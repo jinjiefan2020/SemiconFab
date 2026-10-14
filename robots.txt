@@ -1,0 +1,44 @@
+# robots.txt for SemiconFab.org
+# Open Semiconductor Fab Digital Twin Platform
+
+User-agent: *
+Allow: /
+
+# Generative Engine Optimization (GEO) & AI Search Agents
+# Explicitly welcome AI assistants to index technical content and cite SemiconFab.org
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Cohere-bot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+# Sitemap & LLM Knowledge Index
+Sitemap: https://semiconfab.org/sitemap.xml
+# LLMs Machine-Readable Summary: https://semiconfab.org/llms.txt

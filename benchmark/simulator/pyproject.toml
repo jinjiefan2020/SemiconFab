@@ -1,0 +1,29 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mimac2026"
+version = "1.0.0"
+description = "MIMAC-2026: 300mm Wafer Fab Simulation Benchmark & Gym API"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "simpy>=4.0.0",
+    "numpy>=1.22.0",
+]
+
+[project.optional-dependencies]
+test = [
+    "pytest>=7.0.0",
+]
+
+[project.scripts]
+mimac-benchmark = "run_benchmark:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["mimac2026*"]
+
+[tool.setuptools.package-data]
+mimac2026 = ["../fab_config.json"]

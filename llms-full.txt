@@ -1,0 +1,125 @@
+# SemiconFab.org — Full Technical Knowledge Base & AI Context Specification
+
+## 1. Overview & Vision
+SemiconFab.org is an open-access digital twin and engineering visualization platform for modern 300mm (12-inch) semiconductor wafer fabrication cleanrooms (Fabs). It was established to lower the barriers to understanding advanced semiconductor manufacturing, fab civil architecture, subfab MEP engineering, equipment operations, and yield optimization.
+
+Website: https://semiconfab.org
+Source & Deployment: Cloudflare Pages (Purely Static Edge Architecture)
+
+---
+
+## 2. Fab Architecture & Cleanroom Engineering
+
+### 2.1 Cleanroom Hierarchy (ISO 14644-1 / FED-STD-209E)
+1. **L1 Cleanroom Bay & Chase (ISO Class 1 / Class 3)**
+   - Unidirectional downward laminar airflow (0.45 m/s ± 20%).
+   - Airborne particulate limit: < 10 particles/m³ for particles >= 0.1 µm.
+   - Raised access flooring (600mm x 600mm perforated aluminum waffle slab) providing 20%-40% perforation for laminar air return.
+   - Photolithography Core: Amber/yellow filtered lighting (blocking wavelengths < 500 nm to protect diazonaphthoquinone (DNQ) and chemical amplified resists (CAR) from premature actinic exposure).
+   - Temperature stability: 21.0°C ± 0.1°C; Relative Humidity: 42% ± 1.0% RH.
+
+2. **B1 Subfab Utility Basement (ISO Class 10,000 / ISO Class 7)**
+   - 6.0m clear ceiling height beneath the waffle slab.
+   - Contains dry vacuum pumps, RF generator racks, remote plasma sources, toxic gas abatement scrubbers, and liquid chemical dispense cabinets.
+   - Decouples heavy vibration, thermal load, and hazardous gases from the primary L1 processing deck.
+
+3. **Ceiling Plenum & Recirculation Air Handling (+20m relative elevation)**
+   - Fan Filter Units (FFU) with Ultra-Low Particulate Air (ULPA) filtration (99.9995% efficiency for 0.12 µm particles).
+   - Dynamic aerodynamic differential pressure: Litho Core (+25 Pa) > Bay (+15 Pa) > Chase (+10 Pa) > Gowning Airlock (+5 Pa) > Ambient (0 Pa).
+
+---
+
+## 3. Subfab MEP Utility Distribution Systems
+
+SemiconFab.org accurately models 5 key industrial utility loops connecting tools across the waffle slab:
+
+1. **Ultra-Pure Water (UPW)**:
+   - Resistivity: 18.2 MΩ·cm at 25°C.
+   - Total Organic Carbon (TOC): < 1 ppb.
+   - PVDF / PFA distribution piping loops with continuous velocity to prevent bacterial bio-film accumulation.
+
+2. **Specialty Process Gases & Bulk Gases**:
+   - High-purity 316L VIM/VAR electropolished stainless steel tubing (internal roughness Ra < 0.13 µm).
+   - Gases modeled: Silane (SiH4), Ammonia (NH3), Nitrogen Trifluoride (NF3), Arsine (AsH3), Phosphine (PH3), Chlorine (Cl2), Hydrogen Chloride (HCl), WF6, BCl3, Ar, N2, H2, O2, He.
+   - Double-contained coaxial piping for pyrophoric and highly toxic gases with nitrogen purge annulus.
+
+3. **Process Vacuum Infrastructure**:
+   - Multi-stage roots dry pumps backed with turbomolecular pumps (TMP) achieving chamber base pressures from 10^-3 Torr to 10^-7 Torr.
+   - Heated vacuum exhaust lines to prevent ammonium salt condensation in CVD / etch bypass lines.
+
+4. **Exhaust & Abatement Streams**:
+   - Acid Exhaust: FRP/PP ducting routing to wet acid scrubbers (neutralizing HF, HCl, HNO3, H2SO4).
+   - Solvent / VOC Exhaust: Stainless steel ducting routing to Regenerative Thermal Oxidizers (RTO).
+   - Toxic / Pyrophoric Exhaust: Point-of-use (POU) burn-wet scrubbers.
+   - General Heat Exhaust: Non-hazardous heat extraction from dry pump motors and power cabinets.
+
+5. **AMHS (Automated Material Handling System)**:
+   - Ceiling-mounted OverHead Transport (OHT) track system transporting Front Opening Unified Pods (FOUP, 25-wafer capacity).
+   - Velocity: 3 to 5 m/s; track switches, buffer stations, and load port docking stations.
+
+---
+
+## 4. Semiconductor Tool Taxonomy & 3D Engineering Models
+
+The platform categorizes 92+ equipment types into 8 major process modules:
+
+1. **Photolithography (Litho)**:
+   - Extreme Ultraviolet (EUV) Scanners (0.33 NA, 13.5 nm laser-produced plasma Sn source).
+   - Deep Ultraviolet (DUV) ArF Immersion (193 nm ArFi, 1.35 NA water immersion lens).
+   - DUV ArF Dry (193 nm), KrF (248 nm), i-Line (365 nm).
+2. **Photoresist Processing (Track)**:
+   - Integrated Coater/Developer clusters, HMDS vapor prime ovens, precision hot plates (±0.05°C), chill plates, spray puddle develop nozzles.
+3. **Dry Etching (Etch)**:
+   - Inductively Coupled Plasma (ICP) Etchers, Capacitively Coupled Plasma (CCP) Etchers, Reactive Ion Etch (RIE), Atomic Layer Etching (ALE).
+4. **Thin Film Deposition (Thin Films)**:
+   - Plasma-Enhanced Chemical Vapor Deposition (PECVD), Low-Pressure Chemical Vapor Deposition (LPCVD), Atomic Layer Deposition (ALD), Physical Vapor Deposition (PVD Magnetron Sputter), Electrochemical Deposition (ECD Copper Plating).
+5. **Wet Chemical Processing (Wet Clean)**:
+   - Single-Wafer Megasonic Spin Cleaners, Batch Wet Stations (SC-1, SC-2, Piranha SPM, DHF).
+6. **Chemical Mechanical Planarization (CMP)**:
+   - Multi-head CMP polishers, polyurethane pads, colloidal silica/ceria slurry dispense systems, PVA brush cleaners, Marangoni vapor dryers.
+7. **Thermal Processing & Ion Implantation (Diffusion / Implant)**:
+   - Vertical High-Capacity Oxidation/Anneal Furnaces, Rapid Thermal Processing (RTP) lamp systems, High-Current / Medium-Current / High-Energy Ion Implanters.
+8. **In-Line Metrology & Inspection (Metrology)**:
+   - Critical Dimension SEM (CD-SEM), Defect Review SEM (DR-SEM), Spectroscopic Ellipsometry, Brightfield & Darkfield Optical Wafer Inspection, Four-Point Probe Sheet Resistance.
+
+---
+
+## 5. Telemetry, Yield & Software Systems
+
+### 5.1 SEMI Standards Implementation
+- **SEMI E10 RAM States**:
+  - Non-Scheduled Time
+  - Unscheduled Down (Alarm, Equipment Breakdown)
+  - Scheduled Down (Preventative Maintenance PM, Recipe Tuning)
+  - Engineering Time (Process Qualification, Test Wafers)
+  - Standby Time (Waiting for FOUP / Operator / Recipe)
+  - Productive Time (Processing Wafers)
+- **SEMI E30 (GEM) / SEMI E37 (HSMS)**:
+  - Equipment Status Variables (SVID): Chamber Pressure, RF Forward/Reflected Power, Gas Mass Flow (MFC), Pedestal Temperature, Throttle Valve Position.
+  - Collection Events (CEID): Wafer Loaded, Recipe Started, Recipe Finished, Chamber Purged.
+
+### 5.2 Yield Management System (YMS) & Defect Modeling
+- **Theoretical Models**:
+  - Poisson Model: `Y = exp(-D0 * A)`
+  - Murphy Model: `Y = ((1 - exp(-D0 * A)) / (D0 * A))^2`
+  - Where `D0` is defect density (defects/cm²) and `A` is active die area (mm²).
+- **WM-811K Wafer Map Fingerprints**:
+  - Edge-Ring: Thermal non-uniformity or electrostatic chuck (ESC) edge-seal leakage.
+  - Center: Showerhead gas stagnation or CMP central over-polishing.
+  - Scratch: Mechanical robot end-effector slip or abrasive particulate dragging.
+  - Donut: Plasma sheath instability or cooling helium pressure divergence.
+  - Random: Ambient cleanroom particulate contamination.
+- **STDF (Standard Test Data Format) V4**:
+  - Ingestion and parsing of MIR (Master Information Record), WIR (Wafer Information Record), and PRR (Part Results Record) for bin-sorting yield heatmaps.
+
+---
+
+## 6. Open Platform Architecture & Data Endpoints
+
+- Web Frontend: Vanilla HTML5, CSS3, Tailwind CSS, Three.js WebGL 3D renderer, OrbitControls, Lucide Icons, pure JavaScript i18n manager (9 languages).
+- Static Edge Architecture: Cloudflare Pages global static edge distribution, zero serverless runtime, zero database dependencies.
+- Data Endpoints: Canonical static JSON files (`/catalog.json`, `/schema.json`, `/benchmark/routes.json`).
+
+To integrate or cite:
+SemiconFab.org, Open Semiconductor Fab Digital Twin Platform.
+URL: https://semiconfab.org

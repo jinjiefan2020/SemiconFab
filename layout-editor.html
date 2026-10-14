@@ -1,0 +1,2442 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SemiconFab — Fab Floor Plan Editor</title>
+
+    <meta
+      name="description"
+      content="Interactive 2D semiconductor cleanroom floor plan editor. Rearrange 300mm wafer fab equipment, validate spatial bounds and clearance, and preview your custom fab layout in 3D."
+    />
+    <meta name="author" content="SemiconFab.org Initiative" />
+    <meta name="theme-color" content="#090d16" />
+
+    <link rel="canonical" href="https://semiconfab.org/layout-editor" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="favicon.ico" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="js/catalog-fallback.js"></script>
+
+    <style>
+      :root {
+        --font:
+          -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+          "Hiragino Sans GB", "Noto Sans SC", "Microsoft YaHei", system-ui,
+          sans-serif;
+      }
+      body {
+        font-family: var(--font);
+        background: #0f172a;
+        color: #e2e8f0;
+        overflow: hidden;
+        user-select: none;
+      }
+      /* Custom scrollbars */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.6);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(71, 85, 105, 0.6);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(100, 116, 139, 0.9);
+      }
+      canvas {
+        image-rendering: auto;
+      }
+    </style>
+  </head>
+  <body class="h-screen w-screen flex flex-col">
+    <!-- Top Navigation & Global Controls -->
+    <header
+      class="h-14 bg-slate-900 border-b border-slate-800 px-4 flex items-center justify-between shrink-0 z-20"
+    >
+      <!-- Left: Brand & Title -->
+      <div class="flex items-center gap-3">
+        <a
+          href="twin.html"
+          class="flex items-center gap-2 text-slate-300 hover:text-white transition group"
+          title="Back to 3D Digital Twin"
+        >
+          <div
+            class="w-8 h-8 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 group-hover:bg-emerald-500/20"
+          >
+            <i data-lucide="box" class="w-4 h-4"></i>
+          </div>
+          <div class="leading-tight">
+            <div
+              class="text-[10px] font-mono uppercase tracking-wider text-emerald-400 font-bold"
+            >
+              SemiconFab · Sandbox
+            </div>
+            <div class="text-sm font-bold text-white flex items-center gap-1.5">
+              <span id="title-text">Floor Plan Editor</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- Status Pill: Tool Count & Validation -->
+        <div
+          class="hidden sm:flex items-center gap-2 ml-4 pl-4 border-l border-slate-800 text-xs"
+        >
+          <div
+            id="status-tool-count"
+            class="px-2.5 py-1 rounded-md bg-slate-800 text-slate-300 border border-slate-700 font-mono text-[11px]"
+          >
+            Tools:
+            <span id="placed-count" class="text-emerald-400 font-bold">0</span>
+            / 121
+          </div>
+          <button
+            id="btn-toggle-val-panel"
+            onclick="toggleValidationPanel()"
+            class="flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/80 transition text-[11px] font-medium"
+          >
+            <i
+              id="val-badge-icon"
+              data-lucide="check-circle-2"
+              class="w-3.5 h-3.5 text-emerald-400"
+            ></i>
+            <span id="val-badge-text">0 errors · Valid layout</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center / Right Actions -->
+      <div class="flex items-center gap-2">
+        <!-- Zoom Controls -->
+        <div
+          class="flex items-center bg-slate-800/80 border border-slate-700/80 rounded-lg p-0.5 text-xs text-slate-300"
+        >
+          <button
+            onclick="zoom2D(-0.2)"
+            class="w-7 h-7 flex items-center justify-center hover:bg-slate-700 rounded transition"
+            title="Zoom Out (-)"
+          >
+            <i data-lucide="minus" class="w-3.5 h-3.5"></i>
+          </button>
+          <button
+            onclick="resetZoom()"
+            id="zoom-percent"
+            class="px-2 font-mono text-[11px] hover:text-white"
+            title="Reset Zoom"
+          >
+            100%
+          </button>
+          <button
+            onclick="zoom2D(0.2)"
+            class="w-7 h-7 flex items-center justify-center hover:bg-slate-700 rounded transition"
+            title="Zoom In (+)"
+          >
+            <i data-lucide="plus" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Reset to Default Button -->
+        <button
+          onclick="confirmResetToDefault()"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700 transition text-xs font-medium"
+          title="Restore canonical 121-tool layout"
+        >
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+          <span id="btn-reset-text">Reset to default</span>
+        </button>
+
+        <!-- Upload Custom Layout JSON Button -->
+        <button
+          id="btn-upload-layout"
+          onclick="openUploadLayoutModal()"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 transition text-xs font-semibold cursor-pointer"
+          title="Upload or Paste Custom Layout JSON"
+        >
+          <i data-lucide="upload" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span id="btn-upload-text">Upload layout</span>
+        </button>
+
+        <!-- Export JSON Button -->
+        <button
+          onclick="exportLayoutJSON()"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 transition text-xs font-semibold"
+          title="Download schema-conformant JSON"
+        >
+          <i data-lucide="download" class="w-3.5 h-3.5 text-sky-400"></i>
+          <span id="btn-export-text">Export JSON</span>
+        </button>
+
+        <!-- Open in 3D Button (Highest Priority Preview Action) -->
+        <button
+          onclick="openIn3D()"
+          class="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow-md transition"
+          title="Preview this custom layout in the 3D Cleanroom Digital Twin"
+        >
+          <i data-lucide="box" class="w-3.5 h-3.5"></i>
+          <span id="btn-3d-text">Open in 3D →</span>
+        </button>
+
+        <!-- Submit for Review Button -->
+        <button
+          onclick="openSubmitModal()"
+          class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs transition shadow-sm"
+          title="Submit your layout via GitHub PR or Email"
+        >
+          <i data-lucide="send" class="w-3.5 h-3.5"></i>
+          <span id="btn-submit-text">Submit layout</span>
+        </button>
+
+        <!-- Language Switcher -->
+        <button
+          onclick="toggleEditorLanguage()"
+          class="ml-1 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-mono font-bold border border-slate-700 transition"
+          id="editor-lang-btn"
+          title="Switch Language"
+        >
+          ZH
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Workspace Container -->
+    <div class="flex-1 flex overflow-hidden relative">
+      <!-- Left: Equipment Catalog Palette Sidebar -->
+      <aside
+        id="palette-sidebar"
+        class="w-80 bg-slate-900/95 border-r border-slate-800 flex flex-col shrink-0 z-10 transition-all duration-200"
+      >
+        <!-- Sidebar Header: Search & Category Filter -->
+        <div class="p-3 border-b border-slate-800 space-y-2 bg-slate-900">
+          <div class="flex items-center justify-between">
+            <span
+              class="text-xs font-bold uppercase tracking-wider text-slate-400"
+              id="palette-header-title"
+            >
+              Equipment Palette (121)
+            </span>
+            <span class="text-[10px] text-slate-500 font-mono" id="palette-sub"
+              >Click to add or drag</span
+            >
+          </div>
+
+          <!-- Search Input -->
+          <div class="relative">
+            <i
+              data-lucide="search"
+              class="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-1/2 -translate-y-1/2"
+            ></i>
+            <input
+              type="text"
+              id="palette-search"
+              oninput="filterPalette()"
+              placeholder="Search model, OEM, category..."
+              class="w-full pl-8 pr-3 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-white placeholder-slate-500 focus:outline-none focus:border-emerald-500 transition"
+            />
+          </div>
+
+          <!-- Category Filter Dropdown -->
+          <select
+            id="palette-category-filter"
+            onchange="filterPalette()"
+            class="w-full px-2.5 py-1.5 bg-slate-800 border border-slate-700 rounded-lg text-xs text-slate-300 focus:outline-none focus:border-emerald-500"
+          >
+            <option value="ALL">All Categories</option>
+            <option value="lithography">Lithography</option>
+            <option value="resist_track">Resist Track</option>
+            <option value="dry_etch">Dry Plasma Etch</option>
+            <option value="thin_film_deposition">Thin Film Deposition</option>
+            <option value="thermal_processing">Thermal Processing</option>
+            <option value="ion_implantation">Ion Implantation</option>
+            <option value="cmp">CMP Planarization</option>
+            <option value="wet_clean">Wet Cleaning</option>
+            <option value="metrology">Metrology & CD-SEM</option>
+            <option value="inspection">Defect Inspection</option>
+            <option value="packaging">Advanced Packaging</option>
+            <option value="test">Wafer Test & ATE</option>
+            <option value="other">Facility Support</option>
+          </select>
+        </div>
+
+        <!-- Palette List -->
+        <div
+          id="palette-list"
+          class="flex-1 overflow-y-auto p-2 space-y-1.5 text-xs"
+        >
+          <!-- Filled dynamically by JavaScript -->
+        </div>
+
+        <!-- Palette Footer Info -->
+        <div
+          class="p-2.5 border-t border-slate-800 text-[11px] text-slate-400 bg-slate-900/80 flex items-center justify-between"
+        >
+          <span id="palette-showing-text">Showing 121 tools</span>
+          <span class="text-slate-500">100% Static & Local</span>
+        </div>
+      </aside>
+
+      <!-- Center: 2D Floor Plan Canvas -->
+      <main class="flex-1 relative bg-slate-950 overflow-hidden flex flex-col">
+        <!-- Floating Canvas Viewport HUD -->
+        <div
+          class="absolute top-3 left-3 z-10 flex items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="bg-slate-900/90 backdrop-blur border border-slate-800 rounded-lg px-2.5 py-1 text-[11px] font-mono text-slate-300 shadow"
+          >
+            Coord:
+            <span id="hud-coords" class="text-emerald-400"
+              >X: 0.0m, Z: 0.0m</span
+            >
+          </div>
+          <div
+            class="bg-slate-900/90 backdrop-blur border border-slate-800 rounded-lg px-2.5 py-1 text-[11px] text-slate-400 shadow"
+          >
+            <span id="hud-instructions"
+              >Pan: Drag empty space · Zoom: Scroll wheel · Move: Drag
+              tool</span
+            >
+          </div>
+          <div
+            class="hidden md:flex items-center gap-1.5 bg-slate-900/90 backdrop-blur border border-amber-500/30 rounded-lg px-2.5 py-1 text-[11px] text-amber-300/90 shadow pointer-events-auto"
+            id="hud-sandbox-notice-pill"
+            title="This cleanroom serves as a SemiconFab proof-of-concept and full-spectrum equipment catalog digital twin sandbox, integrating representative front-end and back-end equipment, with machine counts significantly lower than an actual high-volume advanced node semiconductor fab."
+          >
+            <i
+              data-lucide="info"
+              class="w-3.5 h-3.5 text-amber-400 shrink-0"
+            ></i>
+            <span id="hud-sandbox-notice" class="truncate max-w-sm"
+              >Sandbox: Concept &amp; catalog twin (counts calibrated lower than
+              actual megafabs)</span
+            >
+          </div>
+        </div>
+
+        <!-- 2D Canvas Element -->
+        <canvas
+          id="editor-canvas"
+          class="flex-1 cursor-grab active:cursor-grabbing w-full h-full block"
+        ></canvas>
+
+        <!-- Selected Tool Action Bar (Docked Bottom Floating Bar) -->
+        <div
+          id="selection-bar"
+          class="hidden absolute bottom-5 left-1/2 -translate-x-1/2 z-20 bg-slate-900/95 backdrop-blur-md border border-slate-700 rounded-xl px-4 py-2.5 shadow-2xl flex items-center gap-4 text-white text-xs max-w-2xl"
+        >
+          <!-- Tool Summary -->
+          <div class="flex items-center gap-2.5">
+            <div
+              id="selected-cat-dot"
+              class="w-3 h-3 rounded-full bg-emerald-400 shrink-0"
+            ></div>
+            <div class="leading-tight">
+              <div
+                id="selected-tool-name"
+                class="font-bold text-slate-100 truncate max-w-xs"
+              >
+                Canon FPA-5550iZ2
+              </div>
+              <div
+                id="selected-tool-meta"
+                class="text-[11px] text-slate-400 font-mono truncate"
+              >
+                Lithography Bay · 2.4m × 3.5m
+              </div>
+            </div>
+          </div>
+
+          <!-- Position & Rotation Controls -->
+          <div class="flex items-center gap-2 border-l border-slate-700 pl-3">
+            <button
+              onclick="rotateSelectedTool()"
+              class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-300 border border-slate-700 font-semibold text-xs transition"
+              title="Rotate 90° Clockwise (Hotkey: R)"
+            >
+              <i data-lucide="rotate-cw" class="w-3.5 h-3.5"></i>
+              <span id="btn-rotate-text">Rotate 90°</span>
+              (<span id="selected-rot-label">0°</span>)
+            </button>
+
+            <button
+              onclick="deleteSelectedTool()"
+              class="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-700/60 font-semibold text-xs transition"
+              title="Delete equipment from cleanroom floor (Hotkey: Delete)"
+            >
+              <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+              <span id="btn-delete-text">Delete</span>
+            </button>
+          </div>
+
+          <!-- Close / Deselect Button -->
+          <button
+            onclick="deselectTool()"
+            class="w-6 h-6 flex items-center justify-center rounded-md hover:bg-slate-800 text-slate-400 hover:text-white"
+            title="Deselect tool"
+          >
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <!-- Validation Drawer / Bottom Panel -->
+        <div
+          id="validation-panel"
+          class="hidden absolute bottom-0 left-0 right-0 max-h-56 bg-slate-900/98 border-t border-slate-800 z-30 flex flex-col shadow-2xl transition-all"
+        >
+          <div
+            class="px-4 py-2 border-b border-slate-800 flex items-center justify-between text-xs font-semibold bg-slate-900"
+          >
+            <div class="flex items-center gap-2">
+              <i
+                data-lucide="alert-triangle"
+                class="w-4 h-4 text-amber-400"
+              ></i>
+              <span id="val-panel-title">Layout Live Validation Issues</span>
+              <span
+                id="val-panel-count"
+                class="px-2 py-0.2 rounded bg-amber-500/20 text-amber-300 font-mono text-[11px]"
+                >0 errors</span
+              >
+            </div>
+            <button
+              onclick="toggleValidationPanel()"
+              class="p-1 hover:bg-slate-800 rounded text-slate-400 hover:text-white"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div
+            id="val-panel-list"
+            class="flex-1 overflow-y-auto p-3 space-y-2 text-xs font-mono"
+          >
+            <!-- Dynamic validation error items -->
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Footer Bar -->
+    <footer
+      class="h-7 bg-slate-900 border-t border-slate-800 px-4 flex items-center justify-between text-[11px] text-slate-400 shrink-0 z-20"
+    >
+      <div class="flex items-center gap-2">
+        <a
+          href="https://github.com/jinjiefan2020/SemiconFab"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5 font-medium text-slate-300"
+        >
+          <svg
+            class="w-3.5 h-3.5 fill-current"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+            ></path>
+          </svg>
+          <span>GitHub</span>
+        </a>
+        <span class="text-slate-600">·</span>
+        <a
+          href="mailto:info@semiconfab.org"
+          class="hover:text-emerald-400 transition text-slate-400"
+          >info@semiconfab.org</a
+        >
+      </div>
+      <div>
+        <span id="footer-license-text" class="text-slate-500 text-[10.5px]">
+          Source-available · PolyForm Noncommercial 1.0.0 · Free for education &amp; personal use; commercial use requires a separate license.
+        </span>
+      </div>
+    </footer>
+
+    <!-- Submit Layout Modal (Mirrors /add-equipment architecture) -->
+    <div
+      id="submit-modal"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto"
+    >
+      <div
+        class="bg-slate-900 border border-slate-700 rounded-2xl max-w-xl w-full p-6 shadow-2xl space-y-5 text-slate-200 my-auto"
+      >
+        <div
+          class="flex items-center justify-between border-b border-slate-800 pb-3"
+        >
+          <div class="flex items-center gap-2.5">
+            <div
+              class="w-8 h-8 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center border border-indigo-500/30"
+            >
+              <i data-lucide="git-pull-request" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3
+                class="font-bold text-white text-base"
+                id="submit-modal-title"
+              >
+                Submit Fab Layout for Review
+              </h3>
+              <p class="text-xs text-slate-400" id="submit-modal-sub">
+                Target: layouts/pending/ in jinjiefan2020/SemiconFab
+              </p>
+            </div>
+          </div>
+          <button
+            onclick="closeSubmitModal()"
+            class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <label
+              class="block font-semibold mb-1 text-slate-300"
+              id="lbl-layout-name"
+              >Layout Name</label
+            >
+            <input
+              type="text"
+              id="submit-layout-name"
+              placeholder="e.g. Sub-3nm Logic Optimization Layout v1"
+              value="Custom Fab Floor Plan"
+              class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block font-semibold mb-1 text-slate-300"
+              id="lbl-author-name"
+              >Author / Contributor</label
+            >
+            <input
+              type="text"
+              id="submit-author-name"
+              placeholder="e.g. Cleanroom Planner"
+              class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-indigo-500"
+            />
+          </div>
+
+          <div>
+            <label class="block font-semibold mb-1 text-slate-300" id="lbl-desc"
+              >Change Description</label
+            >
+            <textarea
+              id="submit-layout-desc"
+              rows="3"
+              placeholder="Explain bay slotting adjustments, process ergonomics, or routing optimization..."
+              class="w-full px-3 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:border-indigo-500"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Submission Buttons -->
+        <div
+          class="pt-3 border-t border-slate-800 flex flex-col sm:flex-row gap-2.5 justify-end"
+        >
+          <button
+            onclick="submitViaGitHub()"
+            class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs shadow transition"
+          >
+            <i data-lucide="github" class="w-4 h-4"></i>
+            <span id="btn-submit-gh">Create GitHub Pull Request</span>
+          </button>
+          <button
+            onclick="submitViaEmail()"
+            class="flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold text-xs shadow transition"
+          >
+            <i data-lucide="mail" class="w-4 h-4"></i>
+            <span id="btn-submit-email">Submit via Email</span>
+          </button>
+          <button
+            onclick="
+              exportLayoutJSON();
+              closeSubmitModal();
+            "
+            class="flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition"
+          >
+            <i data-lucide="download" class="w-3.5 h-3.5"></i>
+            <span id="btn-submit-dl">Download JSON</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Upload Layout JSON Modal -->
+    <div
+      id="upload-layout-modal"
+      class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto"
+    >
+      <div
+        class="bg-slate-900 border border-slate-700 rounded-2xl max-w-lg w-full p-6 shadow-2xl space-y-4 text-slate-200 my-auto"
+      >
+        <div
+          class="flex items-center justify-between border-b border-slate-800 pb-3"
+        >
+          <div class="flex items-center gap-2.5">
+            <div
+              class="w-8 h-8 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center border border-emerald-500/30"
+            >
+              <i data-lucide="upload" class="w-4 h-4"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-white text-sm" id="upload-modal-title">
+                Upload Custom Layout JSON
+              </h3>
+              <p class="text-[11px] text-slate-400" id="upload-modal-sub">
+                Conforms to twin/layout-schema.json
+              </p>
+            </div>
+          </div>
+          <button
+            onclick="closeUploadLayoutModal()"
+            class="w-7 h-7 flex items-center justify-center rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white cursor-pointer"
+          >
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="space-y-3 text-xs">
+          <div>
+            <label
+              class="block font-semibold mb-1 text-slate-300"
+              id="lbl-upload-file"
+            >
+              Choose Layout File (.json)
+            </label>
+            <input
+              type="file"
+              id="layout-file-picker"
+              accept=".json"
+              onchange="handleLayoutFileSelected(event)"
+              class="w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-950/80 file:text-emerald-300 hover:file:bg-emerald-900 file:border file:border-emerald-500/40 cursor-pointer"
+            />
+          </div>
+
+          <div>
+            <label
+              class="block font-semibold mb-1 text-slate-300"
+              id="lbl-upload-paste"
+            >
+              Or Paste Layout JSON
+            </label>
+            <textarea
+              id="layout-json-input"
+              rows="6"
+              placeholder='{"version": "1.0.0", "tools": [{"tool_id": "...", "bay": "lithography", "x": -30, "z": -20, "rotation": 0}]}'
+              class="w-full p-2.5 bg-slate-800 border border-slate-700 rounded-lg font-mono text-[11px] text-white focus:outline-none focus:border-emerald-500"
+            ></textarea>
+          </div>
+
+          <div
+            id="upload-layout-error"
+            class="hidden p-2.5 rounded-lg bg-red-950/80 border border-red-500/60 text-red-300 text-xs font-semibold"
+          ></div>
+        </div>
+
+        <div class="pt-2 border-t border-slate-800 flex justify-end gap-2">
+          <button
+            onclick="closeUploadLayoutModal()"
+            id="btn-upload-cancel"
+            class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-xs transition cursor-pointer"
+          >
+            Cancel
+          </button>
+          <button
+            onclick="applyUploadedLayout()"
+            id="btn-upload-apply"
+            class="px-4 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition shadow cursor-pointer"
+          >
+            Validate &amp; Apply
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bilingual Rejection Toast Alert -->
+    <div
+      id="toast"
+      class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden bg-red-950/95 border border-red-500/80 text-red-200 px-4 py-2.5 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 transition-all"
+    >
+      <i data-lucide="alert-octagon" class="w-4 h-4 text-red-400 shrink-0"></i>
+      <span id="toast-message">Placement rejected</span>
+    </div>
+
+    <!-- Success Toast Alert -->
+    <div
+      id="success-toast"
+      class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden bg-emerald-950/95 border border-emerald-500/80 text-emerald-200 px-4 py-2.5 rounded-xl shadow-2xl text-xs font-semibold flex items-center gap-2 transition-all"
+    >
+      <i
+        data-lucide="check-circle"
+        class="w-4 h-4 text-emerald-400 shrink-0"
+      ></i>
+      <span id="success-toast-message">Success</span>
+    </div>
+
+    <script>
+      // ==========================================
+      // CONSTANTS & FAB SPECIFICATION
+      // ==========================================
+      const SUBMISSION_CONFIG = {
+        org: "jinjiefan2020",
+        repo: "SemiconFab",
+        contactEmail: "info@semiconfab.org",
+      };
+
+      // 13 Cleanroom Bays (Conforming strictly to TWIN-DATA-MAP.md & twin.html)
+      const CATEGORY_BAYS = {
+        lithography: {
+          key: "lithography",
+          nameEn: "Lithography Scanner Bay",
+          nameZh: "黄光光刻曝光区",
+          xRange: [-35, -20],
+          zRange: [-26, -5],
+          room: "amber",
+          accent: "#d99e3d",
+          fill: "rgba(217, 158, 61, 0.12)",
+        },
+        resist_track: {
+          key: "resist_track",
+          nameEn: "Resist Track & Coater/Dev",
+          nameZh: "涂胶显影跟踪机区",
+          xRange: [-35, -20],
+          zRange: [-4, 7],
+          room: "amber",
+          accent: "#d99e3d",
+          fill: "rgba(217, 158, 61, 0.10)",
+        },
+        metrology: {
+          key: "metrology",
+          nameEn: "In-line CD-SEM & Thin Film Metrology",
+          nameZh: "在线微观量测椭偏区",
+          xRange: [-35, -20],
+          zRange: [9, 21],
+          room: "clean",
+          accent: "#619485",
+          fill: "rgba(97, 148, 133, 0.12)",
+        },
+        inspection: {
+          key: "inspection",
+          nameEn: "Defect Inspection Bay",
+          nameZh: "光学暗场缺陷检测区",
+          xRange: [-35, -20],
+          zRange: [22, 28],
+          room: "clean",
+          accent: "#619485",
+          fill: "rgba(97, 148, 133, 0.10)",
+        },
+        dry_etch: {
+          key: "dry_etch",
+          nameEn: "Plasma Dry Etch & Strip Bay",
+          nameZh: "等离子干法刻蚀区",
+          xRange: [-13, 4],
+          zRange: [-26, -5],
+          room: "clean",
+          accent: "#d15c6b",
+          fill: "rgba(209, 92, 107, 0.12)",
+        },
+        cmp: {
+          key: "cmp",
+          nameEn: "CMP Planarization Bay",
+          nameZh: "化学机械研磨平坦化区",
+          xRange: [-13, -4],
+          zRange: [4, 28],
+          room: "clean",
+          accent: "#479eb3",
+          fill: "rgba(71, 158, 179, 0.12)",
+        },
+        wet_clean: {
+          key: "wet_clean",
+          nameEn: "Automated Wet Cleaning Bay",
+          nameZh: "湿法清洗腐蚀台区",
+          xRange: [-4, 5],
+          zRange: [4, 28],
+          room: "clean",
+          accent: "#479eb3",
+          fill: "rgba(71, 158, 179, 0.10)",
+        },
+        thin_film_deposition: {
+          key: "thin_film_deposition",
+          nameEn: "Thin Film Deposition (CVD/PVD/ALD)",
+          nameZh: "薄膜沉积与外延区",
+          xRange: [11, 29],
+          zRange: [-26, -5],
+          room: "clean",
+          accent: "#527ab8",
+          fill: "rgba(82, 122, 184, 0.12)",
+        },
+        ion_implantation: {
+          key: "ion_implantation",
+          nameEn: "Ion Implantation Bay",
+          nameZh: "离子注入机区",
+          xRange: [11, 20],
+          zRange: [4, 28],
+          room: "clean",
+          accent: "#946bbd",
+          fill: "rgba(148, 107, 189, 0.12)",
+        },
+        thermal_processing: {
+          key: "thermal_processing",
+          nameEn: "Thermal Diffusion & Oxidation",
+          nameZh: "高温氧化扩散炉管区",
+          xRange: [21, 30],
+          zRange: [4, 28],
+          room: "clean",
+          accent: "#c77a4d",
+          fill: "rgba(199, 122, 77, 0.12)",
+        },
+        packaging: {
+          key: "packaging",
+          nameEn: "Advanced 2.5D/3D Packaging",
+          nameZh: "先进封装与异构集成区",
+          xRange: [34, 44],
+          zRange: [-26, -5],
+          room: "clean",
+          accent: "#c26b94",
+          fill: "rgba(194, 107, 148, 0.12)",
+        },
+        test: {
+          key: "test",
+          nameEn: "Wafer Sort & ATE Final Test",
+          nameZh: "晶圆探针测试与分选区",
+          xRange: [34, 44],
+          zRange: [-4, 21],
+          room: "clean",
+          accent: "#c26b94",
+          fill: "rgba(194, 107, 148, 0.10)",
+        },
+        other: {
+          key: "other",
+          nameEn: "Facility Support & Auxiliary",
+          nameZh: "厂务辅助与综合保障区",
+          xRange: [34, 44],
+          zRange: [22, 28],
+          room: "clean",
+          accent: "#619485",
+          fill: "rgba(97, 148, 133, 0.08)",
+        },
+      };
+
+      const CATEGORY_ACCENT_HEX = {
+        lithography: "#d99e3d",
+        resist_track: "#d99e3d",
+        dry_etch: "#d15c6b",
+        thin_film_deposition: "#527ab8",
+        thermal_processing: "#c77a4d",
+        ion_implantation: "#946bbd",
+        cmp: "#479eb3",
+        wet_clean: "#479eb3",
+        metrology: "#619485",
+        inspection: "#619485",
+        packaging: "#c26b94",
+        test: "#c26b94",
+        other: "#619485",
+      };
+
+      // Category Localization Dictionary
+      const CATEGORY_NAMES = {
+        en: {
+          ALL: "All Categories",
+          lithography: "Lithography",
+          resist_track: "Resist Track",
+          dry_etch: "Dry Plasma Etch",
+          thin_film_deposition: "Thin Film Deposition",
+          thermal_processing: "Thermal Processing",
+          ion_implantation: "Ion Implantation",
+          cmp: "CMP Planarization",
+          wet_clean: "Wet Cleaning",
+          metrology: "Metrology & CD-SEM",
+          inspection: "Defect Inspection",
+          packaging: "Advanced Packaging",
+          test: "Wafer Test & ATE",
+          other: "Facility Support",
+        },
+        zh: {
+          ALL: "全部分类",
+          lithography: "黄光光刻",
+          resist_track: "涂胶显影",
+          dry_etch: "干法刻蚀",
+          thin_film_deposition: "薄膜沉积",
+          thermal_processing: "高温氧化扩散",
+          ion_implantation: "离子注入",
+          cmp: "化学机械抛光",
+          wet_clean: "湿法清洗",
+          metrology: "量测检测",
+          inspection: "缺陷检测",
+          packaging: "先进封装",
+          test: "晶圆测试",
+          other: "厂务辅助",
+        },
+      };
+
+      // Bilingual Copy Dictionary
+      const I18N_EDITOR = {
+        en: {
+          title: "Floor Plan Editor",
+          sub: "2D Cleanroom Sandbox",
+          tools: "Tools",
+          reset: "Reset to default",
+          export: "Export JSON",
+          open3d: "Open in 3D →",
+          submit: "Submit layout",
+          palette_header: "Equipment Palette (121)",
+          palette_sub: "Click to add or drag",
+          search_placeholder: "Search model, OEM, category...",
+          showing: "Showing {n} tools",
+          rotate: "Rotate 90°",
+          delete: "Delete",
+          valid: "0 errors · Valid layout",
+          invalid: "{n} errors · Issues detected",
+          val_panel_title: "Layout Live Validation Issues",
+          val_no_issues:
+            "✓ All tools placed within valid bay bounds and clearances. Note: This cleanroom serves as a SemiconFab proof-of-concept and full-spectrum equipment catalog sandbox, with machine counts calibrated for a balanced pilot line rather than an actual megafab.",
+          sandbox_notice:
+            "Sandbox: Concept & catalog twin (counts calibrated lower than actual megafabs)",
+          sandbox_notice_full:
+            "This cleanroom serves as a SemiconFab proof-of-concept and full-spectrum equipment catalog digital twin sandbox, integrating representative front-end and back-end equipment, with machine counts significantly lower than an actual high-volume advanced node semiconductor fab.",
+          hud_pan:
+            "Pan: Drag empty space · Zoom: Scroll wheel · Move: Drag tool",
+          confirm_reset:
+            "Reset cleanroom layout to default 121-tool configuration? Unsaved custom changes will be replaced.",
+          err_oob: "Tool out of bay bounds",
+          err_overlap: "Equipment bounding box overlap detected",
+          err_unknown_id: "Unknown tool ID not found in catalog",
+          err_rot: "Invalid rotation angle",
+          reject_drop_oob:
+            "Placement rejected: Tool exceeds cleanroom bay boundaries.",
+          reject_drop_overlap:
+            "Placement rejected: Equipment overlaps with an existing tool.",
+          reject_drop_nobay:
+            "Placement rejected: Equipment must be placed inside a cleanroom bay.",
+          toast_saved: "Layout autosaved to local storage",
+          toast_exported: "Layout JSON exported successfully",
+          submit_title: "Submit Fab Layout for Review",
+          submit_sub: "Target: layouts/pending/ in jinjiefan2020/SemiconFab",
+          lbl_layout_name: "Layout Name",
+          lbl_author_name: "Author / Contributor",
+          lbl_desc: "Change Description",
+          name_placeholder: "e.g. Sub-3nm Logic Optimization Layout v1",
+          author_placeholder: "e.g. Cleanroom Planner",
+          desc_placeholder:
+            "Explain bay slotting adjustments, process ergonomics, or routing optimization...",
+          submit_gh: "Create GitHub Pull Request",
+          submit_email: "Submit via Email",
+          submit_dl: "Download JSON",
+          upload: "Upload layout",
+          upload_title: "Upload Custom Layout JSON",
+          upload_sub: "Conforms to twin/layout-schema.json",
+          upload_lbl_file: "Choose Layout File (.json)",
+          upload_lbl_paste: "Or Paste Layout JSON",
+          upload_cancel: "Cancel",
+          upload_apply: "Validate & Apply",
+          toast_uploaded: "Layout loaded successfully",
+          placed_status: "✓ Placed on floor",
+          available_status: "Available",
+          add_tool_btn: "+ Add Tool",
+          focus_btn: "Focus",
+          lang_btn: "中",
+          lang_title: "Switch Language (当前: English)",
+          footer_license:
+            "Source-available · PolyForm Noncommercial 1.0.0 · Free for education & personal use; commercial use requires a separate license.",
+        },
+        zh: {
+          title: "洁净室平面布局编辑器",
+          sub: "2D 平面沙盒",
+          tools: "机台数",
+          reset: "恢复默认布局",
+          export: "导出 JSON",
+          open3d: "在 3D 中预览 →",
+          submit: "提交布局审查",
+          palette_header: "设备目录备选区 (121)",
+          palette_sub: "点击添加或拖拽机台",
+          search_placeholder: "搜索机台型号、制造商、工艺类别...",
+          showing: "共显示 {n} 台设备",
+          rotate: "旋转 90°",
+          delete: "移除机台",
+          valid: "0 个错误 · 布局有效",
+          invalid: "{n} 个错误 · 存在空间冲突",
+          val_panel_title: "实时布局空间校验问题",
+          val_no_issues:
+            "✓ 所有机台均已正确放置于工艺区内，间距符合规范。说明：本洁净室为 SemiconFab 概念验证与全谱系设备编目孪生沙盒，集成了前道与后道代表性设备，但机台数量显著少于实际先进制程Fab。",
+          sandbox_notice:
+            "本洁净室为概念验证与全谱系编目孪生沙盒，机台数少于实际Fab",
+          sandbox_notice_full:
+            "本洁净室为 SemiconFab 概念验证与全谱系设备编目孪生沙盒，集成了前道与后道代表性设备，但机台数量显著少于实际先进制程Fab。",
+          hud_pan: "平移：按住空白处拖拽 · 缩放：滚轮 · 移动：拖拽设备",
+          confirm_reset:
+            "确定将当前平面布局恢复为默认 121 台基准配置吗？未保存的自定义排布将被覆盖。",
+          err_oob: "机台超出所属工艺区边界",
+          err_overlap: "检测到设备物理包络矩形重叠冲突",
+          err_unknown_id: "未在设备目录中找到该机台 ID",
+          err_rot: "旋转角度不合法（仅支持 0°/90°/180°/270°）",
+          reject_drop_oob: "放置失败：机台超出洁净室工艺区边界。",
+          reject_drop_overlap: "放置失败：机台与现有设备物理空间重叠。",
+          reject_drop_nobay: "放置失败：机台必须放置在指定的工艺区间内。",
+          toast_saved: "布局已自动保存至本地缓存",
+          toast_exported: "布局 JSON 文件导出成功",
+          submit_title: "提交洁净室布局提案",
+          submit_sub:
+            "提交至 jinjiefan2020/SemiconFab 的 layouts/pending/ 目录",
+          lbl_layout_name: "布局名称",
+          lbl_author_name: "提交者 / 单位",
+          lbl_desc: "布局改动说明",
+          name_placeholder: "例如：Sub-3nm 逻辑工艺布局优化版 v1",
+          author_placeholder: "例如：洁净室规划师",
+          desc_placeholder: "说明工艺分区调整、设备间距或机台摆放优化细节...",
+          submit_gh: "在 GitHub 发起 PR 提交",
+          submit_email: "发送邮件提交",
+          submit_dl: "直接下载 JSON",
+          upload: "导入布局",
+          upload_title: "导入自定义布局 JSON",
+          upload_sub: "遵循 twin/layout-schema.json 规范",
+          upload_lbl_file: "选择布局文件 (.json)",
+          upload_lbl_paste: "或直接粘贴布局 JSON",
+          upload_cancel: "取消",
+          upload_apply: "校验并应用",
+          toast_uploaded: "布局文件加载成功",
+          placed_status: "✓ 已布置在洁净室",
+          available_status: "未布置",
+          add_tool_btn: "+ 添加机台",
+          focus_btn: "定位",
+          lang_btn: "EN",
+          lang_title: "切换语言 (Current: 简体中文)",
+          footer_license:
+            "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费；商业使用需另行授权。",
+        },
+      };
+
+      let currentLang = (
+        localStorage.getItem("semiconfab_editor_lang") ||
+        localStorage.getItem("semiconfab_lang") ||
+        "en"
+      ).startsWith("zh")
+        ? "zh"
+        : "en";
+
+      // Application State
+      let catalogRecords = [];
+      let catalogMap = new Map();
+      let currentLayout = {
+        version: "1.0.0",
+        name: "Custom Fab Floor Plan",
+        description: "Custom user-edited cleanroom floor plan layout",
+        tools: [],
+      };
+
+      let selectedTool = null; // Reference to placed tool in currentLayout.tools
+      let validationErrors = [];
+
+      // Canvas View State
+      let canvas, ctx;
+      let view = {
+        scale: 12.0, // pixels per meter
+        offsetX: 0,
+        offsetZ: 0,
+        isPanning: false,
+        panStartX: 0,
+        panStartY: 0,
+      };
+
+      // Dragging Placed Tool State
+      let dragTool = {
+        active: false,
+        tool: null,
+        initialX: 0,
+        initialZ: 0,
+        mouseOffsetX: 0,
+        mouseOffsetZ: 0,
+      };
+
+      // ==========================================
+      // INITIALIZATION
+      // ==========================================
+      window.addEventListener("DOMContentLoaded", async () => {
+        canvas = document.getElementById("editor-canvas");
+        ctx = canvas.getContext("2d");
+
+        initCanvasEvents();
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        applyLanguage(currentLang);
+
+        // Load catalog and initial layout
+        await loadCatalogAndLayout();
+
+        if (window.lucide) lucide.createIcons();
+      });
+
+      function applyLanguage(lang) {
+        currentLang = lang === "zh" ? "zh" : "en";
+        localStorage.setItem("semiconfab_editor_lang", currentLang);
+
+        document.title =
+          currentLang === "zh"
+            ? "SemiconFab — 洁净室平面布局编辑器"
+            : "SemiconFab — Fab Floor Plan Editor";
+
+        const dict = I18N_EDITOR[currentLang];
+        const langBtn = document.getElementById("editor-lang-btn");
+        if (langBtn) {
+          langBtn.textContent = dict.lang_btn;
+          langBtn.title = dict.lang_title;
+        }
+        document.getElementById("title-text").textContent = dict.title;
+        document.getElementById("btn-reset-text").textContent = dict.reset;
+        const uploadBtn = document.getElementById("btn-upload-text");
+        if (uploadBtn) uploadBtn.textContent = dict.upload;
+        document.getElementById("btn-export-text").textContent = dict.export;
+        document.getElementById("btn-3d-text").textContent = dict.open3d;
+        document.getElementById("btn-submit-text").textContent = dict.submit;
+        document.getElementById("palette-header-title").textContent =
+          dict.palette_header;
+        document.getElementById("palette-sub").textContent = dict.palette_sub;
+        const searchInput = document.getElementById("palette-search");
+        if (searchInput) searchInput.placeholder = dict.search_placeholder;
+        document.getElementById("btn-rotate-text").textContent = dict.rotate;
+        document.getElementById("btn-delete-text").textContent = dict.delete;
+        document.getElementById("hud-instructions").textContent = dict.hud_pan;
+        const hudNotice = document.getElementById("hud-sandbox-notice");
+        if (hudNotice) hudNotice.textContent = dict.sandbox_notice;
+        const hudPill = document.getElementById("hud-sandbox-notice-pill");
+        if (hudPill) hudPill.title = dict.sandbox_notice_full;
+
+        // Validation drawer title
+        const valTitle = document.getElementById("val-panel-title");
+        if (valTitle) valTitle.textContent = dict.val_panel_title;
+
+        // Category filter options
+        const catSelect = document.getElementById("palette-category-filter");
+        if (catSelect) {
+          const currentVal = catSelect.value;
+          const catMap = CATEGORY_NAMES[currentLang] || CATEGORY_NAMES.en;
+          Array.from(catSelect.options).forEach((opt) => {
+            if (catMap[opt.value]) {
+              opt.textContent = catMap[opt.value];
+            }
+          });
+          catSelect.value = currentVal;
+        }
+
+        // Submit Modal Labels & Placeholders
+        document.getElementById("submit-modal-title").textContent =
+          dict.submit_title;
+        document.getElementById("submit-modal-sub").textContent =
+          dict.submit_sub;
+        document.getElementById("lbl-layout-name").textContent =
+          dict.lbl_layout_name;
+        document.getElementById("lbl-author-name").textContent =
+          dict.lbl_author_name;
+        document.getElementById("lbl-desc").textContent = dict.lbl_desc;
+        const nameInp = document.getElementById("submit-layout-name");
+        if (nameInp) nameInp.placeholder = dict.name_placeholder;
+        const authorInp = document.getElementById("submit-author-name");
+        if (authorInp) authorInp.placeholder = dict.author_placeholder;
+        const descInp = document.getElementById("submit-layout-desc");
+        if (descInp) descInp.placeholder = dict.desc_placeholder;
+
+        document.getElementById("btn-submit-gh").textContent = dict.submit_gh;
+        document.getElementById("btn-submit-email").textContent =
+          dict.submit_email;
+        document.getElementById("btn-submit-dl").textContent = dict.submit_dl;
+
+        // Upload Modal Labels
+        const uploadModalTitle = document.getElementById("upload-modal-title");
+        if (uploadModalTitle) uploadModalTitle.textContent = dict.upload_title;
+        const uploadModalSub = document.getElementById("upload-modal-sub");
+        if (uploadModalSub) uploadModalSub.textContent = dict.upload_sub;
+        const lblUploadFile = document.getElementById("lbl-upload-file");
+        if (lblUploadFile) lblUploadFile.textContent = dict.upload_lbl_file;
+        const lblUploadPaste = document.getElementById("lbl-upload-paste");
+        if (lblUploadPaste) lblUploadPaste.textContent = dict.upload_lbl_paste;
+        const btnUploadCancel = document.getElementById("btn-upload-cancel");
+        if (btnUploadCancel) btnUploadCancel.textContent = dict.upload_cancel;
+        const btnUploadApply = document.getElementById("btn-upload-apply");
+        if (btnUploadApply) btnUploadApply.textContent = dict.upload_apply;
+
+        const footLic = document.getElementById("footer-license-text");
+        if (footLic) footLic.textContent = dict.footer_license;
+
+        renderPalette();
+        updateValidationStatus();
+        renderCanvas();
+      }
+
+      function toggleEditorLanguage() {
+        applyLanguage(currentLang === "en" ? "zh" : "en");
+      }
+
+      // ==========================================
+      // DATA LOADING & PERSISTENCE
+      // ==========================================
+      async function loadCatalogAndLayout() {
+        try {
+          let res = await fetch("catalog.json");
+          if (!res.ok) {
+            res = await fetch("/catalog.json");
+          }
+          if (res.ok) {
+            catalogRecords = await res.json();
+          }
+        } catch (err) {
+          try {
+            const res = await fetch("/catalog.json");
+            if (res.ok) catalogRecords = await res.json();
+          } catch (e) {
+            // Fetch failed (likely file:// scheme or offline)
+          }
+        }
+
+        // Fallback to window.CATALOG_FALLBACK if fetch was blocked (e.g. file:// protocol)
+        if (
+          (!catalogRecords || catalogRecords.length === 0) &&
+          typeof window !== "undefined" &&
+          window.CATALOG_FALLBACK
+        ) {
+          catalogRecords = window.CATALOG_FALLBACK;
+        }
+
+        // Build lookup map
+        catalogMap.clear();
+        catalogRecords.forEach((item) => {
+          const id = item.record_id || item.id;
+          catalogMap.set(id, item);
+        });
+
+        // Check LocalStorage for autosaved layout first
+        const saved = localStorage.getItem("semiconfab_editor_layout");
+        let loaded = false;
+        if (saved) {
+          try {
+            const parsed = JSON.parse(saved);
+            if (
+              parsed &&
+              Array.isArray(parsed.tools) &&
+              parsed.tools.length > 0 &&
+              parsed.version === "1.1.0"
+            ) {
+              currentLayout = parsed;
+              loaded = true;
+            }
+          } catch (e) {
+            console.warn("Failed to parse saved layout from localStorage:", e);
+          }
+        }
+
+        // Fallback: fetch twin/layout-default.json
+        if (!loaded) {
+          try {
+            let defRes = await fetch("twin/layout-default.json");
+            if (!defRes.ok) {
+              defRes = await fetch("/twin/layout-default.json");
+            }
+            if (defRes.ok) {
+              currentLayout = await defRes.json();
+              loaded = true;
+            }
+          } catch (e) {
+            // Fetch failed
+          }
+        }
+
+        // Fallback to window.DEFAULT_LAYOUT_FALLBACK if fetch was blocked
+        if (
+          !loaded &&
+          typeof window !== "undefined" &&
+          window.DEFAULT_LAYOUT_FALLBACK
+        ) {
+          currentLayout = JSON.parse(
+            JSON.stringify(window.DEFAULT_LAYOUT_FALLBACK),
+          );
+          loaded = true;
+        }
+
+        // Center view on cleanroom bounds
+        centerView();
+        renderPalette();
+        validateCurrentLayout();
+        renderCanvas();
+      }
+
+      function autosaveLayout() {
+        currentLayout.updated_at = new Date().toISOString();
+        localStorage.setItem(
+          "semiconfab_editor_layout",
+          JSON.stringify(currentLayout),
+        );
+        // Also update 3D preview cache
+        localStorage.setItem(
+          "semiconfab_custom_layout",
+          JSON.stringify(currentLayout),
+        );
+      }
+
+      async function confirmResetToDefault() {
+        const dict = I18N_EDITOR[currentLang];
+        if (!confirm(dict.confirm_reset)) return;
+
+        let loaded = false;
+        try {
+          let defRes = await fetch("twin/layout-default.json");
+          if (!defRes.ok) defRes = await fetch("/twin/layout-default.json");
+          if (defRes.ok) {
+            currentLayout = await defRes.json();
+            loaded = true;
+          }
+        } catch (err) {
+          // Fetch failed
+        }
+
+        if (
+          !loaded &&
+          typeof window !== "undefined" &&
+          window.DEFAULT_LAYOUT_FALLBACK
+        ) {
+          currentLayout = JSON.parse(
+            JSON.stringify(window.DEFAULT_LAYOUT_FALLBACK),
+          );
+          loaded = true;
+        }
+
+        if (loaded) {
+          selectedTool = null;
+          updateSelectionBar();
+          autosaveLayout();
+          validateCurrentLayout();
+          renderPalette();
+          renderCanvas();
+          showSuccessToast(
+            currentLang === "zh"
+              ? "已恢复默认 121 台布局"
+              : "Restored canonical default layout",
+          );
+        } else {
+          showSuccessToast(
+            currentLang === "zh"
+              ? "无法恢复默认布局"
+              : "Failed to restore default layout",
+          );
+        }
+      }
+
+      // ==========================================
+      // VALIDATION ENGINE
+      // ==========================================
+      function getToolFootprint(tool) {
+        const catalogItem = catalogMap.get(tool.tool_id);
+        const phys = catalogItem?.record?.physical || {};
+        const baseW = (phys.width_mm?.value || 2400) / 1000;
+        const baseD = (phys.depth_mm?.value || 3500) / 1000;
+
+        // If rotation is 90° or 270°, swap width and depth
+        const rot = tool.rotation || 0;
+        const isSwapped = rot === 90 || rot === 270;
+        const width = isSwapped ? baseD : baseW;
+        const depth = isSwapped ? baseW : baseD;
+
+        return {
+          width,
+          depth,
+          minX: tool.x - width / 2,
+          maxX: tool.x + width / 2,
+          minZ: tool.z - depth / 2,
+          maxZ: tool.z + depth / 2,
+        };
+      }
+
+      function validateToolPosition(
+        tool,
+        candidateX,
+        candidateZ,
+        candidateRot,
+        ignoreSelf = true,
+      ) {
+        const catalogItem = catalogMap.get(tool.tool_id);
+        if (!catalogItem) {
+          return { valid: false, reason: "err_unknown_id" };
+        }
+
+        const bay = CATEGORY_BAYS[tool.bay];
+        if (!bay) {
+          return { valid: false, reason: "reject_drop_nobay" };
+        }
+
+        const phys = catalogItem.record?.physical || {};
+        const baseW = (phys.width_mm?.value || 2400) / 1000;
+        const baseD = (phys.depth_mm?.value || 3500) / 1000;
+
+        const rot =
+          candidateRot !== undefined ? candidateRot : tool.rotation || 0;
+        if (![0, 90, 180, 270].includes(rot)) {
+          return { valid: false, reason: "err_rot" };
+        }
+
+        const isSwapped = rot === 90 || rot === 270;
+        const w = isSwapped ? baseD : baseW;
+        const d = isSwapped ? baseW : baseD;
+
+        const x = candidateX !== undefined ? candidateX : tool.x;
+        const z = candidateZ !== undefined ? candidateZ : tool.z;
+
+        const minX = x - w / 2;
+        const maxX = x + w / 2;
+        const minZ = z - d / 2;
+        const maxZ = z + d / 2;
+
+        // Check Bay Bounds (Allow 0.15m tolerance for ergonomic edge alignment)
+        const [bxMin, bxMax] = bay.xRange;
+        const [bzMin, bzMax] = bay.zRange;
+        const tolerance = 0.15;
+        if (
+          minX < bxMin - tolerance ||
+          maxX > bxMax + tolerance ||
+          minZ < bzMin - tolerance ||
+          maxZ > bzMax + tolerance
+        ) {
+          return { valid: false, reason: "err_oob" };
+        }
+
+        // Check AABB Overlaps against other tools
+        for (const other of currentLayout.tools) {
+          if (ignoreSelf && other === tool) continue;
+
+          const oFp = getToolFootprint(other);
+          // Standard AABB overlap test
+          const overlap = !(
+            maxX <= oFp.minX ||
+            minX >= oFp.maxX ||
+            maxZ <= oFp.minZ ||
+            minZ >= oFp.maxZ
+          );
+
+          if (overlap) {
+            return {
+              valid: false,
+              reason: "err_overlap",
+              conflictWith:
+                catalogMap.get(other.tool_id)?.model || "other tool",
+            };
+          }
+        }
+
+        return { valid: true };
+      }
+
+      function validateCurrentLayout() {
+        validationErrors = [];
+
+        currentLayout.tools.forEach((tool, idx) => {
+          const item = catalogMap.get(tool.tool_id);
+          const toolLabel = item?.model || tool.tool_id;
+
+          if (!item) {
+            validationErrors.push({
+              tool,
+              index: idx,
+              messageEn: `Tool ID "${tool.tool_id}" does not exist in catalog.json`,
+              messageZh: `机台 ID "${tool.tool_id}" 不存在于设备目录中`,
+            });
+            return;
+          }
+
+          const res = validateToolPosition(
+            tool,
+            tool.x,
+            tool.z,
+            tool.rotation,
+            true,
+          );
+          if (!res.valid) {
+            if (res.reason === "err_oob") {
+              const bay = CATEGORY_BAYS[tool.bay];
+              validationErrors.push({
+                tool,
+                index: idx,
+                messageEn: `${toolLabel}: out of bounds for bay "${bay?.nameEn || tool.bay}"`,
+                messageZh: `${toolLabel}：超出 "${bay?.nameZh || tool.bay}" 的工艺区空间边界`,
+              });
+            } else if (res.reason === "err_overlap") {
+              validationErrors.push({
+                tool,
+                index: idx,
+                messageEn: `${toolLabel}: overlaps with "${res.conflictWith}"`,
+                messageZh: `${toolLabel}：与设备 "${res.conflictWith}" 发生占地包络重叠`,
+              });
+            } else {
+              validationErrors.push({
+                tool,
+                index: idx,
+                messageEn: `${toolLabel}: validation issue (${res.reason})`,
+                messageZh: `${toolLabel}：校验问题 (${res.reason})`,
+              });
+            }
+          }
+        });
+
+        updateValidationStatus();
+      }
+
+      function updateValidationStatus() {
+        const dict = I18N_EDITOR[currentLang];
+        const countBadge = document.getElementById("val-badge-text");
+        const iconBadge = document.getElementById("val-badge-icon");
+        const btnToggle = document.getElementById("btn-toggle-val-panel");
+        const placedCountEl = document.getElementById("placed-count");
+
+        placedCountEl.textContent = currentLayout.tools.length;
+
+        if (validationErrors.length === 0) {
+          countBadge.textContent = dict.valid;
+          btnToggle.className =
+            "flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-950/80 border border-emerald-500/40 text-emerald-300 hover:bg-emerald-900/80 transition text-[11px] font-medium";
+          iconBadge.setAttribute("data-lucide", "check-circle-2");
+          iconBadge.className = "w-3.5 h-3.5 text-emerald-400";
+        } else {
+          countBadge.textContent = dict.invalid.replace(
+            "{n}",
+            validationErrors.length,
+          );
+          btnToggle.className =
+            "flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-950/80 border border-amber-500/40 text-amber-300 hover:bg-amber-900/80 transition text-[11px] font-medium";
+          iconBadge.setAttribute("data-lucide", "alert-triangle");
+          iconBadge.className = "w-3.5 h-3.5 text-amber-400";
+        }
+
+        // Render validation panel list
+        const listEl = document.getElementById("val-panel-list");
+        const panelCountEl = document.getElementById("val-panel-count");
+        panelCountEl.textContent = `${validationErrors.length} ${currentLang === "zh" ? "个问题" : "errors"}`;
+
+        listEl.innerHTML = "";
+        if (validationErrors.length === 0) {
+          listEl.innerHTML = `<div class="text-emerald-400 font-semibold p-2">${dict.val_no_issues}</div>`;
+        } else {
+          validationErrors.forEach((err) => {
+            const item = document.createElement("div");
+            item.className =
+              "flex items-center justify-between p-2 rounded bg-slate-800/80 border border-slate-700 hover:border-amber-500/60 transition";
+            const msg = currentLang === "zh" ? err.messageZh : err.messageEn;
+
+            item.innerHTML = `
+              <div class="flex items-center gap-2 text-amber-300">
+                <i data-lucide="alert-circle" class="w-3.5 h-3.5 text-amber-400 shrink-0"></i>
+                <span>${escapeHtml(msg)}</span>
+              </div>
+              <button onclick="focusToolByIndex(${err.index})" class="px-2 py-0.5 rounded bg-slate-700 hover:bg-slate-600 text-[10px] text-white shrink-0">
+                ${dict.focus_btn}
+              </button>
+            `;
+            listEl.appendChild(item);
+          });
+        }
+
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function toggleValidationPanel() {
+        const panel = document.getElementById("validation-panel");
+        panel.classList.toggle("hidden");
+      }
+
+      function focusToolByIndex(idx) {
+        const tool = currentLayout.tools[idx];
+        if (!tool) return;
+        selectedTool = tool;
+        updateSelectionBar();
+
+        // Center view on tool
+        view.offsetX = -tool.x * view.scale;
+        view.offsetZ = -tool.z * view.scale;
+        renderCanvas();
+      }
+
+      // ==========================================
+      // PALETTE OPERATIONS
+      // ==========================================
+      function renderPalette() {
+        const listEl = document.getElementById("palette-list");
+        const query = (document.getElementById("palette-search")?.value || "")
+          .toLowerCase()
+          .trim();
+        const catFilter =
+          document.getElementById("palette-category-filter")?.value || "ALL";
+
+        const placedIds = new Set(currentLayout.tools.map((t) => t.tool_id));
+
+        const filtered = catalogRecords.filter((item) => {
+          const id = item.record_id || item.id;
+          const model = (item.model || "").toLowerCase();
+          const vendor = (item.vendor || "").toLowerCase();
+          const cat = (item.category || "").toLowerCase();
+
+          const matchesQuery =
+            !query ||
+            model.includes(query) ||
+            vendor.includes(query) ||
+            cat.includes(query);
+          const matchesCat = catFilter === "ALL" || item.category === catFilter;
+          return matchesQuery && matchesCat;
+        });
+
+        document.getElementById("palette-showing-text").textContent =
+          I18N_EDITOR[currentLang].showing.replace("{n}", filtered.length);
+
+        listEl.innerHTML = "";
+        filtered.forEach((item) => {
+          const id = item.record_id || item.id;
+          const isPlaced = placedIds.has(id);
+          const phys = item.record?.physical || {};
+          const w = (phys.width_mm?.value || 2400) / 1000;
+          const d = (phys.depth_mm?.value || 3500) / 1000;
+          const isL1 = item.conformance_level === "L1" && phys.width_mm?.value;
+          const catColor = CATEGORY_ACCENT_HEX[item.category] || "#64748b";
+
+          const card = document.createElement("div");
+          card.className = `p-2 rounded-lg border transition ${
+            isPlaced
+              ? "bg-slate-850/60 border-slate-800 text-slate-400 hover:border-slate-700"
+              : "bg-slate-800/90 border-slate-700/80 hover:border-emerald-500/80 text-white"
+          }`;
+
+          card.innerHTML = `
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-[9.5px] font-mono px-1.5 py-0.2 rounded font-bold uppercase" style="color: ${catColor}; background: ${catColor}15; border: 1px solid ${catColor}30;">
+                ${escapeHtml(item.category)}
+              </span>
+              <span class="text-[9.5px] font-mono ${isL1 ? "text-emerald-400" : "text-slate-500"}">
+                ${isL1 ? "L1 Verified" : "Draft Shell"}
+              </span>
+            </div>
+            <div class="font-bold text-xs truncate leading-tight">${escapeHtml(item.model || "Unknown")}</div>
+            <div class="text-[11px] text-slate-400 flex items-center justify-between mt-0.5">
+              <span>${escapeHtml(item.vendor || "OEM")}</span>
+              <span class="font-mono text-[10px] text-slate-500">${w}m × ${d}m</span>
+            </div>
+            <div class="mt-2 pt-1.5 border-t border-slate-700/60 flex items-center justify-between">
+              <span class="text-[10px] font-mono ${isPlaced ? "text-emerald-400" : "text-slate-500"}">
+                ${isPlaced ? I18N_EDITOR[currentLang].placed_status : I18N_EDITOR[currentLang].available_status}
+              </span>
+              <button
+                onclick="addToolFromPalette('${escapeHtml(id)}')"
+                class="px-2 py-0.5 rounded bg-slate-700 hover:bg-emerald-600 text-white text-[10px] font-semibold transition"
+              >
+                ${I18N_EDITOR[currentLang].add_tool_btn}
+              </button>
+            </div>
+          `;
+          listEl.appendChild(card);
+        });
+      }
+
+      function filterPalette() {
+        renderPalette();
+      }
+
+      function addToolFromPalette(toolId) {
+        const item = catalogMap.get(toolId);
+        if (!item) return;
+
+        const bayKey = item.category || "other";
+        const bay = CATEGORY_BAYS[bayKey] || CATEGORY_BAYS["other"];
+
+        // Compute a non-overlapping candidate position in the bay
+        const [bxMin, bxMax] = bay.xRange;
+        const [bzMin, bzMax] = bay.zRange;
+        const centerBayX = (bxMin + bxMax) / 2;
+        const centerBayZ = (bzMin + bzMax) / 2;
+
+        const newTool = {
+          tool_id: toolId,
+          bay: bayKey,
+          x: round2(centerBayX),
+          z: round2(centerBayZ),
+          rotation: 0,
+          vendor: item.vendor,
+          model: item.model,
+          category: bayKey,
+        };
+
+        // If center overlaps or out-of-bounds, search along Z axis for an open slot
+        const fp = getToolFootprint(newTool);
+        let placed = false;
+
+        const stepZ = Math.max(fp.depth + 0.6, 2.5);
+        for (
+          let testZ = bzMin + fp.depth / 2 + 0.3;
+          testZ <= bzMax - fp.depth / 2 - 0.3;
+          testZ += stepZ
+        ) {
+          for (let testX of [
+            centerBayX,
+            bxMin + fp.width / 2 + 0.4,
+            bxMax - fp.width / 2 - 0.4,
+          ]) {
+            const check = validateToolPosition(newTool, testX, testZ, 0, false);
+            if (check.valid) {
+              newTool.x = round2(testX);
+              newTool.z = round2(testZ);
+              placed = true;
+              break;
+            }
+          }
+          if (placed) break;
+        }
+
+        currentLayout.tools.push(newTool);
+        selectedTool = newTool;
+        updateSelectionBar();
+
+        validateCurrentLayout();
+        autosaveLayout();
+        renderPalette();
+        renderCanvas();
+
+        showSuccessToast(
+          currentLang === "zh"
+            ? `已添加机台 ${item.model} 至 ${bay.nameZh}`
+            : `Added ${item.model} to ${bay.nameEn}`,
+        );
+      }
+
+      // ==========================================
+      // CANVAS RENDERING & USER INTERACTIONS
+      // ==========================================
+      function resizeCanvas() {
+        const container = canvas.parentElement;
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = container.clientWidth * dpr;
+        canvas.height = container.clientHeight * dpr;
+        renderCanvas();
+      }
+
+      function centerView() {
+        view.scale = 12.0;
+        view.offsetX = 0;
+        view.offsetZ = 0;
+      }
+
+      function resetZoom() {
+        centerView();
+        renderCanvas();
+      }
+
+      function zoom2D(delta) {
+        const factor = 1 + delta;
+        view.scale = Math.max(4, Math.min(50, view.scale * factor));
+        renderCanvas();
+      }
+
+      function toScreenX(fabX) {
+        const dpr = window.devicePixelRatio || 1;
+        const cx = canvas.width / (2 * dpr) + view.offsetX;
+        return (cx + fabX * view.scale) * dpr;
+      }
+
+      function toScreenZ(fabZ) {
+        const dpr = window.devicePixelRatio || 1;
+        const cz = canvas.height / (2 * dpr) + view.offsetZ;
+        return (cz + fabZ * view.scale) * dpr;
+      }
+
+      function toFabX(screenX) {
+        const dpr = window.devicePixelRatio || 1;
+        const cx = canvas.width / (2 * dpr) + view.offsetX;
+        return (screenX / dpr - cx) / view.scale;
+      }
+
+      function toFabZ(screenZ) {
+        const dpr = window.devicePixelRatio || 1;
+        const cz = canvas.height / (2 * dpr) + view.offsetZ;
+        return (screenZ / dpr - cz) / view.scale;
+      }
+
+      function renderCanvas() {
+        if (!ctx) return;
+        const dpr = window.devicePixelRatio || 1;
+        const w = canvas.width;
+        const h = canvas.height;
+
+        ctx.save();
+        ctx.clearRect(0, 0, w, h);
+
+        // Update Zoom HUD
+        const zoomEl = document.getElementById("zoom-percent");
+        if (zoomEl)
+          zoomEl.textContent = `${Math.round((view.scale / 12) * 100)}%`;
+
+        // 1. Background Grid: 6m x 6m structural column grid (standard cleanroom bay module)
+        const s = view.scale * dpr;
+        const cx = w / 2 + view.offsetX * dpr;
+        const cz = h / 2 + view.offsetZ * dpr;
+
+        ctx.strokeStyle = "rgba(51, 65, 85, 0.4)";
+        ctx.lineWidth = 1;
+        const gridStep = 6.0 * s;
+        const startX = cx % gridStep;
+        const startZ = cz % gridStep;
+
+        ctx.beginPath();
+        for (let x = startX; x < w; x += gridStep) {
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, h);
+        }
+        for (let z = startZ; z < h; z += gridStep) {
+          ctx.moveTo(0, z);
+          ctx.lineTo(w, z);
+        }
+        ctx.stroke();
+
+        // 2. Cleanroom Outer Ballroom Envelope Contour
+        ctx.strokeStyle = "rgba(71, 85, 105, 0.8)";
+        ctx.lineWidth = 2 * dpr;
+        ctx.strokeRect(toScreenX(-38), toScreenZ(-29), 85 * s, 60 * s);
+
+        // 3. Render 13 Cleanroom Bays
+        Object.values(CATEGORY_BAYS).forEach((bay) => {
+          const bx = toScreenX(bay.xRange[0]);
+          const bz = toScreenZ(bay.zRange[0]);
+          const bw = (bay.xRange[1] - bay.xRange[0]) * s;
+          const bd = (bay.zRange[1] - bay.zRange[0]) * s;
+
+          // Bay background fill
+          ctx.fillStyle = bay.fill;
+          ctx.fillRect(bx, bz, bw, bd);
+
+          // Bay contour line
+          ctx.strokeStyle = bay.accent;
+          ctx.lineWidth = 1.5 * dpr;
+          ctx.setLineDash([4 * dpr, 4 * dpr]);
+          ctx.strokeRect(bx, bz, bw, bd);
+          ctx.setLineDash([]);
+
+          // Bay Label Header
+          ctx.fillStyle = bay.accent;
+          ctx.font = `bold ${Math.max(10, 11 * dpr)}px sans-serif`;
+          ctx.textAlign = "left";
+          ctx.textBaseline = "top";
+          const bayTitle = currentLang === "zh" ? bay.nameZh : bay.nameEn;
+          ctx.fillText(bayTitle, bx + 8 * dpr, bz + 6 * dpr);
+
+          // Dimension badge
+          ctx.font = `${Math.max(8, 9 * dpr)}px monospace`;
+          ctx.fillStyle = "rgba(148, 163, 184, 0.75)";
+          const bayDim = `${bay.xRange[1] - bay.xRange[0]}m × ${bay.zRange[1] - bay.zRange[0]}m`;
+          ctx.fillText(bayDim, bx + 8 * dpr, bz + 20 * dpr);
+        });
+
+        // 4. Render Placed Equipment Blocks
+        currentLayout.tools.forEach((tool) => {
+          const catalogItem = catalogMap.get(tool.tool_id);
+          const fp = getToolFootprint(tool);
+
+          const isSelected = selectedTool === tool;
+          const isDraggingThis = dragTool.active && dragTool.tool === tool;
+
+          const sx = toScreenX(tool.x);
+          const sz = toScreenZ(tool.z);
+          const sw = fp.width * s;
+          const sd = fp.depth * s;
+
+          ctx.save();
+          ctx.translate(sx, sz);
+
+          // Shadow for dragging tool
+          if (isDraggingThis) {
+            ctx.shadowColor = "rgba(16, 185, 129, 0.5)";
+            ctx.shadowBlur = 15 * dpr;
+          }
+
+          // Tool Foundation Fill
+          ctx.fillStyle = isSelected ? "#1e293b" : "rgba(30, 41, 59, 0.95)";
+          ctx.fillRect(-sw / 2, -sd / 2, sw, sd);
+
+          // Category Color Accent Border
+          const catColor = CATEGORY_ACCENT_HEX[tool.bay] || "#64748b";
+          ctx.strokeStyle = isSelected ? "#38bdf8" : catColor;
+          ctx.lineWidth = (isSelected ? 2.5 : 1.5) * dpr;
+          ctx.strokeRect(-sw / 2, -sd / 2, sw, sd);
+
+          // Tool Yaw Heading / EFEM Load Ports Notch (Shows front facing side)
+          // Rotation in degrees: 0=facing south (+Z), 90=facing west (-X), 180=facing north (-Z), 270=facing east (+X)
+          ctx.fillStyle = isSelected ? "#38bdf8" : catColor;
+          const rot = tool.rotation || 0;
+          const efemThick = Math.min(sd * 0.18, 5 * dpr);
+          if (rot === 0) {
+            ctx.fillRect(-sw * 0.4, sd / 2 - efemThick, sw * 0.8, efemThick);
+          } else if (rot === 90) {
+            ctx.fillRect(-sw / 2, -sd * 0.4, efemThick, sd * 0.8);
+          } else if (rot === 180) {
+            ctx.fillRect(-sw * 0.4, -sd / 2, sw * 0.8, efemThick);
+          } else if (rot === 270) {
+            ctx.fillRect(sw / 2 - efemThick, -sd * 0.4, efemThick, sd * 0.8);
+          }
+
+          // Tool Text Label (Model and OEM)
+          if (view.scale >= 8) {
+            ctx.fillStyle = isSelected ? "#f8fafc" : "#e2e8f0";
+            ctx.font = `bold ${Math.max(9, 9 * dpr)}px sans-serif`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+
+            const modelName = catalogItem?.model || tool.model || "Tool";
+            ctx.fillText(modelName, 0, -2 * dpr);
+
+            if (view.scale >= 14) {
+              ctx.font = `${Math.max(7.5, 7.5 * dpr)}px monospace`;
+              ctx.fillStyle = "rgba(148, 163, 184, 0.85)";
+              const vendorName = catalogItem?.vendor || tool.vendor || "";
+              ctx.fillText(vendorName, 0, 10 * dpr);
+            }
+          }
+
+          ctx.restore();
+        });
+
+        // 5. Active Drag Candidate Ghost (When dragging an existing tool)
+        if (dragTool.active && dragTool.tool) {
+          const testRes = validateToolPosition(
+            dragTool.tool,
+            dragTool.tool.x,
+            dragTool.tool.z,
+            dragTool.tool.rotation,
+            true,
+          );
+          const fp = getToolFootprint(dragTool.tool);
+          const sx = toScreenX(dragTool.tool.x);
+          const sz = toScreenZ(dragTool.tool.z);
+          const sw = fp.width * s;
+          const sd = fp.depth * s;
+
+          ctx.save();
+          ctx.strokeStyle = testRes.valid ? "#10b981" : "#ef4444";
+          ctx.lineWidth = 2 * dpr;
+          ctx.setLineDash([4 * dpr, 3 * dpr]);
+          ctx.strokeRect(sx - sw / 2, sz - sd / 2, sw, sd);
+          ctx.restore();
+        }
+
+        ctx.restore();
+      }
+
+      function initCanvasEvents() {
+        canvas.addEventListener("mousedown", (e) => {
+          if (e.button !== 0) return; // Left click only
+          const rect = canvas.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          const dpr = window.devicePixelRatio || 1;
+          const fabX = toFabX(mouseX * dpr);
+          const fabZ = toFabZ(mouseY * dpr);
+
+          // Check if clicked on a tool (traverse backwards so top-most tool is hit)
+          let hit = null;
+          for (let i = currentLayout.tools.length - 1; i >= 0; i--) {
+            const tool = currentLayout.tools[i];
+            const fp = getToolFootprint(tool);
+            if (
+              fabX >= fp.minX &&
+              fabX <= fp.maxX &&
+              fabZ >= fp.minZ &&
+              fabZ <= fp.maxZ
+            ) {
+              hit = tool;
+              break;
+            }
+          }
+
+          if (hit) {
+            selectedTool = hit;
+            updateSelectionBar();
+
+            dragTool.active = true;
+            dragTool.tool = hit;
+            dragTool.initialX = hit.x;
+            dragTool.initialZ = hit.z;
+            dragTool.mouseOffsetX = fabX - hit.x;
+            dragTool.mouseOffsetZ = fabZ - hit.z;
+          } else {
+            // Deselect and initiate canvas pan
+            selectedTool = null;
+            updateSelectionBar();
+
+            view.isPanning = true;
+            view.panStartX = e.clientX;
+            view.panStartY = e.clientY;
+          }
+
+          renderCanvas();
+        });
+
+        window.addEventListener("mousemove", (e) => {
+          const rect = canvas.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          const dpr = window.devicePixelRatio || 1;
+          const fabX = toFabX(mouseX * dpr);
+          const fabZ = toFabZ(mouseY * dpr);
+
+          // Update Coordinates HUD
+          const hud = document.getElementById("hud-coords");
+          if (hud)
+            hud.textContent = `X: ${fabX.toFixed(2)}m, Z: ${fabZ.toFixed(2)}m`;
+
+          if (dragTool.active && dragTool.tool) {
+            // Move tool with mouse
+            dragTool.tool.x = round2(fabX - dragTool.mouseOffsetX);
+            dragTool.tool.z = round2(fabZ - dragTool.mouseOffsetZ);
+            renderCanvas();
+          } else if (view.isPanning) {
+            view.offsetX += e.clientX - view.panStartX;
+            view.offsetZ += e.clientY - view.panStartY;
+            view.panStartX = e.clientX;
+            view.panStartY = e.clientY;
+            renderCanvas();
+          }
+        });
+
+        window.addEventListener("mouseup", () => {
+          if (dragTool.active && dragTool.tool) {
+            const tool = dragTool.tool;
+            const res = validateToolPosition(
+              tool,
+              tool.x,
+              tool.z,
+              tool.rotation,
+              true,
+            );
+
+            if (!res.valid) {
+              // Revert position and display bilingual rejection toast!
+              tool.x = dragTool.initialX;
+              tool.z = dragTool.initialZ;
+
+              const dict = I18N_EDITOR[currentLang];
+              let msg = dict.reject_drop_oob;
+              if (res.reason === "err_overlap") {
+                msg = dict.reject_drop_overlap;
+              } else if (res.reason === "reject_drop_nobay") {
+                msg = dict.reject_drop_nobay;
+              }
+              showRejectionToast(msg);
+            } else {
+              // Valid drop: trigger validation update and autosave
+              validateCurrentLayout();
+              autosaveLayout();
+            }
+
+            dragTool.active = false;
+            dragTool.tool = null;
+            renderCanvas();
+          }
+
+          view.isPanning = false;
+        });
+
+        canvas.addEventListener(
+          "wheel",
+          (e) => {
+            e.preventDefault();
+            const delta = e.deltaY < 0 ? 0.15 : -0.15;
+            zoom2D(delta);
+          },
+          { passive: false },
+        );
+
+        // Keyboard hotkeys: 'R' to rotate, 'Delete' to delete selected tool
+        window.addEventListener("keydown", (e) => {
+          if (
+            ["input", "textarea", "select"].includes(
+              e.target.tagName.toLowerCase(),
+            )
+          )
+            return;
+
+          if (selectedTool) {
+            if (e.key === "r" || e.key === "R") {
+              rotateSelectedTool();
+            } else if (e.key === "Delete" || e.key === "Backspace") {
+              deleteSelectedTool();
+            } else if (e.key === "ArrowLeft") {
+              moveSelectedTool(-0.5, 0);
+            } else if (e.key === "ArrowRight") {
+              moveSelectedTool(0.5, 0);
+            } else if (e.key === "ArrowUp") {
+              moveSelectedTool(0, -0.5);
+            } else if (e.key === "ArrowDown") {
+              moveSelectedTool(0, 0.5);
+            }
+          }
+        });
+      }
+
+      function updateSelectionBar() {
+        const bar = document.getElementById("selection-bar");
+        if (!selectedTool) {
+          bar.classList.add("hidden");
+          return;
+        }
+
+        const item = catalogMap.get(selectedTool.tool_id);
+        const bay = CATEGORY_BAYS[selectedTool.bay];
+
+        document.getElementById("selected-tool-name").textContent =
+          item?.model || selectedTool.model || selectedTool.tool_id;
+
+        const bayName = currentLang === "zh" ? bay?.nameZh : bay?.nameEn;
+        const fp = getToolFootprint(selectedTool);
+        document.getElementById("selected-tool-meta").textContent =
+          `${bayName || selectedTool.bay} · ${fp.width}m × ${fp.depth}m (X: ${selectedTool.x}m, Z: ${selectedTool.z}m)`;
+
+        document.getElementById("selected-rot-label").textContent =
+          `${selectedTool.rotation || 0}°`;
+        document.getElementById("selected-cat-dot").style.backgroundColor =
+          CATEGORY_ACCENT_HEX[selectedTool.bay] || "#10b981";
+
+        bar.classList.remove("hidden");
+        if (window.lucide) lucide.createIcons();
+      }
+
+      function deselectTool() {
+        selectedTool = null;
+        updateSelectionBar();
+        renderCanvas();
+      }
+
+      function rotateSelectedTool() {
+        if (!selectedTool) return;
+        const curRot = selectedTool.rotation || 0;
+        const nextRot = (curRot + 90) % 360;
+
+        const res = validateToolPosition(
+          selectedTool,
+          selectedTool.x,
+          selectedTool.z,
+          nextRot,
+          true,
+        );
+        if (!res.valid) {
+          showRejectionToast(
+            res.reason === "err_overlap"
+              ? I18N_EDITOR[currentLang].reject_drop_overlap
+              : I18N_EDITOR[currentLang].reject_drop_oob,
+          );
+          return;
+        }
+
+        selectedTool.rotation = nextRot;
+        updateSelectionBar();
+        validateCurrentLayout();
+        autosaveLayout();
+        renderCanvas();
+      }
+
+      function moveSelectedTool(dx, dz) {
+        if (!selectedTool) return;
+        const targetX = round2(selectedTool.x + dx);
+        const targetZ = round2(selectedTool.z + dz);
+
+        const res = validateToolPosition(
+          selectedTool,
+          targetX,
+          targetZ,
+          selectedTool.rotation,
+          true,
+        );
+        if (res.valid) {
+          selectedTool.x = targetX;
+          selectedTool.z = targetZ;
+          updateSelectionBar();
+          validateCurrentLayout();
+          autosaveLayout();
+          renderCanvas();
+        }
+      }
+
+      function deleteSelectedTool() {
+        if (!selectedTool) return;
+        const idx = currentLayout.tools.indexOf(selectedTool);
+        if (idx !== -1) {
+          currentLayout.tools.splice(idx, 1);
+          selectedTool = null;
+          updateSelectionBar();
+          validateCurrentLayout();
+          autosaveLayout();
+          renderPalette();
+          renderCanvas();
+          showSuccessToast(
+            currentLang === "zh"
+              ? "机台已从洁净室布局中移除"
+              : "Tool removed from floor plan",
+          );
+        }
+      }
+
+      // ==========================================
+      // EXPORT & SUBMISSION ENGINE (Task 2 items 4, 5, 6)
+      // ==========================================
+      function openIn3D() {
+        // Save current layout to localStorage under key "semiconfab_custom_layout"
+        autosaveLayout();
+        // Open twin.html?layout=local in a new window/tab
+        window.open("twin.html?layout=local", "_blank");
+      }
+
+      function exportLayoutJSON() {
+        const layoutPayload = {
+          $schema: "./twin/layout-schema.json",
+          version: currentLayout.version || "1.1.0",
+          name: currentLayout.name || "Custom Fab Cleanroom Floor Plan",
+          description:
+            currentLayout.description ||
+            "Custom fab floor plan exported from layout editor",
+          created_at: currentLayout.created_at || new Date().toISOString(),
+          updated_at: new Date().toISOString(),
+          author: currentLayout.author || "SemiconFab Layout Editor User",
+          tools: currentLayout.tools.map((t) => ({
+            tool_id: t.tool_id,
+            bay: t.bay,
+            x: t.x,
+            z: t.z,
+            rotation: t.rotation || 0,
+            vendor: t.vendor || catalogMap.get(t.tool_id)?.vendor,
+            model: t.model || catalogMap.get(t.tool_id)?.model,
+            category: t.bay,
+          })),
+        };
+
+        const dateStr = new Date().toISOString().split("T")[0];
+        const filename = `fab-layout-${dateStr}.json`;
+        const jsonStr = JSON.stringify(layoutPayload, null, 2);
+
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        showSuccessToast(I18N_EDITOR[currentLang].toast_exported);
+      }
+
+      // ==========================================
+      // UPLOAD / IMPORT LAYOUT JSON ENGINE
+      // ==========================================
+      function openUploadLayoutModal() {
+        const modal = document.getElementById("upload-layout-modal");
+        const errEl = document.getElementById("upload-layout-error");
+        if (errEl) errEl.classList.add("hidden");
+        if (modal) modal.classList.remove("hidden");
+      }
+
+      function closeUploadLayoutModal() {
+        const modal = document.getElementById("upload-layout-modal");
+        if (modal) modal.classList.add("hidden");
+      }
+
+      function handleLayoutFileSelected(event) {
+        const file = event.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const txt = e.target.result;
+          const textarea = document.getElementById("layout-json-input");
+          if (textarea) textarea.value = txt;
+        };
+        reader.readAsText(file);
+      }
+
+      function applyUploadedLayout() {
+        const input = document.getElementById("layout-json-input");
+        const errEl = document.getElementById("upload-layout-error");
+        const txt = (input?.value || "").trim();
+        const dict = I18N_EDITOR[currentLang];
+
+        if (!txt) {
+          if (errEl) {
+            errEl.textContent =
+              currentLang === "zh"
+                ? "请选择布局文件或粘贴 JSON 内容"
+                : "Please choose a layout JSON file or paste content";
+            errEl.classList.remove("hidden");
+          }
+          return;
+        }
+
+        let parsed;
+        try {
+          parsed = JSON.parse(txt);
+        } catch (e) {
+          if (errEl) {
+            errEl.textContent =
+              (currentLang === "zh"
+                ? "JSON 解析错误: "
+                : "JSON syntax error: ") + e.message;
+            errEl.classList.remove("hidden");
+          }
+          return;
+        }
+
+        if (
+          !parsed ||
+          typeof parsed !== "object" ||
+          !Array.isArray(parsed.tools) ||
+          parsed.tools.length === 0
+        ) {
+          if (errEl) {
+            errEl.textContent =
+              currentLang === "zh"
+                ? "无效布局：'tools' 必须为包含机台的非空数组"
+                : "Invalid layout: 'tools' must be a non-empty array of tools";
+            errEl.classList.remove("hidden");
+          }
+          return;
+        }
+
+        // Apply imported layout
+        currentLayout = parsed;
+        selectedTool = null;
+        updateSelectionBar();
+        autosaveLayout();
+        renderPalette();
+        validateCurrentLayout();
+        renderCanvas();
+        closeUploadLayoutModal();
+        showSuccessToast(dict.toast_uploaded || "Layout loaded successfully");
+      }
+
+      function openSubmitModal() {
+        const modal = document.getElementById("submit-modal");
+        modal.classList.remove("hidden");
+      }
+
+      function closeSubmitModal() {
+        const modal = document.getElementById("submit-modal");
+        modal.classList.add("hidden");
+      }
+
+      function prepareLayoutPayload() {
+        const nameInput =
+          document.getElementById("submit-layout-name")?.value ||
+          "Custom Fab Layout";
+        const authorInput =
+          document.getElementById("submit-author-name")?.value || "Contributor";
+        const descInput =
+          document.getElementById("submit-layout-desc")?.value || "";
+
+        return {
+          $schema: "./twin/layout-schema.json",
+          version: "1.0.0",
+          name: nameInput,
+          description: descInput,
+          created_at: new Date().toISOString(),
+          author: authorInput,
+          tools: currentLayout.tools.map((t) => ({
+            tool_id: t.tool_id,
+            bay: t.bay,
+            x: t.x,
+            z: t.z,
+            rotation: t.rotation || 0,
+            vendor: t.vendor || catalogMap.get(t.tool_id)?.vendor,
+            model: t.model || catalogMap.get(t.tool_id)?.model,
+            category: t.bay,
+          })),
+        };
+      }
+
+      function submitViaGitHub() {
+        const payload = prepareLayoutPayload();
+        const jsonStr = JSON.stringify(payload, null, 2);
+        const dateStr = new Date().toISOString().split("T")[0];
+        const safeName =
+          payload.name
+            .toLowerCase()
+            .replace(/[^a-z0-9_-]/g, "-")
+            .slice(0, 30) || "layout";
+        const filename = `fab-layout-${safeName}-${dateStr}.json`;
+        const targetPath = `layouts/pending/${filename}`;
+        const commitMsg = `feat(layout): submit cleanroom layout ${payload.name}`;
+
+        const prUrl = `https://github.com/${encodeURIComponent(SUBMISSION_CONFIG.org)}/${encodeURIComponent(
+          SUBMISSION_CONFIG.repo,
+        )}/new/main?filename=${encodeURIComponent(targetPath)}&value=${encodeURIComponent(
+          jsonStr,
+        )}&message=${encodeURIComponent(commitMsg)}`;
+
+        window.open(prUrl, "_blank");
+        closeSubmitModal();
+      }
+
+      function submitViaEmail() {
+        const payload = prepareLayoutPayload();
+        const jsonStr = JSON.stringify(payload, null, 2);
+
+        const subject = `[SemiconFab Layout Submission] ${payload.name}`;
+        const body =
+          `Layout Name: ${payload.name}\n` +
+          `Author: ${payload.author}\n` +
+          `Tools Placed: ${payload.tools.length}\n` +
+          `Description: ${payload.description}\n\n` +
+          `JSON Content:\n${jsonStr}\n`;
+
+        const mailtoUrl = `mailto:${encodeURIComponent(SUBMISSION_CONFIG.contactEmail)}?subject=${encodeURIComponent(
+          subject,
+        )}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailtoUrl;
+        closeSubmitModal();
+      }
+
+      // ==========================================
+      // UTILITY HELPERS
+      // ==========================================
+      function round2(num) {
+        return Math.round(num * 100) / 100;
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+      }
+
+      function showRejectionToast(msg) {
+        const toast = document.getElementById("toast");
+        const msgEl = document.getElementById("toast-message");
+        msgEl.textContent = msg;
+        toast.classList.remove("hidden");
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+          toast.classList.add("hidden");
+        }, 3200);
+      }
+
+      function showSuccessToast(msg) {
+        const toast = document.getElementById("success-toast");
+        const msgEl = document.getElementById("success-toast-message");
+        msgEl.textContent = msg;
+        toast.classList.remove("hidden");
+        clearTimeout(toast._timeout);
+        toast._timeout = setTimeout(() => {
+          toast.classList.add("hidden");
+        }, 2800);
+      }
+    </script>
+  </body>
+</html>

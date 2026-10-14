@@ -1,0 +1,1041 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      SemiconFab Equipment Schema v1.0 — Open Data Standard | SemiconFab.org
+    </title>
+    <meta
+      name="description"
+      content="Open, machine-readable semiconductor equipment schema with 7 data layers, 3 conformance levels, and field-level provenance for fab planning and research."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --bg-page: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-card-alt: #f1f5f9;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border: #cbd5e1;
+        --border-focus: #2563eb;
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --success: #16a34a;
+        --success-bg: #dcfce7;
+        --warning: #d97706;
+        --warning-bg: #fef3c7;
+        --danger: #dc2626;
+        --radius: 8px;
+        --font:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font);
+        background-color: var(--bg-page);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 24px 16px 80px;
+      }
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      header {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .header-titles h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+      .header-titles p {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+      .nav-links a.active {
+        color: var(--text-main);
+        font-weight: 700;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 2px;
+      }
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 16px 0 8px;
+      }
+      p {
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+      p.zh {
+        color: #334155;
+        background: #f8fafc;
+        border-left: 3px solid #94a3b8;
+        padding: 8px 14px;
+        border-radius: 0 6px 6px 0;
+        font-size: 13.5px;
+      }
+      .diagram-wrap {
+        margin: 20px 0;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+        text-align: center;
+        padding: 16px;
+      }
+      .diagram-wrap img {
+        width: 100%;
+        max-width: 860px;
+        height: auto;
+        display: inline-block;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 13px;
+      }
+      th,
+      td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      th {
+        background-color: var(--bg-card-alt);
+        font-weight: 600;
+        color: #1e293b;
+      }
+      tr:hover td {
+        background-color: #f8fafc;
+      }
+      code,
+      pre {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12.5px;
+      }
+      code {
+        background-color: var(--bg-card-alt);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #0f172a;
+        font-weight: 600;
+      }
+      ul {
+        margin-left: 20px;
+        margin-bottom: 12px;
+        font-size: 13.5px;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      .badge-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .badge-cyan {
+        background: #e0f2fe;
+        color: #0369a1;
+      }
+      .badge-purple {
+        background: #f3e8ff;
+        color: #6b21a8;
+      }
+
+      /* Bilingual Toggle Engine */
+      [data-lang="en"] .zh-only,
+      [data-lang="en"] .zh {
+        display: none !important;
+      }
+      [data-lang="zh"] .en-only,
+      [data-lang="zh"] .en-pair {
+        display: none !important;
+      }
+      [data-lang="zh"] p.zh,
+      [data-lang="zh"] div.zh,
+      [data-lang="zh"] li.zh {
+        color: var(--text-main);
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      [data-lang="zh"] ul.zh {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 0 0 20px !important;
+        margin-bottom: 16px;
+      }
+      .lang-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 4px 10px;
+        background: var(--bg-card);
+        color: var(--primary);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        user-select: none;
+        font-family: inherit;
+        line-height: 1.2;
+        margin-left: 6px;
+      }
+      .lang-btn:hover {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-titles">
+          <h1>SemiconFab Equipment Schema v1.0</h1>
+          <p class="en-pair">
+            <span class="en-only"
+              >Open Data Standard for Semiconductor Manufacturing Equipment
+              &bull; 7-Layer Architecture</span
+            >
+            <span class="zh-only"
+              >半导体制造设备开放数据标准 &bull; 七层架构规范</span
+            >
+          </p>
+        </div>
+        <div class="nav-links">
+          <a href="index.html"
+            ><span class="en-only">Home</span
+            ><span class="zh-only">首页</span></a
+          >
+          <a href="catalog-demo.html"
+            ><span class="en-only">Catalog</span
+            ><span class="zh-only">设备目录</span></a
+          >
+          <a href="twin.html"
+            ><span class="en-only">Digital Twin</span
+            ><span class="zh-only">数字孪生</span></a
+          >
+          <a href="benchmark.html"
+            ><span class="en-only">Benchmark</span
+            ><span class="zh-only">基准评测</span></a
+          >
+          <a href="data-standard.html" class="active" style="font-weight: 700"
+            ><span class="en-only">Data Standard</span
+            ><span class="zh-only">数据标准</span></a
+          >
+          <a href="verification.html"
+            ><span class="en-only">Verification</span
+            ><span class="zh-only">数据核验</span></a
+          >
+          <a href="add-equipment.html"
+            ><span class="en-only">Add Equipment</span
+            ><span class="zh-only">提交设备</span></a
+          >
+          <button
+            id="lang-toggle-btn"
+            onclick="toggleLanguage()"
+            class="lang-btn"
+            title="Switch English / 中文"
+          >
+            <strong>EN</strong> /
+            <span style="opacity: 0.6; font-weight: normal">中</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Section 1: Overview -->
+      <section class="card" id="overview">
+        <h2>
+          <span class="en-only">1. Overview</span
+          ><span class="zh-only">1. 概述</span>
+        </h2>
+        <p class="en-pair">
+          The SemiconFab Equipment Schema v1.0 is an open, machine-readable data
+          standard designed to describe semiconductor manufacturing tools across
+          front-end wafer fabrication and back-end packaging. It establishes a
+          structured specification format for equipment manufacturers, fab
+          planners, industrial engineering teams, and academic researchers to
+          catalog physical footprints, utility hookups, process capabilities,
+          and reliability metrics without exposing proprietary process recipes
+          or confidential pricing.
+        </p>
+        <p class="zh">
+          SemiconFab 设备数据标准 v1.0
+          是一个开放、机器可读的数据交换规范，旨在统一描述半导体前道晶圆制造与后道封装测试的各类制造设备。本标准为半导体设备制造商、晶圆厂规划工程师、工业工程团队以及学术研究人员建立了一套结构化的数据描述体系，用于收录设备物理占地、厂务二次配管配线需求、工艺能力及设备可靠性指标，同时严格避开厂商专有工艺配方与商业机密价格。
+        </p>
+      </section>
+
+      <!-- Section 2: Why It Exists -->
+      <section class="card" id="why-it-exists">
+        <h2>
+          <span class="en-only">2. Why It Exists</span
+          ><span class="zh-only">2. 制定背景：芯片制造设备的数据困境</span>
+        </h2>
+        <p class="en-pair">
+          The semiconductor equipment industry currently relies on fragmented,
+          unstructured documentation that hinders transparent technical
+          evaluation:
+        </p>
+        <p class="zh">
+          半导体设备行业长期依赖离散、非结构化的技术文档，制约了客观、透明的技术评估与产线规划：
+        </p>
+
+        <ul>
+          <li>
+            <strong
+              >Inconsistent Vendor Datasheets (厂商规格书格式碎片化)</strong
+            >: Equipment manufacturers publish technical specifications across
+            varied PDF layouts, non-standard unit systems, and marketing
+            summaries. Critical engineering parameters—such as SEMI E72
+            equipment footprint dimensions, exhaust volumes, and apparent
+            electrical power—are frequently omitted, inconsistently measured, or
+            buried in non-indexable drawings.
+            <div class="zh" style="margin-top: 4px; font-size: 13px">
+              设备厂商的技术规格分散在版式迥异的 PDF
+              手册、非标准化单位制及营销彩页中。外形几何尺寸（SEMI
+              E72）、厂务排风量、视在功率等核心工程参数经常缺漏、口径不一，或深埋于无法被机器索引的图纸中。
+            </div>
+          </li>
+          <li>
+            <strong
+              >Evaluation Barriers for Alternative Toolmakers
+              (替代设备评估门槛高企)</strong
+            >: Emerging equipment vendors face substantial obstacles when
+            competing with established incumbents. Fab procurement and
+            industrial engineering teams lack a neutral, standardized framework
+            to perform objective drop-in replacement evaluations, resulting in
+            prolonged qualification timelines and entrenched vendor lock-in.
+            <div class="zh" style="margin-top: 4px; font-size: 13px">
+              新兴设备厂商在与传统主导厂商竞争时面临极高的评估壁垒。晶圆厂采购与工业工程团队缺乏中立、标准化的横向评估框架，难以执行精准的同口径替换可行性分析，导致验证周期漫长且容易形成被动绑定。
+            </div>
+          </li>
+          <li>
+            <strong
+              >Absence of Machine-Readable Industry Standards
+              (缺乏机器可读的设备数据标准)</strong
+            >: While SEMI standards govern hardware safety (SEMI S2), physical
+            footprints (SEMI E72), and reliability accounting (SEMI E10), no
+            open JSON Schema standard exists to exchange structured tool
+            parameters. Fab digital twin modeling and capacity scheduling tools
+            are forced to re-enter data manually for every project.
+            <div class="zh" style="margin-top: 4px; font-size: 13px">
+              尽管 SEMI 现行标准规范了设备安全（SEMI S2）、设备占地（SEMI
+              E72）与可靠性统计（SEMI
+              E10），但在设备级规格数据交换领域，行业内仍不存在开放的 JSON
+              模式标准。晶圆厂数字孪生建模与产能调度仿真被迫对每个工程项目进行重复的人工数据录入。
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 3: 7 Data Layers -->
+      <section class="card" id="layers">
+        <h2>
+          <span class="en-only">3. The 7 Data Layers</span
+          ><span class="zh-only">3. 七层数据架构</span>
+        </h2>
+        <p class="en-pair">
+          The schema organizes equipment attributes into seven modular,
+          decoupled layers, ensuring that records can be populated progressively
+          as data becomes available:
+        </p>
+        <p class="zh">
+          本规范将设备属性解耦划分为七个独立的模块化数据层，确保记录可随着工程数据的逐步完备而逐层递进补充：
+        </p>
+
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>
+                  <span class="en-only">Layer Key</span
+                  ><span class="zh-only">层标识</span>
+                </th>
+                <th>
+                  <span class="en-only">Layer Name</span
+                  ><span class="zh-only">层名称</span>
+                </th>
+                <th>
+                  <span class="en-only">Scope &amp; Description</span
+                  ><span class="zh-only">定义与范围</span>
+                </th>
+                <th>
+                  <span class="en-only">Example Fields</span
+                  ><span class="zh-only">核心代表字段</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>identity</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Identity Layer</span
+                    ><span class="zh-only">身份层</span></strong
+                  >
+                </td>
+                <td>
+                  Canonical equipment identification, classification taxonomy,
+                  wafer size applicability, node target, and manufacturing
+                  status.
+                  设备基础身份核验、大类归属、适用晶圆尺寸、适用制程节点及在产状态。
+                </td>
+                <td>
+                  <code>vendor</code>, <code>model</code>,
+                  <code>category</code>, <code>wafer_sizes_mm</code>,
+                  <code>node_applicability</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>physical</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Physical Layer</span
+                    ><span class="zh-only">物理层</span></strong
+                  >
+                </td>
+                <td>
+                  Structural envelope dimensions, installed mass, automation
+                  interface configurations, and 3D digital twin geometry assets
+                  (aligned with SEMI E72).
+                  设备外形几何包络尺寸、整机安装重量、晶圆搬送自动化端口及三维模型（对标
+                  SEMI E72）。
+                </td>
+                <td>
+                  <code>width_mm</code>, <code>depth_mm</code>,
+                  <code>height_mm</code>, <code>weight_kg</code>,
+                  <code>load_ports</code>, <code>model_3d_url</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>facilities</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Facilities Layer</span
+                    ><span class="zh-only">厂务层</span></strong
+                  >
+                </td>
+                <td>
+                  Utility consumptions and hookup requirements, including
+                  electrical power, cooling water, ultra-pure water, process
+                  gases, and cleanroom exhaust.
+                  洁净室二次配管配线需求，包括动力供电、工艺冷却水、超纯水、干式压缩空气、特气消耗及酸碱排气。
+                </td>
+                <td>
+                  <code>power_kva</code>, <code>heat_load_kw</code>,
+                  <code>upw_lpm</code>, <code>cda_nm3h</code>,
+                  <code>process_gases</code>, <code>exhaust</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>process_capability</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Process Capability Layer</span
+                    ><span class="zh-only">工艺能力层</span></strong
+                  >
+                </td>
+                <td>
+                  Qualified process modules, baseline wafer processing
+                  throughput, across-wafer thickness/etch uniformity, and
+                  defectivity limits.
+                  设备支持的合格工艺模块清单、参考工艺条件下的晶圆产出速率、晶圆内均匀度指标及微粒缺陷控制标准。
+                </td>
+                <td>
+                  <code>capabilities</code>, <code>throughput_wph</code>,
+                  <code>uniformity_pct</code>, <code>particle_spec</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>reliability</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Reliability Layer</span
+                    ><span class="zh-only">可靠性层</span></strong
+                  >
+                </td>
+                <td>
+                  Standard equipment reliability, maintainability, and
+                  operational availability metrics, mapped directly to SEMI E10
+                  definitions.
+                  运行可靠性、可维修性及设备本征开机率指标，严格对标 SEMI E10
+                  RAM 状态定义及量产验证状态。
+                </td>
+                <td>
+                  <code>mtbf_h</code>, <code>mttr_h</code>,
+                  <code>availability_pct</code>,
+                  <code>qualification_status</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>commercial</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Commercial Layer</span
+                    ><span class="zh-only">商务层</span></strong
+                  >
+                </td>
+                <td>
+                  Public vendor contact points, regional service eligibility,
+                  direct drop-in replacement tool references, and public
+                  datasheet links.
+                  厂商公开联系渠道、销售与技术服务区域、同口径直接替代型号对照关系及公开数据手册来源链接。
+                </td>
+                <td>
+                  <code>vendor_contact</code>, <code>regions_available</code>,
+                  <code>alternative_to</code>, <code>datasheet_url</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>notes</code></td>
+                <td>
+                  <strong
+                    ><span class="en-only">Notes Layer</span
+                    ><span class="zh-only">备注层</span></strong
+                  >
+                </td>
+                <td>
+                  Unstructured engineering remarks, equipment maintenance notes,
+                  and field operational observations excluded from automated
+                  comparisons.
+                  自由文本工程备注、维护注意事项及现场运行经验总结（不参与自动化机器横向参数比对）。
+                </td>
+                <td>
+                  <span class="en-only">Free-text string</span
+                  ><span class="zh-only">自由文本字符串</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 4: Conformance Levels -->
+      <section class="card" id="conformance-levels">
+        <h2>
+          <span class="en-only">4. Conformance Levels</span
+          ><span class="zh-only">4. 合规等级 (L1 / L2 / L3)</span>
+        </h2>
+        <p class="en-pair">
+          To lower the barrier to entry while maintaining rigorous standards for
+          advanced industrial engineering, records are certified across three
+          conformance levels matching SPEC.md §7:
+        </p>
+        <p class="zh">
+          为降低数据提交门槛，同时保障工业工程严谨性，规范设立了三个向后兼容的合规分级（严格对标
+          SPEC.md §7）：
+        </p>
+
+        <ul>
+          <li>
+            <strong
+              ><span class="en-only"
+                >Level 1 — Minimum Listing (<code>L1</code>)</span
+              ><span class="zh-only"
+                >第一级 — 最低上架级 (<code>L1</code>)</span
+              ></strong
+            >:
+            <ul style="margin-top: 6px">
+              <li>
+                <strong
+                  ><span class="en-only">Required Layers</span
+                  ><span class="zh-only">必选数据层</span></strong
+                >:
+                <span class="en-only"
+                  ><code>meta</code> + <code>identity</code> +
+                  <code>physical</code>.</span
+                ><span class="zh-only"
+                  ><code>meta</code> + <code>identity</code> +
+                  <code>physical</code>。</span
+                >
+              </li>
+              <li class="en-only">
+                <strong>Intent &amp; Target Audience</strong>: Verifies that the
+                tool physically exists, has an established vendor model
+                designation, and can fit into cleanroom floorplan envelopes.
+                Intended for rapid tool indexing and equipment discovery.
+              </li>
+              <li class="en-only">
+                <strong>Real Catalog Benchmark</strong>: In the SemiconFab
+                equipment catalog, 7 equipment models (including the Canon
+                FPA-5550iZ2 i-line stepper, Ebara F-REX300 CMP polisher, Besi
+                Datacon 2200 evo, and ACM Research Ultra ECP 3D) satisfy full L1
+                criteria with verified footprint dimensions, while 114 draft
+                tools currently reside in the pre-L1
+                <code>needs_footprint</code> pipeline awaiting physical
+                dimensions.
+              </li>
+              <li class="zh">
+                适用场景与对象:
+                验证设备真实存在、具备公开型号标识，且物理尺寸可放入洁净室机台间距中。主要用于设备目录快速收录与基础产品发现。在现有目录中，包括佳能
+                FPA-5550iZ2 光刻机、荏原 F-REX300 CMP 抛光机、Besi Datacon 2200
+                evo 固晶机及盛美半导体 Ultra ECP 3D 镀铜设备在内的 7
+                款机型已完整达成 L1 标准，其余 114
+                款设备暂存于待补全占地管线（<code>needs_footprint</code>）中等待尺寸补充。
+              </li>
+            </ul>
+          </li>
+          <li style="margin-top: 14px">
+            <strong
+              ><span class="en-only"
+                >Level 2 — Fab Planning (<code>L2</code>)</span
+              ><span class="zh-only"
+                >第二级 — 厂务规划级 (<code>L2</code>)</span
+              ></strong
+            >:
+            <ul style="margin-top: 6px">
+              <li>
+                <strong
+                  ><span class="en-only">Required Layers</span
+                  ><span class="zh-only">必选数据层</span></strong
+                >:
+                <span class="en-only"
+                  ><code>L1</code> requirements + <code>facilities</code>.</span
+                ><span class="zh-only"
+                  ><code>L1</code> 全部要求 + <code>facilities</code>。</span
+                >
+              </li>
+              <li class="en-only">
+                <strong>Intent &amp; Target Audience</strong>: Provides complete
+                cleanroom utility consumption data (electrical load, UPW, PCW,
+                CDA, exhaust). Intended for fab layout planners and facility
+                hookup engineers budgeting utility capacities.
+              </li>
+              <li class="zh">
+                适用场景与对象: 在 L1
+                基础上补全厂务二次配管配线负荷数据（电力视在功率、超纯水、冷却水、压缩空气、特气排气等）。服务于晶圆厂建厂规划与二次配厂务工程师。
+              </li>
+            </ul>
+          </li>
+          <li style="margin-top: 14px">
+            <strong
+              ><span class="en-only"
+                >Level 3 — Full Benchmark Grade (<code>L3</code>)</span
+              ><span class="zh-only"
+                >第三级 — 完整基准级 (<code>L3</code>)</span
+              ></strong
+            >:
+            <ul style="margin-top: 6px">
+              <li>
+                <strong
+                  ><span class="en-only">Required Layers</span
+                  ><span class="zh-only">必选数据层</span></strong
+                >:
+                <span class="en-only"
+                  ><code>L2</code> requirements + <code>process_capability</code>
+                  + <code>reliability</code> + <code>commercial</code>.</span
+                ><span class="zh-only"
+                  ><code>L2</code> 全部要求 + <code>process_capability</code> +
+                  <code>reliability</code> + <code>commercial</code>。</span
+                >
+              </li>
+              <li class="en-only">
+                <strong>Intent &amp; Target Audience</strong>: Provides
+                end-to-end operational metrics, including SEMI E10 availability,
+                wafer throughput rates, drop-in replacement references, and
+                qualification history. Intended for discrete-event fab
+                simulation, capacity planning, and technical replacement audits.
+              </li>
+              <li class="zh">
+                适用场景与对象: 在 L2 基础上补齐工艺性能、SEMI E10
+                可靠性指标与替代关系对照。服务于晶圆厂离散事件仿真（如 MIMAC
+                基准）、产能瓶颈分析及严肃的机台替换技术论证。
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 5: Provenance Tiers -->
+      <section class="card" id="provenance-tiers">
+        <h2>
+          <span class="en-only">5. Provenance Tiers</span
+          ><span class="zh-only">5. 字段级出处分级</span>
+        </h2>
+        <p class="en-pair">
+          Trust in the SemiconFab catalog is established at the field level
+          rather than the record level. Every quantitative and qualitative value
+          is wrapped in a <code>FieldValue</code> object carrying an explicit
+          provenance tier from SPEC.md §5:
+        </p>
+        <p class="zh">
+          SemiconFab
+          目录的信任建立在字段级而非整条记录级。每个数值或枚举值均被封装在
+          <code>FieldValue</code>
+          对象中，携带规范定义的五个出处等级之一（严格对标 SPEC.md §5）：
+        </p>
+
+        <ul>
+          <li>
+            <strong
+              ><code>vendor_confirmed</code>
+              <span class="en-only">(Vendor Published)</span
+              ><span class="zh-only">(厂商公开确认)</span></strong
+            >:
+            <p class="en-pair">
+              Data explicitly published in the equipment manufacturer's public
+              datasheet, official technical manual, or attested by an authorized
+              vendor representative. Example: equipment dimensions directly
+              transcribed from an official brochure published on the vendor's
+              primary domain (<code>width_mm = 3200</code>).
+            </p>
+            <p class="zh">
+              由设备制造商在公开产品规格书、官方技术手册中明确公布，或经厂商认证代表正式提交。例如：设备宽度直接录自厂商官网公开
+              PDF（<code>width_mm = 3200</code>）。
+            </p>
+          </li>
+          <li>
+            <strong
+              ><code>independent_verified</code>
+              <span class="en-only">(Independent Verified)</span
+              ><span class="zh-only">(独立验证)</span></strong
+            >:
+            <p class="en-pair">
+              Data verified through independent third-party testing, certified
+              fab installation inspection, academic literature, or accredited
+              laboratory test reports. Example: cleanroom acoustic noise
+              verified by an ISO/IEC 17025 accredited metrology lab report
+              (<code>noise_db = 68.5</code>).
+            </p>
+            <p class="zh">
+              经过独立第三方机构测试、晶圆厂装机现场验收单、经同行评审学术论文或认证实验室检测报告验证。例如：设备运行噪声经检测机构实测标定（<code
+                >noise_db = 68.5</code
+              >）。
+            </p>
+          </li>
+          <li>
+            <strong
+              ><code>community_corroborated</code>
+              <span class="en-only">(Community Corroborated)</span
+              ><span class="zh-only">(社区交叉确认)</span></strong
+            >:
+            <p class="en-pair">
+              Data confirmed independently by two or more unrelated fab
+              engineers, facility technicians, or research institutions without
+              an official public datasheet. Example: ultra-pure water flow rate
+              corroborated by facility logs from two independent semiconductor
+              fabrication lines (<code>upw_lpm = 18.0</code>).
+            </p>
+            <p class="zh">
+              缺乏原厂公开手册时，由至少两家无关联关系的晶圆厂运行团队、厂务技工或科研机构独立提供并相互交叉印证的数据。例如：超纯水流量经两座工厂运行记录印证（<code
+                >upw_lpm = 18.0</code
+              >）。
+            </p>
+          </li>
+          <li>
+            <strong
+              ><code>inferred</code>
+              <span class="en-only">(Engineering Inferred)</span
+              ><span class="zh-only">(工程推断)</span></strong
+            >:
+            <p class="en-pair">
+              Engineering estimates calculated from scale references, related
+              tool family architectures, physical scaling laws, or facility
+              boundary equations. Example: machine depth estimated by pixel
+              scale calibration against standard 300mm FOUP load port dimensions
+              from cleanroom photographs (<code>depth_mm = 2450</code>).
+            </p>
+            <p class="zh">
+              基于同系前代设备结构、标准物理放缩定律、现场照片比例尺标定或厂务外推模型估算的工程推断值。例如：通过晶圆装载端口（FOUP）标准物理尺寸在照片中的像素比例推算机身深度（<code
+                >depth_mm = 2450</code
+              >）。
+            </p>
+          </li>
+          <li>
+            <strong
+              ><code>synthetic</code>
+              <span class="en-only">(Synthetic Placeholder)</span
+              ><span class="zh-only">(合成占位)</span></strong
+            >:
+            <p class="en-pair">
+              Numerically plausible placeholder values generated for digital
+              twin simulation pipelines, stress testing, or mock demonstrators.
+              Example: Mean Time To Repair populated with a standard default
+              value to enable discrete-event queuing simulation prior to
+              production data collection (<code>mttr_h = 8.0</code>).
+            </p>
+            <p class="zh">
+              为离散事件仿真运行、数据校验器压力测试或原型展示系统填充的数值合理占位符。例如：在真实量产统计收敛前，填入合理的行业均值以跑通排队仿真算法（<code
+                >mttr_h = 8.0</code
+              >）。
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 6: Architecture Diagram -->
+      <section class="card" id="diagram">
+        <h2>
+          <span class="en-only">6. Architecture Diagram</span
+          ><span class="zh-only">6. 架构示意图</span>
+        </h2>
+        <div class="diagram-wrap">
+          <img
+            src="diagrams/layers.svg"
+            alt="SemiconFab Equipment Schema 7-Layer Stack Architecture"
+          />
+        </div>
+        <p
+          style="font-size: 13px; color: var(--text-muted); text-align: center"
+        >
+          Figure 1: The seven-layer modular stack of the SemiconFab Equipment
+          Schema v1.0, showing conformance level boundaries (L1/L2/L3) and
+          FieldValue provenance tiers.
+        </p>
+        <p class="zh" style="font-size: 12.5px; text-align: center">
+          图 1：SemiconFab 设备数据标准 v1.0 七层模块化架构堆栈、L1/L2/L3
+          合规等级边界及底层的 FieldValue 出处分级体系。
+        </p>
+      </section>
+
+      <!-- Section 7: Resources & Links -->
+      <section class="card" id="resources">
+        <h2>
+          <span class="en-only">7. Resources &amp; Links</span
+          ><span class="zh-only">7. 相关资源与工具</span>
+        </h2>
+        <p class="en-pair">
+          Access the canonical specification documents, validation tools, and
+          submission interfaces below:
+        </p>
+        <p class="zh">
+          您可以通过以下公开链接下载规范文档、调用校验工具或提交新设备规格：
+        </p>
+
+        <ul>
+          <li>
+            <strong
+              ><span class="en-only">JSON Schema Document</span
+              ><span class="zh-only">模式规范文件</span></strong
+            >: Download the formal machine-readable schema definition:
+            <a href="/schema.json"><code>/schema.json</code></a>
+          </li>
+          <li>
+            <strong
+              ><span class="en-only">Raw Markdown Specification</span
+              ><span class="zh-only">原始 Markdown 文档</span></strong
+            >: View canonical Markdown source:
+            <a href="/data-standard.md"><code>/data-standard.md</code></a>
+          </li>
+          <li>
+            <strong
+              ><span class="en-only">Data Verification Policy</span
+              ><span class="zh-only">数据核验体系指南</span></strong
+            >: Read the end-to-end verification and dispute workflow:
+            <a href="verification.html"><code>verification.html</code></a>
+          </li>
+          <li>
+            <strong
+              ><span class="en-only">Equipment Submission Form</span
+              ><span class="zh-only">在线设备规格提报表单</span></strong
+            >: Submit equipment specifications via our schema-driven form:
+            <a href="/add-equipment.html"><code>/add-equipment.html</code></a>
+          </li>
+          <li>
+            <strong
+              ><span class="en-only">Schema Source Code on GitHub</span
+              ><span class="zh-only">模式规范源码</span></strong
+            >: View formal JSON Schema specification in the source repository:
+            <a
+              href="https://github.com/jinjiefan2020/SemiconFab/blob/main/schema.json"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: var(--primary); font-weight: 600"
+            >
+              Schema source on GitHub &rarr; / 在 GitHub 查看模式规范源码 &rarr;
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <!-- Site Footer -->
+      <footer
+        style="
+          margin-top: 40px;
+          padding-top: 24px;
+          border-top: 1px solid var(--border);
+          text-align: center;
+          font-size: 13px;
+          color: var(--text-muted);
+        "
+      >
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+          "
+        >
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+              color: var(--primary);
+              font-weight: 600;
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: 5px;
+            "
+          >
+            <svg
+              style="width: 16px; height: 16px; fill: currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              ></path>
+            </svg>
+            <span>GitHub (Source code)</span>
+          </a>
+          <span>&middot;</span>
+          <a
+            href="mailto:info@semiconfab.org"
+            style="color: var(--primary); text-decoration: none"
+            >info@semiconfab.org</a
+          >
+        </div>
+        <p class="en-only" style="margin: 0; font-size: 12px; line-height: 1.5">
+          Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; Free
+          for education &amp; personal use; commercial use requires a separate
+          license.
+        </p>
+        <p class="zh-only" style="margin: 0; font-size: 12px; line-height: 1.5">
+          源码公开 &middot; PolyForm Noncommercial 1.0.0 &middot;
+          教育与个人使用免费；商业使用需另行授权。
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      function getInitialLanguage() {
+        const urlParam = new URLSearchParams(window.location.search).get(
+          "lang",
+        );
+        if (urlParam === "zh" || urlParam === "zh-CN") return "zh";
+        if (urlParam === "en") return "en";
+        const stored = localStorage.getItem("semiconfab_lang");
+        if (stored) return stored.startsWith("zh") ? "zh" : "en";
+        const navLang = (
+          navigator.language ||
+          navigator.userLanguage ||
+          ""
+        ).toLowerCase();
+        if (navLang.startsWith("zh")) return "zh";
+        return "en";
+      }
+
+      function setLanguage(lang) {
+        const targetLang = lang === "zh" || lang === "zh-CN" ? "zh" : "en";
+        document.documentElement.setAttribute("data-lang", targetLang);
+        document.documentElement.setAttribute(
+          "lang",
+          targetLang === "zh" ? "zh-CN" : "en",
+        );
+        localStorage.setItem(
+          "semiconfab_lang",
+          targetLang === "zh" ? "zh-CN" : "en",
+        );
+
+        const btn = document.getElementById("lang-toggle-btn");
+        if (btn) {
+          if (targetLang === "zh") {
+            btn.innerHTML =
+              '<span style="opacity:0.6;font-weight:normal">EN</span> / <strong>中</strong>';
+            btn.title = "Switch to English";
+          } else {
+            btn.innerHTML =
+              '<strong>EN</strong> / <span style="opacity:0.6;font-weight:normal">中</span>';
+            btn.title = "切换为中文";
+          }
+        }
+      }
+
+      function toggleLanguage() {
+        const current =
+          document.documentElement.getAttribute("data-lang") || "en";
+        setLanguage(current === "zh" ? "en" : "zh");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setLanguage(getInitialLanguage());
+      });
+    </script>
+  </body>
+</html>

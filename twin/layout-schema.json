@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://semiconfab.org/twin/layout-schema.json",
+  "title": "SemiconFab Cleanroom Floor Plan Layout",
+  "description": "Floor plan equipment placement layout specification for the SemiconFab 300mm digital twin cleanroom",
+  "type": "object",
+  "required": ["version", "tools"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string",
+      "description": "Layout specification version (e.g. 1.0.0)"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name of the layout configuration"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description or changelog of the fab floor plan layout"
+    },
+    "created_at": {
+      "type": "string",
+      "description": "ISO 8601 creation timestamp"
+    },
+    "updated_at": {
+      "type": "string",
+      "description": "ISO 8601 update timestamp"
+    },
+    "author": {
+      "type": "string",
+      "description": "Author or organization who created this layout"
+    },
+    "bays": {
+      "type": "object",
+      "description": "Optional cleanroom bay boundaries and specifications"
+    },
+    "tools": {
+      "type": "array",
+      "description": "Array of equipment instances placed in cleanroom bays",
+      "items": {
+        "type": "object",
+        "required": ["tool_id", "bay", "x", "z", "rotation"],
+        "properties": {
+          "tool_id": {
+            "type": "string",
+            "description": "Equipment ID matching a catalog record_id in catalog.json"
+          },
+          "bay": {
+            "type": "string",
+            "enum": [
+              "lithography",
+              "resist_track",
+              "dry_etch",
+              "thin_film_deposition",
+              "thermal_processing",
+              "ion_implantation",
+              "cmp",
+              "wet_clean",
+              "metrology",
+              "inspection",
+              "packaging",
+              "test",
+              "other"
+            ],
+            "description": "Target cleanroom functional bay"
+          },
+          "x": {
+            "type": "number",
+            "description": "Bay-local / cleanroom X coordinate in meters"
+          },
+          "z": {
+            "type": "number",
+            "description": "Bay-local / cleanroom Z coordinate in meters"
+          },
+          "rotation": {
+            "type": "integer",
+            "enum": [0, 90, 180, 270],
+            "description": "Tool yaw orientation in degrees (0, 90, 180, 270)"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  },
+  "additionalProperties": true
+}

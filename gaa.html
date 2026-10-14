@@ -1,0 +1,2992 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GAAFET 全环绕栅极晶体管 3D 制造工艺剖析 — SemiconFab.org</title>
+
+    <!-- Primary SEO Meta Tags -->
+    <meta
+      name="title"
+      content="GAAFET 全环绕栅极晶体管 3D 制造工艺全流程剖析 — SemiconFab.org"
+    />
+    <meta
+      name="description"
+      content="交互式三维立体几何解构 GAA 全环绕栅极 (Gate-All-Around / Nanosheet / MBCFET) 晶体管制造全流程：从Si/SiGe超晶格多层外延、内侧墙成形(Inner Spacer)、片释放(Sheet Release)到360度全包围HKMG高K金属栅与互连。支持任意角度自由旋转、动态剖切、X-Ray透视及电子流导电模拟。"
+    />
+    <meta
+      name="keywords"
+      content="GAA, GAAFET, Nanosheet, MBCFET, RibbonFET, 全环绕栅极, 2nm工艺, 3nm工艺, 制造工艺3D, Sheet Release, Inner Spacer, 超晶格外延, 半导体制造流程"
+    />
+    <meta name="author" content="SemiconFab.org Initiative" />
+    <meta name="theme-color" content="#090d16" />
+
+    <!-- Canonical & Multilingual Alternates -->
+    <link rel="canonical" href="https://semiconfab.org/gaa.html" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://semiconfab.org/gaa.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://semiconfab.org/gaa.html?lang=en"
+    />
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://semiconfab.org/gaa.html?lang=zh"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SemiconFab.org" />
+    <meta
+      property="og:title"
+      content="GAAFET 3D Nanosheet Transistor Fabrication Digital Twin — SemiconFab.org"
+    />
+    <meta
+      property="og:description"
+      content="Interactive 3D step-by-step engineering model of 3nm/2nm Gate-All-Around (GAAFET / MBCFET) semiconductor manufacturing: Si/SiGe superlattice epitaxy, inner spacers, nanosheet release, 360-degree all-around HKMG gate, and MOL contact metallization."
+    />
+    <meta property="og:url" content="https://semiconfab.org/gaa.html" />
+    <meta property="og:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="GAAFET 3D Nanosheet Transistor Fabrication Digital Twin — SemiconFab.org"
+    />
+    <meta
+      name="twitter:description"
+      content="Interactive 3D step-by-step engineering model of 3nm/2nm Gate-All-Around (GAAFET / MBCFET) semiconductor manufacturing: Si/SiGe superlattice epitaxy, inner spacers, nanosheet release, 360-degree all-around HKMG gate, and MOL contact metallization."
+    />
+    <meta name="twitter:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Structured Data (JSON-LD) for Search Engines & AI Crawlers (GEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "@id": "https://semiconfab.org/gaa.html#article",
+            "headline": "GAAFET 3D Nanosheet Transistor Fabrication: 10-Step 3nm/2nm Semiconductor Engineering Guide",
+            "alternativeHeadline": "全环绕栅极 (GAAFET / Nanosheet) 晶体管制造全流程工业模型",
+            "description": "Comprehensive engineering breakdown and 3D simulation of sub-3nm/2nm Gate-All-Around Nanosheet (MBCFET/RibbonFET) semiconductor manufacturing across 10 sequential fabrication steps.",
+            "inLanguage": ["en", "zh-CN"],
+            "url": "https://semiconfab.org/gaa.html",
+            "author": {
+              "@type": "Organization",
+              "name": "SemiconFab.org Initiative",
+              "url": "https://semiconfab.org"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "SemiconFab.org",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://semiconfab.org/favicon.png"
+              }
+            },
+            "keywords": [
+              "GAAFET",
+              "Gate-All-Around",
+              "Nanosheet",
+              "MBCFET",
+              "RibbonFET",
+              "2nm Process",
+              "3nm Process",
+              "Inner Spacer",
+              "Nanosheet Release",
+              "SiGe Superlattice",
+              "HKMG",
+              "Semiconductor Fabrication"
+            ]
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://semiconfab.org/gaa.html#application",
+            "name": "GAAFET 3D Fabrication Digital Twin",
+            "url": "https://semiconfab.org/gaa.html",
+            "applicationCategory": "EngineeringApplication",
+            "operatingSystem": "All modern browsers with WebGL 2.0",
+            "browserRequirements": "Requires WebGL support",
+            "featureList": [
+              "10-Step Sequential 3D GAAFET Nanosheet Fabrication Evolution",
+              "Interactive OrbitControls 360-Degree CAD Orbiting",
+              "Dynamic X-Ray Translucent Mode",
+              "Cross-Section Cutaway Clipping Plane",
+              "Electron Conduction Channel Stream Simulation",
+              "Exploded View Layer Separation Slider",
+              "Atomic-Level Raycast Precision Tooltips"
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://semiconfab.org/gaa.html#breadcrumbs",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://semiconfab.org/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "GAA 3D Nanosheet",
+                "item": "https://semiconfab.org/gaa.html"
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://semiconfab.org/gaa.html#howto",
+            "name": "How to Manufacture a 3nm/2nm GAAFET Nanosheet Transistor",
+            "description": "Sequential 10-step industrial semiconductor fabrication sequence for manufacturing Gate-All-Around Nanosheet devices using Si/SiGe superlattice epitaxy and replacement metal gate.",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Silicon Substrate & P/N-Well Implantation",
+                "text": "Preparing single-crystal silicon substrate with retrograded well doping to support GAA nFET/pFET logic."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Si/SiGe Multi-Layer Superlattice Epitaxy",
+                "text": "Atomic-layer epitaxial growth of alternating Si and sacrificial Si0.7Ge0.3 superlattice layers (3-4 pairs) with sub-nanometer interface sharpness."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "EUV Fin Pitch Patterning & Superlattice Dry Etch",
+                "text": "EUV lithography and atomic-precision anisotropic dry etching of the Si/SiGe fin pillar stack with perfectly vertical sidewalls."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "STI Oxide Gap Fill, CMP & Fin Base Recess",
+                "text": "Filling trenches with flowable CVD oxide, CMP polishing, and selective oxide recess to unmask the active Si/SiGe superlattice stack."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Dummy Poly-Si Gate & Top Hardmask Patterning",
+                "text": "EUV patterning of sacrificial polysilicon dummy gate spanning orthogonally over the superlattice fin pillars."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Selective SiGe Lateral Cavity Recess & Inner Spacer Formation",
+                "text": "Isotropic gas-phase chemical etch selectively pulling back SiGe by ~5nm, followed by conformal ALD of low-k SiBCN/SiOCN inner spacers to minimize parasitic gate-to-drain capacitance."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 7,
+                "name": "Source/Drain Epitaxy & Dopant Activation",
+                "text": "In-situ doped selective epitaxy growing faceted Si:P (nFET) or SiGe:B (pFET) touching all stacked nanosheet channel ends simultaneously."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 8,
+                "name": "ILD0 Oxide Deposition & CMP Gate Uncovering",
+                "text": "Depositing interlayer dielectric oxide and CMP polishing down to expose the dummy gate top surface."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 9,
+                "name": "Dummy Gate Strip & Sacrificial SiGe Nanosheet Release",
+                "text": "Wet strip of dummy gate, followed by highly selective chemical vapor etching (selectivity > 150:1) removing all sacrificial SiGe layers to release completely suspended silicon nanosheets."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 10,
+                "name": "360-Degree All-Around HKMG Gate Metallization & Contact Routing",
+                "text": "ALD coating sub-nanometer interfacial oxide, HfO2 high-k dielectric, work-function metal stacks, and Tungsten gate fill completely surrounding each nanosheet wire in 360 degrees."
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://semiconfab.org/gaa.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why does GAAFET replace FinFET at the 3nm and 2nm nodes?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "As fin width scales below 5nm in FinFETs, fin height variability and severe short-channel quantum leakage degrade performance. GAAFET surrounds the horizontal silicon nanosheet channels on all four sides (360 degrees) with the gate, restoring full electrostatic gate control, enabling higher drive currents per footprint, and supporting variable nanosheet widths for power/performance optimization."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the critical role of Inner Spacers in GAAFET architecture?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Inner spacers are nanoscale dielectric plugs (SiOCN/SiBCN) formed inside the lateral recesses left by sacrificial SiGe. They physically and electrostatically isolate the replacement metal gate from the heavily doped epitaxial source and drain, drastically reducing parasitic gate capacitance (Cgd/Cgs) which is essential for high-frequency switching."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How is nanosheet release achieved without damaging the silicon channels?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Nanosheet release relies on highly selective isotropic etching (using gas-phase vapor chemistry or hot chemical mixtures like H2O2/HF) that dissolves Si0.7Ge0.3 with an etch selectivity exceeding 150:1 over pure silicon, leaving the pristine 5nm-thin silicon nanosheets suspended without stiction or thickness loss."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What are the common industry names for GAA architecture?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Different semiconductor foundries use distinct brand names: Samsung calls it MBCFET (Multi-Bridge-Channel FET), Intel terms it RibbonFET, and TSMC and IBM refer to it as Nanosheet FET / GAAFET."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="favicon.ico" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              darkbg: "#070a12",
+              panelbg: "rgba(15, 23, 42, 0.85)",
+              accent: "#8b5cf6", // Violet/Purple theme for next-gen GAA (2nm/3nm)
+              accentGlow: "rgba(139, 92, 246, 0.25)",
+              neonBlue: "#38bdf8",
+              neonAmber: "#f59e0b",
+              neonGreen: "#10b981",
+              neonPurple: "#a855f7",
+            },
+            fontFamily: {
+              mono: ["JetBrains Mono", "Fira Code", "Menlo", "monospace"],
+              sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Three.js and OrbitControls -->
+    <!-- Modern Three.js (0.160.0) with ES Module OrbitControls & PBR Tone Mapping -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+      window.THREE = Object.assign({}, THREE, { OrbitControls });
+      if (window.__onThreeLoaded) window.__onThreeLoaded();
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.6);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(100, 116, 139, 0.4);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(168, 85, 247, 0.6);
+      }
+
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glow-purple {
+        box-shadow: 0 0 20px -3px rgba(168, 85, 247, 0.35);
+      }
+
+      .stepper-btn {
+        transition: all 0.15s ease;
+      }
+      .stepper-btn:hover {
+        background: rgba(30, 41, 59, 0.7);
+      }
+      .stepper-btn.active {
+        background: #f8fafc !important;
+        border-color: #f8fafc !important;
+        color: #0f172a !important;
+        font-weight: 600;
+      }
+
+      /* Tooltip overlay */
+      #part-tooltip {
+        pointer-events: none;
+        transform: translate(-50%, -120%);
+        transition: opacity 0.15s ease;
+      }
+
+
+        50% { opacity: 0.4; }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-darkbg text-slate-100 font-sans h-screen w-screen overflow-hidden flex flex-col select-none"
+  >
+    <!-- Top Navigation Header -->
+    <header
+      class="h-14 border-b border-slate-800/80 bg-[#090d16]/90 backdrop-blur-md px-4 flex items-center justify-between shrink-0 z-30"
+    >
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <div
+            class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:scale-105 transition"
+          >
+            <i data-lucide="layers-3" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <span
+              class="font-bold text-sm tracking-tight text-white group-hover:text-purple-400 transition"
+              >SemiconFab</span
+            >
+            <span
+              class="text-[10px] text-purple-400 font-mono ml-1.5 px-1.5 py-0.5 rounded bg-purple-950/80 border border-purple-800/60 font-semibold"
+              >GAA 3D</span
+            >
+          </div>
+        </a>
+        <div class="hidden sm:block h-4 w-[1px] bg-slate-700/60 mx-1"></div>
+        <div class="hidden sm:flex items-center text-xs text-slate-400 gap-1.5">
+          <span id="header-subtitle"
+            >全环绕栅极晶体管工业制造演进模型 (2nm/3nm Nanosheet 工艺)</span
+          >
+        </div>
+      </div>
+
+      <!-- Center Quick Links -->
+      <div
+        class="hidden md:flex items-center gap-4 text-xs font-medium text-slate-400"
+      >
+        <a
+          href="finfet.html"
+          class="hover:text-cyan-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>FinFET 3D</span>
+        </a>
+        <a
+          href="dram.html"
+          class="hover:text-amber-400 transition flex items-center gap-1.5 text-amber-400 font-semibold"
+        >
+          <i data-lucide="database" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>DRAM 3D</span>
+        </a>
+        <a
+          href="nand.html"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5 text-emerald-400 font-semibold"
+        >
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>NAND 3D</span>
+        </a>
+        <a
+          href="hbm.html"
+          class="hover:text-rose-400 transition flex items-center gap-1.5 text-rose-400 font-semibold"
+        >
+          <i data-lucide="boxes" class="w-3.5 h-3.5 text-rose-400"></i>
+          <span>HBM 3D</span>
+        </a>
+        <a
+          href="twin.html"
+          class="hover:text-purple-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          <span id="nav-cleanroom">洁净室数字孪生</span>
+        </a>
+        <a
+          href="vision.html"
+          class="hover:text-purple-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span id="nav-vision">愿景</span>
+        </a>
+      </div>
+
+      <!-- Top Action Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Lang Toggle -->
+        <button
+          id="lang-btn"
+          onclick="toggleLanguage()"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs font-mono border border-slate-700 text-slate-200 transition flex items-center gap-1.5"
+          title="Switch English / 中文"
+        >
+          <i data-lucide="languages" class="w-3.5 h-3.5 text-purple-400"></i>
+          <span id="lang-indicator">EN</span>
+        </button>
+
+        <!-- Reset Camera -->
+        <button
+          onclick="resetCamera()"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs text-slate-200 border border-slate-700 transition flex items-center gap-1.5"
+          title="复位视角"
+        >
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span class="hidden sm:inline" id="btn-reset-cam-label"
+            >复位视角</span
+          >
+        </button>
+
+        <!-- Play Mode -->
+        <button
+          id="autoplay-btn"
+          onclick="toggleAutoPlay()"
+          class="px-2.5 py-1 rounded-lg bg-purple-950/80 hover:bg-purple-900 border border-purple-800 text-xs text-purple-300 transition flex items-center gap-1.5"
+        >
+          <i id="autoplay-icon" data-lucide="play" class="w-3.5 h-3.5"></i>
+          <span id="autoplay-label">播放工序</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main CAD Studio Workspace (Flex Layout with 500x500 central 3D viewport) -->
+    <!-- Main CAD Studio Workspace (Hero 3D Viewport with Breathing Room & Collapsible Specs Drawer) -->
+    <main
+      class="flex-1 w-full h-[calc(100vh-56px)] overflow-hidden flex flex-col justify-between p-3 sm:p-4 bg-[#0a0d14]"
+    >
+      <!-- Top Focus Bar (克制、精确、一次只给一个焦点) -->
+      <div
+        class="w-full max-w-7xl mx-auto flex items-center justify-between pb-2 shrink-0 gap-3"
+      >
+        <div class="flex items-center gap-3 min-w-0">
+          <span
+            id="step-badge"
+            class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 border border-slate-700/80 font-mono text-xs font-semibold shrink-0"
+          >
+            STEP 01 / 10 · 衬底工程
+          </span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <h1
+                id="step-title"
+                class="text-sm sm:text-base font-semibold text-white tracking-tight truncate"
+              >
+                单晶硅衬底准备与阱注入
+              </h1>
+              <span
+                id="step-title-en"
+                class="text-xs font-mono text-slate-400 font-normal hidden lg:inline"
+                >Substrate Preparation & Well Implantation</span
+              >
+            </div>
+            <p
+              id="step-summary"
+              class="text-xs text-slate-400 mt-0.5 truncate max-w-2xl"
+            >
+              高纯度单晶硅片经离子注入形成 NMOS/PMOS
+              势阱基底，为超晶格纳米片外延生长确立基面。
+            </p>
+          </div>
+        </div>
+
+        <!-- Stepper Controls & Drawer Toggle -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            id="btn-prev"
+            onclick="prevStep()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            <span id="lbl-prev-btn">上一步</span>
+          </button>
+          <button
+            id="btn-next"
+            onclick="nextStep()"
+            class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-white text-xs font-semibold text-slate-900 transition flex items-center gap-1 shadow-sm"
+          >
+            <span id="lbl-next-btn">下一步</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          </button>
+          <button
+            id="btn-toggle-details"
+            onclick="toggleDetailsDrawer()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1.5"
+          >
+            <i
+              data-lucide="sliders-horizontal"
+              class="w-3.5 h-3.5 text-slate-400"
+            ></i>
+            <span id="lbl-details-btn">工艺参数</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Workspace: Hero 3D Viewport with Minimal Floating HUD -->
+      <div
+        class="relative w-full max-w-7xl mx-auto flex-1 rounded-2xl border border-slate-800/90 bg-[#0c1017] overflow-hidden flex"
+      >
+        <!-- 3D Canvas Mount Point -->
+        <div
+          id="webgl-container"
+          class="w-full h-full cursor-grab active:cursor-grabbing"
+        ></div>
+
+        <!-- Floating Minimalist CAD Toolbar (Top Left) -->
+        <div
+          class="absolute top-3 left-3 z-10 flex flex-col sm:flex-row items-start sm:items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1 pointer-events-auto"
+          >
+            <span
+              class="text-[10px] font-mono text-slate-400 px-1.5 hidden sm:inline"
+              id="lbl-cam-presets"
+              >机位</span
+            >
+            <button
+              onclick="setCameraView('iso')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="等轴侧"
+            >
+              ISO
+            </button>
+            <button
+              onclick="setCameraView('fin')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="截面"
+            >
+              FIN
+            </button>
+            <button
+              onclick="setCameraView('gate')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="栅极"
+            >
+              GATE
+            </button>
+            <button
+              onclick="setCameraView('top')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="俯视"
+            >
+              TOP
+            </button>
+          </div>
+
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1.5 text-[10px] font-mono text-slate-300 pointer-events-auto"
+          >
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-dimensions"
+                checked
+                onchange="toggleDimensions(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-dimensions">标尺</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-cutaway"
+                onchange="toggleCutaway(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-cutaway">剖切</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-xray"
+                onchange="toggleXRay(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-xray">透视</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-grid"
+                checked
+                onchange="toggleGrid(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-grid">网格</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Technical Spec Pill (Top Right) -->
+        <div
+          class="absolute top-3 right-3 z-10 hidden sm:flex items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="px-2.5 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-slate-400"
+          >
+            <span>GAAFET 2nm Nanosheet · TCAD 仿真 · 1:1 Scale</span>
+          </div>
+        </div>
+
+        <!-- Color & Material Legend (Bottom Left) -->
+        <div
+          id="material-legend-wrapper"
+          class="absolute bottom-3 left-3 z-10 glass-panel p-2 rounded-xl border border-slate-800/80 shadow-md text-[10px] pointer-events-auto max-w-xs transition"
+        >
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span id="lbl-mat-legend" class="font-mono font-medium"
+              >材料图例</span
+            >
+            <span
+              class="text-[9px] text-slate-500 font-mono"
+              id="lbl-legend-hint"
+              >点击高亮</span
+            >
+          </div>
+          <div
+            id="material-legend-container"
+            class="grid grid-cols-2 gap-1 max-h-24 overflow-y-auto pr-0.5 custom-scrollbar"
+          ></div>
+        </div>
+
+        <!-- Scale Bar (Bottom Right) -->
+        <div
+          id="viewport-scale-bar"
+          class="absolute bottom-3 right-3 px-2.5 py-1.5 rounded-lg bg-slate-950/85 border border-slate-800/80 text-[10px] font-mono text-slate-300 flex items-center gap-2 pointer-events-none select-none z-10 shadow-md"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              id="scale-bar-text"
+              class="text-[9px] text-slate-200 font-bold mb-0.5 tracking-wider"
+            >
+              10 nm
+            </div>
+            <div class="flex items-center">
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+              <div class="w-12 h-[2px] bg-slate-400"></div>
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+            </div>
+          </div>
+          <span class="text-[9px] text-slate-500">1:1 CAD</span>
+        </div>
+
+        <!-- Floating Tooltip -->
+        <div
+          id="part-tooltip"
+          class="absolute hidden z-30 px-3 py-2 rounded-xl bg-slate-950/95 border border-slate-700 shadow-xl backdrop-blur-md max-w-xs pointer-events-none"
+        >
+          <div
+            id="tooltip-title"
+            class="font-semibold text-xs text-slate-200 font-mono flex items-center gap-1.5"
+          ></div>
+          <div
+            id="tooltip-desc"
+            class="text-[11px] text-slate-400 mt-1 leading-tight"
+          ></div>
+        </div>
+
+        <!-- Collapsible Detailed Engineering Specs Drawer -->
+        <div
+          id="inspector-drawer"
+          class="absolute top-0 right-0 bottom-0 w-80 sm:w-96 bg-slate-950/95 border-l border-slate-800/90 backdrop-blur-xl p-4 sm:p-5 flex flex-col gap-3.5 z-20 shadow-2xl transition-transform duration-300 translate-x-full overflow-y-auto"
+        >
+          <div
+            class="flex items-center justify-between border-b border-slate-800 pb-2.5"
+          >
+            <div
+              class="text-xs font-semibold text-slate-200 flex items-center gap-1.5"
+            >
+              <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-drawer-title">制造机台与工艺物理参数</span>
+            </div>
+            <button
+              onclick="toggleDetailsDrawer()"
+              class="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span
+              id="process-category-badge"
+              class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700"
+            ></span>
+          </div>
+
+          <div class="text-xs text-slate-300 leading-relaxed">
+            <p
+              id="drawer-step-summary"
+              class="text-slate-300 leading-normal"
+            ></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="cog" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-equipment">制造机台 (Tool)</span>
+              </div>
+              <div
+                id="step-equipment"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-equipment-vendor"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="atom" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-material">材料与结构</span>
+              </div>
+              <div
+                id="step-material"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-material-dim"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-900/50 border border-slate-800/90 rounded-xl p-3 text-xs"
+          >
+            <div
+              class="font-semibold text-slate-200 flex items-center gap-1.5 mb-1 text-[11px]"
+            >
+              <i data-lucide="microchip" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-purpose-title">工艺核心机理与器件物理</span>
+            </div>
+            <p
+              id="step-purpose"
+              class="text-slate-400 leading-normal text-[11px]"
+            ></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Timeline Stepper -->
+      <div class="w-full max-w-7xl mx-auto pt-2 shrink-0">
+        <div
+          class="p-1 rounded-xl bg-slate-900/80 border border-slate-800/80 flex items-center gap-1 overflow-x-auto w-full"
+        >
+          <button
+            onclick="goToStep(0)"
+            class="stepper-btn active flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-0"
+          >
+            <div class="font-semibold text-[10px]">01</div>
+            <div class="tab-label truncate text-[10px]">衬底准备</div>
+          </button>
+          <button
+            onclick="goToStep(1)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-1"
+          >
+            <div class="font-semibold text-[10px]">02</div>
+            <div class="tab-label truncate text-[10px]">超晶格外延</div>
+          </button>
+          <button
+            onclick="goToStep(2)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-2"
+          >
+            <div class="font-semibold text-[10px]">03</div>
+            <div class="tab-label truncate text-[10px]">EUV鳍刻蚀</div>
+          </button>
+          <button
+            onclick="goToStep(3)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-3"
+          >
+            <div class="font-semibold text-[10px]">04</div>
+            <div class="tab-label truncate text-[10px]">STI回蚀</div>
+          </button>
+          <button
+            onclick="goToStep(4)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-4"
+          >
+            <div class="font-semibold text-[10px]">05</div>
+            <div class="tab-label truncate text-[10px]">假栅光刻</div>
+          </button>
+          <button
+            onclick="goToStep(5)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-5"
+          >
+            <div class="font-semibold text-[10px]">06</div>
+            <div class="tab-label truncate text-[10px]">内侧墙形成</div>
+          </button>
+          <button
+            onclick="goToStep(6)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-6"
+          >
+            <div class="font-semibold text-[10px]">07</div>
+            <div class="tab-label truncate text-[10px]">源漏外延</div>
+          </button>
+          <button
+            onclick="goToStep(7)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-7"
+          >
+            <div class="font-semibold text-[10px]">08</div>
+            <div class="tab-label truncate text-[10px]">ILD0填充</div>
+          </button>
+          <button
+            onclick="goToStep(8)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-8"
+          >
+            <div class="font-semibold text-[10px]">09</div>
+            <div class="tab-label truncate text-[10px]">纳米片释放</div>
+          </button>
+          <button
+            onclick="goToStep(9)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-9"
+          >
+            <div class="font-semibold text-[10px]">10</div>
+            <div class="tab-label truncate text-[10px]">全环绕金属栅</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Device Twin Footer -->
+      <footer
+        class="w-full max-w-7xl mx-auto pt-2 pb-1 text-center text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/60 mt-1 shrink-0"
+      >
+        <div class="flex items-center gap-2">
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-slate-400 hover:text-cyan-400 transition"
+          >
+            <svg
+              class="w-3 h-3 fill-current"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              ></path>
+            </svg>
+            <span>GitHub (Source code)</span>
+          </a>
+        </div>
+        <div>
+          <span
+            >Source-available &middot; PolyForm Noncommercial 1.0.0 &middot;
+            Free for education &amp; personal use; commercial use requires a
+            separate license. (源码公开 &middot; 商业使用需另行授权)</span
+          >
+        </div>
+      </footer>
+    </main>
+
+    <!-- 3D Tooltip Overlay (Fixed position next to cursor) -->
+    <div
+      id="part-tooltip"
+      class="fixed hidden z-50 pointer-events-none bg-slate-900/95 border border-purple-500/50 rounded-lg p-2.5 shadow-2xl backdrop-blur-md max-w-xs transition-opacity duration-150"
+    >
+      <div
+        id="tooltip-title"
+        class="font-bold text-xs text-purple-300 font-mono flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+        <span>部件名称</span>
+      </div>
+      <div
+        id="tooltip-desc"
+        class="text-[11px] text-slate-300 mt-1 leading-snug"
+      >
+        物理工艺描述与参数信息
+      </div>
+    </div>
+
+    <script>
+      // Safe DOM proxy to prevent any missing element from breaking 3D initialization
+      (function () {
+        const _orig = document.getElementById.bind(document);
+        const dummy = {
+          innerText: "",
+          innerHTML: "",
+          textContent: "",
+          value: "",
+          checked: false,
+          disabled: false,
+          style: {},
+          classList: {
+            add() {},
+            remove() {},
+            toggle() {},
+            contains() {
+              return false;
+            },
+          },
+          setAttribute() {},
+          getAttribute() {
+            return null;
+          },
+          removeAttribute() {},
+          addEventListener() {},
+          removeEventListener() {},
+          querySelector() {
+            return null;
+          },
+          querySelectorAll() {
+            return [];
+          },
+          scrollIntoView() {},
+        };
+        document.getElementById = function (id) {
+          return _orig(id) || dummy;
+        };
+      })();
+
+      // --- 1. DATA: 10 Manufacturing Steps for Gate-All-Around (Nanosheet / MBCFET) ---
+      const STEPS = [
+        {
+          id: 0,
+          badgeZh: "步骤 01 / 10",
+          badgeEn: "STEP 01 / 10",
+          shortZh: "超晶格叠层",
+          shortEn: "Superlattice",
+          catZh: "超晶格多层外延",
+          catEn: "Epitaxial Superlattice",
+          titleZh: "Si/SiGe 多层超晶格原子级外延生长",
+          titleEn: "Si/SiGe Superlattice Multi-layer Epitaxy",
+          summaryZh:
+            "在单晶硅基底上，利用低压化学气相外延（RPCVD）交替精确生长单原子层级突变的 Si0.7Ge0.3 牺牲层与纯硅 Si 纳米片层（通常交替 3 层 SiGe + 3 层 Si 纳米片）。",
+          summaryEn:
+            "On single-crystal Si wafer, reduced-pressure CVD (RPCVD) alternates atomic-layer epitaxial growth of sacrificial Si0.7Ge0.3 and pure Si nanosheet channel layers (3 pairs of alternating Si/SiGe ribbons).",
+          toolZh: "减压化学气相外延反应炉 (RPCVD)",
+          toolEn: "Reduced-Pressure CVD Epitaxy Reactor",
+          toolVendor: "Applied Materials Centura Epi / ASM Intrepid",
+          matZh: "Si / Si0.7Ge0.3 超晶格周期性外延层",
+          matEn: "Alternating Si / Si0.7Ge0.3 Epitaxial Superlattice",
+          matDimZh: "硅片厚度 ~5nm | SiGe 厚度 ~9nm | 周期: 3层",
+          matDimEn: "Si Sheet: ~5nm | SiGe Sacrificial: ~9nm | 3-Stack",
+          purposeZh:
+            "构建未来悬空三维导电纳米通道的材料前驱骨架，严格控制 Si/SiGe 晶格界面的原子突变锐利度，避免锗原子互扩散导致后续选择性腐蚀失效。",
+          purposeEn:
+            "Builds precursor skeleton for future suspended 3D nanosheet channels with atomically abrupt interfaces to guarantee extreme chemical etch selectivity.",
+        },
+        {
+          id: 1,
+          badgeZh: "步骤 02 / 10",
+          badgeEn: "STEP 02 / 10",
+          shortZh: "鳍叠层刻蚀",
+          shortEn: "Fin Stack Etch",
+          catZh: "高深宽比光刻与叠层刻蚀",
+          catEn: "High-Aspect-Ratio Etch",
+          titleZh: "EUV高精度光刻与纳米片鳍状叠层刻蚀",
+          titleEn: "EUV Patterning & Nanosheet Stack Fin Etch",
+          summaryZh:
+            "涂覆 SiN 硬掩模，利用高数值孔径 EUV 光刻机精准曝光，随后采用各向异性反应离子刻蚀（RIE）垂直穿透整个 3 层 Si/SiGe 叠层并向下挖入基底，成型垂直直立的纳米片复合鳍条柱。",
+          summaryEn:
+            "A Si3N4 hard mask is applied. High-NA EUV lithography defines fin tracks. Deep anisotropic RIE cuts vertically through all 3 Si/SiGe pairs into the substrate, carving vertical multi-bridge pillars.",
+          toolZh: "高数值孔径 EUV 光刻机 + 各向异性等离子干法刻蚀机",
+          toolEn: "High-NA EUV Scanner + Anisotropic Deep RIE Etcher",
+          toolVendor: "ASML Twinscan EXE:5000 / Lam Research Kiyo",
+          matZh: "垂直复合纳米片鳍柱 + 顶部硬掩模",
+          matEn: "Vertical Superlattice Pillar + Si3N4 Mask Cap",
+          matDimZh: "片宽 Wns: ~30-40nm | 叠层总高度: ~65nm",
+          matDimEn: "Sheet Width Wns: ~30-40nm | Stack Height: ~65nm",
+          purposeZh:
+            "决定三维纳米片的物理宽度（Wns）。GAA 允许通过调整光刻宽度在单芯片上自由调节不同驱动电流的晶体管（宽度可调性优势）。",
+          purposeEn:
+            "Sets the physical channel sheet width (Wns). Nanosheet architecture offers variable channel width flexibility for custom drive current on a single chip.",
+        },
+        {
+          id: 2,
+          badgeZh: "步骤 03 / 10",
+          badgeEn: "STEP 03 / 10",
+          shortZh: "STI绝缘隔离",
+          shortEn: "STI & BDI",
+          catZh: "浅沟槽隔离与底部介质隔离",
+          catEn: "STI Isolation & Recess",
+          titleZh: "STI浅沟槽氧化层填充与底部绝缘回退",
+          titleEn: "STI Oxide Fill, CMP & Bottom Isolation Recess",
+          summaryZh:
+            "采用流动态 CVD 填满沟槽，经 CMP 研磨平坦化，随后高精度各向同性刻蚀回退氧化层至最底层纳米片下方，露出上部活跃的 3 层 Si/SiGe 纳米片叠层，并在底部构建防穿通势垒（BDI）。",
+          summaryEn:
+            "Flowable CVD fills trenches with SiO2, polished by CMP, then precisely recessed below the bottom nanosheet layer, isolating the sub-fin while exposing the active 3-tier superlattice.",
+          toolZh: "流动态CVD介质沉积机 + CMP抛光机 + 精密回蚀槽",
+          toolEn:
+            "FCVD Oxide Coater + CMP Polisher + Precision Recess Wet Bench",
+          toolVendor: "Applied Materials Producer CVD / Reflexion LK",
+          matZh: "STI 二氧化硅 (SiO2) 介质",
+          matEn: "Shallow Trench Isolation (STI) SiO2",
+          matDimZh: "露出叠层高度: ~45nm | 底部基底隔离: ~20nm",
+          matDimEn: "Exposed Stack Height: ~45nm | Sub-Fin Isolation: ~20nm",
+          purposeZh:
+            "在芯片衬底与相邻器件之间建立坚固电气隔离，并为下一步栅极跨骑包裹纳米片叠层提供坚固平整基底。",
+          purposeEn:
+            "Provides inter-device electrical isolation and sets clean planar foundation for the dummy gate wrap over the nanosheet stack.",
+        },
+        {
+          id: 3,
+          badgeZh: "步骤 04 / 10",
+          badgeEn: "STEP 04 / 10",
+          shortZh: "伪栅与外侧墙",
+          shortEn: "Dummy Gate",
+          catZh: "替换金属栅 (RMG) 假栅成形",
+          catEn: "Dummy Gate & Outer Spacer",
+          titleZh: "牺牲多晶硅假栅与低-k外侧墙成形",
+          titleEn: "Sacrificial Dummy Gate & Outer Spacers",
+          summaryZh:
+            "沉积牺牲层多晶硅与硬掩模，经 EUV 光刻在垂直于纳米片方向刻蚀出横跨假栅条。随后 ALD 保形沉积一层 Si3N4/SiBCN 低-k 薄膜并定向干刻，在假栅侧壁形成保护外侧墙（Outer Spacer）。",
+          summaryEn:
+            "Deposits sacrificial poly-Si gate and caps with hard mask. Anisotropic etch cuts gate tracks perpendicular to nanosheets. ALD conformal low-k deposition and spacer RIE form outer gate spacers.",
+          toolZh: "LPCVD 多晶硅炉 + ALD 原子层沉积机 + 侧墙刻蚀机",
+          toolEn: "LPCVD Poly-Si Furnace + ALD Reactor + Spacer RIE Etcher",
+          toolVendor: "TEL Alpha-8SE / ASM Pulsar / Lam Versys",
+          matZh: "多晶硅假栅 (Poly-Si) + Si3N4 外侧墙 (Outer Spacer)",
+          matEn: "Sacrificial Poly-Si Gate + Low-k SiN Outer Spacers",
+          matDimZh: "栅长 Lg: ~12-16nm | 外侧墙厚度: ~5nm",
+          matDimEn: "Gate Length Lg: ~12-16nm | Outer Spacer: ~5nm",
+          purposeZh:
+            "作为栅极位置的占位符保护中央沟道，并设定源漏外延区与最终金属栅的纵向间距，抑制外侧寄生电容。",
+          purposeEn:
+            "Acts as a placeholder protecting central channel during source/drain formation and sets offset to reduce parasitic capacitance.",
+        },
+        {
+          id: 4,
+          badgeZh: "步骤 05 / 10",
+          badgeEn: "STEP 05 / 10",
+          shortZh: "内侧墙成形",
+          shortEn: "Inner Spacer",
+          catZh: "GAA 核心专利工序",
+          catEn: "Inner Spacer Process",
+          titleZh: "源漏凹槽下挖与内侧墙自对准成形 (Inner Spacer)",
+          titleEn: "S/D Cavity Recess & Inner Spacer Formation",
+          summaryZh:
+            "刻蚀移除假栅两侧未保护的纳米片叠层形成凹腔。随后利用高选择比气体各向同性横向微刻蚀 SiGe 牺牲层（侧向内凹约 4-6nm），通过 ALD 填入低-k 介质并回蚀，在 Si 纳米片层之间生成特征性的**内侧墙 (Inner Spacers)**！",
+          summaryEn:
+            "Anisotropic etch recesses S/D cavities. A highly selective isotropic dry etch lateral-recesses SiGe layers ~5nm horizontally. ALD deposits low-k dielectric and isotropic etchback creates distinct Inner Spacers between Si sheets!",
+          toolZh: "选择性气相各向同性刻蚀机 + 超高保形 ALD 介质机",
+          toolEn: "Selective Gas-Phase Isotropic Etcher + Conformal ALD Tool",
+          toolVendor: "Applied Materials Centura / Lam Research Helios",
+          matZh: "SiBCN / SiN 内侧墙 (Inner Spacers)",
+          matEn: "Low-k SiBCN / Si3N4 Inner Spacers",
+          matDimZh: "内侧墙横向深度: ~5nm | 垂直间隔: ~9nm",
+          matDimEn: "Lateral Indent: ~5nm | Vertical Pitch: ~9nm",
+          purposeZh:
+            "【GAA最关键工序】内侧墙填补在纳米片之间，将未来的全环绕金属栅与源漏外延彻底绝缘隔开，杜绝纳秒级短路，并降绝缘寄生电容至最低。",
+          purposeEn:
+            "[GAA Core Process] Isolates the future all-around metal gate from the adjacent source/drain epitaxy, preventing lethal shorts and slashing parasitic capacitance.",
+        },
+        {
+          id: 5,
+          badgeZh: "步骤 06 / 10",
+          badgeEn: "STEP 06 / 10",
+          shortZh: "源漏外延生长",
+          shortEn: "S/D Epitaxy",
+          catZh: "自对准源漏应变外延",
+          catEn: "Source/Drain Epitaxy",
+          titleZh: "高浓度原位掺杂源漏晶体外延生长 (SEG)",
+          titleEn: "In-situ Doped Strained S/D Epitaxial Growth",
+          summaryZh:
+            "以暴露在凹腔中的 Si 纳米片截面为晶种，在减压外延炉中进行选择性外延生长（SEG）。生长高度掺杂的晶体块（nMOS 为磷掺杂硅 Si:P，pMOS 为硼掺杂硅锗 SiGe），紧密贴合在内侧墙上，融合成坚固体块。",
+          summaryEn:
+            "Using exposed Si nanosheet ends as crystal seeds, selective epitaxy (SEG) grows in-situ doped crystals (Si:P for nFET / SiGe:B for pFET), seamlessly merging across all tiers abutting the inner spacers.",
+          toolZh: "减压化学气相外延炉 (RP-CVD Epitaxy)",
+          toolEn: "Reduced-Pressure CVD Epitaxy System",
+          toolVendor: "ASM Intrepid ES / Applied Materials Epi Centura",
+          matZh: "重掺杂晶体 (Si:P / SiGe:B)",
+          matEn: "In-situ Doped Epitaxy (Si:P / SiGe:B)",
+          matDimZh: "掺杂浓度: > 1×10^21 cm^-3 | 接触面积倍增",
+          matDimEn: "Doping: > 1e21 cm^-3 | Huge contact surface",
+          purposeZh:
+            "提供极高载流子浓度与极低接触电阻，为 3 层导电纳米片同步灌入源漏驱动电流。",
+          purposeEn:
+            "Provides immense carrier reservoir and ultra-low contact resistance, simultaneously feeding drive current to all 3 stacked nanosheet channels.",
+        },
+        {
+          id: 6,
+          badgeZh: "步骤 07 / 10",
+          badgeEn: "STEP 07 / 10",
+          shortZh: "ILD0与平坦化",
+          shortEn: "ILD0 & CMP",
+          catZh: "介质填充与平坦化",
+          catEn: "Dielectric Gap Fill & CMP",
+          titleZh: "ILD0层间介电层填充与假栅顶端抛光露头",
+          titleEn: "ILD0 Dielectric Gap Fill & Gate-Top Reveal CMP",
+          summaryZh:
+            "沉积接触阻挡层（CESL）与厚层二氧化硅（ILD0），填实整个器件外围。随后进行精密化学机械研磨（CMP），精准磨削切平至多晶硅假栅顶端，露出假栅上表面供下一步掏空腐蚀。",
+          summaryEn:
+            "CESL liner and ILD0 SiO2 fill the surrounding structure. Nanoscale CMP polishes back the oxide stopping flush on top of the sacrificial poly gate, exposing it for subsequent chemical removal.",
+          toolZh: "PECVD 介质沉积机 + 先进 CMP 化学机械研磨机",
+          toolEn: "PECVD Gap-fill Coater + Advanced CMP Polisher",
+          toolVendor: "Applied Materials Reflexion LK / Producer",
+          matZh: "ILD0 二氧化硅 (SiO2) 介质",
+          matEn: "Interlayer Dielectric (SiO2) Gap Fill",
+          matDimZh: "研磨平整度公差: < 1.0nm (3-sigma)",
+          matDimEn: "CMP Flatness Tolerance: < 1.0nm (3-sigma)",
+          purposeZh:
+            "保护与绝缘坚固源漏区，并制造纳米级绝对平整基面，为假栅溶除和纳米片悬空释放提供稳定物理支撑。",
+          purposeEn:
+            "Encapsulates source/drain regions and provides atomic flatness for subsequent dummy gate removal and nanosheet release.",
+        },
+        {
+          id: 7,
+          badgeZh: "步骤 08 / 10",
+          badgeEn: "STEP 08 / 10",
+          shortZh: "纳米片悬空释放",
+          shortEn: "Sheet Release",
+          catZh: "GAA 最核心工艺里程碑",
+          catEn: "Nanosheet Release Etch",
+          titleZh: "假栅掏空与纳米片化学选择性释放 (Sheet Release)",
+          titleEn: "Dummy Gate Pull & Nanosheet Release Etch",
+          summaryZh:
+            "先利用选择性刻蚀抽除多晶硅假栅；随后进行【纳米片释放蚀刻】：利用气相化学刻蚀对 SiGe 与 Si 具有超过 150:1 的超高选择比，将纳米片夹层中的全部 SiGe 彻底镂空溶除！瞬间出现 **3 根悬空孤立的纯硅纳米薄片 (Suspended Nanosheets)**！",
+          summaryEn:
+            "Dummy poly gate is stripped. Then comes the monumental Nanosheet Release: gas-phase chemical etch with >150:1 selectivity against pure Si dissolves all sacrificial SiGe between channels, leaving 3 pristine suspended Silicon Nanosheet bridges!",
+          toolZh: "原子级高选择比气相刻蚀机 / 表面张力干燥槽",
+          toolEn: "Selective Gas-Phase Dry Chemical Etcher / Marangoni Dryer",
+          toolVendor: "Lam Research Helios / SCREEN Vapor Etch",
+          matZh: "3 根三维悬空的纯硅纳米片 (Suspended Si Nanosheets)",
+          matEn: "3 Suspended Pure Si Nanosheet Channels",
+          matDimZh: "层间纳米间距: ~9nm (四面完全悬空镂空)",
+          matDimEn: "Sheet Gap: ~9nm (Completely suspended on 4 sides)",
+          purposeZh:
+            "【GAA巅峰几何成型】彻底释放纳米片上下及侧面的全部三维空间，使未来金属栅极得以 360 度无死角全包围包裹每一个导电通道！",
+          purposeEn:
+            "[GAA Pinnacle Geometry] Unlocks 360-degree 3D clearance around all nanosheet surfaces, enabling full all-around gate wrap for absolute gate control.",
+        },
+        {
+          id: 8,
+          badgeZh: "步骤 09 / 10",
+          badgeEn: "STEP 09 / 10",
+          shortZh: "360°全包围栅",
+          shortEn: "GAA HKMG",
+          catZh: "全环绕栅极 (GAA) 金属栅填充",
+          catEn: "Gate-All-Around HKMG",
+          titleZh: "原子层沉积 360° 全环绕 HfO2 高K介质与功函数金属栅",
+          titleEn: "360° Wrap-Around High-k Dielectric & Metal Gate",
+          summaryZh:
+            "利用超保形 ALD，在每一根悬空硅纳米片的**上、下、左、右四个表面（360° 全环绕）**均匀镀上 1.5nm HfO2 高 K 绝缘层与 TiN/TaN 功函数层，最后以金属钨(W)或钌(Ru)将片间空隙与栅槽彻底填充满并 CMP 切平！",
+          summaryEn:
+            "Atomic Layer Deposition (ALD) wraps a 1.5nm HfO2 (κ=25) high-k dielectric and work-function metal uniformly around ALL 4 SIDES of every suspended nanosheet. Tungsten/Ruthenium fills all gaps, followed by metal CMP planarization.",
+          toolZh: "先进多腔体 ALD 原子层沉积集群机 + 金属 CMP",
+          toolEn: "Multi-Station Conformal ALD Cluster Tool + Metal CMP",
+          toolVendor: "Applied Materials Endura ALD / TEL Trias",
+          matZh: "HfO2 360°高K全环绕层 + 功函数金属 + 钨/钌金属栅芯",
+          matEn: "HfO2 High-k Wrap + WFM Metal + Tungsten/Ruthenium Core",
+          matDimZh: "EOT 等效氧化层: < 0.65nm | 360° 四面全包围控栅",
+          matDimEn: "EOT: < 0.65nm | True 360° 4-sided electrostatic gate",
+          purposeZh:
+            "从三面控栅（FinFET）跃升至四面 360° 物理全包围，彻底消除短沟道亚阈值漏电，将静电控制力推向硅基晶体管的物理极限！",
+          purposeEn:
+            "Upgrades 3-sided control (FinFET) to full 360° 4-sided control, annihilating sub-threshold leakage and reaching the ultimate electrostatic scaling limit of silicon.",
+        },
+        {
+          id: 9,
+          badgeZh: "步骤 10 / 10",
+          badgeEn: "STEP 10 / 10",
+          shortZh: "接触与金属互连",
+          shortEn: "Contacts/M1",
+          catZh: "中段触点与后段/背面互连",
+          catEn: "MOL Contacts & BEOL M1",
+          titleZh: "超小孔径触点插塞 (Contacts) 与首层金属互连 (M1)",
+          titleEn: "MOL Contact Plugs & Dual-Damascene Metal 1 (Cu)",
+          summaryZh:
+            "沉积 ILD1 介质层，垂直蚀刻接触深孔至源漏外延区，填充低电阻钨(W)或钴(Co)插塞，顶部制作首层低阻铜走线（M1），晶体管全电学通路闭环打通（下一代亦支持背面供电 BSPDN 网络）！",
+          summaryEn:
+            "ILD1 dielectric is deposited. Deep contact vias punch down to source/drain, filled with cobalt/tungsten plugs. Dual-damascene copper wiring (M1) completes the electrical circuit, ready for Backside Power Delivery (BSPDN).",
+          toolZh: "高深宽比介质刻蚀机 + 触点钴/钨沉积机 + 铜双大马士革线",
+          toolEn:
+            "HAR Dielectric Etcher + Contact Co/W Tool + Cu Dual-Damascene",
+          toolVendor: "Lam Research Flex / Applied Materials Endura Cu",
+          matZh: "触点金属插塞 (CA/CB) + 首层铜互连走线 (Cu M1)",
+          matEn: "Cobalt/Tungsten Plugs + Copper Interconnect Wire (Cu M1)",
+          matDimZh: "接触孔径: ~11nm | 双面走线架构就绪",
+          matDimEn: "Via CD: ~11nm | Backside Power Ready",
+          purposeZh:
+            "将纳米尺度的 3 根导电纳米片完整连入微处理器逻辑单元网络，支撑 2nm/1.8nm 超算与 AI 芯片数以千亿计的算力迸发！",
+          purposeEn:
+            "Interconnects the 3 nanosheet channels into complex computing logic arrays, unleashing hundreds of billions of gates for advanced AI & HPC processors.",
+        },
+      ];
+
+      // Determine language from URL parameter or preference:
+      // Only ?lang=zh or ?lang=zh-CN defaults to Chinese. All other languages/defaults load English!
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = (urlParams.get("lang") || "").toLowerCase();
+      let isEnglish = true; // Default to English for all other languages
+      if (langParam === "zh" || langParam === "zh-cn") {
+        isEnglish = false;
+      } else if (langParam === "en") {
+        isEnglish = true;
+      } else {
+        // If no query parameter, check if user explicitly selected Simplified Chinese
+        const savedLang = localStorage.getItem("semiconfab_lang");
+        isEnglish = savedLang !== "zh-CN";
+      }
+
+      let currentStepIndex = 0;
+      let isAutoPlaying = false;
+      let autoPlayTimer = null;
+      let isXRay = false;
+      let isCutaway = false;
+      let isGrid = true;
+      let isPowerFlow = false;
+      let explodeProgress = 0;
+
+      // --- 2. THREE.JS SCENE SETUP ---
+      let scene, camera, renderer, controls;
+      let baseGroup,
+        superlatticeGroup,
+        stiGroup,
+        dummyGateGroup,
+        outerSpacerGroup;
+      let innerSpacerGroup,
+        epiGroup,
+        ild0Group,
+        nanosheetsReleaseGroup,
+        allAroundGateGroup;
+      let contactGroup, electronStreamGroup;
+      let gridHelper;
+      let clippingPlane;
+      let raycaster, mouse;
+      let hoveredMesh = null;
+      let animatedElectrons = [];
+
+      const container = document.getElementById("webgl-container");
+
+      function initThree() {
+        // Scene
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0c1017);
+        scene.fog = new THREE.FogExp2(0x0c1017, 0.002);
+
+        // Camera: Optimized for 500x500 square viewport
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        const aspect = width / height;
+        camera = new THREE.PerspectiveCamera(46, aspect, 1, 2000);
+        camera.position.set(145, 110, 155);
+
+        // Clipping Plane for Cutaway Mode (along Z axis)
+        clippingPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.localClippingEnabled = true;
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        container.appendChild(renderer.domElement);
+
+        // Controls
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 + 0.05;
+        controls.minDistance = 35;
+        controls.maxDistance = 500;
+        controls.target.set(0, 26, 0);
+
+        // Lighting
+        // Neutral Industrial TCAD Studio Lighting (ASML / Synopsys TCAD Style)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.25);
+        dirLight1.position.set(120, 180, 100);
+        dirLight1.castShadow = true;
+        dirLight1.shadow.mapSize.width = 2048;
+        dirLight1.shadow.mapSize.height = 2048;
+        dirLight1.shadow.bias = -0.0005;
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0x94a3b8, 0.55); // Neutral cool grey fill
+        dirLight2.position.set(-120, 100, -100);
+        scene.add(dirLight2);
+
+        const dirLight3 = new THREE.DirectionalLight(0x64748b, 0.35); // Neutral slate ground bounce
+        dirLight3.position.set(80, -60, 60);
+        scene.add(dirLight3);
+
+        // Neutral Slate CAD Grid
+        gridHelper = new THREE.GridHelper(240, 24, 0x334155, 0x1e2634);
+        gridHelper.position.y = -0.2;
+        scene.add(gridHelper);
+
+        // Raycaster & Mouse for hover
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        // Build 3D Models
+        buildGeometryHierarchy();
+
+        // Event Listeners
+        window.addEventListener("resize", onWindowResize);
+        renderer.domElement.addEventListener("mousemove", onMouseMove);
+
+        // Start loop
+        animate();
+      }
+
+      // --- 3. GEOMETRY & MATERIALS HIERARCHY ---
+      let materials = {};
+
+      function initMaterials() {
+        materials.siliconSubstrate = new THREE.MeshStandardMaterial({
+          color: 0x242b35,
+          roughness: 0.7,
+          metalness: 0.15,
+        });
+
+        materials.siNanosheet = new THREE.MeshStandardMaterial({
+          color: 0x3e4958,
+          roughness: 0.55,
+          metalness: 0.2,
+        });
+
+        materials.sigeSacrificial = new THREE.MeshStandardMaterial({
+          color: 0x4f46e5,
+          roughness: 0.6,
+          metalness: 0.2,
+        });
+
+        materials.hardMask = new THREE.MeshStandardMaterial({
+          color: 0x2d6a4f,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.stiOxide = new THREE.MeshStandardMaterial({
+          color: 0x416584,
+          roughness: 0.45,
+          metalness: 0.05,
+          transparent: true,
+          opacity: 0.6,
+        });
+
+        materials.dummyPolyGate = new THREE.MeshStandardMaterial({
+          color: 0x92400e,
+          roughness: 0.75,
+          metalness: 0.1,
+        });
+
+        materials.outerSpacer = new THREE.MeshStandardMaterial({
+          color: 0x1f4e38,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.innerSpacer = new THREE.MeshStandardMaterial({
+          color: 0x115e59,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.strainedEpi = new THREE.MeshStandardMaterial({
+          color: 0x583d72,
+          roughness: 0.45,
+          metalness: 0.35,
+        });
+
+        materials.ild0Oxide = new THREE.MeshStandardMaterial({
+          color: 0x4a6572,
+          roughness: 0.45,
+          metalness: 0.05,
+          transparent: true,
+          opacity: 0.4,
+        });
+
+        materials.highK360 = new THREE.MeshStandardMaterial({
+          color: 0xa16207,
+          roughness: 0.4,
+          metalness: 0.4,
+        });
+
+        materials.metalGateCore = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.contactPlug = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.copperM1 = new THREE.MeshStandardMaterial({
+          color: 0xb4532b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+      }
+
+      function createPart(geometry, material, nameZh, nameEn, specZh, specEn) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        mesh.userData = {
+          nameZh: nameZh,
+          nameEn: nameEn,
+          specZh: specZh,
+          specEn: specEn,
+          origY: 0,
+        };
+        return mesh;
+      }
+
+      function buildGeometryHierarchy() {
+        initMaterials();
+
+        // Master Groups for each GAA process phase
+        baseGroup = new THREE.Group();
+        superlatticeGroup = new THREE.Group();
+        stiGroup = new THREE.Group();
+        dummyGateGroup = new THREE.Group();
+        outerSpacerGroup = new THREE.Group();
+        innerSpacerGroup = new THREE.Group();
+        epiGroup = new THREE.Group();
+        ild0Group = new THREE.Group();
+        nanosheetsReleaseGroup = new THREE.Group();
+        allAroundGateGroup = new THREE.Group();
+        contactGroup = new THREE.Group();
+        electronStreamGroup = new THREE.Group();
+
+        scene.add(baseGroup);
+        scene.add(superlatticeGroup);
+        scene.add(stiGroup);
+        scene.add(dummyGateGroup);
+        scene.add(outerSpacerGroup);
+        scene.add(innerSpacerGroup);
+        scene.add(epiGroup);
+        scene.add(ild0Group);
+        scene.add(nanosheetsReleaseGroup);
+        scene.add(allAroundGateGroup);
+        scene.add(contactGroup);
+        scene.add(electronStreamGroup);
+
+        // --- Part 1: Bulk Silicon Substrate ---
+        const subGeom = new THREE.BoxGeometry(140, 20, 160);
+        const subMesh = createPart(
+          subGeom,
+          materials.siliconSubstrate,
+          "单晶硅 P-Well 衬底",
+          "P-Type Bulk Silicon Substrate (100)",
+          "高纯度硅片基底，为超晶格多层外延提供原子级平整晶向基底",
+          "High-purity Si (100) base substrate supporting superlattice epitaxy",
+        );
+        subMesh.position.set(0, 10, 0);
+        baseGroup.add(subMesh);
+
+        const subWire = new THREE.LineSegments(
+          new THREE.EdgesGeometry(subGeom),
+          new THREE.LineBasicMaterial({
+            color: 0x64748b,
+            transparent: true,
+            opacity: 0.4,
+          }),
+        );
+        subMesh.add(subWire);
+
+        // --- Part 2: Superlattice (3 pairs of SiGe sacrificial and Si Nanosheets) ---
+        // Dimensions: Width 36 (X), Length 140 (Z).
+        // Alternating heights: SiGe layer height = 8, Si Nanosheet height = 5.
+        // Base at Y = 20.
+        // Pair 1: SiGe1: Y=20..28 (center 24). Si1: Y=28..33 (center 30.5).
+        // Pair 2: SiGe2: Y=33..41 (center 37). Si2: Y=41..46 (center 43.5).
+        // Pair 3: SiGe3: Y=46..54 (center 50). Si3: Y=54..59 (center 56.5).
+        // Total stack height = 39 (from Y=20 to Y=59).
+        const sheetWidth = 36;
+        const sheetLength = 140;
+
+        const layerConfigs = [
+          {
+            type: "sige",
+            y: 24,
+            h: 8,
+            idx: 1,
+            nameZh: "第1层 Si0.7Ge0.3 牺牲层",
+            nameEn: "Sacrificial SiGe Layer 1",
+          },
+          {
+            type: "si",
+            y: 30.5,
+            h: 5,
+            idx: 1,
+            nameZh: "第1层 硅纳米片通道 (Si Nanosheet 1)",
+            nameEn: "Si Nanosheet Channel 1",
+          },
+          {
+            type: "sige",
+            y: 37,
+            h: 8,
+            idx: 2,
+            nameZh: "第2层 Si0.7Ge0.3 牺牲层",
+            nameEn: "Sacrificial SiGe Layer 2",
+          },
+          {
+            type: "si",
+            y: 43.5,
+            h: 5,
+            idx: 2,
+            nameZh: "第2层 硅纳米片通道 (Si Nanosheet 2)",
+            nameEn: "Si Nanosheet Channel 2",
+          },
+          {
+            type: "sige",
+            y: 50,
+            h: 8,
+            idx: 3,
+            nameZh: "第3层 Si0.7Ge0.3 牺牲层",
+            nameEn: "Sacrificial SiGe Layer 3",
+          },
+          {
+            type: "si",
+            y: 56.5,
+            h: 5,
+            idx: 3,
+            nameZh: "第3层 硅纳米片通道 (Si Nanosheet 3)",
+            nameEn: "Si Nanosheet Channel 3",
+          },
+        ];
+
+        layerConfigs.forEach((cfg) => {
+          const geom = new THREE.BoxGeometry(sheetWidth, cfg.h, sheetLength);
+          const mat =
+            cfg.type === "si"
+              ? materials.siNanosheet
+              : materials.sigeSacrificial;
+          const mesh = createPart(
+            geom,
+            mat,
+            cfg.nameZh,
+            cfg.nameEn,
+            cfg.type === "si"
+              ? "厚度 ~5nm 单晶硅导电片"
+              : "厚度 ~8nm 硅锗牺牲层，后续将被化学掏空",
+            cfg.type === "si"
+              ? "~5nm single-crystal Si channel"
+              : "~8nm SiGe layer to be hollowed out during sheet release",
+          );
+          mesh.position.set(0, cfg.y, 0);
+          superlatticeGroup.add(mesh);
+        });
+
+        // Top SiN Hardmask on the Superlattice stack
+        const hmGeom = new THREE.BoxGeometry(sheetWidth + 0.4, 6, sheetLength);
+        const hmMesh = createPart(
+          hmGeom,
+          materials.hardMask,
+          "纳米片鳍状叠层硬掩模 (Hard Mask Cap)",
+          "Nanosheet Stack Hard Mask Cap",
+          "在高深宽比叠层各向异性刻蚀中保护顶部纳米片",
+          "Si3N4 cap guarding the nanosheet stack during deep anisotropic etch",
+        );
+        hmMesh.position.set(0, 59 + 3, 0);
+        hmMesh.name = "hm_cap";
+        superlatticeGroup.add(hmMesh);
+
+        // --- Part 3: STI Shallow Trench Isolation ---
+        // Fills surrounding space up to Y=28 (Height 8 above substrate), isolating bottom sub-fin.
+        const stiGeom = new THREE.BoxGeometry(138, 8, 158);
+        const stiMesh = createPart(
+          stiGeom,
+          materials.stiOxide,
+          "STI 浅沟槽隔离氧化物 (SiO2)",
+          "Shallow Trench Isolation (STI) SiO2",
+          "流动态 CVD 填平，回蚀露出活跃的 3 层纳米片复合叠层",
+          "Recessed STI oxide providing bottom sub-fin electrical isolation",
+        );
+        stiMesh.position.set(0, 20 + 4, 0);
+        stiGroup.add(stiMesh);
+
+        // --- Part 4: Dummy Poly Gate (RMG) & Outer Spacers ---
+        // Dummy gate spans X from -42 to +42 (Width 84), Gate Length along Z = 24 (-12 to +12).
+        // Height Y from 28 to 78 (Height 50).
+        const dummyGateGeom = new THREE.BoxGeometry(84, 50, 24);
+        const dummyGateMesh = createPart(
+          dummyGateGeom,
+          materials.dummyPolyGate,
+          "多晶硅牺牲假栅 (Dummy Poly-Si Gate)",
+          "Sacrificial Polysilicon Dummy Gate",
+          "跨越纳米片叠层，保护中央沟道免受后续源漏高温退火损伤",
+          "Gate-last placeholder bridging the nanosheet stack through thermal anneals",
+        );
+        dummyGateMesh.position.set(0, 28 + 25, 0);
+        dummyGateGroup.add(dummyGateMesh);
+
+        // Outer Spacers on both sides of dummy gate along Z at -16 and +16 (Thickness 8 each)
+        [-16, 16].forEach((zPos, sIdx) => {
+          const outerSpGeom = new THREE.BoxGeometry(84, 50, 8);
+          const outerSpMesh = createPart(
+            outerSpGeom,
+            materials.outerSpacer,
+            `自对准低-k外侧墙 ${sIdx === 0 ? "前壁" : "后壁"} (Outer Spacer)`,
+            `Gate Low-k Outer Spacer`,
+            "Si3N4 / SiBCN 侧壁绝缘薄膜，界定源漏外延区物理间距",
+            "Low-k outer spacer setting physical offset to source/drain epitaxy",
+          );
+          outerSpMesh.position.set(0, 28 + 25, zPos);
+          outerSpacerGroup.add(outerSpMesh);
+        });
+
+        // --- Part 5: Inner Spacers (内侧墙) - GAA 标志性核心工艺! ---
+        // Located at the ends of the sacrificial SiGe layers underneath the outer spacers!
+        // In Z at [-20, -12] and [+12, +20]. At Y = 24, 37, 50 (the 3 SiGe heights).
+        // Width = sheetWidth (36), Length = 8, Height = 8 each.
+        [-16, 16].forEach((zPos, zIdx) => {
+          [24, 37, 50].forEach((yPos, layerIdx) => {
+            const innerSpGeom = new THREE.BoxGeometry(sheetWidth, 8, 8);
+            const innerSpMesh = createPart(
+              innerSpGeom,
+              materials.innerSpacer,
+              `第 ${layerIdx + 1} 层自对准绝缘内侧墙 (Inner Spacer ${layerIdx + 1})`,
+              `Inner Spacer Layer ${layerIdx + 1}`,
+              "【GAA核心结构】位于硅纳米片层间，彻底隔离全包围金属栅与源漏外延",
+              "Crucial GAA feature: isolates 360° metal gate from S/D epitaxy",
+            );
+            innerSpMesh.position.set(0, yPos, zPos);
+            innerSpacerGroup.add(innerSpMesh);
+          });
+        });
+
+        // --- Part 6: Source & Drain In-situ Doped Epitaxy Blocks ---
+        // Solid blocks growing from Z = 20 to 65 and Z = -20 to -65 on both sides.
+        // Merging all 3 nanosheet tiers into continuous conductive S/D crystals.
+        [-42.5, 42.5].forEach((zCenter, sideIdx) => {
+          const epiBlockGeom = new THREE.BoxGeometry(sheetWidth + 8, 38, 45);
+          const epiMesh = createPart(
+            epiBlockGeom,
+            materials.strainedEpi,
+            `重掺杂源漏外延晶体块 (${sideIdx === 0 ? "源极 Source" : "漏极 Drain"})`,
+            `In-situ Doped S/D Epitaxy Block (${sideIdx === 0 ? "Source" : "Drain"})`,
+            "原位重掺杂外延晶体，紧贴内侧墙融合 3 层纳米片，实现极低接触电阻",
+            "Merged S/D epitaxy feeding all 3 nanosheet channels with minimal resistance",
+          );
+          epiMesh.position.set(0, 20 + 19, zCenter);
+          epiGroup.add(epiMesh);
+        });
+
+        // --- Part 7: ILD0 Interlayer Dielectric ---
+        // Fills the surrounding space up to Y = 78.
+        const ild0Geom = new THREE.BoxGeometry(138, 50, 158);
+        const ild0Mesh = createPart(
+          ild0Geom,
+          materials.ild0Oxide,
+          "ILD0 层间绝缘氧化介质",
+          "Interlayer Dielectric 0 (ILD0 SiO2)",
+          "填平晶体管外周，经 CMP 抛光至与多晶硅假栅顶端完全平齐",
+          "ILD0 oxide planarized dead-flush with dummy gate top by CMP",
+        );
+        ild0Mesh.position.set(0, 28 + 25, 0);
+        ild0Group.add(ild0Mesh);
+
+        // --- Part 8: Suspended Pure Silicon Nanosheet Channels (Sheet Release!) ---
+        // 3 isolated, suspended Silicon Nanosheet bridges running through Z = [-20, +20]!
+        // They are suspended in air with 8-unit vertical gaps between them!
+        [30.5, 43.5, 56.5].forEach((yPos, nsIdx) => {
+          const nsGeom = new THREE.BoxGeometry(sheetWidth, 5, 40);
+          const nsMesh = createPart(
+            nsGeom,
+            materials.siNanosheet,
+            `第 ${nsIdx + 1} 层悬空导电纳米薄片 (Suspended Nanosheet ${nsIdx + 1})`,
+            `Suspended Silicon Nanosheet Ribbon ${nsIdx + 1}`,
+            "【Sheet Release】化学选择性掏空 SiGe 后悬空的纯单晶硅超薄桥梁",
+            "Free-standing Si channel bridge after selective sacrificial SiGe release",
+          );
+          nsMesh.position.set(0, yPos, 0);
+          nanosheetsReleaseGroup.add(nsMesh);
+        });
+
+        // --- Part 9: 360° All-Around Metal Gate (GAA HKMG Stack) ---
+        // 1. High-K Dielectric Liners wrapping 360° around each of the 3 nanosheets
+        [30.5, 43.5, 56.5].forEach((yPos, nsIdx) => {
+          // Hollow outer frame wrapping all 4 sides of each nanosheet
+          const wrapGeom = new THREE.BoxGeometry(sheetWidth + 2.4, 7.4, 24.2);
+          const wrapMesh = createPart(
+            wrapGeom,
+            materials.highK360,
+            `第 ${nsIdx + 1} 层纳米片 360° 全包围 HfO2 高K介质层`,
+            `360° HfO2 High-k Dielectric Wrap (Tier ${nsIdx + 1})`,
+            "原子层沉积 1.5nm 氧化铪，完整包覆纳米片上下左右四个表面",
+            "Conformal 360° ALD HfO2 coating wrapping top, bottom, and both sidewalls",
+          );
+          wrapMesh.position.set(0, yPos, 0);
+          allAroundGateGroup.add(wrapMesh);
+        });
+
+        // 2. Main Gate Core (Ruthenium / Tungsten) filling the gate trench and all gaps
+        const gateCoreGeom = new THREE.BoxGeometry(84, 50, 24);
+        const gateCoreMesh = createPart(
+          gateCoreGeom,
+          materials.metalGateCore,
+          "全环绕金属栅芯 (All-Around Metal Gate Core)",
+          "Gate-All-Around (GAA) Metal Gate Core",
+          "致密填充金属钨/钌，实现对 3 根纳米通道四面无死角极致静电控栅",
+          "Metal gate core wrapping around all channels for ultimate electrostatic control",
+        );
+        gateCoreMesh.position.set(0, 28 + 25, 0);
+        allAroundGateGroup.add(gateCoreMesh);
+
+        // --- Part 10: MOL Contacts & Metal 1 Interconnects ---
+        // Gate contact via (CB)
+        const cbGeom = new THREE.CylinderGeometry(5, 5, 26, 16);
+        const cbMesh = createPart(
+          cbGeom,
+          materials.contactPlug,
+          "栅极垂直接触插塞 (CB Gate Contact)",
+          "CB Tungsten/Cobalt Gate Contact Via",
+          "垂直引出全环绕栅极控制电位",
+          "Vertical contact routing 360° gate control voltage to interconnect",
+        );
+        cbMesh.position.set(0, 78 + 13, 0);
+        contactGroup.add(cbMesh);
+
+        // S/D Contacts (CA)
+        [-42.5, 42.5].forEach((zCenter, caIdx) => {
+          const caGeom = new THREE.CylinderGeometry(7, 7, 46, 16);
+          const caMesh = createPart(
+            caGeom,
+            materials.contactPlug,
+            `${caIdx === 0 ? "源极" : "漏极"} 触点插塞 (CA Contact)`,
+            `${caIdx === 0 ? "Source" : "Drain"} CA Contact Plug`,
+            "直达源漏外延区，实现原子级超低欧姆接触电阻",
+            "Ultra-low resistance contact via connecting to doped S/D block",
+          );
+          caMesh.position.set(0, 58 + 23, zCenter);
+          contactGroup.add(caMesh);
+        });
+
+        // M1 Metal Lines
+        const m1GateGeom = new THREE.BoxGeometry(100, 10, 16);
+        const m1GateMesh = createPart(
+          m1GateGeom,
+          materials.copperM1,
+          "M1 铜互连走线 - 栅极控制总线 (Gate M1)",
+          "Dual-Damascene Copper M1 (Gate Line)",
+          "双大马士革低阻铜走线",
+          "Dual-damascene copper interconnect",
+        );
+        m1GateMesh.position.set(0, 104 + 5, 0);
+        contactGroup.add(m1GateMesh);
+
+        [-42.5, 42.5].forEach((zCenter, lineIdx) => {
+          const m1SdGeom = new THREE.BoxGeometry(90, 10, 20);
+          const m1SdMesh = createPart(
+            m1SdGeom,
+            materials.copperM1,
+            `M1 铜互连走线 - ${lineIdx === 0 ? "源极 VDD" : "漏极 GND"}`,
+            `Dual-Damascene Copper M1 (${lineIdx === 0 ? "Source" : "Drain"})`,
+            "低电阻率铜走线供电干线",
+            "Low-resistivity copper bus rails",
+          );
+          m1SdMesh.position.set(0, 104 + 5, zCenter);
+          contactGroup.add(m1SdMesh);
+        });
+
+        // --- Part 11: Electron Stream (Conducting through all 3 tiers of nanosheets) ---
+        initElectronStream();
+        buildDimensionsHierarchy();
+
+        // Set initial step visibility
+        applyStepState(0, false);
+      }
+
+      // --- 4. STEP-BY-STEP VISIBILITY STATE MACHINE ---
+      function applyStepState(stepIdx, animateTransition = true) {
+        updateDimensionsVisibility(stepIdx);
+        currentStepIndex = stepIdx;
+        updateInspectorUI(stepIdx);
+
+        baseGroup.visible = true;
+
+        // Superlattice stack is visible from Step 0 through Step 6
+        // In step 7 (Sheet Release), the superlattice is replaced by suspended pure Si sheets!
+        superlatticeGroup.visible = stepIdx <= 6;
+        superlatticeGroup.traverse((child) => {
+          if (child.name === "hm_cap") {
+            // Hardmask cap stripped after STI / Dummy gate step
+            child.visible = stepIdx <= 2;
+          }
+        });
+
+        stiGroup.visible = stepIdx >= 2;
+
+        // Dummy gate is present from step 3 through step 6, stripped at step 7
+        dummyGateGroup.visible = stepIdx >= 3 && stepIdx <= 6;
+        outerSpacerGroup.visible = stepIdx >= 3;
+
+        // Inner spacers are formed at step 4 and remain throughout
+        innerSpacerGroup.visible = stepIdx >= 4;
+
+        // S/D Epitaxy formed at step 5 and remains
+        epiGroup.visible = stepIdx >= 5;
+
+        // ILD0 gap-fill at step 6 and remains
+        ild0Group.visible = stepIdx >= 6;
+
+        // Suspended Nanosheets are revealed at step 7 and stay inside the gate in step 8 & 9
+        nanosheetsReleaseGroup.visible = stepIdx >= 7;
+
+        // All-Around Metal Gate (GAA HKMG) deposited at step 8 & 9
+        allAroundGateGroup.visible = stepIdx >= 8;
+
+        // Contacts & M1 at step 9
+        contactGroup.visible = stepIdx >= 9;
+
+        // Enable Power Flow toggle only at Step 9
+        const powerContainer = document.getElementById("power-flow-container");
+        const powerCheckbox = document.getElementById("check-power");
+        if (stepIdx === 9) {
+          powerContainer.classList.remove("opacity-50", "pointer-events-none");
+        } else {
+          powerContainer.classList.add("opacity-50", "pointer-events-none");
+          powerCheckbox.checked = false;
+          isPowerFlow = false;
+          electronStreamGroup.visible = false;
+        }
+
+        if (animateTransition) {
+          cinematicCameraMove(stepIdx);
+        }
+
+        applyExplodeOffsets();
+      }
+
+      // --- 5. CAMERA PRESETS & TRANSITIONS ---
+      let isDrawerOpen = false;
+      function toggleDetailsDrawer() {
+        isDrawerOpen = !isDrawerOpen;
+        const drawer = document.getElementById("inspector-drawer");
+        if (drawer) {
+          drawer.classList.toggle("translate-x-full", !isDrawerOpen);
+        }
+        const btn = document.getElementById("btn-toggle-details");
+        if (btn) {
+          btn.classList.toggle("bg-slate-700", isDrawerOpen);
+        }
+      }
+
+      function setCameraView(preset) {
+        let targetPos, targetLook;
+        if (preset === "iso") {
+          targetPos = new THREE.Vector3(145, 110, 155);
+          targetLook = new THREE.Vector3(0, 26, 0);
+        } else if (preset === "sheet") {
+          // Nanosheet profile looking along Z axis directly at the 3 tiers
+          targetPos = new THREE.Vector3(0, 48, 175);
+          targetLook = new THREE.Vector3(0, 43, 0);
+        } else if (preset === "gate") {
+          // Looking along X axis directly at the 360 wrap
+          targetPos = new THREE.Vector3(185, 48, 0);
+          targetLook = new THREE.Vector3(0, 43, 0);
+        } else if (preset === "top") {
+          targetPos = new THREE.Vector3(0, 240, 0.1);
+          targetLook = new THREE.Vector3(0, 0, 0);
+        }
+
+        tweenCamera(targetPos, targetLook, 900);
+      }
+
+      function resetCamera() {
+        setCameraView("iso");
+      }
+
+      function cinematicCameraMove(stepIdx) {
+        if (stepIdx === 0) {
+          tweenCamera(
+            new THREE.Vector3(95, 75, 120),
+            new THREE.Vector3(0, 35, 0),
+            800,
+          );
+        } else if (stepIdx === 4) {
+          // Focus on Inner Spacers indentation
+          tweenCamera(
+            new THREE.Vector3(65, 55, 75),
+            new THREE.Vector3(0, 40, -15),
+            800,
+          );
+        } else if (stepIdx === 7) {
+          // Zoom right into the 3 suspended nanosheet bridges!
+          tweenCamera(
+            new THREE.Vector3(50, 52, 60),
+            new THREE.Vector3(0, 43, 0),
+            800,
+          );
+        } else if (stepIdx === 8) {
+          // View 360 wrap around sheets
+          tweenCamera(
+            new THREE.Vector3(110, 85, 60),
+            new THREE.Vector3(0, 45, 0),
+            800,
+          );
+        } else if (stepIdx === 9) {
+          tweenCamera(
+            new THREE.Vector3(145, 125, 155),
+            new THREE.Vector3(0, 45, 0),
+            900,
+          );
+        }
+      }
+
+      function tweenCamera(endPos, endLook, durationMs) {
+        const startPos = camera.position.clone();
+        const startLook = controls.target.clone();
+        const startTime = performance.now();
+
+        function updateTween(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / durationMs, 1);
+          const ease =
+            progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+          camera.position.lerpVectors(startPos, endPos, ease);
+          controls.target.lerpVectors(startLook, endLook, ease);
+          controls.update();
+
+          if (progress < 1) {
+            requestAnimationFrame(updateTween);
+          }
+        }
+        requestAnimationFrame(updateTween);
+      }
+
+      // --- 6. ELECTRON STREAM (Simulating conduction across all 3 tiers) ---
+      function initElectronStream() {
+        const particleCount = 120;
+        const particleGeom = new THREE.SphereGeometry(1.2, 8, 8);
+        const particleMat = new THREE.MeshBasicMaterial({ color: 0xa855f7 });
+
+        const tierY = [30.5, 43.5, 56.5];
+
+        for (let i = 0; i < particleCount; i++) {
+          const p = new THREE.Mesh(particleGeom, particleMat);
+          const yBase = tierY[i % 3];
+          p.userData = {
+            xOffset: (Math.random() - 0.5) * 28,
+            yBase: yBase,
+            zProgress: Math.random() * 90 - 45,
+            speed: 0.65 + Math.random() * 0.4,
+          };
+          p.position.set(p.userData.xOffset, yBase, p.userData.zProgress);
+          electronStreamGroup.add(p);
+          animatedElectrons.push(p);
+        }
+        electronStreamGroup.visible = false;
+      }
+
+      function updateElectrons() {
+        if (!isPowerFlow || !electronStreamGroup.visible) return;
+        for (let i = 0; i < animatedElectrons.length; i++) {
+          const p = animatedElectrons[i];
+          p.userData.zProgress += p.userData.speed;
+          if (p.userData.zProgress > 45) {
+            p.userData.zProgress = -45;
+          }
+          p.position.z = p.userData.zProgress;
+        }
+      }
+
+      // --- 7. EXPLODED VIEW ---
+      function updateExplode(val) {
+        explodeProgress = val / 100;
+        document.getElementById("explode-val").innerText =
+          `${Math.round(val)}%`;
+        applyExplodeOffsets();
+      }
+
+      function applyExplodeOffsets() {
+        const e = explodeProgress;
+        superlatticeGroup.position.y = e * 12;
+        stiGroup.position.y = e * 12;
+
+        dummyGateGroup.position.y = e * 28;
+        outerSpacerGroup.position.y = e * 28;
+        innerSpacerGroup.position.y = e * 28;
+        epiGroup.position.y = e * 28;
+
+        nanosheetsReleaseGroup.position.y = e * 36;
+        allAroundGateGroup.position.y = e * 48;
+        ild0Group.position.y = e * 48;
+
+        contactGroup.position.y = e * 72;
+      }
+
+      // --- 8. TOGGLE MODES ---
+      function toggleXRay(enabled) {
+        isXRay = enabled;
+        materials.stiOxide.opacity = enabled ? 0.15 : 0.45;
+        materials.ild0Oxide.opacity = enabled ? 0.08 : 0.3;
+        materials.siliconSubstrate.transparent = enabled;
+        materials.siliconSubstrate.opacity = enabled ? 0.5 : 1.0;
+      }
+
+      function toggleCutaway(enabled) {
+        isCutaway = enabled;
+        if (enabled) {
+          renderer.clippingPlanes = [clippingPlane];
+          clippingPlane.constant = 0;
+        } else {
+          renderer.clippingPlanes = [];
+        }
+      }
+
+      function toggleGrid(enabled) {
+        isGrid = enabled;
+        gridHelper.visible = enabled;
+      }
+
+      function togglePowerFlow(enabled) {
+        isPowerFlow = enabled;
+        electronStreamGroup.visible = enabled;
+      }
+
+      // --- 9. STEPPER CONTROLS & AUTOPLAY ---
+      function goToStep(idx) {
+        applyStepState(idx, true);
+      }
+
+      function nextStep() {
+        if (currentStepIndex < STEPS.length - 1) {
+          goToStep(currentStepIndex + 1);
+        } else if (isAutoPlaying) {
+          goToStep(0);
+        }
+      }
+
+      function prevStep() {
+        if (currentStepIndex > 0) {
+          goToStep(currentStepIndex - 1);
+        }
+      }
+
+      function toggleAutoPlay() {
+        isAutoPlaying = !isAutoPlaying;
+        const btn = document.getElementById("autoplay-btn");
+        const icon = document.getElementById("autoplay-icon");
+        const label = document.getElementById("autoplay-label");
+
+        if (isAutoPlaying) {
+          btn.classList.add("glow-purple", "border-purple-400");
+          icon.setAttribute("data-lucide", "pause");
+          label.innerText = isEnglish ? "Pause" : "暂停演示";
+          lucide.createIcons();
+          autoPlayTimer = setInterval(() => {
+            nextStep();
+          }, 4200);
+        } else {
+          btn.classList.remove("glow-purple", "border-purple-400");
+          icon.setAttribute("data-lucide", "play");
+          label.innerText = isEnglish ? "Play" : "播放工序";
+          lucide.createIcons();
+          clearInterval(autoPlayTimer);
+        }
+      }
+
+      // --- 10. UI & LOCALIZATION (I18N) ---
+      function updateInspectorUI(idx) {
+        const data = STEPS[idx];
+
+        document.getElementById("step-badge").innerText = isEnglish
+          ? data.badgeEn
+          : data.badgeZh;
+        document.getElementById("process-category-badge").innerText = isEnglish
+          ? data.catEn
+          : data.catZh;
+
+        const titleEl = document.getElementById("step-title");
+        const subTitleEl = document.getElementById("step-title-en");
+
+        if (isEnglish) {
+          titleEl.innerText = data.titleEn;
+          subTitleEl.style.display = "none";
+          subTitleEl.innerText = "";
+        } else {
+          titleEl.innerText = data.titleZh;
+          subTitleEl.style.display = "block";
+          subTitleEl.innerText = data.titleEn;
+        }
+
+        document.getElementById("step-summary").innerText = isEnglish
+          ? data.summaryEn
+          : data.summaryZh;
+        document.getElementById("step-equipment").innerText = isEnglish
+          ? data.toolEn
+          : data.toolZh;
+        document.getElementById("step-equipment-vendor").innerText =
+          data.toolVendor;
+        document.getElementById("step-material").innerText = isEnglish
+          ? data.matEn
+          : data.matZh;
+        document.getElementById("step-material-dim").innerText = isEnglish
+          ? data.matDimEn
+          : data.matDimZh;
+        document.getElementById("step-purpose").innerText = isEnglish
+          ? data.purposeEn
+          : data.purposeZh;
+
+        document.getElementById("btn-prev").disabled = idx === 0;
+
+        // Bottom Timeline Stepper Buttons
+        for (let i = 0; i < STEPS.length; i++) {
+          const btn = document.getElementById(`step-tab-${i}`);
+          if (btn) {
+            const labelEl = btn.querySelector(".tab-label");
+            if (labelEl) {
+              labelEl.innerText = isEnglish
+                ? STEPS[i].shortEn
+                : STEPS[i].shortZh;
+            }
+            if (i === idx) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          }
+        }
+      }
+
+      function applyLanguageUI() {
+        document.documentElement.lang = isEnglish ? "en" : "zh-CN";
+        document.getElementById("lang-indicator").innerText = isEnglish
+          ? "中"
+          : "EN";
+
+        document.getElementById("header-subtitle").innerText = isEnglish
+          ? "3D Gate-All-Around Transistor Fabrication Digital Twin (2nm/3nm Nanosheet Process)"
+          : "全环绕栅极晶体管工业制造演进模型 (2nm/3nm Nanosheet 工艺)";
+        document.getElementById("nav-cleanroom").innerText = isEnglish
+          ? "Cleanroom Twin"
+          : "洁净室数字孪生";
+        document.getElementById("nav-vision").innerText = isEnglish
+          ? "Vision"
+          : "愿景";
+        document.getElementById("btn-reset-cam-label").innerText = isEnglish
+          ? "Reset View"
+          : "复位视角";
+
+        document.getElementById("lbl-cam-presets").innerText = isEnglish
+          ? "Camera Views"
+          : "机位视角 (Camera)";
+        document.getElementById("lbl-display-modes").innerText = isEnglish
+          ? "Display Modes"
+          : "显示模式 (Display)";
+        document.getElementById("opt-xray").innerText = isEnglish
+          ? "X-Ray Translucent"
+          : "X-Ray 透视";
+        document.getElementById("opt-cutaway").innerText = isEnglish
+          ? "Cross-Section Cut"
+          : "中轴切面剖切";
+        document.getElementById("opt-grid").innerText = isEnglish
+          ? "Nanometer Grid"
+          : "纳米标尺基面";
+        document.getElementById("opt-power").innerText = isEnglish
+          ? "Electron Conduction"
+          : "导电电子流";
+        document.getElementById("opt-explode").innerText = isEnglish
+          ? "Exploded View"
+          : "层叠爆炸解构";
+        document.getElementById("hint-mouse").innerText = isEnglish
+          ? "Left: Rotate · Right: Pan · Scroll: Zoom · Hover: Inspect"
+          : "左键旋转 · 右键平移 · 滚轮缩放 · 悬停测绘";
+
+        document.getElementById("lbl-equipment").innerText = isEnglish
+          ? "Tool Equipment"
+          : "制造机台 (Tool)";
+        document.getElementById("lbl-material").innerText = isEnglish
+          ? "Material & Specs"
+          : "材料与结构 (Material)";
+        document.getElementById("lbl-purpose-title").innerText = isEnglish
+          ? "Engineering Purpose & Mechanism"
+          : "工艺核心目的与机理";
+        document.getElementById("lbl-prev-btn").innerText = isEnglish
+          ? "Prev Step"
+          : "上一步";
+        document.getElementById("lbl-next-btn").innerText = isEnglish
+          ? "Next Step"
+          : "下一步";
+
+        const autoplayLabel = document.getElementById("autoplay-label");
+        if (autoplayLabel) {
+          autoplayLabel.innerText = isAutoPlaying
+            ? isEnglish
+              ? "Pause"
+              : "暂停演示"
+            : isEnglish
+              ? "Play"
+              : "播放工序";
+        }
+
+        // Update links to FinFET 3D, DRAM 3D & NAND 3D to keep current language
+        const finfetLink = document.querySelector('a[href*="finfet.html"]');
+        if (finfetLink) {
+          finfetLink.href = isEnglish
+            ? "finfet.html?lang=en"
+            : "finfet.html?lang=zh";
+        }
+        const dramLink = document.querySelector('a[href*="dram.html"]');
+        if (dramLink) {
+          dramLink.href = isEnglish ? "dram.html?lang=en" : "dram.html?lang=zh";
+        }
+        const nandLink = document.querySelector('a[href*="nand.html"]');
+        if (nandLink) {
+          nandLink.href = isEnglish ? "nand.html?lang=en" : "nand.html?lang=zh";
+        }
+
+        updateInspectorUI(currentStepIndex);
+        renderMaterialLegend();
+        dimensionSprites.forEach((s) => {
+          if (s.userData && s.userData.redraw) {
+            s.userData.redraw(isEnglish);
+            s.userData.texture.needsUpdate = true;
+          }
+        });
+        const lblLegend = document.getElementById("lbl-mat-legend");
+        if (lblLegend)
+          lblLegend.innerText = isEnglish
+            ? "Material & Color Legend"
+            : "材料与色标图例";
+        const lblHint = document.getElementById("lbl-legend-hint");
+        if (lblHint)
+          lblHint.innerText = isEnglish ? "Click to highlight" : "点击高亮";
+        const optDim = document.getElementById("opt-dimensions");
+        if (optDim)
+          optDim.innerText = isEnglish
+            ? "Physical Dimensions (5nm/8nm)"
+            : "纳米尺寸标尺 (5nm/8nm)";
+      }
+
+      function toggleLanguage() {
+        isEnglish = !isEnglish;
+        localStorage.setItem("semiconfab_lang", isEnglish ? "en" : "zh-CN");
+        applyLanguageUI();
+      }
+
+      // --- 11. RAYCASTING & HOVER INSPECTOR TOOLTIP ---
+      function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        const validHit = intersects.find(
+          (hit) =>
+            hit.object.userData &&
+            hit.object.userData.nameZh &&
+            hit.object.visible,
+        );
+
+        const tooltip = document.getElementById("part-tooltip");
+
+        if (validHit) {
+          const obj = validHit.object;
+          tooltip.style.left = `${event.clientX}px`;
+          tooltip.style.top = `${event.clientY}px`;
+          tooltip.classList.remove("hidden");
+
+          document.getElementById("tooltip-title").innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+          <span>${isEnglish ? obj.userData.nameEn : obj.userData.nameZh}</span>
+        `;
+          document.getElementById("tooltip-desc").innerText = isEnglish
+            ? obj.userData.specEn || obj.userData.nameEn
+            : obj.userData.specZh || obj.userData.nameZh;
+
+          if (hoveredMesh !== obj) {
+            if (
+              hoveredMesh &&
+              hoveredMesh.material &&
+              hoveredMesh.material.emissive
+            ) {
+              hoveredMesh.material.emissiveIntensity =
+                hoveredMesh.userData.origEmissive || 0;
+            }
+            hoveredMesh = obj;
+            if (hoveredMesh.material && hoveredMesh.material.emissive) {
+              hoveredMesh.userData.origEmissive =
+                hoveredMesh.material.emissiveIntensity;
+              hoveredMesh.material.emissive.setHex(0x94a3b8);
+              hoveredMesh.material.emissiveIntensity = 0.15;
+            }
+          }
+        } else {
+          tooltip.classList.add("hidden");
+          if (
+            hoveredMesh &&
+            hoveredMesh.material &&
+            hoveredMesh.material.emissive
+          ) {
+            hoveredMesh.material.emissiveIntensity =
+              hoveredMesh.userData.origEmissive || 0;
+            hoveredMesh = null;
+          }
+        }
+      }
+
+      function onWindowResize() {
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      // --- COLOR & MATERIAL METADATA (GAA 纳米片材料色标图例) ---
+      const DEVICE_MATERIALS_META = [
+        {
+          id: "siliconSubstrate",
+          nameZh: "单晶硅衬底",
+          nameEn: "Si Substrate",
+          color: "#334155",
+          formula: "Si",
+          descZh: "基础单晶硅底座",
+          descEn: "Base single-crystal silicon",
+        },
+        {
+          id: "siNanosheet",
+          nameZh: "单晶硅纳米片沟道",
+          nameEn: "Si Nanosheet Channel",
+          color: "#475569",
+          formula: "Si",
+          descZh: "厚度 5nm 导电片 (3层垂直堆叠)",
+          descEn: "5nm thick channel sheets (3-tier)",
+        },
+        {
+          id: "sigeSacrificial",
+          nameZh: "硅锗牺牲释放层",
+          nameEn: "SiGe Sacrificial",
+          color: "#6366f1",
+          formula: "SiGe",
+          descZh: "厚度 8nm · 掏空形成全环空腔",
+          descEn: "8nm sacrificial layer for sheet release",
+        },
+        {
+          id: "hardMask",
+          nameZh: "氮化硅硬掩模",
+          nameEn: "Si3N4 Hard Mask",
+          color: "#10b981",
+          formula: "Si₃N₄",
+          descZh: "EUV 微影成形掩模帽",
+          descEn: "EUV lithography hardmask cap",
+        },
+        {
+          id: "stiOxide",
+          nameZh: "浅沟槽隔离氧化硅",
+          nameEn: "STI SiO2 Oxide",
+          color: "#38bdf8",
+          formula: "SiO₂",
+          descZh: "绝缘隔离浅槽填充",
+          descEn: "Shallow trench isolation",
+        },
+        {
+          id: "dummyPolyGate",
+          nameZh: "多晶硅假栅",
+          nameEn: "Dummy Poly Gate",
+          color: "#d97706",
+          formula: "Poly-Si",
+          descZh: "RMG 占位栅极 · 栅长 12nm",
+          descEn: "Sacrificial dummy gate placeholder",
+        },
+        {
+          id: "outerSpacer",
+          nameZh: "自对准外侧墙",
+          nameEn: "Outer Dielectric Spacer",
+          color: "#059669",
+          formula: "Si₃N₄",
+          descZh: "低k电介质外侧墙",
+          descEn: "Low-k outer dielectric spacer",
+        },
+        {
+          id: "innerSpacer",
+          nameZh: "自对准内侧墙",
+          nameEn: "Inner Spacer",
+          color: "#0d9488",
+          formula: "Si3N4/SiCO",
+          descZh: "GAA 特色极薄内侧墙 · 隔离源漏与栅",
+          descEn: "GAA signature inner spacer",
+        },
+        {
+          id: "strainedEpi",
+          nameZh: "应变源漏外延",
+          nameEn: "Strained S/D Epi",
+          color: "#a855f7",
+          formula: "Si:P / SiGe",
+          descZh: "自对准选择性应变外延",
+          descEn: "Selective strained S/D epitaxy",
+        },
+        {
+          id: "ild0Oxide",
+          nameZh: "层间绝缘氧化硅",
+          nameEn: "ILD0 Oxide",
+          color: "#60a5fa",
+          formula: "SiO₂",
+          descZh: "预金属化层间介质",
+          descEn: "Pre-metal dielectric gap fill",
+        },
+        {
+          id: "highK360",
+          nameZh: "360°全环绕高k介质",
+          nameEn: "360° All-Around High-k",
+          color: "#facc15",
+          formula: "HfO₂",
+          descZh: "ALD 沉积 1.4nm 超薄绝缘膜",
+          descEn: "ALD 1.4nm gate dielectric (κ=25)",
+        },
+        {
+          id: "metalGateCore",
+          nameZh: "全环绕金属栅极",
+          nameEn: "Gate-All-Around Metal",
+          color: "#e2e8f0",
+          formula: "W / TiN",
+          descZh: "360度包裹所有纳米片的金属主栅",
+          descEn: "360° surrounding gate fill & WF metals",
+        },
+        {
+          id: "contactPlug",
+          nameZh: "金属接触插塞",
+          nameEn: "Tungsten Contact Plug",
+          color: "#38bdf8",
+          formula: "W",
+          descZh: "中段接触导电通道",
+          descEn: "MOL contact plugs",
+        },
+        {
+          id: "copperM1",
+          nameZh: "顶层铜互连导线",
+          nameEn: "Copper M1 Routing",
+          color: "#f97316",
+          formula: "Cu",
+          descZh: "双大马士革铜金属化",
+          descEn: "Dual-damascene Cu interconnect",
+        },
+      ];
+
+      function renderMaterialLegend() {
+        const container = document.getElementById("material-legend-container");
+        if (!container) return;
+        container.innerHTML = "";
+
+        DEVICE_MATERIALS_META.forEach((mat) => {
+          const item = document.createElement("div");
+          item.className =
+            "flex items-center gap-1.5 p-1 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-purple-500/50 cursor-pointer transition text-[10px] select-none";
+          item.title = isEnglish
+            ? `${mat.nameEn} (${mat.formula}) - ${mat.descEn}`
+            : `${mat.nameZh} (${mat.formula}) - ${mat.descZh}`;
+          item.onclick = () => highlightMaterialInScene(mat.id);
+
+          item.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm" style="background-color: ${mat.color}; border: 1px solid rgba(255,255,255,0.25)"></span>
+          <div class="truncate flex items-center gap-1">
+            <span class="font-mono text-purple-300 font-semibold">${mat.formula}</span>
+            <span class="text-slate-400 text-[9px] truncate">${isEnglish ? mat.nameEn : mat.nameZh}</span>
+          </div>
+        `;
+          container.appendChild(item);
+        });
+      }
+
+      function highlightMaterialInScene(matId) {
+        const targetMat = materials[matId];
+        if (!targetMat) return;
+
+        scene.traverse((child) => {
+          if (child.isMesh && child.material === targetMat) {
+            const origHex = child.material.emissive
+              ? child.material.emissive.getHex()
+              : 0;
+            if (child.material.emissive) {
+              child.material.emissive.setHex(0xa855f7);
+              child.material.emissiveIntensity = 0.8;
+              setTimeout(() => {
+                child.material.emissive.setHex(origHex);
+                child.material.emissiveIntensity = 0.2;
+              }, 1200);
+            }
+          }
+        });
+      }
+
+      // --- 3D CALIBRATED DIMENSION ANNOTATIONS (GAA 尺寸标注) ---
+      let dimensionsGroup = null;
+      let dimensionSprites = [];
+
+      function createBillboardDimensionBadge(
+        textZh,
+        textEn,
+        position,
+        scaleX = 26,
+        scaleY = 6.5,
+      ) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 128;
+        const ctx = canvas.getContext("2d");
+
+        function redraw(isEn) {
+          ctx.clearRect(0, 0, 512, 128);
+          ctx.fillStyle = "rgba(15, 23, 42, 0.92)";
+          ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
+          ctx.lineWidth = 4;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(8, 8, 496, 112, 24);
+            ctx.fill();
+            ctx.stroke();
+          } else {
+            ctx.fillRect(8, 8, 496, 112);
+            ctx.strokeRect(8, 8, 496, 112);
+          }
+
+          ctx.fillStyle = "#94a3b8";
+          ctx.beginPath();
+          ctx.arc(36, 64, 12, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font =
+            'bold 36px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.textBaseline = "middle";
+          ctx.fillText(isEn ? textEn : textZh, 60, 64);
+        }
+
+        redraw(isEnglish);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.minFilter = THREE.LinearFilter;
+        const spriteMat = new THREE.SpriteMaterial({
+          map: texture,
+          depthTest: false,
+          transparent: true,
+        });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.position.copy(position);
+        sprite.scale.set(scaleX, scaleY, 1);
+        sprite.userData = { isDimensionLabel: true, redraw, texture };
+        dimensionSprites.push(sprite);
+        return sprite;
+      }
+
+      function createDimensionLine(
+        p1,
+        p2,
+        color = 0xa855f7,
+        tickLen = 3,
+        tickAxis = "y",
+      ) {
+        const pts = [p1, p2];
+        const off = new THREE.Vector3();
+        off[tickAxis] = tickLen;
+
+        pts.push(
+          p1.clone().add(off),
+          p1.clone().sub(off),
+          p2.clone().add(off),
+          p2.clone().sub(off),
+        );
+
+        const geom = new THREE.BufferGeometry().setFromPoints(pts);
+        const mat = new THREE.LineBasicMaterial({
+          color: color,
+          depthTest: false,
+          transparent: true,
+          opacity: 0.85,
+        });
+        return new THREE.LineSegments(geom, mat);
+      }
+
+      function buildDimensionsHierarchy() {
+        dimensionsGroup = new THREE.Group();
+        dimensionSprites = [];
+
+        // 1. 纳米片厚度 5nm (最顶层片厚度, y = 47.5 到 52.5)
+        const pTBot = new THREE.Vector3(-35, 47.5, 30);
+        const pTTop = new THREE.Vector3(-35, 52.5, 30);
+        const tLine = createDimensionLine(pTBot, pTTop, 0xa855f7, 2, "x");
+        const tBadge = createBillboardDimensionBadge(
+          "纳米片厚度: 5 nm",
+          "Nanosheet Thick: 5 nm",
+          new THREE.Vector3(-52, 50, 30),
+          28,
+          6,
+        );
+        tLine.name = "dim_ns_thick";
+        tBadge.name = "dim_ns_thick_badge";
+        dimensionsGroup.add(tLine, tBadge);
+
+        // 2. 纳米片宽度 40nm (纳米片横向宽, x = -20 到 20, y = 56, z = 30)
+        const pWLeft = new THREE.Vector3(-20, 56, 30);
+        const pWRight = new THREE.Vector3(20, 56, 30);
+        const wLine = createDimensionLine(pWLeft, pWRight, 0x38bdf8, 3, "y");
+        const wBadge = createBillboardDimensionBadge(
+          "纳米片宽度: 40 nm",
+          "Nanosheet Width: 40 nm",
+          new THREE.Vector3(0, 62, 30),
+          28,
+          6,
+        );
+        wLine.name = "dim_ns_width";
+        wBadge.name = "dim_ns_width_badge";
+        dimensionsGroup.add(wLine, wBadge);
+
+        // 3. 垂直间距 8nm (SiGe 释放层厚度, y = 39.5 到 47.5)
+        const pGapBot = new THREE.Vector3(26, 39.5, 30);
+        const pGapTop = new THREE.Vector3(26, 47.5, 30);
+        const gapLine = createDimensionLine(pGapBot, pGapTop, 0x10b981, 2, "x");
+        const gapBadge = createBillboardDimensionBadge(
+          "层间间隙: 8 nm (SiGe释放)",
+          "Vertical Gap: 8 nm",
+          new THREE.Vector3(46, 43.5, 30),
+          32,
+          6.2,
+        );
+        gapLine.name = "dim_ns_gap";
+        gapBadge.name = "dim_ns_gap_badge";
+        dimensionsGroup.add(gapLine, gapBadge);
+
+        // 4. 栅长 12nm (沿 Z 轴, z = -10 到 10, x = 32, y = 54)
+        const pGFront = new THREE.Vector3(32, 54, -10);
+        const pGBack = new THREE.Vector3(32, 54, 10);
+        const gLine = createDimensionLine(pGFront, pGBack, 0xf59e0b, 3, "x");
+        const gBadge = createBillboardDimensionBadge(
+          "Gate 栅长: 12 nm",
+          "Gate Length: 12 nm",
+          new THREE.Vector3(46, 59, 0),
+          24,
+          5.6,
+        );
+        gLine.name = "dim_gate_len";
+        gBadge.name = "dim_gate_len_badge";
+        dimensionsGroup.add(gLine, gBadge);
+
+        scene.add(dimensionsGroup);
+      }
+
+      function updateDimensionsVisibility(step) {
+        if (!dimensionsGroup) return;
+        const isDimChecked =
+          document.getElementById("check-dimensions")?.checked ?? true;
+        if (!isDimChecked) {
+          dimensionsGroup.visible = false;
+          return;
+        }
+        dimensionsGroup.visible = true;
+
+        const tL = dimensionsGroup.getObjectByName("dim_ns_thick");
+        const tB = dimensionsGroup.getObjectByName("dim_ns_thick_badge");
+        const wL = dimensionsGroup.getObjectByName("dim_ns_width");
+        const wB = dimensionsGroup.getObjectByName("dim_ns_width_badge");
+        const gapL = dimensionsGroup.getObjectByName("dim_ns_gap");
+        const gapB = dimensionsGroup.getObjectByName("dim_ns_gap_badge");
+        const gL = dimensionsGroup.getObjectByName("dim_gate_len");
+        const gB = dimensionsGroup.getObjectByName("dim_gate_len_badge");
+
+        const nsVisible = step >= 1;
+        if (tL) tL.visible = nsVisible;
+        if (tB) tB.visible = nsVisible;
+        if (wL) wL.visible = nsVisible;
+        if (wB) wB.visible = nsVisible;
+        if (gapL) gapL.visible = nsVisible;
+        if (gapB) gapB.visible = nsVisible;
+
+        const gateVisible = step >= 4;
+        if (gL) gL.visible = gateVisible;
+        if (gB) gB.visible = gateVisible;
+      }
+
+      function toggleDimensions(visible) {
+        if (dimensionsGroup) dimensionsGroup.visible = visible;
+        const sb = document.getElementById("viewport-scale-bar");
+        if (sb) sb.style.display = visible ? "flex" : "none";
+      }
+
+      // --- 12. ANIMATION LOOP ---
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        updateElectrons();
+        renderer.render(scene, camera);
+      }
+
+      // Bootstrap
+      function bootstrapApp() {
+        if (window.THREE && window.THREE.OrbitControls) {
+          initThree();
+          applyLanguageUI();
+          if (window.lucide) lucide.createIcons();
+        } else {
+          window.__onThreeLoaded = () => {
+            initThree();
+            applyLanguageUI();
+            if (window.lucide) lucide.createIcons();
+          };
+        }
+      }
+      window.addEventListener("DOMContentLoaded", bootstrapApp);
+    </script>
+    <!-- Accessible & Machine-Readable Knowledge Base for AI Engines (GEO) & Search Crawlers -->
+    <article
+      id="seo-crawlable-content"
+      class="sr-only"
+      aria-label="GAAFET 3D Nanosheet Transistor Fabrication Engineering Documentation"
+    >
+      <h1>
+        GAAFET 3D Nanosheet Transistor Fabrication Process: 10-Step 3nm/2nm
+        Industrial Engineering Breakdown
+      </h1>
+      <p>
+        This interactive digital twin details the complete industrial
+        fabrication sequence of next-generation 3nm / 2nm Gate-All-Around
+        Nanosheet (MBCFET / RibbonFET) transistors using Si/SiGe superlattice
+        epitaxy and 360-degree all-around high-k metal gate wrapping.
+      </p>
+
+      <h2>10-Step GAAFET Nanosheet Semiconductor Fabrication Sequence</h2>
+      <ol>
+        <li>
+          <h3>Step 1: Silicon Substrate & Well Implantation (P/N-Well)</h3>
+          <p>
+            Single-crystal 300mm silicon substrate preparation and retrograde
+            well implantation providing the bulk silicon base for advanced
+            sub-3nm nanosheet CMOS architectures.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High-Energy Ion Implanter.
+            <strong>Materials:</strong> P-Type Si Substrate, Boron (p-well) /
+            Phosphorus (n-well) dopants.
+          </p>
+        </li>
+        <li>
+          <h3>Step 2: Si/SiGe Alternating Superlattice Epitaxy</h3>
+          <p>
+            Atomic-precision chemical vapor epitaxy growing alternating layers
+            of single-crystal silicon channels (~5nm) and sacrificial Si0.7Ge0.3
+            layers (~5nm) with atomic-level interface abruptness.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Ultra-High Vacuum CVD (UHVCVD) Epitaxy
+            Reactor (Applied Materials Centura Epi / ASM Intrepid).
+            <strong>Materials:</strong> Pure Silicon (Si) + Silicon-Germanium
+            (Si0.7Ge0.3, 30% Ge).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 3: EUV Fin Pitch Splitting & Superlattice Anisotropic Dry Etch
+          </h3>
+          <p>
+            Extreme Ultraviolet (0.33 NA EUV) lithography defining dense
+            nanosheet fin pitches, followed by anisotropic plasma dry etching
+            through all Si/SiGe layers with vertical sidewall angles (>89°).
+          </p>
+          <p>
+            <strong>Equipment:</strong> EUV Lithography Scanner (ASML Twinscan
+            EXE/NXE) + High-Density Conductor RIE (Lam Research Kiyo / TEL
+            Tactras). <strong>Materials:</strong> Si/SiGe Multi-Layer
+            Superlattice Fin Pillars.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 4: Shallow Trench Isolation (STI) Oxide Fill, CMP & Recess
+          </h3>
+          <p>
+            Flowable CVD oxide trench filling, CMP planarization, and selective
+            oxide recess exposing the multi-layer nanosheet fin active stack.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Flowable CVD (AMAT Producer) + CMP
+            Polisher + Wet Recess Station. <strong>Materials:</strong> SiO2 STI
+            Dielectric Oxide.
+          </p>
+        </li>
+        <li>
+          <h3>Step 5: Dummy Poly-Si Gate Patterning & SiN Top Hardmask</h3>
+          <p>
+            EUV patterning of sacrificial polysilicon dummy gate spanning
+            orthogonally over the superlattice fin pillars, establishing the
+            channel gate length.
+          </p>
+          <p>
+            <strong>Equipment:</strong> EUV Scanner + Dry Plasma Poly Etcher.
+            <strong>Materials:</strong> Polysilicon (~65nm) + Si3N4 Hardmask
+            (~25nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 6: Selective SiGe Lateral Cavity Recess & Inner Spacer
+            Formation
+          </h3>
+          <p>
+            Isotropic gas-phase chemical etch selectively pulling back SiGe by
+            ~5nm, followed by conformal ALD of low-k SiBCN/SiOCN inner spacers
+            to minimize parasitic gate-to-drain capacitance.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Atomic-Precision Gas-Phase Dry Chemical
+            Etcher + ALD System (TEL Certas / AMAT Producer).
+            <strong>Materials:</strong> Low-k Dielectric Inner Spacers
+            (SiBCN/SiOCN, k &lt; 4.2).
+          </p>
+        </li>
+        <li>
+          <h3>Step 7: Source/Drain Selective Epitaxy & Dopant Activation</h3>
+          <p>
+            In-situ doped selective epitaxy growing faceted Si:P (nFET) or
+            SiGe:B (pFET) touching all stacked nanosheet channel ends
+            simultaneously, drastically reducing contact resistance.
+          </p>
+          <p>
+            <strong>Equipment:</strong> UHVCVD Epitaxy Cluster (AMAT Epi / ASM).
+            <strong>Materials:</strong> Heavily Doped Si:P (nFET, 3e21 cm⁻³) /
+            SiGe:B (pFET, 50% Ge).
+          </p>
+        </li>
+        <li>
+          <h3>Step 8: ILD0 Oxide Gap Fill & CMP Gate Uncovering</h3>
+          <p>
+            Depositing interlayer dielectric oxide (ILD0) and chemical
+            mechanical polishing down to uncover the dummy polysilicon gate top
+            surface.
+          </p>
+          <p>
+            <strong>Equipment:</strong> PECVD System + Advanced CMP System (AMAT
+            Reflexion LK). <strong>Materials:</strong> Low-k SiO2 Interlayer
+            Dielectric.
+          </p>
+        </li>
+        <li>
+          <h3>Step 9: Dummy Gate Strip & Sacrificial SiGe Nanosheet Release</h3>
+          <p>
+            Wet strip of dummy gate, followed by highly selective chemical vapor
+            etching (selectivity > 150:1) removing all sacrificial SiGe layers
+            to release completely suspended silicon nanosheets.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Gas-Phase Selective Dry Etch System
+            (Tokyo Electron TEL Certas / Applied Materials Siconi).
+            <strong>Materials:</strong> Gas-phase vapor chemistry / Dilute H2O2
+            wet solution.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 10: 360-Degree All-Around HKMG Gate Metallization & Contact
+            Routing
+          </h3>
+          <p>
+            ALD coating sub-nanometer interfacial oxide, HfO2 high-k dielectric,
+            work-function metal stacks, and Tungsten gate fill completely
+            surrounding each nanosheet wire in 360 degrees.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High-k Metal Gate ALD Cluster (TEL Trias
+            / AMAT Olympia) + MOL Metallization.
+            <strong>Materials:</strong> Interfacial SiO2 (~0.8nm) + HfO2 High-k
+            (~1.4nm) + TiN/TaN Work-Function + W Fill.
+          </p>
+        </li>
+      </ol>
+
+      <h2>Frequently Asked Questions (FAQ) on GAAFET Nanosheet Fabrication</h2>
+      <dl>
+        <dt>Why does GAAFET replace FinFET at 3nm and 2nm?</dt>
+        <dd>
+          GAAFET surrounds the horizontal silicon nanosheet channels on all four
+          sides (360 degrees) with the gate, restoring full electrostatic gate
+          control, enabling higher drive currents per footprint, and supporting
+          variable nanosheet widths for power/performance optimization.
+        </dd>
+        <dt>
+          What is the critical role of Inner Spacers in GAAFET architecture?
+        </dt>
+        <dd>
+          Inner spacers are nanoscale dielectric plugs (SiOCN/SiBCN) formed
+          inside the lateral recesses left by sacrificial SiGe. They physically
+          and electrostatically isolate the replacement metal gate from the
+          heavily doped epitaxial source and drain, drastically reducing
+          parasitic gate capacitance (Cgd/Cgs) which is essential for
+          high-frequency switching.
+        </dd>
+        <dt>
+          How is nanosheet release achieved without damaging the silicon
+          channels?
+        </dt>
+        <dd>
+          Nanosheet release relies on highly selective isotropic etching (using
+          gas-phase vapor chemistry or hot chemical mixtures like H2O2/HF) that
+          dissolves Si0.7Ge0.3 with an etch selectivity exceeding 150:1 over
+          pure silicon, leaving the pristine 5nm-thin silicon nanosheets
+          suspended without stiction or thickness loss.
+        </dd>
+      </dl>
+    </article>
+  </body>
+</html>

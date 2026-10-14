@@ -1,0 +1,154 @@
+{
+  "by_category": {
+    "lithography": [
+      "022f1d26-9738-45d2-9a33-6c45dbbcc645",
+      "72a696ce-4859-417c-a256-151b8b8a102c",
+      "c3473afe-08c4-46cd-a5c8-6f672305937d",
+      "bd4d925d-d8b3-402a-99b8-ffdaf56ef504",
+      "c1bfa44c-32fe-4ec3-8985-86408777ca84",
+      "e19f350d-b3ce-46a3-a6ce-e3150e4dc412",
+      "7743eeeb-02ff-4a9d-856c-090171784389",
+      "28b4f15d-d8ae-4484-b143-dbb701fa5499",
+      "65516385-77d1-4c9a-874c-72e109623bf2",
+      "5717e2ed-8b3f-422f-813b-7c4881cc2b47",
+      "68ce56dd-56d8-4261-9373-b6c62a1a4934",
+      "d188133d-161d-476a-8e0c-33ad03eb54f4",
+      "aac589b2-a1b5-4234-a8a1-681ee72b15fe",
+      "539733e8-0d7b-449a-909b-b7b0ddc76f63",
+      "c37a4263-16ae-4ce5-a0fd-79d916f61e84",
+      "96f40da5-4f9c-4d78-8efe-12b36c11ee12"
+    ],
+    "cmp": [
+      "bf793e3f-98bd-4a12-8db8-ab5581a30ab8",
+      "e0fcf669-29f2-491c-96fb-436133f5c1bd",
+      "4c645f32-09a9-4ec4-87ac-ab0a0b53f25e",
+      "2ac4ca1b-094d-4e70-a4df-63fb1fef4aa5",
+      "b2e1bfd8-0792-412b-bc72-9e8ac4346e4b",
+      "f56e270c-4479-465b-8f67-c1f7308cb28d",
+      "97ac1a79-ec82-4e38-a9fd-ce77d14d22ce",
+      "3dd3b1cf-8926-44a5-a76e-58e7a510e04a",
+      "f7e2067a-5fb0-40e1-ab13-bbf1d4ddedc0"
+    ],
+    "packaging": [
+      "4d178240-4a17-462d-9956-e1f58e45211e",
+      "7c411088-dc08-412a-a0ec-89ff4819bc3d",
+      "8912404d-1937-4c3f-b9c4-e8a0d49f44cf",
+      "61c4153f-f806-4eaf-a6e1-474e6cb3893a",
+      "48f57545-b478-490f-a021-ec2db2023205",
+      "50c7982c-0707-4ed1-b70a-71f54fada066",
+      "456e8047-c2ac-4696-a84c-ac8332567bbb",
+      "05314151-b40c-4816-a681-e51e0881286a",
+      "1d9e3dc4-78de-40e5-b7f5-d07104b8cce7",
+      "bfcf6d97-628c-42f0-97d1-a7fa1529cf0a",
+      "aaa09534-6d84-4126-b500-537e7a208f6b",
+      "ee2461a9-bf74-48eb-829a-f4bbdc96f11c"
+    ],
+    "ion_implantation": [
+      "3aa3eeab-a670-4c9a-9955-20b878ecda93",
+      "24e24194-42ff-4e0b-b9ee-58d654396d80",
+      "51bb9adf-efb3-4cb4-b061-0db04b149362",
+      "feb26aea-38bf-4d5b-96bc-447440f1e508",
+      "4207dc90-39b7-4d30-a7bd-fe60b1ae3c5a",
+      "98b7f0b0-d629-4683-814f-f213b405e392",
+      "6b81b8c2-18ae-44f8-b443-23e35cc54112",
+      "57304ceb-3060-4337-973f-14e1d46a4866",
+      "be1d5b74-5a53-46d5-9dd7-fcfe41be1c85",
+      "33c5f420-5991-4979-bcdf-b6dca74dc113"
+    ],
+    "dry_etch": [
+      "c023cab6-8aea-45ef-9c22-a4a04fec4ff8",
+      "08fa539c-99af-4ea4-b925-8f8dc302784f",
+      "cecf6e2a-d3c8-49f2-88a5-a40022bf97bc",
+      "debc8dd8-9d16-465e-9743-ceff620d59b4",
+      "04414ac5-0d7f-4722-8397-ecf9f31549b7",
+      "76cb067a-f330-432a-816a-dd371c64cbc4",
+      "d1294fff-4960-4d98-8786-bfdf4ee5cc8d",
+      "b0f6d513-4783-4093-be3a-5a1347536816",
+      "0b8893cd-7fa7-447e-a265-f020167ede29",
+      "879e6a81-948c-49ff-a0b3-e40e4e326630",
+      "ed73be38-243e-4492-b8cf-e0e470a70315",
+      "6e6d2c65-59d1-4ba5-8124-1b005e859e37",
+      "06427346-01c6-4b73-9bd4-fbe20106d430",
+      "8e6c2ce9-7afa-4bf4-adb7-ca0c1f825104",
+      "b43079c2-0f64-4323-aab2-3f2658d6e763"
+    ],
+    "thin_film_deposition": [
+      "d3a0d8d2-04e3-4c55-8440-13021509246c",
+      "7f907090-34b3-4c03-ab9b-595d9e7b95c0",
+      "39485d63-6466-4262-bfef-89845cf2cde4",
+      "1b79d858-e452-404c-b733-ecf7619f28ec",
+      "826538ce-0348-4e99-8033-c77bf4ad8a26",
+      "68a6c38e-7ed8-4816-a00e-ba6e1e9f14f3",
+      "c64a5f1e-72d8-425b-ba54-3fbcde8359c8",
+      "37711882-a79e-48c8-9af8-79397dc2703a",
+      "d850dfca-9afb-425e-9d04-fca4bc15e109",
+      "aa10f79a-08b0-469a-b93a-8c570c489027",
+      "2e3ce4ba-50db-4dec-b114-b526967bd086",
+      "d6659c73-dc96-4dc1-8cf4-8a2c47a78434"
+    ],
+    "metrology": [
+      "dfb6dc36-848a-4c99-97d0-8404dbaca469",
+      "b3ce6f4a-38f8-404e-aee5-f49c075b0ce2",
+      "37d77056-0d9f-4648-bc3c-559315d2a8dd",
+      "c3ef7680-ec3c-4e70-855e-1286767581ea",
+      "faaa4a3c-bc30-49df-a752-c42cd8c3aed6",
+      "f5ecac1c-e329-4aed-855f-9bdb76ce467f",
+      "8822e423-b55e-4da9-b86a-d01f6b72ffe7",
+      "9112c45c-20bb-43fe-88fe-adb1f1fb789f",
+      "61048a5a-e242-4096-b283-00502af08651",
+      "e89f3ec5-4d31-48ad-9193-d333e48ea5b6",
+      "52c49860-8d71-4e0d-b10e-1fb16dac1592",
+      "b0c9c757-4dbc-43d7-a055-90bbad48a6cc",
+      "ed3603cf-6c00-4c9a-aabb-dfb035e3e198",
+      "ecf6fec1-c07f-464a-9174-e76e84eee5e7"
+    ],
+    "wet_clean": [
+      "95909c34-8dfb-4288-8321-8eef569779c2",
+      "81dba549-fce6-4114-addd-c79e6d5bc73d",
+      "b8875bfd-98c6-499c-b939-c7047aa6e1c2",
+      "8e28e4eb-1ee1-4ce7-95c9-49bcd0f0e00b",
+      "15b9c5d9-aec6-47ae-914a-a6f765ec2ecc",
+      "d3cdda6a-e886-458c-a257-f1be6ca44b5a",
+      "f0c082d1-3da4-4ddf-b336-8877fe30390a",
+      "9bd134e1-d086-47a9-943d-0dc8f64450fb",
+      "3b763536-5cd4-40ec-93bf-41776172cb79"
+    ],
+    "thermal_processing": [
+      "fcefaf58-353f-4e03-87c9-6c5bb34eefe8",
+      "4830bc3d-4588-46b0-8cff-1d4f457ff307",
+      "5d84b0f7-845e-491f-bb0e-8f7c1ebef672",
+      "f52f536c-60c2-4e3d-973d-6637c98a218c",
+      "c4d736f8-6555-421f-abac-b28011b3cdb9",
+      "79c5c1c1-853d-49cd-bab3-578032580e91",
+      "700c1b42-a24a-45c9-be38-3d79f989da71",
+      "6df71004-55e1-40ca-9973-bbb6dee40cc8",
+      "f0b869d4-7ff8-4fff-b06f-2a2b6100056f"
+    ],
+    "test": [
+      "8dd92d8b-1672-4ce4-8726-b977a006e56d",
+      "012b9059-937e-4b1d-a6f4-8bce54a3a81d",
+      "3330890d-eefc-4195-9831-0b055a6ebe8b",
+      "1b24f9b5-e7d1-49bc-a180-fe79c5889a5d",
+      "4a73701d-28d4-4e43-9cec-d287b442c90b",
+      "2e29d716-fad5-458d-81b4-d7a738422cd8",
+      "04dc5703-05dc-4187-8170-d8de844590aa",
+      "7ad831a3-1579-46f8-8f76-ae29b14f5f9d",
+      "fc7683d2-378f-4c5f-b4ea-a5c5243d848b",
+      "a0e1d49b-eda3-47dc-85e6-ffb535d3ab64"
+    ],
+    "resist_track": [
+      "4019337c-50d3-4d36-a73f-2d68ea5732d9",
+      "4abd7a15-23e0-429d-94b4-01e0eafc705b"
+    ],
+    "inspection": [
+      "e05da5b9-176b-40a0-928b-079c88cbc104",
+      "a1e5d4f1-3a23-48d9-a877-a521b3471d67"
+    ],
+    "other": ["a79171ce-2e2a-41a7-9ce9-b5687260ae6c"]
+  },
+  "counts": {
+    "total": 121,
+    "l1": 7,
+    "draft": 114
+  }
+}

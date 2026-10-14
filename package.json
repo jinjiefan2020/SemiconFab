@@ -1,0 +1,16 @@
+{
+  "name": "semiconfab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SemiconFab — source-available 300mm semiconductor fab equipment catalog and digital twin simulation",
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "scripts": {
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --fix"
+  },
+  "devDependencies": {
+    "eslint": "^9.20.0",
+    "prettier": "^3.5.0"
+  }
+}

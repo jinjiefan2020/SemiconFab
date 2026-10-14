@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 650" width="800" height="650">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; fill: #475569; }
+      .layer-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 14px; font-weight: 700; fill: #1e293b; }
+      .layer-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #64748b; font-weight: 500; }
+      .layer-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; fill: #334155; }
+      .layer-fields { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; fill: #0284c7; font-family: monospace; }
+      .level-tag { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; }
+      .bracket-line { stroke: #94a3b8; stroke-width: 2; fill: none; }
+      .tier-pill { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 600; fill: #1e293b; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="8"/>
+  <rect x="1" y="1" width="798" height="648" fill="none" stroke="#e2e8f0" stroke-width="2" rx="8"/>
+
+  <!-- Header -->
+  <text x="40" y="38" class="title">SemiconFab Equipment Schema v1.0 — 7-Layer Architecture</text>
+  <text x="40" y="58" class="subtitle">半导体设备数据标准七层架构与合规分级 (L1 / L2 / L3 Conformance Levels)</text>
+
+  <!-- Left: Conformance Level Brackets -->
+  <!-- L1 Bracket: y=80 to y=230 -->
+  <path d="M 75 85 L 60 85 L 60 155 L 45 155 L 60 155 L 60 225 L 75 225" class="bracket-line" stroke="#0284c7"/>
+  <text x="40" y="150" class="level-tag" fill="#0284c7" text-anchor="end">L1: Listing</text>
+  <text x="40" y="166" class="level-tag" fill="#0284c7" text-anchor="end" font-size="9.5px">最低上架</text>
+
+  <!-- L2 Bracket: y=80 to y=310 -->
+  <path d="M 85 85 L 75 85 L 75 235 L 75 235 L 75 305 L 85 305" class="bracket-line" stroke="#0d9488"/>
+  <text x="40" y="270" class="level-tag" fill="#0d9488" text-anchor="end">L2: Planning</text>
+  <text x="40" y="286" class="level-tag" fill="#0d9488" text-anchor="end" font-size="9.5px">厂务规划</text>
+
+  <!-- L3 Bracket: y=80 to y=550 -->
+  <path d="M 95 85 L 85 85 L 85 390 L 85 390 L 85 545 L 95 545" class="bracket-line" stroke="#6366f1"/>
+  <text x="40" y="470" class="level-tag" fill="#6366f1" text-anchor="end">L3: Benchmark</text>
+  <text x="40" y="486" class="level-tag" fill="#6366f1" text-anchor="end" font-size="9.5px">基准级</text>
+
+  <!-- Layer 1: identity -->
+  <g transform="translate(105, 80)">
+    <rect width="665" height="68" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1.5"/>
+    <rect width="6" height="68" rx="3" fill="#0284c7"/>
+    <text x="20" y="24" class="layer-title">Layer 1: identity</text>
+    <text x="145" y="24" class="layer-sub">身份层 (Who the tool is)</text>
+    <text x="20" y="44" class="layer-desc">Tool identification, classification taxonomy, wafer dimension, node applicability, and commercial lifecycle.</text>
+    <text x="20" y="60" class="layer-fields">vendor · model · category · subcategory · wafer_sizes_mm · node_applicability · lifecycle_status</text>
+  </g>
+
+  <!-- Layer 2: physical -->
+  <g transform="translate(105, 156)">
+    <rect width="665" height="68" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1.5"/>
+    <rect width="6" height="68" rx="3" fill="#0284c7"/>
+    <text x="20" y="24" class="layer-title">Layer 2: physical</text>
+    <text x="145" y="24" class="layer-sub">物理层 (Size &amp; Form Factor — maps SEMI E72)</text>
+    <text x="20" y="44" class="layer-desc">Footprint envelope dimensions, installed mass, EFEM automation interface, and digital twin 3D model link.</text>
+    <text x="20" y="60" class="layer-fields">width_mm · depth_mm · height_mm · weight_kg · load_ports · efem_config · model_3d_url (LOD0-300)</text>
+  </g>
+
+  <!-- Layer 3: facilities -->
+  <g transform="translate(105, 232)">
+    <rect width="665" height="68" rx="6" fill="#ffffff" stroke="#99f6e4" stroke-width="1.5"/>
+    <rect width="6" height="68" rx="3" fill="#0d9488"/>
+    <text x="20" y="24" class="layer-title">Layer 3: facilities</text>
+    <text x="150" y="24" class="layer-sub">厂务层 (Utilities &amp; Hookup Requirements)</text>
+    <text x="20" y="44" class="layer-desc">Cleanroom power, heat dissipation, ultra-pure water, cooling water, clean dry air, process gases, and exhaust.</text>
+    <text x="20" y="60" class="layer-fields">power_kva · heat_load_kw · upw_lpm · pcw_kw · cda_nm3h · process_gases · exhaust · vacuum_req</text>
+  </g>
+
+  <!-- Layer 4: process_capability -->
+  <g transform="translate(105, 308)">
+    <rect width="665" height="68" rx="6" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <rect width="6" height="68" rx="3" fill="#6366f1"/>
+    <text x="20" y="24" class="layer-title">Layer 4: process_capability</text>
+    <text x="220" y="24" class="layer-sub">工艺能力层 (Processing Performance)</text>
+    <text x="20" y="44" class="layer-desc">Qualified manufacturing process modules, baseline wafer throughput speed, cross-wafer uniformity, and particle spec.</text>
+    <text x="20" y="60" class="layer-fields">capabilities[] · throughput_wph · uniformity_pct · particle_spec</text>
+  </g>
+
+  <!-- Layer 5: reliability -->
+  <g transform="translate(105, 384)">
+    <rect width="665" height="68" rx="6" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <rect width="6" height="68" rx="3" fill="#6366f1"/>
+    <text x="20" y="24" class="layer-title">Layer 5: reliability</text>
+    <text x="165" y="24" class="layer-sub">可靠性层 (RAM Metrics — maps SEMI E10)</text>
+    <text x="20" y="44" class="layer-desc">Mean Time Between Failures, Mean Time To Repair, inherent uptime availability percentage, and fab qualification status.</text>
+    <text x="20" y="60" class="layer-fields">mtbf_h · mttr_h · availability_pct · qualification_status</text>
+  </g>
+
+  <!-- Layer 6: commercial -->
+  <g transform="translate(105, 460)">
+    <rect width="665" height="68" rx="6" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <rect width="6" height="68" rx="3" fill="#6366f1"/>
+    <text x="20" y="24" class="layer-title">Layer 6: commercial</text>
+    <text x="175" y="24" class="layer-sub">商务层 (Market Presence &amp; Equivalents)</text>
+    <text x="20" y="44" class="layer-desc">Vendor direct contact, regional distribution eligibility, drop-in replacement tool mapping, and public datasheet URL.</text>
+    <text x="20" y="60" class="layer-fields">vendor_contact · regions_available[] · alternative_to[] · datasheet_url</text>
+  </g>
+
+  <!-- Layer 7: notes -->
+  <g transform="translate(105, 536)">
+    <rect width="665" height="42" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    <rect width="6" height="42" rx="3" fill="#94a3b8"/>
+    <text x="20" y="24" class="layer-title" font-size="13px">notes</text>
+    <text x="80" y="24" class="layer-sub">备注层 (Tribal Knowledge &amp; Engineering Footnotes)</text>
+    <text x="390" y="24" class="layer-desc" font-size="11px">Free-text remarks, historical quirks, and unmodeled field context.</text>
+  </g>
+
+  <!-- Bottom: Provenance Tiers Strip -->
+  <g transform="translate(40, 595)">
+    <rect width="730" height="38" rx="6" fill="#f1f5f9" stroke="#cbd5e1" stroke-width="1"/>
+    <text x="15" y="23" font-family="-apple-system, sans-serif" font-size="11px" font-weight="700" fill="#334155">FieldValue Provenance Tiers 出处分级:</text>
+    
+    <!-- Tier 1 -->
+    <rect x="235" y="8" width="95" height="22" rx="4" fill="#dcfce7" stroke="#86efac"/>
+    <text x="282" y="23" class="tier-pill" fill="#15803d" text-anchor="middle">vendor_confirmed</text>
+
+    <!-- Tier 2 -->
+    <rect x="338" y="8" width="105" height="22" rx="4" fill="#e0f2fe" stroke="#7dd3fc"/>
+    <text x="390" y="23" class="tier-pill" fill="#0369a1" text-anchor="middle">independent_verified</text>
+
+    <!-- Tier 3 -->
+    <rect x="451" y="8" width="118" height="22" rx="4" fill="#fef9c3" stroke="#fde047"/>
+    <text x="510" y="23" class="tier-pill" fill="#a16207" text-anchor="middle">community_corroborated</text>
+
+    <!-- Tier 4 -->
+    <rect x="577" y="8" width="60" height="22" rx="4" fill="#ffedd5" stroke="#fed7aa"/>
+    <text x="607" y="23" class="tier-pill" fill="#c2410c" text-anchor="middle">inferred</text>
+
+    <!-- Tier 5 -->
+    <rect x="645" y="8" width="65" height="22" rx="4" fill="#f1f5f9" stroke="#cbd5e1"/>
+    <text x="677" y="23" class="tier-pill" fill="#64748b" text-anchor="middle">synthetic</text>
+  </g>
+</svg>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 680" width="100%" height="auto">
+  <defs>
+    <!-- Arrow marker -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#475569" />
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#d97706" />
+    </marker>
+    <marker id="arrow-emerald" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#059669" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="680" fill="#f8fafc" rx="12" />
+  <rect x="8" y="8" width="1084" height="664" fill="none" stroke="#e2e8f0" stroke-width="2" rx="10" />
+
+  <!-- Diagram Title Header -->
+  <text x="550" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="20" font-weight="700" fill="#0f172a">MIMAC-2026 Benchmark Architecture Overview · 架构总览</text>
+  <text x="550" y="58" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" fill="#64748b">3 Products → Re-entrant Routes → 18 Tool Groups (217 Machines) → 3 Tasks → Target KPIs</text>
+
+  <!-- ================= COLUMN 1: 3 PRODUCTS ================= -->
+  <g transform="translate(30, 80)">
+    <!-- Column Container -->
+    <rect width="180" height="560" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+    <rect width="180" height="38" rx="8" fill="#f1f5f9" />
+    <text x="90" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#1e293b">1. Products 产品输入</text>
+
+    <!-- Product A -->
+    <g transform="translate(12, 52)">
+      <rect width="156" height="110" rx="6" fill="#eff6ff" stroke="#93c5fd" stroke-width="1.5" />
+      <text x="78" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1e40af">Product A (60%)</text>
+      <text x="78" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#3b82f6">Logic-HighVolume</text>
+      <line x1="16" y1="46" x2="140" y2="46" stroke="#bfdbfe" stroke-width="1" />
+      <text x="24" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e3a8a">• 120 Process Steps</text>
+      <text x="24" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#1e3a8a">• 28 Litho Visits</text>
+      <text x="24" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#60a5fa">高性能计算微处理器</text>
+    </g>
+
+    <!-- Product B -->
+    <g transform="translate(12, 178)">
+      <rect width="156" height="110" rx="6" fill="#f0fdf4" stroke="#86efac" stroke-width="1.5" />
+      <text x="78" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#166534">Product B (30%)</text>
+      <text x="78" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#22c55e">Logic-MediumVolume</text>
+      <line x1="16" y1="46" x2="140" y2="46" stroke="#bbf7d0" stroke-width="1" />
+      <text x="24" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#14532d">• 104 Process Steps</text>
+      <text x="24" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#14532d">• 24 Litho Visits</text>
+      <text x="24" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#4ade80">移动端 SoC 芯片</text>
+    </g>
+
+    <!-- Product C -->
+    <g transform="translate(12, 304)">
+      <rect width="156" height="110" rx="6" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5" />
+      <text x="78" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#6b21a8">Product C (10%)</text>
+      <text x="78" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#a855f7">Mixed-Signal / Auto</text>
+      <line x1="16" y1="46" x2="140" y2="46" stroke="#e9d5ff" stroke-width="1" />
+      <text x="24" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#581c87">• 92 Process Steps</text>
+      <text x="24" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#581c87">• 20 Litho Visits</text>
+      <text x="24" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#c084fc">车规级微控制器</text>
+    </g>
+
+    <!-- Poisson Start Box -->
+    <g transform="translate(12, 430)">
+      <rect width="156" height="114" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" />
+      <text x="78" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Poisson Lot Starts</text>
+      <text x="78" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">泊松批次到达</text>
+      <line x1="16" y1="44" x2="140" y2="44" stroke="#cbd5e1" stroke-width="1" />
+      <text x="78" y="62" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0f172a">λ = 2.40 lots/h</text>
+      <text x="78" y="78" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#475569">57.6 lots/day</text>
+      <text x="78" y="94" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#475569">1,440 wafers/day</text>
+      <text x="78" y="108" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8">(25 wafers per FOUP)</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 1 -> Col 2 -->
+  <line x1="210" y1="187" x2="245" y2="280" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="210" y1="289" x2="245" y2="330" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="210" y1="415" x2="245" y2="380" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- ================= COLUMN 2: RE-ENTRANT ROUTES ================= -->
+  <g transform="translate(250, 80)">
+    <rect width="180" height="560" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+    <rect width="180" height="38" rx="8" fill="#f1f5f9" />
+    <text x="90" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#1e293b">2. Routes 工艺路线</text>
+
+    <!-- Structural Re-entrancy -->
+    <g transform="translate(12, 52)">
+      <rect width="156" height="150" rx="6" fill="#fefce8" stroke="#fde047" stroke-width="1.5" />
+      <text x="78" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#854d0e">Re-entrant Structure</text>
+      <text x="78" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#a16207">结构化多重循环重入</text>
+      <line x1="16" y1="46" x2="140" y2="46" stroke="#fef08a" stroke-width="1" />
+      <text x="20" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#713f12">• FEOL Gate / Well</text>
+      <text x="20" y="82" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#713f12">• BEOL Metal 1–8</text>
+      <text x="20" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#713f12">• Litho: 20–28 visits</text>
+      <text x="20" y="114" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#713f12">• Etch: 12–16 visits</text>
+      <text x="20" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#713f12">• CVD: 7–8 visits</text>
+      <text x="20" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#a16207">跨层反复重入同一设备组</text>
+    </g>
+
+    <!-- Quality Loops -->
+    <g transform="translate(12, 218)">
+      <rect width="156" height="150" rx="6" fill="#fff1f2" stroke="#fecdd3" stroke-width="1.5" />
+      <text x="78" y="22" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#9f1239">Deviations &amp; Yield</text>
+      <text x="78" y="38" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#be123c">返工回路与良率损失</text>
+      <line x1="16" y1="46" x2="140" y2="46" stroke="#fecdd3" stroke-width="1" />
+      <text x="20" y="66" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#881337">• Gate Litho Rework:</text>
+      <text x="26" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#9f1239">  p = 2.5% (3-step loop)</text>
+      <text x="20" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#881337">• M1 CMP Rework:</text>
+      <text x="26" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#9f1239">  p = 1.5% (2-step loop)</text>
+      <text x="20" y="130" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#881337">• Scrap: 0.04%/op</text>
+      <text x="26" y="144" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#9f1239">  Line Yield ≈ 95.31%</text>
+    </g>
+
+    <!-- Distribution Box -->
+    <g transform="translate(12, 384)">
+      <rect width="156" height="160" rx="6" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.5" />
+      <text x="78" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#334155">Processing Distributions</text>
+      <text x="78" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">加工时间概率分布</text>
+      <line x1="16" y1="44" x2="140" y2="44" stroke="#cbd5e1" stroke-width="1" />
+      <text x="78" y="64" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f172a">Lognormal(μ, σ)</text>
+      <text x="20" y="84" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#475569">• Serial: CV = 0.15</text>
+      <text x="20" y="100" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">  单片机台变异系数</text>
+      <text x="20" y="120" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#475569">• Batch: CV = 0.08</text>
+      <text x="20" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">  批处理炉管变异系数</text>
+      <text x="78" y="152" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#94a3b8">严密防范非物理负数加工时间</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 2 -> Col 3 -->
+  <line x1="430" y1="210" x2="465" y2="240" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+  <line x1="430" y1="350" x2="465" y2="350" stroke="#94a3b8" stroke-width="2" marker-end="url(#arrow)" />
+
+  <!-- ================= COLUMN 3: 18 TOOL GROUPS ================= -->
+  <g transform="translate(470, 80)">
+    <rect width="200" height="560" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+    <rect width="200" height="38" rx="8" fill="#f1f5f9" />
+    <text x="100" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#1e293b">3. 18 Tool Groups (217 M/C)</text>
+
+    <!-- Bottleneck Highlight -->
+    <g transform="translate(10, 50)">
+      <rect width="180" height="116" rx="6" fill="#fef2f2" stroke="#ef4444" stroke-width="2" />
+      <text x="90" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#b91c1c">TG01_LITHO (Bottleneck)</text>
+      <text x="90" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#dc2626">全厂主瓶颈 · 38 台浸没步进光刻机</text>
+      <line x1="14" y1="44" x2="166" y2="44" stroke="#fecaca" stroke-width="1" />
+      <text x="90" y="64" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="14" font-weight="700" fill="#991b1b">Utilization = 91.23%</text>
+      <text x="90" y="80" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#7f1d1d">Design Band: [88.0%, 93.0%]</text>
+      <text x="90" y="96" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">A = 0.900 (MTBF 90h / MTTR 10h)</text>
+      <text x="90" y="110" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#dc2626">4 Reticle Families (15 min setup)</text>
+    </g>
+
+    <!-- Couple Track -->
+    <g transform="translate(10, 174)">
+      <rect width="180" height="66" rx="6" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+      <text x="90" y="18" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#1e3a8a">TG02_TRACK (35 M/C)</text>
+      <text x="90" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#2563eb">涂胶显影机 · Coupled to Litho</text>
+      <text x="90" y="48" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#0f172a">Util: 85.27% | A: 0.920</text>
+      <text x="90" y="60" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b">次瓶颈协同联线</text>
+    </g>
+
+    <!-- Dry Etch & Strip -->
+    <g transform="translate(10, 248)">
+      <rect width="180" height="74" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+      <text x="90" y="18" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f172a">TG03_ETCH (30) &amp; TG04_STRIP (9)</text>
+      <text x="90" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">等离子刻蚀 (81.76%) &amp; 去胶 (55.6%)</text>
+      <text x="90" y="48" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">TG03 Setup: Fluorine/Chlorine (20m)</text>
+      <text x="90" y="62" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b">SEMI E10 UDT &amp; SDT PM 循环</text>
+    </g>
+
+    <!-- Thin Films & Furnaces -->
+    <g transform="translate(10, 330)">
+      <rect width="180" height="82" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+      <text x="90" y="18" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f172a">TG05_CVD (20) &amp; TG06_PVD (9)</text>
+      <text x="90" y="32" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">薄膜沉积 (72.2%) &amp; 溅射 (57.4%)</text>
+      <text x="90" y="48" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f172a">TG07/08 FURNACES (16 Batch)</text>
+      <text x="90" y="62" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#475569">扩散炉与 LPCVD (Bmin:2, Bmax:4)</text>
+      <text x="90" y="74" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#64748b">最大等待超时 τ = 2.0 小时</text>
+    </g>
+
+    <!-- Other Tools -->
+    <g transform="translate(10, 420)">
+      <rect width="180" height="124" rx="6" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1" />
+      <text x="90" y="16" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#0f172a">TG09–TG18 (98 Machines)</text>
+      <text x="90" y="30" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">注入、化学机械研磨、湿法、量测</text>
+      <text x="20" y="48" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">• TG09/10 IMPL (14): 中/大束流离子注入</text>
+      <text x="20" y="64" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">• TG11/12 CMP (14): 介质/金属研磨抛光</text>
+      <text x="20" y="80" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">• TG13/14 WET (12): 湿法槽与单片清洗</text>
+      <text x="20" y="96" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">• TG15 RTP (5): 快速热退火系统</text>
+      <text x="20" y="112" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">• TG16–18 MET (15): CD-SEM/膜厚/缺陷</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 3 -> Col 4 -->
+  <line x1="670" y1="150" x2="705" y2="180" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" />
+  <line x1="670" y1="370" x2="705" y2="350" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)" />
+  <line x1="670" y1="500" x2="705" y2="480" stroke="#059669" stroke-width="2" marker-end="url(#arrow-emerald)" />
+
+  <!-- ================= COLUMN 4: 3 BENCHMARK TASKS ================= -->
+  <g transform="translate(710, 80)">
+    <rect width="180" height="560" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+    <rect width="180" height="38" rx="8" fill="#f1f5f9" />
+    <text x="90" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#1e293b">4. Benchmark Tasks</text>
+
+    <!-- Task 1 (T1) -->
+    <g transform="translate(10, 50)">
+      <rect width="160" height="154" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" />
+      <text x="80" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#1d4ed8">Task 1 (T1)</text>
+      <text x="80" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#1e40af">Dynamic Lot Dispatching</text>
+      <text x="80" y="50" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#3b82f6">机台动态实时派工</text>
+      <line x1="12" y1="56" x2="148" y2="56" stroke="#bfdbfe" stroke-width="1" />
+      <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#1e3a8a">Decision Variable 决策变量:</text>
+      <text x="16" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#1e40af">Lot index l* for idle machine</text>
+      <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">从就绪队列挑选下一批次</text>
+      <text x="16" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#1e3a8a">Baselines 经典基准规则:</text>
+      <text x="16" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#0f172a">FIFO, SPT, EDD, CR</text>
+      <text x="16" y="148" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#2563eb">Gym API: FabEnv (RL Agent)</text>
+    </g>
+
+    <!-- Task 2 (T2) -->
+    <g transform="translate(10, 218)">
+      <rect width="160" height="154" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" />
+      <text x="80" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#b45309">Task 2 (T2)</text>
+      <text x="80" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#92400e">AMHS OHT Routing</text>
+      <text x="80" y="50" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#d97706">天车物料传输路径规划</text>
+      <line x1="12" y1="56" x2="148" y2="56" stroke="#fde68a" stroke-width="1" />
+      <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#78350f">Decision Variable 决策变量:</text>
+      <text x="16" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#92400e">OHT assignment &amp; switch path</text>
+      <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">天车分派与单向道岔选择</text>
+      <text x="16" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#78350f">Topology 轨道拓扑架构:</text>
+      <text x="16" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#0f172a">60 Vehicles, 8 Inter-bay loops</text>
+      <text x="16" y="148" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#d97706">18 Intra-bay spurs (防拥堵碰撞)</text>
+    </g>
+
+    <!-- Task 3 (T3) -->
+    <g transform="translate(10, 386)">
+      <rect width="160" height="154" rx="6" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5" />
+      <text x="80" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#047857">Task 3 (T3)</text>
+      <text x="80" y="36" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="600" fill="#065f46">Opportunistic PM</text>
+      <text x="80" y="50" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#059669">机会性预防维护调度</text>
+      <line x1="12" y1="56" x2="148" y2="56" stroke="#a7f3d0" stroke-width="1" />
+      <text x="16" y="74" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#064e3b">Decision Variable 决策变量:</text>
+      <text x="16" y="88" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#047857">Initiation timestamp t_start</text>
+      <text x="16" y="102" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">停机维护执行时间戳</text>
+      <text x="16" y="122" font-family="system-ui, -apple-system, sans-serif" font-size="10" font-weight="700" fill="#064e3b">Constraints 浮动窗口约束:</text>
+      <text x="16" y="136" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#0f172a">TG01 / TG03 / TG05 (±24h)</text>
+      <text x="16" y="148" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#059669">饥饿停机同步 · 避免瓶颈重叠</text>
+    </g>
+  </g>
+
+  <!-- Connectors Col 4 -> Col 5 -->
+  <line x1="890" y1="180" x2="925" y2="180" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)" />
+  <line x1="890" y1="350" x2="925" y2="350" stroke="#d97706" stroke-width="2" marker-end="url(#arrow-amber)" />
+  <line x1="890" y1="480" x2="925" y2="480" stroke="#059669" stroke-width="2" marker-end="url(#arrow-emerald)" />
+
+  <!-- ================= COLUMN 5: EVALUATION & KPIS ================= -->
+  <g transform="translate(930, 80)">
+    <rect width="140" height="560" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5" />
+    <rect width="140" height="38" rx="8" fill="#f1f5f9" />
+    <text x="70" y="24" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="13" font-weight="700" fill="#1e293b">5. Target KPIs 目标</text>
+
+    <!-- KPI 1 -->
+    <g transform="translate(10, 50)">
+      <rect width="120" height="154" rx="6" fill="#f8fafc" stroke="#93c5fd" stroke-width="1.5" />
+      <text x="60" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#1e40af">T1 Primary Metric</text>
+      <text x="60" y="34" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#2563eb">派工主评价指标</text>
+      <line x1="10" y1="42" x2="110" y2="42" stroke="#bfdbfe" stroke-width="1" />
+      <text x="60" y="64" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0f172a">Mean Cycle Time</text>
+      <text x="60" y="80" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">平均生产周期 (天)</text>
+      <text x="60" y="104" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Secondary: WIP,</text>
+      <text x="60" y="118" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Mean Tardiness,</text>
+      <text x="60" y="132" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Cycle Time Std Dev</text>
+      <text x="60" y="146" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#2563eb">CR (11.69d) &lt; FIFO</text>
+    </g>
+
+    <!-- KPI 2 -->
+    <g transform="translate(10, 218)">
+      <rect width="120" height="154" rx="6" fill="#f8fafc" stroke="#fcd34d" stroke-width="1.5" />
+      <text x="60" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#b45309">T2 Primary Metric</text>
+      <text x="60" y="34" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#d97706">天车主评价指标</text>
+      <line x1="10" y1="42" x2="110" y2="42" stroke="#fde68a" stroke-width="1" />
+      <text x="60" y="64" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0f172a">Mean Delivery</text>
+      <text x="60" y="80" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">平均搬运耗时</text>
+      <text x="60" y="104" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">T_wait + T_transit</text>
+      <text x="60" y="122" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Secondary: Empty</text>
+      <text x="60" y="136" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">vehicle travel ratio</text>
+      <text x="60" y="148" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#d97706">空车空驶里程率</text>
+    </g>
+
+    <!-- KPI 3 -->
+    <g transform="translate(10, 386)">
+      <rect width="120" height="154" rx="6" fill="#f8fafc" stroke="#6ee7b7" stroke-width="1.5" />
+      <text x="60" y="20" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" font-weight="700" fill="#047857">T3 Primary Metric</text>
+      <text x="60" y="34" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#059669">维护主评价指标</text>
+      <line x1="10" y1="42" x2="110" y2="42" stroke="#a7f3d0" stroke-width="1" />
+      <text x="60" y="64" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="12" font-weight="700" fill="#0f172a">Effective Rate</text>
+      <text x="60" y="80" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#334155">稳态实际产出率</text>
+      <text x="60" y="104" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Completed lots/day</text>
+      <text x="60" y="122" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Secondary: Avoidable</text>
+      <text x="60" y="136" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="10" fill="#64748b">Starvation Hours</text>
+      <text x="60" y="148" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="9" fill="#059669">可规避饥饿停机时数</text>
+    </g>
+  </g>
+
+  <!-- Bottom Footer Protocol Summary Banner -->
+  <g transform="translate(30, 646)">
+    <rect width="1040" height="26" rx="4" fill="#f1f5f9" stroke="#e2e8f0" stroke-width="1" />
+    <text x="520" y="18" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-size="11" fill="#475569">Evaluation Protocol 科学评估协议: 60-day Warm-up · 365-day Run · 30 Replications (CRN) · 95% Confidence Intervals · Paired t-test (α = 0.05)</text>
+  </g>
+</svg>

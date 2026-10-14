@@ -1,0 +1,14 @@
+.DS_Store
+*.log
+Thumbs.db
+.venv/
+node_modules/
+__pycache__/
+*.pyc
+.pytest_cache/
+*.sql
+backups/
+*.egg-info/
+*.zip
+!downloads/mimac2026-simulator.zip
+SemiconFab-1.0.0/

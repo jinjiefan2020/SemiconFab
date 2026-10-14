@@ -1,0 +1,5 @@
+task,baseline,replications,mean_cycle_time_days,ci_95_cycle_time,mean_tardiness_days,ci_95_tardiness,bottleneck_utilization_pct,ci_95_utilization,throughput_wafers_per_day,mean_wip_lots
+T1_Dispatching,FIFO,5,17.27,±1.20,10.18,±1.20,87.6%,±0.2%,946,966.9
+T1_Dispatching,SPT,5,17.27,±1.20,10.18,±1.20,87.6%,±0.2%,946,966.9
+T1_Dispatching,EDD,5,11.67,±0.69,4.60,±0.68,87.2%,±0.3%,1128,665.5
+T1_Dispatching,CR,5,11.96,±0.49,4.88,±0.49,87.3%,±0.3%,1142,681.7

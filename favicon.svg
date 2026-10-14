@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- Rounded Rect Housing (White background, Dark Border) -->
+  <rect x="2" y="2" width="44" height="44" rx="10" fill="#ffffff" stroke="#0f172a" stroke-width="2.5"/>
+  <g transform="translate(6, 6) scale(0.75)">
+    <!-- 300mm Wafer with SEMI Standard Notch (Industrial Slate Gray) -->
+    <path d="M24 4C13.2 4 4.4 12.6 4 23.3C3.6 34.3 12.3 43.4 23.3 43.98C23.6 44 23.8 43.6 23.8 43.3C23.8 42.2 24.2 41.6 24.9 41.6C25.6 41.6 26 42.2 26 43.3C26 43.6 26.2 44 26.5 43.98C37.5 43.4 46.2 34.3 45.8 23.3C45.4 12.6 36.6 4 25.8 4H24Z" stroke="#64748b" stroke-width="3.2" stroke-linejoin="round" fill="none"/>
+    <!-- Scribe Line Matrix (Fine Stepper Grid) -->
+    <g stroke="#94a3b8" stroke-width="2" stroke-linecap="round">
+      <line x1="12" y1="18" x2="38" y2="18"/>
+      <line x1="9"  y1="25" x2="41" y2="25"/>
+      <line x1="12" y1="32" x2="38" y2="32"/>
+      <line x1="18" y1="12" x2="18" y2="38"/>
+      <line x1="25" y1="9"  x2="25" y2="39"/>
+      <line x1="32" y1="12" x2="32" y2="38"/>
+    </g>
+    <!-- Golden Die / Semiconductor Feature Accent (Emerald Green) -->
+    <rect x="26" y="19" width="5.2" height="5.2" rx="1" fill="#10b981"/>
+  </g>
+</svg>

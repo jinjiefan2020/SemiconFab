@@ -1,0 +1,3073 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      3D NAND 闪存电荷捕获(CTF)存储单元 3D 制造工艺剖析 — SemiconFab.org
+    </title>
+
+    <!-- Primary SEO Meta Tags -->
+    <meta
+      name="title"
+      content="3D NAND 闪存电荷捕获(CTF)存储单元 3D 制造工艺全流程剖析 — SemiconFab.org"
+    />
+    <meta
+      name="description"
+      content="交互式三维立体几何解构现代 3D NAND (BiCS / Gate-All-Around Charge Trap Flash) 闪存垂直存储串制造全流程：从ONON纳米多层交替叠层沉积、>60:1深宽比垂直通道打孔、ONO电荷捕获复合膜、中空多晶硅沟道(Macaroni)、字线切割缝隙(Slit Trench)、热磷酸牺牲层湿法剥离、金属钨替代栅(Replacement Gate)到正交位线互连。支持任意角度自由旋转、动态剖切、X-Ray透视及电子量子隧穿捕获模拟。"
+    />
+    <meta
+      name="keywords"
+      content="3D NAND, Charge Trap Flash, CTF, 闪存制造工艺, BiCS, Replacement Gate, 替代栅, ONON Stack, Macaroni Channel, 电子隧穿, 3D半导体工艺, 半导体制造流程"
+    />
+    <meta name="author" content="SemiconFab.org Initiative" />
+    <meta name="theme-color" content="#090d16" />
+
+    <!-- Canonical & Multilingual Alternates -->
+    <link rel="canonical" href="https://semiconfab.org/nand.html" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://semiconfab.org/nand.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://semiconfab.org/nand.html?lang=en"
+    />
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://semiconfab.org/nand.html?lang=zh"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SemiconFab.org" />
+    <meta
+      property="og:title"
+      content="3D NAND Charge Trap Flash (CTF) Memory Cell 3D Fabrication Digital Twin — SemiconFab.org"
+    />
+    <meta
+      property="og:description"
+      content="Interactive 3D step-by-step engineering model of 3D NAND Charge Trap Flash (CTF) manufacturing: ONON dielectric superlattice stack, >60:1 HAR channel punch, ONO trap layer, Macaroni poly channel, wordline slit trench, hot phosphoric acid selective strip, and replacement gate tungsten metallization."
+    />
+    <meta property="og:url" content="https://semiconfab.org/nand.html" />
+    <meta property="og:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="3D NAND Charge Trap Flash (CTF) Memory Cell 3D Fabrication Digital Twin — SemiconFab.org"
+    />
+    <meta
+      name="twitter:description"
+      content="Interactive 3D step-by-step engineering model of 3D NAND Charge Trap Flash (CTF) manufacturing: ONON dielectric superlattice stack, >60:1 HAR channel punch, ONO trap layer, Macaroni poly channel, wordline slit trench, hot phosphoric acid selective strip, and replacement gate tungsten metallization."
+    />
+    <meta name="twitter:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Structured Data (JSON-LD) for Search Engines & AI Crawlers (GEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "@id": "https://semiconfab.org/nand.html#article",
+            "headline": "3D NAND Charge Trap Flash Memory Cell Fabrication: Complete 10-Step Semiconductor Engineering Guide",
+            "alternativeHeadline": "3D NAND 闪存电荷捕获(CTF)垂直存储单元制造全流程工业模型",
+            "description": "Comprehensive engineering breakdown and 3D simulation of 3D NAND Charge Trap Flash (CTF / BiCS) memory manufacturing across 10 sequential fabrication steps, from ONON multi-layer superlattice to replacement gate tungsten wordlines.",
+            "inLanguage": ["en", "zh-CN"],
+            "url": "https://semiconfab.org/nand.html",
+            "author": {
+              "@type": "Organization",
+              "name": "SemiconFab.org Initiative",
+              "url": "https://semiconfab.org"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "SemiconFab.org",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://semiconfab.org/favicon.png"
+              }
+            },
+            "keywords": [
+              "3D NAND",
+              "Charge Trap Flash",
+              "CTF",
+              "BiCS",
+              "ONON Stack",
+              "Macaroni Channel",
+              "Replacement Gate",
+              "Gate-All-Around",
+              "HARC Etch",
+              "High Aspect Ratio Etch",
+              "Semiconductor Fabrication"
+            ]
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://semiconfab.org/nand.html#application",
+            "name": "3D NAND CTF Fabrication Digital Twin",
+            "url": "https://semiconfab.org/nand.html",
+            "applicationCategory": "EngineeringApplication",
+            "operatingSystem": "All modern browsers with WebGL 2.0",
+            "browserRequirements": "Requires WebGL support",
+            "featureList": [
+              "10-Step Sequential 3D NAND CTF Fabrication Evolution",
+              "Interactive OrbitControls 360-Degree CAD Orbiting",
+              "Dynamic X-Ray Translucent Mode",
+              "Cross-Section Cutaway Clipping Plane",
+              "Quantum Fowler-Nordheim Electron Tunneling Simulation",
+              "Exploded View Layer Separation Slider",
+              "Angstrom-Precision Raycast Tooltips"
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://semiconfab.org/nand.html#breadcrumbs",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://semiconfab.org/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "3D NAND Flash Memory",
+                "item": "https://semiconfab.org/nand.html"
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://semiconfab.org/nand.html#howto",
+            "name": "How 3D NAND Charge Trap Flash (CTF) Memory is Manufactured",
+            "description": "Sequential 10-step industrial semiconductor fabrication sequence for manufacturing modern 3D NAND vertical memory strings using alternating ONON multi-layer deposition and replacement metal gate processes.",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "P-Well Substrate & Bottom Common Source Plate Formation",
+                "text": "Preparing single-crystal silicon substrate with P-well doping, and depositing heavy N+ poly-Si / WSi composite source plate providing unified Vss ground."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Alternating Oxide-Nitride (ONON) Multi-layer Dielectric Stack Deposition",
+                "text": "PECVD depositing dozens to hundreds of alternating nanoscale bilayers of SiO2 (inter-tier insulator) and sacrificial Si3N4 (sacrificial wordline tier) with tight stress compensation."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Extreme High Aspect Ratio (>60:1) Channel Hole Cryogenic Plasma Etch",
+                "text": "Cryogenic reactive ion etching (HAR Cryo-RIE) using thick amorphous carbon hardmask (ACL) to punch vertical channel holes through the entire ONON stack down to the source plate."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "ALD Charge Trap Memory Film Stack (Blocking / Si3N4 Trap / Tunnel Oxide)",
+                "text": "Atomic Layer Deposition coating the inner channel hole sidewalls with High-k blocking oxide (Al2O3/SiO2), charge trap storage film (high-density Si3N4), and tunnel oxide (SiO2/SiON)."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Poly-Si Vertical Conduction Channel & Core Oxide ('Macaroni') Fill",
+                "text": "Depositing conformal ultra-thin poly-silicon channel film, filling the central core with insulating SiO2 macaroni rod, and plugging the top with N+ poly drain contact."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Slit Trench (Wordline Cut) Anisotropic Deep Dry Etch",
+                "text": "Anisotropic plasma dry etching vertical slit trenches between channel columns through the entire ONON stack, completely exposing the lateral edges of alternating layers."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 7,
+                "name": "Hot Phosphoric Acid Selective Nitride Strip (Lateral Gate Cavity Release)",
+                "text": "Injecting hot phosphoric acid (H3PO4, ~160°C) via slit trenches, selectively stripping all sacrificial Si3N4 layers (selectivity > 100:1 over SiO2) to release hollow lateral gate cavities."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 8,
+                "name": "Conformal ALD/CVD Tungsten (W) Wordline Gate Replacement Metallization",
+                "text": "Conformal ALD TiN barrier deposition and deep CVD Tungsten metallization filling all horizontal cavities through the slit, followed by recess etch-back to separate monolithic wordlines."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 9,
+                "name": "Slit Sidewall Isolation Spacer & Common Source Line (CSL) Metallization",
+                "text": "Depositing SiO2 dielectric sidewall spacers inside the slit trench, opening the floor, and filling with tungsten to form the solid vertical Common Source Line (CSL) wall."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 10,
+                "name": "Drain Contact Vias & Orthogonal Bitline (BL) Top Metallization",
+                "text": "Depositing interlayer dielectric (ILD), etching vias to each macaroni channel drain plug, and fabricating orthogonal copper/tungsten bitlines crossing perpendicular to wordlines."
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://semiconfab.org/nand.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why did 3D NAND transition from Floating Gate to Charge Trap Flash (CTF)?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Floating Gate (FG) stores electrons in conductive polysilicon islands, where a single oxide defect can leak the entire stored charge. Charge Trap Flash (CTF) stores electrons in physically isolated, non-conductive quantum defect traps within a silicon nitride (Si3N4) dielectric layer. Local defects do not cause global charge leakage, enabling thinner tunneling dielectrics, lower programming voltages, and virtually zero cell-to-cell capacitive crosstalk."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the Macaroni channel structure in 3D NAND?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Instead of completely filling the deep channel hole with solid polysilicon, a thin (~10nm) annular polysilicon channel tube is deposited along the inner wall, while the center is filled with insulating silicon dioxide ('macaroni' core). This eliminates bulk defects and grain boundaries of thick polysilicon, reduces string resistance, and improves the read drive current."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does the Replacement Gate process work in 3D NAND?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Rather than attempting to etch refractory metals through hundreds of layers, the initial stack is grown as alternating SiO2 and sacrificial Si3N4. After memory holes are completed, deep slit trenches are cut and hot phosphoric acid dissolves the sacrificial Si3N4. Metallic tungsten (W) is then deposited through the slit into the vacant lateral cavities, forming low-resistance monolithic control gates."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is CMOS Under Array (CuA / COP) in advanced 3D NAND?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "In traditional designs, peripheral CMOS circuits (page buffers, row decoders, charge pumps) occupy up to 30% of the silicon wafer area adjacent to the memory array. In CMOS Under Array (CuA or COP), the CMOS circuitry is manufactured first on the wafer substrate, and the entire 3D NAND memory stack is fabricated directly on top, dramatically reducing total chip die size."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="favicon.ico" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              darkbg: "#070a12",
+              panelbg: "rgba(15, 23, 42, 0.85)",
+              accent: "#10b981", // Emerald theme for NAND non-volatile charge trap flash
+              accentGlow: "rgba(16, 185, 129, 0.25)",
+              neonEmerald: "#10b981",
+              neonCyan: "#06b6d4",
+              neonAmber: "#f59e0b",
+              neonPurple: "#a855f7",
+            },
+            fontFamily: {
+              mono: ["JetBrains Mono", "Fira Code", "Menlo", "monospace"],
+              sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Three.js and OrbitControls -->
+    <!-- Modern Three.js (0.160.0) with ES Module OrbitControls & PBR Tone Mapping -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+      window.THREE = Object.assign({}, THREE, { OrbitControls });
+      if (window.__onThreeLoaded) window.__onThreeLoaded();
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.6);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(100, 116, 139, 0.4);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(16, 185, 129, 0.6);
+      }
+
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glow-emerald {
+        box-shadow: 0 0 20px -3px rgba(16, 185, 129, 0.35);
+      }
+
+      .stepper-btn {
+        transition: all 0.15s ease;
+      }
+      .stepper-btn:hover {
+        background: rgba(30, 41, 59, 0.7);
+      }
+      .stepper-btn.active {
+        background: #f8fafc !important;
+        border-color: #f8fafc !important;
+        color: #0f172a !important;
+        font-weight: 600;
+      }
+
+      /* Tooltip overlay */
+      #part-tooltip {
+        pointer-events: none;
+        transform: translate(-50%, -120%);
+        transition: opacity 0.15s ease;
+      }
+
+
+        50% { opacity: 0.4; }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-darkbg text-slate-100 font-sans h-screen w-screen overflow-hidden flex flex-col select-none"
+  >
+    <!-- Top Navigation Header -->
+    <header
+      class="h-14 border-b border-slate-800/80 bg-[#090d16]/90 backdrop-blur-md px-4 flex items-center justify-between shrink-0 z-30"
+    >
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <div
+            class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:scale-105 transition"
+          >
+            <i data-lucide="layers" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <span
+              class="font-bold text-sm tracking-tight text-white group-hover:text-emerald-400 transition"
+              >SemiconFab</span
+            >
+            <span
+              class="text-[10px] text-emerald-400 font-mono ml-1.5 px-1.5 py-0.5 rounded bg-emerald-950/80 border border-emerald-800/60 font-semibold"
+              >NAND 3D</span
+            >
+          </div>
+        </a>
+        <div class="hidden sm:block h-4 w-[1px] bg-slate-700/60 mx-1"></div>
+        <div class="hidden sm:flex items-center text-xs text-slate-400 gap-1.5">
+          <span id="header-subtitle"
+            >3D NAND 电荷捕获(CTF)垂直闪存制造演进模型
+            (ONON交替叠层与替代栅工艺)</span
+          >
+        </div>
+      </div>
+
+      <!-- Center Quick Links -->
+      <div
+        class="hidden md:flex items-center gap-4 text-xs font-medium text-slate-400"
+      >
+        <a
+          href="finfet.html"
+          class="hover:text-cyan-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>FinFET 3D</span>
+        </a>
+        <a
+          href="gaa.html"
+          class="hover:text-purple-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="layers-3" class="w-3.5 h-3.5 text-purple-400"></i>
+          <span>GAA 3D</span>
+        </a>
+        <a
+          href="dram.html"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="database" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>DRAM 3D</span>
+        </a>
+        <a
+          href="hbm.html"
+          class="hover:text-rose-400 transition flex items-center gap-1.5 text-rose-400 font-semibold"
+        >
+          <i data-lucide="boxes" class="w-3.5 h-3.5 text-rose-400"></i>
+          <span>HBM 3D</span>
+        </a>
+        <a
+          href="twin.html"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="network" class="w-3.5 h-3.5"></i>
+          <span id="nav-cleanroom">洁净室数字孪生</span>
+        </a>
+        <a
+          href="vision.html"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span id="nav-vision">愿景</span>
+        </a>
+      </div>
+
+      <!-- Top Action Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Lang Toggle -->
+        <button
+          id="lang-btn"
+          onclick="toggleLanguage()"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs font-mono border border-slate-700 text-slate-200 transition flex items-center gap-1.5"
+          title="Switch English / 中文"
+        >
+          <i data-lucide="languages" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span id="lang-indicator">EN</span>
+        </button>
+
+        <!-- Reset Camera -->
+        <button
+          onclick="resetCamera()"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs text-slate-200 border border-slate-700 transition flex items-center gap-1.5"
+          title="复位视角"
+        >
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span class="hidden sm:inline" id="btn-reset-cam-label"
+            >复位视角</span
+          >
+        </button>
+
+        <!-- Play Mode -->
+        <button
+          id="autoplay-btn"
+          onclick="toggleAutoPlay()"
+          class="px-2.5 py-1 rounded-lg bg-emerald-950/80 hover:bg-emerald-900 border border-emerald-800 text-xs text-emerald-300 transition flex items-center gap-1.5"
+        >
+          <i id="autoplay-icon" data-lucide="play" class="w-3.5 h-3.5"></i>
+          <span id="autoplay-label">播放工序</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main CAD Studio Workspace (Flex Layout with 500x500 central 3D viewport) -->
+    <!-- Main CAD Studio Workspace (Hero 3D Viewport with Breathing Room & Collapsible Specs Drawer) -->
+    <main
+      class="flex-1 w-full h-[calc(100vh-56px)] overflow-hidden flex flex-col justify-between p-3 sm:p-4 bg-[#0a0d14]"
+    >
+      <!-- Top Focus Bar -->
+      <div
+        class="w-full max-w-7xl mx-auto flex items-center justify-between pb-2 shrink-0 gap-3"
+      >
+        <div class="flex items-center gap-3 min-w-0">
+          <span
+            id="step-badge"
+            class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 border border-slate-700/80 font-mono text-xs font-semibold shrink-0"
+          >
+            STEP 01 / 10 · 衬底与源极板
+          </span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <h1
+                id="step-title"
+                class="text-sm sm:text-base font-semibold text-white tracking-tight truncate"
+              >
+                单晶硅衬底与共源极板准备
+              </h1>
+              <span
+                id="step-title-en"
+                class="text-xs font-mono text-slate-400 font-normal hidden lg:inline"
+                >Substrate & Source Plate</span
+              >
+            </div>
+            <p
+              id="step-summary"
+              class="text-xs text-slate-400 mt-0.5 truncate max-w-2xl"
+            >
+              单晶硅晶圆衬底经退火与离子注入形成底层共源极板（CSL），作为整个立体存储阵列的电荷接地板极。
+            </p>
+          </div>
+        </div>
+
+        <!-- Stepper Controls & Drawer Toggle -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            id="btn-prev"
+            onclick="prevStep()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            <span id="lbl-prev-btn">上一步</span>
+          </button>
+          <button
+            id="btn-next"
+            onclick="nextStep()"
+            class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-white text-xs font-semibold text-slate-900 transition flex items-center gap-1 shadow-sm"
+          >
+            <span id="lbl-next-btn">下一步</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          </button>
+          <button
+            id="btn-toggle-details"
+            onclick="toggleDetailsDrawer()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1.5"
+          >
+            <i
+              data-lucide="sliders-horizontal"
+              class="w-3.5 h-3.5 text-slate-400"
+            ></i>
+            <span id="lbl-details-btn">工艺参数</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Workspace -->
+      <div
+        class="relative w-full max-w-7xl mx-auto flex-1 rounded-2xl border border-slate-800/90 bg-[#0c1017] overflow-hidden flex"
+      >
+        <div
+          id="webgl-container"
+          class="w-full h-full cursor-grab active:cursor-grabbing"
+        ></div>
+
+        <!-- Toolbar -->
+        <div
+          class="absolute top-3 left-3 z-10 flex flex-col sm:flex-row items-start sm:items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1 pointer-events-auto"
+          >
+            <span
+              class="text-[10px] font-mono text-slate-400 px-1.5 hidden sm:inline"
+              id="lbl-cam-presets"
+              >机位</span
+            >
+            <button
+              onclick="setCameraView('iso')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="等轴侧"
+            >
+              ISO
+            </button>
+            <button
+              onclick="setCameraView('fin')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="截面"
+            >
+              FIN
+            </button>
+            <button
+              onclick="setCameraView('gate')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="缝隙"
+            >
+              SLIT
+            </button>
+            <button
+              onclick="setCameraView('top')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="俯视"
+            >
+              TOP
+            </button>
+          </div>
+
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1.5 text-[10px] font-mono text-slate-300 pointer-events-auto"
+          >
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-dimensions"
+                checked
+                onchange="toggleDimensions(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-dimensions">标尺</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-cutaway"
+                onchange="toggleCutaway(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-cutaway">剖切</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-xray"
+                onchange="toggleXRay(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-xray">透视</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-grid"
+                checked
+                onchange="toggleGrid(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-grid">网格</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Technical Spec Pill -->
+        <div
+          class="absolute top-3 right-3 z-10 hidden sm:flex items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="px-2.5 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-slate-400"
+          >
+            <span>3D NAND 128-Tier CTF · TCAD 仿真 · 70:1 AR</span>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div
+          id="material-legend-wrapper"
+          class="absolute bottom-3 left-3 z-10 glass-panel p-2 rounded-xl border border-slate-800/80 shadow-md text-[10px] pointer-events-auto max-w-xs transition"
+        >
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span id="lbl-mat-legend" class="font-mono font-medium"
+              >材料图例</span
+            >
+            <span
+              class="text-[9px] text-slate-500 font-mono"
+              id="lbl-legend-hint"
+              >点击高亮</span
+            >
+          </div>
+          <div
+            id="material-legend-container"
+            class="grid grid-cols-2 gap-1 max-h-24 overflow-y-auto pr-0.5 custom-scrollbar"
+          ></div>
+        </div>
+
+        <!-- Scale Bar -->
+        <div
+          id="viewport-scale-bar"
+          class="absolute bottom-3 right-3 px-2.5 py-1.5 rounded-lg bg-slate-950/85 border border-slate-800/80 text-[10px] font-mono text-slate-300 flex items-center gap-2 pointer-events-none select-none z-10 shadow-md"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              id="scale-bar-text"
+              class="text-[9px] text-slate-200 font-bold mb-0.5 tracking-wider"
+            >
+              50 nm
+            </div>
+            <div class="flex items-center">
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+              <div class="w-12 h-[2px] bg-slate-400"></div>
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+            </div>
+          </div>
+          <span class="text-[9px] text-slate-500">1:1 CAD</span>
+        </div>
+
+        <!-- Tooltip -->
+        <div
+          id="part-tooltip"
+          class="absolute hidden z-30 px-3 py-2 rounded-xl bg-slate-950/95 border border-slate-700 shadow-xl backdrop-blur-md max-w-xs pointer-events-none"
+        >
+          <div
+            id="tooltip-title"
+            class="font-semibold text-xs text-slate-200 font-mono flex items-center gap-1.5"
+          ></div>
+          <div
+            id="tooltip-desc"
+            class="text-[11px] text-slate-400 mt-1 leading-tight"
+          ></div>
+        </div>
+
+        <!-- Collapsible Drawer -->
+        <div
+          id="inspector-drawer"
+          class="absolute top-0 right-0 bottom-0 w-80 sm:w-96 bg-slate-950/95 border-l border-slate-800/90 backdrop-blur-xl p-4 sm:p-5 flex flex-col gap-3.5 z-20 shadow-2xl transition-transform duration-300 translate-x-full overflow-y-auto"
+        >
+          <div
+            class="flex items-center justify-between border-b border-slate-800 pb-2.5"
+          >
+            <div
+              class="text-xs font-semibold text-slate-200 flex items-center gap-1.5"
+            >
+              <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-drawer-title">制造机台与工艺物理参数</span>
+            </div>
+            <button
+              onclick="toggleDetailsDrawer()"
+              class="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span
+              id="process-category-badge"
+              class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700"
+            ></span>
+          </div>
+
+          <div class="text-xs text-slate-300 leading-relaxed">
+            <p
+              id="drawer-step-summary"
+              class="text-slate-300 leading-normal"
+            ></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="cog" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-equipment">制造机台 (Tool)</span>
+              </div>
+              <div
+                id="step-equipment"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-equipment-vendor"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="atom" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-material">材料与结构</span>
+              </div>
+              <div
+                id="step-material"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-material-dim"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-900/50 border border-slate-800/90 rounded-xl p-3 text-xs"
+          >
+            <div
+              class="font-semibold text-slate-200 flex items-center gap-1.5 mb-1 text-[11px]"
+            >
+              <i data-lucide="microchip" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-purpose-title">工艺核心机理与器件物理</span>
+            </div>
+            <p
+              id="step-purpose"
+              class="text-slate-400 leading-normal text-[11px]"
+            ></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper -->
+      <div class="w-full max-w-7xl mx-auto pt-2 shrink-0">
+        <div
+          class="p-1 rounded-xl bg-slate-900/80 border border-slate-800/80 flex items-center gap-1 overflow-x-auto w-full"
+        >
+          <button
+            onclick="goToStep(0)"
+            class="stepper-btn active flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-0"
+          >
+            <div class="font-semibold text-[10px]">01</div>
+            <div class="tab-label truncate text-[10px]">源极板制备</div>
+          </button>
+          <button
+            onclick="goToStep(1)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-1"
+          >
+            <div class="font-semibold text-[10px]">02</div>
+            <div class="tab-label truncate text-[10px]">ONON多层叠</div>
+          </button>
+          <button
+            onclick="goToStep(2)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-2"
+          >
+            <div class="font-semibold text-[10px]">03</div>
+            <div class="tab-label truncate text-[10px]">通道孔刻蚀</div>
+          </button>
+          <button
+            onclick="goToStep(3)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-3"
+          >
+            <div class="font-semibold text-[10px]">04</div>
+            <div class="tab-label truncate text-[10px]">ONO电荷陷阱</div>
+          </button>
+          <button
+            onclick="goToStep(4)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-4"
+          >
+            <div class="font-semibold text-[10px]">05</div>
+            <div class="tab-label truncate text-[10px]">硅沟道与轴心</div>
+          </button>
+          <button
+            onclick="goToStep(5)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-5"
+          >
+            <div class="font-semibold text-[10px]">06</div>
+            <div class="tab-label truncate text-[10px]">狭缝刻蚀</div>
+          </button>
+          <button
+            onclick="goToStep(6)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-6"
+          >
+            <div class="font-semibold text-[10px]">07</div>
+            <div class="tab-label truncate text-[10px]">湿法掏空</div>
+          </button>
+          <button
+            onclick="goToStep(7)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-7"
+          >
+            <div class="font-semibold text-[10px]">08</div>
+            <div class="tab-label truncate text-[10px]">钨字线填充</div>
+          </button>
+          <button
+            onclick="goToStep(8)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-8"
+          >
+            <div class="font-semibold text-[10px]">09</div>
+            <div class="tab-label truncate text-[10px]">源极线插塞</div>
+          </button>
+          <button
+            onclick="goToStep(9)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-9"
+          >
+            <div class="font-semibold text-[10px]">10</div>
+            <div class="tab-label truncate text-[10px]">位线金属互连</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Device Twin Footer -->
+      <footer
+        class="w-full max-w-7xl mx-auto pt-2 pb-1 text-center text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/60 mt-1 shrink-0"
+      >
+        <div class="flex items-center gap-2">
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-slate-400 hover:text-cyan-400 transition"
+          >
+            <svg
+              class="w-3 h-3 fill-current"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              ></path>
+            </svg>
+            <span>GitHub (Source code)</span>
+          </a>
+        </div>
+        <div>
+          <span
+            >Source-available &middot; PolyForm Noncommercial 1.0.0 &middot;
+            Free for education &amp; personal use; commercial use requires a
+            separate license. (源码公开 &middot; 商业使用需另行授权)</span
+          >
+        </div>
+      </footer>
+    </main>
+
+    <!-- JAVASCRIPT LOGIC: 3D CAD ENGINE & FABRICATION STATE MACHINE -->
+    <script>
+      // Safe DOM proxy to prevent any missing element from breaking 3D initialization
+      (function () {
+        const _orig = document.getElementById.bind(document);
+        const dummy = {
+          innerText: "",
+          innerHTML: "",
+          textContent: "",
+          value: "",
+          checked: false,
+          disabled: false,
+          style: {},
+          classList: {
+            add() {},
+            remove() {},
+            toggle() {},
+            contains() {
+              return false;
+            },
+          },
+          setAttribute() {},
+          getAttribute() {
+            return null;
+          },
+          removeAttribute() {},
+          addEventListener() {},
+          removeEventListener() {},
+          querySelector() {
+            return null;
+          },
+          querySelectorAll() {
+            return [];
+          },
+          scrollIntoView() {},
+        };
+        document.getElementById = function (id) {
+          return _orig(id) || dummy;
+        };
+      })();
+
+      // --- 1. DATA DEFINITIONS: 10-STEP FABRICATION SEQUENCE ---
+      const STEPS = [
+        {
+          id: 0,
+          badgeZh: "STEP 01/10",
+          badgeEn: "STEP 01/10",
+          catZh: "基底与源极",
+          catEn: "Substrate & Source",
+          titleZh: "P-Well 基底与底层共用源极板 (Source Plate) 成形",
+          titleEn: "P-Well Substrate & Bottom Common Source Plate Formation",
+          shortZh: "基底源极板",
+          shortEn: "Source Plate",
+          summaryZh:
+            "在单晶硅基底上注入形成 P-Well 阱区，随后沉积并热退火形成重掺杂 N+ 多晶硅与硅化钨（WSi/W）复合下源极导电层（Source Plate），为全阵列垂直存储串提供统一的源极电位（Vss）。",
+          summaryEn:
+            "Forming the P-well on the single-crystal silicon substrate, followed by depositing and annealing heavy N+ poly-Si and tungsten silicide (WSi/W) composite lower source plate, providing the unified source ground voltage (Vss) across the vertical memory string array.",
+          toolZh: "高能大束流离子注入机 + 立式扩散退火炉",
+          toolEn:
+            "High-Energy High-Current Ion Implanter + Vertical Diffusion Furnace",
+          toolVendor: "Applied Materials Varian / TEL TELINDY",
+          matZh: "P-Type Si 单晶硅 + N+ Poly-Si / WSi 复合层",
+          matEn: "P-Type Si Substrate + N+ Poly-Si / WSi Composite Plate",
+          matDimZh: "源极导电层厚度: ~120nm | 杂质浓度: 1e20 cm⁻³",
+          matDimEn: "Source Plate Thickness: ~120nm | Doping: 1e20 cm⁻³",
+          purposeZh:
+            "构建 3D NAND 垂直存储串阵列的坚固物理与电气底座。在先进 CuA (CMOS under Array) 架构中，外围逻辑控制电路更置于此层下方，实现极高硅片利用率。",
+          purposeEn:
+            "Establishing the structural and electrical foundation for vertical NAND strings. In advanced CuA (CMOS under Array) architectures, peripheral CMOS logic is placed beneath this floor to maximize wafer utilization.",
+        },
+        {
+          id: 1,
+          badgeZh: "STEP 02/10",
+          badgeEn: "STEP 02/10",
+          catZh: "薄膜沉积",
+          catEn: "Thin Films",
+          titleZh: "氧化物/氮化物（ONON）交替纳米超晶格多层叠层沉积",
+          titleEn:
+            "Alternating Oxide-Nitride (ONON) Multi-layer Dielectric Stack Deposition",
+          shortZh: "ONON多层叠层",
+          shortEn: "ONON Stack",
+          summaryZh:
+            "使用等离子体增强化学气相沉积（PECVD），在源极板上高精度连续交替沉积数十至上百层纳米级二氧化硅（SiO2，绝缘介质）与氮化硅（Si3N4，牺牲替代栅层）双层膜，形成应力严格补偿的高深宽比微叠层结构。",
+          summaryEn:
+            "Using PECVD to deposit dozens to hundreds of alternating nanoscale bilayers of Silicon Dioxide (SiO2, dielectric insulator) and Silicon Nitride (Si3N4, sacrificial gate tier) with strict mechanical stress compensation across the multi-tier micro-stack.",
+          toolZh: "等离子体增强化学气相沉积系统 (PECVD)",
+          toolEn: "Plasma Enhanced Chemical Vapor Deposition (PECVD)",
+          toolVendor: "Lam Research Vector / Applied Materials Producer GT",
+          matZh: "SiO2 绝缘层 (~25nm) + Si3N4 牺牲层 (~30nm) 交替纳米叠层",
+          matEn:
+            "Alternating SiO2 (~25nm) & Sacrificial Si3N4 (~30nm) Multi-layer",
+          matDimZh:
+            "叠层数: 128~232 对 (演示模型为代表性多层) | 总厚度: >5.5μm",
+          matDimEn:
+            "Tier Count: 128~232 pairs (demo scaled) | Stack Height: >5.5μm",
+          purposeZh:
+            "通过一次性沉积成百上千个垂直纳米层，彻底摆脱 2D 平面光刻线宽缩微的物理极限，将存储密度的增长维度直接拓展到纵向立体空间（Bit Cost Scaling）。",
+          purposeEn:
+            "Overcoming physical 2D planar lithography scaling limits by depositing hundreds of vertical nanometer layers in one continuous recipe, expanding memory bit density into 3D vertical space.",
+        },
+        {
+          id: 2,
+          badgeZh: "STEP 03/10",
+          badgeEn: "STEP 03/10",
+          catZh: "高深宽比等离子刻蚀",
+          catEn: "HAR Plasma Etch",
+          titleZh: "超高深宽比（HARC >60:1）垂直通道存储孔等离子体穿透干法刻蚀",
+          titleEn:
+            "Extreme High Aspect Ratio (>60:1) Channel Hole Cryogenic Plasma Etch",
+          shortZh: "高深宽比通道孔",
+          shortEn: "HAR Channel Hole",
+          summaryZh:
+            "应用硬掩模（厚非晶碳 ACL）与极低温高能高深宽比反应离子刻蚀（HAR Cryo-RIE），以高速氟碳等离子体一枪贯穿所有数十层 ONON 叠层直至底层源极板，形成孔径高度均匀、无扭曲偏转的纳米垂直通道孔阵列。",
+          summaryEn:
+            "Utilizing thick amorphous carbon hardmask (ACL) and cryogenic high-aspect-ratio reactive ion etching (HAR Cryo-RIE) with fluorocarbon plasma to punch vertical memory channel holes through all ONON layers down to the source plate with exceptional verticality and zero profile twisting.",
+          toolZh: "超低温极高深宽比电介质干法刻蚀机",
+          toolEn: "Cryogenic Extreme HAR Dielectric RIE Etcher",
+          toolVendor: "Tokyo Electron TEL Tactras / Lam Research Vantex",
+          matZh: "深纵贯圆柱通道孔 (Channel Holes)",
+          matEn: "Vertical Deep Memory Channel Hole Cavities",
+          matDimZh: "深宽比: >60:1 | 顶部 CD: ~75nm | 底部 CD: ~55nm",
+          matDimEn: "Aspect Ratio: >60:1 | Top CD: ~75nm | Bottom CD: ~55nm",
+          purposeZh:
+            "这是 3D NAND 制造中最具挑战性的关键工序。孔的垂直度与底端开通率直接决定了上百层垂直串中每个存储单元的电学一致性与器件良率。",
+          purposeEn:
+            "The pinnacle engineering challenge of 3D NAND. Vertical hole profile uniformity and bottom punch opening fidelity directly govern the electrical threshold uniformity across all 100+ vertical memory cells.",
+        },
+        {
+          id: 3,
+          badgeZh: "STEP 04/10",
+          badgeEn: "STEP 04/10",
+          catZh: "原子层沉积 (ALD)",
+          catEn: "Atomic Layer Deposition",
+          titleZh:
+            "原子层沉积（ALD）电荷捕获叠层（阻挡层 + Si3N4捕获层 + 隧穿层）",
+          titleEn:
+            "ALD Charge Trap Memory Film Stack (Blocking / Si3N4 Trap / Tunnel Oxide)",
+          shortZh: "ONO捕获介质",
+          shortEn: "ONO Trap Stack",
+          summaryZh:
+            "沿超深孔内壁进行超高台阶覆盖率的原子层沉积（ALD），依次沉积由高介电常数阻挡氧化层（Al2O3/SiO2）、电荷捕获层（高陷阱密度 Si3N4）和能带工程隧穿层（SiO2/SiON）组成的 ONO 存储功能复合薄膜。",
+          summaryEn:
+            "Applying ultra-conformal Atomic Layer Deposition (ALD) along the inner sidewalls of the ultra-deep channel holes, sequentially coating the High-k Blocking layer (Al2O3/SiO2), Charge Trap Layer (high trap-density Si3N4), and bandgap-engineered Tunnel Oxide (SiO2/SiON).",
+          toolZh: "超保形深孔立式炉原子层沉积系统 (Furnace ALD)",
+          toolEn: "Ultra-Conformal Deep-Trench Furnace ALD System",
+          toolVendor:
+            "Tokyo Electron TEL TELINDY Plus / ASM International Pulsar",
+          matZh:
+            "Al2O3 阻挡层 (~5nm) + Si3N4 陷阱层 (~6nm) + SiO2 隧穿层 (~3nm)",
+          matEn:
+            "Al2O3 Blocking (~5nm) + Si3N4 Trap (~6nm) + SiO2 Tunnel (~3nm)",
+          matDimZh: "总薄膜厚度: ~14nm | 纳米级台阶覆盖率: >99.5%",
+          matDimEn: "Total Film Thickness: ~14nm | Step Coverage: >99.5%",
+          purposeZh:
+            "构建电荷捕获闪存（CTF）的非易失物理存储核心。量子绝缘陷阱层能可靠捕获并长久储存电子，在断电情况下保存数据超过10年，且耐受上万次擦写疲劳。",
+          purposeEn:
+            "Building the non-volatile charge trap flash (CTF) storage node. The isolated quantum deep trap states in Si3N4 store electrons reliably for over 10 years without power, providing high endurance.",
+        },
+        {
+          id: 4,
+          badgeZh: "STEP 05/10",
+          badgeEn: "STEP 05/10",
+          catZh: "沟道成形与填充",
+          catEn: "Channel & Core Fill",
+          titleZh: "多晶硅垂直导电沟道沉积与中空氧化物绝缘柱芯（Macaroni）填充",
+          titleEn:
+            "Poly-Si Vertical Conduction Channel & Core Oxide ('Macaroni') Fill",
+          shortZh: "中空多晶硅沟道",
+          shortEn: "Macaroni Channel",
+          summaryZh:
+            "在隧穿层表面保形沉积纳米薄层多晶硅（Poly-Si，作为垂直串的导电沟道），随后以氧化物绝缘介质充满孔心内部形成“通心粉”（Macaroni）结构，顶部刻蚀回拉并以高浓度 N+ 多晶硅回填形成漏极接触塞（Drain Plug）。",
+          summaryEn:
+            "Depositing an ultra-thin conformal poly-silicon layer (serving as the vertical string conduction channel) on the tunnel oxide, filling the remaining center hollow with insulating SiO2 oxide to form the 'Macaroni' core, and plugging the top with N+ poly-Si drain contact.",
+          toolZh: "低压化学气相沉积 (LPCVD) + 缝隙填充氧化物 CMP",
+          toolEn: "Low-Pressure CVD (LPCVD) + Core Oxide CMP Planarization",
+          toolVendor: "Applied Materials Producer ALD/CVD / Ebara F-REX",
+          matZh: "多晶硅沟道 (~10nm) + 中空 SiO2 氧化物芯柱 + N+ 漏极塞",
+          matEn:
+            "Poly-Si Channel (~10nm) + Central SiO2 Core Rod + N+ Drain Plug",
+          matDimZh: "多晶硅环厚度: ~10nm | 芯棒绝缘体直径: ~35nm",
+          matDimEn:
+            "Poly-Si Ring Thickness: ~10nm | Macaroni Core Diameter: ~35nm",
+          purposeZh:
+            "采用中空 Macaroni 沟道设计可避免厚多晶硅体内晶界散射与大陷阱波动，显著降低串电阻、抑制短沟道效应并大幅提升垂直通道的读出电流（Ion/Ioff 比）。",
+          purposeEn:
+            "The hollow Macaroni channel avoids grain-boundary bulk defects of thick polysilicon, lowering parasitic string resistance, subduing short-channel degradation, and boosting read drive current.",
+        },
+        {
+          id: 5,
+          badgeZh: "STEP 06/10",
+          badgeEn: "STEP 06/10",
+          catZh: "缝隙槽刻蚀",
+          catEn: "Slit Trench Cut",
+          titleZh: "字线隔离缝隙长槽（Wordline Slit Trench）各向异性干法刻蚀",
+          titleEn: "Slit Trench (Wordline Cut) Anisotropic Deep Dry Etch",
+          shortZh: "字线狭缝切割",
+          shortEn: "Slit Trench Cut",
+          summaryZh:
+            "光刻定义存储块边界，以反应离子等离子体在存储通道柱阵列之间垂直向下深切贯穿所有 ONON 叠层直至源极底板，切出平行的字线隔离缝隙槽（Slit / Wordline Cut），将侧向的氮化硅与氧化物截面完整暴露。",
+          summaryEn:
+            "Patterning memory block boundaries with lithography and anisotropically etching long vertical slit trenches (Wordline Cuts) between channel column arrays down to the source plate, completely exposing the lateral sidewalls of alternating ONON layers.",
+          toolZh: "高纵横比狭缝深反应离子刻蚀机 (RIE)",
+          toolEn: "High-Aspect-Ratio Slit Deep RIE Etcher",
+          toolVendor: "Lam Research Kiyo / Applied Materials Centura",
+          matZh: "贯穿性长条状隔离缝隙 (Slit Trenches)",
+          matEn: "Continuous Deep Slit Isolation Trench Openings",
+          matDimZh:
+            "缝隙宽: ~75nm | 深度: 与叠层总厚平齐 (>5.5μm) | 纵深比: >70:1",
+          matDimEn:
+            "Slit Width: ~75nm | Depth: Stack Height (>5.5μm) | Aspect Ratio: >70:1",
+          purposeZh:
+            "字线缝隙槽不仅是未来物理隔离相邻闪存块的界限，更是后续化学湿法剥离药液与金属原子层前驱体进入各层横向内部的唯一通道（门禁通道）。",
+          purposeEn:
+            "Serving both as the physical isolation boundary between memory blocks and the essential gateway allowing wet etch chemicals and metal ALD precursors to penetrate laterally into each internal tier.",
+        },
+        {
+          id: 6,
+          badgeZh: "STEP 07/10",
+          badgeEn: "STEP 07/10",
+          catZh: "高选择比湿法剥离",
+          catEn: "Selective Wet Strip",
+          titleZh: "热磷酸高选择比湿法剥离牺牲氮化物层（形成横向悬空栅极空腔）",
+          titleEn:
+            "Hot Phosphoric Acid Selective Nitride Strip (Lateral Gate Cavity Release)",
+          shortZh: "热磷酸氮化物剥离",
+          shortEn: "Nitride Strip",
+          summaryZh:
+            "将高温热磷酸（H3PO4，~160°C）通过字线缝隙注入，利用对氮化硅（Si3N4）相较于二氧化硅（SiO2）大于 100:1 的超高腐蚀选择比，将所有层间的牺牲氮化硅完全溶解掏空，释放出横向环绕每个存储孔的悬空栅极空腔。",
+          summaryEn:
+            "Injecting hot phosphoric acid (H3PO4, ~160°C) through the slit trenches. Leveraging an ultra-high selectivity (>100:1) of Si3N4 over SiO2, every sacrificial nitride layer is completely dissolved, releasing hollow horizontal gate shelves surrounding all channel pillars.",
+          toolZh: "全自动单晶圆/批式高温湿法刻蚀清洗系统",
+          toolEn: "Automated High-Temperature Single-Wafer/Batch Wet Station",
+          toolVendor: "Tokyo Electron TEL CELLESTA / SCREEN SU-3200",
+          matZh: "悬空 SiO2 绝缘棚架 + 横向连续栅极空腔 (Gate Cavities)",
+          matEn: "Suspended SiO2 Shelves + Hollow Horizontal Gate Cavities",
+          matDimZh: "腐蚀选择比: Si3N4:SiO2 > 100:1 | 空腔高度: ~30nm",
+          matDimEn: "Selectivity: Si3N4:SiO2 > 100:1 | Cavity Height: ~30nm",
+          purposeZh:
+            "替代栅（Replacement Gate / Gate Replacement）工艺的核心里程碑。彻底移除原先的介电牺牲层，腾出完全自由的横向空间以容纳高电导率金属栅极。",
+          purposeEn:
+            "The pivotal milestone of the Replacement Gate (Gate-All-Around) architecture. Removing sacrificial dielectric tiers creates vacant lateral galleries to receive low-resistance metal wordlines.",
+        },
+        {
+          id: 7,
+          badgeZh: "STEP 08/10",
+          badgeEn: "STEP 08/10",
+          catZh: "金属替代栅金属化",
+          catEn: "Gate Replacement",
+          titleZh: "原子层沉积钨（W）金属化填充横向空腔（字线控制栅极成形）",
+          titleEn:
+            "Conformal ALD/CVD Tungsten (W) Wordline Gate Replacement Metallization",
+          shortZh: "替代栅钨字线",
+          shortEn: "W Wordline Fill",
+          summaryZh:
+            "首先以 ALD 保形沉积极薄氮化钛（TiN）黏附阻挡层与高-k 衬垫，随后通过缝隙槽在所有横向空腔中高密度填充化学气相沉积金属钨（W），回蚀清除缝隙内多余金属，完成数百层独立字线（Wordline / Control Gate）的整体成形。",
+          summaryEn:
+            "First depositing a conformal ultra-thin TiN barrier and High-k liner by ALD, followed by deep chemical vapor deposition (CVD) of metallic Tungsten (W) through the slit into all horizontal cavities. Slit recess etching separates each tier into monolithic Wordline Control Gates.",
+          toolZh: "超高保形原子层/化学气相沉积金属化工作站",
+          toolEn: "Ultra-Conformal ALD/CVD Metallization System",
+          toolVendor: "Lam Research ALTUS / Applied Materials Olympia ALD",
+          matZh: "TiN 阻挡层 (~2nm) + 金属钨（W）横向字线板",
+          matEn:
+            "TiN Liner (~2nm) + Metallic Tungsten (W) Horizontal Wordline Plates",
+          matDimZh: "字线金属厚度: ~28nm | 电阻率: <12 μΩ·cm",
+          matDimEn: "Wordline Metal Thickness: ~28nm | Resistivity: <12 μΩ·cm",
+          purposeZh:
+            "以极低电阻率的金属钨彻底取代传统多晶硅栅极，显著消除 RC 传输延迟与寄生栅极压降，使 3D 巨量存储阵列拥有毫秒级高速块擦除与亚微秒级读写寻址性能。",
+          purposeEn:
+            "Replacing high-resistance poly gates with pure metallic Tungsten dramatically eliminates RC signal delay and IR drop, enabling ultra-fast block erase and sub-microsecond read/write access across massive 3D arrays.",
+        },
+        {
+          id: 8,
+          badgeZh: "STEP 09/10",
+          badgeEn: "STEP 09/10",
+          catZh: "共用源极互连",
+          catEn: "Source Interconnect",
+          titleZh: "缝隙侧墙绝缘隔离与共用源极线（CSL）垂直钨壁互连填充",
+          titleEn:
+            "Slit Sidewall Isolation Spacer & Common Source Line (CSL) Metallization",
+          shortZh: "源极线CSL填充",
+          shortEn: "CSL Slit Fill",
+          summaryZh:
+            "在缝隙槽侧壁沉积致密二氧化硅侧墙隔垫（Spacer）以绝缘隔离横向暴露的钨字线边缘，随后各向异性刻穿缝隙底部，以金属钨填充形成坚固的垂直金属板状共用源极线（Common Source Line / CSL），经 CMP 平坦化平齐顶层。",
+          summaryEn:
+            "Depositing dense SiO2 dielectric sidewall spacers inside the slit trench to insulate the exposed edges of lateral tungsten wordlines, etching open the slit floor, and filling with tungsten to form the solid vertical Common Source Line (CSL) wall, followed by CMP planarization.",
+          toolZh: "等离子体侧墙 CVD + 钨金属沉积机 + CMP 抛光系统",
+          toolEn: "PECVD Spacer + Tungsten CVD + CMP Polishing System",
+          toolVendor: "Applied Materials Reflexion LK / Lam Research Vector",
+          matZh: "SiO2 绝缘套管侧墙 + 金属钨（W）垂直 CSL 板墙",
+          matEn:
+            "SiO2 Dielectric Spacers + Solid Tungsten (W) Vertical CSL Wall",
+          matDimZh: "侧墙厚度: ~20nm | CSL 触点宽度: ~35nm | 纵通源极底板",
+          matDimEn:
+            "Spacer Thickness: ~20nm | CSL Width: ~35nm | Contacting Source Plate",
+          purposeZh:
+            "建立由芯片顶层直接贯穿到底层源极板的高导电低欧姆直流通路，在多层读取与编程期间提供极低寄生地电平噪声与充沛的地回路瞬态放电能力。",
+          purposeEn:
+            "Establishing a low-impedance vertical ground backbone directly connecting top routing down to the bottom source plate, minimizing ground bounce and providing massive transient discharge current during flash operations.",
+        },
+        {
+          id: 9,
+          badgeZh: "STEP 10/10",
+          badgeEn: "STEP 10/10",
+          catZh: "位线顶层互连",
+          catEn: "Bitline Metallization",
+          titleZh:
+            "漏极直触孔（BL Contact）与正交位线（Bitline）铜/钨上层金属互连",
+          titleEn:
+            "Drain Contact Vias & Orthogonal Bitline (BL) Top Metallization",
+          shortZh: "位线触点与互连",
+          shortEn: "Bitline Routing",
+          summaryZh:
+            "沉积顶层层间介质（ILD），光刻刻蚀垂直着陆触孔直达每个存储通道顶端的 N+ 多晶硅漏极塞，随后通过双大马士革工艺制作与底层字线完全垂直正交排列的铜/钨位线（Bitline / BL），完成整个 3D 闪存阵列的矩阵电气互联。",
+          summaryEn:
+            "Depositing top interlayer dielectric (ILD), etching contact vias down to the N+ poly drain plug of every memory channel, and fabricating orthogonal copper/tungsten Bitlines (BL) perpendicular to the buried wordlines via dual-damascene to complete the entire 3D matrix.",
+          toolZh: "双大马士革铜互连刻蚀机 + 电化学电镀铜 (ECD) 系统",
+          toolEn:
+            "Dual-Damascene Etcher + Electrochemical Plating (ECD) System",
+          toolVendor: "Lam Research SABRE / Applied Materials Endura Copper",
+          matZh: "钨触孔塞 (BL Contact Vias) + 正交铜/钨位线 (Bitline Lines)",
+          matEn:
+            "Tungsten Vias (BL Contacts) + Orthogonal Copper/Tungsten Bitlines",
+          matDimZh: "位线节距: ~40nm | 正交交叉编织于字线阵列上方",
+          matDimEn:
+            "Bitline Pitch: ~40nm | Cross-grid over underlying wordlines",
+          purposeZh:
+            "完成 3D 矩阵的最终电气寻址闭环。每根正交位线可单独选中一列垂直串，配合横向字线偏置电压，实现精确到单比特（Single-Bit）乃至多比特（TLC/QLC）的高速读写与独立编程。",
+          purposeEn:
+            "Closing the final 3D addressing grid. Each orthogonal Bitline uniquely selects a vertical string column, coordinating with lateral Wordline bias to achieve single-bit, TLC, or QLC precision programming and sensing.",
+        },
+      ];
+
+      // Current State
+      let currentStepIndex = 0;
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = (urlParams.get("lang") || "").toLowerCase();
+      let isEnglish = true; // Default to English for all other languages
+      if (langParam === "zh" || langParam === "zh-cn") {
+        isEnglish = false;
+      } else if (langParam === "en") {
+        isEnglish = true;
+      } else {
+        const savedLang = localStorage.getItem("semiconfab_lang");
+        isEnglish = savedLang !== "zh-CN";
+      }
+
+      let isAutoPlaying = false;
+      let autoPlayTimer = null;
+      let isXRay = false;
+      let isCutaway = false;
+      let isGrid = true;
+      let isPowerFlow = true; // Default show electron trap tunneling simulation
+      let explodeProgress = 0;
+
+      // --- 2. THREE.JS SCENE SETUP ---
+      let scene, camera, renderer, controls;
+      let substrateGroup,
+        sourcePlateGroup,
+        solidOnonStackGroup,
+        ononStackGroup,
+        slitCenterGroup;
+      let channelPunchHolesGroup,
+        chargeTrapONOArrayGroup,
+        macaroniChannelCoreGroup,
+        slitTrenchCutGroup;
+      let sacrificialCavitiesGroup,
+        tungstenWordlinesGroup,
+        cslWallGroup,
+        bitlineContactsGroup;
+      let electronParticleGroup;
+      let gridHelper;
+      let clippingPlane;
+      let raycaster, mouse;
+      let hoveredMesh = null;
+      let animatedElectrons = [];
+
+      const container = document.getElementById("webgl-container");
+
+      function initThree() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0c1017);
+        scene.fog = new THREE.FogExp2(0x0c1017, 0.002);
+
+        // Camera: Optimized for tall 3D NAND vertical memory stacks in 500x500 viewport
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        const aspect = width / height;
+        camera = new THREE.PerspectiveCamera(46, aspect, 1, 2000);
+        camera.position.set(160, 130, 165);
+
+        // Clipping Plane for Cutaway Mode (cutting along Z axis)
+        clippingPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+
+        renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.localClippingEnabled = true;
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        container.appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 + 0.05;
+        controls.minDistance = 35;
+        controls.maxDistance = 550;
+        controls.target.set(0, 48, 0);
+
+        // Lighting
+        // Neutral Industrial TCAD Studio Lighting (ASML / Synopsys TCAD Style)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.25);
+        dirLight1.position.set(120, 180, 100);
+        dirLight1.castShadow = true;
+        dirLight1.shadow.mapSize.width = 2048;
+        dirLight1.shadow.mapSize.height = 2048;
+        dirLight1.shadow.bias = -0.0005;
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0x94a3b8, 0.55); // Neutral cool grey fill
+        dirLight2.position.set(-120, 100, -100);
+        scene.add(dirLight2);
+
+        const dirLight3 = new THREE.DirectionalLight(0x64748b, 0.35); // Neutral slate ground bounce
+        dirLight3.position.set(80, -60, 60);
+        scene.add(dirLight3);
+
+        // Neutral Slate CAD Grid
+        gridHelper = new THREE.GridHelper(240, 24, 0x334155, 0x1e2634);
+        gridHelper.position.y = -0.2;
+        scene.add(gridHelper);
+
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        buildGeometryHierarchy();
+
+        window.addEventListener("resize", onWindowResize);
+        renderer.domElement.addEventListener("mousemove", onMouseMove);
+
+        animate();
+      }
+
+      // --- 3. MATERIALS DEFINITIONS ---
+      let materials = {};
+
+      function initMaterials() {
+        materials.siliconSubstrate = new THREE.MeshStandardMaterial({
+          color: 0x242b35,
+          roughness: 0.7,
+          metalness: 0.15,
+        });
+
+        materials.sourcePlate = new THREE.MeshStandardMaterial({
+          color: 0x475569,
+          roughness: 0.6,
+          metalness: 0.2,
+        });
+
+        materials.sio2Layer = new THREE.MeshStandardMaterial({
+          color: 0x416584,
+          roughness: 0.45,
+          metalness: 0.05,
+          transparent: true,
+          opacity: 0.7,
+        });
+
+        materials.si3n4Sacrificial = new THREE.MeshStandardMaterial({
+          color: 0x2d6a4f,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.cavityEmpty = new THREE.MeshBasicMaterial({
+          transparent: true,
+          opacity: 0.0,
+        });
+
+        materials.holeInterior = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          roughness: 0.5,
+          metalness: 0.2,
+        });
+
+        materials.plasmaBeam = new THREE.MeshBasicMaterial({
+          color: 0x64748b,
+          transparent: true,
+          opacity: 0.3,
+        });
+
+        materials.holeRim = new THREE.MeshBasicMaterial({
+          color: 0x94a3b8,
+        });
+
+        materials.onoChargeTrap = new THREE.MeshStandardMaterial({
+          color: 0x92400e,
+          roughness: 0.5,
+          metalness: 0.1,
+        });
+
+        materials.polyChannel = new THREE.MeshStandardMaterial({
+          color: 0x583d72,
+          roughness: 0.5,
+          metalness: 0.25,
+        });
+
+        materials.macaroniCore = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          roughness: 0.4,
+          metalness: 0.1,
+        });
+
+        materials.drainPlug = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.tungstenWordline = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.slitSpacer = new THREE.MeshStandardMaterial({
+          color: 0x1f4e38,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.cslTungsten = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.blVia = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.bitline = new THREE.MeshStandardMaterial({
+          color: 0xb4532b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+      }
+
+      // --- 4. 3D GEOMETRY BUILDER ---
+      function buildGeometryHierarchy() {
+        initMaterials();
+
+        // Root scene container groups
+        substrateGroup = new THREE.Group();
+        sourcePlateGroup = new THREE.Group();
+        solidOnonStackGroup = new THREE.Group();
+        ononStackGroup = new THREE.Group();
+        slitCenterGroup = new THREE.Group();
+        channelPunchHolesGroup = new THREE.Group();
+        chargeTrapONOArrayGroup = new THREE.Group();
+        macaroniChannelCoreGroup = new THREE.Group();
+        slitTrenchCutGroup = new THREE.Group();
+        sacrificialCavitiesGroup = new THREE.Group();
+        tungstenWordlinesGroup = new THREE.Group();
+        cslWallGroup = new THREE.Group();
+        bitlineContactsGroup = new THREE.Group();
+        electronParticleGroup = new THREE.Group();
+
+        scene.add(substrateGroup);
+        scene.add(sourcePlateGroup);
+        scene.add(solidOnonStackGroup);
+        scene.add(ononStackGroup);
+        scene.add(slitCenterGroup);
+        scene.add(channelPunchHolesGroup);
+        scene.add(chargeTrapONOArrayGroup);
+        scene.add(macaroniChannelCoreGroup);
+        scene.add(slitTrenchCutGroup);
+        scene.add(sacrificialCavitiesGroup);
+        scene.add(tungstenWordlinesGroup);
+        scene.add(cslWallGroup);
+        scene.add(bitlineContactsGroup);
+        scene.add(electronParticleGroup);
+
+        // --- A. Base Substrate (P-Well Single-crystal Si) ---
+        const subGeo = new THREE.BoxGeometry(110, 8, 110);
+        const subMesh = new THREE.Mesh(subGeo, materials.siliconSubstrate);
+        subMesh.position.y = 4;
+        subMesh.castShadow = true;
+        subMesh.receiveShadow = true;
+        subMesh.userData = {
+          nameZh: "单晶硅 P-Well 基底",
+          nameEn: "P-Well Silicon Substrate",
+          specZh: "P-Type Si 单晶硅 | 掺杂: 1e16 cm⁻³ | 厚度: 8nm (标定)",
+          specEn: "P-Type Single-Crystal Silicon | Doping: 1e16 cm⁻³",
+        };
+        substrateGroup.add(subMesh);
+
+        // --- B. Bottom Source Plate (N+ Poly-Si / WSi Plate) ---
+        const srcPlateGeo = new THREE.BoxGeometry(108, 6, 108);
+        const srcPlateMesh = new THREE.Mesh(srcPlateGeo, materials.sourcePlate);
+        srcPlateMesh.position.y = 11;
+        srcPlateMesh.castShadow = true;
+        srcPlateMesh.receiveShadow = true;
+        srcPlateMesh.userData = {
+          nameZh: "下源极板 (Bottom Common Source Plate)",
+          nameEn: "Bottom Common Source Plate (WSi / N+ Poly)",
+          specZh: "N+ 多晶硅 / 硅化钨复合源极板 | 厚度: ~120nm | 提供全局 Vss",
+          specEn:
+            "N+ Poly-Si / WSi Composite Plate | Thickness: ~120nm | Array Vss",
+        };
+        sourcePlateGroup.add(srcPlateMesh);
+
+        // --- C. ONON Stack Multi-Layer Bilayers & Through-Holes ---
+        // 8 Alternating tiers (Total height: 72nm, Y from 14 to 86)
+        const stackWidth = 106;
+        const stackDepth = 106;
+        const tierCount = 8;
+        const layerThickness = 4.5; // 4.5nm each, total 9nm per pair
+        const stackTotalHeight = tierCount * 2 * layerThickness; // 72nm
+        const stackCenterY = 14 + stackTotalHeight / 2; // 50
+
+        // Split 14 channel holes into Left Wing (Block A) and Right Wing (Block B)
+        const holesLeft = [
+          { x: -36, z: -30 },
+          { x: -36, z: 0 },
+          { x: -36, z: 30 },
+          { x: -20, z: -42 },
+          { x: -18, z: -15 },
+          { x: -18, z: 15 },
+          { x: -20, z: 42 },
+        ];
+        const holesRight = [
+          { x: 20, z: -42 },
+          { x: 18, z: -15 },
+          { x: 18, z: 15 },
+          { x: 20, z: 42 },
+          { x: 36, z: -30 },
+          { x: 36, z: 0 },
+          { x: 36, z: 30 },
+        ];
+        const holePositions = [...holesLeft, ...holesRight];
+
+        // Procedural CSG-equivalent punched layer generator via THREE.Shape holes
+        function createPunchedLayerGeometry(
+          xMin,
+          xMax,
+          zMin,
+          zMax,
+          holesInBlock,
+          thickness,
+        ) {
+          const shape = new THREE.Shape();
+          shape.moveTo(xMin, zMin);
+          shape.lineTo(xMax, zMin);
+          shape.lineTo(xMax, zMax);
+          shape.lineTo(xMin, zMax);
+          shape.closePath();
+
+          holesInBlock.forEach((h) => {
+            const holePath = new THREE.Path();
+            holePath.absarc(h.x, h.z, 4.8, 0, Math.PI * 2, true);
+            shape.holes.push(holePath);
+          });
+
+          const extrudeSettings = {
+            depth: thickness,
+            bevelEnabled: false,
+            curveSegments: 20,
+          };
+          const geo = new THREE.ExtrudeGeometry(shape, extrudeSettings);
+          geo.rotateX(Math.PI / 2);
+          geo.translate(0, thickness / 2, 0);
+          geo.computeVertexNormals();
+          return geo;
+        }
+
+        const geoPunchedLeft = createPunchedLayerGeometry(
+          -53,
+          -7,
+          -53,
+          53,
+          holesLeft,
+          layerThickness,
+        );
+        const geoPunchedRight = createPunchedLayerGeometry(
+          7,
+          53,
+          -53,
+          53,
+          holesRight,
+          layerThickness,
+        );
+        const geoCenterSlit = new THREE.BoxGeometry(14, layerThickness, 106);
+        const geoSolidFull = new THREE.BoxGeometry(106, layerThickness, 106);
+
+        for (let i = 0; i < tierCount; i++) {
+          const yOxide = 14 + i * 2 * layerThickness + layerThickness / 2;
+          const yNitride =
+            14 + (i * 2 + 1) * layerThickness + layerThickness / 2;
+
+          // 1. Unpunched Solid Layers for Step 2 (Deposit ONON Stack)
+          const solidOxMesh = new THREE.Mesh(geoSolidFull, materials.sio2Layer);
+          solidOxMesh.position.set(0, yOxide, 0);
+          solidOxMesh.castShadow = true;
+          solidOxMesh.receiveShadow = true;
+          solidOxMesh.userData = {
+            nameZh: `第 ${i + 1} 层 SiO2 绝缘隔离层 (未穿孔)`,
+            nameEn: `Tier ${i + 1} SiO2 Inter-Gate Shelf (Solid)`,
+            specZh: `PECVD 二氧化硅 | 介电常数 k=3.9 | 阻隔层间垂直漏电`,
+            specEn: `PECVD Silicon Dioxide | k=3.9 | Inter-tier leakage isolation`,
+          };
+          solidOnonStackGroup.add(solidOxMesh);
+
+          const solidNitMesh = new THREE.Mesh(
+            geoSolidFull,
+            materials.si3n4Sacrificial,
+          );
+          solidNitMesh.position.set(0, yNitride, 0);
+          solidNitMesh.castShadow = true;
+          solidNitMesh.receiveShadow = true;
+          solidNitMesh.userData = {
+            nameZh: `第 ${i + 1} 层 Si3N4 牺牲层 (未穿孔)`,
+            nameEn: `Tier ${i + 1} Sacrificial Si3N4 Layer (Solid)`,
+            specZh: `PECVD 氮化硅 | 牺牲厚度: ~30nm | 最终替换为金属钨字线`,
+            specEn: `PECVD Silicon Nitride | Sacrificial ~30nm | Replaced by Tungsten`,
+          };
+          solidOnonStackGroup.add(solidNitMesh);
+
+          // 2. Punched Through-Hole Layers for Step 3 and Beyond
+          // Left Wing Oxide
+          const oxMeshLeft = new THREE.Mesh(
+            geoPunchedLeft,
+            materials.sio2Layer,
+          );
+          oxMeshLeft.position.set(0, yOxide, 0);
+          oxMeshLeft.castShadow = true;
+          oxMeshLeft.receiveShadow = true;
+          oxMeshLeft.userData = {
+            nameZh: `第 ${i + 1} 层 SiO2 绝缘隔离层 (Block A 贯穿通孔)`,
+            nameEn: `Tier ${i + 1} SiO2 Inter-Gate Shelf (Block A, Punched)`,
+            specZh: `PECVD 二氧化硅 | 高深宽比穿透通孔贯穿所有16层`,
+            specEn: `PECVD Silicon Dioxide | HAR through-holes pierced across all tiers`,
+          };
+          ononStackGroup.add(oxMeshLeft);
+
+          // Right Wing Oxide
+          const oxMeshRight = new THREE.Mesh(
+            geoPunchedRight,
+            materials.sio2Layer,
+          );
+          oxMeshRight.position.set(0, yOxide, 0);
+          oxMeshRight.castShadow = true;
+          oxMeshRight.receiveShadow = true;
+          oxMeshRight.userData = {
+            nameZh: `第 ${i + 1} 层 SiO2 绝缘隔离层 (Block B 贯穿通孔)`,
+            nameEn: `Tier ${i + 1} SiO2 Inter-Gate Shelf (Block B, Punched)`,
+            specZh: `PECVD 二氧化硅 | 高深宽比穿透通孔贯穿所有16层`,
+            specEn: `PECVD Silicon Dioxide | HAR through-holes pierced across all tiers`,
+          };
+          ononStackGroup.add(oxMeshRight);
+
+          // Left Wing Sacrificial Nitride
+          const nitMeshLeft = new THREE.Mesh(
+            geoPunchedLeft,
+            materials.si3n4Sacrificial,
+          );
+          nitMeshLeft.position.set(0, yNitride, 0);
+          nitMeshLeft.castShadow = true;
+          nitMeshLeft.receiveShadow = true;
+          nitMeshLeft.userData = {
+            nameZh: `第 ${i + 1} 层 Si3N4 牺牲层 (Block A 贯穿通孔)`,
+            nameEn: `Tier ${i + 1} Sacrificial Si3N4 Layer (Block A, Punched)`,
+            specZh: `PECVD 氮化硅 | 贯穿存储孔内壁清晰可见交叠阶梯`,
+            specEn: `PECVD Silicon Nitride | Inner sidewall reveals ONON stack`,
+          };
+          ononStackGroup.add(nitMeshLeft);
+
+          // Right Wing Sacrificial Nitride
+          const nitMeshRight = new THREE.Mesh(
+            geoPunchedRight,
+            materials.si3n4Sacrificial,
+          );
+          nitMeshRight.position.set(0, yNitride, 0);
+          nitMeshRight.castShadow = true;
+          nitMeshRight.receiveShadow = true;
+          nitMeshRight.userData = {
+            nameZh: `第 ${i + 1} 层 Si3N4 牺牲层 (Block B 贯穿通孔)`,
+            nameEn: `Tier ${i + 1} Sacrificial Si3N4 Layer (Block B, Punched)`,
+            specZh: `PECVD 氮化硅 | 贯穿存储孔内壁清晰可见交叠阶梯`,
+            specEn: `PECVD Silicon Nitride | Inner sidewall reveals ONON stack`,
+          };
+          ononStackGroup.add(nitMeshRight);
+
+          // 3. Central Slit Filler (Present until Step 6 Slit Cut)
+          const slitOxMesh = new THREE.Mesh(geoCenterSlit, materials.sio2Layer);
+          slitOxMesh.position.set(0, yOxide, 0);
+          slitCenterGroup.add(slitOxMesh);
+
+          const slitNitMesh = new THREE.Mesh(
+            geoCenterSlit,
+            materials.si3n4Sacrificial,
+          );
+          slitNitMesh.position.set(0, yNitride, 0);
+          slitCenterGroup.add(slitNitMesh);
+
+          // 4. Tungsten Replacement Gate Wordline Tiers for Step 8+
+          const wMeshLeft = new THREE.Mesh(
+            geoPunchedLeft,
+            materials.tungstenWordline,
+          );
+          wMeshLeft.position.set(0, yNitride, 0);
+          wMeshLeft.userData = {
+            nameZh: `第 ${i + 1} 层金属钨字线控制栅 (WL Gate - Block A)`,
+            nameEn: `Tier ${i + 1} Tungsten Wordline Control Gate (Block A)`,
+            specZh: `ALD TiN/W 金属替代栅 | 360°环绕垂直存储通道孔`,
+            specEn: `ALD TiN/W Replacement Metal Gate | Wraps 360° around channel pillars`,
+          };
+          tungstenWordlinesGroup.add(wMeshLeft);
+
+          const wMeshRight = new THREE.Mesh(
+            geoPunchedRight,
+            materials.tungstenWordline,
+          );
+          wMeshRight.position.set(0, yNitride, 0);
+          wMeshRight.userData = {
+            nameZh: `第 ${i + 1} 层金属钨字线控制栅 (WL Gate - Block B)`,
+            nameEn: `Tier ${i + 1} Tungsten Wordline Control Gate (Block B)`,
+            specZh: `ALD TiN/W 金属替代栅 | 360°环绕垂直存储通道孔`,
+            specEn: `ALD TiN/W Replacement Metal Gate | Wraps 360° around channel pillars`,
+          };
+          tungstenWordlinesGroup.add(wMeshRight);
+        }
+
+        // --- D. Channel Holes & Vertical Pillar Memory Strings ---
+        holePositions.forEach((pos, idx) => {
+          // 1. Channel Punch Holes (Cryogenic Plasma Beams & Top Glowing Rim in Step 3)
+          // Translucent plasma etch beam penetrating straight through all tiers
+          const beamGeo = new THREE.CylinderGeometry(
+            4.7,
+            4.4,
+            stackTotalHeight,
+            20,
+            1,
+            true,
+          );
+          const beamMesh = new THREE.Mesh(beamGeo, materials.plasmaBeam);
+          beamMesh.position.set(pos.x, stackCenterY, pos.z);
+          beamMesh.userData = {
+            nameZh: `极低温等离子体刻蚀束流 #${idx + 1}`,
+            nameEn: `Cryogenic Plasma Etch Beam #${idx + 1}`,
+            specZh: `深宽比 >60:1 | 极低温 (-70°C) 氟基等离子体 | 垂直穿透所有 16 层介质`,
+            specEn: `Aspect Ratio >60:1 | Cryo (-70°C) Fluorine Plasma | Pierces through all 16 tiers`,
+          };
+          channelPunchHolesGroup.add(beamMesh);
+
+          // Top surface glowing etch aperture rim
+          const rimGeo = new THREE.RingGeometry(3.8, 5.2, 24);
+          rimGeo.rotateX(-Math.PI / 2);
+          const rimMesh = new THREE.Mesh(rimGeo, materials.holeRim);
+          rimMesh.position.set(pos.x, 14 + stackTotalHeight + 0.1, pos.z);
+          channelPunchHolesGroup.add(rimMesh);
+
+          // Bottom etched interface circle on source plate
+          const botCircleGeo = new THREE.CircleGeometry(4.3, 20);
+          botCircleGeo.rotateX(-Math.PI / 2);
+          const botCircleMesh = new THREE.Mesh(botCircleGeo, materials.holeRim);
+          botCircleMesh.position.set(pos.x, 14.1, pos.z);
+          channelPunchHolesGroup.add(botCircleMesh);
+
+          // 2. ONO Charge Trap Layer (Emerald shell cylinder around each hole)
+          const onoGeo = new THREE.CylinderGeometry(
+            5.1,
+            4.3,
+            stackTotalHeight,
+            24,
+            1,
+            true,
+          );
+          const onoMesh = new THREE.Mesh(onoGeo, materials.onoChargeTrap);
+          onoMesh.position.set(pos.x, stackCenterY, pos.z);
+          onoMesh.userData = {
+            nameZh: `ONO 电荷捕获薄膜 (Si3N4 电子陷阱层)`,
+            nameEn: `ONO Charge Trap Film (Si3N4 Deep Trap Layer)`,
+            specZh: `Al2O3 阻挡层 + Si3N4 捕获层 + SiO2 隧穿层 | 厚度: ~14nm`,
+            specEn: `Al2O3 Blocking + Si3N4 Trap + SiO2 Tunnel | Thickness: ~14nm`,
+          };
+          chargeTrapONOArrayGroup.add(onoMesh);
+
+          // 3. Poly-Si Channel (translucent hollow tube)
+          const polyGeo = new THREE.CylinderGeometry(
+            4.0,
+            3.4,
+            stackTotalHeight,
+            24,
+            1,
+            true,
+          );
+          const polyMesh = new THREE.Mesh(polyGeo, materials.polyChannel);
+          polyMesh.position.set(pos.x, stackCenterY, pos.z);
+          polyMesh.userData = {
+            nameZh: `多晶硅垂直导电沟道 (Poly-Si Channel)`,
+            nameEn: `Poly-Si Vertical Conduction Channel`,
+            specZh: `LPCVD 多晶硅薄膜 (~10nm) | 导通垂直存储串电流`,
+            specEn: `LPCVD Poly-Si Thin Shell (~10nm) | Conduction path of NAND string`,
+          };
+          macaroniChannelCoreGroup.add(polyMesh);
+
+          // 4. Central Macaroni Core Oxide (hollow insulating pillar inside poly channel)
+          const coreGeo = new THREE.CylinderGeometry(
+            3.2,
+            2.6,
+            stackTotalHeight - 4,
+            16,
+          );
+          const coreMesh = new THREE.Mesh(coreGeo, materials.macaroniCore);
+          coreMesh.position.set(pos.x, stackCenterY - 2, pos.z);
+          coreMesh.userData = {
+            nameZh: `中空氧化物绝缘柱芯 (Macaroni Core Oxide)`,
+            nameEn: `Central Macaroni Core Oxide Rod`,
+            specZh: `SiO2 绝缘芯柱 | 抑制晶界散射与短沟道效应`,
+            specEn: `SiO2 Insulating Core | Suppresses grain-boundary scattering`,
+          };
+          macaroniChannelCoreGroup.add(coreMesh);
+
+          // 5. Top N+ Poly Drain Contact Plug
+          const plugGeo = new THREE.CylinderGeometry(4.0, 4.0, 4.5, 16);
+          const plugMesh = new THREE.Mesh(plugGeo, materials.drainPlug);
+          plugMesh.position.set(pos.x, 14 + stackTotalHeight - 2.25, pos.z);
+          plugMesh.userData = {
+            nameZh: `顶层 N+ 多晶硅漏极塞 (Drain Poly Plug)`,
+            nameEn: `Top N+ Poly Drain Contact Plug`,
+            specZh: `高浓度 N+ 掺杂多晶硅 | 与上位线触点欧姆接触`,
+            specEn: `Heavily N+ doped Poly-Si | Ohmic junction to Bitline Contact`,
+          };
+          macaroniChannelCoreGroup.add(plugMesh);
+
+          // 6. Bitline Contact Vias (Step 10)
+          const viaGeo = new THREE.CylinderGeometry(2.8, 2.8, 8, 16);
+          const viaMesh = new THREE.Mesh(viaGeo, materials.blVia);
+          viaMesh.position.set(pos.x, 14 + stackTotalHeight + 4, pos.z);
+          viaMesh.userData = {
+            nameZh: `漏极位线直触孔塞 (Bitline Contact Via)`,
+            nameEn: `Bitline Drain Contact Via`,
+            specZh: `钨 (W) 垂直通孔触点 | 垂直连接 Macaroni 漏极与顶层位线`,
+            specEn: `Tungsten (W) Vertical Via | Connects drain plug to top Bitline`,
+          };
+          bitlineContactsGroup.add(viaMesh);
+        });
+
+        // --- E. Slit Trench Cut (Wordline Cut Central Trench) ---
+        // Slit at x=0, along Z axis, width=14, depth=stackTotalHeight + 2
+        const slitOutlineGeo = new THREE.BoxGeometry(
+          14,
+          stackTotalHeight + 4,
+          108,
+        );
+        const slitCutMesh = new THREE.Mesh(
+          slitOutlineGeo,
+          materials.cavityEmpty,
+        );
+        slitCutMesh.position.set(0, stackCenterY, 0);
+        slitCutMesh.userData = {
+          nameZh: `字线隔离切割缝隙 (Wordline Slit Trench)`,
+          nameEn: `Wordline Slit Trench (Gate Cut Opening)`,
+          specZh: `各向异性干法刻蚀缝隙 | 宽 ~75nm | 暴露侧壁以供替代栅反应`,
+          specEn: `Anisotropic RIE Slit Trench | Width ~75nm | Gateway for Replacement Gate`,
+        };
+        slitTrenchCutGroup.add(slitCutMesh);
+
+        // --- F. Common Source Line (CSL) Dielectric Spacer & Tungsten Wall (Step 9) ---
+        // 1. Spacers on Left & Right walls of the slit
+        const spacerLeftGeo = new THREE.BoxGeometry(2.5, stackTotalHeight, 106);
+        const spacerLeftMesh = new THREE.Mesh(
+          spacerLeftGeo,
+          materials.slitSpacer,
+        );
+        spacerLeftMesh.position.set(-5.75, stackCenterY, 0);
+        spacerLeftMesh.userData = {
+          nameZh: `CSL 缝隙侧墙绝缘隔离层 (Left Spacer)`,
+          nameEn: `CSL Slit Sidewall Dielectric Spacer (Left)`,
+          specZh: `CVD SiO2 氧化物隔离套管 | 阻断 CSL 与字线横向短路`,
+          specEn: `CVD SiO2 Sidewall Spacer | Prevents CSL-to-Wordline shorting`,
+        };
+        cslWallGroup.add(spacerLeftMesh);
+
+        const spacerRightGeo = new THREE.BoxGeometry(
+          2.5,
+          stackTotalHeight,
+          106,
+        );
+        const spacerRightMesh = new THREE.Mesh(
+          spacerRightGeo,
+          materials.slitSpacer,
+        );
+        spacerRightMesh.position.set(5.75, stackCenterY, 0);
+        spacerRightMesh.userData = {
+          nameZh: `CSL 缝隙侧墙绝缘隔离层 (Right Spacer)`,
+          nameEn: `CSL Slit Sidewall Dielectric Spacer (Right)`,
+          specZh: `CVD SiO2 氧化物隔离套管 | 阻断 CSL 与字线横向短路`,
+          specEn: `CVD SiO2 Sidewall Spacer | Prevents CSL-to-Wordline shorting`,
+        };
+        cslWallGroup.add(spacerRightMesh);
+
+        // 2. Central Solid Tungsten Common Source Line (CSL Wall)
+        const cslWGeo = new THREE.BoxGeometry(7, stackTotalHeight + 6, 106);
+        const cslWMesh = new THREE.Mesh(cslWGeo, materials.cslTungsten);
+        cslWMesh.position.set(0, stackCenterY - 1, 0);
+        cslWMesh.userData = {
+          nameZh: `共用源极线垂直金属钨壁 (Common Source Line - CSL)`,
+          nameEn: `Common Source Line (CSL) Solid Tungsten Wall`,
+          specZh: `金属钨 (W) 垂直板墙 | 直通底板 Source Plate | 释放读写地电位`,
+          specEn: `Tungsten (W) Vertical Wall | Connects array floor to global Vss`,
+        };
+        cslWallGroup.add(cslWMesh);
+
+        // --- G. Orthogonal Bitlines (Top Metal Routing, Step 10) ---
+        // 5 Parallel Bitlines running in X-direction (orthogonal to slit in Z-direction)
+        const zBitlines = [-42, -22, 0, 22, 42];
+        zBitlines.forEach((zb, bIdx) => {
+          const blGeo = new THREE.BoxGeometry(108, 3.5, 7);
+          const blMesh = new THREE.Mesh(blGeo, materials.bitline);
+          blMesh.position.set(0, 14 + stackTotalHeight + 10, zb);
+          blMesh.castShadow = true;
+          blMesh.userData = {
+            nameZh: `顶层正交位线 (Bitline BL-${bIdx + 1})`,
+            nameEn: `Top Orthogonal Bitline Line (BL-${bIdx + 1})`,
+            specZh: `双大马士革铜/钨互连 | 节距 ~40nm | 与字线正交编码垂直串寻址`,
+            specEn: `Dual-Damascene Cu/W Interconnect | Pitch ~40nm | Orthogonal string address`,
+          };
+          bitlineContactsGroup.add(blMesh);
+        });
+
+        // --- H. Electron Trapping & Tunneling Simulation Particles ---
+        initElectronTrapSimulation();
+
+        // Set initial step visibility
+        buildDimensionsHierarchy();
+        applyStepState(0, false);
+      }
+
+      // --- 5. CHARGE TRAP TUNNELING SIMULATION ---
+      function initElectronTrapSimulation() {
+        const particleCount = 75;
+        const electronGeo = new THREE.SphereGeometry(0.85, 8, 8);
+        const electronMat = new THREE.MeshBasicMaterial({ color: 0x34d399 });
+
+        for (let i = 0; i < particleCount; i++) {
+          const mesh = new THREE.Mesh(electronGeo, electronMat);
+          // Distribute within vertical channels
+          const pillarIdx = i % 14;
+          const xPos = [-36, -20, -18, 18, 20, 36][i % 6];
+          const zPos = [-42, -30, -15, 0, 15, 30, 42][i % 7];
+
+          mesh.position.set(
+            xPos + (Math.random() - 0.5) * 4,
+            18 + Math.random() * 64,
+            zPos + (Math.random() - 0.5) * 4,
+          );
+
+          mesh.userData = {
+            speedY: 0.15 + Math.random() * 0.25,
+            radialDist: Math.random(),
+            centerX: xPos,
+            centerZ: zPos,
+            baseY: 18 + Math.random() * 64,
+          };
+
+          electronParticleGroup.add(mesh);
+          animatedElectrons.push(mesh);
+        }
+      }
+
+      function updateElectronSimulation() {
+        if (!isPowerFlow) return;
+
+        const time = performance.now() * 0.002;
+
+        animatedElectrons.forEach((mesh) => {
+          mesh.position.y += mesh.userData.speedY;
+          if (mesh.position.y > 85) {
+            mesh.position.y = 16;
+          }
+
+          // Slight lateral oscillation showing quantum Fowler-Nordheim tunneling into SiN traps
+          const angle = time + mesh.position.y * 0.1;
+          mesh.position.x = mesh.userData.centerX + Math.cos(angle) * 3.8;
+          mesh.position.z = mesh.userData.centerZ + Math.sin(angle) * 3.8;
+        });
+      }
+
+      // --- 6. STEPPER STATE MACHINE (10 FABRICATION STEPS) ---
+      function applyStepState(stepIdx, animateCam = false) {
+        updateDimensionsVisibility(stepIdx);
+        currentStepIndex = stepIdx;
+
+        // Group Visibility State Matrix
+        // Step 0: Substrate + Source Plate
+        substrateGroup.visible = true;
+        sourcePlateGroup.visible = stepIdx >= 0;
+
+        // Step 1: Solid ONON Multi-layer Alternating Dielectric Stack (before punch)
+        solidOnonStackGroup.visible = stepIdx === 1;
+
+        // Step 2 and beyond: Punched ONON stack with 14 true through-holes
+        ononStackGroup.visible = stepIdx >= 2;
+
+        // Slit Center filler: Visible before Step 5 (Slit Trench Cut)
+        slitCenterGroup.visible = stepIdx >= 2 && stepIdx < 5;
+
+        // Step 2: HAR Channel Punch Holes & Cryogenic Plasma Beams
+        channelPunchHolesGroup.visible = stepIdx === 2;
+
+        // Step 3: ONO Charge Trap Layer
+        chargeTrapONOArrayGroup.visible = stepIdx >= 3;
+
+        // Step 4: Poly Channel & Macaroni Core Fill
+        macaroniChannelCoreGroup.visible = stepIdx >= 4;
+
+        // Step 5: Slit Trench Cut
+        slitTrenchCutGroup.visible = stepIdx === 5;
+
+        // Step 6: Hot Phosphoric Acid Sacrificial Nitride Stripping
+        // In Step 6 & 7: The sacrificial nitride layers are stripped away!
+        ononStackGroup.children.forEach((child) => {
+          if (child.material === materials.si3n4Sacrificial) {
+            child.visible = stepIdx < 6; // Disappears at Step 6 & Step 7!
+          }
+        });
+        slitCenterGroup.children.forEach((child) => {
+          if (child.material === materials.si3n4Sacrificial) {
+            child.visible = stepIdx < 6;
+          }
+        });
+
+        // Step 7: Tungsten Wordline Metallization (Replacement Gate)
+        tungstenWordlinesGroup.visible = stepIdx >= 7;
+
+        // Step 8: Common Source Line (CSL) Slit Fill
+        cslWallGroup.visible = stepIdx >= 8;
+
+        // Step 9: Bitline Contacts & Orthogonal Bitlines
+        bitlineContactsGroup.visible = stepIdx >= 9;
+
+        // Particle simulation: Active during steps with channel/trap (Step 3 to 9)
+        electronParticleGroup.visible = isPowerFlow && stepIdx >= 3;
+
+        // Dynamic Camera Adjustment based on fabrication focus
+        if (animateCam) {
+          if (stepIdx === 2) {
+            // Channel hole deep inspection
+            setCameraPresetSmooth(130, 160, 130, 0, 48, 0);
+          } else if (stepIdx === 5 || stepIdx === 6) {
+            // Slit trench front view
+            setCameraPresetSmooth(0, 75, 185, 0, 48, 0);
+          } else if (stepIdx === 9) {
+            // Top bitline matrix view
+            setCameraPresetSmooth(120, 175, 120, 0, 52, 0);
+          }
+        }
+
+        updateInspectorUI(stepIdx);
+      }
+
+      // --- 7. CAMERA PRESETS & SMOOTH TRANSITION ---
+      let isDrawerOpen = false;
+      function toggleDetailsDrawer() {
+        isDrawerOpen = !isDrawerOpen;
+        const drawer = document.getElementById("inspector-drawer");
+        if (drawer) {
+          drawer.classList.toggle("translate-x-full", !isDrawerOpen);
+        }
+        const btn = document.getElementById("btn-toggle-details");
+        if (btn) {
+          btn.classList.toggle("bg-slate-700", isDrawerOpen);
+        }
+      }
+
+      function setCameraView(preset) {
+        if (preset === "iso") {
+          setCameraPresetSmooth(160, 130, 165, 0, 48, 0);
+        } else if (preset === "front") {
+          setCameraPresetSmooth(0, 65, 210, 0, 48, 0);
+        } else if (preset === "side") {
+          setCameraPresetSmooth(210, 65, 0, 0, 48, 0);
+        } else if (preset === "top") {
+          setCameraPresetSmooth(0.1, 235, 0, 0, 48, 0);
+        }
+      }
+
+      function resetCamera() {
+        setCameraPresetSmooth(160, 130, 165, 0, 48, 0);
+        controls.target.set(0, 48, 0);
+      }
+
+      function setCameraPresetSmooth(x, y, z, tx, ty, tz) {
+        const startPos = camera.position.clone();
+        const endPos = new THREE.Vector3(x, y, z);
+        const startTarget = controls.target.clone();
+        const endTarget = new THREE.Vector3(tx, ty, tz);
+
+        let progress = 0;
+        const duration = 28;
+
+        function stepCam() {
+          progress++;
+          const ease = 0.5 - Math.cos((progress / duration) * Math.PI) / 2;
+          camera.position.lerpVectors(startPos, endPos, ease);
+          controls.target.lerpVectors(startTarget, endTarget, ease);
+          controls.update();
+
+          if (progress < duration) {
+            requestAnimationFrame(stepCam);
+          }
+        }
+        stepCam();
+      }
+
+      // --- 8. EXPLODED VIEW DECONSTRUCTION ---
+      function updateExplode(val) {
+        explodeProgress = val / 100;
+        document.getElementById("explode-val").innerText = `${val}%`;
+
+        const e = explodeProgress;
+        // Explode tiers along vertical Y axis
+        sourcePlateGroup.position.y = e * 8;
+        solidOnonStackGroup.position.y = e * 18;
+        ononStackGroup.position.y = e * 18;
+        slitCenterGroup.position.y = e * 18;
+        channelPunchHolesGroup.position.y = e * 28;
+        chargeTrapONOArrayGroup.position.y = e * 36;
+        macaroniChannelCoreGroup.position.y = e * 46;
+        slitTrenchCutGroup.position.y = e * 56;
+        tungstenWordlinesGroup.position.y = e * 66;
+        cslWallGroup.position.y = e * 78;
+        bitlineContactsGroup.position.y = e * 92;
+      }
+
+      // --- 9. DISPLAY TOGGLES ---
+      function toggleXRay(enabled) {
+        isXRay = enabled;
+        materials.sio2Layer.opacity = enabled ? 0.15 : 0.65;
+        materials.si3n4Sacrificial.opacity = enabled ? 0.2 : 0.85;
+        materials.polyChannel.opacity = enabled ? 0.2 : 0.75;
+        materials.siliconSubstrate.transparent = enabled;
+        materials.siliconSubstrate.opacity = enabled ? 0.45 : 1.0;
+        materials.sourcePlate.transparent = enabled;
+        materials.sourcePlate.opacity = enabled ? 0.45 : 1.0;
+      }
+
+      function toggleCutaway(enabled) {
+        isCutaway = enabled;
+        if (enabled) {
+          renderer.clippingPlanes = [clippingPlane];
+          clippingPlane.constant = 0;
+        } else {
+          renderer.clippingPlanes = [];
+        }
+      }
+
+      function toggleGrid(enabled) {
+        isGrid = enabled;
+        gridHelper.visible = enabled;
+      }
+
+      function togglePowerFlow(enabled) {
+        isPowerFlow = enabled;
+        electronParticleGroup.visible = enabled && currentStepIndex >= 3;
+      }
+
+      // --- 10. STEPPER CONTROLS & AUTOPLAY ---
+      function goToStep(idx) {
+        applyStepState(idx, true);
+      }
+
+      function nextStep() {
+        if (currentStepIndex < STEPS.length - 1) {
+          goToStep(currentStepIndex + 1);
+        } else if (isAutoPlaying) {
+          goToStep(0);
+        }
+      }
+
+      function prevStep() {
+        if (currentStepIndex > 0) {
+          goToStep(currentStepIndex - 1);
+        }
+      }
+
+      function toggleAutoPlay() {
+        isAutoPlaying = !isAutoPlaying;
+        const btn = document.getElementById("autoplay-btn");
+        const icon = document.getElementById("autoplay-icon");
+        const label = document.getElementById("autoplay-label");
+
+        if (isAutoPlaying) {
+          btn.classList.add("glow-emerald", "border-emerald-400");
+          icon.setAttribute("data-lucide", "pause");
+          label.innerText = isEnglish ? "Pause" : "暂停演示";
+          lucide.createIcons();
+          autoPlayTimer = setInterval(() => {
+            nextStep();
+          }, 4200);
+        } else {
+          btn.classList.remove("glow-emerald", "border-emerald-400");
+          icon.setAttribute("data-lucide", "play");
+          label.innerText = isEnglish ? "Play" : "播放工序";
+          lucide.createIcons();
+          clearInterval(autoPlayTimer);
+        }
+      }
+
+      // --- 11. UI LOCALIZATION (I18N) & INSPECTOR ---
+      function updateInspectorUI(idx) {
+        const data = STEPS[idx];
+
+        document.getElementById("step-badge").innerText = isEnglish
+          ? data.badgeEn
+          : data.badgeZh;
+        document.getElementById("process-category-badge").innerText = isEnglish
+          ? data.catEn
+          : data.catZh;
+
+        const titleEl = document.getElementById("step-title");
+        const subTitleEl = document.getElementById("step-title-en");
+
+        if (isEnglish) {
+          titleEl.innerText = data.titleEn;
+          subTitleEl.style.display = "none";
+          subTitleEl.innerText = "";
+        } else {
+          titleEl.innerText = data.titleZh;
+          subTitleEl.style.display = "block";
+          subTitleEl.innerText = data.titleEn;
+        }
+
+        document.getElementById("step-summary").innerText = isEnglish
+          ? data.summaryEn
+          : data.summaryZh;
+        document.getElementById("step-equipment").innerText = isEnglish
+          ? data.toolEn
+          : data.toolZh;
+        document.getElementById("step-equipment-vendor").innerText =
+          data.toolVendor;
+        document.getElementById("step-material").innerText = isEnglish
+          ? data.matEn
+          : data.matZh;
+        document.getElementById("step-material-dim").innerText = isEnglish
+          ? data.matDimEn
+          : data.matDimZh;
+        document.getElementById("step-purpose").innerText = isEnglish
+          ? data.purposeEn
+          : data.purposeZh;
+
+        document.getElementById("btn-prev").disabled = idx === 0;
+
+        for (let i = 0; i < STEPS.length; i++) {
+          const btn = document.getElementById(`step-tab-${i}`);
+          if (btn) {
+            const labelEl = btn.querySelector(".tab-label");
+            if (labelEl) {
+              labelEl.innerText = isEnglish
+                ? STEPS[i].shortEn
+                : STEPS[i].shortZh;
+            }
+            if (i === idx) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          }
+        }
+      }
+
+      function applyLanguageUI() {
+        document.documentElement.lang = isEnglish ? "en" : "zh-CN";
+        document.getElementById("lang-indicator").innerText = isEnglish
+          ? "中"
+          : "EN";
+
+        document.getElementById("header-subtitle").innerText = isEnglish
+          ? "3D NAND Charge Trap Flash (CTF) Memory Cell Fabrication Digital Twin (ONON Stack & Replacement Gate)"
+          : "3D NAND 电荷捕获(CTF)垂直闪存制造演进模型 (ONON交替叠层与替代栅工艺)";
+        document.getElementById("nav-cleanroom").innerText = isEnglish
+          ? "Cleanroom Twin"
+          : "洁净室数字孪生";
+        document.getElementById("nav-vision").innerText = isEnglish
+          ? "Vision"
+          : "愿景";
+        document.getElementById("btn-reset-cam-label").innerText = isEnglish
+          ? "Reset View"
+          : "复位视角";
+
+        document.getElementById("lbl-cam-presets").innerText = isEnglish
+          ? "Camera Views"
+          : "机位视角 (Camera)";
+        document.getElementById("lbl-display-modes").innerText = isEnglish
+          ? "Display Modes"
+          : "显示模式 (Display)";
+        document.getElementById("opt-xray").innerText = isEnglish
+          ? "X-Ray Translucent"
+          : "X-Ray 透视";
+        document.getElementById("opt-cutaway").innerText = isEnglish
+          ? "Cross-Section Cut"
+          : "中轴切面剖切";
+        document.getElementById("opt-grid").innerText = isEnglish
+          ? "Nanometer Grid"
+          : "纳米标尺基面";
+        document.getElementById("opt-power").innerText = isEnglish
+          ? "Charge Trap Tunneling"
+          : "电子隧穿捕获模拟";
+        document.getElementById("opt-explode").innerText = isEnglish
+          ? "Exploded View"
+          : "层叠爆炸解构";
+        document.getElementById("hint-mouse").innerText = isEnglish
+          ? "Left: Rotate · Right: Pan · Scroll: Zoom · Hover: Inspect"
+          : "左键旋转 · 右键平移 · 滚轮缩放 · 悬停测绘";
+
+        document.getElementById("lbl-equipment").innerText = isEnglish
+          ? "Tool Equipment"
+          : "制造机台 (Tool)";
+        document.getElementById("lbl-material").innerText = isEnglish
+          ? "Material & Specs"
+          : "材料与结构 (Material)";
+        document.getElementById("lbl-purpose-title").innerText = isEnglish
+          ? "Engineering Purpose & Mechanism"
+          : "工艺核心目的与机理";
+        document.getElementById("lbl-prev-btn").innerText = isEnglish
+          ? "Prev Step"
+          : "上一步";
+        document.getElementById("lbl-next-btn").innerText = isEnglish
+          ? "Next Step"
+          : "下一步";
+
+        const autoplayLabel = document.getElementById("autoplay-label");
+        if (autoplayLabel) {
+          autoplayLabel.innerText = isAutoPlaying
+            ? isEnglish
+              ? "Pause"
+              : "暂停演示"
+            : isEnglish
+              ? "Play"
+              : "播放工序";
+        }
+
+        // Update cross links to preserve language
+        const finfetLink = document.querySelector('a[href*="finfet.html"]');
+        if (finfetLink) {
+          finfetLink.href = isEnglish
+            ? "finfet.html?lang=en"
+            : "finfet.html?lang=zh";
+        }
+        const gaaLink = document.querySelector('a[href*="gaa.html"]');
+        if (gaaLink) {
+          gaaLink.href = isEnglish ? "gaa.html?lang=en" : "gaa.html?lang=zh";
+        }
+        const dramLink = document.querySelector('a[href*="dram.html"]');
+        if (dramLink) {
+          dramLink.href = isEnglish ? "dram.html?lang=en" : "dram.html?lang=zh";
+        }
+
+        updateInspectorUI(currentStepIndex);
+        renderMaterialLegend();
+        dimensionSprites.forEach((s) => {
+          if (s.userData && s.userData.redraw) {
+            s.userData.redraw(isEnglish);
+            s.userData.texture.needsUpdate = true;
+          }
+        });
+        const lblLegend = document.getElementById("lbl-mat-legend");
+        if (lblLegend)
+          lblLegend.innerText = isEnglish
+            ? "Material & Color Legend"
+            : "材料与色标图例";
+        const lblHint = document.getElementById("lbl-legend-hint");
+        if (lblHint)
+          lblHint.innerText = isEnglish ? "Click to highlight" : "点击高亮";
+        const optDim = document.getElementById("opt-dimensions");
+        if (optDim)
+          optDim.innerText = isEnglish
+            ? "3D Dimensions (70:1 Aspect Ratio)"
+            : "三维尺寸标尺 (70:1深宽比)";
+      }
+
+      function toggleLanguage() {
+        isEnglish = !isEnglish;
+        localStorage.setItem("semiconfab_lang", isEnglish ? "en" : "zh-CN");
+        applyLanguageUI();
+      }
+
+      // --- 12. RAYCASTING & HOVER INSPECTOR TOOLTIP ---
+      function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        const validHit = intersects.find(
+          (hit) =>
+            hit.object.userData &&
+            hit.object.userData.nameZh &&
+            hit.object.visible,
+        );
+
+        const tooltip = document.getElementById("part-tooltip");
+
+        if (validHit) {
+          const obj = validHit.object;
+          tooltip.style.left = `${event.clientX}px`;
+          tooltip.style.top = `${event.clientY}px`;
+          tooltip.classList.remove("hidden");
+
+          document.getElementById("tooltip-title").innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+          <span>${isEnglish ? obj.userData.nameEn : obj.userData.nameZh}</span>
+        `;
+          document.getElementById("tooltip-desc").innerText = isEnglish
+            ? obj.userData.specEn || obj.userData.nameEn
+            : obj.userData.specZh || obj.userData.nameZh;
+
+          if (hoveredMesh !== obj) {
+            if (
+              hoveredMesh &&
+              hoveredMesh.material &&
+              hoveredMesh.material.emissive
+            ) {
+              hoveredMesh.material.emissiveIntensity =
+                hoveredMesh.userData.origEmissive || 0;
+            }
+            hoveredMesh = obj;
+            if (hoveredMesh.material && hoveredMesh.material.emissive) {
+              hoveredMesh.userData.origEmissive =
+                hoveredMesh.material.emissiveIntensity;
+              hoveredMesh.material.emissive.setHex(0x94a3b8);
+              hoveredMesh.material.emissiveIntensity = 0.15;
+            }
+          }
+        } else {
+          tooltip.classList.add("hidden");
+          if (
+            hoveredMesh &&
+            hoveredMesh.material &&
+            hoveredMesh.material.emissive
+          ) {
+            hoveredMesh.material.emissiveIntensity =
+              hoveredMesh.userData.origEmissive || 0;
+            hoveredMesh = null;
+          }
+        }
+      }
+
+      function onWindowResize() {
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      // --- COLOR & MATERIAL METADATA (3D NAND 材料色标图例) ---
+      const DEVICE_MATERIALS_META = [
+        {
+          id: "siliconSubstrate",
+          nameZh: "单晶硅衬底与源极板",
+          nameEn: "Silicon Substrate & CSL",
+          color: "#334155",
+          formula: "Si",
+          descZh: "硅衬底底座与共源极基板",
+          descEn: "Base silicon & bottom source plate",
+        },
+        {
+          id: "sio2Layer",
+          nameZh: "氧化硅隔离层",
+          nameEn: "SiO2 Insulating Layer",
+          color: "#38bdf8",
+          formula: "SiO₂",
+          descZh: "与氮化硅交替沉积的介质层",
+          descEn: "Dielectric isolation alternating layer",
+        },
+        {
+          id: "si3n4Sacrificial",
+          nameZh: "氮化硅牺牲层",
+          nameEn: "Si3N4 Sacrificial Layer",
+          color: "#10b981",
+          formula: "Si₃N₄",
+          descZh: "热磷酸湿法掏空形成水平缝隙",
+          descEn: "Sacrificial tier stripped via hot H3PO4",
+        },
+        {
+          id: "tungstenWordline",
+          nameZh: "钨金属字线 (Wordline)",
+          nameEn: "Tungsten Wordline Gate",
+          color: "#facc15",
+          formula: "W / TiN",
+          descZh: "金属替换栅极 · 厚度 28nm",
+          descEn: "Replacement metal gate tiers (28nm)",
+        },
+        {
+          id: "onoChargeTrap",
+          nameZh: "ONO 电荷俘获复合介质",
+          nameEn: "ONO Charge Trap Dielectric",
+          color: "#f97316",
+          formula: "SiO₂-SiN-SiO₂",
+          descZh: "隧穿氧化层+氮化硅电荷陷阱+阻挡层",
+          descEn: "Tunnel oxide + SiN trap + block layer",
+        },
+        {
+          id: "polyChannel",
+          nameZh: "多晶硅垂直导电沟道",
+          nameEn: "Poly-Si Channel Tube",
+          color: "#a855f7",
+          formula: "Poly-Si",
+          descZh: "厚度 8-10nm 的中空圆筒状导电柱",
+          descEn: "8-10nm thin cylindrical channel tube",
+        },
+        {
+          id: "macaroniCore",
+          nameZh: "Macaroni 绝缘轴心",
+          nameEn: "Macaroni Oxide Core",
+          color: "#e2e8f0",
+          formula: "SiO₂",
+          descZh: "孔中心绝缘填充，抑制寄生漏电",
+          descEn: "Central dielectric core filler",
+        },
+        {
+          id: "cslTungsten",
+          nameZh: "共源极钨金属导电壁",
+          nameEn: "Common Source Line (CSL)",
+          color: "#e2e8f0",
+          formula: "W",
+          descZh: "垂直缝隙中的源极接地连接柱",
+          descEn: "Vertical tungsten ground wall",
+        },
+        {
+          id: "bitline",
+          nameZh: "正交铜金属位线 (Bitline)",
+          nameEn: "Copper Bitline (BL)",
+          color: "#f97316",
+          formula: "Cu",
+          descZh: "顶层正交读写金属互连总线",
+          descEn: "Top orthogonal read/write metal lines",
+        },
+      ];
+
+      function renderMaterialLegend() {
+        const container = document.getElementById("material-legend-container");
+        if (!container) return;
+        container.innerHTML = "";
+
+        DEVICE_MATERIALS_META.forEach((mat) => {
+          const item = document.createElement("div");
+          item.className =
+            "flex items-center gap-1.5 p-1 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-emerald-500/50 cursor-pointer transition text-[10px] select-none";
+          item.title = isEnglish
+            ? `${mat.nameEn} (${mat.formula}) - ${mat.descEn}`
+            : `${mat.nameZh} (${mat.formula}) - ${mat.descZh}`;
+          item.onclick = () => highlightMaterialInScene(mat.id);
+
+          item.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm" style="background-color: ${mat.color}; border: 1px solid rgba(255,255,255,0.25)"></span>
+          <div class="truncate flex items-center gap-1">
+            <span class="font-mono text-emerald-300 font-semibold">${mat.formula}</span>
+            <span class="text-slate-400 text-[9px] truncate">${isEnglish ? mat.nameEn : mat.nameZh}</span>
+          </div>
+        `;
+          container.appendChild(item);
+        });
+      }
+
+      function highlightMaterialInScene(matId) {
+        const targetMat = materials[matId];
+        if (!targetMat) return;
+
+        scene.traverse((child) => {
+          if (child.isMesh && child.material === targetMat) {
+            const origHex = child.material.emissive
+              ? child.material.emissive.getHex()
+              : 0;
+            if (child.material.emissive) {
+              child.material.emissive.setHex(0x10b981);
+              child.material.emissiveIntensity = 0.8;
+              setTimeout(() => {
+                child.material.emissive.setHex(origHex);
+                child.material.emissiveIntensity = 0.2;
+              }, 1200);
+            }
+          }
+        });
+      }
+
+      // --- 3D CALIBRATED DIMENSION ANNOTATIONS (3D NAND 尺寸标注) ---
+      let dimensionsGroup = null;
+      let dimensionSprites = [];
+
+      function createBillboardDimensionBadge(
+        textZh,
+        textEn,
+        position,
+        scaleX = 26,
+        scaleY = 6.5,
+      ) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 128;
+        const ctx = canvas.getContext("2d");
+
+        function redraw(isEn) {
+          ctx.clearRect(0, 0, 512, 128);
+          ctx.fillStyle = "rgba(15, 23, 42, 0.92)";
+          ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
+          ctx.lineWidth = 4;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(8, 8, 496, 112, 24);
+            ctx.fill();
+            ctx.stroke();
+          } else {
+            ctx.fillRect(8, 8, 496, 112);
+            ctx.strokeRect(8, 8, 496, 112);
+          }
+
+          ctx.fillStyle = "#94a3b8";
+          ctx.beginPath();
+          ctx.arc(36, 64, 12, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font =
+            'bold 36px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.textBaseline = "middle";
+          ctx.fillText(isEn ? textEn : textZh, 60, 64);
+        }
+
+        redraw(isEnglish);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.minFilter = THREE.LinearFilter;
+        const spriteMat = new THREE.SpriteMaterial({
+          map: texture,
+          depthTest: false,
+          transparent: true,
+        });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.position.copy(position);
+        sprite.scale.set(scaleX, scaleY, 1);
+        sprite.userData = { isDimensionLabel: true, redraw, texture };
+        dimensionSprites.push(sprite);
+        return sprite;
+      }
+
+      function createDimensionLine(
+        p1,
+        p2,
+        color = 0x10b981,
+        tickLen = 3,
+        tickAxis = "y",
+      ) {
+        const pts = [p1, p2];
+        const off = new THREE.Vector3();
+        off[tickAxis] = tickLen;
+
+        pts.push(
+          p1.clone().add(off),
+          p1.clone().sub(off),
+          p2.clone().add(off),
+          p2.clone().sub(off),
+        );
+
+        const geom = new THREE.BufferGeometry().setFromPoints(pts);
+        const mat = new THREE.LineBasicMaterial({
+          color: color,
+          depthTest: false,
+          transparent: true,
+          opacity: 0.85,
+        });
+        return new THREE.LineSegments(geom, mat);
+      }
+
+      function buildDimensionsHierarchy() {
+        dimensionsGroup = new THREE.Group();
+        dimensionSprites = [];
+
+        // 1. 通道孔高度 ~5.5μm (深宽比 70:1, y = 14 到 74)
+        const pChBot = new THREE.Vector3(-42, 14, 25);
+        const pChTop = new THREE.Vector3(-42, 74, 25);
+        const chLine = createDimensionLine(pChBot, pChTop, 0x10b981, 3, "x");
+        const chBadge = createBillboardDimensionBadge(
+          "通道孔深: ~5.5 μm (深宽比 70:1)",
+          "Channel Depth: ~5.5 μm (70:1 AR)",
+          new THREE.Vector3(-62, 44, 25),
+          36,
+          6.8,
+        );
+        chLine.name = "dim_channel_depth";
+        chBadge.name = "dim_channel_depth_badge";
+        dimensionsGroup.add(chLine, chBadge);
+
+        // 2. 通道孔孔径 80nm (在顶层开孔处, x = -18 到 -10, y = 77, z = 20)
+        const pDLeft = new THREE.Vector3(-18, 77, 20);
+        const pDRight = new THREE.Vector3(-10, 77, 20);
+        const dLine = createDimensionLine(pDLeft, pDRight, 0x38bdf8, 2, "z");
+        const dBadge = createBillboardDimensionBadge(
+          "通道孔径: 80 nm",
+          "Hole Diameter: 80 nm",
+          new THREE.Vector3(-14, 83, 20),
+          24,
+          5.8,
+        );
+        dLine.name = "dim_hole_dia";
+        dBadge.name = "dim_hole_dia_badge";
+        dimensionsGroup.add(dLine, dBadge);
+
+        // 3. 字线层厚度 28nm (单层钨栅厚度)
+        const wBadge = createBillboardDimensionBadge(
+          "字线金属厚: 28 nm",
+          "Wordline Metal: 28 nm",
+          new THREE.Vector3(42, 50, 15),
+          24,
+          5.8,
+        );
+        wBadge.name = "dim_wl_thick_badge";
+        dimensionsGroup.add(wBadge);
+
+        // 4. ONO 复合介质膜厚 14nm
+        const onoBadge = createBillboardDimensionBadge(
+          "ONO 电荷陷阱: ~14 nm",
+          "ONO Charge Trap: ~14 nm",
+          new THREE.Vector3(0, 30, 42),
+          26,
+          6,
+        );
+        onoBadge.name = "dim_ono_badge";
+        dimensionsGroup.add(onoBadge);
+
+        scene.add(dimensionsGroup);
+      }
+
+      function updateDimensionsVisibility(step) {
+        if (!dimensionsGroup) return;
+        const isDimChecked =
+          document.getElementById("check-dimensions")?.checked ?? true;
+        if (!isDimChecked) {
+          dimensionsGroup.visible = false;
+          return;
+        }
+        dimensionsGroup.visible = true;
+
+        const chL = dimensionsGroup.getObjectByName("dim_channel_depth");
+        const chB = dimensionsGroup.getObjectByName("dim_channel_depth_badge");
+        const dL = dimensionsGroup.getObjectByName("dim_hole_dia");
+        const dB = dimensionsGroup.getObjectByName("dim_hole_dia_badge");
+        const wlB = dimensionsGroup.getObjectByName("dim_wl_thick_badge");
+        const onoB = dimensionsGroup.getObjectByName("dim_ono_badge");
+
+        const punchVisible = step >= 2;
+        if (chL) chL.visible = punchVisible;
+        if (chB) chB.visible = punchVisible;
+        if (dL) dL.visible = punchVisible;
+        if (dB) dB.visible = punchVisible;
+
+        const wlVisible = step >= 7;
+        if (wlB) wlB.visible = wlVisible;
+
+        const onoVisible = step >= 3;
+        if (onoB) onoB.visible = onoVisible;
+      }
+
+      function toggleDimensions(visible) {
+        if (dimensionsGroup) dimensionsGroup.visible = visible;
+        const sb = document.getElementById("viewport-scale-bar");
+        if (sb) sb.style.display = visible ? "flex" : "none";
+      }
+
+      // --- 13. ANIMATION LOOP ---
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        updateElectronSimulation();
+        renderer.render(scene, camera);
+      }
+
+      // Bootstrap
+      function bootstrapApp() {
+        if (window.THREE && window.THREE.OrbitControls) {
+          initThree();
+          applyLanguageUI();
+          if (window.lucide) lucide.createIcons();
+        } else {
+          window.__onThreeLoaded = () => {
+            initThree();
+            applyLanguageUI();
+            if (window.lucide) lucide.createIcons();
+          };
+        }
+      }
+      window.addEventListener("DOMContentLoaded", bootstrapApp);
+    </script>
+    <!-- Accessible & Machine-Readable Knowledge Base for AI Engines (GEO) & Search Crawlers -->
+    <article
+      id="seo-crawlable-content"
+      class="sr-only"
+      aria-label="3D NAND CTF Memory Cell Fabrication Engineering Documentation"
+    >
+      <h1>
+        3D NAND Charge Trap Flash (CTF) Fabrication Process: 10-Step Industrial
+        Engineering Breakdown
+      </h1>
+      <p>
+        This interactive digital twin details the complete industrial
+        fabrication sequence of modern 3D NAND vertical memory strings,
+        featuring alternating oxide-nitride (ONON) multi-layer stacks, high
+        aspect ratio (>60:1) channel punch holes, hollow Macaroni poly-silicon
+        channels, and replacement gate tungsten metallization.
+      </p>
+
+      <h2>10-Step 3D NAND Semiconductor Fabrication Sequence</h2>
+      <ol>
+        <li>
+          <h3>
+            Step 1: P-Well Substrate & Bottom Common Source Plate Formation
+          </h3>
+          <p>
+            Forming P-well on 300mm single-crystal silicon wafer, followed by
+            depositing and annealing heavy N+ poly-Si and tungsten silicide
+            (WSi/W) composite lower source plate providing global Vss ground
+            across the array.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High-Energy Ion Implanter (AMAT Varian)
+            + Vertical Diffusion Anneal Furnace (TEL TELINDY).
+            <strong>Materials:</strong> P-Type Si Substrate, N+ Poly-Si / WSi
+            Source Plate (Thickness: ~120nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 2: Alternating Oxide-Nitride (ONON) Multi-Layer Dielectric
+            Stack Deposition
+          </h3>
+          <p>
+            PECVD continuously deposits dozens to hundreds of alternating
+            nanoscale bilayers of SiO2 (inter-tier isolation, ~25nm) and
+            sacrificial Si3N4 (sacrificial gate tier, ~30nm) with mechanical
+            stress compensation.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Plasma Enhanced Chemical Vapor
+            Deposition (PECVD) System (Lam Research Vector / AMAT Producer GT).
+            <strong>Materials:</strong> Alternating SiO2 & Si3N4 Bilayers (Stack
+            Height: >5.5μm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 3: Extreme High Aspect Ratio (>60:1) Channel Hole Cryogenic
+            Plasma Etch
+          </h3>
+          <p>
+            Using thick amorphous carbon hardmask (ACL) and cryogenic
+            fluorocarbon plasma RIE to punch vertical cylindrical channel holes
+            straight through all ONON layers down to the source plate with
+            exceptional verticality.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Cryogenic Extreme HAR Dielectric RIE
+            Etcher (Tokyo Electron TEL Tactras / Lam Vantex).
+            <strong>Materials:</strong> Vertical Memory Channel Voids (Aspect
+            Ratio: >60:1, Top CD: ~75nm, Bottom CD: ~55nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 4: ALD Charge Trap Memory Film Stack (Blocking / Si3N4 Trap /
+            Tunnel Oxide)
+          </h3>
+          <p>
+            Atomic Layer Deposition conforms along deep hole sidewalls,
+            sequentially coating High-k blocking oxide (Al2O3/SiO2), charge trap
+            storage film (high-density Si3N4), and bandgap-engineered tunnel
+            oxide (SiO2/SiON).
+          </p>
+          <p>
+            <strong>Equipment:</strong> Ultra-Conformal Vertical Furnace ALD
+            (TEL TELINDY Plus / ASM Pulsar). <strong>Materials:</strong> Al2O3
+            (~5nm) + Si3N4 Trap (~6nm) + SiO2 Tunnel (~3nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 5: Poly-Si Vertical Conduction Channel & Core Oxide
+            ('Macaroni') Fill
+          </h3>
+          <p>
+            Conformal LPCVD deposition of a thin (~10nm) poly-silicon channel
+            tube, filling the remaining hollow core with insulating SiO2
+            macaroni rod, and plugging the top with N+ poly drain contact.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Low-Pressure CVD (LPCVD) + Oxide CMP
+            System (AMAT Producer / Ebara F-REX).
+            <strong>Materials:</strong> Thin Poly-Si Conduction Shell + Macaroni
+            SiO2 Core + N+ Drain Poly Plug.
+          </p>
+        </li>
+        <li>
+          <h3>Step 6: Slit Trench (Wordline Cut) Anisotropic Deep Dry Etch</h3>
+          <p>
+            Anisotropic plasma dry etching cuts deep vertical slit trenches
+            between channel columns through all ONON layers down to the source
+            plate, completely exposing the lateral edges of alternating tiers.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Slit Deep RIE Etcher (Lam Research Kiyo
+            / AMAT Centura). <strong>Materials:</strong> Deep Slit Trenches
+            (Width: ~75nm, Aspect Ratio: >70:1).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 7: Hot Phosphoric Acid Selective Nitride Strip (Lateral Gate
+            Cavity Release)
+          </h3>
+          <p>
+            Injecting hot phosphoric acid (H3PO4, ~160°C) via slit trenches
+            selectively dissolves all sacrificial Si3N4 layers (selectivity >
+            100:1 over SiO2) to release hollow lateral gate cavities.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Automated High-Temperature Wet Etch
+            Station (TEL CELLESTA / SCREEN SU-3200).
+            <strong>Materials:</strong> Hot Phosphoric Acid (H3PO4) wet
+            chemistry, releasing hollow horizontal gate shelves.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 8: Conformal ALD/CVD Tungsten (W) Wordline Gate Replacement
+            Metallization
+          </h3>
+          <p>
+            ALD TiN barrier deposition and deep CVD Tungsten metallization
+            filling all horizontal cavities through the slit, followed by recess
+            etch-back to separate monolithic wordlines.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Ultra-Conformal ALD/CVD Metallization
+            System (Lam Research ALTUS / AMAT Olympia).
+            <strong>Materials:</strong> TiN Liner (~2nm) + Metallic Tungsten (W)
+            Horizontal Wordline Plates.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 9: Slit Sidewall Isolation Spacer & Common Source Line (CSL)
+            Metallization
+          </h3>
+          <p>
+            Depositing SiO2 dielectric sidewall spacers inside the slit trench,
+            opening the floor, and filling with tungsten to form the solid
+            vertical Common Source Line (CSL) wall.
+          </p>
+          <p>
+            <strong>Equipment:</strong> PECVD Spacer + Tungsten CVD + CMP System
+            (Applied Materials Reflexion LK). <strong>Materials:</strong> SiO2
+            Dielectric Spacers + Solid Tungsten (W) Vertical CSL Wall.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 10: Drain Contact Vias & Orthogonal Bitline (BL) Top
+            Metallization
+          </h3>
+          <p>
+            Depositing interlayer dielectric (ILD), etching vias to each
+            macaroni channel drain plug, and fabricating orthogonal
+            copper/tungsten bitlines crossing perpendicular to wordlines.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Dual-Damascene Etcher + Electroplating
+            Copper (ECD) System (Lam Research SABRE / AMAT Endura).
+            <strong>Materials:</strong> Tungsten Vias + Orthogonal
+            Copper/Tungsten Bitlines.
+          </p>
+        </li>
+      </ol>
+
+      <h2>Frequently Asked Questions (FAQ) on 3D NAND Flash Fabrication</h2>
+      <dl>
+        <dt>
+          Why did 3D NAND transition from Floating Gate to Charge Trap Flash
+          (CTF)?
+        </dt>
+        <dd>
+          Floating Gate stores electrons in conductive polysilicon islands,
+          where a single oxide defect leaks the entire charge. Charge Trap Flash
+          (CTF) stores electrons in physically isolated, non-conductive quantum
+          defect traps within a silicon nitride (Si3N4) layer. Local defects do
+          not cause global charge leakage, enabling thinner dielectrics, lower
+          voltages, and eliminating cell-to-cell capacitive crosstalk.
+        </dd>
+        <dt>What is the Macaroni channel structure in 3D NAND?</dt>
+        <dd>
+          Instead of filling the deep channel hole with solid polysilicon, a
+          thin (~10nm) annular polysilicon channel tube is deposited along the
+          inner wall, while the center is filled with insulating silicon dioxide
+          ('macaroni' core). This eliminates bulk defects and grain boundaries
+          of thick polysilicon, reducing string resistance and boosting read
+          drive current.
+        </dd>
+        <dt>How does the Replacement Gate process work in 3D NAND?</dt>
+        <dd>
+          Rather than etching refractory metals through hundreds of layers, the
+          initial stack is grown as alternating SiO2 and sacrificial Si3N4.
+          After memory holes are completed, deep slit trenches are cut and hot
+          phosphoric acid dissolves the sacrificial Si3N4. Metallic tungsten (W)
+          is then deposited through the slit into the vacant lateral cavities,
+          forming low-resistance monolithic control gates.
+        </dd>
+      </dl>
+    </article>
+  </body>
+</html>

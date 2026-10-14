@@ -1,0 +1,278 @@
+{
+  "commercial": {
+    "alternative_to": [
+      {
+        "model": "P-80 PECVD",
+        "note": "Demonstrates the alternative_to linkage powering drop-in comparison; vendor-submitted entry would replace this placeholder",
+        "vendor": "Example Challenger Deposition Co."
+      }
+    ],
+    "datasheet_url": "https://www.appliedmaterials.com/products/producer-gt/",
+    "regions_available": ["US", "TW", "KR", "CN", "SG"],
+    "vendor_contact": "https://www.appliedmaterials.com/contact/"
+  },
+  "conformance_level": "L3",
+  "facilities": {
+    "cleanroom_class_required": {
+      "provenance": {
+        "note": "Standard for 300mm PECVD bays",
+        "tier": "inferred"
+      },
+      "value": "ISO 4"
+    },
+    "exhaust": {
+      "provenance": {
+        "note": "Illustrative for PFC-abated PECVD",
+        "tier": "synthetic"
+      },
+      "value": "Process exhaust 8 CMM + abatement inlet"
+    },
+    "heat_load_kw": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "kW",
+      "value": 60
+    },
+    "phases": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "phases",
+      "value": 3
+    },
+    "power_kva": {
+      "provenance": {
+        "note": "Illustrative; RF + heaters + vacuum budget placeholder",
+        "tier": "synthetic"
+      },
+      "unit": "kVA",
+      "value": 120
+    },
+    "process_gases": [
+      {
+        "gas": "SiH4",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 2.0
+        }
+      },
+      {
+        "gas": "N2O",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 10.0
+        }
+      },
+      {
+        "gas": "NH3",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 5.0
+        }
+      },
+      {
+        "gas": "N2",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 20.0
+        }
+      }
+    ],
+    "upw_lpm": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "L/min",
+      "value": 6
+    },
+    "vacuum_requirement": {
+      "provenance": {
+        "note": "Typical PECVD operating window",
+        "tier": "inferred"
+      },
+      "value": "Dry pump per chamber, process range 1–10 Torr"
+    },
+    "voltage_v": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "V",
+      "value": 400
+    }
+  },
+  "identity": {
+    "category": {
+      "provenance": {
+        "source": "Vendor product categorization",
+        "tier": "independent_verified"
+      },
+      "value": "thin_film_deposition"
+    },
+    "lifecycle_status": {
+      "provenance": {
+        "note": "Widely deployed platform",
+        "tier": "community_corroborated"
+      },
+      "value": "in_production"
+    },
+    "model": {
+      "provenance": {
+        "note": "Model designation per vendor product page",
+        "source": "https://www.appliedmaterials.com/products/producer-gt/",
+        "tier": "vendor_confirmed"
+      },
+      "value": "Producer GT"
+    },
+    "node_applicability": {
+      "provenance": {
+        "note": "Positioned by vendor for advanced dielectric deposition",
+        "tier": "inferred"
+      },
+      "value": "Advanced logic, DRAM, 3D NAND"
+    },
+    "subcategory": {
+      "provenance": {
+        "source": "https://www.appliedmaterials.com/products/producer-gt/",
+        "tier": "vendor_confirmed"
+      },
+      "value": "PECVD"
+    },
+    "vendor": {
+      "provenance": {
+        "note": "Vendor product page names Producer GT PECVD platform",
+        "source": "https://www.appliedmaterials.com/products/producer-gt/",
+        "tier": "vendor_confirmed"
+      },
+      "value": "Applied Materials"
+    },
+    "wafer_sizes_mm": {
+      "provenance": {
+        "source": "Vendor 300mm product line",
+        "tier": "vendor_confirmed"
+      },
+      "value": [300]
+    }
+  },
+  "notes": "GOLDEN EXAMPLE — illustrative record. Field values mix vendor-confirmed headlines with inferred/synthetic placeholders; every value carries its provenance tier per §3 of SPEC.md. Do not cite placeholder numbers as specifications.",
+  "physical": {
+    "depth_mm": {
+      "provenance": {
+        "note": "Twin-chamber mainframe estimate",
+        "tier": "inferred"
+      },
+      "unit": "mm",
+      "value": 3600
+    },
+    "efem_config": {
+      "provenance": {
+        "note": "Standard for 300mm PECVD platforms",
+        "tier": "inferred"
+      },
+      "value": "Vacuum EFEM, dual-arm robot"
+    },
+    "height_mm": {
+      "provenance": { "tier": "inferred" },
+      "unit": "mm",
+      "value": 2200
+    },
+    "load_ports": {
+      "provenance": {
+        "note": "Typical 4-LP configuration",
+        "tier": "inferred"
+      },
+      "unit": "ports",
+      "value": 4
+    },
+    "weight_kg": {
+      "provenance": {
+        "note": "Placeholder for twin-chamber configuration; replace with vendor data",
+        "tier": "synthetic"
+      },
+      "unit": "kg",
+      "value": 5200
+    },
+    "width_mm": {
+      "provenance": {
+        "note": "Twin-chamber mainframe estimated from product imagery and SEMI E72-class footprints; vendor does not publish exact footprint",
+        "tier": "inferred"
+      },
+      "unit": "mm",
+      "value": 3800
+    }
+  },
+  "process_capability": {
+    "capabilities": [
+      {
+        "detail": {
+          "provenance": {
+            "source": "https://www.appliedmaterials.com/products/producer-gt/",
+            "tier": "vendor_confirmed"
+          },
+          "value": "High-productivity dielectric PECVD with multi-step film stacks"
+        },
+        "materials": ["SiO2", "SiN", "SiON", "a-C"],
+        "process": "PECVD dielectric deposition"
+      },
+      {
+        "detail": {
+          "provenance": {
+            "note": "Illustrative hardmask application",
+            "tier": "inferred"
+          },
+          "value": "Patterning films for advanced nodes"
+        },
+        "materials": ["a-C", "SiON"],
+        "process": "Hardmask deposition"
+      }
+    ],
+    "throughput_wph": {
+      "provenance": {
+        "note": "Reference process: 1000A USG; replace with qualified data",
+        "tier": "synthetic"
+      },
+      "unit": "wph",
+      "value": 100
+    },
+    "uniformity_pct": {
+      "provenance": {
+        "note": "WIWNU 1-sigma placeholder",
+        "tier": "synthetic"
+      },
+      "unit": "%",
+      "value": 1.5
+    }
+  },
+  "record_id": "c4b7e1a9-3d2f-4c6e-8a5b-1e9f2c7d4a6b3",
+  "record_status": "published",
+  "reliability": {
+    "availability_pct": {
+      "provenance": {
+        "note": "Inherent availability placeholder",
+        "tier": "synthetic"
+      },
+      "unit": "%",
+      "value": 93.0
+    },
+    "mtbf_h": {
+      "provenance": {
+        "note": "Illustrative; SEMI E10 accounting assumed",
+        "tier": "synthetic"
+      },
+      "unit": "h",
+      "value": 1000
+    },
+    "mttr_h": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "h",
+      "value": 3
+    },
+    "qualification_status": {
+      "provenance": {
+        "note": "Broad industry deployment",
+        "tier": "community_corroborated"
+      },
+      "value": "HVM qualified at multiple logic and memory fabs"
+    }
+  },
+  "schema_version": "1.0",
+  "submitted_at": "2026-10-11",
+  "submitted_by": "SemiconFab schema working group (golden example)",
+  "updated_at": "2026-10-11"
+}

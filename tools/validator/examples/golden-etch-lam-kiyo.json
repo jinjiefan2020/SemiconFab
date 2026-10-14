@@ -1,0 +1,276 @@
+{
+  "commercial": {
+    "alternative_to": [
+      {
+        "model": "CE-300A",
+        "note": "Demonstrates the alternative_to linkage powering drop-in comparison; vendor-submitted entry would replace this placeholder",
+        "vendor": "Example Challenger Etch Co."
+      }
+    ],
+    "datasheet_url": "https://www.lamresearch.com/products/conductor-etch/kiyo/",
+    "regions_available": ["US", "TW", "KR", "CN", "SG"],
+    "vendor_contact": "https://www.lamresearch.com/contact/"
+  },
+  "conformance_level": "L3",
+  "facilities": {
+    "cleanroom_class_required": {
+      "provenance": {
+        "note": "Standard for 300mm etch bays",
+        "tier": "inferred"
+      },
+      "value": "ISO 3"
+    },
+    "exhaust": {
+      "provenance": {
+        "note": "Illustrative split for halogen etch",
+        "tier": "synthetic"
+      },
+      "value": "Corrosive exhaust 10 CMM + general exhaust 8 CMM"
+    },
+    "heat_load_kw": {
+      "provenance": { "note": "To cleanroom exhaust/PCW", "tier": "synthetic" },
+      "unit": "kW",
+      "value": 45
+    },
+    "phases": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "phases",
+      "value": 3
+    },
+    "power_kva": {
+      "provenance": {
+        "note": "Illustrative; RF + vacuum + thermal budget placeholder",
+        "tier": "synthetic"
+      },
+      "unit": "kVA",
+      "value": 85
+    },
+    "process_gases": [
+      {
+        "gas": "Cl2",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 300
+        }
+      },
+      {
+        "gas": "HBr",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 300
+        }
+      },
+      {
+        "gas": "O2",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 200
+        }
+      },
+      {
+        "gas": "CF4",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 200
+        }
+      },
+      {
+        "gas": "Ar",
+        "max_flow_slm": {
+          "provenance": { "tier": "synthetic" },
+          "unit": "slm",
+          "value": 500
+        }
+      }
+    ],
+    "upw_lpm": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "L/min",
+      "value": 8
+    },
+    "vacuum_requirement": {
+      "provenance": {
+        "note": "Typical conductor-etch operating window",
+        "tier": "inferred"
+      },
+      "value": "Dry pump per chamber, base pressure < 5 mTorr process range"
+    },
+    "voltage_v": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "V",
+      "value": 400
+    }
+  },
+  "identity": {
+    "category": {
+      "provenance": {
+        "source": "Vendor product categorization",
+        "tier": "independent_verified"
+      },
+      "value": "dry_etch"
+    },
+    "lifecycle_status": {
+      "provenance": {
+        "note": "Widely deployed in HVM fabs",
+        "tier": "community_corroborated"
+      },
+      "value": "in_production"
+    },
+    "model": {
+      "provenance": {
+        "note": "Model designation per vendor product page",
+        "source": "https://www.lamresearch.com/products/conductor-etch/kiyo/",
+        "tier": "vendor_confirmed"
+      },
+      "value": "Kiyo FX"
+    },
+    "model_aliases": ["Kiyo"],
+    "node_applicability": {
+      "provenance": {
+        "note": "Positioned by vendor for leading-edge conductor etch",
+        "tier": "inferred"
+      },
+      "value": "Advanced logic/foundry nodes, DRAM"
+    },
+    "subcategory": {
+      "provenance": {
+        "source": "https://www.lamresearch.com/products/conductor-etch/kiyo/",
+        "tier": "vendor_confirmed"
+      },
+      "value": "conductor_etch"
+    },
+    "vendor": {
+      "provenance": {
+        "note": "Vendor product page names Kiyo family for conductor etch",
+        "source": "https://www.lamresearch.com/products/conductor-etch/kiyo/",
+        "tier": "vendor_confirmed"
+      },
+      "value": "Lam Research"
+    },
+    "wafer_sizes_mm": {
+      "provenance": {
+        "source": "Vendor 300mm product line",
+        "tier": "vendor_confirmed"
+      },
+      "value": [300]
+    }
+  },
+  "notes": "GOLDEN EXAMPLE — illustrative record. Field values mix vendor-confirmed headlines with inferred/synthetic placeholders; every value carries its provenance tier per §3 of SPEC.md. Do not cite placeholder numbers as specifications.",
+  "physical": {
+    "depth_mm": {
+      "provenance": { "note": "Same basis as width_mm", "tier": "inferred" },
+      "unit": "mm",
+      "value": 3400
+    },
+    "efem_config": {
+      "provenance": {
+        "note": "Standard for 300mm conductor etch platforms",
+        "tier": "inferred"
+      },
+      "value": "Atmospheric EFEM, dual-arm robot"
+    },
+    "height_mm": {
+      "provenance": {
+        "note": "Excluding facility hookup clearance",
+        "tier": "inferred"
+      },
+      "unit": "mm",
+      "value": 2100
+    },
+    "load_ports": {
+      "provenance": {
+        "note": "Typical 4-LP EFEM for this class",
+        "tier": "inferred"
+      },
+      "unit": "ports",
+      "value": 4
+    },
+    "weight_kg": {
+      "provenance": {
+        "note": "Placeholder for 4-chamber configuration; replace with vendor data",
+        "tier": "synthetic"
+      },
+      "unit": "kg",
+      "value": 4500
+    },
+    "width_mm": {
+      "provenance": {
+        "note": "4-chamber cluster configuration estimated from product imagery and SEMI E72-class footprints; vendor does not publish exact footprint",
+        "tier": "inferred"
+      },
+      "unit": "mm",
+      "value": 3200
+    }
+  },
+  "process_capability": {
+    "capabilities": [
+      {
+        "detail": {
+          "provenance": {
+            "source": "https://www.lamresearch.com/products/conductor-etch/kiyo/",
+            "tier": "vendor_confirmed"
+          },
+          "value": "High-aspect-ratio conductor etch with pulsed plasma control"
+        },
+        "materials": ["poly-Si", "SiN", "W", "TiN"],
+        "process": "Conductor etch (gate / STI / metal)"
+      }
+    ],
+    "throughput_wph": {
+      "provenance": {
+        "note": "Reference process: blanket poly etch; replace with qualified data",
+        "tier": "synthetic"
+      },
+      "unit": "wph",
+      "value": 120
+    },
+    "uniformity_pct": {
+      "provenance": {
+        "note": "WIWNU 1-sigma placeholder",
+        "tier": "synthetic"
+      },
+      "unit": "%",
+      "value": 2.0
+    }
+  },
+  "record_id": "7f3a9c2e-1b4d-4e8a-9f6c-2d5e7a8b9c0d1",
+  "record_status": "published",
+  "reliability": {
+    "availability_pct": {
+      "provenance": {
+        "note": "Inherent availability placeholder",
+        "tier": "synthetic"
+      },
+      "unit": "%",
+      "value": 92.0
+    },
+    "mtbf_h": {
+      "provenance": {
+        "note": "Illustrative; SEMI E10 accounting assumed",
+        "tier": "synthetic"
+      },
+      "unit": "h",
+      "value": 800
+    },
+    "mttr_h": {
+      "provenance": { "tier": "synthetic" },
+      "unit": "h",
+      "value": 4
+    },
+    "qualification_status": {
+      "provenance": {
+        "note": "Broad industry deployment",
+        "tier": "community_corroborated"
+      },
+      "value": "HVM qualified at multiple logic and memory fabs"
+    }
+  },
+  "schema_version": "1.0",
+  "submitted_at": "2026-10-11",
+  "submitted_by": "SemiconFab schema working group (golden example)",
+  "updated_at": "2026-10-11"
+}

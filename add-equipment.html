@@ -1,0 +1,3232 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SemiconFab Equipment Submission Form</title>
+    <style>
+      :root {
+        --bg-page: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-card-alt: #f1f5f9;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border: #cbd5e1;
+        --border-focus: #2563eb;
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --success: #16a34a;
+        --success-bg: #dcfce7;
+        --warning: #d97706;
+        --warning-bg: #fef3c7;
+        --danger: #dc2626;
+        --danger-bg: #fee2e2;
+        --radius: 8px;
+        --font:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font);
+        background-color: var(--bg-page);
+        color: var(--text-main);
+        line-height: 1.5;
+        padding: 24px 16px 80px;
+      }
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+
+      /* Header */
+      header {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 20px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .header-titles h1 {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .header-titles p {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .header-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      /* Buttons & Inputs */
+      button,
+      .btn {
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 8px 16px;
+        border-radius: 6px;
+        border: 1px solid transparent;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        text-decoration: none;
+      }
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-primary:hover:not(:disabled) {
+        background: var(--primary-hover);
+      }
+      .btn-secondary {
+        background: #e2e8f0;
+        color: #334155;
+        border-color: #cbd5e1;
+      }
+      .btn-secondary:hover:not(:disabled) {
+        background: #cbd5e1;
+      }
+      .btn-success {
+        background: var(--success);
+        color: #fff;
+      }
+      .btn-success:hover:not(:disabled) {
+        background: #15803d;
+      }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+      .btn-sm {
+        padding: 4px 10px;
+        font-size: 12px;
+      }
+
+      /* Context Banner (Prefill Mode) */
+      #draft-context-banner {
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: var(--radius);
+        padding: 14px 20px;
+        margin-bottom: 20px;
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .context-banner-text {
+        font-size: 14px;
+        color: #1e3a8a;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .context-banner-link {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--primary);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .context-banner-link:hover {
+        text-decoration: underline;
+      }
+      .badge-from-catalog {
+        display: inline-flex;
+        align-items: center;
+        background: #dbeafe;
+        color: #1d4ed8;
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 999px;
+        margin-left: 8px;
+      }
+
+      /* Schema Loader Notice */
+      #schema-status-card {
+        background: var(--warning-bg);
+        border: 1px solid #fde68a;
+        border-radius: var(--radius);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        display: none;
+      }
+      #schema-status-card.visible {
+        display: block;
+      }
+      .picker-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 10px;
+        flex-wrap: wrap;
+      }
+
+      /* Conformance Meter Card */
+      .meter-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+      .meter-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 14px;
+      }
+      .meter-title {
+        font-size: 15px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .target-select-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .target-select-wrap select {
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: #fff;
+        font-weight: 600;
+        color: var(--primary);
+      }
+      .progress-bar-bg {
+        height: 10px;
+        background: #e2e8f0;
+        border-radius: 999px;
+        overflow: hidden;
+        margin-bottom: 12px;
+      }
+      .progress-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: var(--primary);
+        transition:
+          width 0.3s ease,
+          background-color 0.3s ease;
+      }
+      .progress-levels {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        font-size: 12px;
+      }
+      .level-box {
+        background: var(--bg-card-alt);
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 8px 12px;
+      }
+      .level-box.active {
+        border-color: var(--primary);
+        background: #eff6ff;
+      }
+      .level-box.complete {
+        border-color: var(--success);
+        background: var(--success-bg);
+      }
+      .level-box-header {
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .level-box-desc {
+        color: var(--text-muted);
+        margin-top: 2px;
+        font-size: 11px;
+      }
+
+      /* Collapsible Sections */
+      .section-card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        margin-bottom: 16px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        overflow: hidden;
+      }
+      .section-summary {
+        padding: 16px 20px;
+        background: #f8fafc;
+        border-bottom: 1px solid transparent;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        user-select: none;
+      }
+      .section-summary:hover {
+        background: #f1f5f9;
+      }
+      .section-card[open] .section-summary {
+        border-bottom-color: var(--border);
+      }
+      .section-badge {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: #e2e8f0;
+        color: #475569;
+      }
+      .section-body {
+        padding: 20px;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      /* Form Fields */
+      .field-row {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .field-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        font-size: 13px;
+      }
+      .field-label {
+        font-weight: 600;
+        color: var(--text-main);
+        display: inline-flex;
+        align-items: center;
+      }
+      .field-req-mark {
+        color: var(--danger);
+        font-weight: bold;
+        margin-left: 2px;
+      }
+      .field-desc {
+        font-size: 12px;
+        color: var(--text-muted);
+        font-weight: normal;
+      }
+      .field-inputs {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1.5fr;
+        gap: 8px;
+        align-items: start;
+      }
+      @media (max-width: 768px) {
+        .field-inputs {
+          grid-template-columns: 1fr;
+        }
+      }
+      .field-inputs.bare {
+        grid-template-columns: 1fr;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="url"],
+      select,
+      textarea {
+        width: 100%;
+        font-family: inherit;
+        font-size: 13px;
+        padding: 8px 12px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        background: #ffffff;
+        color: var(--text-main);
+        transition:
+          border-color 0.15s ease,
+          box-shadow 0.15s ease;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--border-focus);
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+      }
+      input.input-error,
+      select.input-error,
+      textarea.input-error {
+        border-color: var(--danger) !important;
+        background-color: #fff8f8;
+      }
+      .error-msg {
+        color: var(--danger);
+        font-size: 12px;
+        font-weight: 500;
+        margin-top: 4px;
+        display: none;
+      }
+      .error-msg.visible {
+        display: block;
+      }
+
+      /* Multi-tag / Checkbox group */
+      .checkbox-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 6px 0;
+      }
+      .checkbox-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+
+      /* Array List Box (e.g. process_gases, capabilities, alternative_to) */
+      .array-container {
+        background: var(--bg-card-alt);
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .array-item {
+        background: #ffffff;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        position: relative;
+      }
+      .array-item-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .btn-remove-item {
+        color: var(--danger);
+        background: transparent;
+        border: none;
+        font-size: 12px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .btn-remove-item:hover {
+        text-decoration: underline;
+      }
+
+      /* Footer Action Bar */
+      .action-bar {
+        position: sticky;
+        bottom: 16px;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 14px 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 24px;
+        z-index: 100;
+      }
+      .action-status {
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      /* Post-Submit Success Panel */
+      .success-panel {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 32px 28px;
+        margin-bottom: 24px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+        display: none;
+      }
+      .success-panel.visible {
+        display: block;
+      }
+      .success-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .success-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--success-bg);
+        color: var(--success);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 20px;
+        font-weight: bold;
+      }
+      .success-title {
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+      .record-id-box {
+        background: var(--bg-card-alt);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 12px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        margin: 16px 0 24px;
+        flex-wrap: wrap;
+      }
+      .record-id-info {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+      .record-id-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--text-muted);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .record-id-box code {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        word-break: break-all;
+      }
+      .steps-heading {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 12px;
+      }
+      .steps-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 28px;
+      }
+      @media (max-width: 768px) {
+        .steps-container {
+          grid-template-columns: 1fr;
+        }
+      }
+      .step-card {
+        background: var(--bg-card-alt);
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 14px 16px;
+      }
+      .step-card h4 {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 6px;
+      }
+      .step-card p {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+      .success-actions {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--border);
+      }
+
+      /* Notification Toast */
+      #toast {
+        position: fixed;
+        bottom: 80px;
+        right: 24px;
+        background: #0f172a;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(10px);
+        transition: all 0.25s ease;
+        z-index: 999;
+      }
+      #toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <header>
+        <div class="header-titles">
+          <h1 id="ui-title">SemiconFab Equipment Submission</h1>
+          <p id="ui-subtitle">
+            Open catalog specification entry &bull; Conforms to Schema v1.0
+          </p>
+        </div>
+        <div class="header-controls">
+          <a
+            href="/catalog-demo.html"
+            class="btn btn-secondary btn-sm"
+            id="btn-catalog-nav"
+            title="Equipment Catalog"
+          >
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+              <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"></path>
+              <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"></path>
+            </svg>
+            <span id="ui-catalog-nav">Equipment Catalog</span>
+          </a>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            id="btn-toggle-lang"
+            onclick="toggleLang()"
+          >
+            EN / 中文
+          </button>
+        </div>
+      </header>
+
+      <!-- Context Banner (Prefill Mode from Catalog) -->
+      <div id="draft-context-banner">
+        <div class="context-banner-text">
+          <span id="banner-prefix">Completing draft record:</span>
+          <strong id="banner-strong-names"></strong>
+        </div>
+        <a
+          href="/catalog-demo.html"
+          class="context-banner-link"
+          id="banner-catalog-link"
+        >
+          &larr; Back to catalog
+        </a>
+      </div>
+
+      <!-- Fallback File Picker Card (shown if fetch fails on file://) -->
+      <div id="schema-status-card">
+        <div
+          style="font-weight: 600; font-size: 14px; color: #92400e"
+          id="picker-notice-title"
+        >
+          ⚠️ Schema Loading Notice
+        </div>
+        <p
+          style="font-size: 13px; color: #78350f; margin-top: 4px"
+          id="picker-notice-desc"
+        >
+          Could not auto-fetch schema.json (standard security restriction on
+          file://). Please select schema.json to render the form dynamically:
+        </p>
+        <div class="picker-row">
+          <input
+            type="file"
+            id="schema-file-input"
+            accept=".json"
+            onchange="handleSchemaFile(event)"
+          />
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="loadEmbeddedSchemaFallback()"
+            id="btn-load-fallback"
+          >
+            Use Built-in Fallback Schema
+          </button>
+        </div>
+      </div>
+
+      <!-- Post-Submit Success Panel -->
+      <div class="success-panel" id="submission-success-panel">
+        <div class="success-header">
+          <div class="success-icon">&check;</div>
+          <h2 class="success-title" id="success-panel-title">
+            提交成功 · Submitted
+          </h2>
+        </div>
+        <p
+          style="font-size: 13px; color: var(--text-muted)"
+          id="success-panel-desc"
+        >
+          Your equipment specification record has been packaged and validated
+          against Schema v1.0.
+        </p>
+        <div class="record-id-box">
+          <div class="record-id-info">
+            <span class="record-id-label" id="lbl-record-id">Record ID</span>
+            <code id="success-record-id"
+              >00000000-0000-0000-0000-000000000000</code
+            >
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary btn-sm"
+            onclick="copyRecordId()"
+            id="btn-copy-record-id"
+          >
+            Copy record_id
+          </button>
+        </div>
+
+        <div class="steps-heading" id="next-steps-heading">
+          后续流转说明 · What Happens Next
+        </div>
+        <div class="steps-container">
+          <div class="step-card">
+            <h4 id="step-1-title">1. 维持团队人工审核 · Maintainer Review</h4>
+            <p id="step-1-desc">
+              社区维护团队将检查设备信息完整性与真实性，确认数据来源及规格一致性。
+            </p>
+          </div>
+          <div class="step-card">
+            <h4 id="step-2-title">2. 自动化模式校验 · Schema Validation</h4>
+            <p id="step-2-desc">
+              使用模式校验器运行 jsonschema
+              自动化语法与物理合规规则检测，确保严格符合 Schema v1.0。
+            </p>
+          </div>
+          <div class="step-card">
+            <h4 id="step-3-title">3. 合并入库并重构目录 · Merge & Rebuild</h4>
+            <p id="step-3-desc">
+              通过校验的记录合入主库迁移树，重新生成 catalog.json 并更新 3D
+              洁净室数字孪生平台。
+            </p>
+          </div>
+        </div>
+
+        <div class="success-actions">
+          <button
+            type="button"
+            class="btn btn-success"
+            onclick="downloadJSONAgain()"
+            id="btn-download-again"
+          >
+            Download JSON Again
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="copyJSONAgain()"
+            id="btn-copy-json-again"
+          >
+            Copy JSON
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="resetToNewSubmission()"
+            id="btn-submit-another"
+          >
+            Submit Another Record
+          </button>
+          <a
+            href="/catalog-demo.html"
+            class="btn btn-secondary"
+            id="btn-back-catalog"
+          >
+            &larr; Back to catalog
+          </a>
+        </div>
+      </div>
+
+      <!-- Conformance Meter -->
+      <div class="meter-card" id="conformance-meter-card">
+        <div class="meter-top">
+          <div class="meter-title">
+            <span id="meter-title-text">Live Conformance Progress</span>
+            <span
+              id="meter-status-pill"
+              class="section-badge"
+              style="background: #dbeafe; color: #1e40af"
+              >Calculating...</span
+            >
+          </div>
+          <div class="target-select-wrap">
+            <label for="target-conformance-select" id="lbl-target-level"
+              >Target Level:</label
+            >
+            <select
+              id="target-conformance-select"
+              onchange="handleTargetLevelChange()"
+            >
+              <option value="L1" selected>L1 — Minimum Listing</option>
+              <option value="L2">L2 — Fab Planning</option>
+              <option value="L3">L3 — Full Benchmark Grade</option>
+            </select>
+          </div>
+        </div>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
+        <div class="progress-levels">
+          <div class="level-box" id="box-l1">
+            <div class="level-box-header">
+              <span>L1 (Identity & Footprint)</span>
+              <span id="badge-l1">0/8</span>
+            </div>
+            <div class="level-box-desc" id="desc-l1">
+              Vendor, model, category, wafer size, 3D dimensions
+            </div>
+          </div>
+          <div class="level-box" id="box-l2">
+            <div class="level-box-header">
+              <span>L2 (Facilities)</span>
+              <span id="badge-l2">0/12</span>
+            </div>
+            <div class="level-box-desc" id="desc-l2">
+              Power, UPW, gases, exhaust, PCW utilities
+            </div>
+          </div>
+          <div class="level-box" id="box-l3">
+            <div class="level-box-header">
+              <span>L3 (Benchmark Grade)</span>
+              <span id="badge-l3">0/8</span>
+            </div>
+            <div class="level-box-desc" id="desc-l3">
+              Capabilities, MTBF, availability, drop-in replacement
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Form Container -->
+      <form
+        id="equipment-form"
+        onsubmit="
+          event.preventDefault();
+          validateForm();
+        "
+      >
+        <div id="dynamic-form-sections">
+          <!-- Generated dynamically from schema.json -->
+          <div
+            style="text-align: center; padding: 40px; color: var(--text-muted)"
+            id="form-loading-placeholder"
+          >
+            Loading schema.json...
+          </div>
+        </div>
+      </form>
+
+      <!-- Sticky Action Bar -->
+      <div class="action-bar" id="form-action-bar">
+        <div class="action-status" id="action-status-text">
+          <span>🟡 Fill required fields to validate</span>
+        </div>
+        <div class="action-buttons">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="validateForm()"
+            id="btn-validate"
+          >
+            Validate Form
+          </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            onclick="handleSubmitAction('download')"
+            id="btn-download"
+          >
+            Download JSON
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="handleSubmitAction('copy')"
+            id="btn-copy"
+          >
+            Copy to Clipboard
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="handleSubmitAction('github')"
+            id="btn-github"
+          >
+            Submit via GitHub
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            onclick="handleSubmitAction('email')"
+            id="btn-email"
+          >
+            Submit via Email
+          </button>
+        </div>
+
+        <!-- Site Footer -->
+        <footer
+          style="
+            margin-top: 40px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 13px;
+            color: var(--text-muted);
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: center;
+              align-items: center;
+              gap: 12px;
+              margin-bottom: 8px;
+            "
+          >
+            <span>&copy; 2026 SemiconFab.org</span>
+            <span>&middot;</span>
+            <a
+              href="https://github.com/jinjiefan2020/SemiconFab"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                color: var(--primary);
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-flex;
+                align-items: center;
+                gap: 5px;
+              "
+            >
+              <svg
+                style="width: 16px; height: 16px; fill: currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                ></path>
+              </svg>
+              <span>GitHub (Source code)</span>
+            </a>
+            <span>&middot;</span>
+            <a
+              href="mailto:info@semiconfab.org"
+              style="color: var(--primary); text-decoration: none"
+              >info@semiconfab.org</a
+            >
+          </div>
+          <p
+            id="ui-footer-license"
+            style="margin: 0; font-size: 12px; line-height: 1.5"
+          >
+            Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; Free
+            for education &amp; personal use; commercial use requires a separate
+            license.
+          </p>
+        </footer>
+      </div>
+    </div>
+
+    <div id="toast">Copied to clipboard!</div>
+
+    <script>
+      /**
+       * SUBMISSION_CONFIG: Maintainer configuration for static-site pipeline.
+       * All destinations live in one central object at the top of the file.
+       */
+      const SUBMISSION_CONFIG = {
+        org: "jinjiefan2020", // e.g. "semiconfab"
+        repo: "SemiconFab", // e.g. "equipment-catalog"
+        contactEmail: "info@semiconfab.org", // e.g. "catalog@semiconfab.org"
+        catalogUrl: "/catalog-demo.html",
+      };
+
+      /**
+       * LABELS: Bilingual mapping dictionary for UI, layers, fields, and provenance tiers.
+       */
+      const LABELS = {
+        ui: {
+          catalog_nav: { en: "Equipment Catalog", zh: "设备目录" },
+          title: {
+            en: "SemiconFab Equipment Submission",
+            zh: "SemiconFab 半导体设备数据填报",
+          },
+          subtitle: {
+            en: "Open catalog specification entry · Conforms to Schema v1.0",
+            zh: "开放设备目录数据录入平台 · 遵循 Schema v1.0 规范",
+          },
+          target_level: { en: "Target Level:", zh: "目标合规等级:" },
+          meter_title: {
+            en: "Live Conformance Progress",
+            zh: "实时合规达标进度",
+          },
+          btn_validate: { en: "Validate Form", zh: "校验表单" },
+          btn_download: { en: "Download JSON", zh: "下载 JSON 文件" },
+          btn_copy: { en: "Copy to Clipboard", zh: "复制到剪贴板" },
+          btn_github: { en: "Submit via GitHub", zh: "通过 GitHub 提交" },
+          btn_email: { en: "Submit via Email", zh: "通过邮件提交" },
+          export_ready: {
+            en: "✅ Valid & ready to export",
+            zh: "✅ 校验通过，可以导出",
+          },
+          export_blocked: {
+            en: "❌ Validation failed: Please fix errors",
+            zh: "❌ 校验未通过：请修复高亮错误",
+          },
+          fill_to_validate: {
+            en: "🟡 Fill required fields to validate",
+            zh: "🟡 填写必填项后点击校验",
+          },
+          picker_title: {
+            en: "⚠️ Schema Loading Notice",
+            zh: "⚠️ Schema 规范文件加载提示",
+          },
+          picker_desc: {
+            en: "Could not auto-fetch schema.json (standard security restriction on file://). Please select schema.json to render the form dynamically:",
+            zh: "无法自动读取 schema.json（浏览器在 file:// 协议下的跨域安全限制）。请选择本地 schema.json 文件以动态渲染表单：",
+          },
+          btn_fallback: {
+            en: "Use Built-in Fallback Schema",
+            zh: "使用内置 Schema 规范",
+          },
+          copied_toast: {
+            en: "JSON copied to clipboard!",
+            zh: "已复制 JSON 到剪贴板！",
+          },
+          copied_id_toast: {
+            en: "Record ID copied to clipboard!",
+            zh: "已复制 Record ID 到剪贴板！",
+          },
+          banner_prefix: {
+            en: "Completing draft record: ",
+            zh: "正在补全草稿记录 · ",
+          },
+          banner_back: { en: "← Back to catalog", zh: "← 返回目录" },
+          tag_from_catalog: { en: "from catalog", zh: "来自目录" },
+          tooltip_not_configured: {
+            en: "not configured — download the JSON instead",
+            zh: "未配置 — 请直接下载 JSON",
+          },
+          success_title: {
+            en: "Submitted Successfully",
+            zh: "提交成功 · Submitted",
+          },
+          success_desc: {
+            en: "Your equipment specification record has been created and validated against Schema v1.0.",
+            zh: "您的设备规格记录已生成完毕，且严格通过了 Schema v1.0 规范校验。",
+          },
+          record_id_label: { en: "Record ID", zh: "记录唯一编号 (Record ID)" },
+          next_steps_heading: {
+            en: "What Happens Next · 后续流转说明",
+            zh: "后续流转说明 · What Happens Next",
+          },
+          step_1_title: {
+            en: "1. Maintainer Review",
+            zh: "1. 维持团队人工审核",
+          },
+          step_1_desc: {
+            en: "Community maintainers review submitted tool specs for authenticity, consistency, and completeness.",
+            zh: "社区维护团队将对提报数据进行人工核实，确认数据来源及规格一致性。",
+          },
+          step_2_title: {
+            en: "2. Schema v1.0 Automated Validation",
+            zh: "2. 自动化模式校验",
+          },
+          step_2_desc: {
+            en: "The record undergoes rigorous automated validation against Schema v1.0 using the schema validator.",
+            zh: "使用模式校验器运行 jsonschema 自动化语法与物理合规规则检测，确保完全合规。",
+          },
+          step_3_title: {
+            en: "3. Merge & Rebuild Catalog",
+            zh: "3. 合并入库并重构目录",
+          },
+          step_3_desc: {
+            en: "Approved records are merged into the catalog tree, regenerating catalog.json and updating the 3D Cleanroom Digital Twin.",
+            zh: "通过校验的设备数据将合入主库，重新构建 catalog.json 并更新 3D 洁净室数字孪生。",
+          },
+          btn_download_again: {
+            en: "Download JSON Again",
+            zh: "再次下载 JSON",
+          },
+          btn_copy_json_again: { en: "Copy JSON", zh: "复制 JSON" },
+          btn_copy_record_id: { en: "Copy record_id", zh: "复制 record_id" },
+          btn_submit_another: {
+            en: "Submit Another Record",
+            zh: "填报另一台设备",
+          },
+          footer_license: {
+            en: "Source-available · PolyForm Noncommercial 1.0.0 · Free for education & personal use; commercial use requires a separate license.",
+            zh: "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费；商业使用需另行授权。",
+          },
+        },
+        tiers: {
+          inferred: {
+            en: "Inferred / Scaled (Default)",
+            zh: "推断 / 估算 (默认诚实值)",
+          },
+          vendor_confirmed: { en: "Vendor Confirmed", zh: "厂商公开确认" },
+          independent_verified: {
+            en: "Independent Verified",
+            zh: "第三方独立验证",
+          },
+          community_corroborated: {
+            en: "Community Corroborated",
+            zh: "社区交叉确认",
+          },
+          synthetic: { en: "Synthetic Placeholder", zh: "合成占位值" },
+        },
+        layers: {
+          meta: {
+            en: "Submission Metadata",
+            zh: "第 0 部分 — 提报元数据 (Metadata)",
+          },
+          identity: {
+            en: "Layer 1 — Identity",
+            zh: "第 1 层 — 身份信息 (Identity)",
+          },
+          physical: {
+            en: "Layer 2 — Physical & Footprint (SEMI E72)",
+            zh: "第 2 层 — 物理与外形尺寸 (Physical)",
+          },
+          facilities: {
+            en: "Layer 3 — Facilities & Utilities",
+            zh: "第 3 层 — 厂务与动力条件 (Facilities)",
+          },
+          process_capability: {
+            en: "Layer 4 — Process Capability",
+            zh: "第 4 层 — 工艺能力 (Process Capability)",
+          },
+          reliability: {
+            en: "Layer 5 — Reliability (SEMI E10)",
+            zh: "第 5 层 — 可靠性 (Reliability)",
+          },
+          commercial: {
+            en: "Layer 6 — Commercial & Alternatives",
+            zh: "第 6 层 — 商务与替代关系 (Commercial)",
+          },
+          notes: { en: "Notes & Remarks", zh: "第 7 层 — 工程备注 (Notes)" },
+        },
+        fields: {
+          submitted_by: { en: "Your name / email", zh: "你的姓名或邮箱" },
+          vendor: { en: "Manufacturer / Vendor", zh: "设备制造商 (厂商)" },
+          model: { en: "Commercial Model Designation", zh: "商业型号名称" },
+          model_aliases: {
+            en: "Model Aliases (comma-separated)",
+            zh: "型号别名 (逗号分隔)",
+          },
+          category: { en: "Equipment Category", zh: "设备大类" },
+          subcategory: {
+            en: "Subcategory / Process Type",
+            zh: "工艺细分类 (如 conductor_etch)",
+          },
+          wafer_sizes_mm: {
+            en: "Applicable Wafer Sizes (mm)",
+            zh: "适用晶圆尺寸 (mm)",
+          },
+          node_applicability: {
+            en: "Node Applicability",
+            zh: "适用工艺节点 (如 14nm-5nm)",
+          },
+          lifecycle_status: { en: "Lifecycle Status", zh: "生命周期状态" },
+          width_mm: { en: "Width (mm)", zh: "设备宽度 (mm) — SEMI E72" },
+          depth_mm: { en: "Depth (mm)", zh: "设备进深 (mm) — SEMI E72" },
+          height_mm: { en: "Height (mm)", zh: "设备高度 (mm)" },
+          weight_kg: { en: "Installed Weight (kg)", zh: "装机重量 (kg)" },
+          load_ports: {
+            en: "Load Ports Count",
+            zh: "晶圆装载机口 (Load Ports) 数量",
+          },
+          efem_config: { en: "EFEM Configuration", zh: "前端模块 (EFEM) 配置" },
+          seismic_kit: {
+            en: "Seismic Kit Provision",
+            zh: "防震抗倾倒支架套件",
+          },
+          model_3d_url: {
+            en: "3D Model URI (glTF 2.0)",
+            zh: "3D 模型链接 (glTF 2.0)",
+          },
+          model_3d_lod: {
+            en: "3D Model Level of Detail",
+            zh: "3D 模型精细度等级 (LOD)",
+          },
+          power_kva: { en: "Apparent Power (kVA)", zh: "视在供电容量 (kVA)" },
+          voltage_v: { en: "Voltage (V)", zh: "供电电压 (V)" },
+          phases: { en: "Electrical Phases", zh: "供电相数 (Phases)" },
+          heat_load_kw: {
+            en: "Heat Load to Cleanroom (kW)",
+            zh: "洁净室散热负荷 (kW)",
+          },
+          upw_lpm: {
+            en: "UPW Consumption (L/min)",
+            zh: "超纯水 (UPW) 耗量 (L/min)",
+          },
+          pcw_kw: {
+            en: "Process Cooling Water (kW)",
+            zh: "工艺冷却水 (PCW) 负荷 (kW)",
+          },
+          cda_nm3h: {
+            en: "Clean Dry Air (Nm³/h)",
+            zh: "洁净压缩空气 (CDA) 耗量 (Nm³/h)",
+          },
+          process_gases: { en: "Process Gases", zh: "工艺特气配置列表" },
+          exhaust: { en: "Exhaust Requirement", zh: "排风排气需求" },
+          vacuum_requirement: {
+            en: "Vacuum Requirement",
+            zh: "真空系统运行需求",
+          },
+          noise_db: {
+            en: "Noise Level (dB(A) @ 1m)",
+            zh: "声学噪声 (dB(A) @ 1m)",
+          },
+          cleanroom_class_required: {
+            en: "Cleanroom Class Required",
+            zh: "洁净室洁净度要求",
+          },
+          capabilities: {
+            en: "Qualified Process Modules",
+            zh: "已认证工艺能力模块",
+          },
+          throughput_wph: {
+            en: "Reference Throughput (wph)",
+            zh: "基准产出率 (wph)",
+          },
+          uniformity_pct: {
+            en: "WIWNU Uniformity (%)",
+            zh: "片内非均匀性 (WIWNU 1σ, %)",
+          },
+          particle_spec: {
+            en: "Defect Particle Specification",
+            zh: "颗粒缺陷规格",
+          },
+          mtbf_h: {
+            en: "Mean Time Between Failures (h)",
+            zh: "平均无故障时间 (MTBF, 小时)",
+          },
+          mttr_h: {
+            en: "Mean Time To Repair (h)",
+            zh: "平均修复时间 (MTTR, 小时)",
+          },
+          availability_pct: {
+            en: "Inherent Availability (%)",
+            zh: "固有可用度 / 利用率 (%)",
+          },
+          qualification_status: {
+            en: "Qualification Status",
+            zh: "量产验证状态",
+          },
+          vendor_contact: {
+            en: "Vendor Public Contact / URL",
+            zh: "厂商公开联系方式 / 网址",
+          },
+          regions_available: {
+            en: "Available Regions (e.g. US, TW, CN)",
+            zh: "供货销售地区列表 (逗号分隔)",
+          },
+          alternative_to: {
+            en: "Drop-in Replacement For",
+            zh: "可替代对标设备列表",
+          },
+          datasheet_url: {
+            en: "Official Datasheet URL",
+            zh: "官方规格书 / 网页链接",
+          },
+          notes: {
+            en: "Engineering Notes / Tribal Knowledge",
+            zh: "工程备注 / 师傅经验",
+          },
+        },
+      };
+
+      let currentLang = (
+        localStorage.getItem("semiconfab_lang") || "en"
+      ).startsWith("zh")
+        ? "zh"
+        : "en";
+      let activeSchema = null;
+      let isValidated = false;
+      let lastSubmittedRecord = null;
+
+      // Canonical SI units map for numerical fields
+      const CANONICAL_UNITS = {
+        width_mm: "mm",
+        depth_mm: "mm",
+        height_mm: "mm",
+        weight_kg: "kg",
+        load_ports: "ports",
+        power_kva: "kVA",
+        voltage_v: "V",
+        phases: "phases",
+        heat_load_kw: "kW",
+        upw_lpm: "L/min",
+        pcw_kw: "kW",
+        cda_nm3h: "Nm³/h",
+        noise_db: "dB(A)",
+        throughput_wph: "wph",
+        uniformity_pct: "%",
+        mtbf_h: "h",
+        mttr_h: "h",
+        availability_pct: "%",
+      };
+
+      /**
+       * Switch language without page reload
+       */
+      function toggleLang() {
+        currentLang = currentLang === "zh" ? "en" : "zh";
+        try {
+          localStorage.setItem("semiconfab_lang", currentLang);
+        } catch (e) {}
+        document.documentElement.lang = currentLang === "zh" ? "zh-CN" : "en";
+        applyTranslations();
+        updateConformanceMeter();
+      }
+
+      function applyTranslations() {
+        const catNav = document.getElementById("ui-catalog-nav");
+        if (catNav) catNav.textContent = LABELS.ui.catalog_nav[currentLang];
+        document.getElementById("ui-title").textContent =
+          LABELS.ui.title[currentLang];
+        document.getElementById("ui-subtitle").textContent =
+          LABELS.ui.subtitle[currentLang];
+        document.getElementById("lbl-target-level").textContent =
+          LABELS.ui.target_level[currentLang];
+        document.getElementById("meter-title-text").textContent =
+          LABELS.ui.meter_title[currentLang];
+        document.getElementById("btn-validate").textContent =
+          LABELS.ui.btn_validate[currentLang];
+        document.getElementById("btn-download").textContent =
+          LABELS.ui.btn_download[currentLang];
+        document.getElementById("btn-copy").textContent =
+          LABELS.ui.btn_copy[currentLang];
+        document.getElementById("btn-github").textContent =
+          LABELS.ui.btn_github[currentLang];
+        document.getElementById("btn-email").textContent =
+          LABELS.ui.btn_email[currentLang];
+
+        document.getElementById("picker-notice-title").textContent =
+          LABELS.ui.picker_title[currentLang];
+        document.getElementById("picker-notice-desc").textContent =
+          LABELS.ui.picker_desc[currentLang];
+        document.getElementById("btn-load-fallback").textContent =
+          LABELS.ui.btn_fallback[currentLang];
+
+        // Tooltips for GitHub & Email buttons
+        const ghTooltip =
+          !SUBMISSION_CONFIG.org || !SUBMISSION_CONFIG.repo
+            ? LABELS.ui.tooltip_not_configured[currentLang]
+            : currentLang === "zh"
+              ? "在 GitHub 创建 Pull Request 提交数据"
+              : "Submit via GitHub Pull Request";
+        document.getElementById("btn-github").title = ghTooltip;
+
+        const emailTooltip = !SUBMISSION_CONFIG.contactEmail
+          ? LABELS.ui.tooltip_not_configured[currentLang]
+          : currentLang === "zh"
+            ? "发送邮件提交数据"
+            : "Send email to submit record";
+        document.getElementById("btn-email").title = emailTooltip;
+
+        // Banner translation
+        const bannerPrefix = document.getElementById("banner-prefix");
+        if (bannerPrefix)
+          bannerPrefix.textContent = LABELS.ui.banner_prefix[currentLang];
+        const bannerLink = document.getElementById("banner-catalog-link");
+        if (bannerLink)
+          bannerLink.textContent = LABELS.ui.banner_back[currentLang];
+
+        // Prefill tags
+        document.querySelectorAll(".badge-from-catalog").forEach((el) => {
+          el.textContent = LABELS.ui.tag_from_catalog[currentLang];
+        });
+
+        // Success panel translation
+        const sTitle = document.getElementById("success-panel-title");
+        if (sTitle) sTitle.textContent = LABELS.ui.success_title[currentLang];
+        const sDesc = document.getElementById("success-panel-desc");
+        if (sDesc) sDesc.textContent = LABELS.ui.success_desc[currentLang];
+        const sRecLbl = document.getElementById("lbl-record-id");
+        if (sRecLbl)
+          sRecLbl.textContent = LABELS.ui.record_id_label[currentLang];
+        const sNextHeading = document.getElementById("next-steps-heading");
+        if (sNextHeading)
+          sNextHeading.textContent = LABELS.ui.next_steps_heading[currentLang];
+        const s1T = document.getElementById("step-1-title");
+        if (s1T) s1T.textContent = LABELS.ui.step_1_title[currentLang];
+        const s1D = document.getElementById("step-1-desc");
+        if (s1D) s1D.textContent = LABELS.ui.step_1_desc[currentLang];
+        const s2T = document.getElementById("step-2-title");
+        if (s2T) s2T.textContent = LABELS.ui.step_2_title[currentLang];
+        const s2D = document.getElementById("step-2-desc");
+        if (s2D) s2D.textContent = LABELS.ui.step_2_desc[currentLang];
+        const s3T = document.getElementById("step-3-title");
+        if (s3T) s3T.textContent = LABELS.ui.step_3_title[currentLang];
+        const s3D = document.getElementById("step-3-desc");
+        if (s3D) s3D.textContent = LABELS.ui.step_3_desc[currentLang];
+        const btnDAgain = document.getElementById("btn-download-again");
+        if (btnDAgain)
+          btnDAgain.textContent = LABELS.ui.btn_download_again[currentLang];
+        const btnCAgain = document.getElementById("btn-copy-json-again");
+        if (btnCAgain)
+          btnCAgain.textContent = LABELS.ui.btn_copy_json_again[currentLang];
+        const btnCId = document.getElementById("btn-copy-record-id");
+        if (btnCId)
+          btnCId.textContent = LABELS.ui.btn_copy_record_id[currentLang];
+        const btnAnother = document.getElementById("btn-submit-another");
+        if (btnAnother)
+          btnAnother.textContent = LABELS.ui.btn_submit_another[currentLang];
+        const btnBackCat = document.getElementById("btn-back-catalog");
+        if (btnBackCat)
+          btnBackCat.textContent = LABELS.ui.banner_back[currentLang];
+
+        // Update section summaries
+        document.querySelectorAll("[data-i18n-layer]").forEach((el) => {
+          const layer = el.getAttribute("data-i18n-layer");
+          if (LABELS.layers[layer]) {
+            el.textContent = LABELS.layers[layer][currentLang];
+          }
+        });
+
+        // Update field labels
+        document.querySelectorAll("[data-i18n-field]").forEach((el) => {
+          const field = el.getAttribute("data-i18n-field");
+          if (LABELS.fields[field]) {
+            // Preserve asterisk and catalog badges
+            const hasReq = el.querySelector(".field-req-mark");
+            const hasBadge = el.querySelector(".badge-from-catalog");
+            el.textContent = LABELS.fields[field][currentLang];
+            if (hasReq) el.appendChild(hasReq);
+            if (hasBadge) el.appendChild(hasBadge);
+          }
+        });
+
+        // Update tier dropdown options
+        document
+          .querySelectorAll("select[data-is-tier='true']")
+          .forEach((sel) => {
+            const val = sel.value;
+            Array.from(sel.options).forEach((opt) => {
+              if (LABELS.tiers[opt.value]) {
+                opt.textContent = LABELS.tiers[opt.value][currentLang];
+              }
+            });
+            sel.value = val;
+          });
+
+        const footLicense = document.getElementById("ui-footer-license");
+        if (footLicense) {
+          footLicense.textContent = LABELS.ui.footer_license[currentLang];
+        }
+
+        const btnToggleLang = document.getElementById("btn-toggle-lang");
+        if (btnToggleLang) {
+          btnToggleLang.innerHTML =
+            currentLang === "zh"
+              ? '<span style="opacity:0.6;font-weight:normal">EN</span> / <strong>中文</strong>'
+              : '<strong>EN</strong> / <span style="opacity:0.6;font-weight:normal">中文</span>';
+        }
+
+        document.title =
+          currentLang === "zh"
+            ? "SemiconFab 设备规格录入表单"
+            : "SemiconFab Equipment Submission Form";
+      }
+
+      /**
+       * Embedded fallback schema (used if offline file:// fails to fetch)
+       */
+      function loadEmbeddedSchemaFallback() {
+        document
+          .getElementById("schema-status-card")
+          .classList.remove("visible");
+        initSchema(FALLBACK_SCHEMA);
+      }
+
+      function handleSchemaFile(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          try {
+            const parsed = JSON.parse(e.target.result);
+            document
+              .getElementById("schema-status-card")
+              .classList.remove("visible");
+            initSchema(parsed);
+          } catch (err) {
+            showToast("Invalid JSON file: " + err.message);
+          }
+        };
+        reader.readAsText(file);
+      }
+
+      /**
+       * On initial load, try fetching schema.json from current directory
+       */
+      window.addEventListener("DOMContentLoaded", () => {
+        applyTranslations();
+        fetch("schema.json")
+          .then((res) => {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.json();
+          })
+          .then((schema) => {
+            initSchema(schema);
+          })
+          .catch((err) => {
+            console.warn("fetch('schema.json') failed:", err);
+            document
+              .getElementById("schema-status-card")
+              .classList.add("visible");
+            document.getElementById("form-loading-placeholder").textContent =
+              "Please select schema.json using the file picker above.";
+          });
+      });
+
+      /**
+       * Render the entire form dynamically from the schema object
+       */
+      function initSchema(schema) {
+        activeSchema = schema;
+        const container = document.getElementById("dynamic-form-sections");
+        container.innerHTML = "";
+
+        // 1. Meta Section (submitted_by required)
+        const metaSection = createSectionElement(
+          "meta",
+          LABELS.layers.meta[currentLang],
+          true,
+        );
+        const metaBody = metaSection.querySelector(".section-body");
+
+        metaBody.appendChild(
+          createSimpleFieldRow({
+            id: "submitted_by",
+            labelKey: "submitted_by",
+            type: "text",
+            required: true,
+            placeholder: "e.g. John Doe / linus@example.com",
+          }),
+        );
+        container.appendChild(metaSection);
+
+        // 2. Seven layers matching schema
+        const layerKeys = [
+          "identity",
+          "physical",
+          "facilities",
+          "process_capability",
+          "reliability",
+          "commercial",
+          "notes",
+        ];
+
+        layerKeys.forEach((layerKey) => {
+          const layerProp = schema.properties[layerKey];
+          if (!layerProp) return;
+
+          const isOpen = layerKey === "identity" || layerKey === "physical";
+          const section = createSectionElement(
+            layerKey,
+            LABELS.layers[layerKey]
+              ? LABELS.layers[layerKey][currentLang]
+              : layerKey,
+            isOpen,
+          );
+          const body = section.querySelector(".section-body");
+
+          if (layerKey === "notes") {
+            body.appendChild(createNotesRow());
+          } else if (layerProp.properties) {
+            const requiredList = layerProp.required || [];
+            Object.entries(layerProp.properties).forEach(
+              ([propKey, propSchema]) => {
+                const isRequired = requiredList.includes(propKey);
+                const row = renderFieldRow(
+                  layerKey,
+                  propKey,
+                  propSchema,
+                  isRequired,
+                  schema,
+                );
+                if (row) body.appendChild(row);
+              },
+            );
+          }
+
+          container.appendChild(section);
+        });
+
+        // Attach live input listeners for the conformance meter
+        container.addEventListener("input", () => {
+          updateConformanceMeter();
+          resetValidationState();
+        });
+        container.addEventListener("change", () => {
+          updateConformanceMeter();
+          resetValidationState();
+        });
+
+        // Post-render step: Catalog prefill (?vendor=...&model=...)
+        applyCatalogPrefill();
+
+        applyTranslations();
+        updateConformanceMeter();
+      }
+
+      /**
+       * 1. Catalog prefill (the core of P2)
+       * Safely parses URL params and sets input values via textContent / input.value (no innerHTML injection).
+       */
+      function applyCatalogPrefill() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const rawVendor = urlParams.get("vendor");
+        const rawModel = urlParams.get("model");
+        const vendorParam =
+          rawVendor !== null && rawVendor !== undefined
+            ? rawVendor.trim()
+            : null;
+        const modelParam =
+          rawModel !== null && rawModel !== undefined ? rawModel.trim() : null;
+
+        const banner = document.getElementById("draft-context-banner");
+        const strongNames = document.getElementById("banner-strong-names");
+        const catalogLink = document.getElementById("banner-catalog-link");
+
+        const catUrl = SUBMISSION_CONFIG.catalogUrl || "/catalog-demo.html";
+        if (catalogLink) {
+          catalogLink.href = catUrl;
+          const sBackLink = document.getElementById("btn-back-catalog");
+          if (sBackLink) sBackLink.href = catUrl;
+        }
+
+        const hasVendor = Boolean(vendorParam && vendorParam.length > 0);
+        const hasModel = Boolean(modelParam && modelParam.length > 0);
+
+        if (hasVendor || hasModel) {
+          // Show banner
+          banner.style.display = "flex";
+          // Security: Insert via textContent only — never innerHTML
+          const cleanNames = [
+            hasVendor ? vendorParam : "",
+            hasModel ? modelParam : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
+          strongNames.textContent = cleanNames;
+
+          // Prefill identity.vendor
+          if (hasVendor) {
+            const vInp = document.getElementById("input-identity.vendor-val");
+            if (vInp) {
+              vInp.value = vendorParam;
+              addCatalogBadge("identity.vendor");
+            }
+          }
+
+          // Prefill identity.model
+          if (hasModel) {
+            const mInp = document.getElementById("input-identity.model-val");
+            if (mInp) {
+              mInp.value = modelParam;
+              addCatalogBadge("identity.model");
+            }
+          }
+        } else {
+          // No params or whitespace-only: keep banner hidden, blank form
+          banner.style.display = "none";
+        }
+      }
+
+      function addCatalogBadge(fieldId) {
+        const row = document.getElementById(`row-${fieldId}`);
+        if (!row) return;
+        const label = row.querySelector(".field-label");
+        if (!label || label.querySelector(".badge-from-catalog")) return;
+
+        const badge = document.createElement("span");
+        badge.className = "badge-from-catalog";
+        badge.id = `tag-${fieldId.replace(".", "-")}`;
+        badge.textContent = LABELS.ui.tag_from_catalog[currentLang];
+        label.appendChild(badge);
+      }
+
+      function createSectionElement(layerKey, title, isOpen) {
+        const details = document.createElement("details");
+        details.className = "section-card";
+        details.id = "section-" + layerKey;
+        if (isOpen) details.setAttribute("open", "");
+
+        const summary = document.createElement("summary");
+        summary.className = "section-summary";
+
+        const spanTitle = document.createElement("span");
+        spanTitle.setAttribute("data-i18n-layer", layerKey);
+        spanTitle.textContent = title;
+
+        const badge = document.createElement("span");
+        badge.className = "section-badge";
+        badge.id = `badge-sec-${layerKey}`;
+        badge.textContent = layerKey.toUpperCase();
+
+        summary.appendChild(spanTitle);
+        summary.appendChild(badge);
+        details.appendChild(summary);
+
+        const body = document.createElement("div");
+        body.className = "section-body";
+        details.appendChild(body);
+
+        return details;
+      }
+
+      /**
+       * Dynamically render a field row by inspecting the schema definition
+       */
+      function renderFieldRow(
+        layerKey,
+        propKey,
+        propSchema,
+        isRequired,
+        rootSchema,
+      ) {
+        const fieldId = `${layerKey}.${propKey}`;
+
+        // 1. Array of objects: process_gases, capabilities, alternative_to
+        if (
+          propSchema.type === "array" &&
+          propSchema.items &&
+          propSchema.items.type === "object"
+        ) {
+          return createComplexArrayRow(
+            layerKey,
+            propKey,
+            propSchema,
+            isRequired,
+          );
+        }
+
+        // 2. Array of primitives: wafer_sizes_mm, model_aliases, regions_available
+        if (propKey === "wafer_sizes_mm") {
+          return createWaferSizesRow(layerKey, propKey, isRequired);
+        }
+        if (propSchema.type === "array") {
+          return createStringArrayRow(layerKey, propKey, isRequired);
+        }
+
+        // 3. FieldValue wrapper vs bare field
+        const isFieldValue = Boolean(
+          (propSchema.$ref && propSchema.$ref.includes("field")) ||
+          (propSchema.properties &&
+            propSchema.properties.provenance &&
+            propSchema.properties.value),
+        );
+
+        const row = document.createElement("div");
+        row.className = "field-row";
+        row.id = `row-${fieldId}`;
+
+        // Field Header
+        const header = document.createElement("div");
+        header.className = "field-header";
+
+        const label = document.createElement("span");
+        label.className = "field-label";
+        label.setAttribute("data-i18n-field", propKey);
+        label.textContent = LABELS.fields[propKey]
+          ? LABELS.fields[propKey][currentLang]
+          : propKey;
+
+        if (isRequired) {
+          const mark = document.createElement("span");
+          mark.className = "field-req-mark";
+          mark.textContent = " *";
+          label.appendChild(mark);
+        }
+
+        const desc = document.createElement("span");
+        desc.className = "field-desc";
+        desc.textContent = fieldId;
+
+        header.appendChild(label);
+        header.appendChild(desc);
+        row.appendChild(header);
+
+        // Field Inputs
+        const inputsDiv = document.createElement("div");
+        inputsDiv.className = isFieldValue
+          ? "field-inputs"
+          : "field-inputs bare";
+
+        // Value input
+        const valueInput = createValueInput(
+          layerKey,
+          propKey,
+          propSchema,
+          rootSchema,
+        );
+        valueInput.id = `input-${fieldId}-val`;
+        valueInput.setAttribute("data-field-id", fieldId);
+        if (isRequired) valueInput.setAttribute("data-required", "true");
+        inputsDiv.appendChild(valueInput);
+
+        // Provenance inputs if FieldValue
+        if (isFieldValue) {
+          // Tier Select (defaults to "inferred")
+          const tierSelect = document.createElement("select");
+          tierSelect.id = `input-${fieldId}-tier`;
+          tierSelect.setAttribute("data-is-tier", "true");
+
+          const tiers = [
+            "inferred",
+            "vendor_confirmed",
+            "independent_verified",
+            "community_corroborated",
+            "synthetic",
+          ];
+          tiers.forEach((t) => {
+            const opt = document.createElement("option");
+            opt.value = t;
+            opt.textContent = LABELS.tiers[t]
+              ? LABELS.tiers[t][currentLang]
+              : t;
+            if (t === "inferred") opt.selected = true;
+            tierSelect.appendChild(opt);
+          });
+          inputsDiv.appendChild(tierSelect);
+
+          // Source URL input
+          const sourceInput = document.createElement("input");
+          sourceInput.type = "text";
+          sourceInput.id = `input-${fieldId}-source`;
+          sourceInput.placeholder = "Source URL / 出处链接";
+          inputsDiv.appendChild(sourceInput);
+        }
+
+        row.appendChild(inputsDiv);
+
+        // Inline error message container
+        const errDiv = document.createElement("div");
+        errDiv.className = "error-msg";
+        errDiv.id = `err-${fieldId}`;
+        row.appendChild(errDiv);
+
+        return row;
+      }
+
+      function createValueInput(layerKey, propKey, propSchema, rootSchema) {
+        // Check for enum
+        let enumVals = null;
+        if (propSchema.enum) {
+          enumVals = propSchema.enum;
+        } else if (
+          propSchema.properties &&
+          propSchema.properties.value &&
+          propSchema.properties.value.enum
+        ) {
+          enumVals = propSchema.properties.value.enum;
+        } else if (
+          propSchema.$ref &&
+          propSchema.$ref.includes("categoryEnum")
+        ) {
+          enumVals = rootSchema.$defs.categoryEnum.enum;
+        } else if (
+          propSchema.properties &&
+          propSchema.properties.value &&
+          propSchema.properties.value.$ref &&
+          propSchema.properties.value.$ref.includes("categoryEnum")
+        ) {
+          enumVals = rootSchema.$defs.categoryEnum.enum;
+        }
+
+        if (enumVals) {
+          const sel = document.createElement("select");
+          const emptyOpt = document.createElement("option");
+          emptyOpt.value = "";
+          emptyOpt.textContent = `-- Select / 请选择 ${propKey} --`;
+          sel.appendChild(emptyOpt);
+          enumVals.forEach((v) => {
+            const opt = document.createElement("option");
+            opt.value = v;
+            opt.textContent = v;
+            sel.appendChild(opt);
+          });
+          return sel;
+        }
+
+        // Check for boolean
+        const isBool =
+          propSchema.type === "boolean" ||
+          (propSchema.$ref && propSchema.$ref.includes("fieldBoolean")) ||
+          (propSchema.properties &&
+            propSchema.properties.value &&
+            propSchema.properties.value.type === "boolean");
+        if (isBool) {
+          const sel = document.createElement("select");
+          const emptyOpt = document.createElement("option");
+          emptyOpt.value = "";
+          emptyOpt.textContent = "-- Select / 请选择 --";
+          sel.appendChild(emptyOpt);
+
+          const optT = document.createElement("option");
+          optT.value = "true";
+          optT.textContent = "True (支持/配备)";
+          const optF = document.createElement("option");
+          optF.value = "false";
+          optF.textContent = "False (不支持/未配备)";
+          sel.appendChild(optT);
+          sel.appendChild(optF);
+          return sel;
+        }
+
+        // Check for number / integer
+        const isNum =
+          propSchema.type === "number" ||
+          propSchema.type === "integer" ||
+          (propSchema.$ref &&
+            (propSchema.$ref.includes("fieldNumber") ||
+              propSchema.$ref.includes("fieldInteger"))) ||
+          (propSchema.properties &&
+            propSchema.properties.value &&
+            (propSchema.properties.value.type === "number" ||
+              propSchema.properties.value.type === "integer"));
+        if (isNum) {
+          const inp = document.createElement("input");
+          inp.type = "number";
+          inp.step =
+            propSchema.type === "integer" ||
+            (propSchema.$ref && propSchema.$ref.includes("fieldInteger"))
+              ? "1"
+              : "any";
+          const unit = CANONICAL_UNITS[propKey] || "";
+          inp.placeholder = unit ? `Numeric value (${unit})` : "Numeric value";
+          return inp;
+        }
+
+        // Default text input
+        const inp = document.createElement("input");
+        inp.type = "text";
+        inp.placeholder = `Enter ${propKey}...`;
+        return inp;
+      }
+
+      function createWaferSizesRow(layerKey, propKey, isRequired) {
+        const fieldId = `${layerKey}.${propKey}`;
+        const row = document.createElement("div");
+        row.className = "field-row";
+        row.id = `row-${fieldId}`;
+
+        const header = document.createElement("div");
+        header.className = "field-header";
+        const label = document.createElement("span");
+        label.className = "field-label";
+        label.setAttribute("data-i18n-field", propKey);
+        label.textContent = LABELS.fields[propKey][currentLang];
+        if (isRequired) {
+          const mark = document.createElement("span");
+          mark.className = "field-req-mark";
+          mark.textContent = " *";
+          label.appendChild(mark);
+        }
+        header.appendChild(label);
+        header.appendChild(createDescSpan(fieldId));
+        row.appendChild(header);
+
+        const inputsDiv = document.createElement("div");
+        inputsDiv.className = "field-inputs";
+
+        // Checkbox group for 150, 200, 300
+        const group = document.createElement("div");
+        group.className = "checkbox-group";
+        group.id = `input-${fieldId}-val`;
+        group.setAttribute("data-field-id", fieldId);
+        if (isRequired) group.setAttribute("data-required", "true");
+
+        [150, 200, 300].forEach((size) => {
+          const lbl = document.createElement("label");
+          lbl.className = "checkbox-label";
+          const cb = document.createElement("input");
+          cb.type = "checkbox";
+          cb.value = size;
+          if (size === 300) cb.checked = true;
+          lbl.appendChild(cb);
+          lbl.appendChild(document.createTextNode(`${size} mm`));
+          group.appendChild(lbl);
+        });
+        inputsDiv.appendChild(group);
+
+        // Tier Select
+        const tierSelect = createTierSelect(`input-${fieldId}-tier`);
+        inputsDiv.appendChild(tierSelect);
+
+        // Source URL
+        const sourceInput = document.createElement("input");
+        sourceInput.type = "text";
+        sourceInput.id = `input-${fieldId}-source`;
+        sourceInput.placeholder = "Source URL / 出处链接";
+        inputsDiv.appendChild(sourceInput);
+
+        row.appendChild(inputsDiv);
+
+        const errDiv = document.createElement("div");
+        errDiv.className = "error-msg";
+        errDiv.id = `err-${fieldId}`;
+        row.appendChild(errDiv);
+
+        return row;
+      }
+
+      function createStringArrayRow(layerKey, propKey, isRequired) {
+        const fieldId = `${layerKey}.${propKey}`;
+        const row = document.createElement("div");
+        row.className = "field-row";
+        row.id = `row-${fieldId}`;
+
+        const header = document.createElement("div");
+        header.className = "field-header";
+        const label = document.createElement("span");
+        label.className = "field-label";
+        label.setAttribute("data-i18n-field", propKey);
+        label.textContent = LABELS.fields[propKey]
+          ? LABELS.fields[propKey][currentLang]
+          : propKey;
+        header.appendChild(label);
+        header.appendChild(createDescSpan(fieldId));
+        row.appendChild(header);
+
+        const inputsDiv = document.createElement("div");
+        inputsDiv.className = "field-inputs bare";
+        const inp = document.createElement("input");
+        inp.type = "text";
+        inp.id = `input-${fieldId}-val`;
+        inp.placeholder = "Comma-separated values, e.g. US, TW, KR, CN";
+        inputsDiv.appendChild(inp);
+        row.appendChild(inputsDiv);
+
+        return row;
+      }
+
+      function createComplexArrayRow(
+        layerKey,
+        propKey,
+        propSchema,
+        isRequired,
+      ) {
+        const fieldId = `${layerKey}.${propKey}`;
+        const row = document.createElement("div");
+        row.className = "field-row";
+        row.id = `row-${fieldId}`;
+
+        const header = document.createElement("div");
+        header.className = "field-header";
+        const label = document.createElement("span");
+        label.className = "field-label";
+        label.setAttribute("data-i18n-field", propKey);
+        label.textContent = LABELS.fields[propKey]
+          ? LABELS.fields[propKey][currentLang]
+          : propKey;
+        header.appendChild(label);
+        header.appendChild(createDescSpan(fieldId));
+        row.appendChild(header);
+
+        const container = document.createElement("div");
+        container.className = "array-container";
+        container.id = `container-${fieldId}`;
+
+        const listDiv = document.createElement("div");
+        listDiv.id = `list-${fieldId}`;
+        listDiv.style.display = "flex";
+        listDiv.style.flexDirection = "column";
+        listDiv.style.gap = "8px";
+        container.appendChild(listDiv);
+
+        const btnAdd = document.createElement("button");
+        btnAdd.type = "button";
+        btnAdd.className = "btn btn-secondary btn-sm";
+        btnAdd.textContent = `+ Add ${propKey} item`;
+        btnAdd.onclick = () => addComplexArrayItem(layerKey, propKey);
+        container.appendChild(btnAdd);
+
+        row.appendChild(container);
+
+        if (propKey === "capabilities") {
+          setTimeout(() => addComplexArrayItem(layerKey, propKey), 0);
+        }
+
+        return row;
+      }
+
+      function addComplexArrayItem(layerKey, propKey) {
+        const list = document.getElementById(`list-${layerKey}.${propKey}`);
+        if (!list) return;
+
+        const itemIndex = list.children.length;
+        const itemDiv = document.createElement("div");
+        itemDiv.className = "array-item";
+
+        const top = document.createElement("div");
+        top.className = "array-item-top";
+        const title = document.createElement("span");
+        title.style.fontSize = "12px";
+        title.style.fontWeight = "600";
+        title.textContent = `#${itemIndex + 1}`;
+        const btnRemove = document.createElement("button");
+        btnRemove.type = "button";
+        btnRemove.className = "btn-remove-item";
+        btnRemove.textContent = "Remove";
+        btnRemove.onclick = () => itemDiv.remove();
+        top.appendChild(title);
+        top.appendChild(btnRemove);
+        itemDiv.appendChild(top);
+
+        if (propKey === "process_gases") {
+          itemDiv.innerHTML += `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+        <input type="text" class="arr-gas-name" placeholder="Gas Name (e.g. Cl2, SiH4)">
+        <input type="number" class="arr-gas-flow" placeholder="Max Flow (slm)">
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+        <select class="arr-gas-tier" data-is-tier="true">
+          <option value="inferred" selected>Inferred</option>
+          <option value="vendor_confirmed">Vendor Confirmed</option>
+          <option value="independent_verified">Independent Verified</option>
+          <option value="community_corroborated">Community Corroborated</option>
+          <option value="synthetic">Synthetic</option>
+        </select>
+        <input type="text" class="arr-gas-source" placeholder="Source URL">
+      </div>
+    `;
+        } else if (propKey === "capabilities") {
+          itemDiv.innerHTML += `
+      <input type="text" class="arr-cap-process" placeholder="Process Name (e.g. Conductor Etch / Dielectric PECVD)">
+      <input type="text" class="arr-cap-materials" placeholder="Materials (comma-separated, e.g. poly-Si, SiN, W)">
+      <div style="display:grid; grid-template-columns: 2fr 1fr 1fr; gap:8px;">
+        <input type="text" class="arr-cap-detail" placeholder="Process Detail Specification">
+        <select class="arr-cap-tier" data-is-tier="true">
+          <option value="inferred" selected>Inferred</option>
+          <option value="vendor_confirmed">Vendor Confirmed</option>
+          <option value="independent_verified">Independent Verified</option>
+          <option value="community_corroborated">Community Corroborated</option>
+          <option value="synthetic">Synthetic</option>
+        </select>
+        <input type="text" class="arr-cap-source" placeholder="Source URL">
+      </div>
+    `;
+        } else if (propKey === "alternative_to") {
+          itemDiv.innerHTML += `
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:8px;">
+        <input type="text" class="arr-alt-vendor" placeholder="Competitor Vendor (e.g. Lam Research)">
+        <input type="text" class="arr-alt-model" placeholder="Competitor Model (e.g. Kiyo FX)">
+      </div>
+      <input type="text" class="arr-alt-note" placeholder="Drop-in comparison note">
+    `;
+        }
+
+        list.appendChild(itemDiv);
+      }
+
+      function createNotesRow() {
+        const row = document.createElement("div");
+        row.className = "field-row";
+        const header = document.createElement("div");
+        header.className = "field-header";
+        const label = document.createElement("span");
+        label.className = "field-label";
+        label.setAttribute("data-i18n-field", "notes");
+        label.textContent = LABELS.fields.notes[currentLang];
+        header.appendChild(label);
+        header.appendChild(createDescSpan("notes"));
+        row.appendChild(header);
+
+        const ta = document.createElement("textarea");
+        ta.id = "input-notes";
+        ta.rows = 4;
+        ta.placeholder =
+          "Free-text remarks, engineering footnotes, tribal knowledge annotations...";
+        row.appendChild(ta);
+        return row;
+      }
+
+      function createSimpleFieldRow({
+        id,
+        labelKey,
+        type,
+        required,
+        placeholder,
+      }) {
+        const row = document.createElement("div");
+        row.className = "field-row";
+        row.id = `row-${id}`;
+
+        const header = document.createElement("div");
+        header.className = "field-header";
+        const label = document.createElement("span");
+        label.className = "field-label";
+        label.setAttribute("data-i18n-field", labelKey);
+        label.textContent = LABELS.fields[labelKey]
+          ? LABELS.fields[labelKey][currentLang]
+          : labelKey;
+        if (required) {
+          const mark = document.createElement("span");
+          mark.className = "field-req-mark";
+          mark.textContent = " *";
+          label.appendChild(mark);
+        }
+        header.appendChild(label);
+        header.appendChild(createDescSpan(id));
+        row.appendChild(header);
+
+        const inp = document.createElement("input");
+        inp.type = type;
+        inp.id = `input-${id}-val`;
+        inp.placeholder = placeholder || "";
+        inp.setAttribute("data-field-id", id);
+        if (required) inp.setAttribute("data-required", "true");
+        row.appendChild(inp);
+
+        const errDiv = document.createElement("div");
+        errDiv.className = "error-msg";
+        errDiv.id = `err-${id}`;
+        row.appendChild(errDiv);
+
+        return row;
+      }
+
+      function createTierSelect(id) {
+        const sel = document.createElement("select");
+        sel.id = id;
+        sel.setAttribute("data-is-tier", "true");
+        [
+          "inferred",
+          "vendor_confirmed",
+          "independent_verified",
+          "community_corroborated",
+          "synthetic",
+        ].forEach((t) => {
+          const opt = document.createElement("option");
+          opt.value = t;
+          opt.textContent = LABELS.tiers[t] ? LABELS.tiers[t][currentLang] : t;
+          if (t === "inferred") opt.selected = true;
+          sel.appendChild(opt);
+        });
+        return sel;
+      }
+
+      function createDescSpan(text) {
+        const desc = document.createElement("span");
+        desc.className = "field-desc";
+        desc.textContent = text;
+        return desc;
+      }
+
+      /**
+       * Conformance Progress Meter Calculation (Live)
+       */
+      function updateConformanceMeter() {
+        const l1Required = [
+          "submitted_by",
+          "identity.vendor",
+          "identity.model",
+          "identity.category",
+          "identity.wafer_sizes_mm",
+          "physical.width_mm",
+          "physical.depth_mm",
+          "physical.height_mm",
+        ];
+
+        let l1Filled = 0;
+        l1Required.forEach((fid) => {
+          if (isFieldFilled(fid)) l1Filled++;
+        });
+        const isL1Complete = l1Filled === l1Required.length;
+
+        // L2 count (Facilities fields)
+        const l2Fields = [
+          "facilities.power_kva",
+          "facilities.voltage_v",
+          "facilities.phases",
+          "facilities.heat_load_kw",
+          "facilities.upw_lpm",
+          "facilities.pcw_kw",
+          "facilities.cda_nm3h",
+          "facilities.exhaust",
+          "facilities.vacuum_requirement",
+          "facilities.noise_db",
+          "facilities.cleanroom_class_required",
+        ];
+        let l2Filled = 0;
+        l2Fields.forEach((fid) => {
+          if (isFieldFilled(fid)) l2Filled++;
+        });
+        const hasGases =
+          document.querySelectorAll(
+            "#list-facilities\\.process_gases .array-item",
+          ).length > 0;
+        if (hasGases) l2Filled++;
+        const isL2Complete = isL1Complete && l2Filled >= 1;
+
+        // L3 count (Process capability, reliability, commercial)
+        const l3Fields = [
+          "process_capability.throughput_wph",
+          "process_capability.uniformity_pct",
+          "reliability.mtbf_h",
+          "reliability.mttr_h",
+          "reliability.availability_pct",
+          "commercial.vendor_contact",
+          "commercial.datasheet_url",
+        ];
+        let l3Filled = 0;
+        l3Fields.forEach((fid) => {
+          if (isFieldFilled(fid)) l3Filled++;
+        });
+        const hasCaps =
+          document.querySelectorAll(
+            "#list-process_capability\\.capabilities .array-item",
+          ).length > 0;
+        if (hasCaps) l3Filled++;
+        const isL3Complete = isL2Complete && hasCaps && l3Filled >= 2;
+
+        // Update Badges & Boxes
+        const badgeL1 = document.getElementById("badge-l1");
+        const badgeL2 = document.getElementById("badge-l2");
+        const badgeL3 = document.getElementById("badge-l3");
+        const boxL1 = document.getElementById("box-l1");
+        const boxL2 = document.getElementById("box-l2");
+        const boxL3 = document.getElementById("box-l3");
+        const bar = document.getElementById("progress-bar-fill");
+        const pill = document.getElementById("meter-status-pill");
+
+        if (badgeL1)
+          badgeL1.textContent =
+            `${l1Filled}/${l1Required.length}` + (isL1Complete ? " ✓" : "");
+        if (badgeL2)
+          badgeL2.textContent =
+            `${l2Filled}/${l2Fields.length + 1}` + (isL2Complete ? " ✓" : "");
+        if (badgeL3)
+          badgeL3.textContent =
+            `${l3Filled}/${l3Fields.length + 1}` + (isL3Complete ? " ✓" : "");
+
+        if (boxL1)
+          boxL1.className =
+            "level-box" + (isL1Complete ? " complete" : " active");
+        if (boxL2)
+          boxL2.className =
+            "level-box" +
+            (isL2Complete ? " complete" : isL1Complete ? " active" : "");
+        if (boxL3)
+          boxL3.className =
+            "level-box" +
+            (isL3Complete ? " complete" : isL2Complete ? " active" : "");
+
+        let pct = 0;
+        if (!isL1Complete) {
+          pct = (l1Filled / l1Required.length) * 33;
+          if (pill) {
+            pill.style.background = "#fef3c7";
+            pill.style.color = "#92400e";
+            pill.textContent =
+              currentLang === "zh"
+                ? `L1 进行中 (${l1Filled}/${l1Required.length})`
+                : `L1 in progress (${l1Filled}/${l1Required.length})`;
+          }
+        } else if (!isL2Complete) {
+          pct = 33 + (l2Filled / (l2Fields.length + 1)) * 33;
+          if (pill) {
+            pill.style.background = "#dbeafe";
+            pill.style.color = "#1e40af";
+            pill.textContent =
+              currentLang === "zh"
+                ? `L1 已达标 ✓ · L2: 厂务 ${l2Filled}/${l2Fields.length + 1}`
+                : `L1 complete ✓ · L2: facilities ${l2Filled}/${l2Fields.length + 1}`;
+          }
+        } else if (!isL3Complete) {
+          pct = 66 + (l3Filled / (l3Fields.length + 1)) * 34;
+          if (pill) {
+            pill.style.background = "#dbeafe";
+            pill.style.color = "#1e40af";
+            pill.textContent =
+              currentLang === "zh"
+                ? `L2 已达标 ✓ · L3: 完整基准 ${l3Filled}/${l3Fields.length + 1}`
+                : `L2 complete ✓ · L3: benchmark ${l3Filled}/${l3Fields.length + 1}`;
+          }
+        } else {
+          pct = 100;
+          if (pill) {
+            pill.style.background = "#dcfce7";
+            pill.style.color = "#166534";
+            pill.textContent =
+              currentLang === "zh" ? `L3 完整基准级已达标 ✓` : `L3 complete ✓`;
+          }
+        }
+        if (bar) bar.style.width = Math.min(100, Math.round(pct)) + "%";
+      }
+
+      function isFieldFilled(fid) {
+        if (fid === "identity.wafer_sizes_mm") {
+          const checked = document.querySelectorAll(
+            "#input-identity\\.wafer_sizes_mm-val input[type='checkbox']:checked",
+          );
+          return checked.length > 0;
+        }
+        const input = document.getElementById(`input-${fid}-val`);
+        if (!input) return false;
+        return input.value.trim() !== "";
+      }
+
+      function handleTargetLevelChange() {
+        resetValidationState();
+        updateConformanceMeter();
+      }
+
+      function resetValidationState() {
+        isValidated = false;
+        const statusEl = document.getElementById("action-status-text");
+        if (statusEl) {
+          statusEl.innerHTML = `<span>${LABELS.ui.fill_to_validate[currentLang]}</span>`;
+        }
+      }
+
+      /**
+       * Validate form against selected target level
+       */
+      function validateForm() {
+        const targetLevel = document.getElementById(
+          "target-conformance-select",
+        ).value;
+        let hasErrors = false;
+        const errors = [];
+
+        // Clear previous errors
+        document
+          .querySelectorAll(".input-error")
+          .forEach((el) => el.classList.remove("input-error"));
+        document.querySelectorAll(".error-msg").forEach((el) => {
+          el.textContent = "";
+          el.classList.remove("visible");
+        });
+
+        function reportError(fid, msgEn, msgZh) {
+          hasErrors = true;
+          const msg = currentLang === "zh" ? msgZh : msgEn;
+          errors.push({ fid, msg });
+          const input = document.getElementById(`input-${fid}-val`);
+          if (input) input.classList.add("input-error");
+          const errDiv = document.getElementById(`err-${fid}`);
+          if (errDiv) {
+            errDiv.textContent = msg;
+            errDiv.classList.add("visible");
+          }
+        }
+
+        // 1. All levels require L1 mandatory fields (including submitted_by)
+        const l1Mandatory = [
+          {
+            id: "submitted_by",
+            en: "submitted_by is required",
+            zh: "提报人 (submitted_by) 为必填项",
+          },
+          {
+            id: "identity.vendor",
+            en: "identity.vendor is required",
+            zh: "设备厂商 (identity.vendor) 为必填项",
+          },
+          {
+            id: "identity.model",
+            en: "identity.model is required",
+            zh: "设备型号 (identity.model) 为必填项",
+          },
+          {
+            id: "identity.category",
+            en: "identity.category is required",
+            zh: "设备大类 (identity.category) 为必填项",
+          },
+          {
+            id: "identity.wafer_sizes_mm",
+            en: "identity.wafer_sizes_mm must have at least one selection",
+            zh: "适用晶圆尺寸 (identity.wafer_sizes_mm) 必须至少勾选一项",
+          },
+          {
+            id: "physical.width_mm",
+            en: "physical.width_mm is required",
+            zh: "设备宽度 (physical.width_mm) 为必填项",
+          },
+          {
+            id: "physical.depth_mm",
+            en: "physical.depth_mm is required",
+            zh: "设备进深 (physical.depth_mm) 为必填项",
+          },
+          {
+            id: "physical.height_mm",
+            en: "physical.height_mm is required",
+            zh: "设备高度 (physical.height_mm) 为必填项",
+          },
+        ];
+
+        l1Mandatory.forEach((f) => {
+          if (!isFieldFilled(f.id)) {
+            reportError(f.id, f.en, f.zh);
+          }
+        });
+
+        // 2. L2 checks
+        if (targetLevel === "L2" || targetLevel === "L3") {
+          // Requires facilities
+        }
+
+        // 3. L3 checks
+        if (targetLevel === "L3") {
+          const caps = document.querySelectorAll(
+            "#list-process_capability\\.capabilities .array-item",
+          );
+          if (caps.length === 0) {
+            hasErrors = true;
+            errors.push({
+              fid: "process_capability.capabilities",
+              msg: "L3 requires at least 1 process capability",
+            });
+          }
+        }
+
+        if (hasErrors) {
+          isValidated = false;
+          document.getElementById("action-status-text").innerHTML =
+            `<span style="color:var(--danger)">${LABELS.ui.export_blocked[currentLang]}</span>`;
+
+          // Open section containing the first error and scroll to it
+          const firstErr = errors[0];
+          const firstRow = document.getElementById(`row-${firstErr.fid}`);
+          if (firstRow) {
+            const parentDetails = firstRow.closest("details");
+            if (parentDetails) parentDetails.setAttribute("open", "");
+            firstRow.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+          return false;
+        } else {
+          isValidated = true;
+          document.getElementById("action-status-text").innerHTML =
+            `<span style="color:var(--success)">${LABELS.ui.export_ready[currentLang]} (${targetLevel} ✓)</span>`;
+          return true;
+        }
+      }
+
+      /**
+       * Generate a standard UUID v4
+       */
+      function generateUUID() {
+        if (
+          typeof crypto !== "undefined" &&
+          typeof crypto.randomUUID === "function"
+        ) {
+          return crypto.randomUUID();
+        }
+        return "uuuuuuuu-uuuu-4uuu-yuuu-uuuuuuuuuuuu".replace(
+          /[uy]/g,
+          function (c) {
+            const r = (Math.random() * 16) | 0;
+            const v = c === "u" ? r : (r & 0x3) | 0x8;
+            return v.toString(16);
+          },
+        );
+      }
+
+      /**
+       * 3. Canonical Record Construction
+       * Builds Schema v1.0 canonical record with record_status = "submitted".
+       */
+      function buildRecordJSON() {
+        const targetLevel = document.getElementById(
+          "target-conformance-select",
+        ).value;
+        const now = new Date().toISOString().split("T")[0];
+
+        const record = {
+          schema_version: "1.0",
+          record_id: generateUUID(),
+          conformance_level: targetLevel,
+          record_status: "submitted",
+          submitted_by: getInputValue("submitted_by"),
+          submitted_at: now,
+          updated_at: now,
+          identity: {},
+          physical: {},
+        };
+
+        function getFieldValue(fid, type) {
+          const valInput = document.getElementById(`input-${fid}-val`);
+          if (!valInput) return null;
+          let rawVal = valInput.value.trim();
+          if (rawVal === "") return null;
+
+          let parsedVal = rawVal;
+          if (type === "number") parsedVal = parseFloat(rawVal);
+          else if (type === "integer") parsedVal = parseInt(rawVal, 10);
+          else if (type === "boolean") parsedVal = rawVal === "true";
+
+          const tier =
+            document.getElementById(`input-${fid}-tier`)?.value || "inferred";
+          const source = document
+            .getElementById(`input-${fid}-source`)
+            ?.value.trim();
+
+          const fv = {
+            value: parsedVal,
+            provenance: { tier: tier },
+          };
+          if (source) fv.provenance.source = source;
+          const unit = CANONICAL_UNITS[fid.split(".")[1]];
+          if (unit && (type === "number" || type === "integer")) fv.unit = unit;
+
+          return fv;
+        }
+
+        // Populate Identity
+        [
+          "vendor",
+          "model",
+          "category",
+          "subcategory",
+          "node_applicability",
+          "lifecycle_status",
+        ].forEach((k) => {
+          const fv = getFieldValue(`identity.${k}`, "string");
+          if (fv) record.identity[k] = fv;
+        });
+
+        // Wafer Sizes
+        const waferSizes = [];
+        document
+          .querySelectorAll(
+            "#input-identity\\.wafer_sizes_mm-val input[type='checkbox']:checked",
+          )
+          .forEach((cb) => {
+            waferSizes.push(parseInt(cb.value, 10));
+          });
+        if (waferSizes.length > 0) {
+          const tier =
+            document.getElementById("input-identity.wafer_sizes_mm-tier")
+              ?.value || "inferred";
+          const source = document
+            .getElementById("input-identity.wafer_sizes_mm-source")
+            ?.value.trim();
+          record.identity.wafer_sizes_mm = {
+            value: waferSizes,
+            provenance: { tier: tier },
+          };
+          if (source) record.identity.wafer_sizes_mm.provenance.source = source;
+        }
+
+        // Model aliases
+        const aliasesRaw = document
+          .getElementById("input-identity.model_aliases-val")
+          ?.value.trim();
+        if (aliasesRaw) {
+          record.identity.model_aliases = aliasesRaw
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+        }
+
+        // Populate Physical
+        ["width_mm", "depth_mm", "height_mm", "weight_kg"].forEach((k) => {
+          const fv = getFieldValue(`physical.${k}`, "number");
+          if (fv) record.physical[k] = fv;
+        });
+        const lp = getFieldValue("physical.load_ports", "integer");
+        if (lp) record.physical.load_ports = lp;
+        const efem = getFieldValue("physical.efem_config", "string");
+        if (efem) record.physical.efem_config = efem;
+        const seismic = getFieldValue("physical.seismic_kit", "boolean");
+        if (seismic) record.physical.seismic_kit = seismic;
+        const lod = getInputValue("physical.model_3d_lod");
+        if (lod) record.physical.model_3d_lod = lod;
+        const model3d = getInputValue("physical.model_3d_url");
+        if (model3d) record.physical.model_3d_url = model3d;
+
+        // Populate Facilities
+        const facilities = {};
+        [
+          "power_kva",
+          "voltage_v",
+          "heat_load_kw",
+          "upw_lpm",
+          "pcw_kw",
+          "cda_nm3h",
+          "noise_db",
+        ].forEach((k) => {
+          const fv = getFieldValue(`facilities.${k}`, "number");
+          if (fv) facilities[k] = fv;
+        });
+        const phases = getFieldValue("facilities.phases", "integer");
+        if (phases) facilities.phases = phases;
+        ["exhaust", "vacuum_requirement", "cleanroom_class_required"].forEach(
+          (k) => {
+            const fv = getFieldValue(`facilities.${k}`, "string");
+            if (fv) facilities[k] = fv;
+          },
+        );
+
+        // Process gases array
+        const gases = [];
+        document
+          .querySelectorAll("#list-facilities\\.process_gases .array-item")
+          .forEach((item) => {
+            const gas = item.querySelector(".arr-gas-name")?.value.trim();
+            const flow = parseFloat(item.querySelector(".arr-gas-flow")?.value);
+            const tier =
+              item.querySelector(".arr-gas-tier")?.value || "inferred";
+            const source = item.querySelector(".arr-gas-source")?.value.trim();
+            if (gas && !isNaN(flow)) {
+              const gObj = {
+                gas: gas,
+                max_flow_slm: {
+                  value: flow,
+                  unit: "slm",
+                  provenance: { tier: tier },
+                },
+              };
+              if (source) gObj.max_flow_slm.provenance.source = source;
+              gases.push(gObj);
+            }
+          });
+        if (gases.length > 0) facilities.process_gases = gases;
+        if (
+          Object.keys(facilities).length > 0 ||
+          targetLevel === "L2" ||
+          targetLevel === "L3"
+        ) {
+          record.facilities = facilities;
+        }
+
+        // Populate Process Capability
+        const processCapability = {};
+        ["throughput_wph", "uniformity_pct"].forEach((k) => {
+          const fv = getFieldValue(`process_capability.${k}`, "number");
+          if (fv) processCapability[k] = fv;
+        });
+        const particle = getFieldValue(
+          "process_capability.particle_spec",
+          "string",
+        );
+        if (particle) processCapability.particle_spec = particle;
+
+        // Capabilities array
+        const caps = [];
+        document
+          .querySelectorAll(
+            "#list-process_capability\\.capabilities .array-item",
+          )
+          .forEach((item) => {
+            const proc = item.querySelector(".arr-cap-process")?.value.trim();
+            const mats = item.querySelector(".arr-cap-materials")?.value.trim();
+            const det = item.querySelector(".arr-cap-detail")?.value.trim();
+            const tier =
+              item.querySelector(".arr-cap-tier")?.value || "inferred";
+            const source = item.querySelector(".arr-cap-source")?.value.trim();
+            if (proc && det) {
+              const cObj = {
+                process: proc,
+                detail: {
+                  value: det,
+                  provenance: { tier: tier },
+                },
+              };
+              if (source) cObj.detail.provenance.source = source;
+              if (mats)
+                cObj.materials = mats
+                  .split(",")
+                  .map((s) => s.trim())
+                  .filter(Boolean);
+              caps.push(cObj);
+            }
+          });
+        if (caps.length > 0) processCapability.capabilities = caps;
+        if (Object.keys(processCapability).length > 0 || targetLevel === "L3") {
+          record.process_capability = processCapability;
+        }
+
+        // Populate Reliability
+        const reliability = {};
+        ["mtbf_h", "mttr_h", "availability_pct"].forEach((k) => {
+          const fv = getFieldValue(`reliability.${k}`, "number");
+          if (fv) reliability[k] = fv;
+        });
+        const qual = getFieldValue(
+          "reliability.qualification_status",
+          "string",
+        );
+        if (qual) reliability.qualification_status = qual;
+        if (Object.keys(reliability).length > 0 || targetLevel === "L3") {
+          record.reliability = reliability;
+        }
+
+        // Populate Commercial
+        const commercial = {};
+        const vContact = getInputValue("commercial.vendor_contact");
+        if (vContact) commercial.vendor_contact = vContact;
+        const dUrl = getInputValue("commercial.datasheet_url");
+        if (dUrl) commercial.datasheet_url = dUrl;
+        const regRaw = getInputValue("commercial.regions_available");
+        if (regRaw)
+          commercial.regions_available = regRaw
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean);
+
+        // Alternative to
+        const alts = [];
+        document
+          .querySelectorAll("#list-commercial\\.alternative_to .array-item")
+          .forEach((item) => {
+            const v = item.querySelector(".arr-alt-vendor")?.value.trim();
+            const m = item.querySelector(".arr-alt-model")?.value.trim();
+            const n = item.querySelector(".arr-alt-note")?.value.trim();
+            if (v && m) {
+              const aObj = { vendor: v, model: m };
+              if (n) aObj.note = n;
+              alts.push(aObj);
+            }
+          });
+        if (alts.length > 0) commercial.alternative_to = alts;
+        if (Object.keys(commercial).length > 0 || targetLevel === "L3") {
+          record.commercial = commercial;
+        }
+
+        // Notes
+        const notes = document.getElementById("input-notes")?.value.trim();
+        if (notes) record.notes = notes;
+
+        return record;
+      }
+
+      function getInputValue(fid) {
+        const el = document.getElementById(`input-${fid}-val`);
+        return el ? el.value.trim() : "";
+      }
+
+      /**
+       * Generate standard slug filename:
+       * <sanitized-vendor>-<sanitized-model>-<short-id>.json
+       * (lowercase, spaces->-, strip anything not [a-z0-9-])
+       */
+      function sanitizeForFilename(str) {
+        return String(str || "")
+          .toLowerCase()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-z0-9-]/g, "")
+          .replace(/-+/g, "-")
+          .replace(/^-|-$/g, "");
+      }
+
+      function generateFilename(record) {
+        const vendorSlug =
+          sanitizeForFilename(record.identity.vendor?.value) || "vendor";
+        const modelSlug =
+          sanitizeForFilename(record.identity.model?.value) || "model";
+        const shortId =
+          (record.record_id || "")
+            .replace(/[^a-z0-9]/gi, "")
+            .slice(0, 8)
+            .toLowerCase() || "00000000";
+        return `${vendorSlug}-${modelSlug}-${shortId}.json`;
+      }
+
+      /**
+       * 2. Static-Site Submission Pipeline
+       * Executes the requested transport action and displays the Post-Submit Success Panel.
+       */
+      function handleSubmitAction(action) {
+        if (!validateForm()) {
+          return;
+        }
+
+        const record = buildRecordJSON();
+        lastSubmittedRecord = record;
+        const jsonStr = JSON.stringify(record, null, 2);
+        const vendorName = record.identity.vendor?.value || "";
+        const modelName = record.identity.model?.value || "";
+
+        if (action === "download") {
+          triggerJSONDownload(record, jsonStr);
+          showSuccessPanel(record);
+        } else if (action === "copy") {
+          navigator.clipboard
+            .writeText(jsonStr)
+            .then(() => {
+              showToast(LABELS.ui.copied_toast[currentLang]);
+              showSuccessPanel(record);
+            })
+            .catch((err) => {
+              prompt("Copy JSON:", jsonStr);
+              showSuccessPanel(record);
+            });
+        } else if (action === "github") {
+          if (!SUBMISSION_CONFIG.org || !SUBMISSION_CONFIG.repo) {
+            showToast(
+              currentLang === "zh"
+                ? "未配置 GitHub 仓库，请直接下载 JSON 文件。"
+                : "GitHub repository is not configured. Please download the JSON file instead.",
+            );
+            return;
+          }
+          const filename = generateFilename(record);
+          const targetPath = `submissions/pending/${filename}`;
+          const commitMsg =
+            `feat(catalog): submit equipment record ${vendorName} ${modelName}`.trim();
+          const prUrl = `https://github.com/${encodeURIComponent(SUBMISSION_CONFIG.org)}/${encodeURIComponent(SUBMISSION_CONFIG.repo)}/new/main?filename=${encodeURIComponent(targetPath)}&value=${encodeURIComponent(jsonStr)}&message=${encodeURIComponent(commitMsg)}`;
+          window.open(prUrl, "_blank");
+          showSuccessPanel(record);
+        } else if (action === "email") {
+          if (!SUBMISSION_CONFIG.contactEmail) {
+            showToast(
+              currentLang === "zh"
+                ? "未配置联系邮箱，请直接下载 JSON 文件。"
+                : "Contact email is not configured. Please download the JSON file instead.",
+            );
+            return;
+          }
+          const subject =
+            `[SemiconFab] New equipment record: ${vendorName} ${modelName}`.trim();
+          const mailtoBody =
+            `SemiconFab Equipment Record Submission:\n\n` +
+            `Record ID: ${record.record_id}\n` +
+            `Vendor: ${vendorName}\n` +
+            `Model: ${modelName}\n` +
+            `Conformance Level: ${record.conformance_level}\n` +
+            `Submitted By: ${record.submitted_by}\n\n` +
+            `JSON Content:\n${jsonStr}\n`;
+
+          const mailtoUrl = `mailto:${encodeURIComponent(SUBMISSION_CONFIG.contactEmail)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(mailtoBody)}`;
+          window.location.href = mailtoUrl;
+          showSuccessPanel(record);
+        }
+      }
+
+      function triggerJSONDownload(record, jsonStr) {
+        const filename = generateFilename(record);
+        const blob = new Blob([jsonStr], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
+      /**
+       * 4. Post-Submit Success Panel Display & Interactions
+       */
+      function showSuccessPanel(record) {
+        document.getElementById("success-record-id").textContent =
+          record.record_id;
+        document.getElementById("equipment-form").style.display = "none";
+        document.getElementById("conformance-meter-card").style.display =
+          "none";
+        document.getElementById("form-action-bar").style.display = "none";
+        document.getElementById("draft-context-banner").style.display = "none";
+
+        const panel = document.getElementById("submission-success-panel");
+        panel.classList.add("visible");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function downloadJSONAgain() {
+        if (!lastSubmittedRecord) return;
+        const jsonStr = JSON.stringify(lastSubmittedRecord, null, 2);
+        triggerJSONDownload(lastSubmittedRecord, jsonStr);
+      }
+
+      function copyJSONAgain() {
+        if (!lastSubmittedRecord) return;
+        const jsonStr = JSON.stringify(lastSubmittedRecord, null, 2);
+        navigator.clipboard
+          .writeText(jsonStr)
+          .then(() => {
+            showToast(LABELS.ui.copied_toast[currentLang]);
+          })
+          .catch((err) => {
+            prompt("Copy JSON:", jsonStr);
+          });
+      }
+
+      function copyRecordId() {
+        if (!lastSubmittedRecord) return;
+        navigator.clipboard
+          .writeText(lastSubmittedRecord.record_id)
+          .then(() => {
+            showToast(LABELS.ui.copied_id_toast[currentLang]);
+          })
+          .catch((err) => {
+            prompt("Copy Record ID:", lastSubmittedRecord.record_id);
+          });
+      }
+
+      function resetToNewSubmission() {
+        document
+          .getElementById("submission-success-panel")
+          .classList.remove("visible");
+        document.getElementById("equipment-form").style.display = "block";
+        document.getElementById("conformance-meter-card").style.display =
+          "block";
+        document.getElementById("form-action-bar").style.display = "flex";
+
+        // Reset form inputs
+        document.getElementById("equipment-form").reset();
+        lastSubmittedRecord = null;
+        resetValidationState();
+        applyCatalogPrefill();
+        updateConformanceMeter();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 2500);
+      }
+
+      // Fallback Schema definition in case file:// rejects fetch
+      const FALLBACK_SCHEMA = {
+        $schema: "https://json-schema.org/draft/2020-12/schema",
+        $defs: {
+          categoryEnum: {
+            enum: [
+              "lithography",
+              "resist_track",
+              "dry_etch",
+              "wet_clean",
+              "thin_film_deposition",
+              "cmp",
+              "thermal_processing",
+              "ion_implantation",
+              "metrology",
+              "inspection",
+              "test",
+              "packaging",
+              "other",
+            ],
+          },
+          provenanceTier: {
+            enum: [
+              "vendor_confirmed",
+              "independent_verified",
+              "community_corroborated",
+              "inferred",
+              "synthetic",
+            ],
+          },
+          fieldString: {
+            type: "object",
+            required: ["value", "provenance"],
+            properties: {
+              value: { type: "string", minLength: 1 },
+              provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+            },
+          },
+          fieldNumber: {
+            type: "object",
+            required: ["value", "provenance"],
+            properties: {
+              value: { type: "number" },
+              unit: { type: "string" },
+              provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+            },
+          },
+          fieldInteger: {
+            type: "object",
+            required: ["value", "provenance"],
+            properties: {
+              value: { type: "integer" },
+              unit: { type: "string" },
+              provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+            },
+          },
+          fieldBoolean: {
+            type: "object",
+            required: ["value", "provenance"],
+            properties: {
+              value: { type: "boolean" },
+              provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+            },
+          },
+        },
+        properties: {
+          identity: {
+            type: "object",
+            required: ["vendor", "model", "category", "wafer_sizes_mm"],
+            properties: {
+              vendor: { $ref: "#/$defs/fieldString" },
+              model: { $ref: "#/$defs/fieldString" },
+              model_aliases: { type: "array", items: { type: "string" } },
+              category: {
+                properties: {
+                  value: { $ref: "#/$defs/categoryEnum" },
+                  provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+                },
+              },
+              subcategory: { $ref: "#/$defs/fieldString" },
+              wafer_sizes_mm: {
+                properties: {
+                  value: { type: "array", items: { enum: [150, 200, 300] } },
+                  provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+                },
+              },
+              node_applicability: { $ref: "#/$defs/fieldString" },
+              lifecycle_status: {
+                properties: {
+                  value: {
+                    enum: [
+                      "in_production",
+                      "discontinued",
+                      "concept",
+                      "unknown",
+                    ],
+                  },
+                  provenance: { tier: { $ref: "#/$defs/provenanceTier" } },
+                },
+              },
+            },
+          },
+          physical: {
+            type: "object",
+            required: ["width_mm", "depth_mm", "height_mm"],
+            properties: {
+              width_mm: { $ref: "#/$defs/fieldNumber" },
+              depth_mm: { $ref: "#/$defs/fieldNumber" },
+              height_mm: { $ref: "#/$defs/fieldNumber" },
+              weight_kg: { $ref: "#/$defs/fieldNumber" },
+              load_ports: { $ref: "#/$defs/fieldInteger" },
+              efem_config: { $ref: "#/$defs/fieldString" },
+              seismic_kit: { $ref: "#/$defs/fieldBoolean" },
+              model_3d_url: { type: "string" },
+              model_3d_lod: { enum: ["LOD0", "LOD200", "LOD300"] },
+            },
+          },
+          facilities: {
+            type: "object",
+            properties: {
+              power_kva: { $ref: "#/$defs/fieldNumber" },
+              voltage_v: { $ref: "#/$defs/fieldNumber" },
+              phases: { $ref: "#/$defs/fieldInteger" },
+              heat_load_kw: { $ref: "#/$defs/fieldNumber" },
+              upw_lpm: { $ref: "#/$defs/fieldNumber" },
+              pcw_kw: { $ref: "#/$defs/fieldNumber" },
+              cda_nm3h: { $ref: "#/$defs/fieldNumber" },
+              process_gases: {
+                type: "array",
+                items: { type: "object" },
+              },
+              exhaust: { $ref: "#/$defs/fieldString" },
+              vacuum_requirement: { $ref: "#/$defs/fieldString" },
+              noise_db: { $ref: "#/$defs/fieldNumber" },
+              cleanroom_class_required: { $ref: "#/$defs/fieldString" },
+            },
+          },
+          process_capability: {
+            type: "object",
+            properties: {
+              capabilities: {
+                type: "array",
+                items: { type: "object" },
+              },
+              throughput_wph: { $ref: "#/$defs/fieldNumber" },
+              uniformity_pct: { $ref: "#/$defs/fieldNumber" },
+              particle_spec: { $ref: "#/$defs/fieldString" },
+            },
+          },
+          reliability: {
+            type: "object",
+            properties: {
+              mtbf_h: { $ref: "#/$defs/fieldNumber" },
+              mttr_h: { $ref: "#/$defs/fieldNumber" },
+              availability_pct: { $ref: "#/$defs/fieldNumber" },
+              qualification_status: { $ref: "#/$defs/fieldString" },
+            },
+          },
+          commercial: {
+            type: "object",
+            properties: {
+              vendor_contact: { type: "string" },
+              regions_available: { type: "array", items: { type: "string" } },
+              alternative_to: { type: "array", items: { type: "object" } },
+              datasheet_url: { type: "string" },
+            },
+          },
+          notes: { type: "string" },
+        },
+      };
+    </script>
+  </body>
+</html>

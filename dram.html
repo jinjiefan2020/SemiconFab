@@ -1,0 +1,2865 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRAM 1T1C 存储单元 3D 制造工艺剖析 — SemiconFab.org</title>
+
+    <!-- Primary SEO Meta Tags -->
+    <meta
+      name="title"
+      content="DRAM 1T1C 存储单元 3D 制造工艺全流程剖析 — SemiconFab.org"
+    />
+    <meta
+      name="description"
+      content="交互式三维立体几何解构现代 DRAM 1T1C (1晶体管+1电容) 动态随机存取内存存储单元制造全流程：从有源区浅沟槽隔离(STI)、埋入式字线(Buried Wordline / b-WL)、位线直触孔(BL DC)、储能触点(SNC Landing Pad)、深宽比超过40:1的MIM圆柱立体电容器(ZAZ High-k)到上极板互连。支持任意角度自由旋转、动态剖切、X-Ray透视及电荷充放电模拟。"
+    />
+    <meta
+      name="keywords"
+      content="DRAM, 1T1C, 内存制造工艺, Buried Wordline, 埋入式字线, Bitline, 位线, MIM电容, ZAZ High-k, 动态随机存取内存, 3D半导体工艺, 半导体制造流程"
+    />
+    <meta name="author" content="SemiconFab.org Initiative" />
+    <meta name="theme-color" content="#090d16" />
+
+    <!-- Canonical & Multilingual Alternates -->
+    <link rel="canonical" href="https://semiconfab.org/dram.html" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://semiconfab.org/dram.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://semiconfab.org/dram.html?lang=en"
+    />
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://semiconfab.org/dram.html?lang=zh"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SemiconFab.org" />
+    <meta
+      property="og:title"
+      content="DRAM 1T1C Memory Cell 3D Fabrication Digital Twin — SemiconFab.org"
+    />
+    <meta
+      property="og:description"
+      content="Interactive 3D step-by-step engineering model of DRAM 1T1C memory cell fabrication: 6F² STI active islands, Buried Wordlines (b-WL), Bitline Direct Contacts, Storage Node Landing Pads, HAR (>40:1) TiN cylinder capacitors, and ALD ZAZ High-k dielectric."
+    />
+    <meta property="og:url" content="https://semiconfab.org/dram.html" />
+    <meta property="og:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="DRAM 1T1C Memory Cell 3D Fabrication Digital Twin — SemiconFab.org"
+    />
+    <meta
+      name="twitter:description"
+      content="Interactive 3D step-by-step engineering model of DRAM 1T1C memory cell fabrication: 6F² STI active islands, Buried Wordlines (b-WL), Bitline Direct Contacts, Storage Node Landing Pads, HAR (>40:1) TiN cylinder capacitors, and ALD ZAZ High-k dielectric."
+    />
+    <meta name="twitter:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Structured Data (JSON-LD) for Search Engines & AI Crawlers (GEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "@id": "https://semiconfab.org/dram.html#article",
+            "headline": "DRAM 1T1C Memory Cell Fabrication: Complete 10-Step Semiconductor Engineering Guide",
+            "alternativeHeadline": "DRAM 1T1C 动态随机存取存储单元制造全流程工业模型",
+            "description": "Comprehensive engineering breakdown and 3D simulation of DRAM 1T1C memory cell manufacturing across 10 sequential fabrication steps, from buried wordlines to ultra-high aspect ratio MIM capacitors.",
+            "inLanguage": ["en", "zh-CN"],
+            "url": "https://semiconfab.org/dram.html",
+            "author": {
+              "@type": "Organization",
+              "name": "SemiconFab.org Initiative",
+              "url": "https://semiconfab.org"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "SemiconFab.org",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://semiconfab.org/favicon.png"
+              }
+            },
+            "keywords": [
+              "DRAM",
+              "1T1C",
+              "Buried Wordline",
+              "b-WL",
+              "Bitline Direct Contact",
+              "Storage Node Contact",
+              "MIM Capacitor",
+              "ZAZ Dielectric",
+              "ZrO2",
+              "Al2O3",
+              "6F2 Cell",
+              "Semiconductor Fabrication"
+            ]
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://semiconfab.org/dram.html#application",
+            "name": "DRAM 1T1C 3D Fabrication Digital Twin",
+            "url": "https://semiconfab.org/dram.html",
+            "applicationCategory": "EngineeringApplication",
+            "operatingSystem": "All modern browsers with WebGL 2.0",
+            "browserRequirements": "Requires WebGL support",
+            "featureList": [
+              "10-Step Sequential 3D DRAM 1T1C Fabrication Evolution",
+              "Interactive OrbitControls 360-Degree CAD Orbiting",
+              "Dynamic X-Ray Translucent Mode",
+              "Cross-Section Cutaway Clipping Plane",
+              "Capacitor Charge Refresh Flow Simulation",
+              "Exploded View Layer Separation Slider",
+              "Angstrom-Precision Raycast Tooltips"
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://semiconfab.org/dram.html#breadcrumbs",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://semiconfab.org/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "DRAM 3D Memory Cell",
+                "item": "https://semiconfab.org/dram.html"
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://semiconfab.org/dram.html#howto",
+            "name": "How a DRAM 1T1C Memory Cell is Fabricated",
+            "description": "Sequential 10-step industrial semiconductor fabrication sequence for manufacturing modern 6F² DRAM 1T1C cells with buried wordlines and >40:1 MIM capacitors.",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Active Area STI Isolation & 6F² Diagonal Island Patterning",
+                "text": "Etching shallow trench isolation (STI) in single-crystal silicon to form 6F² diagonal honeycombed active silicon pillars, filled with flowable CVD oxide."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "Buried Wordline (b-WL / BCAT) Trench Etch",
+                "text": "Anisotropic plasma dry etching across active areas and STI to form saddle-fin gate trenches buried deep within the silicon bulk."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Gate Dielectric, Tungsten b-WL Metallization & SiN Capping",
+                "text": "Thermal gate oxidation, ALD TiN/W gate metal deposition, recess etching, and planarizing with silicon nitride capping to bury the wordline beneath the surface."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Bitline Direct Contact (DC) Self-Aligned Etch",
+                "text": "Self-aligned contact (SAC) etching down to the shared central active silicon island node, plugged with heavily doped N+ polysilicon."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Bitline Poly-Si/W Stack Patterning & Sidewall Spacers",
+                "text": "Depositing poly-Si/TiN/W/SiN composite stack, dry etching bitline tracks orthogonal to wordlines, and encapsulating with low-k SiBCN spacers."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Storage Node Contact (SNC) Etch & Hexagonal Landing Pads",
+                "text": "High aspect ratio contact etching to active silicon source nodes, filled with selective tungsten and chemical mechanical polished into hexagonal landing pads."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 7,
+                "name": "Thick Sacrificial Mold Oxide & Dual Si3N4 Supporter Stack",
+                "text": "PECVD depositing a 1.2-1.5μm thick sacrificial SiO2 mold stack intercalated with two thin Si3N4 supporter membranes."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 8,
+                "name": "Extreme High Aspect Ratio (>40:1) Capacitor Deep Hole Etch",
+                "text": "Cryogenic reactive ion etching using fluorocarbon plasma to punch vertical cylindrical holes through the entire mold down to each SNC landing pad."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 9,
+                "name": "Mold Oxide Selective Wet Strip & Freestanding TiN Cylinder Release",
+                "text": "ALD depositing TiN bottom electrode, followed by selective buffered oxide etch (BOE) stripping all mold oxide while retaining Si3N4 supporter lattices to prevent cylinder collapse."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 10,
+                "name": "ALD MIM ZAZ (ZrO2/Al2O3/ZrO2) High-k Dielectric & Top Plate Interconnect",
+                "text": "Atomic Layer Deposition (ALD) of nanometer ZAZ high-k dielectric stack and TiN/W top plate electrode held at VDD/2, completing the MIM storage capacitor."
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://semiconfab.org/dram.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why are Buried Wordlines (b-WL) essential in modern DRAM?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Buried wordlines sink the gate electrode entirely beneath the silicon wafer surface. This eliminates parasitic capacitive coupling between wordlines and bitlines, reduces bitline capacitance by over 30%, provides a saddle-fin conduction channel with increased effective channel length (Leff), and drastically suppresses off-state subthreshold leakage."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the 6F² cell layout in DRAM manufacturing?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "6F² is an ultra-dense layout geometry where each memory cell occupies only 6 times the minimum lithographic feature area squared (F²). By slanting active silicon islands at an angle, two access transistors share a single central bitline contact, maximizing bit density per silicon wafer."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the ZAZ High-k dielectric stack in DRAM MIM capacitors?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "ZAZ stands for Zirconia-Alumina-Zirconia (ZrO2 / Al2O3 / ZrO2). ZrO2 provides a very high dielectric constant (k ~ 35-45 in tetragonal phase), while an ultra-thin middle layer of Al2O3 (k ~ 9) disrupts grain boundaries and increases the bandgap offset, suppressing quantum mechanical leakage currents below 10^-7 A/cm²."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why do freestanding DRAM cylinder capacitors require supporter layers?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "With aspect ratios exceeding 40:1 and cylinder wall thicknesses under 10nm, surface tension capillary forces during wet mold stripping easily cause adjacent cylinders to bend and stick together ('pattern collapse'). Silicon nitride supporter meshes mechanically tie the cylinders together into a robust 3D honeycomb lattice."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="alternate icon" href="favicon.ico" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              darkbg: "#070a12",
+              panelbg: "rgba(15, 23, 42, 0.85)",
+              accent: "#f59e0b", // Amber/Gold theme for DRAM capacitor storage
+              accentGlow: "rgba(245, 158, 11, 0.25)",
+              neonAmber: "#f59e0b",
+              neonBlue: "#38bdf8",
+              neonGreen: "#10b981",
+              neonPurple: "#a855f7",
+            },
+            fontFamily: {
+              mono: ["JetBrains Mono", "Fira Code", "Menlo", "monospace"],
+              sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Three.js and OrbitControls -->
+    <!-- Modern Three.js (0.160.0) with ES Module OrbitControls & PBR Tone Mapping -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+      window.THREE = Object.assign({}, THREE, { OrbitControls });
+      if (window.__onThreeLoaded) window.__onThreeLoaded();
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.6);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(100, 116, 139, 0.4);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(245, 158, 11, 0.6);
+      }
+
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glow-amber {
+        box-shadow: 0 0 20px -3px rgba(245, 158, 11, 0.35);
+      }
+
+      .stepper-btn {
+        transition: all 0.15s ease;
+      }
+      .stepper-btn:hover {
+        background: rgba(30, 41, 59, 0.7);
+      }
+      .stepper-btn.active {
+        background: #f8fafc !important;
+        border-color: #f8fafc !important;
+        color: #0f172a !important;
+        font-weight: 600;
+      }
+
+      /* Tooltip overlay */
+      #part-tooltip {
+        pointer-events: none;
+        transform: translate(-50%, -120%);
+        transition: opacity 0.15s ease;
+      }
+
+
+        50% { opacity: 0.4; }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-darkbg text-slate-100 font-sans h-screen w-screen overflow-hidden flex flex-col select-none"
+  >
+    <!-- Top Navigation Header -->
+    <header
+      class="h-14 border-b border-slate-800/80 bg-[#090d16]/90 backdrop-blur-md px-4 flex items-center justify-between shrink-0 z-30"
+    >
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <div
+            class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-600 to-yellow-500 flex items-center justify-center group-hover:scale-105 transition"
+          >
+            <i data-lucide="cylinder" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <span
+              class="font-bold text-sm tracking-tight text-white group-hover:text-amber-400 transition"
+              >SemiconFab</span
+            >
+            <span
+              class="text-[10px] text-amber-400 font-mono ml-1.5 px-1.5 py-0.5 rounded bg-amber-950/80 border border-amber-800/60 font-semibold"
+              >DRAM 3D</span
+            >
+          </div>
+        </a>
+        <div class="hidden sm:block h-4 w-[1px] bg-slate-700/60 mx-1"></div>
+        <div class="hidden sm:flex items-center text-xs text-slate-400 gap-1.5">
+          <span id="header-subtitle"
+            >DRAM 1T1C 存储单元制造演进模型 (埋入字线与超高深宽比MIM电容)</span
+          >
+        </div>
+      </div>
+
+      <!-- Center Quick Links -->
+      <div
+        class="hidden md:flex items-center gap-4 text-xs font-medium text-slate-400"
+      >
+        <a
+          href="finfet.html"
+          class="hover:text-cyan-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>FinFET 3D</span>
+        </a>
+        <a
+          href="gaa.html"
+          class="hover:text-purple-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="layers-3" class="w-3.5 h-3.5 text-purple-400"></i>
+          <span>GAA 3D</span>
+        </a>
+        <a
+          href="nand.html"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5 text-emerald-400 font-semibold"
+        >
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>NAND 3D</span>
+        </a>
+        <a
+          href="hbm.html"
+          class="hover:text-rose-400 transition flex items-center gap-1.5 text-rose-400 font-semibold"
+        >
+          <i data-lucide="boxes" class="w-3.5 h-3.5 text-rose-400"></i>
+          <span>HBM 3D</span>
+        </a>
+        <a
+          href="twin.html"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+          <span id="nav-cleanroom">洁净室数字孪生</span>
+        </a>
+        <a
+          href="vision.html"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+          <span id="nav-vision">愿景</span>
+        </a>
+      </div>
+
+      <!-- Top Action Controls -->
+      <div class="flex items-center gap-2">
+        <!-- Lang Toggle -->
+        <button
+          id="lang-btn"
+          onclick="toggleLanguage()"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs font-mono border border-slate-700 text-slate-200 transition flex items-center gap-1.5"
+          title="Switch English / 中文"
+        >
+          <i data-lucide="languages" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span id="lang-indicator">EN</span>
+        </button>
+
+        <!-- Reset Camera -->
+        <button
+          onclick="resetCamera()"
+          class="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-xs text-slate-200 border border-slate-700 transition flex items-center gap-1.5"
+          title="复位视角"
+        >
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span class="hidden sm:inline" id="btn-reset-cam-label"
+            >复位视角</span
+          >
+        </button>
+
+        <!-- Play Mode -->
+        <button
+          id="autoplay-btn"
+          onclick="toggleAutoPlay()"
+          class="px-2.5 py-1 rounded-lg bg-amber-950/80 hover:bg-amber-900 border border-amber-800 text-xs text-amber-300 transition flex items-center gap-1.5"
+        >
+          <i id="autoplay-icon" data-lucide="play" class="w-3.5 h-3.5"></i>
+          <span id="autoplay-label">播放工序</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main CAD Studio Workspace (Flex Layout with 500x500 central 3D viewport) -->
+    <!-- Main CAD Studio Workspace (Hero 3D Viewport with Breathing Room & Collapsible Specs Drawer) -->
+    <main
+      class="flex-1 w-full h-[calc(100vh-56px)] overflow-hidden flex flex-col justify-between p-3 sm:p-4 bg-[#0a0d14]"
+    >
+      <!-- Top Focus Bar -->
+      <div
+        class="w-full max-w-7xl mx-auto flex items-center justify-between pb-2 shrink-0 gap-3"
+      >
+        <div class="flex items-center gap-3 min-w-0">
+          <span
+            id="step-badge"
+            class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 border border-slate-700/80 font-mono text-xs font-semibold shrink-0"
+          >
+            STEP 01 / 10 · 衬底与有源区
+          </span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <h1
+                id="step-title"
+                class="text-sm sm:text-base font-semibold text-white tracking-tight truncate"
+              >
+                有源区 STI 隔离与 6F² 岛状阵列
+              </h1>
+              <span
+                id="step-title-en"
+                class="text-xs font-mono text-slate-400 font-normal hidden lg:inline"
+                >Active Area STI Isolation</span
+              >
+            </div>
+            <p
+              id="step-summary"
+              class="text-xs text-slate-400 mt-0.5 truncate max-w-2xl"
+            >
+              单晶硅衬底经浅槽刻蚀与氧化硅填充，构建 6F²
+              紧密排布的对角线倾斜单晶硅岛阵列。
+            </p>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            id="btn-prev"
+            onclick="prevStep()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            <span id="lbl-prev-btn">上一步</span>
+          </button>
+          <button
+            id="btn-next"
+            onclick="nextStep()"
+            class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-white text-xs font-semibold text-slate-900 transition flex items-center gap-1 shadow-sm"
+          >
+            <span id="lbl-next-btn">下一步</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          </button>
+          <button
+            id="btn-toggle-details"
+            onclick="toggleDetailsDrawer()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1.5"
+          >
+            <i
+              data-lucide="sliders-horizontal"
+              class="w-3.5 h-3.5 text-slate-400"
+            ></i>
+            <span id="lbl-details-btn">工艺参数</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Workspace -->
+      <div
+        class="relative w-full max-w-7xl mx-auto flex-1 rounded-2xl border border-slate-800/90 bg-[#0c1017] overflow-hidden flex"
+      >
+        <div
+          id="webgl-container"
+          class="w-full h-full cursor-grab active:cursor-grabbing"
+        ></div>
+
+        <!-- Toolbar -->
+        <div
+          class="absolute top-3 left-3 z-10 flex flex-col sm:flex-row items-start sm:items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1 pointer-events-auto"
+          >
+            <span
+              class="text-[10px] font-mono text-slate-400 px-1.5 hidden sm:inline"
+              id="lbl-cam-presets"
+              >机位</span
+            >
+            <button
+              onclick="setCameraView('iso')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="等轴侧"
+            >
+              ISO
+            </button>
+            <button
+              onclick="setCameraView('fin')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="截面"
+            >
+              FIN
+            </button>
+            <button
+              onclick="setCameraView('gate')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="字线"
+            >
+              BWL
+            </button>
+            <button
+              onclick="setCameraView('top')"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+              title="俯视"
+            >
+              TOP
+            </button>
+          </div>
+
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1.5 text-[10px] font-mono text-slate-300 pointer-events-auto"
+          >
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-dimensions"
+                checked
+                onchange="toggleDimensions(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-dimensions">标尺</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-cutaway"
+                onchange="toggleCutaway(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-cutaway">剖切</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-xray"
+                onchange="toggleXRay(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-xray">透视</span>
+            </label>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-grid"
+                checked
+                onchange="toggleGrid(this.checked)"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-grid">网格</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Spec Pill -->
+        <div
+          class="absolute top-3 right-3 z-10 hidden sm:flex items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="px-2.5 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-slate-400"
+          >
+            <span>DRAM 1α nm 6F² · TCAD 仿真 · 45:1 AR</span>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div
+          id="material-legend-wrapper"
+          class="absolute bottom-3 left-3 z-10 glass-panel p-2 rounded-xl border border-slate-800/80 shadow-md text-[10px] pointer-events-auto max-w-xs transition"
+        >
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span id="lbl-mat-legend" class="font-mono font-medium"
+              >材料图例</span
+            >
+            <span
+              class="text-[9px] text-slate-500 font-mono"
+              id="lbl-legend-hint"
+              >点击高亮</span
+            >
+          </div>
+          <div
+            id="material-legend-container"
+            class="grid grid-cols-2 gap-1 max-h-24 overflow-y-auto pr-0.5 custom-scrollbar"
+          ></div>
+        </div>
+
+        <!-- Scale Bar -->
+        <div
+          id="viewport-scale-bar"
+          class="absolute bottom-3 right-3 px-2.5 py-1.5 rounded-lg bg-slate-950/85 border border-slate-800/80 text-[10px] font-mono text-slate-300 flex items-center gap-2 pointer-events-none select-none z-10 shadow-md"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              id="scale-bar-text"
+              class="text-[9px] text-slate-200 font-bold mb-0.5 tracking-wider"
+            >
+              20 nm
+            </div>
+            <div class="flex items-center">
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+              <div class="w-12 h-[2px] bg-slate-400"></div>
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+            </div>
+          </div>
+          <span class="text-[9px] text-slate-500">1:1 CAD</span>
+        </div>
+
+        <!-- Tooltip -->
+        <div
+          id="part-tooltip"
+          class="absolute hidden z-30 px-3 py-2 rounded-xl bg-slate-950/95 border border-slate-700 shadow-xl backdrop-blur-md max-w-xs pointer-events-none"
+        >
+          <div
+            id="tooltip-title"
+            class="font-semibold text-xs text-slate-200 font-mono flex items-center gap-1.5"
+          ></div>
+          <div
+            id="tooltip-desc"
+            class="text-[11px] text-slate-400 mt-1 leading-tight"
+          ></div>
+        </div>
+
+        <!-- Drawer -->
+        <div
+          id="inspector-drawer"
+          class="absolute top-0 right-0 bottom-0 w-80 sm:w-96 bg-slate-950/95 border-l border-slate-800/90 backdrop-blur-xl p-4 sm:p-5 flex flex-col gap-3.5 z-20 shadow-2xl transition-transform duration-300 translate-x-full overflow-y-auto"
+        >
+          <div
+            class="flex items-center justify-between border-b border-slate-800 pb-2.5"
+          >
+            <div
+              class="text-xs font-semibold text-slate-200 flex items-center gap-1.5"
+            >
+              <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-drawer-title">制造机台与工艺物理参数</span>
+            </div>
+            <button
+              onclick="toggleDetailsDrawer()"
+              class="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span
+              id="process-category-badge"
+              class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700"
+            ></span>
+          </div>
+
+          <div class="text-xs text-slate-300 leading-relaxed">
+            <p
+              id="drawer-step-summary"
+              class="text-slate-300 leading-normal"
+            ></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="cog" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-equipment">制造机台 (Tool)</span>
+              </div>
+              <div
+                id="step-equipment"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-equipment-vendor"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="atom" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-material">材料与结构</span>
+              </div>
+              <div
+                id="step-material"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-material-dim"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-900/50 border border-slate-800/90 rounded-xl p-3 text-xs"
+          >
+            <div
+              class="font-semibold text-slate-200 flex items-center gap-1.5 mb-1 text-[11px]"
+            >
+              <i data-lucide="microchip" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-purpose-title">工艺核心机理与器件物理</span>
+            </div>
+            <p
+              id="step-purpose"
+              class="text-slate-400 leading-normal text-[11px]"
+            ></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper -->
+      <div class="w-full max-w-7xl mx-auto pt-2 shrink-0">
+        <div
+          class="p-1 rounded-xl bg-slate-900/80 border border-slate-800/80 flex items-center gap-1 overflow-x-auto w-full"
+        >
+          <button
+            onclick="goToStep(0)"
+            class="stepper-btn active flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-0"
+          >
+            <div class="font-semibold text-[10px]">01</div>
+            <div class="tab-label truncate text-[10px]">有源区隔离</div>
+          </button>
+          <button
+            onclick="goToStep(1)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-1"
+          >
+            <div class="font-semibold text-[10px]">02</div>
+            <div class="tab-label truncate text-[10px]">字线沟槽</div>
+          </button>
+          <button
+            onclick="goToStep(2)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-2"
+          >
+            <div class="font-semibold text-[10px]">03</div>
+            <div class="tab-label truncate text-[10px]">埋入式字线</div>
+          </button>
+          <button
+            onclick="goToStep(3)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-3"
+          >
+            <div class="font-semibold text-[10px]">04</div>
+            <div class="tab-label truncate text-[10px]">位线直触孔</div>
+          </button>
+          <button
+            onclick="goToStep(4)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-4"
+          >
+            <div class="font-semibold text-[10px]">05</div>
+            <div class="tab-label truncate text-[10px]">金属位线</div>
+          </button>
+          <button
+            onclick="goToStep(5)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-5"
+          >
+            <div class="font-semibold text-[10px]">06</div>
+            <div class="tab-label truncate text-[10px]">储能接触焊盘</div>
+          </button>
+          <button
+            onclick="goToStep(6)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-6"
+          >
+            <div class="font-semibold text-[10px]">07</div>
+            <div class="tab-label truncate text-[10px]">模具与支撑层</div>
+          </button>
+          <button
+            onclick="goToStep(7)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-7"
+          >
+            <div class="font-semibold text-[10px]">08</div>
+            <div class="tab-label truncate text-[10px]">深孔电容刻蚀</div>
+          </button>
+          <button
+            onclick="goToStep(8)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-8"
+          >
+            <div class="font-semibold text-[10px]">09</div>
+            <div class="tab-label truncate text-[10px]">底电极释放</div>
+          </button>
+          <button
+            onclick="goToStep(9)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-9"
+          >
+            <div class="font-semibold text-[10px]">10</div>
+            <div class="tab-label truncate text-[10px]">ZAZ与顶板充填</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Device Twin Footer -->
+      <footer
+        class="w-full max-w-7xl mx-auto pt-2 pb-1 text-center text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/60 mt-1 shrink-0"
+      >
+        <div class="flex items-center gap-2">
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-slate-400 hover:text-cyan-400 transition"
+          >
+            <svg
+              class="w-3 h-3 fill-current"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              ></path>
+            </svg>
+            <span>GitHub (Source code)</span>
+          </a>
+        </div>
+        <div>
+          <span
+            >Source-available &middot; PolyForm Noncommercial 1.0.0 &middot;
+            Free for education &amp; personal use; commercial use requires a
+            separate license. (源码公开 &middot; 商业使用需另行授权)</span
+          >
+        </div>
+      </footer>
+    </main>
+
+    <!-- 3D Tooltip Overlay (Fixed position next to cursor) -->
+    <div
+      id="part-tooltip"
+      class="fixed hidden z-50 pointer-events-none bg-slate-900/95 border border-amber-500/50 rounded-lg p-2.5 shadow-2xl backdrop-blur-md max-w-xs transition-opacity duration-150"
+    >
+      <div
+        id="tooltip-title"
+        class="font-bold text-xs text-amber-300 font-mono flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+        <span>部件名称</span>
+      </div>
+      <div
+        id="tooltip-desc"
+        class="text-[11px] text-slate-300 mt-1 leading-snug"
+      >
+        物理工艺描述与参数信息
+      </div>
+    </div>
+
+    <script>
+      // Safe DOM proxy to prevent any missing element from breaking 3D initialization
+      (function () {
+        const _orig = document.getElementById.bind(document);
+        const dummy = {
+          innerText: "",
+          innerHTML: "",
+          textContent: "",
+          value: "",
+          checked: false,
+          disabled: false,
+          style: {},
+          classList: {
+            add() {},
+            remove() {},
+            toggle() {},
+            contains() {
+              return false;
+            },
+          },
+          setAttribute() {},
+          getAttribute() {
+            return null;
+          },
+          removeAttribute() {},
+          addEventListener() {},
+          removeEventListener() {},
+          querySelector() {
+            return null;
+          },
+          querySelectorAll() {
+            return [];
+          },
+          scrollIntoView() {},
+        };
+        document.getElementById = function (id) {
+          return _orig(id) || dummy;
+        };
+      })();
+
+      // --- 1. DATA: 10 Manufacturing Steps for DRAM 1T1C Cell ---
+      const STEPS = [
+        {
+          id: 0,
+          badgeZh: "步骤 01 / 10",
+          badgeEn: "STEP 01 / 10",
+          shortZh: "有源区隔离",
+          shortEn: "Active STI",
+          catZh: "有源区浅沟槽隔离",
+          catEn: "Active Area Isolation",
+          titleZh: "有源区浅沟槽隔离 (STI) 与对角硅岛成形",
+          titleEn: "Active Area STI Isolation & 6F² Diagonal Island Patterning",
+          summaryZh:
+            "在单晶硅基底上，经过高分辨率光刻与深反应离子干法刻蚀（RIE），刻出 6F² 蜂窝排列的对角倾斜单晶硅有源区岛（Active Area Islands），并以流动态 CVD（FCVD）填充二氧化硅介质经 CMP 研磨平齐。",
+          summaryEn:
+            "On single-crystal Si wafer, high-resolution lithography and anisotropic RIE etch diagonal Active Area (AA) silicon islands arranged in a high-density 6F² layout. Flowable CVD fills trenches with SiO2 planarized by CMP.",
+          toolZh: "浸没式/EUV光刻机 + 各向异性干法刻蚀机",
+          toolEn: "Immersion/EUV Scanner + Anisotropic RIE Etcher",
+          toolVendor: "ASML Twinscan / Lam Research Kiyo",
+          matZh: "P-Type Si 单晶硅 + STI SiO2 浅沟槽介质",
+          matEn: "P-Type Single-Crystal Si + STI SiO2 Dielectric",
+          matDimZh: "6F² 对角蜂窝排列 | 隔离深度: ~150nm",
+          matDimEn: "6F² Honeycomb Layout | Isolation Depth: ~150nm",
+          purposeZh:
+            "构建紧密排列的单晶硅导电柱，倾斜对角排布使每个有源区能够容纳 2 个存取晶体管并共用中央位线触点，实现单位晶圆面积最高的 6F² 极限存储密度。",
+          purposeEn:
+            "Creates densely packed diagonal silicon pillars allowing two access transistors per active island sharing a center bitline contact for maximal 6F² cell density.",
+        },
+        {
+          id: 1,
+          badgeZh: "步骤 02 / 10",
+          badgeEn: "STEP 02 / 10",
+          shortZh: "埋入字线沟槽",
+          shortEn: "b-WL Trench",
+          catZh: "埋栅沟槽刻蚀",
+          catEn: "Buried Trench Etch",
+          titleZh: "埋入式栅极沟槽刻蚀 (Buried Wordline / b-WL Trench)",
+          titleEn: "Buried Wordline (b-WL) Deep Trench Etch",
+          summaryZh:
+            "沉积硬掩模，经极紫外 EUV 光刻，垂直于位线方向干法深刻出两道深沟槽，将单晶硅有源区切出深凹的马鞍状鳍（Saddle-Fin），为埋入式通道阵列晶体管（BCAT）创造空腔。",
+          summaryEn:
+            "Hard mask is applied. EUV lithography patterns perpendicular trenches. Deep RIE carves trenches through silicon and oxide, shaping a 3D saddle-fin channel for Buried Channel Array Transistors (BCAT).",
+          toolZh: "EUV 光刻机 + 原子级精度等离子干刻机",
+          toolEn: "EUV Scanner + Atomic-Precision RIE Etcher",
+          toolVendor: "ASML EXE / Tokyo Electron (TEL) Tactras",
+          matZh: "刻蚀马鞍状硅沟道 (Saddle-Fin Cavity)",
+          matEn: "Etched Silicon Saddle-Fin Trench Cavity",
+          matDimZh: "字线沟槽深: ~120nm | 临界线宽 CD: ~14nm",
+          matDimEn: "Trench Depth: ~120nm | Wordline CD: ~14nm",
+          purposeZh:
+            "将存取晶体管完全埋入硅片表面下方，彻底消除平面栅极对上方高密度布线的空间占用，大幅降低短沟道效应并减少寄生漏电。",
+          purposeEn:
+            "Buries the access transistor below the silicon surface, clearing surface space for higher-density bitline/capacitor integration while curbing subthreshold leakage.",
+        },
+        {
+          id: 2,
+          badgeZh: "步骤 03 / 10",
+          badgeEn: "STEP 03 / 10",
+          shortZh: "字线钨填充",
+          shortEn: "b-WL Metal",
+          catZh: "埋栅金属填充与封顶",
+          catEn: "b-WL Metal Fill & Cap",
+          titleZh: "原子层沉积栅氧化层、金属钨字线填充与氮化硅绝缘封盖",
+          titleEn: "Gate Dielectric, Tungsten b-WL Metallization & SiN Capping",
+          summaryZh:
+            "在沟槽内保形生长 4.5nm 栅氧化层（SiO2/SiON），随后 CVD 沉积 TiN 阻挡层与金属钨（W）填满沟槽下半部作为字线导线。刻蚀回退金属后，顶部填充高致密氮化硅（Si3N4）并 CMP 切平封顶。",
+          summaryEn:
+            "Conformal gate oxide (SiO2/SiON) coats the trench. CVD fills the bottom half with TiN barrier and low-resistance Tungsten (W) wordline. Recess etchback is capped with Si3N4 and planarized by CMP.",
+          toolZh: "热氧化炉 + 金属钨 CVD 镀膜机 + 介质 CMP",
+          toolEn: "Thermal Oxide Furnace + Tungsten CVD + CMP Polisher",
+          toolVendor: "Applied Materials Endura W / Reflexion LK",
+          matZh: "金属钨 (W) 埋字线 + 氮化硅 (Si3N4) 保护顶盖",
+          matEn: "Tungsten (W) b-WL Core + Si3N4 Insulating Cap",
+          matDimZh: "金属厚度: ~40nm | 氮化硅封顶厚度: ~60nm",
+          matDimEn: "Tungsten Thickness: ~40nm | SiN Cap: ~60nm",
+          purposeZh:
+            "埋入低电阻率金属钨作为控制开关，在电荷读写时同时开启两端通道；坚固的氮化硅封顶在物理上将字线与上方即将经过的位线完全电绝缘隔离。",
+          purposeEn:
+            "Provides low-resistance wordline addressing while thick Si3N4 cap completely insulates the buried gate from bitlines running overhead.",
+        },
+        {
+          id: 3,
+          badgeZh: "步骤 04 / 10",
+          badgeEn: "STEP 04 / 10",
+          shortZh: "位线直触孔",
+          shortEn: "DC Etch",
+          catZh: "位线直触孔光刻刻蚀",
+          catEn: "Direct Contact Etch",
+          titleZh: "位线直触孔 (Bitline Direct Contact / DC) 光刻与穿透刻蚀",
+          titleEn: "Bitline Direct Contact (DC) Litho & Etch",
+          summaryZh:
+            "沉积层间介质层（ILD），经光刻精准在两个埋入字线之间的中央有源区上方开孔，刻穿表面氧化物，精准露出共用的单晶硅漏极（Drain）节点，形成位线直接触点孔（DC 孔）。",
+          summaryEn:
+            "Interlayer dielectric (ILD) is deposited. High-selectivity dry etch punches direct contact (DC) vias through surface oxide down to the shared central drain node between two buried wordlines.",
+          toolZh: "高深宽比介质干法刻蚀机",
+          toolEn: "High-Aspect-Ratio Dielectric Etcher",
+          toolVendor: "Lam Research Flex / Applied Materials Centura",
+          matZh: "直触孔开孔 (Direct Contact Via Opening)",
+          matEn: "DC Contact Hole to Central Silicon Node",
+          matDimZh: "开孔孔径: ~14nm | 穿透深度: ~35nm",
+          matDimEn: "DC Via CD: ~14nm | Etch Depth: ~35nm",
+          purposeZh:
+            "建立存储单元内部唯一的位线电荷输入/读取通道，使左右两个存取晶体管能够共用这根位线引线，节省 50% 的位线布线空间。",
+          purposeEn:
+            "Establishes data read/write channel, allowing dual adjacent memory cells to share a single bitline contact, conserving 50% wiring footprint.",
+        },
+        {
+          id: 4,
+          badgeZh: "步骤 05 / 10",
+          badgeEn: "STEP 05 / 10",
+          shortZh: "位线导线成形",
+          shortEn: "Bitline Stack",
+          catZh: "位线堆叠沉积与刻蚀",
+          catEn: "Bitline Stack & Spacers",
+          titleZh: "重掺杂多晶硅/钨复合位线刻蚀与自对准双侧墙成形",
+          titleEn: "Bitline Poly-Si/W Stack Patterning & Spacers",
+          summaryZh:
+            "沉积重掺杂多晶硅填满 DC 接触孔，连续沉积阻挡层 TiN、金属钨（W）与厚 Si3N4 硬掩模。垂直于字线方向各向异性刻蚀出连续横穿的位线（BL），随后在位线侧壁保形沉积低-k 氮化硅侧墙。",
+          summaryEn:
+            "Doped poly-Si fills the DC via, followed by TiN, Tungsten (W) and Si3N4 hard mask. Anisotropic etch defines bitlines running perpendicular to wordlines, sealed with conformal Si3N4 sidewall spacers.",
+          toolZh: "多腔体金属 PVD/CVD 集群机 + 栅/线等离子刻蚀机",
+          toolEn: "Metal PVD/CVD Cluster Tool + Conformal Spacer RIE",
+          toolVendor: "Applied Materials Endura / Lam Versys Metal",
+          matZh: "金属钨/多晶硅位线 (Bitline W/Poly) + SiN 侧墙",
+          matEn: "Tungsten/Poly-Si Bitline Stack + Si3N4 Spacers",
+          matDimZh: "位线厚度: ~60nm | 侧墙厚度: ~7nm",
+          matDimEn: "Bitline Stack: ~60nm | Spacer Width: ~7nm",
+          purposeZh:
+            "位线承载千兆赫兹级电荷数据读出与感测放大器（Sense Amplifier）通信，侧墙有效防止后续电容插塞与位线发生桥接短路并抑制位线寄生电容。",
+          purposeEn:
+            "Bitlines stream high-speed sense data, while thick spacers prevent shorting with adjacent capacitor landing plugs and curb parasitic capacitance.",
+        },
+        {
+          id: 5,
+          badgeZh: "步骤 06 / 10",
+          badgeEn: "STEP 06 / 10",
+          shortZh: "储能触点与垫",
+          shortEn: "SNC & Pad",
+          catZh: "储能节点接触孔与落脚垫",
+          catEn: "Storage Node Contact",
+          titleZh:
+            "储能节点接触孔 (SNC) 自对准刻蚀与六角落脚垫成形 (Landing Pad)",
+          titleEn: "Storage Node Contact (SNC) Etch & Landing Pads",
+          summaryZh:
+            "在位线之间进行自对准接触孔刻蚀（SAC），精准打到有源区两侧的源极上。充填金属钨或掺杂多晶硅形成接触插塞（SNC），顶部通过光刻刻蚀出扩径的蜂窝六边形储能落脚垫（Landing Pads）。",
+          summaryEn:
+            "Self-Aligned Contact (SAC) dry etch punches storage node contact (SNC) vias to the outer source nodes between bitlines. Metallized plugs are topped with enlarged hexagonal Landing Pads.",
+          toolZh: "自对准介质刻蚀机 + 钨填充机 + 金属 CMP",
+          toolEn: "SAC Dielectric Etcher + Tungsten Metallization + CMP",
+          toolVendor: "Lam Research Flex / Applied Materials Reflexion",
+          matZh: "导电插塞 (SNC Plug) + 钨/钛铝合金落脚垫 (Landing Pad)",
+          matEn: "Tungsten SNC Plugs + Hexagonal Landing Pads",
+          matDimZh: "SNC 孔径: ~12nm | 落脚垫横向扩径: ~24nm",
+          matDimEn: "SNC Plug CD: ~12nm | Landing Pad CD: ~24nm",
+          purposeZh:
+            "将晶体管漏极小孔径安全扩径为面积大一倍的蜂窝落脚垫，为后续高深宽比微型电容器提供极其坚固稳妥的对准接触基底，杜绝脱靶断路。",
+          purposeEn:
+            "Enlarges the contact landing zone by 2x into a honeycomb pad array, ensuring robust alignment for the ultra-tall 3D capacitors overhead.",
+        },
+        {
+          id: 6,
+          badgeZh: "步骤 07 / 10",
+          badgeEn: "STEP 07 / 10",
+          shortZh: "模具与支撑层",
+          shortEn: "Mold & Supporter",
+          catZh: "超厚电容模具与双支撑层",
+          catEn: "Capacitor Mold Stack",
+          titleZh: "超厚牺牲层氧化物模具与双层氮化硅机械支撑膜沉积",
+          titleEn: "Thick Sacrificial Mold Oxide & Dual Supporter Stack",
+          summaryZh:
+            "采用高密度 PECVD 沉积厚达 1.5 微米（1500nm）的二氧化硅（SiO2）牺牲模具层，并在中段与顶部各嵌入一层坚韧的超薄氮化硅（Si3N4）机械支撑层（Supporters）。",
+          summaryEn:
+            "PECVD coats an ultra-thick 1.5μm sacrificial mold oxide (SiO2), interspersed with middle and top ultra-thin mechanical Si3N4 Supporter membranes.",
+          toolZh: "超厚层 PECVD 氧化物沉积机 + 低应力 LPCVD 氮化硅炉",
+          toolEn: "Thick-Oxide PECVD System + Low-Stress SiN Furnace",
+          toolVendor: "Applied Materials Producer GT / TEL Celius",
+          matZh: "牺牲模具氧化物 (Mold SiO2) + Si3N4 支撑骨架",
+          matEn: "Sacrificial Mold Oxide (SiO2) + Dual Si3N4 Supporters",
+          matDimZh: "模具总厚度: ~1.5μm | 双支撑膜各厚度: ~25nm",
+          matDimEn: "Mold Thickness: ~1.5μm | Dual Supporter: ~25nm each",
+          purposeZh:
+            "模具氧化层定义未来圆柱电容器的物理高度；超薄氮化硅支撑膜是防倒塌核心：防止细长电容器在后续掏空腐蚀时发生毛细管力粘连倒塌（Leaning & Sticking）。",
+          purposeEn:
+            "Sets the physical capacitor height; SiN supporters mechanically anchor the tall cylinder array horizontally to prevent capillary stiction and collapse.",
+        },
+        {
+          id: 7,
+          badgeZh: "步骤 08 / 10",
+          badgeEn: "STEP 08 / 10",
+          shortZh: "超深电容孔刻蚀",
+          shortEn: "HAR Etch",
+          catZh: "深宽比 > 40:1 极限刻蚀",
+          catEn: "HAR Capacitor Etch",
+          titleZh: "超高深宽比 (>40:1) 极低温等离子体电容深孔刻蚀",
+          titleEn: "HAR (>40:1) Cryogenic Plasma Capacitor Hole Etch",
+          summaryZh:
+            "涂覆数百纳米厚含碳硬掩模（ACL），在零下数十度的极低温等离子体刻蚀机中，以惊人的垂直各向异性直接打穿 1.5 微米厚的氧化物与支撑层，精准停在下方的金属落脚垫表面！",
+          summaryEn:
+            "Amorphous Carbon Hardmask (ACL) is applied. In a cryogenic plasma chamber, ultra-high aspect ratio (>40:1) anisotropic RIE blasts 1.5μm deep holes cleanly down to the landing pads.",
+          toolZh: "极低温超高深宽比等离子刻蚀机 (Cryo HAR Etcher)",
+          toolEn: "Cryogenic High-Aspect-Ratio Plasma Etcher",
+          toolVendor: "Lam Research Vantex / TEL Episode HAR",
+          matZh: "超深微型圆柱孔洞阵列 (Cylindrical Hole Array)",
+          matEn: "Ultra-Deep Cylindrical Capacitor Voids",
+          matDimZh: "深宽比 Aspect Ratio: > 45:1 | 孔深: 1500nm / 孔径: ~32nm",
+          matDimEn: "Aspect Ratio: > 45:1 | Depth: 1500nm / CD: ~32nm",
+          purposeZh:
+            "【半导体制造最高难度刻蚀】深孔内壁面积决定电容容值，超高深宽比孔壁使单个微米投影面积内获得巨大的三维立体电容表面积。",
+          purposeEn:
+            "[Hardest etch in semiconductors] Maximizes 3D sidewall surface area within a nanometer footprint to achieve sufficient cell capacitance.",
+        },
+        {
+          id: 8,
+          badgeZh: "步骤 09 / 10",
+          badgeEn: "STEP 09 / 10",
+          shortZh: "模具氧化层剥除",
+          shortEn: "Mold Strip",
+          catZh: "模具化学全掏空与圆柱阵列释放",
+          catEn: "Mold Strip & Release",
+          titleZh: "模具二氧化硅化学高选择比溶除与独立圆柱电容骨架释放",
+          titleEn: "Sacrificial Mold Oxide Strip & Cylinder Array Release",
+          summaryZh:
+            "使用对氮化硅具有上千倍选择比的气相氢氟酸（Vapor HF）或稀 HF 湿法腐蚀液，将全部 1.5 微米厚的模具氧化层彻底溶除掏空！瞬间露出由支撑层横向拉结的**自立式高耸薄壁圆柱电容阵列**！",
+          summaryEn:
+            "Gas-phase Vapor HF or wet chemical etch selectively dissolves all 1.5μm mold oxide stopping dead on SiN supporters, revealing tall, freestanding hollow cylinder capacitor pillars!",
+          toolZh: "气相化学腐蚀机 / 马兰戈尼表面张力超临界干燥槽",
+          toolEn: "Vapor HF Etcher / Marangoni Surface-Tension Dryer",
+          toolVendor: "SCREEN Frontier Wet Bench / Tokyo Electron",
+          matZh: "悬空立式圆柱外骨骼阵列 + 氮化硅支撑网格",
+          matEn: "Freestanding Cylinder Pillars + SiN Supporter Grids",
+          matDimZh: "外表面全部镂空释放 | 支撑网格横向拉紧防倾覆",
+          matDimEn: "Outer surface completely exposed | Supported by grids",
+          purposeZh:
+            "释放圆柱电容器的【外表面】，使电容器能够同时利用【圆柱内壁】与【圆柱外壁】双面储能，使有效储能电容面积瞬间再倍增 100%！",
+          purposeEn:
+            "Unlocks the outer sidewall surfaces, allowing both inner and outer walls to store charge simultaneously, doubling effective capacitance.",
+        },
+        {
+          id: 9,
+          badgeZh: "步骤 10 / 10",
+          badgeEn: "STEP 10 / 10",
+          shortZh: "MIM电容与极板",
+          shortEn: "MIM & Plate",
+          catZh: "MIM 高K介质与上极板互连",
+          catEn: "MIM High-k & Top Plate",
+          titleZh: "ALD 原子级沉积下电极、ZAZ 高K绝缘层与金属上极板互连",
+          titleEn:
+            "ALD MIM ZAZ High-k Dielectric Stack & Top Plate Metallization",
+          summaryZh:
+            "原子层沉积（ALD）超保形镀覆 4nm TiN 下电极、6nm 氧化锆-氧化铝-氧化锆（ZAZ, κ≈40）高 K 绝缘膜，最后以 TiN 及金属钨致密充填圆柱内外并连结为公共上极板（Plate Line），完成 1T1C DRAM 单元！",
+          summaryEn:
+            "ALD coats 4nm TiN bottom electrode, 6nm ZrO2/Al2O3/ZrO2 (ZAZ, κ≈40) high-k dielectric, and CVD fills with TiN/W top plate electrode across all cells, completing the 1T1C array.",
+          toolZh: "超高阶多反应腔 ALD 原子层沉积集群机 + 金属填充机",
+          toolEn: "Conformal ALD High-k Reactor + Plate Line Metal CVD",
+          toolVendor: "ASM Pulsar / Applied Materials Endura ALD",
+          matZh: "MIM 结构 (TiN / ZrO2-Al2O3-ZrO2 / TiN) + 金属上极板",
+          matEn: "MIM Stack (TiN / ZAZ High-k κ=40 / TiN) + Top Plate",
+          matDimZh: "单元电容值: ~25-30 fF/cell | 存储保持时间 > 64ms",
+          matDimEn: "Cell Capacitance: ~25-30 fF | Retention: > 64ms",
+          purposeZh:
+            "构建超低漏电纳米电容，毫秒级存储并锁定二进制「1」与「0」位数据；金属上极板接入恒定 VDD/2 偏置电位，完成 DRAM 存储器芯片核心单元！",
+          purposeEn:
+            "Stores binary data '1' and '0' with sub-femtoampere leakage; upper plate connects to VDD/2 bias, completing the 1T1C DRAM memory cell array.",
+        },
+      ];
+
+      // Current State
+      let currentStepIndex = 0;
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = (urlParams.get("lang") || "").toLowerCase();
+      let isEnglish = true; // Default to English for all other languages
+      if (langParam === "zh" || langParam === "zh-cn") {
+        isEnglish = false;
+      } else if (langParam === "en") {
+        isEnglish = true;
+      } else {
+        const savedLang = localStorage.getItem("semiconfab_lang");
+        isEnglish = savedLang !== "zh-CN";
+      }
+
+      let isAutoPlaying = false;
+      let autoPlayTimer = null;
+      let isXRay = false;
+      let isCutaway = false;
+      let isGrid = true;
+      let isPowerFlow = false;
+      let explodeProgress = 0;
+
+      // --- 2. THREE.JS SCENE SETUP ---
+      let scene, camera, renderer, controls;
+      let baseGroup,
+        stiGroup,
+        bwlTrenchGroup,
+        bwlMetalGroup,
+        dcGroup,
+        bitlineGroup;
+      let sncPadGroup,
+        moldGroup,
+        harHoleGroup,
+        cylinderArrayGroup,
+        topPlateGroup;
+      let chargeParticleGroup;
+      let gridHelper;
+      let clippingPlane;
+      let raycaster, mouse;
+      let hoveredMesh = null;
+      let animatedParticles = [];
+
+      const container = document.getElementById("webgl-container");
+
+      function initThree() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0c1017);
+        scene.fog = new THREE.FogExp2(0x060913, 0.0032);
+
+        // Camera: Optimized for tall DRAM capacitors in 500x500 box
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        const aspect = width / height;
+        camera = new THREE.PerspectiveCamera(46, aspect, 1, 2000);
+        camera.position.set(155, 120, 165);
+
+        // Clipping Plane for Cutaway Mode (cutting along Z axis)
+        clippingPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+
+        renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.localClippingEnabled = true;
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        container.appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 + 0.05;
+        controls.minDistance = 35;
+        controls.maxDistance = 550;
+        controls.target.set(0, 48, 0);
+
+        // Lighting
+        // Neutral Industrial TCAD Studio Lighting (ASML / Synopsys TCAD Style)
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.55);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.25);
+        dirLight1.position.set(120, 180, 100);
+        dirLight1.castShadow = true;
+        dirLight1.shadow.mapSize.width = 2048;
+        dirLight1.shadow.mapSize.height = 2048;
+        dirLight1.shadow.bias = -0.0005;
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0x94a3b8, 0.55); // Neutral cool grey fill
+        dirLight2.position.set(-120, 100, -100);
+        scene.add(dirLight2);
+
+        const dirLight3 = new THREE.DirectionalLight(0x64748b, 0.35); // Neutral slate ground bounce
+        dirLight3.position.set(80, -60, 60);
+        scene.add(dirLight3);
+
+        // Neutral Slate CAD Grid
+        gridHelper = new THREE.GridHelper(240, 24, 0x334155, 0x1e2634);
+        gridHelper.position.y = -0.2;
+        scene.add(gridHelper);
+
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        buildGeometryHierarchy();
+
+        window.addEventListener("resize", onWindowResize);
+        renderer.domElement.addEventListener("mousemove", onMouseMove);
+
+        animate();
+      }
+
+      // --- 3. GEOMETRY & MATERIALS HIERARCHY ---
+      let materials = {};
+
+      function initMaterials() {
+        materials.siliconSubstrate = new THREE.MeshStandardMaterial({
+          color: 0x242b35,
+          roughness: 0.7,
+          metalness: 0.15,
+        });
+
+        materials.activeSilicon = new THREE.MeshStandardMaterial({
+          color: 0x3e4958,
+          roughness: 0.55,
+          metalness: 0.2,
+        });
+
+        materials.stiOxide = new THREE.MeshStandardMaterial({
+          color: 0x416584,
+          roughness: 0.45,
+          metalness: 0.05,
+          transparent: true,
+          opacity: 0.6,
+        });
+
+        materials.gateOxide = new THREE.MeshStandardMaterial({
+          color: 0x52799c,
+          roughness: 0.4,
+          metalness: 0.05,
+        });
+
+        materials.buriedWordline = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.nitrideCap = new THREE.MeshStandardMaterial({
+          color: 0x2d6a4f,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.dcPlug = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.bitline = new THREE.MeshStandardMaterial({
+          color: 0x92400e,
+          roughness: 0.5,
+          metalness: 0.3,
+        });
+
+        materials.landingPad = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.moldOxide = new THREE.MeshStandardMaterial({
+          color: 0x416584,
+          roughness: 0.45,
+          metalness: 0.05,
+          transparent: true,
+          opacity: 0.3,
+        });
+
+        materials.supporter = new THREE.MeshStandardMaterial({
+          color: 0x1f4e38,
+          roughness: 0.65,
+          metalness: 0.1,
+        });
+
+        materials.bottomElectrode = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          roughness: 0.35,
+          metalness: 0.85,
+        });
+
+        materials.zazHighK = new THREE.MeshStandardMaterial({
+          color: 0xa16207,
+          roughness: 0.4,
+          metalness: 0.4,
+        });
+
+        materials.topPlate = new THREE.MeshStandardMaterial({
+          color: 0x475569,
+          roughness: 0.5,
+          metalness: 0.4,
+        });
+      }
+
+      function createPart(geometry, material, nameZh, nameEn, specZh, specEn) {
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        mesh.userData = {
+          nameZh: nameZh,
+          nameEn: nameEn,
+          specZh: specZh,
+          specEn: specEn,
+          origY: 0,
+        };
+        return mesh;
+      }
+
+      function buildGeometryHierarchy() {
+        initMaterials();
+
+        baseGroup = new THREE.Group();
+        stiGroup = new THREE.Group();
+        bwlTrenchGroup = new THREE.Group();
+        bwlMetalGroup = new THREE.Group();
+        dcGroup = new THREE.Group();
+        bitlineGroup = new THREE.Group();
+        sncPadGroup = new THREE.Group();
+        moldGroup = new THREE.Group();
+        harHoleGroup = new THREE.Group();
+        cylinderArrayGroup = new THREE.Group();
+        topPlateGroup = new THREE.Group();
+        chargeParticleGroup = new THREE.Group();
+
+        scene.add(baseGroup);
+        scene.add(stiGroup);
+        scene.add(bwlTrenchGroup);
+        scene.add(bwlMetalGroup);
+        scene.add(dcGroup);
+        scene.add(bitlineGroup);
+        scene.add(sncPadGroup);
+        scene.add(moldGroup);
+        scene.add(harHoleGroup);
+        scene.add(cylinderArrayGroup);
+        scene.add(topPlateGroup);
+        scene.add(chargeParticleGroup);
+
+        // --- Part 1: Substrate Base & Active Silicon Islands ---
+        const subGeom = new THREE.BoxGeometry(140, 20, 160);
+        const subMesh = createPart(
+          subGeom,
+          materials.siliconSubstrate,
+          "单晶硅基底 (P-Well Substrate)",
+          "Single-Crystal P-Type Si Substrate",
+          "高纯度硅片衬底，提供外延生长的晶格基底",
+          "Single-crystal P-type silicon substrate",
+        );
+        subMesh.position.set(0, 10, 0);
+        baseGroup.add(subMesh);
+
+        const subWire = new THREE.LineSegments(
+          new THREE.EdgesGeometry(subGeom),
+          new THREE.LineBasicMaterial({
+            color: 0x64748b,
+            transparent: true,
+            opacity: 0.4,
+          }),
+        );
+        subMesh.add(subWire);
+
+        // Two diagonal 6F² active silicon pillars
+        [-24, 24].forEach((xPos, idx) => {
+          const aaGeom = new THREE.BoxGeometry(18, 22, 110);
+          // rotate slightly on Y axis to simulate 6F² diagonal tilt
+          aaGeom.rotateY(Math.PI / 16);
+          const aaMesh = createPart(
+            aaGeom,
+            materials.activeSilicon,
+            `第 ${idx + 1} 号有源区单晶硅岛 (Active Island ${idx + 1})`,
+            `Diagonal Active Area Silicon Island ${idx + 1}`,
+            "对角倾斜排列的导电单晶硅柱，容纳双晶体管共用漏极",
+            "6F² diagonally tilted active silicon pillar housing dual access transistors",
+          );
+          aaMesh.position.set(xPos, 20 + 11, 0);
+          baseGroup.add(aaMesh);
+        });
+
+        // STI dielectric surrounding active areas
+        const stiGeom = new THREE.BoxGeometry(138, 22, 158);
+        const stiMesh = createPart(
+          stiGeom,
+          materials.stiOxide,
+          "STI 浅沟槽隔离介质 (SiO2)",
+          "Shallow Trench Isolation (STI) SiO2",
+          "流动态 CVD 填平，隔离相邻对角有源硅岛",
+          "Recessed STI oxide insulating adjacent active islands",
+        );
+        stiMesh.position.set(0, 20 + 11, 0);
+        stiGroup.add(stiMesh);
+
+        // --- Part 2 & 3: Buried Wordlines (b-WL / BCAT) ---
+        // 2 parallel wordlines running along X axis at Z = -22 and Z = +22
+        [-22, 22].forEach((zPos, wlIdx) => {
+          // Lower half: Tungsten wordline core (Y from 20 to 32, Height 12)
+          const bwlGeom = new THREE.BoxGeometry(136, 12, 14);
+          const bwlMesh = createPart(
+            bwlGeom,
+            materials.buriedWordline,
+            `第 ${wlIdx + 1} 根埋入式金属钨字线 (Buried Wordline ${wlIdx + 1})`,
+            `Buried Tungsten Wordline Core (b-WL ${wlIdx + 1})`,
+            "完全埋入单晶硅下方的低阻钨栅极，控制存取晶体管导通",
+            "Low-resistance buried tungsten gate electrode switching access transistors",
+          );
+          bwlMesh.position.set(0, 20 + 6, zPos);
+          bwlMetalGroup.add(bwlMesh);
+
+          // Upper half: Si3N4 capping layer sealing the trench (Y from 32 to 42, Height 10)
+          const capGeom = new THREE.BoxGeometry(136, 10, 14);
+          const capMesh = createPart(
+            capGeom,
+            materials.nitrideCap,
+            `字线绝缘封顶氮化硅帽 (b-WL Si3N4 Cap ${wlIdx + 1})`,
+            `Buried Wordline Si3N4 Insulating Cap ${wlIdx + 1}`,
+            "厚层氮化硅，将埋入字线与上方即将跨越的位线严密绝缘",
+            "Thick Si3N4 dielectric cap completely insulating b-WL from bitline overhead",
+          );
+          capMesh.position.set(0, 32 + 5, zPos);
+          bwlMetalGroup.add(capMesh);
+        });
+
+        // --- Part 4: Bitline Direct Contact (DC Plug) ---
+        // Centered at Z = 0 between the two buried wordlines, landing on shared drain node
+        const dcGeom = new THREE.CylinderGeometry(6, 6, 16, 16);
+        const dcMesh = createPart(
+          dcGeom,
+          materials.dcPlug,
+          "位线直触孔导电插塞 (Bitline Direct Contact / DC)",
+          "Bitline Direct Contact (DC) Poly-Si Plug",
+          "直达共用中心漏极节点，建立数据读出通路",
+          "Conductive contact plug linking bitline directly to shared central drain",
+        );
+        dcMesh.position.set(0, 42 + 8, 0);
+        dcGroup.add(dcMesh);
+
+        // --- Part 5: Bitline (BL) Stack & Spacers ---
+        // Running along Z axis from -70 to +70 (Length 140), perpendicular to b-WL
+        // Height Y from 50 to 66 (Height 16)
+        const blGeom = new THREE.BoxGeometry(16, 16, 148);
+        const blMesh = createPart(
+          blGeom,
+          materials.bitline,
+          "金属钨位线数据总线 (Bitline / BL Stack)",
+          "Tungsten/Barrier Bitline Data Line (BL)",
+          "高速位线数据总线，传输感测放大器充放电信号",
+          "High-speed tungsten bitline connecting memory cells to sense amplifiers",
+        );
+        blMesh.position.set(0, 50 + 8, 0);
+        bitlineGroup.add(blMesh);
+
+        // Bitline Si3N4 Cap
+        const blCapGeom = new THREE.BoxGeometry(16, 6, 148);
+        const blCapMesh = createPart(
+          blCapGeom,
+          materials.nitrideCap,
+          "位线硬掩模保护帽 (BL Hard Mask Cap)",
+          "Bitline Si3N4 Hard Mask Cap",
+          "保护位线免受后续电容触点自对准刻蚀短路",
+          "Si3N4 cap guarding bitlines during self-aligned contact etching",
+        );
+        blCapMesh.position.set(0, 66 + 3, 0);
+        bitlineGroup.add(blCapMesh);
+
+        // --- Part 6: Storage Node Contacts (SNC) & Hexagonal Landing Pads ---
+        // 4 storage node contacts located at outer ends of active islands
+        const sncPositions = [
+          { x: -24, z: -48 },
+          { x: -24, z: 48 },
+          { x: 24, z: -48 },
+          { x: 24, z: 48 },
+        ];
+
+        sncPositions.forEach((pos, idx) => {
+          // Vertical SNC Plug from Y=42 to Y=70 (Height 28)
+          const sncGeom = new THREE.CylinderGeometry(5, 5, 28, 16);
+          const sncMesh = createPart(
+            sncGeom,
+            materials.landingPad,
+            `储能触点插塞 (SNC Plug ${idx + 1})`,
+            `Storage Node Contact (SNC) Plug ${idx + 1}`,
+            "自对准触点垂直穿透介质，直达晶体管源极储能节点",
+            "Self-aligned vertical plug contacting access transistor storage node",
+          );
+          sncMesh.position.set(pos.x, 42 + 14, pos.z);
+          sncPadGroup.add(sncMesh);
+
+          // Hexagonal / Honeycomb Landing Pad at Y=70 to Y=78
+          const padGeom = new THREE.CylinderGeometry(11, 11, 8, 6);
+          const padMesh = createPart(
+            padGeom,
+            materials.landingPad,
+            `储能六角扩径落脚垫 (Landing Pad ${idx + 1})`,
+            `Honeycomb Landing Pad ${idx + 1}`,
+            "扩径六角蜂窝落脚垫，为上方微型立体电容器提供稳固接触基座",
+            "Enlarged hexagonal landing pad anchoring the 3D capacitor above",
+          );
+          padMesh.position.set(pos.x, 70 + 4, pos.z);
+          sncPadGroup.add(padMesh);
+        });
+
+        // --- Part 7: Sacrificial Mold Oxide & Dual Nitride Supporters ---
+        // Mold Oxide block from Y=78 to Y=158 (Height 80)
+        const moldGeom = new THREE.BoxGeometry(136, 80, 156);
+        const moldMesh = createPart(
+          moldGeom,
+          materials.moldOxide,
+          "厚层牺牲电容模具氧化物 (Mold Oxide SiO2)",
+          "Sacrificial Capacitor Mold Oxide (SiO2)",
+          "定义电容器微米级高深宽比圆柱高度的超厚牺牲模板",
+          "Thick sacrificial oxide matrix defining height of tall 3D capacitor cylinders",
+        );
+        moldMesh.position.set(0, 78 + 40, 0);
+        moldGroup.add(moldMesh);
+
+        // Mid-Supporter (Y = 118, Thickness 4)
+        const midSupGeom = new THREE.BoxGeometry(136, 4, 156);
+        const midSupMesh = createPart(
+          midSupGeom,
+          materials.supporter,
+          "中层氮化硅机械支撑膜 (Mid Si3N4 Supporter)",
+          "Middle Si3N4 Mechanical Supporter Grid",
+          "在电容柱腰部横向拉结，防止圆柱掏空后毛细粘连倒塌",
+          "Middle horizontal SiN supporter preventing slender capacitors from leaning",
+        );
+        midSupMesh.position.set(0, 118, 0);
+        moldGroup.add(midSupMesh);
+
+        // Top-Supporter (Y = 156, Thickness 4)
+        const topSupGeom = new THREE.BoxGeometry(136, 4, 156);
+        const topSupMesh = createPart(
+          topSupGeom,
+          materials.supporter,
+          "顶层氮化硅机械支撑膜 (Top Si3N4 Supporter)",
+          "Top Si3N4 Mechanical Supporter Grid",
+          "在电容柱顶端横向锁死阵列，确保极高深宽比圆柱绝对自立",
+          "Top SiN supporter locking cylinder tops in hexagonal array",
+        );
+        topSupMesh.position.set(0, 156, 0);
+        moldGroup.add(topSupMesh);
+
+        // --- Part 8 & 9: Freestanding 3D Cylindrical MIM Capacitors (Aspect Ratio > 40:1) ---
+        // 4 tall, hollow cylinders at the landing pad positions!
+        // Height = 78 (from Y=78 to Y=156), Outer Radius = 9, Inner Radius = 7.5
+        sncPositions.forEach((pos, cIdx) => {
+          // Hollow cylinder geometry using CylinderGeometry with openEnded and double-walled
+          const cylGeom = new THREE.CylinderGeometry(8.5, 8.5, 78, 24, 1, true);
+          const cylMesh = createPart(
+            cylGeom,
+            materials.bottomElectrode,
+            `第 ${cIdx + 1} 号 MIM 下电极自立圆柱 (Bottom Electrode ${cIdx + 1})`,
+            `MIM TiN Bottom Electrode Cylinder ${cIdx + 1}`,
+            "深宽比 > 40:1 的自立金属氮化钛圆柱薄壳，内外表面同时储能",
+            "Freestanding TiN hollow cylinder with >40:1 aspect ratio",
+          );
+          cylMesh.position.set(pos.x, 78 + 39, pos.z);
+          cylinderArrayGroup.add(cylMesh);
+
+          // High-k Dielectric layer wrapping both inside and outside of cylinder (Golden ZAZ)
+          const zazGeom = new THREE.CylinderGeometry(9.2, 9.2, 78, 24, 1, true);
+          const zazMesh = createPart(
+            zazGeom,
+            materials.zazHighK,
+            `第 ${cIdx + 1} 号 ZAZ (ZrO2-Al2O3-ZrO2) 高K储能介质层`,
+            `ZAZ High-k (κ=40) Dielectric Layer ${cIdx + 1}`,
+            "原子层沉积 6nm ZAZ 叠层，超高介电常数阻断漏电实现毫秒级数据保持",
+            "ALD 6nm ZrO2/Al2O3/ZrO2 high-k dielectric with κ≈40",
+          );
+          zazMesh.position.set(pos.x, 78 + 39, pos.z);
+          cylinderArrayGroup.add(zazMesh);
+        });
+
+        // Horizontal supporters stay in cylinderArrayGroup to hold the cylinders when mold is stripped!
+        const supGridGeom = new THREE.BoxGeometry(136, 4, 156);
+        const supGridMesh = createPart(
+          supGridGeom,
+          materials.supporter,
+          "氮化硅自立支撑网架 (Si3N4 Supporter Matrix)",
+          "Freestanding Si3N4 Supporter Matrix",
+          "在氧化模具被溶除后，在半空中紧紧拉结全部高耸圆柱电容防倾斜",
+          "Mechanical matrix tying cylinder tops horizontally after mold oxide strip",
+        );
+        supGridMesh.position.set(0, 140, 0);
+        cylinderArrayGroup.add(supGridMesh);
+
+        // --- Part 10: Top Plate Line (Upper Plate Electrode VDD/2) ---
+        // Fills all remaining space around and inside the capacitors, interconnecting them into common plate
+        const plateGeom = new THREE.BoxGeometry(136, 84, 156);
+        const plateMesh = createPart(
+          plateGeom,
+          materials.topPlate,
+          "公共上极板金属互连层 (Upper Plate Line Electrode)",
+          "Upper Plate Line Metallization (VDD/2)",
+          "金属钨/氮化钛充填全部电容内外空隙，接 VDD/2 基准偏置电位",
+          "Common top plate electrode filling capacitor cavities at VDD/2 potential",
+        );
+        plateMesh.position.set(0, 78 + 42, 0);
+        topPlateGroup.add(plateMesh);
+
+        // --- Part 11: Capacitive Charge Flow Animation ---
+        initChargeSimulation(sncPositions);
+        buildDimensionsHierarchy();
+
+        // Initial Step State
+        applyStepState(0, false);
+      }
+
+      // --- 4. STEP-BY-STEP VISIBILITY & MORPH STATE MACHINE ---
+      function applyStepState(stepIdx, animateTransition = true) {
+        updateDimensionsVisibility(stepIdx);
+        currentStepIndex = stepIdx;
+        updateInspectorUI(stepIdx);
+
+        baseGroup.visible = true;
+        stiGroup.visible = stepIdx >= 0;
+
+        // Buried wordlines appear in step 2 (index 1 is trench, index 2 is metal fill)
+        bwlMetalGroup.visible = stepIdx >= 2;
+
+        // Bitline DC plug appears in step 3
+        dcGroup.visible = stepIdx >= 3;
+
+        // Bitline stack appears in step 4
+        bitlineGroup.visible = stepIdx >= 4;
+
+        // SNC contacts & landing pads appear in step 5
+        sncPadGroup.visible = stepIdx >= 5;
+
+        // Sacrificial Mold Oxide present during step 6 & 7 (indices 6 & 7), stripped at step 8!
+        moldGroup.visible = stepIdx === 6 || stepIdx === 7;
+
+        // Cylinders released at step 8 and stay through step 9
+        cylinderArrayGroup.visible = stepIdx >= 8;
+
+        // Top plate deposited at step 9 (final operational cell)
+        topPlateGroup.visible = stepIdx >= 9;
+
+        // Enable Power Flow toggle only at Step 9
+        const powerContainer = document.getElementById("power-flow-container");
+        const powerCheckbox = document.getElementById("check-power");
+        if (stepIdx === 9) {
+          powerContainer.classList.remove("opacity-50", "pointer-events-none");
+        } else {
+          powerContainer.classList.add("opacity-50", "pointer-events-none");
+          powerCheckbox.checked = false;
+          isPowerFlow = false;
+          chargeParticleGroup.visible = false;
+        }
+
+        if (animateTransition) {
+          cinematicCameraMove(stepIdx);
+        }
+
+        applyExplodeOffsets();
+      }
+
+      // --- 5. CAMERA PRESETS & TRANSITIONS ---
+      let isDrawerOpen = false;
+      function toggleDetailsDrawer() {
+        isDrawerOpen = !isDrawerOpen;
+        const drawer = document.getElementById("inspector-drawer");
+        if (drawer) {
+          drawer.classList.toggle("translate-x-full", !isDrawerOpen);
+        }
+        const btn = document.getElementById("btn-toggle-details");
+        if (btn) {
+          btn.classList.toggle("bg-slate-700", isDrawerOpen);
+        }
+      }
+
+      function setCameraView(preset) {
+        let targetPos, targetLook;
+        if (preset === "iso") {
+          targetPos = new THREE.Vector3(155, 120, 165);
+          targetLook = new THREE.Vector3(0, 48, 0);
+        } else if (preset === "bwl") {
+          // Looking along X axis directly at the buried wordlines
+          targetPos = new THREE.Vector3(180, 42, 0);
+          targetLook = new THREE.Vector3(0, 32, 0);
+        } else if (preset === "cap") {
+          // High aspect ratio capacitor profile
+          targetPos = new THREE.Vector3(0, 105, 185);
+          targetLook = new THREE.Vector3(0, 95, 0);
+        } else if (preset === "top") {
+          targetPos = new THREE.Vector3(0, 260, 0.1);
+          targetLook = new THREE.Vector3(0, 0, 0);
+        }
+
+        tweenCamera(targetPos, targetLook, 900);
+      }
+
+      function resetCamera() {
+        setCameraView("iso");
+      }
+
+      function cinematicCameraMove(stepIdx) {
+        if (stepIdx === 1 || stepIdx === 2) {
+          // Zoom into buried wordlines
+          tweenCamera(
+            new THREE.Vector3(95, 60, 90),
+            new THREE.Vector3(0, 32, 0),
+            800,
+          );
+        } else if (stepIdx === 4) {
+          // Focus on Bitline stack
+          tweenCamera(
+            new THREE.Vector3(80, 85, 95),
+            new THREE.Vector3(0, 52, 0),
+            800,
+          );
+        } else if (stepIdx === 5) {
+          // Focus on Landing Pads
+          tweenCamera(
+            new THREE.Vector3(75, 95, 80),
+            new THREE.Vector3(0, 68, 0),
+            800,
+          );
+        } else if (stepIdx === 8) {
+          // Highlight freestanding cylindrical capacitors after mold strip!
+          tweenCamera(
+            new THREE.Vector3(115, 120, 125),
+            new THREE.Vector3(0, 95, 0),
+            900,
+          );
+        } else if (stepIdx === 9) {
+          // Finished full cell
+          tweenCamera(
+            new THREE.Vector3(155, 135, 165),
+            new THREE.Vector3(0, 65, 0),
+            900,
+          );
+        }
+      }
+
+      function tweenCamera(endPos, endLook, durationMs) {
+        const startPos = camera.position.clone();
+        const startLook = controls.target.clone();
+        const startTime = performance.now();
+
+        function updateTween(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(elapsed / durationMs, 1);
+          const ease =
+            progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+          camera.position.lerpVectors(startPos, endPos, ease);
+          controls.target.lerpVectors(startLook, endLook, ease);
+          controls.update();
+
+          if (progress < 1) {
+            requestAnimationFrame(updateTween);
+          }
+        }
+        requestAnimationFrame(updateTween);
+      }
+
+      // --- 6. CHARGE & CAPACITOR REFRESH SIMULATION ---
+      function initChargeSimulation(positions) {
+        const particleCount = 100;
+        const particleGeom = new THREE.SphereGeometry(1.4, 8, 8);
+        const particleMat = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
+
+        for (let i = 0; i < particleCount; i++) {
+          const p = new THREE.Mesh(particleGeom, particleMat);
+          const targetCap = positions[i % positions.length];
+          p.userData = {
+            capX: targetCap.x,
+            capZ: targetCap.z,
+            yProgress: 78 + Math.random() * 75,
+            speed: 0.8 + Math.random() * 0.5,
+            radius: 4.5 + Math.random() * 3.5,
+            angle: Math.random() * Math.PI * 2,
+          };
+          p.position.set(
+            targetCap.x + Math.cos(p.userData.angle) * p.userData.radius,
+            p.userData.yProgress,
+            targetCap.z + Math.sin(p.userData.angle) * p.userData.radius,
+          );
+          chargeParticleGroup.add(p);
+          animatedParticles.push(p);
+        }
+        chargeParticleGroup.visible = false;
+      }
+
+      function updateChargeSimulation() {
+        if (!isPowerFlow || !chargeParticleGroup.visible) return;
+        for (let i = 0; i < animatedParticles.length; i++) {
+          const p = animatedParticles[i];
+          p.userData.yProgress += p.userData.speed;
+          p.userData.angle += 0.05;
+          if (p.userData.yProgress > 154) {
+            p.userData.yProgress = 78;
+          }
+          p.position.set(
+            p.userData.capX + Math.cos(p.userData.angle) * p.userData.radius,
+            p.userData.yProgress,
+            p.userData.capZ + Math.sin(p.userData.angle) * p.userData.radius,
+          );
+        }
+      }
+
+      // --- 7. EXPLODED VIEW ---
+      function updateExplode(val) {
+        explodeProgress = val / 100;
+        document.getElementById("explode-val").innerText =
+          `${Math.round(val)}%`;
+        applyExplodeOffsets();
+      }
+
+      function applyExplodeOffsets() {
+        const e = explodeProgress;
+        stiGroup.position.y = e * 8;
+        bwlMetalGroup.position.y = e * 18;
+        dcGroup.position.y = e * 28;
+        bitlineGroup.position.y = e * 38;
+        sncPadGroup.position.y = e * 52;
+        moldGroup.position.y = e * 72;
+        cylinderArrayGroup.position.y = e * 72;
+        topPlateGroup.position.y = e * 92;
+      }
+
+      // --- 8. TOGGLE MODES ---
+      function toggleXRay(enabled) {
+        isXRay = enabled;
+        materials.stiOxide.opacity = enabled ? 0.15 : 0.45;
+        materials.moldOxide.opacity = enabled ? 0.1 : 0.35;
+        materials.topPlate.opacity = enabled ? 0.2 : 0.75;
+        materials.siliconSubstrate.transparent = enabled;
+        materials.siliconSubstrate.opacity = enabled ? 0.5 : 1.0;
+      }
+
+      function toggleCutaway(enabled) {
+        isCutaway = enabled;
+        if (enabled) {
+          renderer.clippingPlanes = [clippingPlane];
+          clippingPlane.constant = 0;
+        } else {
+          renderer.clippingPlanes = [];
+        }
+      }
+
+      function toggleGrid(enabled) {
+        isGrid = enabled;
+        gridHelper.visible = enabled;
+      }
+
+      function togglePowerFlow(enabled) {
+        isPowerFlow = enabled;
+        chargeParticleGroup.visible = enabled;
+      }
+
+      // --- 9. STEPPER CONTROLS & AUTOPLAY ---
+      function goToStep(idx) {
+        applyStepState(idx, true);
+      }
+
+      function nextStep() {
+        if (currentStepIndex < STEPS.length - 1) {
+          goToStep(currentStepIndex + 1);
+        } else if (isAutoPlaying) {
+          goToStep(0);
+        }
+      }
+
+      function prevStep() {
+        if (currentStepIndex > 0) {
+          goToStep(currentStepIndex - 1);
+        }
+      }
+
+      function toggleAutoPlay() {
+        isAutoPlaying = !isAutoPlaying;
+        const btn = document.getElementById("autoplay-btn");
+        const icon = document.getElementById("autoplay-icon");
+        const label = document.getElementById("autoplay-label");
+
+        if (isAutoPlaying) {
+          btn.classList.add("glow-amber", "border-amber-400");
+          icon.setAttribute("data-lucide", "pause");
+          label.innerText = isEnglish ? "Pause" : "暂停演示";
+          lucide.createIcons();
+          autoPlayTimer = setInterval(() => {
+            nextStep();
+          }, 4200);
+        } else {
+          btn.classList.remove("glow-amber", "border-amber-400");
+          icon.setAttribute("data-lucide", "play");
+          label.innerText = isEnglish ? "Play" : "播放工序";
+          lucide.createIcons();
+          clearInterval(autoPlayTimer);
+        }
+      }
+
+      // --- 10. UI & LOCALIZATION (I18N) ---
+      function updateInspectorUI(idx) {
+        const data = STEPS[idx];
+
+        document.getElementById("step-badge").innerText = isEnglish
+          ? data.badgeEn
+          : data.badgeZh;
+        document.getElementById("process-category-badge").innerText = isEnglish
+          ? data.catEn
+          : data.catZh;
+
+        const titleEl = document.getElementById("step-title");
+        const subTitleEl = document.getElementById("step-title-en");
+
+        if (isEnglish) {
+          titleEl.innerText = data.titleEn;
+          subTitleEl.style.display = "none";
+          subTitleEl.innerText = "";
+        } else {
+          titleEl.innerText = data.titleZh;
+          subTitleEl.style.display = "block";
+          subTitleEl.innerText = data.titleEn;
+        }
+
+        document.getElementById("step-summary").innerText = isEnglish
+          ? data.summaryEn
+          : data.summaryZh;
+        document.getElementById("step-equipment").innerText = isEnglish
+          ? data.toolEn
+          : data.toolZh;
+        document.getElementById("step-equipment-vendor").innerText =
+          data.toolVendor;
+        document.getElementById("step-material").innerText = isEnglish
+          ? data.matEn
+          : data.matZh;
+        document.getElementById("step-material-dim").innerText = isEnglish
+          ? data.matDimEn
+          : data.matDimZh;
+        document.getElementById("step-purpose").innerText = isEnglish
+          ? data.purposeEn
+          : data.purposeZh;
+
+        document.getElementById("btn-prev").disabled = idx === 0;
+
+        for (let i = 0; i < STEPS.length; i++) {
+          const btn = document.getElementById(`step-tab-${i}`);
+          if (btn) {
+            const labelEl = btn.querySelector(".tab-label");
+            if (labelEl) {
+              labelEl.innerText = isEnglish
+                ? STEPS[i].shortEn
+                : STEPS[i].shortZh;
+            }
+            if (i === idx) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          }
+        }
+      }
+
+      function applyLanguageUI() {
+        document.documentElement.lang = isEnglish ? "en" : "zh-CN";
+        document.getElementById("lang-indicator").innerText = isEnglish
+          ? "中"
+          : "EN";
+
+        document.getElementById("header-subtitle").innerText = isEnglish
+          ? "3D DRAM 1T1C Memory Cell Fabrication Digital Twin (Buried Wordlines & MIM 3D Capacitors)"
+          : "DRAM 1T1C 存储单元制造演进模型 (埋入字线与超高深宽比MIM电容)";
+        document.getElementById("nav-cleanroom").innerText = isEnglish
+          ? "Cleanroom Twin"
+          : "洁净室数字孪生";
+        document.getElementById("nav-vision").innerText = isEnglish
+          ? "Vision"
+          : "愿景";
+        document.getElementById("btn-reset-cam-label").innerText = isEnglish
+          ? "Reset View"
+          : "复位视角";
+
+        document.getElementById("lbl-cam-presets").innerText = isEnglish
+          ? "Camera Views"
+          : "机位视角 (Camera)";
+        document.getElementById("lbl-display-modes").innerText = isEnglish
+          ? "Display Modes"
+          : "显示模式 (Display)";
+        document.getElementById("opt-xray").innerText = isEnglish
+          ? "X-Ray Translucent"
+          : "X-Ray 透视";
+        document.getElementById("opt-cutaway").innerText = isEnglish
+          ? "Cross-Section Cut"
+          : "中轴切面剖切";
+        document.getElementById("opt-grid").innerText = isEnglish
+          ? "Nanometer Grid"
+          : "纳米标尺基面";
+        document.getElementById("opt-power").innerText = isEnglish
+          ? "Capacitor Refresh Flow"
+          : "电容充放电模拟";
+        document.getElementById("opt-explode").innerText = isEnglish
+          ? "Exploded View"
+          : "层叠爆炸解构";
+        document.getElementById("hint-mouse").innerText = isEnglish
+          ? "Left: Rotate · Right: Pan · Scroll: Zoom · Hover: Inspect"
+          : "左键旋转 · 右键平移 · 滚轮缩放 · 悬停测绘";
+
+        document.getElementById("lbl-equipment").innerText = isEnglish
+          ? "Tool Equipment"
+          : "制造机台 (Tool)";
+        document.getElementById("lbl-material").innerText = isEnglish
+          ? "Material & Specs"
+          : "材料与结构 (Material)";
+        document.getElementById("lbl-purpose-title").innerText = isEnglish
+          ? "Engineering Purpose & Mechanism"
+          : "工艺核心目的与机理";
+        document.getElementById("lbl-prev-btn").innerText = isEnglish
+          ? "Prev Step"
+          : "上一步";
+        document.getElementById("lbl-next-btn").innerText = isEnglish
+          ? "Next Step"
+          : "下一步";
+
+        const autoplayLabel = document.getElementById("autoplay-label");
+        if (autoplayLabel) {
+          autoplayLabel.innerText = isAutoPlaying
+            ? isEnglish
+              ? "Pause"
+              : "暂停演示"
+            : isEnglish
+              ? "Play"
+              : "播放工序";
+        }
+
+        // Update cross links to preserve language
+        const finfetLink = document.querySelector('a[href*="finfet.html"]');
+        if (finfetLink) {
+          finfetLink.href = isEnglish
+            ? "finfet.html?lang=en"
+            : "finfet.html?lang=zh";
+        }
+        const gaaLink = document.querySelector('a[href*="gaa.html"]');
+        if (gaaLink) {
+          gaaLink.href = isEnglish ? "gaa.html?lang=en" : "gaa.html?lang=zh";
+        }
+        const nandLink = document.querySelector('a[href*="nand.html"]');
+        if (nandLink) {
+          nandLink.href = isEnglish ? "nand.html?lang=en" : "nand.html?lang=zh";
+        }
+
+        updateInspectorUI(currentStepIndex);
+        renderMaterialLegend();
+        dimensionSprites.forEach((s) => {
+          if (s.userData && s.userData.redraw) {
+            s.userData.redraw(isEnglish);
+            s.userData.texture.needsUpdate = true;
+          }
+        });
+        const lblLegend = document.getElementById("lbl-mat-legend");
+        if (lblLegend)
+          lblLegend.innerText = isEnglish
+            ? "Material & Color Legend"
+            : "材料与色标图例";
+        const lblHint = document.getElementById("lbl-legend-hint");
+        if (lblHint)
+          lblHint.innerText = isEnglish ? "Click to highlight" : "点击高亮";
+        const optDim = document.getElementById("opt-dimensions");
+        if (optDim)
+          optDim.innerText = isEnglish
+            ? "Physical Dimensions (45:1 Aspect Ratio)"
+            : "物理尺寸标尺 (45:1深宽比)";
+      }
+
+      function toggleLanguage() {
+        isEnglish = !isEnglish;
+        localStorage.setItem("semiconfab_lang", isEnglish ? "en" : "zh-CN");
+        applyLanguageUI();
+      }
+
+      // --- 11. RAYCASTING & HOVER INSPECTOR TOOLTIP ---
+      function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(scene.children, true);
+
+        const validHit = intersects.find(
+          (hit) =>
+            hit.object.userData &&
+            hit.object.userData.nameZh &&
+            hit.object.visible,
+        );
+
+        const tooltip = document.getElementById("part-tooltip");
+
+        if (validHit) {
+          const obj = validHit.object;
+          tooltip.style.left = `${event.clientX}px`;
+          tooltip.style.top = `${event.clientY}px`;
+          tooltip.classList.remove("hidden");
+
+          document.getElementById("tooltip-title").innerHTML = `
+          <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+          <span>${isEnglish ? obj.userData.nameEn : obj.userData.nameZh}</span>
+        `;
+          document.getElementById("tooltip-desc").innerText = isEnglish
+            ? obj.userData.specEn || obj.userData.nameEn
+            : obj.userData.specZh || obj.userData.nameZh;
+
+          if (hoveredMesh !== obj) {
+            if (
+              hoveredMesh &&
+              hoveredMesh.material &&
+              hoveredMesh.material.emissive
+            ) {
+              hoveredMesh.material.emissiveIntensity =
+                hoveredMesh.userData.origEmissive || 0;
+            }
+            hoveredMesh = obj;
+            if (hoveredMesh.material && hoveredMesh.material.emissive) {
+              hoveredMesh.userData.origEmissive =
+                hoveredMesh.material.emissiveIntensity;
+              hoveredMesh.material.emissive.setHex(0x94a3b8);
+              hoveredMesh.material.emissiveIntensity = 0.15;
+            }
+          }
+        } else {
+          tooltip.classList.add("hidden");
+          if (
+            hoveredMesh &&
+            hoveredMesh.material &&
+            hoveredMesh.material.emissive
+          ) {
+            hoveredMesh.material.emissiveIntensity =
+              hoveredMesh.userData.origEmissive || 0;
+            hoveredMesh = null;
+          }
+        }
+      }
+
+      function onWindowResize() {
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      // --- COLOR & MATERIAL METADATA (DRAM 材料色标图例) ---
+      const DEVICE_MATERIALS_META = [
+        {
+          id: "siliconSubstrate",
+          nameZh: "单晶硅衬底",
+          nameEn: "Single-Crystal Si Base",
+          color: "#334155",
+          formula: "Si",
+          descZh: "高纯度 P-Well 硅晶圆衬底",
+          descEn: "P-type Si substrate base",
+        },
+        {
+          id: "activeSilicon",
+          nameZh: "有源区斜向硅柱",
+          nameEn: "Active Area Island (6F²)",
+          color: "#475569",
+          formula: "Si",
+          descZh: "6F² 单元倾斜单晶硅有源区",
+          descEn: "6F² diagonal active area pillar",
+        },
+        {
+          id: "stiOxide",
+          nameZh: "浅沟槽隔离氧化硅",
+          nameEn: "STI SiO2 Oxide",
+          color: "#38bdf8",
+          formula: "SiO₂",
+          descZh: "相邻单元间的介质绝缘隔离",
+          descEn: "Shallow trench isolation oxide",
+        },
+        {
+          id: "buriedWordline",
+          nameZh: "埋入式钨字线 (b-WL)",
+          nameEn: "Buried Tungsten Wordline",
+          color: "#facc15",
+          formula: "W / TiN",
+          descZh: "深陷硅体 120nm 的低电容鞍型栅",
+          descEn: "BCAT recessed tungsten gate (120nm)",
+        },
+        {
+          id: "nitrideCap",
+          nameZh: "氮化硅自对准掩模帽",
+          nameEn: "Si3N4 Mask & Supporter",
+          color: "#10b981",
+          formula: "Si₃N₄",
+          descZh: "字线顶帽与圆柱电容双层防倒支撑板",
+          descEn: "Capping dielectric & dual supporters",
+        },
+        {
+          id: "bitline",
+          nameZh: "金属位线与接触插塞",
+          nameEn: "Bitline & DC Plug",
+          color: "#f97316",
+          formula: "Poly-Si / W",
+          descZh: "直接欧姆接触位线 · 节距 1α nm",
+          descEn: "Direct contact bitline · 1α nm pitch",
+        },
+        {
+          id: "bottomElectrode",
+          nameZh: "圆柱电容底电极",
+          nameEn: "Capacitor Bottom Electrode",
+          color: "#e2e8f0",
+          formula: "TiN / W",
+          descZh: "深宽比 >45:1 的中空微圆柱 (高 1.8μm)",
+          descEn: "Cylinder bottom electrode (1.8μm, 45:1)",
+        },
+        {
+          id: "zazHighK",
+          nameZh: "ZAZ 超薄高k电介质",
+          nameEn: "ZAZ High-k Dielectric",
+          color: "#facc15",
+          formula: "ZrO₂/Al₂O₃/ZrO₂",
+          descZh: "原子层沉积 7.5nm 极低漏电电容介质",
+          descEn: "ALD 7.5nm nanolaminate dielectric",
+        },
+        {
+          id: "topPlate",
+          nameZh: "多晶硅/锗顶板公共电极",
+          nameEn: "Top Plate Electrode",
+          color: "#38bdf8",
+          formula: "Poly-SiGe / TiN",
+          descZh: "全域共用电容顶板板极充填",
+          descEn: "Common top plate electrode fill",
+        },
+      ];
+
+      function renderMaterialLegend() {
+        const container = document.getElementById("material-legend-container");
+        if (!container) return;
+        container.innerHTML = "";
+
+        DEVICE_MATERIALS_META.forEach((mat) => {
+          const item = document.createElement("div");
+          item.className =
+            "flex items-center gap-1.5 p-1 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-amber-500/50 cursor-pointer transition text-[10px] select-none";
+          item.title = isEnglish
+            ? `${mat.nameEn} (${mat.formula}) - ${mat.descEn}`
+            : `${mat.nameZh} (${mat.formula}) - ${mat.descZh}`;
+          item.onclick = () => highlightMaterialInScene(mat.id);
+
+          item.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm" style="background-color: ${mat.color}; border: 1px solid rgba(255,255,255,0.25)"></span>
+          <div class="truncate flex items-center gap-1">
+            <span class="font-mono text-amber-300 font-semibold">${mat.formula}</span>
+            <span class="text-slate-400 text-[9px] truncate">${isEnglish ? mat.nameEn : mat.nameZh}</span>
+          </div>
+        `;
+          container.appendChild(item);
+        });
+      }
+
+      function highlightMaterialInScene(matId) {
+        const targetMat = materials[matId];
+        if (!targetMat) return;
+
+        scene.traverse((child) => {
+          if (child.isMesh && child.material === targetMat) {
+            const origHex = child.material.emissive
+              ? child.material.emissive.getHex()
+              : 0;
+            if (child.material.emissive) {
+              child.material.emissive.setHex(0xf59e0b);
+              child.material.emissiveIntensity = 0.8;
+              setTimeout(() => {
+                child.material.emissive.setHex(origHex);
+                child.material.emissiveIntensity = 0.2;
+              }, 1200);
+            }
+          }
+        });
+      }
+
+      // --- 3D CALIBRATED DIMENSION ANNOTATIONS (DRAM 尺寸标注) ---
+      let dimensionsGroup = null;
+      let dimensionSprites = [];
+
+      function createBillboardDimensionBadge(
+        textZh,
+        textEn,
+        position,
+        scaleX = 26,
+        scaleY = 6.5,
+      ) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 128;
+        const ctx = canvas.getContext("2d");
+
+        function redraw(isEn) {
+          ctx.clearRect(0, 0, 512, 128);
+          ctx.fillStyle = "rgba(15, 23, 42, 0.92)";
+          ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
+          ctx.lineWidth = 4;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(8, 8, 496, 112, 24);
+            ctx.fill();
+            ctx.stroke();
+          } else {
+            ctx.fillRect(8, 8, 496, 112);
+            ctx.strokeRect(8, 8, 496, 112);
+          }
+
+          ctx.fillStyle = "#94a3b8";
+          ctx.beginPath();
+          ctx.arc(36, 64, 12, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font =
+            'bold 36px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.textBaseline = "middle";
+          ctx.fillText(isEn ? textEn : textZh, 60, 64);
+        }
+
+        redraw(isEnglish);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.minFilter = THREE.LinearFilter;
+        const spriteMat = new THREE.SpriteMaterial({
+          map: texture,
+          depthTest: false,
+          transparent: true,
+        });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.position.copy(position);
+        sprite.scale.set(scaleX, scaleY, 1);
+        sprite.userData = { isDimensionLabel: true, redraw, texture };
+        dimensionSprites.push(sprite);
+        return sprite;
+      }
+
+      function createDimensionLine(
+        p1,
+        p2,
+        color = 0xf59e0b,
+        tickLen = 3,
+        tickAxis = "y",
+      ) {
+        const pts = [p1, p2];
+        const off = new THREE.Vector3();
+        off[tickAxis] = tickLen;
+
+        pts.push(
+          p1.clone().add(off),
+          p1.clone().sub(off),
+          p2.clone().add(off),
+          p2.clone().sub(off),
+        );
+
+        const geom = new THREE.BufferGeometry().setFromPoints(pts);
+        const mat = new THREE.LineBasicMaterial({
+          color: color,
+          depthTest: false,
+          transparent: true,
+          opacity: 0.85,
+        });
+        return new THREE.LineSegments(geom, mat);
+      }
+
+      function buildDimensionsHierarchy() {
+        dimensionsGroup = new THREE.Group();
+        dimensionSprites = [];
+
+        // 1. 电容极柱高度 1.8μm (深宽比 45:1, y = 42 到 82)
+        const pCapBot = new THREE.Vector3(-36, 42, 20);
+        const pCapTop = new THREE.Vector3(-36, 82, 20);
+        const capLine = createDimensionLine(pCapBot, pCapTop, 0xf59e0b, 3, "x");
+        const capBadge = createBillboardDimensionBadge(
+          "电容高: 1.8 μm (深宽比 45:1)",
+          "Cap Height: 1.8 μm (45:1 AR)",
+          new THREE.Vector3(-56, 62, 20),
+          36,
+          6.8,
+        );
+        capLine.name = "dim_cap_height";
+        capBadge.name = "dim_cap_height_badge";
+        dimensionsGroup.add(capLine, capBadge);
+
+        // 2. 埋入式字线深度 120nm (bWL 凹槽深度, y = 14 到 26)
+        const pBwlBot = new THREE.Vector3(34, 14, -20);
+        const pBwlTop = new THREE.Vector3(34, 26, -20);
+        const bwlLine = createDimensionLine(pBwlBot, pBwlTop, 0x38bdf8, 2, "x");
+        const bwlBadge = createBillboardDimensionBadge(
+          "埋入字线深: 120 nm",
+          "Buried Wordline: 120 nm",
+          new THREE.Vector3(50, 20, -20),
+          28,
+          6,
+        );
+        bwlLine.name = "dim_bwl_depth";
+        bwlBadge.name = "dim_bwl_depth_badge";
+        dimensionsGroup.add(bwlLine, bwlBadge);
+
+        // 3. 电容孔径 40nm
+        const diaBadge = createBillboardDimensionBadge(
+          "电容孔径: 40 nm",
+          "Capacitor Dia: 40 nm",
+          new THREE.Vector3(0, 88, 20),
+          24,
+          5.6,
+        );
+        diaBadge.name = "dim_cap_dia_badge";
+        dimensionsGroup.add(diaBadge);
+
+        // 4. 位线节距 1α nm
+        const blBadge = createBillboardDimensionBadge(
+          "Bitline 节距: 1α nm",
+          "Bitline Pitch: 1α nm",
+          new THREE.Vector3(0, 42, -35),
+          24,
+          5.6,
+        );
+        blBadge.name = "dim_bl_pitch_badge";
+        dimensionsGroup.add(blBadge);
+
+        scene.add(dimensionsGroup);
+      }
+
+      function updateDimensionsVisibility(step) {
+        if (!dimensionsGroup) return;
+        const isDimChecked =
+          document.getElementById("check-dimensions")?.checked ?? true;
+        if (!isDimChecked) {
+          dimensionsGroup.visible = false;
+          return;
+        }
+        dimensionsGroup.visible = true;
+
+        const cL = dimensionsGroup.getObjectByName("dim_cap_height");
+        const cB = dimensionsGroup.getObjectByName("dim_cap_height_badge");
+        const bwlL = dimensionsGroup.getObjectByName("dim_bwl_depth");
+        const bwlB = dimensionsGroup.getObjectByName("dim_bwl_depth_badge");
+        const diaB = dimensionsGroup.getObjectByName("dim_cap_dia_badge");
+        const blB = dimensionsGroup.getObjectByName("dim_bl_pitch_badge");
+
+        const bwlVisible = step >= 1 && step <= 5;
+        if (bwlL) bwlL.visible = bwlVisible;
+        if (bwlB) bwlB.visible = bwlVisible;
+
+        const blVisible = step >= 4;
+        if (blB) blB.visible = blVisible;
+
+        const capVisible = step >= 7;
+        if (cL) cL.visible = capVisible;
+        if (cB) cB.visible = capVisible;
+        if (diaB) diaB.visible = capVisible;
+      }
+
+      function toggleDimensions(visible) {
+        if (dimensionsGroup) dimensionsGroup.visible = visible;
+        const sb = document.getElementById("viewport-scale-bar");
+        if (sb) sb.style.display = visible ? "flex" : "none";
+      }
+
+      // --- 12. ANIMATION LOOP ---
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        updateChargeSimulation();
+        renderer.render(scene, camera);
+      }
+
+      // Bootstrap
+      function bootstrapApp() {
+        if (window.THREE && window.THREE.OrbitControls) {
+          initThree();
+          applyLanguageUI();
+          if (window.lucide) lucide.createIcons();
+        } else {
+          window.__onThreeLoaded = () => {
+            initThree();
+            applyLanguageUI();
+            if (window.lucide) lucide.createIcons();
+          };
+        }
+      }
+      window.addEventListener("DOMContentLoaded", bootstrapApp);
+    </script>
+    <!-- Accessible & Machine-Readable Knowledge Base for AI Engines (GEO) & Search Crawlers -->
+    <article
+      id="seo-crawlable-content"
+      class="sr-only"
+      aria-label="DRAM 1T1C Memory Cell Fabrication Engineering Documentation"
+    >
+      <h1>
+        DRAM 1T1C Memory Cell Fabrication Process: 10-Step Industrial
+        Engineering Breakdown
+      </h1>
+      <p>
+        This interactive digital twin details the complete industrial
+        fabrication sequence of modern 6F² DRAM 1T1C (1-Transistor 1-Capacitor)
+        memory cells, featuring buried wordlines (b-WL), bitline direct
+        contacts, and extreme aspect ratio (>40:1) MIM cylindrical capacitors.
+      </p>
+
+      <h2>10-Step DRAM 1T1C Semiconductor Fabrication Sequence</h2>
+      <ol>
+        <li>
+          <h3>
+            Step 1: Active Area STI Isolation & 6F² Diagonal Island Patterning
+          </h3>
+          <p>
+            In single-crystal silicon, high-resolution lithography and
+            anisotropic silicon dry etch form 6F² diagonal honeycombed active
+            silicon islands, filled with flowable CVD oxide and polished flat by
+            CMP.
+          </p>
+          <p>
+            <strong>Equipment:</strong> ArFi Immersion Scanner (ASML Twinscan) +
+            High-Aspect-Ratio RIE (Lam Research Kiyo).
+            <strong>Materials:</strong> P-Type Single-Crystal Si + SiO2 STI
+            Oxide (Depth: ~150nm).
+          </p>
+        </li>
+        <li>
+          <h3>Step 2: Buried Wordline (b-WL / BCAT) Saddle-Fin Trench Etch</h3>
+          <p>
+            Anisotropic plasma dry etching cuts deep trenches across both
+            silicon active islands and STI, creating saddle-fin conduction
+            profiles for the buried access transistor.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High-Density Silicon RIE System (TEL
+            Tactras). <strong>Materials:</strong> Recessed Silicon Cavities
+            (Depth: ~120nm, Width: ~25nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 3: Gate Dielectric, Tungsten b-WL Metallization & SiN Capping
+          </h3>
+          <p>
+            Thermal oxidation forms high-reliability gate oxide, followed by
+            conformal ALD TiN and CVD Tungsten fill. Recess etch-back and CMP
+            planarize with SiN capping to seal the wordline beneath the surface.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Radical Gate Oxidation Furnace + W-CVD
+            System + CMP Polisher. <strong>Materials:</strong> SiO2/SiON Gate
+            Dielectric + TiN Barrier + Tungsten (W) + Si3N4 Cap (~40nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 4: Bitline Direct Contact (DC) Self-Aligned Etch & Poly Plug
+          </h3>
+          <p>
+            Self-aligned contact (SAC) etching opens direct contact holes to the
+            shared central active silicon node, filled with heavily doped N+
+            polysilicon.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Self-Aligned Contact RIE Etcher (Applied
+            Materials Centura). <strong>Materials:</strong> N+ Doped Poly-Si
+            (Doping: 2e20 cm⁻³).
+          </p>
+        </li>
+        <li>
+          <h3>Step 5: Bitline Poly-Si/W Stack Patterning & Sidewall Spacers</h3>
+          <p>
+            Depositing a composite stack of doped poly-Si, TiN, low-resistance
+            Tungsten, and SiN hardmask. Anisotropic etching patterns bitlines
+            running orthogonal to buried wordlines, encapsulated by SiBCN
+            spacers.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Metal RIE Etcher + ALD Spacer Reactor.
+            <strong>Materials:</strong> Poly-Si / TiN / W (~40nm) / Si3N4 Cap +
+            Low-k SiBCN Spacers.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 6: Storage Node Contact (SNC) Etch & Hexagonal Landing Pads
+          </h3>
+          <p>
+            Deep contact etching between bitlines down to silicon active source
+            regions. Filled with selective tungsten and CMP polished into
+            hexagonal landing pads to provide a broad base for tall capacitors.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High Aspect Ratio Contact Etcher +
+            Tungsten CMP System. <strong>Materials:</strong> Ti/TiN Liner +
+            Tungsten (W) Hexagonal Landing Pads.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 7: Thick Sacrificial Mold Oxide & Dual Si3N4 Supporter Stack
+          </h3>
+          <p>
+            PECVD depositing a thick 1.2-1.5μm sacrificial SiO2 mold oxide,
+            intercalated with two thin Si3N4 supporter membranes to mechanically
+            stabilize capacitors.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Ultra-Thick Film PECVD System (Applied
+            Materials Producer GT). <strong>Materials:</strong> Sacrificial SiO2
+            Mold (~1400nm) + Dual Si3N4 Supporter Layers (~35nm each).
+          </p>
+        </li>
+        <li>
+          <h3>Step 8: Extreme High Aspect Ratio (>40:1) Capacitor Hole Etch</h3>
+          <p>
+            Using thick boron-doped amorphous carbon hardmask (B-ACL) and
+            cryogenic fluorocarbon plasma RIE to punch vertical cylindrical
+            holes through the entire mold stack down to each landing pad.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Extreme HAR Cryogenic Dielectric Etcher
+            (Tokyo Electron TEL Tactras / Lam Vantex).
+            <strong>Materials:</strong> Deep Cylindrical Storage Node Voids
+            (Depth: ~1400nm, Diameter: ~35nm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 9: Mold Oxide Selective Wet Strip & Freestanding TiN Cylinder
+            Release
+          </h3>
+          <p>
+            ALD deposits thin TiN bottom electrode, followed by selective
+            buffered oxide etch (BOE) stripping all sacrificial SiO2 mold while
+            preserving Si3N4 supporter lattices to prevent cylinder collapse.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Single-Wafer Wet Clean Station (SCREEN
+            SU-3200). <strong>Materials:</strong> TiN Bottom Electrode (~8nm) +
+            Dilute BOE Chemistry, selectivity &gt; 200:1 over Si3N4.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 10: ALD MIM ZAZ (ZrO2/Al2O3/ZrO2) High-k Dielectric & Top Plate
+            Fill
+          </h3>
+          <p>
+            Atomic Layer Deposition coats nanometer ZAZ high-k dielectric stack
+            and TiN/W top plate electrode held at VDD/2, completing the MIM
+            storage capacitor.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Atomic Layer Deposition System (TEL
+            Trias ALD / ASM Pulsar). <strong>Materials:</strong> ZrO2 (~2.5nm) /
+            Al2O3 (~1nm) / ZrO2 (~2.5nm) ZAZ High-k Stack (~6nm, k~38) + TiN/W
+            Top Plate.
+          </p>
+        </li>
+      </ol>
+
+      <h2>Frequently Asked Questions (FAQ) on DRAM 1T1C Fabrication</h2>
+      <dl>
+        <dt>Why are Buried Wordlines (b-WL) essential in modern DRAM?</dt>
+        <dd>
+          Buried wordlines sink the gate electrode entirely beneath the silicon
+          wafer surface. This eliminates parasitic capacitive coupling between
+          wordlines and bitlines, reduces bitline capacitance by over 30%,
+          provides a saddle-fin conduction channel with increased effective
+          channel length (Leff), and drastically suppresses off-state
+          subthreshold leakage.
+        </dd>
+        <dt>What is the 6F² cell layout in DRAM manufacturing?</dt>
+        <dd>
+          6F² is an ultra-dense layout geometry where each memory cell occupies
+          only 6 times the minimum lithographic feature area squared (F²). By
+          slanting active silicon islands at an angle, two access transistors
+          share a single central bitline contact, maximizing bit density per
+          silicon wafer.
+        </dd>
+        <dt>What is the ZAZ High-k dielectric stack in DRAM MIM capacitors?</dt>
+        <dd>
+          ZAZ stands for Zirconia-Alumina-Zirconia (ZrO2 / Al2O3 / ZrO2). ZrO2
+          provides a very high dielectric constant (k ~ 35-45 in tetragonal
+          phase), while an ultra-thin middle layer of Al2O3 (k ~ 9) disrupts
+          grain boundaries and increases the bandgap offset, suppressing quantum
+          mechanical leakage currents below 10^-7 A/cm².
+        </dd>
+      </dl>
+    </article>
+  </body>
+</html>

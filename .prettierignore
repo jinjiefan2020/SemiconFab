@@ -1,0 +1,19 @@
+# Untouchable data assets (byte-identical requirement)
+catalog.json
+**/catalog.json
+*.jsonl
+**/*.jsonl
+schema.json
+**/schema.json
+routes.json
+**/routes.json
+
+# Dependencies and caches
+node_modules
+.venv
+__pycache__
+*.zip
+*.png
+*.ico
+*.svg
+benchmark/simulator/results

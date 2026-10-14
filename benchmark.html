@@ -1,0 +1,1167 @@
+<!doctype html>
+<html lang="en" data-lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      MIMAC-2026: 300mm Wafer Fab Scheduling Benchmark | SemiconFab.org
+    </title>
+    <meta
+      name="description"
+      content="MIMAC-2026 is an open, synthetic benchmark for 300mm wafer fab scheduling, AMHS routing, and maintenance research with 18 tool groups and 217 machines."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <style>
+      :root {
+        --bg-page: #f8fafc;
+        --bg-card: #ffffff;
+        --bg-card-alt: #f1f5f9;
+        --text-main: #0f172a;
+        --text-muted: #64748b;
+        --border: #cbd5e1;
+        --border-focus: #2563eb;
+        --primary: #2563eb;
+        --primary-hover: #1d4ed8;
+        --success: #16a34a;
+        --success-bg: #dcfce7;
+        --warning: #d97706;
+        --warning-bg: #fef3c7;
+        --danger: #dc2626;
+        --radius: 8px;
+        --font:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: var(--font);
+        background-color: var(--bg-page);
+        color: var(--text-main);
+        line-height: 1.6;
+        padding: 24px 16px 80px;
+      }
+      .container {
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      header {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 20px 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+      .header-titles h1 {
+        font-size: 22px;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+      .header-titles p {
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-top: 4px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        color: var(--primary);
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .nav-links a:hover {
+        text-decoration: underline;
+      }
+      .card {
+        background: var(--bg-card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 28px 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+      h2 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 8px;
+      }
+      h3 {
+        font-size: 15px;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 16px 0 8px;
+      }
+      p {
+        margin-bottom: 12px;
+        font-size: 14px;
+      }
+      p.zh {
+        color: #334155;
+        background: #f8fafc;
+        border-left: 3px solid #94a3b8;
+        padding: 8px 14px;
+        border-radius: 0 6px 6px 0;
+        font-size: 13.5px;
+      }
+      .diagram-wrap {
+        margin: 20px 0;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        overflow: hidden;
+        background: #fff;
+        text-align: center;
+      }
+      .diagram-wrap img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+        font-size: 13px;
+      }
+      th,
+      td {
+        padding: 10px 12px;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+      }
+      th {
+        background-color: var(--bg-card-alt);
+        font-weight: 600;
+        color: #1e293b;
+      }
+      tr:hover td {
+        background-color: #f8fafc;
+      }
+      code,
+      pre {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 12.5px;
+      }
+      code {
+        background-color: var(--bg-card-alt);
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #0f172a;
+        font-weight: 600;
+      }
+      pre {
+        background-color: #0f172a;
+        color: #f8fafc;
+        padding: 14px 18px;
+        border-radius: 6px;
+        overflow-x: auto;
+        margin: 12px 0;
+        line-height: 1.45;
+      }
+      .badge-tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 11px;
+        font-weight: 600;
+      }
+      .badge-warning {
+        background: var(--warning-bg);
+        color: #92400e;
+      }
+      .badge-success {
+        background: var(--success-bg);
+        color: #166534;
+      }
+      ul {
+        margin-left: 20px;
+        margin-bottom: 12px;
+        font-size: 13.5px;
+      }
+      li {
+        margin-bottom: 4px;
+      }
+
+      /* Bilingual Toggle Engine */
+      [data-lang="en"] .zh-only,
+      [data-lang="en"] .zh {
+        display: none !important;
+      }
+      [data-lang="zh"] .en-only,
+      [data-lang="zh"] .en-pair {
+        display: none !important;
+      }
+      [data-lang="zh"] p.zh,
+      [data-lang="zh"] div.zh,
+      [data-lang="zh"] li.zh {
+        color: var(--text-main);
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.6;
+      }
+      [data-lang="zh"] ul.zh {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 0 0 20px !important;
+        margin-bottom: 16px;
+      }
+      .lang-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 3px;
+        padding: 4px 10px;
+        background: var(--bg-card);
+        color: var(--primary);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        user-select: none;
+        font-family: inherit;
+        line-height: 1.2;
+        margin-left: 6px;
+      }
+      .lang-btn:hover {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="header-titles">
+          <h1>MIMAC-2026 Benchmark Testbed</h1>
+          <p class="en-pair">
+            <span class="en-only"
+              >300mm Wafer Fab Scheduling, AMHS Routing, &amp; Maintenance
+              Benchmark &bull; Spec v1.0</span
+            >
+            <span class="zh-only"
+              >300mm 晶圆厂排程、天车物流与设备维护调度基准测试集 &bull; 规范
+              v1.0</span
+            >
+          </p>
+        </div>
+        <div class="nav-links">
+          <a href="index.html"
+            ><span class="en-only">Home</span
+            ><span class="zh-only">首页</span></a
+          >
+          <a href="catalog-demo.html"
+            ><span class="en-only">Catalog</span
+            ><span class="zh-only">设备目录</span></a
+          >
+          <a href="twin.html"
+            ><span class="en-only">Digital Twin</span
+            ><span class="zh-only">数字孪生</span></a
+          >
+          <a href="benchmark.html" style="font-weight: 700"
+            ><span class="en-only">Benchmark</span
+            ><span class="zh-only">基准评测</span></a
+          >
+          <a href="data-standard.html"
+            ><span class="en-only">Data Standard</span
+            ><span class="zh-only">数据标准</span></a
+          >
+          <a href="verification.html"
+            ><span class="en-only">Verification</span
+            ><span class="zh-only">数据核验</span></a
+          >
+          <a href="add-equipment.html"
+            ><span class="en-only">Add Equipment</span
+            ><span class="zh-only">提交设备</span></a
+          >
+          <button
+            id="lang-toggle-btn"
+            onclick="toggleLanguage()"
+            class="lang-btn"
+            title="Switch English / 中文"
+          >
+            <strong>EN</strong> /
+            <span style="opacity: 0.6; font-weight: normal">中</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Section 1: Hero -->
+      <section class="card" id="hero">
+        <h2>
+          <span class="en-only">1. Benchmark Overview</span
+          ><span class="zh-only">1. 基准测试集概览</span>
+        </h2>
+        <p class="en-pair">
+          MIMAC-2026 is an open, citable benchmark testbed for 300mm wafer fab
+          scheduling, automated material handling system (AMHS) routing, and
+          preventive-maintenance research. It provides a shared operational
+          baseline for comparing heuristic dispatching rules, mathematical
+          programming solvers, and reinforcement learning agents under realistic
+          cleanroom constraints. MIMAC-2026 is a synthetic, mathematically
+          calibrated model of a modern multi-product logic facility; it is not a
+          digital twin or direct replication of any specific commercial
+          production fab.
+        </p>
+        <p class="zh">
+          MIMAC-2026 是一个面向 300mm
+          晶圆厂实时排程、自动化物料搬运系统（AMHS）天车路径规划以及预防性维护调度研究的开放、可引用的基准测试平台。它为启发式派工规则、运筹优化求解器和强化学习智能体在严苛洁净室物理约束下的性能比对提供了统一的基准。需要明确的是，MIMAC-2026
+          是一个经过严密数学标定的合成基准模型，旨在反映现代多产品逻辑晶圆厂的通用运行特征，而非任何真实商业晶圆厂的数字孪生。
+        </p>
+
+        <div class="diagram-wrap">
+          <img
+            src="diagrams/benchmark-overview.svg"
+            alt="MIMAC-2026 Benchmark Architecture Overview"
+          />
+        </div>
+      </section>
+
+      <!-- Section 2: The Modeled Fab -->
+      <section class="card" id="modeled-fab">
+        <h2>
+          <span class="en-only">2. The Modeled Fab</span
+          ><span class="zh-only">2. 建模晶圆厂配置</span>
+        </h2>
+        <p class="en-pair">
+          The benchmark models an advanced 300mm front-end and back-end logic
+          manufacturing facility operating continuously 24 hours a day, 7 days a
+          week, 365 days a year. Wafers travel exclusively inside Front Opening
+          Unified Pods (FOUPs) standardizing batch transport at 25 wafers per
+          lot. The complete fab topology comprises 18 tool groups containing
+          exactly 217 production machines. Machine counts, tool categories
+          (serial single-wafer processing vs. multi-lot thermal batching),
+          availability parameters under the SEMI E10 standard, mean time between
+          failures (MTBF), mean time to repair (MTTR), and sequence-dependent
+          setup structures match specification Table 1 exactly.
+        </p>
+        <p class="zh">
+          本基准测试集建模了一座先进的 300mm 前道与后道逻辑芯片制造厂，实行全年
+          365 天、每周 7 天、每天 24
+          小时的全天候不间断生产。所有晶圆统一置于标准晶圆盒（FOUP）中流转，搬运批量严格为每批次
+          25 片（25 wafers/lot）。整座厂房包含 18 个设备组，共计 217
+          台生产机台。各机台的分类（单片串行处理机台与多批次热处理炉管）、遵循
+          SEMI E10
+          标准的可用度参数、平均无故障时间（MTBF）、平均修复时间（MTTR）及顺序相关的换模约束均与规范表
+          1 保持一致。
+        </p>
+
+        <h3>
+          <span class="en-only"
+            >Table 1: Equipment Tool Groups and Machine Counts</span
+          ><span class="zh-only">表 1：设备机台组与机台数量清单</span>
+        </h3>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Tool Group ID</th>
+                <th>Equipment Name</th>
+                <th>Machine Count ($N_g$)</th>
+                <th>Tool Class</th>
+                <th>Batch Size</th>
+                <th>Availability ($A_g$)</th>
+                <th>MTBF (h)</th>
+                <th>MTTR (h)</th>
+                <th>Setup Family Structure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>TG01_LITHO</code></td>
+                <td>Immersion ArF / DUV Scanner</td>
+                <td><strong>38</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.900</td>
+                <td>90.0</td>
+                <td>10.0</td>
+                <td>Reticle Family (4 families; 15 min setup)</td>
+              </tr>
+              <tr>
+                <td><code>TG02_TRACK</code></td>
+                <td>Track Coater &amp; Developer</td>
+                <td><strong>35</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.920</td>
+                <td>92.0</td>
+                <td>8.0</td>
+                <td>None (coupled to litho inline)</td>
+              </tr>
+              <tr>
+                <td><code>TG03_ETCH</code></td>
+                <td>High-Density Plasma Dry Etcher</td>
+                <td><strong>30</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.910</td>
+                <td>91.0</td>
+                <td>9.0</td>
+                <td>Chemistry Type (Fluorine / Chlorine; 20 min setup)</td>
+              </tr>
+              <tr>
+                <td><code>TG04_STRIP</code></td>
+                <td>Plasma Resist Strip &amp; Ashing</td>
+                <td><strong>9</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.940</td>
+                <td>141.0</td>
+                <td>9.0</td>
+                <td>None</td>
+              </tr>
+              <tr>
+                <td><code>TG05_CVD</code></td>
+                <td>Dielectric PECVD &amp; ALD</td>
+                <td><strong>20</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.910</td>
+                <td>91.0</td>
+                <td>9.0</td>
+                <td>Film Type (Oxide / Nitride / Low-k; 30 min clean setup)</td>
+              </tr>
+              <tr>
+                <td><code>TG06_PVD</code></td>
+                <td>Metal Sputter PVD System</td>
+                <td><strong>9</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.920</td>
+                <td>115.0</td>
+                <td>10.0</td>
+                <td>Target Material (Cu / Ta / TiN; 25 min clean setup)</td>
+              </tr>
+              <tr>
+                <td><code>TG07_FURN_DIFF</code></td>
+                <td>Atmospheric Diffusion Furnace</td>
+                <td><strong>9</strong></td>
+                <td>batch</td>
+                <td>2, 4</td>
+                <td>0.920</td>
+                <td>115.0</td>
+                <td>10.0</td>
+                <td>
+                  Thermal Profile (Drive-in / Oxidation; incompatible recipe)
+                </td>
+              </tr>
+              <tr>
+                <td><code>TG08_FURN_LPCVD</code></td>
+                <td>Low-Pressure CVD Furnace</td>
+                <td><strong>7</strong></td>
+                <td>batch</td>
+                <td>2, 4</td>
+                <td>0.920</td>
+                <td>115.0</td>
+                <td>10.0</td>
+                <td>Tube Gas Family (Poly-Si / Si3N4; incompatible recipe)</td>
+              </tr>
+              <tr>
+                <td><code>TG09_IMPL_MED</code></td>
+                <td>Medium-Current Ion Implanter</td>
+                <td><strong>7</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.900</td>
+                <td>90.0</td>
+                <td>10.0</td>
+                <td>Dopant Species (B / P / As; 30 min source change)</td>
+              </tr>
+              <tr>
+                <td><code>TG10_IMPL_HIGH</code></td>
+                <td>High-Current Ion Implanter</td>
+                <td><strong>7</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.900</td>
+                <td>90.0</td>
+                <td>10.0</td>
+                <td>Dopant Species (B / P / As; 35 min source change)</td>
+              </tr>
+              <tr>
+                <td><code>TG11_CMP_OX</code></td>
+                <td>Dielectric ILD/STI CMP Polisher</td>
+                <td><strong>7</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.930</td>
+                <td>133.0</td>
+                <td>10.0</td>
+                <td>
+                  Pad &amp; Slurry Type (Silica / Ceria; 15 min conditioning)
+                </td>
+              </tr>
+              <tr>
+                <td><code>TG12_CMP_MET</code></td>
+                <td>Metal (W / Cu) CMP Polisher</td>
+                <td><strong>7</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.930</td>
+                <td>133.0</td>
+                <td>10.0</td>
+                <td>Metal Slurry Type (W slurry / Cu barrier; 20 min flush)</td>
+              </tr>
+              <tr>
+                <td><code>TG13_WET_BENCH</code></td>
+                <td>Automated Wet Chemical Bench</td>
+                <td><strong>5</strong></td>
+                <td>batch</td>
+                <td>2, 4</td>
+                <td>0.940</td>
+                <td>156.7</td>
+                <td>10.0</td>
+                <td>Chemical Bath (RCA-1 / RCA-2 / DHF; incompatible)</td>
+              </tr>
+              <tr>
+                <td><code>TG14_WET_SINGLE</code></td>
+                <td>Single-Wafer Clean &amp; Dry</td>
+                <td><strong>7</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.940</td>
+                <td>156.7</td>
+                <td>10.0</td>
+                <td>None</td>
+              </tr>
+              <tr>
+                <td><code>TG15_RTP</code></td>
+                <td>Rapid Thermal Processing (RTP)</td>
+                <td><strong>5</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.930</td>
+                <td>133.0</td>
+                <td>10.0</td>
+                <td>Temperature Window (Spike / Soak; 10 min recipe tune)</td>
+              </tr>
+              <tr>
+                <td><code>TG16_MET_CD</code></td>
+                <td>CD-SEM &amp; Overlay Metrology</td>
+                <td><strong>6</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.950</td>
+                <td>190.0</td>
+                <td>10.0</td>
+                <td>Recipe alignment (5 min)</td>
+              </tr>
+              <tr>
+                <td><code>TG17_MET_THICK</code></td>
+                <td>Spectroscopic Ellipsometer</td>
+                <td><strong>4</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.950</td>
+                <td>190.0</td>
+                <td>10.0</td>
+                <td>Film optical model (5 min)</td>
+              </tr>
+              <tr>
+                <td><code>TG18_INSPECT</code></td>
+                <td>Darkfield Optical Defect Tool</td>
+                <td><strong>5</strong></td>
+                <td>serial</td>
+                <td>1, 1</td>
+                <td>0.950</td>
+                <td>190.0</td>
+                <td>10.0</td>
+                <td>Inspection threshold profile (5 min)</td>
+              </tr>
+              <tr style="font-weight: bold; background: #e2e8f0">
+                <td>Total</td>
+                <td>18 Tool Groups</td>
+                <td>217</td>
+                <td colspan="6">—</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 3: Products & Routes -->
+      <section class="card" id="products-routes">
+        <h2>
+          <span class="en-only">3. Products &amp; Routes</span
+          ><span class="zh-only">3. 产品组合与重入工艺路线</span>
+        </h2>
+        <p class="en-pair">
+          The production schedule concurrently balances three distinct product
+          flows: Product A (Logic-HighVolume) represents high-performance
+          computing microprocessors, accounting for 60% of starts across a
+          120-operation route requiring 28 lithography visits; Product B
+          (Logic-MediumVolume) represents mobile applications processors,
+          accounting for 30% of starts across a 104-operation route requiring 24
+          visits; and Product C (mixed-signal/automotive) represents embedded
+          microcontrollers, accounting for 10% of starts across a 92-operation
+          route requiring 20 visits. All product routes exhibit severe
+          structural re-entrancy, repeatedly cycling lots back through
+          photolithography (<code>TG01_LITHO</code>), dry etch
+          (<code>TG03_ETCH</code>), and chemical vapor deposition
+          (<code>TG05_CVD</code>) as successive dielectric, metal, and
+          interconnect layers are built up.
+        </p>
+        <p class="zh">
+          该晶圆厂在生产中同步混合投产三种芯片产品：产品
+          A（Logic-HighVolume）对标高性能计算处理器，占投产总量的
+          60%，工艺路线包含 120 道工序，需经历 28 次光刻循环；产品
+          B（Logic-MediumVolume）对标移动终端系统级芯片（SoC），占投产总量的
+          30%，路线包含 104 道工序，需经历 24 次光刻循环；产品
+          C（混合信号/汽车电子）对标车规级微控制器，占投产总量的 10%，路线包含
+          92 道工序，需经历 20
+          次光刻循环。所有产品的加工流程均呈现高度的重入特性（re-entrant
+          routes），即晶圆批次在沉积、光刻与刻蚀各层结构时，会反复回到
+          <code>TG01_LITHO</code>、<code>TG03_ETCH</code> 与
+          <code>TG05_CVD</code> 等核心机台组执行加工。
+        </p>
+      </section>
+
+      <!-- Section 4: Workload Calibration -->
+      <section class="card" id="workload-calibration">
+        <h2>
+          <span class="en-only">4. Workload Calibration</span
+          ><span class="zh-only">4. 负荷标定与瓶颈设计</span>
+        </h2>
+        <p class="en-pair">
+          Lots enter the fab according to a stationary Poisson process with an
+          arrival rate of &lambda; = 2.40 lots/hour, corresponding to 57.6
+          lots/day or 1,440 wafers/day. The global bottleneck of the facility is
+          photolithography (<code>TG01_LITHO</code>, 38 scanners), engineered to
+          operate at exactly 91.23% stationary utilization within the required
+          88%–93% design band. The stationary utilization formula is defined as
+          arrival rate multiplied by workload per lot divided by effective
+          machine capacity.
+        </p>
+        <p class="zh">
+          晶圆批次按齐次泊松过程到达厂房，投产速率设定为 &lambda; = 2.40
+          批/小时（折合 57.6 批/天，即 1,440
+          片晶圆/天）。全厂的容量主瓶颈被明确设定为光刻机台组（<code>TG01_LITHO</code>，共
+          38 台步进光刻机），其稳定利用率被精确标定在 91.23%，处于规范要求的
+          88%–93%
+          稳态负荷区间内。利用率计算公式遵循基础排队论定义：到达率乘以每批晶圆在机台组上的平均负荷时间除以机台组的有效综合产能（<em
+            >U = &lambda; &middot; W / C</em
+          >）。
+        </p>
+      </section>
+
+      <!-- Section 5: Three Benchmark Tasks -->
+      <section class="card" id="tasks">
+        <h2>
+          <span class="en-only">5. Three Benchmark Tasks</span
+          ><span class="zh-only">5. 三大核心运筹任务</span>
+        </h2>
+        <p class="en-pair">
+          MIMAC-2026 formalizes three operational tasks spanning machine-level
+          scheduling, inter-bay transport logistics, and asset health
+          management:
+        </p>
+        <ul>
+          <li>
+            <strong>T1 — Dynamic lot dispatching</strong>: Whenever an
+            individual machine becomes idle, the dispatching controller selects
+            the next lot (or batch of compatible lots) from the queue of waiting
+            lots resident in the local tool buffer. The decision variable is the
+            lot index assigned to the machine at decision time <em>t</em>, and
+            the primary evaluation metric is mean cycle time.
+          </li>
+          <li>
+            <strong>T2 — AMHS OHT routing</strong>: Whenever a lot completes an
+            operation and requires transfer to an upstream or downstream bay,
+            the material handling supervisor dispatches one of 60 overhead hoist
+            transport (OHT) vehicles across 8 inter-bay track loops and 18
+            intra-bay spurs. The decision variable is the vehicle dispatch
+            assignment and track routing path, and the primary evaluation metric
+            is mean FOUP delivery time.
+          </li>
+          <li>
+            <strong>T3 — Opportunistic PM scheduling</strong>: Scheduled
+            preventive maintenance for critical tool groups
+            <code>TG01_LITHO</code>, <code>TG03_ETCH</code>, and
+            <code>TG05_CVD</code> must be executed within a floating window of
+            &plusmn;24 hours around nominal target deadlines. The decision
+            variable is the initiation timestamp for tool PM, and the primary
+            evaluation metric is effective production rate.
+          </li>
+        </ul>
+        <p class="zh">
+          MIMAC-2026
+          规范了半导体制造运行的三个核心基准任务，覆盖机台级派工、跨工区物流与设备资产维护：
+        </p>
+        <ul
+          class="zh"
+          style="
+            background: #f8fafc;
+            border-left: 3px solid #94a3b8;
+            padding: 8px 24px;
+            border-radius: 0 6px 6px 0;
+          "
+        >
+          <li>
+            <strong>T1 — 动态实时批次派工</strong
+            >：当任意机台加工完毕变为空闲状态时，派工调度器必须从本地机台缓冲区等待队列中挑选下一个（或下一炉兼容）批次上机加工。决策变量为决策时刻
+            <em>t</em>
+            分配给空闲机台的晶圆批次索引，主评价指标为平均生产周期（Mean Cycle
+            Time）。
+          </li>
+          <li>
+            <strong>T2 — AMHS 天车路径规划</strong
+            >：当某批次加工完成需要跨工区转运时，调度系统需在由 8 条主干环线与
+            18 条工区支线组成的轨道网络中指挥 60
+            台天车（OHT）执行抓取与搬运。决策变量为天车分派关系与轨道分支路径选择，主评价指标为平均
+            FOUP 交付时间（Mean FOUP Delivery Time）。
+          </li>
+          <li>
+            <strong>T3 — 机会性预防维护调度</strong>：针对高负荷核心机台
+            <code>TG01_LITHO</code>、<code>TG03_ETCH</code> 与
+            <code>TG05_CVD</code> 的周期性维护，允许在到期时间前后 &plusmn;24
+            小时浮动窗口内灵活安排。决策变量为机台维护停机启动的具体时间戳，主评价指标为有效生产产出率（Effective
+            Production Rate）。
+          </li>
+        </ul>
+      </section>
+
+      <!-- Section 6: Baselines & Results -->
+      <section class="card" id="baselines">
+        <h2>
+          <span class="en-only">6. Baselines &amp; Preliminary Results</span
+          ><span class="zh-only">6. 经典基准与初步实验结果</span>
+        </h2>
+        <p class="en-pair">
+          The benchmark provides baseline implementations of standard classical
+          dispatching heuristics: First-In, First-Out (FIFO), Shortest
+          Processing Time (SPT), Earliest Due Date (EDD), and Critical Ratio
+          (CR). All four behavioral sanity gates specified in spec §6 passed:
+          bottleneck scanner utilization was measured at 88.30% (strictly inside
+          [88%, 93%]); fab WIP grew by +32.3% under a +8% arrival rate surge;
+          due-date policy superiority was verified with Critical Ratio cycle
+          time (11.69 d) outperforming FIFO (17.46 d); and the simulation
+          completed without deadlocks. The table below lists baseline
+          performance metrics, labeled as preliminary based on 5 replications;
+          the formal evaluation protocol calls for 30 replications.
+        </p>
+        <p class="zh">
+          基准测试集内置了四种经典工业派工规则：先进先出（FIFO）、最短加工时间优先（SPT）、最早交期优先（EDD）以及关键比率优先（CR）。模拟器已全项通过规范第
+          6 节规定的 4 项行为合理性检验门禁：光刻瓶颈机台实测利用率为
+          88.30%（落在 [88%, 93%] 理论区间内）；在投产流量提升 +8%
+          时在制品（WIP）增长 +32.3%；关键比率规则的周期时间（11.69
+          天）显著优于先进先出规则（17.46
+          天）；仿真在多随机种子下连续运行无死锁。下表列出各规则性能数据，需特别标明此为
+          5 次重复运行下的初步结果；完整评估协议要求进行 30 次独立重复。
+        </p>
+
+        <h3>
+          <span class="en-only"
+            >Table 2: T1 Dispatching Baseline Results (Preliminary — 5
+            Replications)</span
+          ><span class="zh-only"
+            >表 2：T1 派工基准结果（初步实验 — 5 次独立重复）</span
+          >
+        </h3>
+        <div style="overflow-x: auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Baseline</th>
+                <th>Reps</th>
+                <th>Mean cycle time</th>
+                <th>95% CI</th>
+                <th>Mean tardiness</th>
+                <th>Bottleneck util</th>
+                <th>Throughput</th>
+                <th>Mean WIP</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>FIFO</strong></td>
+                <td>5 (Preliminary)</td>
+                <td>17.46 d</td>
+                <td>±0.68</td>
+                <td>10.38 d</td>
+                <td>88.3% ±0.2%</td>
+                <td>964 wafers/day</td>
+                <td>969.6 lots</td>
+              </tr>
+              <tr>
+                <td><strong>SPT</strong></td>
+                <td>5 (Preliminary)</td>
+                <td>17.46 d</td>
+                <td>±0.68</td>
+                <td>10.38 d</td>
+                <td>88.3% ±0.2%</td>
+                <td>964 wafers/day</td>
+                <td>969.6 lots</td>
+              </tr>
+              <tr>
+                <td><strong>EDD</strong></td>
+                <td>5 (Preliminary)</td>
+                <td>12.52 d</td>
+                <td>±0.60</td>
+                <td>5.44 d</td>
+                <td>87.8% ±0.4%</td>
+                <td>1134 wafers/day</td>
+                <td>722.3 lots</td>
+              </tr>
+              <tr>
+                <td><strong>CR</strong></td>
+                <td>5 (Preliminary)</td>
+                <td>11.69 d</td>
+                <td>±0.32</td>
+                <td>4.60 d</td>
+                <td>88.0% ±0.1%</td>
+                <td>1158 wafers/day</td>
+                <td>669.6 lots</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 7: Evaluation Protocol -->
+      <section class="card" id="protocol">
+        <h2>
+          <span class="en-only">7. Evaluation Protocol</span
+          ><span class="zh-only">7. 统计评估协议</span>
+        </h2>
+        <p class="en-pair">
+          To guarantee scientific reproducibility when evaluating novel
+          scheduling or reinforcement learning policies against the baselines,
+          researchers must follow the formal evaluation protocol: a 60-day
+          warm-up period to stabilize fab inventory, followed by a 365-day
+          performance measurement run. Experiments require 30 independent
+          replications executed under Common Random Numbers (CRN) across
+          compared policies, reporting 95% confidence intervals and evaluating
+          statistical significance via paired Student's t-tests at &alpha; =
+          0.05.
+        </p>
+        <p class="zh">
+          为确保研究人员在比对新型调度算法或强化学习模型时具备统计可信度与科学复现性，基准评测必须遵循严谨的统计评估协议：设置
+          60 天预热期（warm-up
+          period）以消除初态偏差使在制品库存趋于平稳，随后进行 365
+          天的数据采集运行。正式实验须采用 30
+          次独立随机种子重复，且在所有对照算法间采用公共随机数（Common Random
+          Numbers, CRN）机制，最终报告 95% 置信区间，并在显著性水平 &alpha; =
+          0.05 下进行配对 t 检验。
+        </p>
+      </section>
+
+      <!-- Section 8: Run It Yourself -->
+      <section class="card" id="quickstart">
+        <h2>
+          <span class="en-only">8. Run It Yourself</span
+          ><span class="zh-only">8. 本地快速运行指南</span>
+        </h2>
+        <p class="en-pair">
+          Researchers can execute the benchmark locally using standard Python
+          tools. Install the core simulation engine via
+          <code>pip install simpy</code> and launch a 365-day experiment by
+          executing
+          <code>python run_benchmark.py --policy fifo --days 365</code>. For
+          reinforcement learning studies, the package provides a standard
+          Gymnasium API via <code>FabEnv</code> (spec §7), supporting
+          state-space observation vectors and action spaces for neural network
+          training. Download artifacts are accessible via the simulator package
+          (<a href="downloads/mimac2026-simulator.zip"
+            >/downloads/mimac2026-simulator.zip</a
+          >), the technical specification (<a href="MIMAC-2026-SPEC-v1.0.md"
+            >/MIMAC-2026-SPEC-v1.0.md</a
+          >), and the process route data (<a href="benchmark/routes.json"
+            >/benchmark/routes.json</a
+          >).
+        </p>
+        <p class="zh">
+          研究人员可通过标准 Python 环境在本地快速运行该基准。通过
+          <code>pip install simpy</code> 安装依赖后，执行
+          <code>python run_benchmark.py --policy fifo --days 365</code>
+          即可启动为期 365 天的基准实验。对于强化学习领域的探索，代码包在
+          <code>FabEnv</code> 类中提供了符合 Gymnasium
+          规范的标准交互接口（参考规范第 7
+          节），提供结构化的状态向量与动作空间供智能体训练。测试集核心资源链接包括仿真器源码包（<a
+            href="downloads/mimac2026-simulator.zip"
+            >/downloads/mimac2026-simulator.zip</a
+          >）、技术规范正文（<a href="MIMAC-2026-SPEC-v1.0.md"
+            >/MIMAC-2026-SPEC-v1.0.md</a
+          >）以及完整工艺路线文件（<a href="benchmark/routes.json"
+            >/benchmark/routes.json</a
+          >）。
+        </p>
+        <pre><code># Quickstart CLI
+pip install simpy gymnasium
+python run_benchmark.py --policy fifo --days 365</code></pre>
+      </section>
+
+      <!-- Section 9: Limitations -->
+      <section class="card" id="limitations">
+        <h2>
+          <span class="en-only">9. Limitations</span
+          ><span class="zh-only">9. 局限性说明</span>
+        </h2>
+        <p class="en-pair">
+          Academic and industrial users should consider three explicit
+          limitations: First, all parameters are synthetic engineering
+          approximations calibrated to represent modern 300mm manufacturing
+          dynamics rather than measured field data from an active foundry (see
+          spec §9 parameter provenance registry). Second, while simulator
+          architecture supports T2 (AMHS routing) and T3 (opportunistic PM),
+          published baseline tables are currently limited to Task 1 dispatching
+          rules; multi-task benchmarks will be released in future updates.
+          Third, the numerical results shown in Section 6 reflect a
+          5-replication preliminary evaluation rather than the 30-replication
+          protocol required for definitive publication.
+        </p>
+        <p class="zh">
+          使用本基准测试集的学术界与工业界同仁须注意以下三点明确限制：第一，所有模型参数均为经过系统化标定的合成工程近似值，用以模拟
+          300mm
+          晶圆厂的真实动态，并不直接对应任何实际代工厂的实测遥测数据（详见规范第
+          9 节参数出处注册表）。第二，虽然仿真器底层架构已支持 T2（天车调度）与
+          T3（机会性维护）任务，但目前公开发布的基线结果表仅覆盖 T1
+          派工规则，多任务基线数据将在后续版本发布。第三，第 6
+          节中展示的数值结果仅为 5
+          次重复运行的初步数据，尚未达到正式科学出版所需的 30 次完整评估要求。
+        </p>
+      </section>
+
+      <!-- Section 10: Cite & Download -->
+      <section class="card" id="citation">
+        <h2>
+          <span class="en-only">10. Cite &amp; Download</span
+          ><span class="zh-only">10. 引用与下载</span>
+        </h2>
+        <p>
+          When utilizing MIMAC-2026 in published scientific literature or
+          industrial benchmarks, please cite the official technical report:
+        </p>
+        <pre><code>@techreport{semiconfab2026mimac,
+  author      = {{SemiconFab Benchmarking Consortium}},
+  title       = {MIMAC-2026: An Open Benchmark Testbed for 300mm Wafer Fab Scheduling, AMHS Routing, and Predictive Maintenance},
+  institution = {SemiconFab Consortium},
+  number      = {SF-TR-2026-01},
+  year        = {2026},
+  version     = {1.0}
+}</code></pre>
+        <p>Downloadable benchmark assets:</p>
+        <ul>
+          <li>
+            <strong>Simulator Package</strong>:
+            <a href="downloads/mimac2026-simulator.zip"
+              >/downloads/mimac2026-simulator.zip</a
+            >
+          </li>
+          <li>
+            <strong>Technical Specification</strong>:
+            <a href="MIMAC-2026-SPEC-v1.0.md">/MIMAC-2026-SPEC-v1.0.md</a>
+          </li>
+          <li>
+            <strong>Process Route Definitions</strong>:
+            <a href="benchmark/routes.json">/benchmark/routes.json</a>
+          </li>
+          <li>
+            <strong
+              ><span class="en-only">Simulator &amp; Spec Source Code</span
+              ><span class="zh-only">仿真器与规范源码</span></strong
+            >:
+            <a
+              href="https://github.com/jinjiefan2020/SemiconFab"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: var(--primary); font-weight: 600"
+            >
+              <span class="en-only"
+                >Simulator &amp; spec source on GitHub &rarr;</span
+              >
+              <span class="zh-only">在 GitHub 查看仿真器与规范源码 &rarr;</span>
+            </a>
+          </li>
+        </ul>
+        <p class="zh">
+          在学术论文或技术报告中引用 MIMAC-2026 时，请采用上述 BibTeX
+          条目。官方数据与代码包下载链接同上。
+        </p>
+      </section>
+
+      <!-- Catalog Backlink -->
+      <div
+        class="card"
+        style="
+          margin-top: 24px;
+          text-align: center;
+          background: #f8fafc;
+          border-left: 4px solid var(--primary);
+        "
+      >
+        <p class="en-only" style="margin: 0; font-size: 15px; font-weight: 500">
+          Looking for real equipment data?
+          <a
+            href="catalog-demo.html"
+            style="
+              color: var(--primary);
+              font-weight: 600;
+              text-decoration: underline;
+            "
+            >Browse the open equipment catalog &rarr;</a
+          >
+        </p>
+        <p class="zh-only" style="margin: 0; font-size: 15px; font-weight: 500">
+          想找真实设备数据？<a
+            href="catalog-demo.html"
+            style="
+              color: var(--primary);
+              font-weight: 600;
+              text-decoration: underline;
+            "
+            >浏览开放设备目录 &rarr;</a
+          >
+        </p>
+      </div>
+
+      <!-- Site Footer -->
+      <footer
+        style="
+          margin-top: 40px;
+          padding-top: 24px;
+          border-top: 1px solid var(--border);
+          text-align: center;
+          font-size: 13px;
+          color: var(--text-muted);
+        "
+      >
+        <div
+          style="
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 8px;
+          "
+        >
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="
+              color: var(--primary);
+              font-weight: 600;
+              text-decoration: none;
+              display: inline-flex;
+              align-items: center;
+              gap: 5px;
+            "
+          >
+            <svg
+              style="width: 16px; height: 16px; fill: currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              ></path>
+            </svg>
+            <span>GitHub (Source code)</span>
+          </a>
+          <span>&middot;</span>
+          <a
+            href="mailto:info@semiconfab.org"
+            style="color: var(--primary); text-decoration: none"
+            >info@semiconfab.org</a
+          >
+        </div>
+        <p class="en-only" style="margin: 0; font-size: 12px; line-height: 1.5">
+          Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; Free
+          for education &amp; personal use; commercial use requires a separate
+          license.
+        </p>
+        <p class="zh-only" style="margin: 0; font-size: 12px; line-height: 1.5">
+          源码公开 &middot; PolyForm Noncommercial 1.0.0 &middot;
+          教育与个人使用免费；商业使用需另行授权。
+        </p>
+      </footer>
+    </div>
+
+    <script>
+      function getInitialLanguage() {
+        const urlParam = new URLSearchParams(window.location.search).get(
+          "lang",
+        );
+        if (urlParam === "zh" || urlParam === "zh-CN") return "zh";
+        if (urlParam === "en") return "en";
+        const stored = localStorage.getItem("semiconfab_lang");
+        if (stored) return stored.startsWith("zh") ? "zh" : "en";
+        const navLang = (
+          navigator.language ||
+          navigator.userLanguage ||
+          ""
+        ).toLowerCase();
+        if (navLang.startsWith("zh")) return "zh";
+        return "en";
+      }
+
+      function setLanguage(lang) {
+        const targetLang = lang === "zh" || lang === "zh-CN" ? "zh" : "en";
+        document.documentElement.setAttribute("data-lang", targetLang);
+        document.documentElement.setAttribute(
+          "lang",
+          targetLang === "zh" ? "zh-CN" : "en",
+        );
+        localStorage.setItem(
+          "semiconfab_lang",
+          targetLang === "zh" ? "zh-CN" : "en",
+        );
+
+        const btn = document.getElementById("lang-toggle-btn");
+        if (btn) {
+          if (targetLang === "zh") {
+            btn.innerHTML =
+              '<span style="opacity:0.6;font-weight:normal">EN</span> / <strong>中</strong>';
+            btn.title = "Switch to English";
+          } else {
+            btn.innerHTML =
+              '<strong>EN</strong> / <span style="opacity:0.6;font-weight:normal">中</span>';
+            btn.title = "切换为中文";
+          }
+        }
+      }
+
+      function toggleLanguage() {
+        const current =
+          document.documentElement.getAttribute("data-lang") || "en";
+        setLanguage(current === "zh" ? "en" : "zh");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        setLanguage(getInitialLanguage());
+      });
+    </script>
+  </body>
+</html>

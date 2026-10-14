@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <style>
+      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 700; fill: #0f172a; }
+      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 12.5px; fill: #475569; }
+      .step-num { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; fill: #ffffff; }
+      .step-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 13px; font-weight: 700; fill: #0f172a; }
+      .step-title-zh { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11.5px; font-weight: 600; fill: #334155; }
+      .step-desc { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; fill: #64748b; }
+      .arrow { stroke: #64748b; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .arrow-reject { stroke: #ef4444; stroke-width: 1.5; stroke-dasharray: 4,3; fill: none; marker-end: url(#arrowhead-red); }
+      .note-badge { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10.5px; fill: #b45309; font-weight: 600; }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#64748b" />
+    </marker>
+    <marker id="arrowhead-red" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#ef4444" />
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#f8fafc" rx="8"/>
+  <rect x="1" y="1" width="798" height="448" fill="none" stroke="#e2e8f0" stroke-width="2" rx="8"/>
+
+  <!-- Header -->
+  <text x="40" y="36" class="title">Equipment Submission &amp; Verification Flow</text>
+  <text x="40" y="55" class="subtitle">设备规格提交、自动化校验、出处赋权与上架发布流程 (5-Step Pipeline)</text>
+
+  <!-- 5 Horizontal Flow Steps -->
+
+  <!-- Step 1: Submission -->
+  <g transform="translate(35, 80)">
+    <rect width="128" height="150" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1.5"/>
+    <circle cx="22" cy="22" r="12" fill="#0284c7"/>
+    <text x="22" y="26" class="step-num" text-anchor="middle">1</text>
+    <text x="40" y="20" class="step-title">Submission</text>
+    <text x="40" y="34" class="step-title-zh">网页表单提交</text>
+    <text x="12" y="60" class="step-desc">Vendor or community</text>
+    <text x="12" y="74" class="step-desc">fills web form.</text>
+    <text x="12" y="96" class="step-desc">厂商或研究员填写</text>
+    <text x="12" y="110" class="step-desc">动态结构化表单</text>
+    <text x="12" y="132" class="step-desc" fill="#0284c7">→ Payload JSON</text>
+  </g>
+
+  <!-- Arrow 1 -> 2 -->
+  <line x1="165" y1="155" x2="183" y2="155" class="arrow"/>
+
+  <!-- Step 2: Auto Validation -->
+  <g transform="translate(185, 80)">
+    <rect width="128" height="150" rx="6" fill="#ffffff" stroke="#bae6fd" stroke-width="1.5"/>
+    <circle cx="22" cy="22" r="12" fill="#0284c7"/>
+    <text x="22" y="26" class="step-num" text-anchor="middle">2</text>
+    <text x="40" y="20" class="step-title">Validation</text>
+    <text x="40" y="34" class="step-title-zh">自动模式校验</text>
+    <text x="12" y="60" class="step-desc">schema.json syntax,</text>
+    <text x="12" y="74" class="step-desc">L1/L2/L3 completeness,</text>
+    <text x="12" y="88" class="step-desc">units &amp; SI ranges.</text>
+    <text x="12" y="110" class="step-desc">格式、层级完备性、</text>
+    <text x="12" y="124" class="step-desc">单位规范全自动检查</text>
+  </g>
+
+  <!-- Arrow 2 -> 3 -->
+  <line x1="315" y1="155" x2="333" y2="155" class="arrow"/>
+
+  <!-- Step 3: Tier Assignment -->
+  <g transform="translate(335, 80)">
+    <rect width="132" height="150" rx="6" fill="#ffffff" stroke="#fef08a" stroke-width="1.5"/>
+    <circle cx="22" cy="22" r="12" fill="#eab308"/>
+    <text x="22" y="26" class="step-num" text-anchor="middle">3</text>
+    <text x="40" y="20" class="step-title">Tier Gating</text>
+    <text x="40" y="34" class="step-title-zh">出处默认赋权</text>
+    <text x="12" y="60" class="step-desc" font-weight="700" fill="#b45309">Defaults to inferred.</text>
+    <text x="12" y="74" class="step-desc">NEVER auto-grants</text>
+    <text x="12" y="88" class="step-desc">vendor_confirmed.</text>
+    <text x="12" y="110" class="step-desc">初始一律赋予 inferred</text>
+    <text x="12" y="124" class="step-desc">杜绝未经审核的认证</text>
+  </g>
+
+  <!-- Arrow 3 -> 4 -->
+  <line x1="469" y1="155" x2="487" y2="155" class="arrow"/>
+
+  <!-- Step 4: Human Review -->
+  <g transform="translate(489, 80)">
+    <rect width="132" height="150" rx="6" fill="#ffffff" stroke="#c7d2fe" stroke-width="1.5"/>
+    <circle cx="22" cy="22" r="12" fill="#6366f1"/>
+    <text x="22" y="26" class="step-num" text-anchor="middle">4</text>
+    <text x="40" y="20" class="step-title">Human Audit</text>
+    <text x="40" y="34" class="step-title-zh">人工抽检审核</text>
+    <text x="12" y="60" class="step-desc">Inspect corporate email,</text>
+    <text x="12" y="74" class="step-desc">public datasheet link,</text>
+    <text x="12" y="88" class="step-desc">or test certificate.</text>
+    <text x="12" y="110" class="step-desc">核对企业实名邮箱、</text>
+    <text x="12" y="124" class="step-desc">白皮书公开出处链接</text>
+  </g>
+
+  <!-- Arrow 4 -> 5 -->
+  <line x1="623" y1="155" x2="641" y2="155" class="arrow"/>
+
+  <!-- Step 5: Catalog Publication -->
+  <g transform="translate(643, 80)">
+    <rect width="124" height="150" rx="6" fill="#ffffff" stroke="#86efac" stroke-width="1.5"/>
+    <circle cx="22" cy="22" r="12" fill="#16a34a"/>
+    <text x="22" y="26" class="step-num" text-anchor="middle">5</text>
+    <text x="40" y="20" class="step-title">Publish</text>
+    <text x="40" y="34" class="step-title-zh">上架公开目录</text>
+    <text x="12" y="60" class="step-desc">Record published</text>
+    <text x="12" y="74" class="step-desc">with L1/L2/L3 badge</text>
+    <text x="12" y="88" class="step-desc">&amp; per-field tier dots.</text>
+    <text x="12" y="110" class="step-desc">携带分级合规徽章与</text>
+    <text x="12" y="124" class="step-desc">字段级出处透明公示</text>
+  </g>
+
+  <!-- Rejection Path from Step 2 -->
+  <path d="M 249 232 L 249 265 L 100 265 L 100 238" class="arrow-reject"/>
+  <rect x="135" y="254" width="85" height="20" fill="#fee2e2" rx="3" stroke="#fca5a5"/>
+  <text x="177" y="268" font-family="-apple-system, sans-serif" font-size="9.5px" fill="#b91c1c" text-anchor="middle">Invalid 拦截退回</text>
+
+  <!-- Continuous Upgrade & Feedback Loop -->
+  <g transform="translate(35, 295)">
+    <rect width="732" height="120" rx="6" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5"/>
+    
+    <text x="20" y="26" class="step-title">Post-Publication Provenance Upgrades &amp; Dispute Loop</text>
+    <text x="420" y="26" class="step-title-zh">上线后的持续升级与纠错反馈闭环</text>
+
+    <!-- Sub-box A: Upgrades -->
+    <g transform="translate(20, 42)">
+      <rect width="335" height="64" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="12" y="20" class="note-badge">Tier Upgrade Path 升档路径</text>
+      <text x="12" y="38" class="step-desc">inferred → community_corroborated (2+ independent fab reports)</text>
+      <text x="12" y="52" class="step-desc">inferred → vendor_confirmed (official vendor attestation + datasheet)</text>
+    </g>
+
+    <!-- Sub-box B: Corrections -->
+    <g transform="translate(375, 42)">
+      <rect width="337" height="64" rx="4" fill="#f8fafc" stroke="#cbd5e1"/>
+      <text x="12" y="20" font-family="-apple-system, sans-serif" font-size="10.5px" font-weight="700" fill="#0f172a">Public Dispute &amp; Corrections 纠错举报</text>
+      <text x="12" y="38" class="step-desc">Anyone can challenge data with evidence (datasheet PDF, photo, or doc).</text>
+      <text x="12" y="52" class="step-desc">Disputed values are downgraded to inferred or flagged for review.</text>
+    </g>
+  </g>
+</svg>

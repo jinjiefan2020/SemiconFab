@@ -1,0 +1,11 @@
+# ==========================================
+# Cloudflare Pages Static Configuration
+# Project: SemiconFab.org
+# ==========================================
+
+name = "semiconfab"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "."
+
+[vars]
+ENVIRONMENT = "production"

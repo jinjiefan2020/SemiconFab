@@ -1,0 +1,3326 @@
+<!doctype html>
+<html lang="zh-CN" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      HBM 高带宽内存 3D 堆叠与先进封装制造工艺全流程剖析 — SemiconFab.org
+    </title>
+
+    <!-- Primary SEO Meta Tags -->
+    <meta
+      name="title"
+      content="HBM3E / HBM4 高带宽内存 3D 堆叠制造工艺全流程剖析 — SemiconFab.org"
+    />
+    <meta
+      name="description"
+      content="交互式三维立体几何解构现代 HBM (High Bandwidth Memory, HBM3E / HBM4) 3D 立体堆叠与 2.5D CoWoS 先进封装全流程：从逻辑底模(Base Die)、DRAM 晶圆硅通孔(TSV)刻蚀镀铜、超密微凸点(Microbump)、载板临时键合、超薄减薄(~30μm)、TSV背面露头、激光解键合、8/12/16层垂直芯片热压堆叠(TC-NCF/MR-MUF)、环氧树脂模压(EMC)到 2.5D 硅中介层与 GPU 异构集成。支持任意角度自由旋转、动态剖切、X-Ray透视及 1.2 TB/s 超高带宽数据流模拟。"
+    />
+    <meta
+      name="keywords"
+      content="HBM, HBM3E, HBM4, 高带宽内存, 3D堆叠, TSV, 硅通孔, 先进封装, CoWoS, MR-MUF, TC-NCF, Microbump, 微凸点, 临时键合, 激光解键合, 硅中介层, 3D半导体工艺"
+    />
+    <meta name="author" content="SemiconFab.org Initiative" />
+    <meta name="theme-color" content="#090d16" />
+
+    <!-- Canonical & Multilingual Alternates -->
+    <link rel="canonical" href="https://semiconfab.org/hbm.html" />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://semiconfab.org/hbm.html"
+    />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://semiconfab.org/hbm.html?lang=en"
+    />
+    <link
+      rel="alternate"
+      hreflang="zh-CN"
+      href="https://semiconfab.org/hbm.html?lang=zh"
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="SemiconFab.org" />
+    <meta
+      property="og:title"
+      content="HBM3E / HBM4 3D Memory Stacking & Advanced Packaging Digital Twin — SemiconFab.org"
+    />
+    <meta
+      property="og:description"
+      content="Interactive 3D step-by-step engineering model of HBM High Bandwidth Memory: Logic Base Die, Through-Silicon Vias (TSV), dense Microbumps, temporary wafer bonding, extreme thinning (~30μm), TSV reveal, laser debonding, 8/12/16-Hi vertical stacking, MR-MUF molding, and 2.5D CoWoS integration."
+    />
+    <meta property="og:url" content="https://semiconfab.org/hbm.html" />
+    <meta property="og:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="HBM3E / HBM4 3D Memory Stacking & Advanced Packaging Digital Twin — SemiconFab.org"
+    />
+    <meta
+      name="twitter:description"
+      content="Interactive 3D step-by-step engineering model of HBM High Bandwidth Memory: Logic Base Die, Through-Silicon Vias (TSV), dense Microbumps, temporary wafer bonding, extreme thinning (~30μm), TSV reveal, laser debonding, 8/12/16-Hi vertical stacking, MR-MUF molding, and 2.5D CoWoS integration."
+    />
+    <meta name="twitter:image" content="https://semiconfab.org/favicon.png" />
+
+    <!-- Structured Data (JSON-LD) for Search Engines & AI Crawlers (GEO) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "TechArticle",
+            "@id": "https://semiconfab.org/hbm.html#article",
+            "headline": "HBM High Bandwidth Memory 3D Stacking & Advanced Packaging: Complete 10-Step Fabrication Guide",
+            "alternativeHeadline": "HBM3E / HBM4 高带宽内存 3D 垂直堆叠与先进封装制造全流程工业模型",
+            "description": "Comprehensive engineering breakdown and 3D simulation of HBM (High Bandwidth Memory) manufacturing across 10 sequential fabrication steps, from Logic Base Die and TSV formation to 16-Hi multi-die stacking, MR-MUF molding, and 2.5D CoWoS GPU heterogeneous integration.",
+            "inLanguage": ["en", "zh-CN"],
+            "url": "https://semiconfab.org/hbm.html",
+            "author": {
+              "@type": "Organization",
+              "name": "SemiconFab.org Initiative",
+              "url": "https://semiconfab.org"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "SemiconFab.org",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://semiconfab.org/favicon.png"
+              }
+            },
+            "keywords": [
+              "HBM",
+              "High Bandwidth Memory",
+              "HBM3E",
+              "HBM4",
+              "3D Stacking",
+              "Through-Silicon Via",
+              "TSV",
+              "Advanced Packaging",
+              "CoWoS",
+              "MR-MUF",
+              "TC-NCF",
+              "Microbump",
+              "Temporary Wafer Bonding",
+              "Semiconductor Fabrication"
+            ]
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://semiconfab.org/hbm.html#application",
+            "name": "HBM 3D Memory Stacking Digital Twin",
+            "url": "https://semiconfab.org/hbm.html",
+            "applicationCategory": "EngineeringApplication",
+            "operatingSystem": "All modern browsers with WebGL 2.0",
+            "browserRequirements": "Requires WebGL support",
+            "featureList": [
+              "10-Step Sequential HBM 3D Stacking & Packaging Evolution",
+              "Interactive OrbitControls 360-Degree CAD Orbiting",
+              "Dynamic X-Ray Translucent Die Mode",
+              "Cross-Section Cutaway Clipping Plane",
+              "1.2 TB/s Ultra-High Bandwidth Data Flow Simulation",
+              "Exploded View 16-Hi Layer Separation Slider",
+              "Angstrom-Precision Raycast Tooltips"
+            ]
+          },
+          {
+            "@type": "BreadcrumbList",
+            "@id": "https://semiconfab.org/hbm.html#breadcrumbs",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://semiconfab.org/"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "HBM High Bandwidth Memory",
+                "item": "https://semiconfab.org/hbm.html"
+              }
+            ]
+          },
+          {
+            "@type": "HowTo",
+            "@id": "https://semiconfab.org/hbm.html#howto",
+            "name": "How HBM High Bandwidth Memory is Manufactured",
+            "description": "Sequential 10-step industrial fabrication sequence for manufacturing high-bandwidth 3D stacked memory cubes with TSV, microbumps, MR-MUF molding, and 2.5D CoWoS integration.",
+            "step": [
+              {
+                "@type": "HowToStep",
+                "position": 1,
+                "name": "Logic Base Die (Buffer Die) Fabrication & BIST Testing",
+                "text": "Advanced CMOS logic fabrication constructing the Base Die with high-speed DFI PHY, BIST self-repair controllers, and dense landing pads."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 2,
+                "name": "DRAM Core Wafer TSV Deep RIE & Void-Free Copper Plating",
+                "text": "Deep Reactive Ion Etching (DRIE) punching thousands of blind TSVs (~55μm deep, ~6μm diameter), lined with SiO2, barrier/seed sputtered, and filled with electroplated copper."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 3,
+                "name": "Front-Side Redistribution Layer (RDL) & Microbump Metallization",
+                "text": "Multi-layer fine-pitch Cu RDL routing and electroplating ultra-dense microbumps (Cu pillar + Ni barrier + Sn-Ag solder cap) at 25-35μm pitch."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 4,
+                "name": "Temporary Carrier Wafer Bonding with Laser-Releasable Adhesive",
+                "text": "Spin-coating laser-releasable adhesive over front microbumps and vacuum-bonding the active DRAM wafer to a rigid optical glass carrier for mechanical support."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 5,
+                "name": "Extreme Backside Mechanical Grinding & Ultra-Precision CMP Thinning",
+                "text": "Coarse and fine diamond wheel grinding followed by stress-relief CMP, thinning the DRAM wafer down to ~30-45μm."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 6,
+                "name": "Backside TSV Silicon Recess Reveal Etch & Passivation",
+                "text": "Selective SF6 plasma recessing silicon by ~1.5μm to reveal copper TSV tips, followed by low-temp PECVD passivation and touch CMP."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 7,
+                "name": "Backside UBM Metallization & Excimer Laser Debonding",
+                "text": "Patterning Ti/Cu/Ni/Au UBM pads on TSV tips, 308nm excimer laser debonding of the glass carrier, and stealth laser dicing into Known Good Dies (KGD)."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 8,
+                "name": "High-Precision 8-Hi / 12-Hi / 16-Hi 3D Die Stacking & Bonding",
+                "text": "Sub-micron pick-and-place stackers aligning DRAM KGD dies sequentially atop the Base Die, bonding via TC-NCF or MR-MUF with void-free joints."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 9,
+                "name": "Wafer-Level Epoxy Molding Compound (EMC) & Top-Die Heat Polish",
+                "text": "Vacuum injection of high-thermal-conductivity silica-filled EMC, followed by back grinding to expose the top raw silicon die for direct heatsink contact."
+              },
+              {
+                "@type": "HowToStep",
+                "position": 10,
+                "name": "2.5D Silicon Interposer Integration (CoWoS) & BGA Ball Mount",
+                "text": "Mounting the HBM cube alongside the host GPU onto a passive Silicon Interposer with sub-micron wiring, substrate bonding, and BGA solder ball attachment."
+              }
+            ]
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://semiconfab.org/hbm.html#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Why is HBM essential for AI GPU accelerators compared to GDDR or DDR?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Traditional DDR5 and GDDR6 use narrow 32-bit to 64-bit buses operating at extreme clock frequencies, encountering strict pin count and trace length power limits. HBM stacks DRAM dies vertically directly above a logic controller, utilizing an ultra-wide 1024-bit interface per stack with thousands of short, low-capacitance TSVs. This achieves >1.2 TB/s per stack (over 3-4x higher than GDDR6) at significantly higher energy efficiency (<3-4 pJ/bit)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the difference between TC-NCF and MR-MUF in HBM stacking?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "TC-NCF (Thermal Compression with Non-Conductive Film) applies a solid micro-film before each die is pressed with heat and force; it requires high pressure per die and can trap voids or increase thermal resistance as layers exceed 12-Hi. MR-MUF (Mass Reflow Molded Underfill), pioneered by SK Hynix, stacks all dies simultaneously with temporary flux, melts all microbumps in a single mass reflow furnace, and injects liquid epoxy molding compound (EMC) under vacuum. MR-MUF reduces thermal resistance by over 30% and significantly enhances 12-Hi and 16-Hi manufacturing yields."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How does HBM4 evolve with Hybrid Bonding and customized Base Dies?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "HBM4 expands the memory bus from 1024 bits to 2048 bits and enables custom Logic Base Dies manufactured on advanced foundry nodes (such as TSMC 3nm/5nm or Intel 18A). Furthermore, HBM4 introduces direct Cu-Cu Hybrid Bonding, eliminating microbumps entirely and reducing vertical die-to-die spacing below 1-2μm, boosting density and thermal dissipation for 16-Hi and 20-Hi configurations."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              darkbg: "#070a12",
+              panelbg: "rgba(15, 23, 42, 0.85)",
+              accent: "#f43f5e", // Rose theme for HBM high-performance 3D stacking
+              accentGlow: "rgba(244, 63, 94, 0.25)",
+              neonRose: "#f43f5e",
+              neonCyan: "#06b6d4",
+              neonAmber: "#f59e0b",
+              neonPurple: "#a855f7",
+            },
+            fontFamily: {
+              mono: ["JetBrains Mono", "Fira Code", "Menlo", "monospace"],
+              sans: ["Inter", "system-ui", "-apple-system", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
+    <!-- Three.js and OrbitControls -->
+    <!-- Modern Three.js (0.160.0) with ES Module OrbitControls & PBR Tone Mapping -->
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.module.min.js"
+        }
+      }
+    </script>
+    <script type="module">
+      import * as THREE from "three";
+      import { OrbitControls } from "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+      window.THREE = Object.assign({}, THREE, { OrbitControls });
+      if (window.__onThreeLoaded) window.__onThreeLoaded();
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* Custom scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(15, 23, 42, 0.6);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(100, 116, 139, 0.4);
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(244, 63, 94, 0.6);
+      }
+
+      .glass-panel {
+        background: rgba(15, 23, 42, 0.85);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+
+      .glow-rose {
+        box-shadow: 0 0 20px -3px rgba(244, 63, 94, 0.35);
+      }
+
+      .stepper-btn {
+        transition: all 0.15s ease;
+      }
+      .stepper-btn:hover {
+        background: rgba(30, 41, 59, 0.7);
+      }
+      .stepper-btn.active {
+        background: #f8fafc !important;
+        border-color: #f8fafc !important;
+        color: #0f172a !important;
+        font-weight: 600;
+      }
+
+      /* Tooltip overlay */
+      #part-tooltip {
+        pointer-events: none;
+        transform: translate(-50%, -120%);
+        transition: opacity 0.15s ease;
+      }
+
+
+        50% { opacity: 0.4; }
+      }
+    </style>
+  </head>
+  <body
+    class="bg-darkbg text-slate-100 font-sans h-screen w-screen overflow-hidden flex flex-col select-none"
+  >
+    <!-- Top Navigation Header -->
+    <header
+      class="h-14 border-b border-slate-800/80 bg-[#090d16]/90 backdrop-blur-md px-4 flex items-center justify-between shrink-0 z-30"
+    >
+      <div class="flex items-center gap-3">
+        <a href="/" class="flex items-center gap-2 group">
+          <div
+            class="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center group-hover:scale-105 transition"
+          >
+            <i data-lucide="boxes" class="w-4 h-4 text-white"></i>
+          </div>
+          <div>
+            <span
+              class="font-bold text-sm tracking-tight text-white group-hover:text-rose-400 transition"
+              >SemiconFab</span
+            >
+            <span
+              class="text-[10px] text-rose-400 font-mono ml-1.5 px-1.5 py-0.5 rounded bg-rose-950/80 border border-rose-800/60 font-semibold"
+              >HBM 3D</span
+            >
+          </div>
+        </a>
+        <div class="hidden xl:block h-4 w-[1px] bg-slate-700/60 mx-1"></div>
+        <div class="hidden xl:flex items-center text-xs text-slate-400 gap-1.5">
+          <span
+            id="header-subtitle"
+            class="text-slate-400 font-mono text-[11px]"
+            >HBM3E / HBM4 12-Hi 3D TSV · 10 步封装工艺 · TCAD</span
+          >
+        </div>
+      </div>
+
+      <!-- Center Quick Links -->
+      <div
+        class="hidden lg:flex items-center gap-4 text-xs font-medium text-slate-400"
+      >
+        <a
+          href="finfet.html"
+          class="hover:text-cyan-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span>FinFET 3D</span>
+        </a>
+        <a
+          href="gaa.html"
+          class="hover:text-purple-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="layers-3" class="w-3.5 h-3.5 text-purple-400"></i>
+          <span>GAA 3D</span>
+        </a>
+        <a
+          href="dram.html"
+          class="hover:text-amber-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="database" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span>DRAM 3D</span>
+        </a>
+        <a
+          href="nand.html"
+          class="hover:text-emerald-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
+          <span>NAND 3D</span>
+        </a>
+        <a
+          href="twin.html"
+          class="hover:text-rose-400 transition flex items-center gap-1.5"
+        >
+          <i data-lucide="network" class="w-3.5 h-3.5"></i>
+          <span id="nav-cleanroom">洁净室数字孪生</span>
+        </a>
+      </div>
+
+      <!-- Right Controls: Auto-Play, Modes, Lang, Theme -->
+      <div class="flex items-center gap-2">
+        <!-- Play Button -->
+        <button
+          id="btn-autoplay"
+          onclick="toggleAutoPlay()"
+          title="Play Flow"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-300 border border-slate-700/60 transition flex items-center gap-1.5"
+        >
+          <i
+            id="autoplay-icon"
+            data-lucide="play"
+            class="w-3.5 h-3.5 text-rose-400"
+          ></i>
+          <span id="lbl-autoplay" class="text-[11px] font-mono">演示</span>
+        </button>
+
+        <!-- Exploded View Slider Pill -->
+        <div
+          class="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-slate-800/80 border border-slate-700/60 text-xs"
+        >
+          <i
+            data-lucide="unfold-vertical"
+            class="w-3.5 h-3.5 text-rose-400"
+          ></i>
+          <span id="lbl-explode" class="text-[10px] text-slate-400 font-mono"
+            >爆炸图</span
+          >
+          <input
+            id="slider-explode"
+            type="range"
+            min="0"
+            max="100"
+            value="0"
+            oninput="updateExplodedView(this.value)"
+            class="w-16 h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-rose-500"
+          />
+        </div>
+
+        <!-- Toggle X-Ray -->
+        <button
+          id="btn-xray"
+          onclick="toggleXRay()"
+          title="Toggle X-Ray Die Transparency"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-300 border border-slate-700/60 transition flex items-center gap-1"
+        >
+          <i data-lucide="scan" class="w-3.5 h-3.5 text-cyan-400"></i>
+          <span id="lbl-xray" class="text-[11px] font-mono">X-Ray</span>
+        </button>
+
+        <!-- Toggle 3D Dimensions & Scale -->
+        <button
+          id="btn-dimensions"
+          onclick="toggleDimensions()"
+          title="Toggle 3D Physical Dimensions & Scale"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-xs text-rose-300 border border-rose-800/60 transition flex items-center gap-1"
+        >
+          <i data-lucide="ruler" class="w-3.5 h-3.5 text-rose-400"></i>
+          <span id="lbl-dimensions" class="text-[11px] font-mono"
+            >标尺 (55μm)</span
+          >
+        </button>
+
+        <!-- Toggle Cutaway Clipping -->
+        <button
+          id="btn-cutaway"
+          onclick="toggleCutaway()"
+          title="Cross-Section Cutaway View"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-300 border border-slate-700/60 transition flex items-center gap-1"
+        >
+          <i data-lucide="scissors" class="w-3.5 h-3.5 text-amber-400"></i>
+          <span id="lbl-cutaway" class="text-[11px] font-mono">剖切</span>
+        </button>
+
+        <!-- Toggle 1.2 TB/s Data Stream Animation -->
+        <button
+          id="btn-stream"
+          onclick="toggleDataStream()"
+          title="Toggle 1.2 TB/s Memory Bandwidth Data Stream"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-300 border border-slate-700/60 transition flex items-center gap-1"
+        >
+          <i
+            id="stream-icon"
+            data-lucide="activity"
+            class="w-3.5 h-3.5 text-rose-400"
+          ></i>
+          <span id="lbl-stream" class="text-[11px] font-mono">带宽流</span>
+        </button>
+
+        <!-- Camera Reset -->
+        <button
+          onclick="resetCamera()"
+          title="Reset Camera View"
+          class="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700/60 transition"
+        >
+          <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+        </button>
+
+        <!-- Language Switcher (EN / ZH) -->
+        <button
+          id="btn-lang"
+          onclick="toggleLanguage()"
+          class="px-2.5 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-xs text-slate-200 border border-slate-700/60 transition font-mono font-bold flex items-center gap-1"
+        >
+          <i data-lucide="languages" class="w-3.5 h-3.5 text-slate-400"></i>
+          <span id="lbl-lang">EN</span>
+        </button>
+
+        <!-- Return to Hub -->
+        <a
+          href="/"
+          class="p-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700/80 text-slate-300 border border-slate-700/60 transition"
+          title="Back to Home Hub"
+        >
+          <i data-lucide="home" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Main Viewport: Left WebGL Canvas + Floating Right HUD Inspector -->
+    <!-- Main CAD Studio Workspace (Hero 3D Viewport with Breathing Room & Collapsible Specs Drawer) -->
+    <main
+      class="flex-1 w-full h-[calc(100vh-56px)] overflow-hidden flex flex-col justify-between p-3 sm:p-4 bg-[#0a0d14]"
+    >
+      <!-- Top Focus Bar -->
+      <div
+        class="w-full max-w-7xl mx-auto flex items-center justify-between pb-2 shrink-0 gap-3"
+      >
+        <div class="flex items-center gap-3 min-w-0">
+          <span
+            id="step-badge"
+            class="px-2.5 py-1 rounded bg-slate-800 text-slate-200 border border-slate-700/80 font-mono text-xs font-semibold shrink-0"
+          >
+            STEP 01 / 10 · 底座控制芯片
+          </span>
+          <div class="min-w-0">
+            <div class="flex items-center gap-2">
+              <h1
+                id="step-title"
+                class="text-sm sm:text-base font-semibold text-white tracking-tight truncate"
+              >
+                底座逻辑控制芯片 (Base / Logic Die) 制造
+              </h1>
+              <span
+                id="step-title-en"
+                class="text-xs font-mono text-slate-400 font-normal hidden lg:inline"
+                >Base Logic Die Fabrication</span
+              >
+            </div>
+            <p
+              id="step-summary"
+              class="text-xs text-slate-400 mt-0.5 truncate max-w-2xl"
+            >
+              先进 CMOS 逻辑芯片底座，包含 1024-bit DFI PHY、BIST 自检引擎与全局
+              TSV 调度路由。
+            </p>
+          </div>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex items-center gap-2 shrink-0">
+          <button
+            id="btn-prev"
+            onclick="prevStep()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1 disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
+            <span id="lbl-prev-btn">上一步</span>
+          </button>
+          <button
+            id="btn-next"
+            onclick="nextStep()"
+            class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-white text-xs font-semibold text-slate-900 transition flex items-center gap-1 shadow-sm"
+          >
+            <span id="lbl-next-btn">下一步</span>
+            <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+          </button>
+          <button
+            id="btn-toggle-details"
+            onclick="toggleDetailsDrawer()"
+            class="px-2.5 py-1.5 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-xs text-slate-300 border border-slate-700 transition flex items-center gap-1.5"
+          >
+            <i
+              data-lucide="sliders-horizontal"
+              class="w-3.5 h-3.5 text-slate-400"
+            ></i>
+            <span id="lbl-details-btn">工艺参数</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Center Workspace -->
+      <div
+        class="relative w-full max-w-7xl mx-auto flex-1 rounded-2xl border border-slate-800/90 bg-[#0c1017] overflow-hidden flex"
+      >
+        <div
+          id="webgl-container"
+          class="w-full h-full cursor-grab active:cursor-grabbing"
+        ></div>
+
+        <!-- Quick Toggles -->
+        <div
+          class="absolute top-3 left-3 z-10 flex flex-col sm:flex-row items-start sm:items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="glass-panel p-1 rounded-xl border border-slate-800/80 shadow-md flex items-center gap-1.5 text-[10px] font-mono text-slate-300 pointer-events-auto"
+          >
+            <button
+              id="btn-quick-reset"
+              onclick="resetCamera()"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+            >
+              复位
+            </button>
+            <label
+              class="flex items-center gap-1 cursor-pointer px-1.5 py-0.5 rounded hover:bg-slate-800/60 transition"
+            >
+              <input
+                type="checkbox"
+                id="check-dimensions"
+                checked
+                onchange="toggleDimensions()"
+                class="rounded bg-slate-800 border-slate-700 text-slate-200 focus:ring-0 w-3 h-3"
+              />
+              <span id="opt-dimensions">标尺 (55μm)</span>
+            </label>
+            <button
+              id="btn-quick-cutaway"
+              onclick="toggleCutaway()"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+            >
+              剖切
+            </button>
+            <button
+              id="btn-quick-xray"
+              onclick="toggleXRay()"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+            >
+              透视
+            </button>
+            <button
+              id="btn-quick-stream"
+              onclick="toggleDataStream()"
+              class="px-2 py-1 rounded bg-slate-800/70 hover:bg-slate-700 text-[10px] font-mono text-slate-300 hover:text-white transition"
+            >
+              带宽流
+            </button>
+          </div>
+        </div>
+
+        <!-- Technical Spec Pill -->
+        <div
+          class="absolute top-3 right-3 z-10 hidden sm:flex items-center gap-2 pointer-events-none"
+        >
+          <div
+            class="px-2.5 py-1 rounded-lg bg-slate-900/90 border border-slate-800 text-[10px] font-mono text-slate-400"
+          >
+            <span>HBM3E/HBM4 12-Hi · 3D TSV · 10:1 AR · 1024-bit</span>
+          </div>
+        </div>
+
+        <!-- Legend -->
+        <div
+          id="material-legend-wrapper"
+          class="absolute bottom-3 left-3 z-10 glass-panel p-2 rounded-xl border border-slate-800/80 shadow-md text-[10px] pointer-events-auto max-w-xs transition"
+        >
+          <div class="flex items-center justify-between text-slate-400 mb-1">
+            <span id="lbl-mat-legend" class="font-mono font-medium"
+              >材料图例</span
+            >
+            <span
+              class="text-[9px] text-slate-500 font-mono"
+              id="lbl-legend-hint"
+              >点击高亮</span
+            >
+          </div>
+          <div
+            id="material-legend-container"
+            class="grid grid-cols-2 gap-1 max-h-24 overflow-y-auto pr-0.5 custom-scrollbar"
+          ></div>
+        </div>
+
+        <!-- Scale Bar -->
+        <div
+          id="viewport-scale-bar"
+          class="absolute bottom-3 right-3 px-2.5 py-1.5 rounded-lg bg-slate-950/85 border border-slate-800/80 text-[10px] font-mono text-slate-300 flex items-center gap-2 pointer-events-none select-none z-10 shadow-md"
+        >
+          <div class="flex flex-col items-center">
+            <div
+              id="scale-bar-text"
+              class="text-[9px] text-slate-200 font-bold mb-0.5 tracking-wider"
+            >
+              20 μm
+            </div>
+            <div class="flex items-center">
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+              <div class="w-14 h-[2px] bg-slate-400"></div>
+              <div class="w-[1px] h-2 bg-slate-400"></div>
+            </div>
+          </div>
+          <span class="text-[9px] text-slate-500">1:1 CAD (TSV 10:1 AR)</span>
+        </div>
+
+        <!-- Tooltip -->
+        <div
+          id="part-tooltip"
+          class="absolute opacity-0 z-30 bg-slate-950/95 border border-slate-700/80 rounded-xl px-3 py-2 text-xs backdrop-blur-md shadow-xl pointer-events-none transition-all duration-150"
+        >
+          <div
+            id="tooltip-title"
+            class="font-bold text-slate-200 font-mono"
+          ></div>
+          <div
+            id="tooltip-desc"
+            class="text-[11px] text-slate-400 mt-0.5 leading-tight"
+          ></div>
+        </div>
+
+        <!-- Drawer -->
+        <div
+          id="inspector-drawer"
+          class="absolute top-0 right-0 bottom-0 w-80 sm:w-96 bg-slate-950/95 border-l border-slate-800/90 backdrop-blur-xl p-4 sm:p-5 flex flex-col gap-3.5 z-20 shadow-2xl transition-transform duration-300 translate-x-full overflow-y-auto"
+        >
+          <div
+            class="flex items-center justify-between border-b border-slate-800 pb-2.5"
+          >
+            <div
+              class="text-xs font-semibold text-slate-200 flex items-center gap-1.5"
+            >
+              <i data-lucide="sliders" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-drawer-title">制造机台与工艺物理参数</span>
+            </div>
+            <button
+              onclick="toggleDetailsDrawer()"
+              class="p-1 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition"
+            >
+              <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <span
+              id="process-category-badge"
+              class="px-2 py-0.5 rounded bg-slate-800 text-[10px] font-mono text-slate-300 border border-slate-700"
+            ></span>
+            <span id="step-category" class="hidden"></span>
+            <span id="step-number-tag" class="hidden"></span>
+          </div>
+
+          <div class="text-xs text-slate-300 leading-relaxed">
+            <p
+              id="drawer-step-summary"
+              class="text-slate-300 leading-normal"
+            ></p>
+          </div>
+
+          <div class="grid grid-cols-2 gap-2 text-[11px]">
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="cog" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-equipment">制造机台 (Tool)</span>
+              </div>
+              <div
+                id="step-tool"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div id="step-equipment" class="hidden"></div>
+              <div
+                id="step-vendor"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+              <div id="step-equipment-vendor" class="hidden"></div>
+            </div>
+            <div
+              class="bg-slate-900/80 border border-slate-800/90 rounded-xl p-2.5"
+            >
+              <div class="text-slate-400 flex items-center gap-1">
+                <i data-lucide="atom" class="w-3 h-3 text-slate-400"></i>
+                <span id="lbl-material">材料与结构</span>
+              </div>
+              <div
+                id="step-material"
+                class="font-medium text-slate-200 mt-1 font-mono text-[11px]"
+              ></div>
+              <div
+                id="step-material-dim"
+                class="text-[10px] text-slate-500 font-mono mt-0.5"
+              ></div>
+            </div>
+          </div>
+
+          <div
+            class="bg-slate-900/50 border border-slate-800/90 rounded-xl p-3 text-xs"
+          >
+            <div
+              class="font-semibold text-slate-200 flex items-center gap-1.5 mb-1 text-[11px]"
+            >
+              <i data-lucide="microchip" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span id="lbl-purpose-title">工艺核心机理与器件物理</span>
+            </div>
+            <p
+              id="step-purpose"
+              class="text-slate-400 leading-normal text-[11px]"
+            ></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stepper -->
+      <div class="w-full max-w-7xl mx-auto pt-2 shrink-0">
+        <div
+          class="p-1 rounded-xl bg-slate-900/80 border border-slate-800/80 flex items-center gap-1 overflow-x-auto w-full"
+        >
+          <button
+            onclick="goToStep(0)"
+            class="stepper-btn active flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-0"
+          >
+            <div class="font-semibold text-[10px]">01</div>
+            <div class="tab-label truncate text-[10px]">逻辑底座</div>
+          </button>
+          <button
+            onclick="goToStep(1)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-1"
+          >
+            <div class="font-semibold text-[10px]">02</div>
+            <div class="tab-label truncate text-[10px]">TSV盲孔</div>
+          </button>
+          <button
+            onclick="goToStep(2)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-2"
+          >
+            <div class="font-semibold text-[10px]">03</div>
+            <div class="tab-label truncate text-[10px]">正面微凸点</div>
+          </button>
+          <button
+            onclick="goToStep(3)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-3"
+          >
+            <div class="font-semibold text-[10px]">04</div>
+            <div class="tab-label truncate text-[10px]">载板键合</div>
+          </button>
+          <button
+            onclick="goToStep(4)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-4"
+          >
+            <div class="font-semibold text-[10px]">05</div>
+            <div class="tab-label truncate text-[10px]">背面减薄</div>
+          </button>
+          <button
+            onclick="goToStep(5)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-5"
+          >
+            <div class="font-semibold text-[10px]">06</div>
+            <div class="tab-label truncate text-[10px]">TSV露头</div>
+          </button>
+          <button
+            onclick="goToStep(6)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-6"
+          >
+            <div class="font-semibold text-[10px]">07</div>
+            <div class="tab-label truncate text-[10px]">UBM与剥离</div>
+          </button>
+          <button
+            onclick="goToStep(7)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-7"
+          >
+            <div class="font-semibold text-[10px]">08</div>
+            <div class="tab-label truncate text-[10px]">12-Hi堆叠</div>
+          </button>
+          <button
+            onclick="goToStep(8)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-8"
+          >
+            <div class="font-semibold text-[10px]">09</div>
+            <div class="tab-label truncate text-[10px]">模塑底部填充</div>
+          </button>
+          <button
+            onclick="goToStep(9)"
+            class="stepper-btn flex-1 min-w-[76px] py-1.5 px-2 rounded-lg text-center border border-slate-800 text-[11px] font-mono text-slate-400"
+            id="step-tab-9"
+          >
+            <div class="font-semibold text-[10px]">10</div>
+            <div class="tab-label truncate text-[10px]">2.5D封装</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Device Twin Footer -->
+      <footer
+        class="w-full max-w-7xl mx-auto pt-2 pb-1 text-center text-[10px] text-slate-500 flex flex-wrap items-center justify-between gap-2 border-t border-slate-800/60 mt-1 shrink-0"
+      >
+        <div class="flex items-center gap-2">
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1 font-semibold text-slate-400 hover:text-cyan-400 transition"
+          >
+            <svg
+              class="w-3 h-3 fill-current"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+              ></path>
+            </svg>
+            <span>GitHub (Source code)</span>
+          </a>
+        </div>
+        <div>
+          <span
+            >Source-available &middot; PolyForm Noncommercial 1.0.0 &middot;
+            Free for education &amp; personal use; commercial use requires a
+            separate license. (源码公开 &middot; 商业使用需另行授权)</span
+          >
+        </div>
+      </footer>
+    </main>
+
+    <!-- Interactive 3D Engine & Procedural CAD Logic -->
+    <script>
+      // Safe DOM proxy to prevent any missing element from breaking 3D initialization
+      (function () {
+        const _orig = document.getElementById.bind(document);
+        const dummy = {
+          innerText: "",
+          innerHTML: "",
+          textContent: "",
+          value: "",
+          checked: false,
+          disabled: false,
+          style: {},
+          classList: {
+            add() {},
+            remove() {},
+            toggle() {},
+            contains() {
+              return false;
+            },
+          },
+          setAttribute() {},
+          getAttribute() {
+            return null;
+          },
+          removeAttribute() {},
+          addEventListener() {},
+          removeEventListener() {},
+          querySelector() {
+            return null;
+          },
+          querySelectorAll() {
+            return [];
+          },
+          scrollIntoView() {},
+        };
+        document.getElementById = function (id) {
+          return _orig(id) || dummy;
+        };
+      })();
+
+      // --- 1. INDUSTRIAL FABRICATION STEPS DATA (BILINGUAL) ---
+      const stepsData = [
+        {
+          id: 0,
+          badgeZh: "步骤 01 / 10",
+          badgeEn: "STEP 01 / 10",
+          shortZh: "基础底模",
+          shortEn: "Base Die",
+          catZh: "底座控制芯片制造",
+          catEn: "Base Die & DFI Interface",
+          titleZh: "逻辑基模 (Base / Buffer Die) 制造与超高密度测试",
+          titleEn:
+            "Logic Base Die (Buffer Die) Fabrication & Built-In Self-Test (BIST)",
+          summaryZh:
+            "使用高良率先进 CMOS 逻辑制程制造 HBM 底层缓冲逻辑晶圆（Base Die / Buffer Die）。芯片内置高速 DFI 物理层控制器（PHY）、冗余修复逻辑、内建自测试（BIST / IEEE 1500）引擎，并制备正面上表面高密度着陆触垫（Landing Pads）。",
+          summaryEn:
+            "High-yield advanced CMOS logic fabrication constructs the HBM Base/Buffer Die wafer, embedding high-speed DFI PHY memory controllers, redundancy rerouting logic, BIST (IEEE 1500) test engines, and high-density top landing pads.",
+          toolZh: "先进逻辑步进光刻机 + 金属互连沉积集群",
+          toolEn: "Advanced Logic ArFi/EUV Scanner + Metallization Cluster",
+          toolVendor: "ASML Twinscan NXT / Applied Materials Endura",
+          matZh: "单晶硅衬底 + Cu/Low-k 互连层 + 钝化绝缘层",
+          matEn:
+            "P-Type Single-Crystal Si + Cu/Low-k Interconnects + Passivation",
+          matDimZh:
+            "晶圆直径: 300mm | 逻辑底模厚度: ~775μm | I/O 接口: 1024-bit 宽总线",
+          matDimEn:
+            "Wafer Size: 300mm | Die Thickness: ~775μm | 1024-bit Wide Bus",
+          purposeZh:
+            "充当整座 HBM 立体堆叠的指挥中枢与物理基底，将上层垂直贯穿的数千条 TSV 信号进行转接、重定时、差分驱动并提供 BIST 自检，实现与主机 GPU/CPU 的超高速接口对接。",
+          purposeEn:
+            "Acts as the command hub and electrical foundation for the entire 3D stack, managing thousands of vertical TSV lines with BIST self-repair and driving the ultra-wide 1024-bit interface to the host GPU/ASIC.",
+        },
+        {
+          id: 1,
+          badgeZh: "步骤 02 / 10",
+          badgeEn: "STEP 02 / 10",
+          shortZh: "TSV通孔",
+          shortEn: "TSV Etch & Fill",
+          catZh: "中段通孔工艺 (Via-Middle TSV)",
+          catEn: "Via-Middle TSV Etch & Plating",
+          titleZh: "DRAM 核心晶圆硅通孔 (TSV) 深度刻蚀与铜填充",
+          titleEn:
+            "DRAM Core Wafer Through-Silicon Via (TSV) Deep RIE & Copper Plating",
+          summaryZh:
+            "在完成晶体管与位线制作的 DRAM 核心晶圆上，使用高深宽比感应耦合等离子体（ICP）深度反应离子刻蚀（DRIE）向下盲打刻蚀数千个垂直硅通孔（TSV，深约 55μm，直径约 6μm，深宽比 ~10:1）；随后沉积 SiO2 绝缘衬垫、ALD Ti 阻挡层与铜种子层，通过超高洁净电化学电镀（ECD）无空洞致密填充铜柱并经 CMP 研磨平齐。图中采用工程 1/4 剖切视图，清晰展示硅基体内部未贯穿背面的垂直盲孔结构与同轴绝缘衬管。",
+          summaryEn:
+            "On DRAM core wafers, Deep Reactive Ion Etching (DRIE) punches thousands of high-aspect-ratio blind TSVs (~55μm deep, ~6μm diameter, 10:1 aspect ratio). Conformal SiO2 liner, ALD Ti barrier, and Cu seed are deposited, followed by void-free Electro-Chemical Plating (ECD) copper fill and CMP planarization. The 3D model presents a 1/4 cutaway cross-section exposing the internal blind copper vias and insulation sheaths within the silicon bulk.",
+          toolZh: "高深宽比 TSV 硅刻蚀机 + 盲孔超充铜电镀机",
+          toolEn:
+            "High-Aspect-Ratio Silicon DRIE Etcher + TSV ECD Copper Plater",
+          toolVendor: "Lam Research Syndion / Applied Materials Raider ECD",
+          matZh: "高纯电镀铜 (Cu) 导电柱 + SiO2/SiN 绝缘衬管 + Ta/Ti 阻挡层",
+          matEn:
+            "Electroplated Copper (Cu) Pillars + SiO2 Liner + Ta/Ti Barrier",
+          matDimZh:
+            "通孔直径: ~5-8μm | 盲孔深度: ~55μm | 纵横深宽比: ~8:1-10:1",
+          matDimEn:
+            "TSV Diameter: ~5-8μm | Blind Depth: ~55μm | Aspect Ratio: ~8:1-10:1",
+          purposeZh:
+            "在单片 DRAM 硅基体内部预置垂直电气传输导电高速公路，消除传统键合引线（Wire Bonding）的寄生电感与阻抗，为多层堆叠奠定超宽并行互连通道。",
+          purposeEn:
+            "Pre-installs vertical copper superhighways through the silicon substrate, replacing high-inductance bond wires with dense, short, low-resistance 3D interconnects.",
+        },
+        {
+          id: 2,
+          badgeZh: "步骤 03 / 10",
+          badgeEn: "STEP 03 / 10",
+          shortZh: "正面微凸点",
+          shortEn: "Front Microbumps",
+          catZh: "微米级凸点冶金 (Microbump Plating)",
+          catEn: "Fine-Pitch Microbump & RDL",
+          titleZh: "晶圆正面重布线层 (RDL) 与微凸点 (Microbump) 镀覆",
+          titleEn:
+            "Front-Side Redistribution Layer (RDL) & Dense Microbump Metallization",
+          summaryZh:
+            "在 DRAM 晶圆正面制作多层细间距铜重布线层（RDL），光刻定义极高密度微凸点开孔阵列。依次电镀沉淀高纯铜微柱（Cu Pillar, ~15μm）、镍阻挡扩散层（Ni Barrier, ~2μm）及无铅锡银焊帽（Sn-Ag Cap, ~8μm），形成节距仅 25~35μm 的微凸点阵列并经微回流球化。",
+          summaryEn:
+            "Multi-layer fine-pitch Cu RDL routes signals on the DRAM active front. Lithography defines ultra-dense microbump arrays, sequentially electroplating Cu pillars (~15μm), Ni barriers (~2μm), and lead-free Sn-Ag solder caps (~8μm) at a fine 25-35μm pitch, followed by reflow.",
+          toolZh: "细间距微凸点光刻机 + 先进封装晶圆电镀集群",
+          toolEn: "Advanced Packaging Stepper + Multi-Chamber ECD Bump Plater",
+          toolVendor: "Canon FPA-5520iV / Lam Research SABRE 3D",
+          matZh:
+            "Cu 柱 (Copper Pillar) + Ni 阻挡层 + Sn-Ag (98.2/1.8) 共晶焊帽",
+          matEn:
+            "Cu Pillar (~15μm) + Ni (~2μm) + Lead-Free Sn-Ag Solder Cap (~8μm)",
+          matDimZh:
+            "凸点直径: ~15-20μm | 阵列节距 (Pitch): ~25-35μm | 数量: 单Die >5,000个",
+          matDimEn:
+            "Bump Diameter: ~15-20μm | Pitch: ~25-35μm | Count: >5,000 per die",
+          purposeZh:
+            "在芯片有源表面建立高密度机械与电气熔接接头，提供极低的接触电阻与优良的抗电迁移（EM）可靠性，为层间晶圆级垂直组装做好准备。",
+          purposeEn:
+            "Establishes ultra-dense vertical mechanical and electrical metallurgical interfaces with minimal contact resistance and high electromigration resistance for multi-die stacking.",
+        },
+        {
+          id: 3,
+          badgeZh: "步骤 04 / 10",
+          badgeEn: "STEP 04 / 10",
+          shortZh: "临时键合",
+          shortEn: "Carrier Bonding",
+          catZh: "超薄晶圆机械支撑 (Temporary Bonding)",
+          catEn: "Temporary Wafer Bonding (TWB)",
+          titleZh: "载板晶圆临时键合 (Temporary Wafer Bonding)",
+          titleEn:
+            "Temporary Carrier Wafer Bonding with Laser-Releasable Adhesive",
+          summaryZh:
+            "为承受后续背面机械减薄的巨大剪切应力，在微凸点表面旋涂高分子耐温粘结胶或热熔胶，将 DRAM 有源晶圆正面与高刚性高平整度光学载板晶圆（超纯玻璃载板或硅载板）在真空下无气泡高精度键合为一体强固三明治夹层。",
+          summaryEn:
+            "To withstand aggressive backside grinding stress, a laser-releasable polymer adhesive is spin-coated over the microbumps. The active DRAM wafer is bonded in vacuum to a rigid, high-flatness optical glass or dummy silicon carrier wafer without voids.",
+          toolZh: "高精度晶圆临时键合机 + 自动涂胶烘烤机",
+          toolEn: "High-Precision Temporary Wafer Bonder + Adhesive Coater",
+          toolVendor: "EV Group EVG 850 / SUSS MicroTec XBC300",
+          matZh: "激光可剥离光敏粘结胶 (Laser Adhesive) + 硼硅酸盐玻璃载板",
+          matEn:
+            "Laser-Releasable Polymer Adhesive + Rigid Borosilicate Glass Carrier",
+          matDimZh:
+            "载板厚度: ~700μm | 胶层厚度: ~25-40μm (完全包覆微凸点) | 键合总厚度: ~1.5mm",
+          matDimEn:
+            "Carrier Thickness: ~700μm | Adhesive: ~25-40μm (Void-free encapsulation)",
+          purposeZh:
+            "为已制作微凸点的晶圆提供坚不可摧的机械刚性支撑，防止超薄晶圆在背面研磨与搬运过程中发生翘曲、崩裂或碎片。",
+          purposeEn:
+            "Provides rigid mechanical support to protect the fragile ultra-thin active wafer against grinding stresses, warpage, and edge chipping.",
+        },
+        {
+          id: 4,
+          badgeZh: "步骤 05 / 10",
+          badgeEn: "STEP 05 / 10",
+          shortZh: "背面减薄",
+          shortEn: "Backside Grinding",
+          catZh: "超薄晶圆加工 (Wafer Thinning)",
+          catEn: "Precision Backside Thinning & CMP",
+          titleZh: "晶圆背面超薄机械研磨与超精密 CMP 抛光",
+          titleEn:
+            "Extreme Backside Mechanical Grinding & Ultra-Precision CMP Thinning",
+          summaryZh:
+            "将键合在载板上的晶圆倒置，使用粗磨金刚石砂轮削减掉数百微米多余单晶硅基底，再换用超细研磨砂轮精磨，最后利用化学机械抛光（CMP）消除表面微裂纹与机械应力损伤，将 DRAM 晶圆极限界质减薄至仅 30~50μm（约为人类发丝粗细的 1/3），距离盲孔 TSV 铜柱底部仅数微米！",
+          summaryEn:
+            "The bonded assembly is flipped. Coarse diamond grinding wheels rapidly remove bulk silicon substrate, followed by ultra-fine grinding. Final chemical mechanical polishing (CMP) eliminates subsurface micro-cracks and residual stresses, thinning the DRAM wafer down to ~30-50μm.",
+          toolZh: "全自动超精密双轴减薄研磨机 + 背面应力消除抛光机",
+          toolEn: "Ultra-Precision In-Line Grinder + CMP Polish Station",
+          toolVendor: "DISCO DFG8560 / Accretech DGP8761HC",
+          matZh: "单晶硅衬底背层削减 + 超细金刚石磨削砂轮 + 抛光研磨胶体",
+          matEn:
+            "Silicon Bulk Substrate + Ultra-Fine Vitrified Diamond Wheel + Polishing Slurry",
+          matDimZh:
+            "晶圆残余厚度: ~30-45μm (HBM3E/HBM4 目标 <30μm) | 厚度总变异 (TTV): <1.0μm",
+          matDimEn:
+            "Remaining Wafer Thickness: ~30-45μm (HBM3E/4 <30μm) | TTV: <1.0μm",
+          purposeZh:
+            "将芯片厚度压缩到极致，为 8 层、12 层甚至 16 层 DRAM 垂直纵向叠合留出严格的封装高度窗口（标准 JEDEC 封装厚度限制通常 ≤720μm）。",
+          purposeEn:
+            "Compresses individual die thickness to extreme limits to satisfy strict JEDEC package height limits (≤720μm) across 8-Hi, 12-Hi, and 16-Hi stacks.",
+        },
+        {
+          id: 5,
+          badgeZh: "步骤 06 / 10",
+          badgeEn: "STEP 06 / 10",
+          shortZh: "TSV露头刻蚀",
+          shortEn: "TSV Reveal",
+          catZh: "背面通孔显露 (TSV Reveal & Passivation)",
+          catEn: "TSV Backside Reveal & Passivation",
+          titleZh: "背面 TSV 露头微刻蚀 (Reveal Etch) 与低温绝缘钝化",
+          titleEn:
+            "Backside TSV Silicon Recess Reveal Etch & Low-Temp Passivation",
+          summaryZh:
+            "使用高选择比各向同性六氟化硫（SF6）低温干法反应离子刻蚀，选择性向内凹蚀硅衬底约 1.5~2.5μm，使被包裹在内部的数千根 TSV 铜通孔端头整齐凸出露头！随后利用低温 PECVD 沉积 SiNx/SiO2 绝缘钝化层，并做轻度 CMP 擦除（Touch CMP）露出洁净的铜端面。",
+          summaryEn:
+            "High-selectivity SF6 dry plasma selectively recesses the silicon substrate by ~1.5-2.5μm, revealing the tips of thousands of copper TSVs. Low-temperature PECVD deposits a SiN/SiO2 passivation liner, followed by a soft touch CMP to cleanly expose the planar copper tips.",
+          toolZh: "低温 TSV 露头硅刻蚀机 + 低温钝化 PECVD + 轻触 CMP",
+          toolEn: "Low-Temp Silicon Recess Etcher + Low-Temp PECVD + Touch CMP",
+          toolVendor:
+            "Lam Research Versys / SPTS Rapier / Applied Materials Reflexion",
+          matZh: "凸出铜端头 (Protruding Cu Tip) + 低温 Si3N4 绝缘阻挡层",
+          matEn:
+            "Protruding Copper Tips (~1.5μm) + Low-Temp SiNx/SiO2 Passivation",
+          matDimZh: "TSV 露头突出高度: ~1.5-2.0μm | 钝化层厚度: ~0.5μm",
+          matDimEn:
+            "TSV Tip Protrusion: ~1.5-2.0μm | Passivation Thickness: ~0.5μm",
+          purposeZh:
+            "打通 TSV 背面电气连接端点，并使用无机绝缘薄膜将硅衬底彻底钝化包裹，杜绝金属铜向硅中扩散及层间横向短路。",
+          purposeEn:
+            "Opens up the backside copper interconnect terminals while hermetically sealing the exposed silicon surface to prevent copper diffusion and lateral leakage.",
+        },
+        {
+          id: 6,
+          badgeZh: "步骤 07 / 10",
+          badgeEn: "STEP 07 / 10",
+          shortZh: "UBM与激光剥离",
+          shortEn: "UBM & Laser Debond",
+          catZh: "背面金属化与解键合 (Metallization & Debonding)",
+          catEn: "Backside UBM & Excimer Laser Debond",
+          titleZh: "背面凸点下金属化 (UBM) 焊盘制备与载板激光剥离",
+          titleEn: "Backside UBM Pad Metallization & Excimer Laser Debonding",
+          summaryZh:
+            "溅射沉积钛/铜/镍/金（Ti/Cu/Ni/Au）复合薄膜并微图形化，在每个露出的 TSV 铜头上形成平整牢固的凸点下金属化焊盘（UBM Landing Pad）。随后使用 308nm/355nm 紫外准分子激光从玻璃载板背面瞬间透射扫描，光化学热解剥离粘结胶层，安全脱开载板并清洗残留物，经隐形激光切割（Stealth Dicing）分切为已知良品裸片（KGD）。",
+          summaryEn:
+            "Sputtering and patterning Ti/Cu/Ni/Au forms robust Under-Bump Metallization (UBM) landing pads on exposed TSV tips. UV excimer laser (308nm/355nm) scans through the glass carrier, photochemically decomposing the adhesive layer for stress-free carrier debonding, followed by stealth dicing into Known Good Dies (KGD).",
+          toolZh: "准分子激光解键合剥离机 + 晶圆等离子清洗槽 + 隐形激光切割机",
+          toolEn:
+            "Excimer Laser Debonder + Plasma Clean Station + Stealth Laser Dicer",
+          toolVendor: "SUSS MicroTec XDD300 / DISCO DFL7362 / EVG 850DB",
+          matZh: "背面 UBM 焊盘 (Ti/Cu/Ni/Au) + 紫外激光脉冲光解界面",
+          matEn:
+            "Backside UBM Landing Pads (Ti/Cu/Ni/Au) + Cleaned KGD Silicon Dice",
+          matDimZh:
+            "UBM 焊盘直径: ~18-22μm | 激光剥离分秒级完成 | KGD 裸片厚度: ~35μm",
+          matDimEn:
+            "UBM Pad Diameter: ~18-22μm | Laser Cycle: <60s | Die Thickness: ~35μm",
+          purposeZh:
+            "完成 DRAM 单晶粒的正反双面垂直金属通孔接口构建，使晶粒具备上下一体导通能力；并将超薄晶圆无损释放为高良率已知好裸片（KGD）。",
+          purposeEn:
+            "Finalizes bidirectional through-die connectivity on ultra-thin DRAM dies and safely releases them into pristine Known Good Dies (KGD) ready for vertical stacking.",
+        },
+        {
+          id: 7,
+          badgeZh: "步骤 08 / 10",
+          badgeEn: "STEP 08 / 10",
+          shortZh: "12层立体堆叠",
+          shortEn: "12-Hi Stacking",
+          catZh: "垂直立体堆叠键合 (12-Hi 3D Die Stacking)",
+          catEn: "Multi-Die Stacking: TC-NCF / MR-MUF",
+          titleZh: "高精度 12层 (12-Hi) 3D 垂直芯片对准与热压/回流键合",
+          titleEn:
+            "High-Precision 12-Hi 3D Die Stacking (TC-NCF / MR-MUF / Hybrid Bonding)",
+          summaryZh:
+            "使用亚微米高精度贴片机将 12 层 DRAM KGD 裸片依次垂直精准堆叠（12-Hi，包含底层 Base Die 共 13 层芯片）。前 11 层晶片内部贯穿垂直 TSV 铜柱与微凸点阵列；最顶层（第12层）芯片无 TSV 穿透，保留完整单晶硅背部作为直接散热界面。采用热压非导电胶膜（TC-NCF）或先进大规模回流模塑底部填充（MR-MUF，SK海力士代表技术）在加温加压下一体熔融焊点并填充层间微间隙；未来 HBM4 更引入无凸点直接铜-铜混合键合（Cu-Cu Hybrid Bonding）。",
+          summaryEn:
+            "Sub-micron precision pick-and-place stackers align 12 DRAM KGD dies sequentially atop the Base Die (12-Hi, totaling 13 dies). The lower 11 DRAM tiers feature dense vertical TSVs and microbumps, while the topmost 12th tier has NO TSVs, serving as a pristine bare silicon heat spreader. Thermal Compression Non-Conductive Film (TC-NCF) or Mass Reflow Molded Underfill (MR-MUF) solidifies thousands of microbumps void-free.",
+          toolZh: "超高精度 3D 倒装贴片键合机 / 晶圆级热压键合系统",
+          toolEn:
+            "Sub-Micron 3D Flip-Chip Die Bonder / Thermal Compression System",
+          toolVendor:
+            "Toray / Hanmi Semiconductor DUAL TC Bonder / Besi Datacon 8800",
+          matZh:
+            "12 层垂直层叠 DRAM 裸片 (前11层含TSV+顶层纯硅) + 锡银微焊点 + MR-MUF / NCF",
+          matEn:
+            "12-Hi Stacked DRAM Dies (11 with TSVs + Top Bare Si) + Sn-Ag Joints + NCF / MUF Underfill",
+          matDimZh:
+            "对准精度 (Alignment): <0.5μm | 层间间距 (Gap): ~1.2μm | 堆叠总层数: 12-Hi DRAM + 1层逻辑底模",
+          matDimEn:
+            "Alignment: <0.5μm | Inter-Die Gap: ~1.2μm | Stack Height: 12 DRAM Dies + 1 Base Die",
+          purposeZh:
+            "构建现代旗舰级 HBM3E 的物理主体结构：利用数万根垂直贯穿的微凸点与 TSV 焊点将 12 层 DRAM 与底层逻辑紧密固化，形成拥有极致带宽的超密集 3D 存储立方体（Memory Cube）。",
+          purposeEn:
+            "Assembles the monolithic 12-Hi 3D HBM Memory Cube, forming tens of thousands of parallel vertical connections between DRAM tiers and the Base Die for terabyte-per-second memory bandwidth.",
+        },
+        {
+          id: 8,
+          badgeZh: "步骤 09 / 10",
+          badgeEn: "STEP 09 / 10",
+          shortZh: "EMC模压散热",
+          shortEn: "Molding & Top Polish",
+          catZh: "模压塑封与热管理 (Molding & Thermal Engineering)",
+          catEn: "EMC Encapsulation & Top Bare Si Grinding",
+          titleZh: "晶圆级环氧树脂模压 (EMC) 塑封与顶层散热背磨",
+          titleEn:
+            "Wafer-Level Epoxy Molding Compound (EMC) & Top-Die Heat-Dissipation Polish",
+          summaryZh:
+            "将 12-Hi 堆叠立柱整体送入模压机，注入高导热性细微颗粒环氧树脂模塑料（EMC），在真空加压与高温下固化，彻底致密包裹整个堆叠立柱周围；随后使用高精度研磨机对模压顶层进行微米级研磨（Back Grinding），磨去顶层 EMC 暴露出最顶层（第12层）DRAM 裸芯片的单晶硅背面，确保芯片与后续金属均热板直接接触。随后经晶圆划片分切为独立的完整塑封 HBM 立方体（Cube）。",
+          summaryEn:
+            "High-thermal-conductivity Epoxy Molding Compound (EMC) is injected in vacuum and cured at high temperature to seal the entire 12-Hi multi-die stack void-free. Precision back grinding removes excess top EMC, exposing the raw silicon backside of the uppermost die for direct metal heat spreader contact. The wafer is then singulated into individual molded HBM cubes.",
+          toolZh: "晶圆级真空液态/颗粒模压机 + 超精密背磨减薄机",
+          toolEn:
+            "Wafer-Level Vacuum Compression Molder + Precision Back Grinder",
+          toolVendor: "TOWA YPM Series / APIC Yamada / DISCO DFG8560",
+          matZh:
+            "高导热二氧化硅填充微球环氧树脂模塑料 (High-k EMC) + 顶层裸露导热硅",
+          matEn:
+            "High Thermal Conductivity Silica-Filled EMC + Bare Top Si Heat Spreader",
+          matDimZh:
+            "模塑料导热系数: >2.5-3.0 W/m·K | 顶层暴露硅表面平整度: <0.3μm",
+          matDimEn:
+            "EMC Thermal Conductivity: >2.5-3.0 W/m·K | Coplanarity: <0.3μm",
+          purposeZh:
+            "提供极高抗机械冲击与环境湿气保护能力；消除层间热阻，使高功耗运作下 12 层堆叠内部累积的热量能迅速垂直导出至顶端散热器，防止高温导致刷新失效或热关断。",
+          purposeEn:
+            "Provides robust mechanical protection and moisture barrier while opening a direct low-thermal-resistance pathway from top die to external heatsinks, preventing thermal throttling.",
+        },
+        {
+          id: 9,
+          badgeZh: "步骤 10 / 10",
+          badgeEn: "STEP 10 / 10",
+          shortZh: "2.5D CoWoS集成",
+          shortEn: "2.5D CoWoS & BGA",
+          catZh: "2.5D 先进异构集成 (Advanced Heterogeneous Integration)",
+          catEn: "2.5D Silicon Interposer (CoWoS) & Host GPU Integration",
+          titleZh: "2.5D 硅中介层集成 (CoWoS) 与封装基板 BGA 植球",
+          titleEn:
+            "2.5D Silicon Interposer Integration (CoWoS / I-Cube) & Final BGA Ball Mount",
+          summaryZh:
+            "切片后的独立塑封 HBM3E 12-Hi 立方体（Cube，保持其完整的 EMC 塑封外壳与顶层裸硅散热面）与先进制程 AI/GPU 计算核心芯片并排精确贴装在微米级互连的无源硅中介层（Silicon Interposer）上（台积电 CoWoS / 三星 I-Cube），通过中介层内部亚微米密集金属导线实现数千条位线互联；最后将中介层组装在有机封装基板上并植上 BGA 锡球，完成最终 AI 加速卡模组！",
+          summaryEn:
+            "Singulated molded HBM3E 12-Hi cubes (retaining their full EMC molded encapsulation and top bare silicon heat interface) and host GPU compute dies are placed onto a passive Silicon Interposer with sub-micron wiring (TSMC CoWoS / Samsung I-Cube). The interposer is mounted to an organic BGA substrate and fitted with solder balls.",
+          toolZh:
+            "2.5D 晶圆级芯片贴装机 (CoW Bonder) + 自动植球机 + 倒装封装系统",
+          toolEn:
+            "Chip-on-Wafer (CoW) Bonder + BGA Ball Mounter + System Reflow Furnace",
+          toolVendor:
+            "Shinkawa / Besi / Kulicke & Soffa (K&S) / ASM Pacific Technology (ASMPT)",
+          matZh:
+            "高密度硅中介层 (Silicon Interposer) + 倒装 BGA 锡球 (SAC305) + 有机 ABF 基板",
+          matEn:
+            "Passive Si Interposer (CoWoS) + SAC305 Solder Balls + Organic ABF Substrate",
+          matDimZh:
+            "单 Stack 堆叠总线: 1024-bit 宽总线 | 带宽: >1.2 TB/s (HBM3E) / >2.0 TB/s (HBM4) | BGA 焊球节距: ~0.8mm",
+          matDimEn:
+            "Bus Width: 1024-bit | Bandwidth: >1.2 TB/s (HBM3E) / >2.0 TB/s (HBM4) | BGA Pitch: ~0.8mm",
+          purposeZh:
+            "将大容量高带宽存储立方体与算力中心超级处理器以近乎零物理距离互连，彻底打破“内存墙”（Memory Wall），为现代百亿/千亿参数大语言模型与 AI 超级计算提供澎湃数据吞吐。",
+          purposeEn:
+            "Bridges the 3D memory cube with the host GPU processor across sub-micron channels with negligible latency, shattering the 'Memory Wall' for multi-billion parameter AI training and LLM inference.",
+        },
+      ];
+
+      // Current State
+      let currentStepIndex = 0;
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = (urlParams.get("lang") || "").toLowerCase();
+      let isEnglish = true;
+      if (langParam === "zh" || langParam === "zh-cn") {
+        isEnglish = false;
+      } else if (langParam === "en") {
+        isEnglish = true;
+      } else {
+        const savedLang = localStorage.getItem("semiconfab_lang");
+        isEnglish = savedLang !== "zh-CN";
+      }
+
+      let isAutoPlaying = false;
+      let autoPlayTimer = null;
+      let isXRay = false;
+      let isCutaway = false;
+      let isDataStream = true;
+      let explodeProgress = 0;
+
+      // --- 2. THREE.JS SCENE SETUP ---
+      let scene, camera, renderer, controls;
+      let clippingPlane;
+      let raycaster, mouse;
+      let hoveredMesh = null;
+      let dataPackets = [];
+
+      // Groups for 3D Steps
+      let baseDieGroup, tsvGroup, microbumpGroup, carrierGroup, thinnedDieGroup;
+      let tsvRevealGroup,
+        ubmLaserGroup,
+        stackedCubeGroup,
+        emcMoldingGroup,
+        cowosGroup;
+      let streamParticlesGroup;
+
+      const container = document.getElementById("webgl-container");
+
+      function initThree() {
+        scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0c1017);
+        scene.fog = new THREE.FogExp2(0x060913, 0.003);
+
+        const width = container.clientWidth || 500;
+        const height = container.clientHeight || 500;
+        const aspect = width / height;
+
+        camera = new THREE.PerspectiveCamera(45, aspect, 1, 2000);
+        camera.position.set(160, 130, 170);
+
+        // Clipping Plane for Cutaway Mode (cutting along Z axis)
+        clippingPlane = new THREE.Plane(new THREE.Vector3(0, 0, -1), 0);
+
+        renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true,
+          powerPreference: "high-performance",
+        });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        renderer.localClippingEnabled = true;
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        if (THREE.SRGBColorSpace)
+          renderer.outputColorSpace = THREE.SRGBColorSpace;
+        if (THREE.ACESFilmicToneMapping) {
+          renderer.toneMapping = THREE.ACESFilmicToneMapping;
+          renderer.toneMappingExposure = 1.15;
+        }
+        container.appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.05;
+        controls.maxPolarAngle = Math.PI / 2 + 0.05;
+        controls.minDistance = 35;
+        controls.maxDistance = 550;
+        controls.target.set(0, 36, 0);
+
+        // Lighting
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+        scene.add(ambientLight);
+
+        const dirLight1 = new THREE.DirectionalLight(0xffffff, 1.3);
+        dirLight1.position.set(120, 240, 110);
+        dirLight1.castShadow = true;
+        dirLight1.shadow.mapSize.width = 2048;
+        dirLight1.shadow.mapSize.height = 2048;
+        dirLight1.shadow.camera.near = 10;
+        dirLight1.shadow.camera.far = 450;
+        dirLight1.shadow.camera.left = -100;
+        dirLight1.shadow.camera.right = 100;
+        dirLight1.shadow.camera.top = 100;
+        dirLight1.shadow.camera.bottom = -100;
+        dirLight1.shadow.bias = -0.0005;
+        scene.add(dirLight1);
+
+        const dirLight2 = new THREE.DirectionalLight(0x38bdf8, 0.45); // Subtle cyan accent rim light
+        dirLight2.position.set(-110, 80, -130);
+        scene.add(dirLight2);
+
+        const pointLight = new THREE.PointLight(0x06b6d4, 0.8, 150); // Cyan base logic accent
+        pointLight.position.set(0, -10, 0);
+        scene.add(pointLight);
+
+        // Floor Grid
+        const gridHelper = new THREE.GridHelper(300, 30, 0x1e293b, 0x0f172a);
+        gridHelper.position.y = -18;
+        scene.add(gridHelper);
+
+        // Raycasting setup
+        raycaster = new THREE.Raycaster();
+        mouse = new THREE.Vector2();
+
+        container.addEventListener("mousemove", onMouseMove, false);
+        container.addEventListener("click", onClick, false);
+        window.addEventListener("resize", onWindowResize, false);
+
+        buildHbmGeometry();
+        initDataStreamParticles();
+        animate();
+      }
+
+      // --- 3. PROCEDURAL CAD 3D GEOMETRY CONSTRUCTION ---
+      const materials = {};
+      const interactiveMeshes = [];
+
+      function createPart(geom, mat, nameZh, nameEn, descZh, descEn) {
+        const instMat = mat.clone();
+        const mesh = new THREE.Mesh(geom, instMat);
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        mesh.userData = {
+          nameZh,
+          nameEn,
+          descZh,
+          descEn,
+          originalMat: instMat,
+          originalEmissive: instMat.emissive
+            ? instMat.emissive.getHex()
+            : 0x000000,
+        };
+        interactiveMeshes.push(mesh);
+        return mesh;
+      }
+
+      function buildHbmGeometry() {
+        // Materials Definition (Matte TCAD PBR Materials)
+        materials.siliconBulk = new THREE.MeshStandardMaterial({
+          color: 0x242b35,
+          metalness: 0.15,
+          roughness: 0.7,
+        });
+
+        materials.siliconTranslucent = new THREE.MeshStandardMaterial({
+          color: 0x334155,
+          metalness: 0.2,
+          roughness: 0.5,
+          transparent: true,
+          opacity: 0.35,
+        });
+
+        materials.baseLogicDie = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          metalness: 0.3,
+          roughness: 0.6,
+        });
+
+        materials.copperTsv = new THREE.MeshStandardMaterial({
+          color: 0xb4532b,
+          metalness: 0.85,
+          roughness: 0.35,
+        });
+
+        materials.microbumpSolder = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          metalness: 0.85,
+          roughness: 0.35,
+        });
+
+        materials.glassCarrier = new THREE.MeshPhysicalMaterial({
+          color: 0x94a3b8,
+          transparent: true,
+          opacity: 0.4,
+          roughness: 0.1,
+          transmission: 0.85,
+          thickness: 2.0,
+        });
+
+        materials.laserAdhesive = new THREE.MeshStandardMaterial({
+          color: 0x92400e,
+          transparent: true,
+          opacity: 0.5,
+          roughness: 0.5,
+        });
+
+        materials.laserBeam = new THREE.MeshBasicMaterial({
+          color: 0x64748b,
+          transparent: true,
+          opacity: 0.4,
+          side: THREE.DoubleSide,
+        });
+
+        materials.ubmPad = new THREE.MeshStandardMaterial({
+          color: 0xa16207,
+          metalness: 0.6,
+          roughness: 0.35,
+        });
+
+        materials.emcResin = new THREE.MeshStandardMaterial({
+          color: 0x18181b,
+          metalness: 0.1,
+          roughness: 0.8,
+        });
+
+        materials.siliconInterposer = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          metalness: 0.2,
+          roughness: 0.6,
+        });
+
+        materials.hostGpu = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          metalness: 0.3,
+          roughness: 0.6,
+        });
+
+        materials.packageSubstrate = new THREE.MeshStandardMaterial({
+          color: 0x064e3b, // Green organic ABF substrate
+          metalness: 0.3,
+          roughness: 0.6,
+        });
+
+        materials.bgaBalls = new THREE.MeshStandardMaterial({
+          color: 0xcbd5e1, // Solder BGA balls
+          metalness: 0.95,
+          roughness: 0.1,
+        });
+
+        // --- GROUPS ---
+        baseDieGroup = new THREE.Group();
+        tsvGroup = new THREE.Group();
+        microbumpGroup = new THREE.Group();
+        carrierGroup = new THREE.Group();
+        thinnedDieGroup = new THREE.Group();
+        tsvRevealGroup = new THREE.Group();
+        ubmLaserGroup = new THREE.Group();
+        stackedCubeGroup = new THREE.Group();
+        emcMoldingGroup = new THREE.Group();
+        cowosGroup = new THREE.Group();
+        streamParticlesGroup = new THREE.Group();
+
+        scene.add(baseDieGroup);
+        scene.add(tsvGroup);
+        scene.add(microbumpGroup);
+        scene.add(carrierGroup);
+        scene.add(thinnedDieGroup);
+        scene.add(tsvRevealGroup);
+        scene.add(ubmLaserGroup);
+        scene.add(stackedCubeGroup);
+        scene.add(emcMoldingGroup);
+        scene.add(cowosGroup);
+        scene.add(streamParticlesGroup);
+
+        // ==========================================
+        // PART 1: LOGIC BASE DIE (STEP 1)
+        // ==========================================
+        const baseGeom = new THREE.BoxGeometry(78, 6, 78);
+        const baseDieMesh = createPart(
+          baseGeom,
+          materials.baseLogicDie,
+          "逻辑基础底模 (Logic Base / Buffer Die)",
+          "Logic Base Die (Buffer Die)",
+          "先进 CMOS 逻辑芯片底座，包含 1024-bit DFI 控制器、BIST 引擎与全局 TSV 调度路由",
+          "Advanced CMOS logic foundation with 1024-bit DFI PHY, BIST engine, and TSV routing",
+        );
+        baseDieMesh.position.y = 3;
+        baseDieGroup.add(baseDieMesh);
+
+        // Gold Landing Pads on Base Die
+        for (let x = -28; x <= 28; x += 14) {
+          for (let z = -28; z <= 28; z += 14) {
+            const padGeom = new THREE.CylinderGeometry(2.5, 2.5, 0.4, 16);
+            const pad = createPart(
+              padGeom,
+              materials.ubmPad,
+              "底模高密度焊盘 (Base Die Landing Pad)",
+              "Base Die Landing Pad",
+              "接收来自第一层 DRAM 晶圆垂直 TSV 信号的极低阻抗焊盘",
+              "Low-impedance pad interfacing with the bottom DRAM TSV microbumps",
+            );
+            pad.position.set(x, 6.2, z);
+            baseDieGroup.add(pad);
+          }
+        }
+
+        // ==========================================
+        // PART 2: DRAM CORE DIE WITH TSVS (STEP 2)
+        // 1/4 Cutaway Engineering View exposing internal blind TSVs
+        // ==========================================
+        // Rear Half Silicon Bulk (Z <= 0, size 72 x 16 x 36)
+        const dramBackGeom = new THREE.BoxGeometry(72, 16, 36);
+        const dramBackMesh = createPart(
+          dramBackGeom,
+          materials.siliconBulk,
+          "DRAM 晶圆基底主体 (DRAM Wafer Bulk)",
+          "DRAM Core Wafer Bulk (Pre-thinning)",
+          "标准厚度 DRAM 硅晶圆（厚度 ~775μm 等效 CAD 比例），内部刻蚀数千个垂直硅通孔 (TSV)",
+          "Standard-thickness DRAM silicon substrate harboring thousands of vertical TSVs",
+        );
+        dramBackMesh.position.set(0, 16, -18);
+        tsvGroup.add(dramBackMesh);
+
+        // Front-Left Silicon Block (X <= 0, Z > 0, size 36 x 16 x 36)
+        const dramFrontLeftGeom = new THREE.BoxGeometry(36, 16, 36);
+        const dramFrontLeftMesh = createPart(
+          dramFrontLeftGeom,
+          materials.siliconBulk,
+          "DRAM 晶圆左前区衬底 (DRAM Front-Left Substrate)",
+          "DRAM Substrate Matrix",
+          "单晶硅基体，剖切面展示 TSV 钻孔阵列的横纵分布",
+          "Bulk silicon matrix exposing the internal blind via array cross-section",
+        );
+        dramFrontLeftMesh.position.set(-18, 16, 18);
+        tsvGroup.add(dramFrontLeftMesh);
+
+        // Front-Right Bottom Bulk Floor (X > 0, Z > 0, size 36 x 2.5 x 36, y in [8, 10.5])
+        // Represents the remaining silicon bulk underneath blind TSVs (~15μm silicon remaining before backside grinding)
+        const dramFloorGeom = new THREE.BoxGeometry(36, 2.5, 36);
+        const dramFloorMesh = createPart(
+          dramFloorGeom,
+          materials.siliconBulk,
+          "盲孔底部未贯通衬底 (Blind TSV Substrate Floor)",
+          "Un-etched Silicon Bulk Floor (~15μm remaining)",
+          "Via-Middle 中段工艺特征：TSV 为深约 55μm 盲孔，此时尚未打通晶圆背面，留有厚硅机械支撑",
+          "Via-middle hallmark: blind TSVs terminate ~15μm above the backside, preserving mechanical integrity",
+        );
+        dramFloorMesh.position.set(18, 9.25, 18);
+        tsvGroup.add(dramFloorMesh);
+
+        // Cutaway Wall Liners (Dielectric cut indications on exposed internal faces)
+        const cutWallMat = new THREE.MeshStandardMaterial({
+          color: 0x475569,
+          roughness: 0.4,
+          metalness: 0.3,
+        });
+        const cutWallX = new THREE.Mesh(
+          new THREE.PlaneGeometry(36, 13.5),
+          cutWallMat,
+        );
+        cutWallX.rotation.y = Math.PI / 2;
+        cutWallX.position.set(0, 17.25, 18);
+        tsvGroup.add(cutWallX);
+
+        const cutWallZ = new THREE.Mesh(
+          new THREE.PlaneGeometry(36, 13.5),
+          cutWallMat,
+        );
+        cutWallZ.position.set(18, 17.25, 0);
+        tsvGroup.add(cutWallZ);
+
+        // Array of Copper TSVs (Blind Vias drilled from y=10.5 to y=24, height 13.5)
+        for (let x = -24; x <= 24; x += 12) {
+          for (let z = -24; z <= 24; z += 12) {
+            const isCutawayZone = x > 0 && z > 0;
+
+            // Copper TSV Pillar
+            const tsvGeom = new THREE.CylinderGeometry(1.4, 1.4, 13.5, 16);
+            const tsv = createPart(
+              tsvGeom,
+              materials.copperTsv,
+              isCutawayZone
+                ? "高深宽比盲孔 TSV 铜柱 (Blind TSV Copper Pillar)"
+                : "垂直硅通孔 (Through-Silicon Via - TSV)",
+              isCutawayZone
+                ? "Blind TSV Copper Pillar (55μm Deep, 10:1 AR)"
+                : "Copper Through-Silicon Via (TSV)",
+              isCutawayZone
+                ? "剖切面清晰展示：DRIE 深度等离子体刻蚀 10:1 深盲孔并经 ECD 超充镀铜，尚未贯通背面"
+                : "DRIE 深度刻蚀并经超充铜电镀致密填充的垂直铜柱高速通道",
+              isCutawayZone
+                ? "Cutaway exposing ~55μm blind TSV filled void-free with ECD electroplated copper"
+                : "Void-free electroplated copper vertical highway drilled via DRIE",
+            );
+            tsv.position.set(x, 17.25, z);
+            tsvGroup.add(tsv);
+
+            // Top Wafer Via Opening Collar & Pad (Flush with wafer top surface at y=24)
+            const padRingGeom = new THREE.CylinderGeometry(2.5, 2.5, 0.3, 16);
+            const padRing = createPart(
+              padRingGeom,
+              materials.ubmPad,
+              "TSV 正面孔口隔离环与接触焊垫 (TSV Annular Pad)",
+              "TSV Top Annular Opening & Contact Pad",
+              "正面钝化开孔与微凸点着陆过渡焊垫",
+              "Top-side dielectric collar and landing pad for microbump connection",
+            );
+            padRing.position.set(x, 24.15, z);
+            tsvGroup.add(padRing);
+
+            // In the cutaway zone, add SiO2 dielectric insulation sheath around exposed TSVs
+            if (isCutawayZone) {
+              const sheathGeom = new THREE.CylinderGeometry(
+                1.7,
+                1.7,
+                13.5,
+                16,
+                1,
+                true,
+              );
+              const sheathMat = new THREE.MeshStandardMaterial({
+                color: 0x93c5fd,
+                transparent: true,
+                opacity: 0.35,
+                roughness: 0.2,
+              });
+              const sheath = new THREE.Mesh(sheathGeom, sheathMat);
+              sheath.position.set(x, 17.25, z);
+              tsvGroup.add(sheath);
+            }
+          }
+        }
+
+        // ==========================================
+        // PART 3: FRONT MICROBUMPS (STEP 3)
+        // ==========================================
+        for (let x = -24; x <= 24; x += 12) {
+          for (let z = -24; z <= 24; z += 12) {
+            // Cu Pillar + Solder Ball Cap
+            const bumpGeom = new THREE.CylinderGeometry(1.8, 1.8, 2.5, 16);
+            const bump = createPart(
+              bumpGeom,
+              materials.microbumpSolder,
+              "正面细间距微凸点 (Front Microbump)",
+              "Front Microbump (Cu Pillar + Sn-Ag Cap)",
+              "电镀 15μm 铜柱与无铅锡银合金焊帽，节距 35μm",
+              "Electroplated 15μm copper pillar with lead-free Sn-Ag cap at 35μm pitch",
+            );
+            bump.position.set(x, 25.2, z);
+            microbumpGroup.add(bump);
+          }
+        }
+
+        // ==========================================
+        // PART 4: TEMPORARY CARRIER BONDING (STEP 4)
+        // ==========================================
+        // Adhesive Layer
+        const adhesiveGeom = new THREE.BoxGeometry(74, 2.5, 74);
+        const adhesive = createPart(
+          adhesiveGeom,
+          materials.laserAdhesive,
+          "激光可剥离耐温粘结胶 (Laser-Releasable Adhesive)",
+          "Laser-Releasable Adhesive Film",
+          "真空旋涂高分子胶层，完全包裹微凸点提供平整缓冲",
+          "Polymer adhesive layer completely embedding microbumps without voids",
+        );
+        adhesive.position.y = 27.5;
+        carrierGroup.add(adhesive);
+
+        // Glass Carrier Wafer
+        const carrierGeom = new THREE.CylinderGeometry(45, 45, 14, 32);
+        const carrierMesh = createPart(
+          carrierGeom,
+          materials.glassCarrier,
+          "高刚性玻璃载板晶圆 (Glass Carrier Wafer)",
+          "Rigid Glass Carrier Wafer",
+          "高平整度光学硼硅酸盐玻璃载板，为超薄研磨提供强大机械支撑防翘曲",
+          "High-flatness borosilicate glass carrier providing rigid anti-warpage support",
+        );
+        carrierMesh.position.y = 36;
+        carrierGroup.add(carrierMesh);
+
+        // ==========================================
+        // PART 5: THINNED DRAM DIE (STEP 5)
+        // ==========================================
+        // Dram die thinned to ~4 units thickness (from 16 units)
+        const thinnedGeom = new THREE.BoxGeometry(72, 4.5, 72);
+        const thinnedMesh = createPart(
+          thinnedGeom,
+          materials.siliconBulk,
+          "背面精密减薄 DRAM 晶片 (~35μm Thin Die)",
+          "Thinned DRAM Silicon Die (~35μm)",
+          "经金刚石双轴研磨与 CMP 消除应力后的超薄硅体，残余厚度仅约 35μm",
+          "Ultra-thin silicon die (~35μm) after diamond grinding and stress-relief CMP",
+        );
+        thinnedMesh.position.y = 22;
+        thinnedDieGroup.add(thinnedMesh);
+
+        // TSVs inside the thinned die
+        for (let x = -24; x <= 24; x += 12) {
+          for (let z = -24; z <= 24; z += 12) {
+            const tsvGeom = new THREE.CylinderGeometry(1.4, 1.4, 4.5, 16);
+            const tsv = createPart(
+              tsvGeom,
+              materials.copperTsv,
+              "减薄后通孔 (Thinned TSV Copper Pillars)",
+              "Thinned TSV Copper Pillars",
+              "完全纵穿超薄硅片厚度的致密铜导电柱",
+              "Solid copper pillars traversing the entire ultra-thin silicon profile",
+            );
+            tsv.position.set(x, 22, z);
+            thinnedDieGroup.add(tsv);
+          }
+        }
+
+        // ==========================================
+        // PART 6: TSV REVEAL ETCH & PASSIVATION (STEP 6)
+        // ==========================================
+        // Protruding Copper Tips on Backside
+        for (let x = -24; x <= 24; x += 12) {
+          for (let z = -24; z <= 24; z += 12) {
+            const tipGeom = new THREE.CylinderGeometry(1.5, 1.5, 1.5, 16);
+            const tip = createPart(
+              tipGeom,
+              materials.copperTsv,
+              "TSV 露头铜端面 (Revealed Cu Tips)",
+              "Revealed TSV Copper Tips",
+              "SF6 干法回蚀硅凹陷 1.5μm 后凸出的洁净铜通孔端头",
+              "Copper tips protruding 1.5μm after selective SF6 silicon recess etch",
+            );
+            tip.position.set(x, 19.2, z);
+            tsvRevealGroup.add(tip);
+          }
+        }
+
+        // ==========================================
+        // PART 7: BACKSIDE UBM & LASER DEBONDING (STEP 7)
+        // ==========================================
+        // UBM Pads
+        for (let x = -24; x <= 24; x += 12) {
+          for (let z = -24; z <= 24; z += 12) {
+            const ubmGeom = new THREE.CylinderGeometry(2.2, 2.2, 0.5, 16);
+            const ubm = createPart(
+              ubmGeom,
+              materials.ubmPad,
+              "背面 UBM 焊盘 (Backside UBM Landing Pad)",
+              "Backside UBM Landing Pad (Ti/Cu/Ni/Au)",
+              "溅射制作在 TSV 端头的抗氧化导电接合焊盘",
+              "Sputtered multi-layer landing pad for robust vertical micro-joint bonding",
+            );
+            ubm.position.set(x, 18.8, z);
+            ubmLaserGroup.add(ubm);
+          }
+        }
+
+        // UV Laser Debonding Sheet
+        const laserSheetGeom = new THREE.PlaneGeometry(86, 86);
+        const laserSheet = new THREE.Mesh(laserSheetGeom, materials.laserBeam);
+        laserSheet.rotation.x = -Math.PI / 2;
+        laserSheet.position.y = 28;
+        ubmLaserGroup.add(laserSheet);
+
+        // ==========================================
+        // PART 8: 12-HI 3D MULTI-DIE STACKING (STEP 8)
+        // 12 Stacked DRAM Dies + 1 Base Die = 13 Layers Total
+        // ==========================================
+        const DIE_COUNT = 12;
+        const DIE_THICK = 2.4;
+        const BUMP_GAP = 1.2;
+        const DIE_STEP = DIE_THICK + BUMP_GAP; // 3.6
+
+        for (let i = 0; i < DIE_COUNT; i++) {
+          const layerGroup = new THREE.Group();
+          layerGroup.userData = { layerIndex: i };
+
+          // Base Die top is at y = 6.0
+          // Die 0 sits at y = 6.0 + 1.2 + 2.4/2 = 8.4
+          const dieY = 6.0 + BUMP_GAP + DIE_THICK / 2 + i * DIE_STEP;
+          const isTopDie = i === DIE_COUNT - 1;
+
+          // DRAM Die Slab
+          const dieGeom = new THREE.BoxGeometry(72, DIE_THICK, 72);
+          const dieMesh = createPart(
+            dieGeom,
+            materials.siliconBulk,
+            isTopDie
+              ? "第 12 层顶层 DRAM 保护与散热裸芯片 (12-Hi Top Die)"
+              : `第 ${i + 1} 层 DRAM 存储芯片 (12-Hi 堆叠 · Tier #${i + 1})`,
+            isTopDie
+              ? "Tier #12 Top DRAM Die (Heat Dissipation Interface)"
+              : `DRAM Core Die Tier #${i + 1} (12-Hi Stack)`,
+            isTopDie
+              ? "12-Hi 堆叠的最顶层芯片：内部无 TSV 穿透，背部为纯净平整单晶硅面，充当与外部均热板直接接触的高效散热界面"
+              : "极度减薄 (~30μm) 的已知良品 (KGD) 晶片，内部含数千条垂直 TSV 贯穿通道",
+            isTopDie
+              ? "Top tier of the 12-Hi stack: NO through TSVs; pristine single-crystal silicon serves as direct thermal interface."
+              : "Precision-thinned (~30μm) Known Good Die (KGD) with dense vertical TSV array",
+          );
+          dieMesh.position.y = dieY;
+          layerGroup.add(dieMesh);
+
+          // Vertical TSVs inside dies 0 to 10 ONLY (top die i = 11 strictly has NO TSVs in standard HBM)
+          if (!isTopDie) {
+            for (let x = -24; x <= 24; x += 12) {
+              for (let z = -24; z <= 24; z += 12) {
+                const tsvGeom = new THREE.CylinderGeometry(
+                  1.2,
+                  1.2,
+                  DIE_THICK,
+                  12,
+                );
+                const tsv = createPart(
+                  tsvGeom,
+                  materials.copperTsv,
+                  `第 ${i + 1} 层 垂直 TSV 通道 (TSV Channel #${i + 1})`,
+                  `Tier #${i + 1} TSV Channel`,
+                  "贯穿硅体的铜柱互连通道",
+                  "Through-die vertical copper interconnect",
+                );
+                tsv.position.set(x, dieY, z);
+                layerGroup.add(tsv);
+              }
+            }
+          }
+
+          // Microbumps beneath this die (connecting to Base Die or to die i-1 below)
+          for (let x = -24; x <= 24; x += 12) {
+            for (let z = -24; z <= 24; z += 12) {
+              const bumpGeom = new THREE.CylinderGeometry(
+                1.4,
+                1.4,
+                BUMP_GAP,
+                12,
+              );
+              const bump = createPart(
+                bumpGeom,
+                materials.microbumpSolder,
+                `层间微凸点熔焊接头 (Inter-Die Microbump #${i + 1})`,
+                `Inter-Die Microbump Joint #${i + 1}`,
+                "Sn-Ag 共晶微焊点，熔合上下层 TSV 形成 1024-bit 宽总线",
+                "Sn-Ag reflowed joint connecting adjacent TSVs into 1024-bit bus",
+              );
+              bump.position.set(x, dieY - DIE_THICK / 2 - BUMP_GAP / 2, z);
+              layerGroup.add(bump);
+            }
+          }
+
+          stackedCubeGroup.add(layerGroup);
+        }
+
+        // ==========================================
+        // PART 9: EMC MOLDING & BARE TOP SILICON (STEP 9)
+        // ==========================================
+        // Total 12-Hi stack height above Base Die:
+        // Base Die is y=0 to y=6.
+        // Top of Die 11 is 6 + 12 * 3.6 = 49.2.
+        const TOTAL_MOLD_HEIGHT = 44.0;
+        const emcOuterGeom = new THREE.BoxGeometry(76, TOTAL_MOLD_HEIGHT, 76);
+        const emcMesh = createPart(
+          emcOuterGeom,
+          materials.emcResin,
+          "环氧树脂模塑料封体 (Epoxy Molding Compound - EMC)",
+          "Epoxy Molding Compound (EMC)",
+          "高导热二氧化硅填充微粒模塑料，真空高压充填 12-Hi 堆叠立柱周围与层间微间隙",
+          "High-thermal-conductivity silica-filled resin encapsulating the 12-Hi stack void-free",
+        );
+        emcMesh.position.set(0, 6 + TOTAL_MOLD_HEIGHT / 2, 0); // y = 28.0 (from 6.0 to 50.0)
+        emcMoldingGroup.add(emcMesh);
+
+        // Bare top silicon surface (polished flush for direct heatsink contact)
+        const bareTopSiGeom = new THREE.BoxGeometry(71.8, 1.0, 71.8);
+        const bareTopSi = createPart(
+          bareTopSiGeom,
+          materials.siliconBulk,
+          "顶层裸露导热硅面 (Bare Top Silicon Heat Interface)",
+          "Bare Top Silicon Heat Interface",
+          "背磨去除顶层多余 EMC 暴露出第 12 层 DRAM 裸芯片的单晶硅背面，供金属均热板直接无介质导热",
+          "Precision back-ground raw silicon exposed for direct heatsink thermal dissipation",
+        );
+        bareTopSi.position.set(0, 49.7, 0);
+        emcMoldingGroup.add(bareTopSi);
+
+        // ==========================================
+        // PART 10: 2.5D SILICON INTERPOSER & GPU COWOS (STEP 10)
+        // ==========================================
+        // Silicon Interposer Substrate
+        const interposerGeom = new THREE.BoxGeometry(160, 6, 120);
+        const interposerMesh = createPart(
+          interposerGeom,
+          materials.siliconInterposer,
+          "2.5D 无源硅中介层 (CoWoS Silicon Interposer)",
+          "CoWoS Silicon Interposer",
+          "亚微米金属细导线基板，实现 HBM 内存立方体与相邻 GPU 主机的高密度互连",
+          "Passive silicon substrate with sub-micron metallization bridging HBM and GPU",
+        );
+        interposerMesh.position.set(20, -5, 0);
+        cowosGroup.add(interposerMesh);
+
+        // Microbumps connecting HBM Base Die to Silicon Interposer (y in [-2, 0])
+        for (let x = -28; x <= 28; x += 14) {
+          for (let z = -28; z <= 28; z += 14) {
+            const hbmBumpGeom = new THREE.CylinderGeometry(1.6, 1.6, 2.0, 12);
+            const hbmBump = createPart(
+              hbmBumpGeom,
+              materials.microbumpSolder,
+              "HBM 底模至中介层微凸点 (HBM Base Die Microbumps)",
+              "HBM-to-Interposer Microbumps",
+              "将 HBM 逻辑基模倒装焊接在 2.5D 硅中介层焊盘上",
+              "Microbumps flip-chip bonding HBM Base Die to Silicon Interposer",
+            );
+            hbmBump.position.set(x, -1, z);
+            cowosGroup.add(hbmBump);
+          }
+        }
+
+        // Host Compute GPU / ASIC Die placed on Interposer
+        const gpuGeom = new THREE.BoxGeometry(56, 10, 80);
+        const gpuMesh = createPart(
+          gpuGeom,
+          materials.hostGpu,
+          "宿主 AI / GPU 核心芯片 (Host GPU / AI Accelerator Die)",
+          "Host GPU / AI Accelerator Compute Die",
+          "顶级先进制程 AI 算力核心，通过 2.5D 硅中介层直接接入 1024-bit HBM 总线",
+          "Host AI processor die connected directly across the interposer to HBM",
+        );
+        gpuMesh.position.set(65, 3, 0);
+        cowosGroup.add(gpuMesh);
+
+        // Microbumps connecting GPU to Silicon Interposer (y in [-2, 0])
+        for (let gx = 45; gx <= 85; gx += 10) {
+          for (let gz = -30; gz <= 30; gz += 15) {
+            const gpuBumpGeom = new THREE.CylinderGeometry(1.6, 1.6, 2.0, 12);
+            const gpuBump = createPart(
+              gpuBumpGeom,
+              materials.microbumpSolder,
+              "GPU 算力芯片微凸点 (GPU-to-Interposer Microbumps)",
+              "GPU Microbumps to Interposer",
+              "将 GPU 主芯片高密 I/O 倒装焊接至中介层",
+              "High-density microbumps mounting GPU die to interposer",
+            );
+            gpuBump.position.set(gx, -1, gz);
+            cowosGroup.add(gpuBump);
+          }
+        }
+
+        // High-Density Sub-Micron Interconnect Bridge Routing on Interposer
+        const bridgeGeom = new THREE.BoxGeometry(40, 0.4, 52);
+        const bridgeMesh = createPart(
+          bridgeGeom,
+          materials.copperTsv,
+          "中介层超密高频互连总线 (Sub-Micron Dense Metal Routing)",
+          "Interposer Sub-Micron Interconnect Routing",
+          "2.5D 硅中介层内部亚微米双向高速位线，提供 >1.2 TB/s 超低延迟直连带宽",
+          "Sub-micron parallel routing channels delivering >1.2 TB/s ultra-low latency bus",
+        );
+        bridgeMesh.position.set(33, -1.8, 0);
+        cowosGroup.add(bridgeMesh);
+
+        // Package Organic ABF Substrate (Bottom board)
+        const subGeom = new THREE.BoxGeometry(190, 8, 150);
+        const subMesh = createPart(
+          subGeom,
+          materials.packageSubstrate,
+          "有机封装基板 (Organic BGA Substrate)",
+          "Organic Package Substrate (ABF)",
+          "多层有机积层基板，将中介层微间距信号扩展到系统级主板焊盘",
+          "Multi-layer ABF substrate fanning out signals to system board",
+        );
+        subMesh.position.set(20, -12, 0);
+        cowosGroup.add(subMesh);
+
+        // BGA Solder Balls underneath Substrate
+        for (let bx = -60; bx <= 100; bx += 20) {
+          for (let bz = -60; bz <= 60; bz += 20) {
+            const ballGeom = new THREE.SphereGeometry(3.0, 12, 12);
+            const ball = createPart(
+              ballGeom,
+              materials.bgaBalls,
+              "BGA 封装焊球阵列 (BGA Solder Balls SAC305)",
+              "BGA Solder Ball (SAC305)",
+              "无铅合金焊球，将完整封装模块焊接至 AI 加速卡 PCB 主板",
+              "Lead-free BGA balls mounting the accelerator module to the main PCB",
+            );
+            ball.position.set(bx, -18, bz);
+            cowosGroup.add(ball);
+          }
+        }
+
+        // Initial Step State
+        buildDimensionsHierarchy();
+        applyStepState(0, false);
+      }
+
+      // --- 4. DATA STREAM PARTICLE SIMULATION (1.2 TB/s BANDWIDTH) ---
+      function initDataStreamParticles() {
+        const particleCount = 180;
+        const geom = new THREE.SphereGeometry(0.85, 8, 8);
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0x38bdf8, // High-speed data photon cyan
+          transparent: true,
+          opacity: 0.85,
+        });
+
+        const tsvCols = [-24, -12, 0, 12, 24];
+
+        for (let i = 0; i < particleCount; i++) {
+          const p = new THREE.Mesh(geom, mat);
+          const colX = tsvCols[Math.floor(Math.random() * tsvCols.length)];
+          const colZ = tsvCols[Math.floor(Math.random() * tsvCols.length)];
+          // minY is 6.5 (top of Base Die), maxY is 46.5 (bottom of Top Die 12)
+          const posY = Math.random() * (46.5 - 6.5) + 6.5;
+
+          p.position.set(colX, posY, colZ);
+          p.userData = {
+            speedY:
+              (Math.random() * 0.8 + 0.4) * (Math.random() > 0.5 ? 1 : -1),
+            minY: 6.5,
+            maxY: 46.5,
+            colX: colX,
+            colZ: colZ,
+            // Interposer bridge flow towards GPU
+            toGpu: Math.random() > 0.55,
+            gpuX: 65,
+            speedX: Math.random() * 0.9 + 0.5,
+          };
+          streamParticlesGroup.add(p);
+          dataPackets.push(p);
+        }
+      }
+
+      function updateDataStream() {
+        if (!isDataStream) return;
+
+        const currentStep = currentStepIndex;
+        // Only active from Step 8 onwards (stacking, molding, and CoWoS)
+        if (currentStep < 7) {
+          streamParticlesGroup.visible = false;
+          return;
+        }
+        streamParticlesGroup.visible = true;
+
+        dataPackets.forEach((p) => {
+          if (currentStep === 9 && p.userData.toGpu) {
+            // Flow between HBM base and GPU die horizontally across interposer
+            p.position.x += p.userData.speedX;
+            if (p.position.x > p.userData.gpuX) {
+              p.position.x = -24;
+              p.position.y = -1.5;
+              p.position.z = (Math.random() - 0.5) * 35;
+            }
+          } else {
+            // Flow vertically up and down strictly inside the TSVs, never escaping above maxY
+            p.position.y += p.userData.speedY;
+            if (p.position.y > p.userData.maxY) {
+              p.position.y = p.userData.minY;
+            } else if (p.position.y < p.userData.minY) {
+              p.position.y = p.userData.maxY;
+            }
+          }
+        });
+      }
+
+      // --- 5. STEP VISIBILITY & MORPH STATE MACHINE ---
+      function applyStepState(stepIdx, animateTransition = true) {
+        updateDimensionsVisibility(stepIdx);
+        currentStepIndex = stepIdx;
+        updateInspectorUI(stepIdx);
+
+        // Step 0: Logic Base Die Only
+        baseDieGroup.visible = true;
+
+        // Step 1: TSV Etch on DRAM Wafer
+        tsvGroup.visible = stepIdx === 1 || stepIdx === 2 || stepIdx === 3;
+
+        // Step 2: Microbumps on Front
+        microbumpGroup.visible = stepIdx === 2 || stepIdx === 3;
+
+        // Step 3: Temporary Carrier Wafer Bonding
+        carrierGroup.visible = stepIdx === 3 || stepIdx === 4 || stepIdx === 5;
+
+        // Step 4: Backside Thinning
+        thinnedDieGroup.visible =
+          stepIdx === 4 || stepIdx === 5 || stepIdx === 6;
+
+        // Step 5: TSV Reveal Etch
+        tsvRevealGroup.visible = stepIdx === 5 || stepIdx === 6;
+
+        // Step 6: UBM & Laser Debonding
+        ubmLaserGroup.visible = stepIdx === 6;
+
+        // Step 7, 8, 9: Stacked 3D Cube
+        stackedCubeGroup.visible = stepIdx >= 7;
+
+        // Step 8 & 9: EMC Molding
+        emcMoldingGroup.visible = stepIdx >= 8;
+
+        // Step 9: 2.5D CoWoS & Interposer
+        cowosGroup.visible = stepIdx === 9;
+
+        // Adjust camera target & position for 2.5D CoWoS module in Step 9
+        if (animateTransition && controls) {
+          if (stepIdx === 9) {
+            smoothCameraLookAt(
+              new THREE.Vector3(20, 15, 0),
+              new THREE.Vector3(180, 140, 180),
+            );
+          } else if (stepIdx >= 7) {
+            smoothCameraLookAt(
+              new THREE.Vector3(0, 32, 0),
+              new THREE.Vector3(145, 115, 155),
+            );
+          } else {
+            smoothCameraLookAt(
+              new THREE.Vector3(0, 20, 0),
+              new THREE.Vector3(135, 100, 145),
+            );
+          }
+        }
+      }
+
+      function smoothCameraLookAt(targetVec, posVec) {
+        const startPos = camera.position.clone();
+        const startTarget = controls.target.clone();
+        let t = 0;
+        const anim = () => {
+          t += 0.05;
+          camera.position.lerpVectors(startPos, posVec, t);
+          controls.target.lerpVectors(startTarget, targetVec, t);
+          if (t < 1) requestAnimationFrame(anim);
+        };
+        anim();
+      }
+
+      // --- 6. EXPLODED VIEW ENGINE ---
+      function updateExplodedView(val) {
+        explodeProgress = val / 100;
+        if (!stackedCubeGroup) return;
+
+        stackedCubeGroup.children.forEach((child) => {
+          const idx = child.userData.layerIndex || 0;
+          const baseY = 0;
+          child.position.y = baseY + idx * explodeProgress * 14;
+        });
+
+        // If EMC molding is visible, make it translucent during explosion so user sees inside
+        if (emcMoldingGroup) {
+          emcMoldingGroup.children.forEach((c) => {
+            if (c.material) {
+              c.material.transparent = explodeProgress > 0.05;
+              c.material.opacity =
+                explodeProgress > 0.05
+                  ? Math.max(0.2, 1 - explodeProgress * 0.9)
+                  : 1.0;
+            }
+          });
+        }
+      }
+
+      // --- 7. INSPECTOR UI & BILINGUAL UPDATE ---
+      function updateInspectorUI(idx) {
+        const step = stepsData[idx];
+
+        // Update Tabs active state
+        for (let i = 0; i < 10; i++) {
+          const tab = document.getElementById(`step-tab-${i}`);
+          if (tab) {
+            if (i === idx) {
+              tab.classList.add("active");
+              tab.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest",
+                inline: "center",
+              });
+            } else {
+              tab.classList.remove("active");
+            }
+          }
+        }
+
+        // Populate text fields
+        document.getElementById("step-badge").innerText = isEnglish
+          ? step.badgeEn
+          : step.badgeZh;
+        document.getElementById("step-category").innerText = isEnglish
+          ? step.catEn
+          : step.catZh;
+        document.getElementById("process-category-badge").innerText = isEnglish
+          ? step.catEn
+          : step.catZh;
+        document.getElementById("step-number-tag").innerText = (idx + 1)
+          .toString()
+          .padStart(2, "0");
+
+        const titleEl = document.getElementById("step-title");
+        const subTitleEl = document.getElementById("step-title-en");
+        if (isEnglish) {
+          titleEl.innerText = step.titleEn;
+          if (subTitleEl) subTitleEl.style.display = "none";
+        } else {
+          titleEl.innerText = step.titleZh;
+          if (subTitleEl) {
+            subTitleEl.style.display = "inline";
+            subTitleEl.innerText = step.titleEn;
+          }
+        }
+
+        document.getElementById("step-summary").innerText = isEnglish
+          ? step.summaryEn
+          : step.summaryZh;
+        document.getElementById("drawer-step-summary").innerText = isEnglish
+          ? step.summaryEn
+          : step.summaryZh;
+        document.getElementById("step-equipment").innerText = isEnglish
+          ? step.toolEn
+          : step.toolZh;
+        document.getElementById("step-tool").innerText = isEnglish
+          ? step.toolEn
+          : step.toolZh;
+        document.getElementById("step-equipment-vendor").innerText =
+          step.toolVendor;
+        document.getElementById("step-vendor").innerText = step.toolVendor;
+        document.getElementById("step-material").innerText = isEnglish
+          ? step.matEn
+          : step.matZh;
+        document.getElementById("step-material-dim").innerText = isEnglish
+          ? step.matDimEn
+          : step.matDimZh;
+        document.getElementById("step-purpose").innerText = isEnglish
+          ? step.purposeEn
+          : step.purposeZh;
+
+        // Prev/Next buttons state
+        document.getElementById("btn-prev").disabled = idx === 0;
+        document.getElementById("btn-next").disabled = idx === 9;
+      }
+
+      function goToStep(idx) {
+        applyStepState(idx, true);
+      }
+
+      function prevStep() {
+        if (currentStepIndex > 0) goToStep(currentStepIndex - 1);
+      }
+
+      function nextStep() {
+        if (currentStepIndex < 9) goToStep(currentStepIndex + 1);
+      }
+
+      // --- 8. TOGGLE MODES (X-RAY, CUTAWAY, STREAM, AUTOPLAY, LANG) ---
+      function toggleXRay() {
+        isXRay = !isXRay;
+        const btn = document.getElementById("btn-xray");
+        if (isXRay) {
+          btn.classList.add(
+            "bg-cyan-950/80",
+            "border-cyan-500",
+            "text-cyan-300",
+          );
+          materials.siliconBulk.transparent = true;
+          materials.siliconBulk.opacity = 0.35;
+          materials.baseLogicDie.transparent = true;
+          materials.baseLogicDie.opacity = 0.45;
+          materials.emcResin.transparent = true;
+          materials.emcResin.opacity = 0.25;
+        } else {
+          btn.classList.remove(
+            "bg-cyan-950/80",
+            "border-cyan-500",
+            "text-cyan-300",
+          );
+          materials.siliconBulk.transparent = false;
+          materials.siliconBulk.opacity = 1.0;
+          materials.baseLogicDie.transparent = false;
+          materials.baseLogicDie.opacity = 1.0;
+          materials.emcResin.transparent = false;
+          materials.emcResin.opacity = 1.0;
+        }
+        materials.siliconBulk.needsUpdate = true;
+        materials.baseLogicDie.needsUpdate = true;
+        materials.emcResin.needsUpdate = true;
+      }
+
+      function toggleCutaway() {
+        isCutaway = !isCutaway;
+        const btn = document.getElementById("btn-cutaway");
+        if (isCutaway) {
+          btn.classList.add(
+            "bg-amber-950/80",
+            "border-amber-500",
+            "text-amber-300",
+          );
+          renderer.clippingPlanes = [clippingPlane];
+        } else {
+          btn.classList.remove(
+            "bg-amber-950/80",
+            "border-amber-500",
+            "text-amber-300",
+          );
+          renderer.clippingPlanes = [];
+        }
+      }
+
+      function toggleDataStream() {
+        isDataStream = !isDataStream;
+        const btn = document.getElementById("btn-stream");
+        const icon = document.getElementById("stream-icon");
+        if (isDataStream) {
+          btn.classList.add(
+            "bg-rose-950/80",
+            "border-rose-500",
+            "text-rose-300",
+          );
+          streamParticlesGroup.visible = true;
+        } else {
+          btn.classList.remove(
+            "bg-rose-950/80",
+            "border-rose-500",
+            "text-rose-300",
+          );
+          streamParticlesGroup.visible = false;
+        }
+      }
+
+      function toggleAutoPlay() {
+        isAutoPlaying = !isAutoPlaying;
+        const btn = document.getElementById("btn-autoplay");
+        const icon = document.getElementById("autoplay-icon");
+        const lbl = document.getElementById("lbl-autoplay");
+
+        if (isAutoPlaying) {
+          btn.classList.add("bg-rose-600", "text-white", "border-rose-500");
+          icon.setAttribute("data-lucide", "pause");
+          lbl.innerText = isEnglish ? "PAUSE" : "暂停";
+          lucide.createIcons();
+
+          autoPlayTimer = setInterval(() => {
+            let nextIdx = currentStepIndex + 1;
+            if (nextIdx > 9) nextIdx = 0;
+            goToStep(nextIdx);
+          }, 5000);
+        } else {
+          btn.classList.remove("bg-rose-600", "text-white", "border-rose-500");
+          icon.setAttribute("data-lucide", "play");
+          lbl.innerText = isEnglish ? "PLAY" : "演示";
+          lucide.createIcons();
+          clearInterval(autoPlayTimer);
+        }
+      }
+
+      let isDrawerOpen = false;
+      function toggleDetailsDrawer() {
+        isDrawerOpen = !isDrawerOpen;
+        const drawer = document.getElementById("inspector-drawer");
+        if (drawer) {
+          drawer.classList.toggle("translate-x-full", !isDrawerOpen);
+        }
+        const btn = document.getElementById("btn-toggle-details");
+        if (btn) {
+          btn.classList.toggle("bg-slate-700", isDrawerOpen);
+        }
+      }
+
+      function resetCamera() {
+        camera.position.set(160, 130, 170);
+        controls.target.set(0, 36, 0);
+        controls.update();
+      }
+
+      function applyLanguageUI() {
+        document.documentElement.lang = isEnglish ? "en" : "zh-CN";
+        document.title = isEnglish
+          ? "HBM High Bandwidth Memory 3D Stacking & Advanced Packaging — SemiconFab.org"
+          : "HBM 高带宽内存 3D 堆叠与先进封装制造工艺全流程剖析 — SemiconFab.org";
+
+        const langEl = document.getElementById("lbl-lang");
+        if (langEl) langEl.innerText = isEnglish ? "中" : "EN";
+
+        const brandTitle = document.getElementById("header-brand-title");
+        if (brandTitle) {
+          brandTitle.innerText = isEnglish
+            ? "HBM3E / HBM4 3D Stacking & Packaging"
+            : "HBM3E / HBM4 3D 堆叠制造";
+        }
+
+        const subtitleEl = document.getElementById("header-subtitle");
+        if (subtitleEl) {
+          subtitleEl.innerText = isEnglish
+            ? "HBM3E / HBM4 12-Hi 3D TSV · 10-Step Packaging · TCAD"
+            : "HBM3E / HBM4 12-Hi 3D TSV · 10 步封装工艺 · TCAD";
+        }
+
+        const navCleanroom = document.getElementById("nav-cleanroom");
+        if (navCleanroom)
+          navCleanroom.innerText = isEnglish
+            ? "Cleanroom Twin"
+            : "洁净室数字孪生";
+
+        const lblAutoplay = document.getElementById("lbl-autoplay");
+        if (lblAutoplay) {
+          lblAutoplay.innerText = isAutoPlaying
+            ? isEnglish
+              ? "PAUSE"
+              : "暂停"
+            : isEnglish
+              ? "PLAY"
+              : "演示";
+        }
+
+        const lblExplode = document.getElementById("lbl-explode");
+        if (lblExplode) lblExplode.innerText = isEnglish ? "Explode" : "爆炸图";
+
+        const lblXray = document.getElementById("lbl-xray");
+        if (lblXray) lblXray.innerText = isEnglish ? "X-Ray" : "透视";
+
+        const lblDimensions = document.getElementById("lbl-dimensions");
+        if (lblDimensions)
+          lblDimensions.innerText = isEnglish ? "Scale (55μm)" : "标尺 (55μm)";
+
+        const optDimensions = document.getElementById("opt-dimensions");
+        if (optDimensions)
+          optDimensions.innerText = isEnglish ? "Scale (55μm)" : "标尺 (55μm)";
+
+        const lblCutaway = document.getElementById("lbl-cutaway");
+        if (lblCutaway) lblCutaway.innerText = isEnglish ? "Cutaway" : "剖切";
+
+        const lblStream = document.getElementById("lbl-stream");
+        if (lblStream)
+          lblStream.innerText = isEnglish ? "Data Stream" : "带宽流";
+
+        const quickReset = document.getElementById("btn-quick-reset");
+        if (quickReset) quickReset.innerText = isEnglish ? "RESET" : "复位";
+
+        const quickCutaway = document.getElementById("btn-quick-cutaway");
+        if (quickCutaway) quickCutaway.innerText = isEnglish ? "CUT" : "剖切";
+
+        const quickXray = document.getElementById("btn-quick-xray");
+        if (quickXray) quickXray.innerText = isEnglish ? "X-RAY" : "透视";
+
+        const quickStream = document.getElementById("btn-quick-stream");
+        if (quickStream)
+          quickStream.innerText = isEnglish ? "STREAM" : "带宽流";
+
+        const prevBtn = document.getElementById("lbl-prev-btn");
+        if (prevBtn) prevBtn.innerText = isEnglish ? "Prev Step" : "上一步";
+
+        const nextBtn = document.getElementById("lbl-next-btn");
+        if (nextBtn) nextBtn.innerText = isEnglish ? "Next Step" : "下一步";
+
+        const detailsBtn = document.getElementById("lbl-details-btn");
+        if (detailsBtn)
+          detailsBtn.innerText = isEnglish ? "Parameters" : "工艺参数";
+
+        const drawerTitle = document.getElementById("lbl-drawer-title");
+        if (drawerTitle)
+          drawerTitle.innerText = isEnglish
+            ? "Equipment & Process Physical Specs"
+            : "制造机台与工艺物理参数";
+
+        const lblEquipment = document.getElementById("lbl-equipment");
+        if (lblEquipment)
+          lblEquipment.innerText = isEnglish
+            ? "Tool & Equipment"
+            : "制造机台 (Tool)";
+
+        const lblMaterial = document.getElementById("lbl-material");
+        if (lblMaterial)
+          lblMaterial.innerText = isEnglish
+            ? "Materials & Structure"
+            : "材料与结构 (Material)";
+
+        const lblPurpose = document.getElementById("lbl-purpose-title");
+        if (lblPurpose)
+          lblPurpose.innerText = isEnglish
+            ? "Process Physics & Engineering Mechanism"
+            : "工艺核心机理与器件物理";
+
+        const lblLegend = document.getElementById("lbl-mat-legend");
+        if (lblLegend)
+          lblLegend.innerText = isEnglish
+            ? "Material & Color Legend"
+            : "材料与色标图例";
+
+        const lblHint = document.getElementById("lbl-legend-hint");
+        if (lblHint)
+          lblHint.innerText = isEnglish ? "Click to highlight" : "点击高亮";
+
+        // Update Timeline Stepper Labels
+        for (let i = 0; i < 10; i++) {
+          const tab = document.getElementById(`step-tab-${i}`);
+          if (tab) {
+            const lbl = tab.querySelector(".tab-label");
+            if (lbl) {
+              lbl.innerText = isEnglish
+                ? stepsData[i].shortEn
+                : stepsData[i].shortZh;
+            }
+          }
+        }
+
+        // Update navbar links with lang parameter
+        const finfetLink = document.querySelector('a[href*="finfet.html"]');
+        if (finfetLink)
+          finfetLink.href = isEnglish
+            ? "finfet.html?lang=en"
+            : "finfet.html?lang=zh";
+        const gaaLink = document.querySelector('a[href*="gaa.html"]');
+        if (gaaLink)
+          gaaLink.href = isEnglish ? "gaa.html?lang=en" : "gaa.html?lang=zh";
+        const dramLink = document.querySelector('a[href*="dram.html"]');
+        if (dramLink)
+          dramLink.href = isEnglish ? "dram.html?lang=en" : "dram.html?lang=zh";
+        const nandLink = document.querySelector('a[href*="nand.html"]');
+        if (nandLink)
+          nandLink.href = isEnglish ? "nand.html?lang=en" : "nand.html?lang=zh";
+
+        updateInspectorUI(currentStepIndex);
+        renderMaterialLegend();
+        if (window.dimensionSprites) {
+          dimensionSprites.forEach((s) => {
+            if (s.userData && s.userData.redraw) {
+              s.userData.redraw(isEnglish);
+              if (s.userData.texture) s.userData.texture.needsUpdate = true;
+            }
+          });
+        }
+      }
+
+      function toggleLanguage() {
+        isEnglish = !isEnglish;
+        localStorage.setItem("semiconfab_lang", isEnglish ? "en" : "zh-CN");
+        applyLanguageUI();
+      }
+
+      // --- 9. INTERACTION: RAYCAST HOVER & CLICK INSPECTOR ---
+      function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(interactiveMeshes, true);
+
+        const tooltip = document.getElementById("part-tooltip");
+        if (intersects.length > 0) {
+          const hit = intersects[0].object;
+          if (hit.userData && hit.userData.nameZh) {
+            tooltip.style.left = `${event.clientX}px`;
+            tooltip.style.top = `${event.clientY}px`;
+            tooltip.style.opacity = "1";
+            document.getElementById("tooltip-title").innerText = isEnglish
+              ? hit.userData.nameEn
+              : hit.userData.nameZh;
+            document.getElementById("tooltip-desc").innerText = isEnglish
+              ? hit.userData.descEn
+              : hit.userData.descZh;
+
+            if (hoveredMesh !== hit) {
+              if (
+                hoveredMesh &&
+                hoveredMesh.material &&
+                hoveredMesh.material.emissive
+              ) {
+                hoveredMesh.material.emissive.setHex(0x94a3b8);
+              }
+              hoveredMesh = hit;
+              if (hit.material && hit.material.emissive) {
+                hit.userData.originalEmissive = hit.material.emissive.getHex();
+                hit.material.emissive.setHex(0x38bdf8);
+              }
+            }
+            return;
+          }
+        }
+
+        tooltip.style.opacity = "0";
+        if (
+          hoveredMesh &&
+          hoveredMesh.material &&
+          hoveredMesh.material.emissive
+        ) {
+          hoveredMesh.material.emissive.setHex(0x94a3b8);
+          hoveredMesh = null;
+        }
+      }
+
+      function onClick(event) {
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(interactiveMeshes, true);
+        if (intersects.length > 0) {
+          const hit = intersects[0].object;
+          if (hit.userData && hit.userData.nameZh) {
+            // Camera zooms slightly towards clicked object
+            const worldPos = new THREE.Vector3();
+            hit.getWorldPosition(worldPos);
+            controls.target.lerp(worldPos, 0.4);
+          }
+        }
+      }
+
+      function onWindowResize() {
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      // --- COLOR & MATERIAL METADATA (HBM 材料色标图例) ---
+      const DEVICE_MATERIALS_META = [
+        {
+          id: "siliconBulk",
+          nameZh: "单晶硅基体 (DRAM / Base / Top)",
+          nameEn: "Silicon Bulk Die",
+          color: "#334155",
+          formula: "Si",
+          descZh: "DRAM 裸片 / 逻辑底座 / 顶层纯硅散热片",
+          descEn: "DRAM die / logic base / bare top die",
+        },
+        {
+          id: "copperTsv",
+          nameZh: "TSV 垂直硅通孔铜柱",
+          nameEn: "Through-Silicon Via (Cu)",
+          color: "#d97706",
+          formula: "Cu",
+          descZh: "深 55μm / 径 6μm · 10:1 深宽比高速通道",
+          descEn: "55μm deep, 6μm dia. 10:1 AR Cu pillar",
+        },
+        {
+          id: "microbumpSolder",
+          nameZh: "Sn-Ag 共晶微凸点",
+          nameEn: "Sn-Ag Microbumps",
+          color: "#e2e8f0",
+          formula: "Sn-Ag",
+          descZh: "垂直堆叠熔合微焊点 (节距 25μm)",
+          descEn: "Microbump solder joints (25μm pitch)",
+        },
+        {
+          id: "ubmPad",
+          nameZh: "凸点下金属化焊盘 (UBM)",
+          nameEn: "UBM Landing Pads",
+          color: "#f59e0b",
+          formula: "Ti/Cu/Ni/Au",
+          descZh: "TSV 端头抗氧化导电接合过渡层",
+          descEn: "Under-bump metallization pads",
+        },
+        {
+          id: "glassCarrier",
+          nameZh: "高刚性硼硅玻璃载板",
+          nameEn: "Borosilicate Glass Carrier",
+          color: "#a5f3fc",
+          formula: "Glass",
+          descZh: "临时键合提供超薄晶圆机械刚性支撑",
+          descEn: "Rigid temporary bonding carrier",
+        },
+        {
+          id: "laserBeam",
+          nameZh: "308nm 紫外准分子激光面",
+          nameEn: "UV 308nm Laser Release",
+          color: "#c084fc",
+          formula: "308nm UV",
+          descZh: "光化学热解粘合胶 · 零应力安全剥离",
+          descEn: "Photochemical carrier debonding plane",
+        },
+        {
+          id: "emcResin",
+          nameZh: "环氧模塑料底部填充",
+          nameEn: "MR-MUF / EMC Resin",
+          color: "#18181b",
+          formula: "Epoxy / Silica",
+          descZh: "高导热环氧胶一体熔融消除层间空洞",
+          descEn: "Molded underfill void-free encapsulation",
+        },
+        {
+          id: "siliconInterposer",
+          nameZh: "2.5D CoWoS 硅中介层",
+          nameEn: "Silicon Interposer",
+          color: "#1e293b",
+          formula: "Si Interposer",
+          descZh: "亚微米高密高频互连转接底板",
+          descEn: "Passive high-density routing interposer",
+        },
+      ];
+
+      function renderMaterialLegend() {
+        const container = document.getElementById("material-legend-container");
+        if (!container) return;
+        container.innerHTML = "";
+
+        DEVICE_MATERIALS_META.forEach((mat) => {
+          const item = document.createElement("div");
+          item.className =
+            "flex items-center gap-1.5 p-1 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-rose-500/50 cursor-pointer transition text-[10px] select-none";
+          item.title = isEnglish
+            ? `${mat.nameEn} (${mat.formula}) - ${mat.descEn}`
+            : `${mat.nameZh} (${mat.formula}) - ${mat.descZh}`;
+          item.onclick = () => highlightMaterialInScene(mat.id);
+
+          item.innerHTML = `
+          <span class="w-2.5 h-2.5 rounded-full shrink-0 shadow-sm" style="background-color: ${mat.color}; border: 1px solid rgba(255,255,255,0.25)"></span>
+          <div class="truncate flex items-center gap-1">
+            <span class="font-mono text-rose-300 font-semibold">${mat.formula}</span>
+            <span class="text-slate-400 text-[9px] truncate">${isEnglish ? mat.nameEn : mat.nameZh}</span>
+          </div>
+        `;
+          container.appendChild(item);
+        });
+      }
+
+      function highlightMaterialInScene(matId) {
+        const targetMat = materials[matId];
+        if (!targetMat) return;
+
+        scene.traverse((child) => {
+          if (child.isMesh && child.material === targetMat) {
+            const origHex = child.material.emissive
+              ? child.material.emissive.getHex()
+              : 0;
+            if (child.material.emissive) {
+              child.material.emissive.setHex(0xf43f5e);
+              child.material.emissiveIntensity = 0.8;
+              setTimeout(() => {
+                child.material.emissive.setHex(origHex);
+                child.material.emissiveIntensity = 0.2;
+              }, 1200);
+            }
+          }
+        });
+      }
+
+      // --- 3D CALIBRATED DIMENSION ANNOTATIONS (HBM TSV 尺寸标注) ---
+      let dimensionsGroup = null;
+      let dimensionSprites = [];
+      let isDimensionsVisible = true;
+
+      function createBillboardDimensionBadge(
+        textZh,
+        textEn,
+        position,
+        scaleX = 26,
+        scaleY = 6.5,
+      ) {
+        const canvas = document.createElement("canvas");
+        canvas.width = 512;
+        canvas.height = 128;
+        const ctx = canvas.getContext("2d");
+
+        function redraw(isEn) {
+          ctx.clearRect(0, 0, 512, 128);
+          ctx.fillStyle = "rgba(15, 23, 42, 0.92)";
+          ctx.strokeStyle = "rgba(100, 116, 139, 0.7)";
+          ctx.lineWidth = 4;
+          if (ctx.roundRect) {
+            ctx.beginPath();
+            ctx.roundRect(8, 8, 496, 112, 24);
+            ctx.fill();
+            ctx.stroke();
+          } else {
+            ctx.fillRect(8, 8, 496, 112);
+            ctx.strokeRect(8, 8, 496, 112);
+          }
+
+          ctx.fillStyle = "#94a3b8";
+          ctx.beginPath();
+          ctx.arc(36, 64, 12, 0, Math.PI * 2);
+          ctx.fill();
+
+          ctx.fillStyle = "#ffffff";
+          ctx.font =
+            'bold 36px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+          ctx.textBaseline = "middle";
+          ctx.fillText(isEn ? textEn : textZh, 60, 64);
+        }
+
+        redraw(isEnglish);
+
+        const texture = new THREE.CanvasTexture(canvas);
+        texture.minFilter = THREE.LinearFilter;
+        const spriteMat = new THREE.SpriteMaterial({
+          map: texture,
+          depthTest: false,
+          transparent: true,
+        });
+        const sprite = new THREE.Sprite(spriteMat);
+        sprite.position.copy(position);
+        sprite.scale.set(scaleX, scaleY, 1);
+        sprite.userData = { isDimensionLabel: true, redraw, texture };
+        dimensionSprites.push(sprite);
+        return sprite;
+      }
+
+      function createDimensionLine(
+        p1,
+        p2,
+        color = 0xf43f5e,
+        tickLen = 3,
+        tickAxis = "y",
+      ) {
+        const pts = [p1, p2];
+        const off = new THREE.Vector3();
+        off[tickAxis] = tickLen;
+
+        pts.push(
+          p1.clone().add(off),
+          p1.clone().sub(off),
+          p2.clone().add(off),
+          p2.clone().sub(off),
+        );
+
+        const geom = new THREE.BufferGeometry().setFromPoints(pts);
+        const mat = new THREE.LineBasicMaterial({
+          color: color,
+          depthTest: false,
+          transparent: true,
+          opacity: 0.85,
+        });
+        return new THREE.LineSegments(geom, mat);
+      }
+
+      function buildDimensionsHierarchy() {
+        dimensionsGroup = new THREE.Group();
+        dimensionSprites = [];
+
+        // 1. TSV 盲孔深度 55μm (高深宽比 10:1, y = 10.5 到 24, 在剖切展示区 x = 32, z = 24)
+        const pTsvBot = new THREE.Vector3(32, 10.5, 24);
+        const pTsvTop = new THREE.Vector3(32, 24, 24);
+        const tsvLine = createDimensionLine(pTsvBot, pTsvTop, 0xf43f5e, 2, "x");
+        const tsvBadge = createBillboardDimensionBadge(
+          "TSV 盲孔深: 55 μm (10:1 AR)",
+          "Blind TSV Depth: 55 μm (10:1 AR)",
+          new THREE.Vector3(48, 17.25, 24),
+          36,
+          6.8,
+        );
+        tsvLine.name = "dim_tsv_depth";
+        tsvBadge.name = "dim_tsv_depth_badge";
+        dimensionsGroup.add(tsvLine, tsvBadge);
+
+        // 2. TSV 直径 6μm (在 x = 12, y = 25.5, z = 12)
+        const pDiaL = new THREE.Vector3(12 - 1.4, 25.5, 12);
+        const pDiaR = new THREE.Vector3(12 + 1.4, 25.5, 12);
+        const diaLine = createDimensionLine(pDiaL, pDiaR, 0x38bdf8, 1.5, "z");
+        const diaBadge = createBillboardDimensionBadge(
+          "TSV 径: 6 μm",
+          "TSV Dia: 6 μm",
+          new THREE.Vector3(12, 30, 12),
+          22,
+          5.5,
+        );
+        diaLine.name = "dim_tsv_dia";
+        diaBadge.name = "dim_tsv_dia_badge";
+        dimensionsGroup.add(diaLine, diaBadge);
+
+        // 3. 微凸点节距 25μm (x = 0 到 12, y = 26, z = 0)
+        const pPitchL = new THREE.Vector3(0, 26, 0);
+        const pPitchR = new THREE.Vector3(12, 26, 0);
+        const pitchLine = createDimensionLine(
+          pPitchL,
+          pPitchR,
+          0x10b981,
+          2,
+          "z",
+        );
+        const pitchBadge = createBillboardDimensionBadge(
+          "微凸点节距: 25 μm",
+          "Microbump Pitch: 25 μm",
+          new THREE.Vector3(6, 31, 0),
+          26,
+          6,
+        );
+        pitchLine.name = "dim_ubump_pitch";
+        pitchBadge.name = "dim_ubump_pitch_badge";
+        dimensionsGroup.add(pitchLine, pitchBadge);
+
+        // 4. DRAM 晶片减薄后厚度 ~30μm (y = 18 到 24, x = 38, z = -15)
+        const pThinBot = new THREE.Vector3(38, 18, -15);
+        const pThinTop = new THREE.Vector3(38, 24, -15);
+        const thinLine = createDimensionLine(
+          pThinBot,
+          pThinTop,
+          0xf59e0b,
+          2,
+          "x",
+        );
+        const thinBadge = createBillboardDimensionBadge(
+          "Die 减薄厚度: ~30 μm",
+          "Thinned Die: ~30 μm",
+          new THREE.Vector3(52, 21, -15),
+          30,
+          6.2,
+        );
+        thinLine.name = "dim_thin_depth";
+        thinBadge.name = "dim_thin_depth_badge";
+        dimensionsGroup.add(thinLine, thinBadge);
+
+        // 5. 12-Hi 堆叠总高度 ~720μm (Step 8-10, y = 6 到 64, x = 46, z = 20)
+        const pStackBot = new THREE.Vector3(46, 6, 20);
+        const pStackTop = new THREE.Vector3(46, 64, 20);
+        const stackLine = createDimensionLine(
+          pStackBot,
+          pStackTop,
+          0xf43f5e,
+          3,
+          "z",
+        );
+        const stackBadge = createBillboardDimensionBadge(
+          "12-Hi 堆叠总高: ~720 μm",
+          "12-Hi Stack Height: ~720 μm",
+          new THREE.Vector3(66, 35, 20),
+          38,
+          7.2,
+        );
+        stackLine.name = "dim_stack_height";
+        stackBadge.name = "dim_stack_height_badge";
+        dimensionsGroup.add(stackLine, stackBadge);
+
+        scene.add(dimensionsGroup);
+      }
+
+      function updateDimensionsVisibility(step) {
+        if (!dimensionsGroup) return;
+        if (!isDimensionsVisible) {
+          dimensionsGroup.visible = false;
+          return;
+        }
+        dimensionsGroup.visible = true;
+
+        const tsvL = dimensionsGroup.getObjectByName("dim_tsv_depth");
+        const tsvB = dimensionsGroup.getObjectByName("dim_tsv_depth_badge");
+        const diaL = dimensionsGroup.getObjectByName("dim_tsv_dia");
+        const diaB = dimensionsGroup.getObjectByName("dim_tsv_dia_badge");
+        const pitchL = dimensionsGroup.getObjectByName("dim_ubump_pitch");
+        const pitchB = dimensionsGroup.getObjectByName("dim_ubump_pitch_badge");
+        const thinL = dimensionsGroup.getObjectByName("dim_thin_depth");
+        const thinB = dimensionsGroup.getObjectByName("dim_thin_depth_badge");
+        const stackL = dimensionsGroup.getObjectByName("dim_stack_height");
+        const stackB = dimensionsGroup.getObjectByName(
+          "dim_stack_height_badge",
+        );
+
+        // TSV depth & dia visible in Step 1, 2, 3
+        const tsvVis = step === 1 || step === 2 || step === 3;
+        if (tsvL) tsvL.visible = tsvVis;
+        if (tsvB) tsvB.visible = tsvVis;
+        if (diaL) diaL.visible = tsvVis;
+        if (diaB) diaB.visible = tsvVis;
+
+        // Microbump pitch in Step 2 & Step 7
+        const ubumpVis = step === 2 || step === 7;
+        if (pitchL) pitchL.visible = ubumpVis;
+        if (pitchB) pitchB.visible = ubumpVis;
+
+        // Thinning in Step 4, 5, 6
+        const thinVis = step === 4 || step === 5 || step === 6;
+        if (thinL) thinL.visible = thinVis;
+        if (thinB) thinB.visible = thinVis;
+
+        // 12-Hi Stack height in Step 7, 8, 9
+        const stackVis = step >= 7;
+        if (stackL) stackL.visible = stackVis;
+        if (stackB) stackB.visible = stackVis;
+      }
+
+      function toggleDimensions() {
+        isDimensionsVisible = !isDimensionsVisible;
+        if (dimensionsGroup) dimensionsGroup.visible = isDimensionsVisible;
+        const sb = document.getElementById("viewport-scale-bar");
+        if (sb) sb.style.display = isDimensionsVisible ? "flex" : "none";
+        const btn = document.getElementById("btn-dimensions");
+        if (btn) {
+          btn.classList.toggle("bg-rose-950/80", isDimensionsVisible);
+          btn.classList.toggle("border-rose-500", isDimensionsVisible);
+        }
+      }
+
+      // --- 10. ANIMATION LOOP ---
+      function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+        updateDataStream();
+        renderer.render(scene, camera);
+      }
+
+      // Initialize once DOM is ready
+      window.addEventListener("DOMContentLoaded", () => {
+        initThree();
+        applyLanguageUI();
+        if (window.lucide) lucide.createIcons();
+      });
+    </script>
+
+    <!-- Accessible Machine-Readable Knowledge Base for AI Engines (GEO) & Search Crawlers -->
+    <article
+      id="seo-crawlable-content"
+      class="sr-only"
+      aria-label="HBM 3D Memory Stacking Engineering Documentation"
+    >
+      <h1>
+        HBM3E / HBM4 High Bandwidth Memory 3D Stacking & Advanced Packaging:
+        10-Step Industrial Engineering Breakdown
+      </h1>
+      <p>
+        This interactive digital twin details the complete industrial
+        fabrication sequence of advanced HBM3E and HBM4 (High Bandwidth Memory)
+        semiconductors using TSV (Through-Silicon Via), dense microbumps, MR-MUF
+        / TC-NCF vertical stacking, and 2.5D CoWoS silicon interposer
+        integration.
+      </p>
+
+      <h2>10-Step HBM Semiconductor Fabrication Sequence</h2>
+      <ol>
+        <li>
+          <h3>
+            Step 1: Logic Base Die (Buffer Die) Fabrication & BIST Testing
+          </h3>
+          <p>
+            Advanced CMOS logic fabrication constructs the Base Die wafer with
+            high-speed DFI PHY, BIST self-repair controllers, and dense landing
+            pads.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Advanced Logic ArFi/EUV Scanner +
+            Metallization Cluster (ASML Twinscan NXT / AMAT Endura).
+            <strong>Materials:</strong> P-Type Single-Crystal Si + Cu/Low-k
+            Interconnects + Passivation.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 2: DRAM Core Wafer TSV Deep RIE & Void-Free Copper Plating
+          </h3>
+          <p>
+            Deep Reactive Ion Etching (DRIE) punches thousands of blind TSVs
+            (~55μm deep, ~6μm diameter), lined with SiO2, barrier/seed
+            sputtered, and filled with electroplated copper.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High-Aspect-Ratio Silicon DRIE Etcher +
+            TSV ECD Copper Plater (Lam Research Syndion / AMAT Raider ECD).
+            <strong>Materials:</strong> Electroplated Copper (Cu) Pillars + SiO2
+            Liner + Ta/Ti Barrier.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 3: Front-Side Redistribution Layer (RDL) & Microbump
+            Metallization
+          </h3>
+          <p>
+            Multi-layer fine-pitch Cu RDL routing and electroplating ultra-dense
+            microbumps (Cu pillar + Ni barrier + Sn-Ag solder cap) at 25-35μm
+            pitch.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Advanced Packaging Stepper +
+            Multi-Chamber ECD Bump Plater (Canon FPA-5520iV / Lam Research SABRE
+            3D). <strong>Materials:</strong> Cu Pillar (~15μm) + Ni (~2μm) +
+            Lead-Free Sn-Ag Solder Cap (~8μm).
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 4: Temporary Carrier Wafer Bonding with Laser-Releasable
+            Adhesive
+          </h3>
+          <p>
+            Spin-coating laser-releasable adhesive over front microbumps and
+            vacuum-bonding the active DRAM wafer to a rigid optical glass
+            carrier for mechanical support.
+          </p>
+          <p>
+            <strong>Equipment:</strong> High-Precision Temporary Wafer Bonder +
+            Adhesive Coater (EV Group EVG 850 / SUSS MicroTec XBC300).
+            <strong>Materials:</strong> Laser-Releasable Polymer Adhesive +
+            Rigid Borosilicate Glass Carrier.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 5: Extreme Backside Mechanical Grinding & Ultra-Precision CMP
+            Thinning
+          </h3>
+          <p>
+            Coarse and fine diamond wheel grinding followed by stress-relief
+            CMP, thinning the DRAM wafer down to ~30-45μm.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Ultra-Precision In-Line Grinder + CMP
+            Polish Station (DISCO DFG8560 / Accretech DGP8761HC).
+            <strong>Materials:</strong> Silicon Bulk Substrate + Ultra-Fine
+            Vitrified Diamond Wheel + Polishing Slurry.
+          </p>
+        </li>
+        <li>
+          <h3>Step 6: Backside TSV Silicon Recess Reveal Etch & Passivation</h3>
+          <p>
+            Selective SF6 plasma recessing silicon by ~1.5μm to reveal copper
+            TSV tips, followed by low-temp PECVD passivation and touch CMP.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Low-Temp Silicon Recess Etcher +
+            Low-Temp PECVD + Touch CMP (Lam Research Versys / SPTS Rapier / AMAT
+            Reflexion). <strong>Materials:</strong> Protruding Copper Tips
+            (~1.5μm) + Low-Temp SiNx/SiO2 Passivation.
+          </p>
+        </li>
+        <li>
+          <h3>Step 7: Backside UBM Metallization & Excimer Laser Debonding</h3>
+          <p>
+            Patterning Ti/Cu/Ni/Au UBM pads on TSV tips, 308nm excimer laser
+            debonding of the glass carrier, and stealth laser dicing into Known
+            Good Dies (KGD).
+          </p>
+          <p>
+            <strong>Equipment:</strong> Excimer Laser Debonder + Plasma Clean
+            Station + Stealth Laser Dicer (SUSS MicroTec XDD300 / DISCO DFL7362
+            / EVG 850DB). <strong>Materials:</strong> Backside UBM Landing Pads
+            (Ti/Cu/Ni/Au) + Cleaned KGD Silicon Dice.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 8: High-Precision 8-Hi / 12-Hi / 16-Hi 3D Die Stacking &
+            Bonding
+          </h3>
+          <p>
+            Sub-micron pick-and-place stackers aligning DRAM KGD dies
+            sequentially atop the Base Die, bonding via TC-NCF or MR-MUF with
+            void-free joints.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Sub-Micron 3D Flip-Chip Die Bonder /
+            Thermal Compression System (Toray / Hanmi Semiconductor DUAL TC
+            Bonder / Besi Datacon 8800). <strong>Materials:</strong> 8-Hi to
+            16-Hi Stacked DRAM Dies + Sn-Ag Joints + NCF / MUF Underfill.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 9: Wafer-Level Epoxy Molding Compound (EMC) & Top-Die Heat
+            Polish
+          </h3>
+          <p>
+            Vacuum injection of high-thermal-conductivity silica-filled EMC,
+            followed by back grinding to expose the top raw silicon die for
+            direct heatsink contact.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Wafer-Level Vacuum Compression Molder +
+            Precision Back Grinder (TOWA YPM Series / APIC Yamada / DISCO
+            DFG8560). <strong>Materials:</strong> High Thermal Conductivity
+            Silica-Filled EMC + Bare Top Si Heat Spreader.
+          </p>
+        </li>
+        <li>
+          <h3>
+            Step 10: 2.5D Silicon Interposer Integration (CoWoS) & BGA Ball
+            Mount
+          </h3>
+          <p>
+            Mounting the HBM cube alongside the host GPU onto a passive Silicon
+            Interposer with sub-micron wiring, substrate bonding, and BGA solder
+            ball attachment.
+          </p>
+          <p>
+            <strong>Equipment:</strong> Chip-on-Wafer (CoW) Bonder + BGA Ball
+            Mounter + System Reflow Furnace (Shinkawa / Besi / Kulicke & Soffa /
+            ASMPT). <strong>Materials:</strong> Passive Si Interposer (CoWoS) +
+            SAC305 Solder Balls + Organic ABF Substrate.
+          </p>
+        </li>
+      </ol>
+
+      <h2>Frequently Asked Questions (FAQ) on HBM 3D Memory Fabrication</h2>
+      <dl>
+        <dt>
+          Why is HBM essential for AI GPU accelerators compared to GDDR or DDR?
+        </dt>
+        <dd>
+          Traditional DDR5 and GDDR6 use narrow 32-bit to 64-bit buses operating
+          at extreme clock frequencies, encountering strict pin count and trace
+          length power limits. HBM stacks DRAM dies vertically directly above a
+          logic controller, utilizing an ultra-wide 1024-bit interface per stack
+          with thousands of short, low-capacitance TSVs. This achieves >1.2 TB/s
+          per stack (over 3-4x higher than GDDR6) at significantly higher energy
+          efficiency (<3-4 pJ/bit).
+        </dd>
+        <dt>
+          What is the difference between TC-NCF and MR-MUF in HBM stacking?
+        </dt>
+        <dd>
+          TC-NCF (Thermal Compression with Non-Conductive Film) applies a solid
+          micro-film before each die is pressed with heat and force; it requires
+          high pressure per die and can trap voids or increase thermal
+          resistance as layers exceed 12-Hi. MR-MUF (Mass Reflow Molded
+          Underfill), pioneered by SK Hynix, stacks all dies simultaneously with
+          temporary flux, melts all microbumps in a single mass reflow furnace,
+          and injects liquid epoxy molding compound (EMC) under vacuum. MR-MUF
+          reduces thermal resistance by over 30% and significantly enhances
+          12-Hi and 16-Hi manufacturing yields.
+        </dd>
+        <dt>
+          How does HBM4 evolve with Hybrid Bonding and customized Base Dies?
+        </dt>
+        <dd>
+          HBM4 expands the memory bus from 1024 bits to 2048 bits and enables
+          custom Logic Base Dies manufactured on advanced foundry nodes (such as
+          TSMC 3nm/5nm or Intel 18A). Furthermore, HBM4 introduces direct Cu-Cu
+          Hybrid Bonding, eliminating microbumps entirely and reducing vertical
+          die-to-die spacing below 1-2μm, boosting density and thermal
+          dissipation for 16-Hi and 20-Hi configurations.
+        </dd>
+      </dl>
+    </article>
+  </body>
+</html>

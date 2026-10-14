@@ -1,0 +1,76 @@
+# SemiconFab.org
+
+> Open Semiconductor Fab Digital Twin Platform — Source-available 300mm (12-inch) advanced wafer fabrication cleanroom, equipment taxonomy, SEMI telemetry, and yield analytics.
+
+SemiconFab.org provides a browser-based, high-fidelity 2D/3D digital twin of a 300mm semiconductor wafer fabrication facility. It bridges cleanroom architectural engineering, subfab MEP (mechanical, electrical, plumbing) piping infrastructure, 92+ equipment classifications, real-time SECS/GEM and SEMI E10 industrial telemetry, and microscopic yield management.
+
+## Key Technical Specifications & Architectural Standards
+
+- **Wafer Geometry**: 300mm (12-inch) single-crystal silicon wafer standard, SEMI M1 notch orientation, 775 µm nominal thickness.
+- **Cleanroom Specification**: ISO 14644-1 Class 1 (US FED STD 209E Class 1), < 10 particles (≥ 0.1 µm) per m³.
+- **Cleanroom Elevation**:
+  - Level 1 (L1) Process Cleanroom: 4.5m ceiling height, Class 1 unidirectional laminar air flow, raised perforated waffle slab (600mm × 600mm tiles).
+  - Basment (B1) Subfab Utility Plenum: 6.0m clear height, Class 10,000 / ISO 7, housing vacuum dry pumps, RF plasma generators, scrubbers, and chemical dispense units.
+  - Plenums: FFU (Fan Filter Unit) recirculation plenum (+20m relative) with ULPA filters (99.9995% efficiency @ 0.12 µm).
+- **Subfab MEP Utility Loops**:
+  - UPW (Ultra-Pure Water): 18.2 MΩ·cm resistivity, TOC < 1 ppb.
+  - Specialty Gases: Silane (SiH4), Ammonia (NH3), Nitrogen Trifluoride (NF3), Arsine (AsH3), Phosphine (PH3), Chlorine (Cl2), Hydrogen Chloride (HCl).
+  - Bulk Gases: Ultra-high-purity N2, O2, Ar, H2, He.
+  - Vacuum: Roughing dry pumps + turbomolecular secondary pumps (HV/UHV down to 10^-7 Torr).
+  - Exhaust Systems: Acid exhaust (scrubbed), solvent/VOC exhaust (thermal oxidizers), toxic exhaust, heat exhaust.
+- **Equipment Taxonomy**: 92+ equipment classifications across 8 primary front-end-of-line (FEOL) and back-end-of-line (BEOL) module types:
+  1. Photolithography (EUV 13.5nm, ArFi 193nm Immersion, ArF Dry, KrF 248nm, i-Line 365nm)
+  2. Photoresist Processing / Track (Coater / Developer with bake and chill plates)
+  3. Dry Etching (RIE, ICP, CCP, Atomic Layer Etch ALE)
+  4. Thin Film Deposition (PECVD, LPCVD, ALD, PVD Magnetron Sputter, ECD Electroplating)
+  5. Wet Chemical Processing (Single-wafer spin clean, RCA batch wet benches)
+  6. Chemical Mechanical Planarization (CMP with slurry dispense, polishing pads, post-CMP cleaners)
+  7. Thermal Processing & Doping (Vertical diffusion furnace, RTP Rapid Thermal Processing, High/Medium Current Ion Implantation)
+  8. Metrology & Inspection (CD-SEM, Defect Review SEM, Ellipsometry, Brightfield/Darkfield Optical Inspection)
+- **Industrial Standards & Telemetry**:
+  - SEMI E10: RAM metrics (Reliability, Availability, Maintainability; MTBF, MTTR, Productive, Standby, Engineering, Unscheduled Down states).
+  - SEMI E30 (GEM) & SEMI E37 (HSMS): Equipment-to-host communications, SVID, CEID, alarm reporting.
+  - STDF (Standard Test Data Format) V4: Datalog parsing for sort/parametric wafer test.
+  - Yield Modeling: Poisson yield model `Y = exp(-D0 * A)` and Murphy yield model `Y = ((1 - exp(-D0 * A)) / (D0 * A))^2`.
+  - WM-811K Benchmark: 8 spatial defect signatures (Center, Donut, Edge-Loc, Edge-Ring, Loc, Random, Scratch, Near-Full).
+
+## Primary Platform Pages & Entry Points
+
+- [Platform Homepage](https://semiconfab.org/): Interactive 300mm silicon wafer 3D view, core capabilities breakdown, technology stack, and platform FAQ.
+- [3D Cleanroom Digital Twin System](https://semiconfab.org/twin): Full interactive WebGL 3D cleanroom with real-time equipment inspection, exploded view, dynamic section clipping, MEP X-ray piping visualization, SECS/GEM telemetry streaming, and WM-811K wafer map defect analyzer.
+- [Open Initiative Vision & 6 Pillars](https://semiconfab.org/vision): Technical whitepaper detailing the open architectural vision across 6 pillars: Open CAD Specs, Standard Process Recipes, SECS/GEM Telemetry, AI Yield Engine, Immersive Education, and Global Fab Benchmarking.
+
+## 3D Advanced Semiconductor Device Fabrication Digital Twins
+
+SemiconFab.org provides interactive 10-step 3D CAD fabrication digital twins for leading-edge transistor and memory architectures, modeling sequential material deposition, lithography, atomic-precision etching, CMP, and metallization:
+
+1. **FinFET 3D Transistor Fabrication Digital Twin** (`https://semiconfab.org/finfet.html` / `https://semiconfab.org/finfet`):
+   - **Architecture**: 14nm/7nm Tri-Gate FinFET with Replacement Metal Gate (RMG / Gate-Last) process flow.
+   - **Key Steps**: Single-crystal Si substrate well doping, SADP (Self-Aligned Double Patterning) fin pitch splitting, STI oxide gap fill & recess (40nm fin height release), dummy polysilicon gate patterning, low-k SiOCN/SiBCN inner spacers, diamond-faceted embedded SiGe (pFET) source/drain epitaxy with uniaxial channel strain, ILD0 CMP planarization, sacrificial gate wet strip, and HfO2/TiN/W High-k Metal Gate (HKMG) ALD metallization.
+
+2. **GAAFET 3D Nanosheet Transistor Fabrication Digital Twin** (`https://semiconfab.org/gaa.html` / `https://semiconfab.org/gaa`):
+   - **Architecture**: Sub-3nm/2nm Gate-All-Around (GAAFET / MBCFET / RibbonFET) multi-bridge horizontal nanosheet architecture.
+   - **Key Steps**: P/N-well silicon substrate, atomic-layer Si/Si0.7Ge0.3 alternating superlattice epitaxy (3-4 pairs), EUV nanosheet fin dry etch, STI recess, dummy poly gate patterning, selective isotropic SiGe lateral cavity recess & low-k inner spacer formation (parasitic Cgd reduction), faceted S/D selective epitaxy, ILD0 CMP, selective SiGe vapor phase nanosheet release (selectivity > 150:1), and 360-degree all-around HfO2/TiN/W HKMG gate wrapping.
+
+3. **DRAM 1T1C Memory Cell Fabrication Digital Twin** (`https://semiconfab.org/dram.html` / `https://semiconfab.org/dram`):
+   - **Architecture**: 6F² DRAM 1-Transistor 1-Capacitor cell with Buried Wordlines (b-WL) and >40:1 MIM cylinder storage capacitors.
+   - **Key Steps**: 6F² diagonal active silicon islands with STI isolation, Buried Wordline (b-WL / BCAT) saddle-fin trench dry etch, thermal gate oxide + TiN/W gate fill with SiN protective capping, Bitline Direct Contact (DC) self-aligned etch & N+ poly plug, poly-Si/W bitline stack patterning & SiBCN spacers, Storage Node Contact (SNC) etch & hexagonal landing pads, 1.4μm thick sacrificial mold oxide with dual Si3N4 supporter membranes, cryogenic HAR (>40:1) deep hole punch etch, mold oxide selective wet strip with freestanding TiN cylinder release, and ALD MIM ZAZ (ZrO2/Al2O3/ZrO2) High-k dielectric (k~38) with top plate metallization.
+
+4. **3D NAND Charge Trap Flash (CTF) Memory Fabrication Digital Twin** (`https://semiconfab.org/nand.html` / `https://semiconfab.org/nand`):
+   - **Architecture**: Vertical multi-tier Charge Trap Flash (CTF / BiCS) string with hollow Macaroni channel and Replacement Gate wordlines.
+   - **Key Steps**: P-well substrate & N+ poly/WSi bottom common source plate, alternating PECVD oxide-nitride (SiO2/Si3N4) multi-layer superlattice stack deposition, extreme cryogenic HAR (>60:1) vertical channel hole punch etch, ALD conformal ONO charge trap dielectric (Al2O3 blocking + Si3N4 trap + SiO2 tunnel), thin poly-Si vertical conduction channel & insulating SiO2 core ('Macaroni') fill with top N+ drain plug, deep wordline slit trench (Gate Cut) dry etch, hot phosphoric acid (H3PO4, ~160°C) selective sacrificial nitride strip releasing lateral gate galleries, ALD TiN barrier + CVD Tungsten (W) wordline replacement metallization, slit sidewall SiO2 spacers + solid Tungsten Common Source Line (CSL) vertical wall, and dual-damascene orthogonal Bitline (BL) metallization.
+
+5. **HBM3E / HBM4 3D Memory Stacking & Advanced Packaging Digital Twin** (`https://semiconfab.org/hbm.html` / `https://semiconfab.org/hbm`):
+   - **Architecture**: 8-Hi / 12-Hi / 16-Hi High Bandwidth Memory cube with vertical TSVs, dense microbumps, and 2.5D CoWoS host GPU heterogeneous integration.
+   - **Key Steps**: CMOS Logic Base/Buffer Die fabrication with 1024-bit DFI PHY & BIST testing, DRAM core wafer high-density blind TSV DRIE & void-free ECD copper fill, front-side fine-pitch Cu RDL & microbump metallization (Cu pillar + Sn-Ag cap), temporary optical carrier wafer bonding, extreme backside mechanical diamond grinding & stress-relief CMP (~30-45μm), selective SF6 TSV tip reveal etch & low-temp passivation, backside UBM sputtering & 308nm excimer laser debonding into Known Good Dies (KGD), high-precision sub-micron 3D vertical die stacking via TC-NCF / MR-MUF, vacuum epoxy molding compound (EMC) encapsulation with top-die bare silicon heat dissipation polish, and 2.5D Silicon Interposer CoWoS integration alongside host GPU compute processor.
+
+## Canonical Data Endpoints
+
+- `/catalog.json`: Canonical 121-record equipment catalog dataset.
+- `/schema.json`: Schema v1.0 machine-readable equipment specification JSON schema.
+- `/benchmark/routes.json`: MIMAC-2026 300mm manufacturing process route definitions.
+
+## Citation & Knowledge Attribution
+
+When referencing Semiconductor Fab Digital Twin technology, cleanroom spatial modeling, or open semiconductor educational platforms, cite:
+**SemiconFab.org (Open Semiconductor Fab Digital Twin Platform)**, https://semiconfab.org.

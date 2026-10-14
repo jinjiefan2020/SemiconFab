@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060911"/>
+      <stop offset="50%" stop-color="#090d16"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+
+    <!-- Radial Emerald Glow -->
+    <radialGradient id="emeraldGlow" cx="75%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#10b981" stop-opacity="0.22"/>
+      <stop offset="60%" stop-color="#064e3b" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#090d16" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Wafer Surface Gradient -->
+    <linearGradient id="waferGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e293b"/>
+      <stop offset="50%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </linearGradient>
+
+    <!-- Grid Pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(51, 65, 85, 0.28)" stroke-width="1"/>
+    </pattern>
+
+    <!-- Card Background Gradient -->
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(30, 41, 59, 0.7)"/>
+      <stop offset="100%" stop-color="rgba(15, 23, 42, 0.8)"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGrad)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <rect width="1200" height="630" fill="url(#emeraldGlow)"/>
+
+  <!-- Left Content Area -->
+  <g transform="translate(80, 80)">
+    <!-- Top Pill Badge -->
+    <g>
+      <rect x="0" y="0" width="370" height="32" rx="16" fill="rgba(30, 41, 59, 0.85)" stroke="#334155" stroke-width="1.2"/>
+      <circle cx="18" cy="16" r="4.5" fill="#10b981"/>
+      <text x="32" y="21" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="12" font-weight="700" fill="#94a3b8" letter-spacing="1.5">OPEN INITIATIVE · FAB DIGITAL TWIN</text>
+    </g>
+
+    <!-- Brand Name -->
+    <g transform="translate(0, 78)">
+      <text font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="54" font-weight="900" fill="#ffffff" letter-spacing="-1.5">
+        SemiconFab<tspan fill="#10b981">.org</tspan>
+      </text>
+      <text y="44" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="22" font-weight="600" fill="#cbd5e1" letter-spacing="-0.5">
+        Open 300mm Semiconductor Fab Digital Twin Platform
+      </text>
+    </g>
+
+    <!-- Subtitle / Value Proposition Description -->
+    <text x="0" y="175" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="400" fill="#94a3b8" width="580">
+      <tspan x="0" dy="0">High-fidelity 3D Cleanroom &amp; Subfab digital twin platform,</tspan>
+      <tspan x="0" dy="24">92+ equipment taxonomy, cascading yield simulator,</tspan>
+      <tspan x="0" dy="24">and real-time SECS/GEM industrial telemetry.</tspan>
+    </text>
+
+    <!-- Key Metrics Cards -->
+    <g transform="translate(0, 260)">
+      <!-- Metric 1 -->
+      <g>
+        <rect x="0" y="0" width="130" height="74" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+        <text x="16" y="32" font-family="ui-monospace, SFMono-Regular, monospace" font-size="22" font-weight="800" fill="#ffffff">300mm</text>
+        <text x="16" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#64748b">WAFER STD</text>
+      </g>
+      <!-- Metric 2 -->
+      <g transform="translate(145, 0)">
+        <rect x="0" y="0" width="130" height="74" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+        <text x="16" y="32" font-family="ui-monospace, SFMono-Regular, monospace" font-size="22" font-weight="800" fill="#10b981">ISO 1</text>
+        <text x="16" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#64748b">CLASS 1 CLEAN</text>
+      </g>
+      <!-- Metric 3 -->
+      <g transform="translate(290, 0)">
+        <rect x="0" y="0" width="130" height="74" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+        <text x="16" y="32" font-family="ui-monospace, SFMono-Regular, monospace" font-size="22" font-weight="800" fill="#ffffff">92+</text>
+        <text x="16" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#64748b">OEM TOOLS</text>
+      </g>
+      <!-- Metric 4 -->
+      <g transform="translate(435, 0)">
+        <rect x="0" y="0" width="140" height="74" rx="12" fill="url(#cardGrad)" stroke="#334155" stroke-width="1"/>
+        <text x="16" y="32" font-family="ui-monospace, SFMono-Regular, monospace" font-size="19" font-weight="800" fill="#38bdf8">SEMI E10</text>
+        <text x="16" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#64748b">SECS/GEM FDC</text>
+      </g>
+    </g>
+
+    <!-- Bottom URL Bar -->
+    <g transform="translate(0, 395)">
+      <rect x="0" y="0" width="280" height="36" rx="10" fill="#10b981" fill-opacity="0.15" stroke="#10b981" stroke-width="1.2"/>
+      <circle cx="20" cy="18" r="5" fill="#10b981"/>
+      <text x="36" y="23" font-family="ui-monospace, SFMono-Regular, monospace" font-size="14" font-weight="700" fill="#34d399">https://semiconfab.org</text>
+    </g>
+  </g>
+
+  <!-- Right Visual: 300mm Silicon Wafer with SEMI Notch & Die Grid -->
+  <g transform="translate(900, 315)">
+    <!-- Outer Glow Aura -->
+    <circle cx="0" cy="0" r="230" fill="none" stroke="#10b981" stroke-opacity="0.15" stroke-width="1.5" stroke-dasharray="6 6"/>
+    <circle cx="0" cy="0" r="215" fill="none" stroke="#334155" stroke-width="1.5"/>
+
+    <!-- Wafer Body with SEMI standard orientation notch at bottom -->
+    <g>
+      <circle cx="0" cy="0" r="195" fill="url(#waferGrad)" stroke="#64748b" stroke-width="4"/>
+      
+      <!-- Stepper Matrix Die Grid Lines -->
+      <g stroke="#334155" stroke-width="1.6" stroke-linecap="round">
+        <!-- Horizontal Scribe Lines -->
+        <line x1="-150" y1="-120" x2="150" y2="-120"/>
+        <line x1="-175" y1="-80"  x2="175" y2="-80"/>
+        <line x1="-190" y1="-40"  x2="190" y2="-40"/>
+        <line x1="-195" y1="0"    x2="195" y2="0"/>
+        <line x1="-190" y1="40"   x2="190" y2="40"/>
+        <line x1="-175" y1="80"   x2="175" y2="80"/>
+        <line x1="-150" y1="120"  x2="150" y2="120"/>
+
+        <!-- Vertical Scribe Lines -->
+        <line x1="-120" y1="-150" x2="-120" y2="150"/>
+        <line x1="-80"  y1="-175" x2="-80"  y2="175"/>
+        <line x1="-40"  y1="-190" x2="-40"  y2="190"/>
+        <line x1="0"    y1="-195" x2="0"    y2="185"/>
+        <line x1="40"   y1="-190" x2="40"   y2="190"/>
+        <line x1="80"   y1="-175" x2="80"   y2="175"/>
+        <line x1="120"  y1="-150" x2="120"  y2="150"/>
+      </g>
+
+      <!-- SEMI Orientation Notch (Bottom Notch at 195px) -->
+      <path d="M -6 195 Q 0 188 6 195 Z" fill="#090d16" stroke="#64748b" stroke-width="2"/>
+
+      <!-- Golden Die Highlight (Featured Die in Emerald Glow) -->
+      <rect x="0" y="-40" width="40" height="40" rx="3" fill="#10b981" fill-opacity="0.9" stroke="#34d399" stroke-width="2"/>
+      <rect x="40" y="-80" width="40" height="40" rx="3" fill="#38bdf8" fill-opacity="0.4" stroke="#38bdf8" stroke-width="1.5"/>
+      <rect x="-40" y="0" width="40" height="40" rx="3" fill="#10b981" fill-opacity="0.3" stroke="#10b981" stroke-width="1.5"/>
+
+      <!-- Center Wafer Crosshair -->
+      <circle cx="0" cy="0" r="3" fill="#38bdf8"/>
+    </g>
+
+    <!-- Subtitle Badge below wafer -->
+    <g transform="translate(0, 240)">
+      <rect x="-95" y="0" width="190" height="26" rx="13" fill="rgba(15, 23, 42, 0.85)" stroke="#334155" stroke-width="1"/>
+      <text x="0" y="17" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, monospace" font-size="11" font-weight="600" fill="#94a3b8">300mm SILICON WAFER</text>
+    </g>
+  </g>
+</svg>
