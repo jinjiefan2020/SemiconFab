@@ -749,7 +749,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "08f2083d-6096-54d9-b0c2-d83e3c904bec",
+    record_id: "09b4a776-277f-5203-8f72-80361b049f10",
     vendor: "KLA",
     model: "3935 (39xx series)",
     category: "metrology",
@@ -766,7 +766,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "76ac75ca-d579-588f-a0c1-053d10c136ae",
+    record_id: "bdd36ff2-ada4-5655-8230-ccd30e4919a6",
     vendor: "KLA",
     model: "2930 (29xx series)",
     category: "metrology",
@@ -783,7 +783,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "aae0deec-36ca-5bfc-975b-6813aafd92c4",
+    record_id: "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca",
     vendor: "KLA",
     model: "eDR7280",
     category: "metrology",
@@ -902,7 +902,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "a59601fa-0c7b-56c3-971e-a7becce1c7b5",
+    record_id: "3ec5df59-2f2e-565d-bb9c-ab9974fa6720",
     vendor: "Lasertec",
     model: "MATRICS X9ULTRA",
     category: "metrology",
@@ -1939,7 +1939,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "5f9d9df2-580c-5621-9880-203abf291ac4",
+    record_id: "ac21f1d6-2cda-51ba-a46b-b7c56f3eda25",
     vendor: "SKYVERSE",
     model: "SPRUCE-800",
     category: "metrology",
@@ -2007,7 +2007,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "a17941e5-0957-5789-a42f-c5e0cdab8127",
+    record_id: "1618a1eb-086d-5dbc-9635-1d7577b0602c",
     vendor: "KLA",
     model: "2920 Series Broadband Plasma Inspection",
     category: "inspection",
@@ -2058,7 +2058,7 @@ window.CATALOG_FALLBACK = [
     },
   },
   {
-    record_id: "ac2add35-89c1-530b-9be6-a5271fb0a49e",
+    record_id: "b7fd7715-e3a4-5563-bf18-a6ba7e8929f8",
     vendor: "SKYVERSE",
     model: "SPRUCE-600",
     category: "metrology",
@@ -2345,11 +2345,137 @@ window.CATALOG_FALLBACK = [
     record: {
     },
   },
+  {
+    record_id: "9f2dd614-22fd-5568-baff-5ef0473bf17d",
+    vendor: "ASML",
+    model: "PAS 5500/60",
+    category: "lithography",
+    conformance_level: "L1",
+    record: {
+    },
+  },
+  {
+    record_id: "e27404f9-870a-5bce-8d5a-c91a6e85695c",
+    vendor: "Tokyo Electron",
+    model: "CLEAN TRACK ACT 8",
+    category: "resist_track",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "6df5f3ad-5332-54f7-a806-0ad597beb740",
+    vendor: "Kingsemi",
+    model: "FT300",
+    category: "resist_track",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "7a43403b-8206-5580-8d77-8b4133bbb23c",
+    vendor: "Lam Research",
+    model: "Sense.i",
+    category: "dry_etch",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "675ad6a7-3218-5168-b518-f00fa45b978a",
+    vendor: "Lam Research",
+    model: "TCP 9400 Poly Etcher",
+    category: "dry_etch",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "58862876-946e-5da9-812a-7e3f239e41cf",
+    vendor: "AMEC",
+    model: "Primo nanova",
+    category: "dry_etch",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "120f36d5-9f9f-5522-a9ff-9f377cca0aae",
+    vendor: "AMEC",
+    model: "Primo AD-RIE",
+    category: "dry_etch",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "9490cf72-5e74-5c66-9d82-d4d2fee147b6",
+    vendor: "Applied Materials",
+    model: "Centura 5200 CVD",
+    category: "thin_film_deposition",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "a8ea6f35-5a10-5b05-87c3-56fd8b9d2ae8",
+    vendor: "ASM International",
+    model: "Pulsar XP ALD",
+    category: "thin_film_deposition",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "c9f70f4b-621c-59c4-9f44-34e26ea62a33",
+    vendor: "Applied Materials",
+    model: "Mirra Mesa",
+    category: "cmp",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "e90409d2-5773-5692-9910-6e0ff66965c7",
+    vendor: "Huahai Qingke",
+    model: "Versatile-GP300",
+    category: "cmp",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "e46e3f37-36ef-5092-930c-b8825fac2ca2",
+    vendor: "KLA",
+    model: "Surfscan SP7XP",
+    category: "inspection",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "8af8d04b-9e7b-5a0e-971e-2612b1827492",
+    vendor: "SCREEN",
+    model: "SU-3200",
+    category: "wet_clean",
+    conformance_level: "draft",
+    record: {
+    },
+  },
+  {
+    record_id: "2bafc8ee-b237-5b0c-851c-bb53e6c3a39b",
+    vendor: "ACM Research",
+    model: "Ultra C SAPS II",
+    category: "wet_clean",
+    conformance_level: "draft",
+    record: {
+    },
+  },
 ];
 
 window.DEFAULT_LAYOUT_FALLBACK = {
   $schema: "./layout-schema.json",
-  version: "1.1.0",
+  version: "1.2.0",
   name: "SemiconFab 300mm Advanced Node Balanced Pilot Layout",
   description:
     "Balanced cleanroom floor plan (121 tools) calibrated for advanced-node logic manufacturing flow: 1:1 Litho-Track pairing (8:8), 2.25x Etch/CVD multi-patterning ratios (18:18), and dedicated packaging annex. 本洁净室为 SemiconFab 概念验证与全谱系设备编目孪生沙盒，集成了前道与后道代表性设备，但机台数量显著少于实际先进制程Fab。",
@@ -3248,7 +3374,7 @@ window.DEFAULT_LAYOUT_FALLBACK = {
       rotation: 90,
     },
     {
-      tool_id: "08f2083d-6096-54d9-b0c2-d83e3c904bec",
+      tool_id: "09b4a776-277f-5203-8f72-80361b049f10",
       vendor: "KLA",
       model: "3935 (39xx series)",
       category: "metrology",
@@ -3258,7 +3384,7 @@ window.DEFAULT_LAYOUT_FALLBACK = {
       rotation: 90,
     },
     {
-      tool_id: "76ac75ca-d579-588f-a0c1-053d10c136ae",
+      tool_id: "bdd36ff2-ada4-5655-8230-ccd30e4919a6",
       vendor: "KLA",
       model: "2930 (29xx series)",
       category: "metrology",
@@ -3268,7 +3394,7 @@ window.DEFAULT_LAYOUT_FALLBACK = {
       rotation: 90,
     },
     {
-      tool_id: "aae0deec-36ca-5bfc-975b-6813aafd92c4",
+      tool_id: "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca",
       vendor: "KLA",
       model: "eDR7280",
       category: "metrology",
@@ -3298,7 +3424,7 @@ window.DEFAULT_LAYOUT_FALLBACK = {
       rotation: 90,
     },
     {
-      tool_id: "a17941e5-0957-5789-a42f-c5e0cdab8127",
+      tool_id: "1618a1eb-086d-5dbc-9635-1d7577b0602c",
       vendor: "KLA",
       model: "2920 Series Broadband Plasma Inspection",
       category: "inspection",
@@ -3318,7 +3444,7 @@ window.DEFAULT_LAYOUT_FALLBACK = {
       rotation: 0,
     },
     {
-      tool_id: "a17941e5-0957-5789-a42f-c5e0cdab8127",
+      tool_id: "1618a1eb-086d-5dbc-9635-1d7577b0602c",
       vendor: "KLA",
       model: "2920 Series Broadband Plasma Inspection",
       category: "inspection",

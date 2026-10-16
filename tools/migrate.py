@@ -24,6 +24,37 @@ RECORD_ID_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "https://semiconfab.org/sch
 def make_record_id(vendor: str, model: str, category: str = "") -> str:
     key = f"{(vendor or '').strip().lower()}||{(model or '').strip().lower()}||{(category or '').strip().lower()}"
     return str(uuid.uuid5(RECORD_ID_NAMESPACE, key))
+
+
+# Site taxonomy refinements (v1.2.0): split DB coarse segments into the
+# fab-meaningful categories used by twin bays, 3D colors and filters.
+# Applied AFTER the segment->category mapping, BEFORE make_record_id().
+RESIST_TRACK_MODELS = {
+    ("tokyo electron", "clean track lithius pro z"),
+    ("tokyo electron", "clean track act 12"),
+    ("tokyo electron", "clean track act 8"),
+    ("kingsemi", "ft300"),
+}
+INSPECTION_MODELS = {
+    ("kla", "3935 (39xx series)"),
+    ("kla", "2930 (29xx series)"),
+    ("kla", "edr7280"),
+    ("kla", "2920 series"),
+    ("kla", "surfscan sp7xp"),
+    ("applied materials", "uvision 4"),
+    ("lasertec", "matrics x9ultra"),
+    ("skyverse", "spruce-800"),
+    ("skyverse", "spruce-600"),
+}
+
+
+def refine_category(vendor: str, model: str, cat: str) -> str:
+    key = ((vendor or "").strip().lower(), (model or "").strip().lower())
+    if key in RESIST_TRACK_MODELS:
+        return "resist_track"
+    if key in INSPECTION_MODELS:
+        return "inspection"
+    return cat
 from typing import Any, Dict, List, Optional, Tuple
 
 import jsonschema
@@ -166,6 +197,8 @@ def map_csv_row_to_record(row: Dict[str, str], row_idx: int) -> Tuple[Dict[str, 
         cat = "inspection" if is_insp else "metrology"
     else:
         cat = CATEGORY_MAP.get(segment, "other")
+
+    cat = refine_category(vendor_str, model_str, cat)
 
     src_tier_raw = row.get("source_tier", "").strip()
     tier_mapped = SOURCE_TIER_MAP.get(src_tier_raw, "inferred")

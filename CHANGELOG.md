@@ -4,6 +4,13 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ---
 
+## [1.2.0] - 2026-10-15
+
+### Catalog expansion: 153 → 167 records
+
+- **Equipment catalog**: 153 → **167 records** (8 L1 verified / 159 draft). Added 14 models from research batch 2 (TEL CLEAN TRACK ACT 8, Kingsemi FT300, ASML PAS 5500/60, Lam Sense.i, Lam TCP 9400, AMEC Primo nanova / Primo AD-RIE, AMAT Centura 5200, ASM Pulsar XP, AMAT Mirra Mesa, HHQK Versatile-GP300, KLA Surfscan SP7XP, SCREEN SU-3200, ACM Ultra C SAPS II); ASML PAS 5500/60 newly qualifies as L1 (full footprint). KLA `2920 Series` replaces `2920 Series Broadband Plasma Inspection` per naming decision.
+- **Taxonomy preserved at 13 categories**: `tools/migrate.py` now refines DB segments into fab-meaningful categories (tracks → `resist_track`, defect-inspection tools → `inspection`) via explicit model lists, keeping twin bays, 3D colors and filters intact.
+
 ## [1.1.0] - 2026-10-15
 
 ### Catalog expansion: 121 → 153 records, deterministic record IDs

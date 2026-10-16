@@ -7,11 +7,13 @@ __pycache__/
 *.pyc
 .pytest_cache/
 *.sql
+# Local Development & Research Workspace (not for GitHub commits)
+dev/
 backups/
-*.egg-info/
+pkg/
+SemiconFab-*/
+
+# Archives and build artifacts
 *.zip
 !downloads/mimac2026-simulator.zip
-SemiconFab-1.0.0/
-SemiconFab-1.1.0/
-pkg/
 

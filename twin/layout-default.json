@@ -1,10 +1,10 @@
 {
   "$schema": "./layout-schema.json",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "name": "SemiconFab 300mm Advanced Node Balanced Pilot Layout",
   "description": "Balanced cleanroom floor plan (121 tools) calibrated for advanced-node logic manufacturing flow: 1:1 Litho-Track pairing (8:8), 2.25x Etch/CVD multi-patterning ratios (18:18), and dedicated packaging annex. 本洁净室为 SemiconFab 概念验证与全谱系设备编目孪生沙盒，集成了前道与后道代表性设备，但机台数量显著少于实际先进制程Fab。",
   "created_at": "2026-10-14T20:45:00Z",
-  "updated_at": "2026-10-15T19:00:00Z",
+  "updated_at": "2026-10-15T20:10:00Z",
   "author": "SemiconFab Consortium (Balanced Node Revision)",
   "tools": [
     {
@@ -898,7 +898,7 @@
       "rotation": 90
     },
     {
-      "tool_id": "08f2083d-6096-54d9-b0c2-d83e3c904bec",
+      "tool_id": "09b4a776-277f-5203-8f72-80361b049f10",
       "vendor": "KLA",
       "model": "3935 (39xx series)",
       "category": "metrology",
@@ -908,7 +908,7 @@
       "rotation": 90
     },
     {
-      "tool_id": "76ac75ca-d579-588f-a0c1-053d10c136ae",
+      "tool_id": "bdd36ff2-ada4-5655-8230-ccd30e4919a6",
       "vendor": "KLA",
       "model": "2930 (29xx series)",
       "category": "metrology",
@@ -918,7 +918,7 @@
       "rotation": 90
     },
     {
-      "tool_id": "aae0deec-36ca-5bfc-975b-6813aafd92c4",
+      "tool_id": "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca",
       "vendor": "KLA",
       "model": "eDR7280",
       "category": "metrology",
@@ -948,7 +948,7 @@
       "rotation": 90
     },
     {
-      "tool_id": "a17941e5-0957-5789-a42f-c5e0cdab8127",
+      "tool_id": "1618a1eb-086d-5dbc-9635-1d7577b0602c",
       "vendor": "KLA",
       "model": "2920 Series Broadband Plasma Inspection",
       "category": "inspection",
@@ -968,7 +968,7 @@
       "rotation": 0
     },
     {
-      "tool_id": "a17941e5-0957-5789-a42f-c5e0cdab8127",
+      "tool_id": "1618a1eb-086d-5dbc-9635-1d7577b0602c",
       "vendor": "KLA",
       "model": "2920 Series Broadband Plasma Inspection",
       "category": "inspection",

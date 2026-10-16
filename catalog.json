@@ -7,8 +7,8 @@
     "conformance_level": "L1",
     "completeness_pct": 100.0,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 4
+      "inferred": 4,
+      "vendor_confirmed": 5
     },
     "missing_fields": [],
     "prefill_url": "/add-equipment?vendor=Canon&model=FPA-5550iZ2",
@@ -215,8 +215,8 @@
     "conformance_level": "L1",
     "completeness_pct": 100.0,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 4
+      "inferred": 4,
+      "vendor_confirmed": 5
     },
     "missing_fields": [],
     "prefill_url": "/add-equipment?vendor=Canon&model=FPA-1200NZ2C",
@@ -743,6 +743,117 @@
     }
   },
   {
+    "record_id": "9f2dd614-22fd-5568-baff-5ef0473bf17d",
+    "vendor": "ASML",
+    "model": "PAS 5500/60",
+    "category": "lithography",
+    "conformance_level": "L1",
+    "completeness_pct": 100.0,
+    "tier_summary": {
+      "community_corroborated": 5,
+      "inferred": 5
+    },
+    "missing_fields": [],
+    "prefill_url": "/add-equipment?vendor=ASML&model=PAS%205500/60",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "9f2dd614-22fd-5568-baff-5ef0473bf17d",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "ASML",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        },
+        "model": {
+          "value": "PAS 5500/60",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        },
+        "category": {
+          "value": "lithography",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            200
+          ],
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        },
+        "node_applicability": {
+          "value": "0.35um-0.5um",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        }
+      },
+      "physical": {
+        "width_mm": {
+          "value": 1450,
+          "unit": "mm",
+          "provenance": {
+            "tier": "inferred",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        },
+        "depth_mm": {
+          "value": 2400,
+          "unit": "mm",
+          "provenance": {
+            "tier": "inferred",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        },
+        "height_mm": {
+          "value": 2300,
+          "unit": "mm",
+          "provenance": {
+            "tier": "inferred",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        },
+        "weight_kg": {
+          "value": 3200.0,
+          "unit": "kg",
+          "provenance": {
+            "tier": "inferred",
+            "source": "https://snfexpt.stanford.edu/equipment/asml"
+          }
+        }
+      },
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Lithography",
+            "detail": {
+              "value": "i-line 365nm stepper, NA 0.54, 5x reduction; resolution <= 0.45um; SMO overlay <= 90nm (3-sigma); 55 wph",
+              "provenance": {
+                "tier": "community_corroborated",
+                "source": "https://snfexpt.stanford.edu/equipment/asml"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Stanford Nanofabrication Facility (SNF) documented SOP and Teledyne MEMS production stepper; mature workhorse"
+    }
+  },
+  {
     "record_id": "c327b57f-9e72-50d5-87a3-0986242ffb86",
     "vendor": "ASML",
     "model": "TWINSCAN NXT:2050i",
@@ -750,8 +861,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -1159,8 +1270,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -1570,8 +1681,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -1735,8 +1846,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -1817,8 +1928,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -1899,8 +2010,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -1982,8 +2093,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -2146,8 +2257,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -2393,8 +2504,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -2475,8 +2586,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -2962,8 +3073,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3044,8 +3155,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3531,8 +3642,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3614,8 +3725,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3697,8 +3808,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3773,15 +3884,15 @@
     }
   },
   {
-    "record_id": "08f2083d-6096-54d9-b0c2-d83e3c904bec",
+    "record_id": "09b4a776-277f-5203-8f72-80361b049f10",
     "vendor": "KLA",
     "model": "3935 (39xx series)",
-    "category": "metrology",
+    "category": "inspection",
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3791,7 +3902,7 @@
     "prefill_url": "/add-equipment?vendor=KLA&model=3935%20%2839xx%20series%29",
     "record": {
       "schema_version": "1.0",
-      "record_id": "08f2083d-6096-54d9-b0c2-d83e3c904bec",
+      "record_id": "09b4a776-277f-5203-8f72-80361b049f10",
       "conformance_level": "L1",
       "record_status": "draft",
       "submitted_by": "csv-migration v1.0",
@@ -3813,7 +3924,7 @@
           }
         },
         "category": {
-          "value": "metrology",
+          "value": "inspection",
           "provenance": {
             "tier": "inferred",
             "source": "segment mapping v1.0"
@@ -3855,15 +3966,15 @@
     }
   },
   {
-    "record_id": "76ac75ca-d579-588f-a0c1-053d10c136ae",
+    "record_id": "bdd36ff2-ada4-5655-8230-ccd30e4919a6",
     "vendor": "KLA",
     "model": "2930 (29xx series)",
-    "category": "metrology",
+    "category": "inspection",
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -3873,7 +3984,7 @@
     "prefill_url": "/add-equipment?vendor=KLA&model=2930%20%2829xx%20series%29",
     "record": {
       "schema_version": "1.0",
-      "record_id": "76ac75ca-d579-588f-a0c1-053d10c136ae",
+      "record_id": "bdd36ff2-ada4-5655-8230-ccd30e4919a6",
       "conformance_level": "L1",
       "record_status": "draft",
       "submitted_by": "csv-migration v1.0",
@@ -3895,7 +4006,7 @@
           }
         },
         "category": {
-          "value": "metrology",
+          "value": "inspection",
           "provenance": {
             "tier": "inferred",
             "source": "segment mapping v1.0"
@@ -3938,10 +4049,10 @@
     }
   },
   {
-    "record_id": "aae0deec-36ca-5bfc-975b-6813aafd92c4",
+    "record_id": "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca",
     "vendor": "KLA",
     "model": "eDR7280",
-    "category": "metrology",
+    "category": "inspection",
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
@@ -3955,7 +4066,7 @@
     "prefill_url": "/add-equipment?vendor=KLA&model=eDR7280",
     "record": {
       "schema_version": "1.0",
-      "record_id": "aae0deec-36ca-5bfc-975b-6813aafd92c4",
+      "record_id": "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca",
       "conformance_level": "L1",
       "record_status": "draft",
       "submitted_by": "csv-migration v1.0",
@@ -3977,7 +4088,7 @@
           }
         },
         "category": {
-          "value": "metrology",
+          "value": "inspection",
           "provenance": {
             "tier": "inferred",
             "source": "segment mapping v1.0"
@@ -4026,8 +4137,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -4109,8 +4220,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -4432,8 +4543,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -4508,15 +4619,15 @@
     }
   },
   {
-    "record_id": "a59601fa-0c7b-56c3-971e-a7becce1c7b5",
+    "record_id": "3ec5df59-2f2e-565d-bb9c-ab9974fa6720",
     "vendor": "Lasertec",
     "model": "MATRICS X9ULTRA",
-    "category": "metrology",
+    "category": "inspection",
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -4527,7 +4638,7 @@
     "prefill_url": "/add-equipment?vendor=Lasertec&model=MATRICS%20X9ULTRA",
     "record": {
       "schema_version": "1.0",
-      "record_id": "a59601fa-0c7b-56c3-971e-a7becce1c7b5",
+      "record_id": "3ec5df59-2f2e-565d-bb9c-ab9974fa6720",
       "conformance_level": "L1",
       "record_status": "draft",
       "submitted_by": "csv-migration v1.0",
@@ -4549,7 +4660,7 @@
           }
         },
         "category": {
-          "value": "metrology",
+          "value": "inspection",
           "provenance": {
             "tier": "inferred",
             "source": "segment mapping v1.0"
@@ -4917,8 +5028,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -5158,8 +5269,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -5240,8 +5351,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -5489,8 +5600,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -5572,8 +5683,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -5805,8 +5916,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -5888,8 +5999,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -6211,8 +6322,8 @@
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -6285,8 +6396,8 @@
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -6508,8 +6619,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 2
+      "inferred": 2,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "physical.width_mm",
@@ -7068,8 +7179,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -7234,8 +7345,8 @@
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -7308,8 +7419,8 @@
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -7917,8 +8028,8 @@
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -8243,8 +8354,8 @@
     "conformance_level": "draft",
     "completeness_pct": 50.0,
     "tier_summary": {
-      "vendor_confirmed": 4,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 4
     },
     "missing_fields": [
       "identity.wafer_sizes_mm",
@@ -9331,10 +9442,10 @@
     }
   },
   {
-    "record_id": "5f9d9df2-580c-5621-9880-203abf291ac4",
+    "record_id": "ac21f1d6-2cda-51ba-a46b-b7c56f3eda25",
     "vendor": "SKYVERSE",
     "model": "SPRUCE-800",
-    "category": "metrology",
+    "category": "inspection",
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
@@ -9348,7 +9459,7 @@
     "prefill_url": "/add-equipment?vendor=SKYVERSE&model=SPRUCE-800",
     "record": {
       "schema_version": "1.0",
-      "record_id": "5f9d9df2-580c-5621-9880-203abf291ac4",
+      "record_id": "ac21f1d6-2cda-51ba-a46b-b7c56f3eda25",
       "conformance_level": "L1",
       "record_status": "draft",
       "submitted_by": "csv-migration v1.0",
@@ -9370,7 +9481,7 @@
           }
         },
         "category": {
-          "value": "metrology",
+          "value": "inspection",
           "provenance": {
             "tier": "inferred",
             "source": "segment mapping v1.0"
@@ -9486,10 +9597,10 @@
     }
   },
   {
-    "record_id": "ac2add35-89c1-530b-9be6-a5271fb0a49e",
+    "record_id": "b7fd7715-e3a4-5563-bf18-a6ba7e8929f8",
     "vendor": "SKYVERSE",
     "model": "SPRUCE-600",
-    "category": "metrology",
+    "category": "inspection",
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
@@ -9503,7 +9614,7 @@
     "prefill_url": "/add-equipment?vendor=SKYVERSE&model=SPRUCE-600",
     "record": {
       "schema_version": "1.0",
-      "record_id": "ac2add35-89c1-530b-9be6-a5271fb0a49e",
+      "record_id": "b7fd7715-e3a4-5563-bf18-a6ba7e8929f8",
       "conformance_level": "L1",
       "record_status": "draft",
       "submitted_by": "csv-migration v1.0",
@@ -9525,7 +9636,7 @@
           }
         },
         "category": {
-          "value": "metrology",
+          "value": "inspection",
           "provenance": {
             "tier": "inferred",
             "source": "segment mapping v1.0"
@@ -9721,8 +9832,8 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
-      "vendor_confirmed": 5,
-      "inferred": 1
+      "inferred": 1,
+      "vendor_confirmed": 5
     },
     "missing_fields": [
       "physical.width_mm",
@@ -11853,6 +11964,1154 @@
     }
   },
   {
+    "record_id": "b8574715-05b3-5bd4-9449-3c34dd00ed02",
+    "vendor": "Tokyo Electron",
+    "model": "CLEAN TRACK LITHIUS Pro Z",
+    "category": "resist_track",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Tokyo%20Electron&model=CLEAN%20TRACK%20LITHIUS%20Pro%20Z",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "b8574715-05b3-5bd4-9449-3c34dd00ed02",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Tokyo Electron",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
+          }
+        },
+        "model": {
+          "value": "CLEAN TRACK LITHIUS Pro Z",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
+          }
+        },
+        "category": {
+          "value": "resist_track",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
+          }
+        },
+        "node_applicability": {
+          "value": "3nm-10nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Lithography",
+            "detail": {
+              "value": "Advanced EUV and ArF immersion track; rated up to 300 wph; ultra-low defectivity & CDU control; multi-block architecture",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Industry standard coater/developer inline paired with ASML NXE/NXT scanners for advanced sub-10nm logic/DRAM"
+    }
+  },
+  {
+    "record_id": "5b0a3bb2-da3e-5981-9431-99e04edda4c0",
+    "vendor": "Tokyo Electron",
+    "model": "CLEAN TRACK ACT 12",
+    "category": "resist_track",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "independent_verified": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Tokyo%20Electron&model=CLEAN%20TRACK%20ACT%2012",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "5b0a3bb2-da3e-5981-9431-99e04edda4c0",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Tokyo Electron",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/track-systems/tokyo-electron/clean-track-act-12"
+          }
+        },
+        "model": {
+          "value": "CLEAN TRACK ACT 12",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/track-systems/tokyo-electron/clean-track-act-12"
+          }
+        },
+        "category": {
+          "value": "resist_track",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/track-systems/tokyo-electron/clean-track-act-12"
+          }
+        },
+        "node_applicability": {
+          "value": "28nm-90nm",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/track-systems/tokyo-electron/clean-track-act-12"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Lithography",
+            "detail": {
+              "value": "High-volume 300mm coater/developer track; 16-20 spin process stations; 150-200 wph; ArF/KrF/i-line process support",
+              "provenance": {
+                "tier": "independent_verified",
+                "source": "https://moov.co/marketplace/track-systems/tokyo-electron/clean-track-act-12"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Workhorse 300mm track system widely deployed globally for mature and mainstream deep sub-micron nodes"
+    }
+  },
+  {
+    "record_id": "e27404f9-870a-5bce-8d5a-c91a6e85695c",
+    "vendor": "Tokyo Electron",
+    "model": "CLEAN TRACK ACT 8",
+    "category": "resist_track",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "independent_verified": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Tokyo%20Electron&model=CLEAN%20TRACK%20ACT%208",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "e27404f9-870a-5bce-8d5a-c91a6e85695c",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Tokyo Electron",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://www.ritetrack.com/tel-act-8-systems/"
+          }
+        },
+        "model": {
+          "value": "CLEAN TRACK ACT 8",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://www.ritetrack.com/tel-act-8-systems/"
+          }
+        },
+        "category": {
+          "value": "resist_track",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            200
+          ],
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://www.ritetrack.com/tel-act-8-systems/"
+          }
+        },
+        "node_applicability": {
+          "value": "65nm-180nm",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://www.ritetrack.com/tel-act-8-systems/"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Lithography",
+            "detail": {
+              "value": "200mm workhorse track; 8-12 spin units; dual chemical lines; precise temperature-controlled bake/chill plates",
+              "provenance": {
+                "tier": "independent_verified",
+                "source": "https://www.ritetrack.com/tel-act-8-systems/"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Standard 8-inch fab coating and development tool; extensive secondary market refurbished ecosystem by Rite Track"
+    }
+  },
+  {
+    "record_id": "6df5f3ad-5332-54f7-a806-0ad597beb740",
+    "vendor": "Kingsemi",
+    "model": "FT300",
+    "category": "resist_track",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Kingsemi&model=FT300",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "6df5f3ad-5332-54f7-a806-0ad597beb740",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Kingsemi",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kingsemi.com/product/track-ft300"
+          }
+        },
+        "model": {
+          "value": "FT300",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kingsemi.com/product/track-ft300"
+          }
+        },
+        "category": {
+          "value": "resist_track",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kingsemi.com/product/track-ft300"
+          }
+        },
+        "node_applicability": {
+          "value": "28nm-65nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kingsemi.com/product/track-ft300"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Lithography",
+            "detail": {
+              "value": "Front-end 300mm coater/developer; up to 36-48 spin stations; nominal 300 wph; supports PR, BARC, SOC, SOH, SOD coatings",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.kingsemi.com/product/track-ft300"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] China leading domestic front-end track; offline and online inline operation with ASML and SMEE lithography scanners"
+    }
+  },
+  {
+    "record_id": "7a43403b-8206-5580-8d77-8b4133bbb23c",
+    "vendor": "Lam Research",
+    "model": "Sense.i",
+    "category": "dry_etch",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Lam%20Research&model=Sense.i",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "7a43403b-8206-5580-8d77-8b4133bbb23c",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Lam Research",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.lamresearch.com/products/sense-i-platform/"
+          }
+        },
+        "model": {
+          "value": "Sense.i",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.lamresearch.com/products/sense-i-platform/"
+          }
+        },
+        "category": {
+          "value": "dry_etch",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.lamresearch.com/products/sense-i-platform/"
+          }
+        },
+        "node_applicability": {
+          "value": "Sub-3nm & 3D NAND",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.lamresearch.com/products/sense-i-platform/"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Etch",
+            "detail": {
+              "value": "Next-generation compact etch platform; >50% improvement in etch output density; Equipment Intelligence autonomous calibration; hosts Vantex and Akara chambers",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.lamresearch.com/products/sense-i-platform/"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Flagship platform for GAA/CFET nanosheet, 3D NAND (>200 layers), and advanced DRAM capacitor/contact patterning"
+    }
+  },
+  {
+    "record_id": "675ad6a7-3218-5168-b518-f00fa45b978a",
+    "vendor": "Lam Research",
+    "model": "TCP 9400 Poly Etcher",
+    "category": "dry_etch",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "community_corroborated": 5,
+      "inferred": 1
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Lam%20Research&model=TCP%209400%20Poly%20Etcher",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "675ad6a7-3218-5168-b518-f00fa45b978a",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Lam Research",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/lampoly"
+          }
+        },
+        "model": {
+          "value": "TCP 9400 Poly Etcher",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/lampoly"
+          }
+        },
+        "category": {
+          "value": "dry_etch",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            200
+          ],
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/lampoly"
+          }
+        },
+        "node_applicability": {
+          "value": "90nm-250nm",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://snfexpt.stanford.edu/equipment/lampoly"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Etch",
+            "detail": {
+              "value": "Transformer Coupled Plasma (TCP) / ICP poly-Si and silicon etcher; independent source/bias RF power; Cl2, HBr, He-O2, CF4 chemistries",
+              "provenance": {
+                "tier": "community_corroborated",
+                "source": "https://snfexpt.stanford.edu/equipment/lampoly"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Industry classic gate etch and polysilicon trench tool; verified via Stanford Nanofabrication Facility SOP operating guidelines"
+    }
+  },
+  {
+    "record_id": "58862876-946e-5da9-812a-7e3f239e41cf",
+    "vendor": "AMEC",
+    "model": "Primo nanova",
+    "category": "dry_etch",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=AMEC&model=Primo%20nanova",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "58862876-946e-5da9-812a-7e3f239e41cf",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "AMEC",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-nanova"
+          }
+        },
+        "model": {
+          "value": "Primo nanova",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-nanova"
+          }
+        },
+        "category": {
+          "value": "dry_etch",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-nanova"
+          }
+        },
+        "node_applicability": {
+          "value": "Sub-5nm logic & 3D memory",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-nanova"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Etch",
+            "detail": {
+              "value": "Inductively Coupled Plasma (ICP) conductor etch; up to 6 etch chambers + 2 strip chambers; low-capacitance 3D coil; multi-zone dynamic ESC",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.amec-inc.com/product/primo-nanova"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Advanced conductor etching for leading-edge logic gate patterning, DRAM capacitor arrays, and 3D NAND contact hole etching"
+    }
+  },
+  {
+    "record_id": "120f36d5-9f9f-5522-a9ff-9f377cca0aae",
+    "vendor": "AMEC",
+    "model": "Primo AD-RIE",
+    "category": "dry_etch",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=AMEC&model=Primo%20AD-RIE",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "120f36d5-9f9f-5522-a9ff-9f377cca0aae",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "AMEC",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-ad-rie"
+          }
+        },
+        "model": {
+          "value": "Primo AD-RIE",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-ad-rie"
+          }
+        },
+        "category": {
+          "value": "dry_etch",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-ad-rie"
+          }
+        },
+        "node_applicability": {
+          "value": "5nm-40nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.amec-inc.com/product/primo-ad-rie"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Etch",
+            "detail": {
+              "value": "Second-gen dual-station CCP dielectric etch; up to 3 dual-station chambers (6 reaction stations); switchable dual-low-frequency RF bias; 4-zone ESC",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.amec-inc.com/product/primo-ad-rie"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Dual-wafer processing for maximum cleanroom area throughput; widely used in BEOL ultra-low-k inter-metal dielectric and FEOL contact trenches"
+    }
+  },
+  {
+    "record_id": "9490cf72-5e74-5c66-9d82-d4d2fee147b6",
+    "vendor": "Applied Materials",
+    "model": "Centura 5200 CVD",
+    "category": "thin_film_deposition",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "community_corroborated": 5,
+      "inferred": 1
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Applied%20Materials&model=Centura%205200%20CVD",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "9490cf72-5e74-5c66-9d82-d4d2fee147b6",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Applied Materials",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://www.mtl.mit.edu/services/fabrication/centura-5200"
+          }
+        },
+        "model": {
+          "value": "Centura 5200 CVD",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://www.mtl.mit.edu/services/fabrication/centura-5200"
+          }
+        },
+        "category": {
+          "value": "thin_film_deposition",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            200
+          ],
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://www.mtl.mit.edu/services/fabrication/centura-5200"
+          }
+        },
+        "node_applicability": {
+          "value": "65nm-180nm",
+          "provenance": {
+            "tier": "community_corroborated",
+            "source": "https://www.mtl.mit.edu/services/fabrication/centura-5200"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Deposition",
+            "detail": {
+              "value": "Multi-chamber single-wafer vacuum cluster system; accommodates up to 4 CVD/Epi/Etch process modules; dual loadlock cassettes",
+              "provenance": {
+                "tier": "community_corroborated",
+                "source": "https://www.mtl.mit.edu/services/fabrication/centura-5200"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Standard Operating Procedure (SOP) published by MIT Microsystems Technology Laboratories / ICL; dielectric & metal CVD workhorse"
+    }
+  },
+  {
+    "record_id": "a8ea6f35-5a10-5b05-87c3-56fd8b9d2ae8",
+    "vendor": "ASM International",
+    "model": "Pulsar XP ALD",
+    "category": "thin_film_deposition",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=ASM%20International&model=Pulsar%20XP%20ALD",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "a8ea6f35-5a10-5b05-87c3-56fd8b9d2ae8",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "ASM International",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.asm.com/products/atomic-layer-deposition/pulsar"
+          }
+        },
+        "model": {
+          "value": "Pulsar XP ALD",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.asm.com/products/atomic-layer-deposition/pulsar"
+          }
+        },
+        "category": {
+          "value": "thin_film_deposition",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.asm.com/products/atomic-layer-deposition/pulsar"
+          }
+        },
+        "node_applicability": {
+          "value": "7nm-28nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.asm.com/products/atomic-layer-deposition/pulsar"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Deposition",
+            "detail": {
+              "value": "High-k dielectric and metal gate atomic layer deposition; ultra-thin sub-monolayer uniformity; HfO2, ZrO2, Al2O3, TiN films",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.asm.com/products/atomic-layer-deposition/pulsar"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] De facto industry standard for advanced gate oxide and FinFET/GAA high-k metal gate (HKMG) stacks"
+    }
+  },
+  {
+    "record_id": "c9f70f4b-621c-59c4-9f44-34e26ea62a33",
+    "vendor": "Applied Materials",
+    "model": "Mirra Mesa",
+    "category": "cmp",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "independent_verified": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Applied%20Materials&model=Mirra%20Mesa",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "c9f70f4b-621c-59c4-9f44-34e26ea62a33",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Applied Materials",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/chemical-mechanical-planarization/applied-materials/mirra-mesa"
+          }
+        },
+        "model": {
+          "value": "Mirra Mesa",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/chemical-mechanical-planarization/applied-materials/mirra-mesa"
+          }
+        },
+        "category": {
+          "value": "cmp",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            200
+          ],
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/chemical-mechanical-planarization/applied-materials/mirra-mesa"
+          }
+        },
+        "node_applicability": {
+          "value": "90nm-250nm",
+          "provenance": {
+            "tier": "independent_verified",
+            "source": "https://moov.co/marketplace/chemical-mechanical-planarization/applied-materials/mirra-mesa"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "CMP",
+            "detail": {
+              "value": "Dry In / Dry Out CMP; 4-head / 3-platen carousel architecture; multi-zone Titan Contour polishing heads; integrated dual-sided brush scrubber cleaner",
+              "provenance": {
+                "tier": "independent_verified",
+                "source": "https://moov.co/marketplace/chemical-mechanical-planarization/applied-materials/mirra-mesa"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Industry classic 200mm planarization platform for oxide, polysilicon, STI, tungsten, and copper damascene interconnects"
+    }
+  },
+  {
+    "record_id": "e90409d2-5773-5692-9910-6e0ff66965c7",
+    "vendor": "Huahai Qingke",
+    "model": "Versatile-GP300",
+    "category": "cmp",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=Huahai%20Qingke&model=Versatile-GP300",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "e90409d2-5773-5692-9910-6e0ff66965c7",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "Huahai Qingke",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.hhqk.com.cn/product/versatile-gp300"
+          }
+        },
+        "model": {
+          "value": "Versatile-GP300",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.hhqk.com.cn/product/versatile-gp300"
+          }
+        },
+        "category": {
+          "value": "cmp",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.hhqk.com.cn/product/versatile-gp300"
+          }
+        },
+        "node_applicability": {
+          "value": "Advanced packaging & 3D IC",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.hhqk.com.cn/product/versatile-gp300"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "CMP",
+            "detail": {
+              "value": "Ultra-precision wafer thinning and CMP polishing integration; ultra-precision grinding TTV < 1.0 um; multi-zone pressure control CMP; post-clean module",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.hhqk.com.cn/product/versatile-gp300"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] First domestic integrated 300mm ultra-precision grinder & CMP machine for 3D IC, Chiplet, and CIS back-illuminated wafer thinning"
+    }
+  },
+  {
+    "record_id": "1618a1eb-086d-5dbc-9635-1d7577b0602c",
+    "vendor": "KLA",
+    "model": "2920 Series",
+    "category": "inspection",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=KLA&model=2920%20Series",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "1618a1eb-086d-5dbc-9635-1d7577b0602c",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "KLA",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/chip-manufacturing/defect-inspection-review/29xx-series"
+          }
+        },
+        "model": {
+          "value": "2920 Series",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/chip-manufacturing/defect-inspection-review/29xx-series"
+          }
+        },
+        "category": {
+          "value": "inspection",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/chip-manufacturing/defect-inspection-review/29xx-series"
+          }
+        },
+        "node_applicability": {
+          "value": "10nm-20nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/chip-manufacturing/defect-inspection-review/29xx-series"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Metrology & Inspection",
+            "detail": {
+              "value": "Broadband plasma (BBP) optical patterned wafer defect inspection; DUV/UV/visible illumination bands; high-speed multi-channel sensor",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.kla.com/products/chip-manufacturing/defect-inspection-review/29xx-series"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Workhorse patterned wafer inspection tool for discovery and inline monitoring of critical defectivity across sub-20nm nodes"
+    }
+  },
+  {
+    "record_id": "e46e3f37-36ef-5092-930c-b8825fac2ca2",
+    "vendor": "KLA",
+    "model": "Surfscan SP7XP",
+    "category": "inspection",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=KLA&model=Surfscan%20SP7XP",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "e46e3f37-36ef-5092-930c-b8825fac2ca2",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "KLA",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/wafer-manufacturing/surfscan-sp7xp"
+          }
+        },
+        "model": {
+          "value": "Surfscan SP7XP",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/wafer-manufacturing/surfscan-sp7xp"
+          }
+        },
+        "category": {
+          "value": "inspection",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/wafer-manufacturing/surfscan-sp7xp"
+          }
+        },
+        "node_applicability": {
+          "value": "Sub-3nm logic & 3D NAND",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.kla.com/products/wafer-manufacturing/surfscan-sp7xp"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Metrology & Inspection",
+            "detail": {
+              "value": "Unpatterned blanket wafer inspection; 12.5nm peak defect sensitivity; Phase Contrast Channel (PCC) & Normal Illumination (NI); real-time machine learning Image-Based Classification (IBC)",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.kla.com/products/wafer-manufacturing/surfscan-sp7xp"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] World standard for bare wafer and blanket film quality control at sub-3nm logic, advanced 3D NAND, and EUV litho resist stacks"
+    }
+  },
+  {
     "record_id": "ac5b0753-0843-5980-a016-cc5297bb0438",
     "vendor": "Applied Materials",
     "model": "UVision 4",
@@ -11860,6 +13119,7 @@
     "conformance_level": "draft",
     "completeness_pct": 62.5,
     "tier_summary": {
+      "inferred": 1,
       "vendor_confirmed": 5
     },
     "missing_fields": [
@@ -11881,21 +13141,21 @@
           "value": "Applied Materials",
           "provenance": {
             "tier": "vendor_confirmed",
-            "source": "https://www.appliedmaterials.com/products/uvision-4"
+            "source": "https://www.appliedmaterials.com/en-us/products/semiconductor/inspection/uvision-4"
           }
         },
         "model": {
           "value": "UVision 4",
           "provenance": {
             "tier": "vendor_confirmed",
-            "source": "https://www.appliedmaterials.com/products/uvision-4"
+            "source": "https://www.appliedmaterials.com/en-us/products/semiconductor/inspection/uvision-4"
           }
         },
         "category": {
           "value": "inspection",
           "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.appliedmaterials.com/products/uvision-4"
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
           }
         },
         "wafer_sizes_mm": {
@@ -11904,7 +13164,14 @@
           ],
           "provenance": {
             "tier": "vendor_confirmed",
-            "source": "https://www.appliedmaterials.com/products/uvision-4"
+            "source": "https://www.appliedmaterials.com/en-us/products/semiconductor/inspection/uvision-4"
+          }
+        },
+        "node_applicability": {
+          "value": "14nm-28nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.appliedmaterials.com/en-us/products/semiconductor/inspection/uvision-4"
           }
         }
       },
@@ -11912,18 +13179,182 @@
       "process_capability": {
         "capabilities": [
           {
-            "process": "inspection",
+            "process": "Metrology & Inspection",
             "detail": {
-              "value": "3D brightfield inspection system with deep UV illumination for advanced logic and memory patterned wafers",
+              "value": "Simultaneous 3D brightfield and scattered light (grayfield) laser inspection; DUV laser illumination; programmable polarization",
               "provenance": {
                 "tier": "vendor_confirmed",
-                "source": "https://www.appliedmaterials.com/products/uvision-4"
+                "source": "https://www.appliedmaterials.com/en-us/products/semiconductor/inspection/uvision-4"
               }
             }
           }
         ]
       },
-      "notes": "[source note] 3D optical brightfield inspection platform"
+      "notes": "[source note] FEOL and MOL pattern defect inspection for STI, gate etch, and contact vias; pairs with SEMVision defect review SEM"
+    }
+  },
+  {
+    "record_id": "8af8d04b-9e7b-5a0e-971e-2612b1827492",
+    "vendor": "SCREEN",
+    "model": "SU-3200",
+    "category": "wet_clean",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=SCREEN&model=SU-3200",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "8af8d04b-9e7b-5a0e-971e-2612b1827492",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "SCREEN",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.screen.co.jp/en/spe/products/su3200"
+          }
+        },
+        "model": {
+          "value": "SU-3200",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.screen.co.jp/en/spe/products/su3200"
+          }
+        },
+        "category": {
+          "value": "wet_clean",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.screen.co.jp/en/spe/products/su3200"
+          }
+        },
+        "node_applicability": {
+          "value": "14nm-28nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.screen.co.jp/en/spe/products/su3200"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Cleaning",
+            "detail": {
+              "value": "Single-wafer cleaning system; up to 12 chambers in four 3-level towers; up to 800 wph; Super Clean APAC micro-atmosphere control",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.screen.co.jp/en/spe/products/su3200"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] High-volume manufacturing single-wafer wet cleaner with watermark-free drying and advanced pattern collapse prevention"
+    }
+  },
+  {
+    "record_id": "2bafc8ee-b237-5b0c-851c-bb53e6c3a39b",
+    "vendor": "ACM Research",
+    "model": "Ultra C SAPS II",
+    "category": "wet_clean",
+    "conformance_level": "draft",
+    "completeness_pct": 62.5,
+    "tier_summary": {
+      "inferred": 1,
+      "vendor_confirmed": 5
+    },
+    "missing_fields": [
+      "physical.width_mm",
+      "physical.depth_mm",
+      "physical.height_mm"
+    ],
+    "prefill_url": "/add-equipment?vendor=ACM%20Research&model=Ultra%20C%20SAPS%20II",
+    "record": {
+      "schema_version": "1.0",
+      "record_id": "2bafc8ee-b237-5b0c-851c-bb53e6c3a39b",
+      "conformance_level": "L1",
+      "record_status": "draft",
+      "submitted_by": "csv-migration v1.0",
+      "submitted_at": "2026-10-11",
+      "updated_at": "2026-10-11",
+      "identity": {
+        "vendor": {
+          "value": "ACM Research",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.acmr.com/products/cleaning/ultra-c-saps-ii/"
+          }
+        },
+        "model": {
+          "value": "Ultra C SAPS II",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.acmr.com/products/cleaning/ultra-c-saps-ii/"
+          }
+        },
+        "category": {
+          "value": "wet_clean",
+          "provenance": {
+            "tier": "inferred",
+            "source": "segment mapping v1.0"
+          }
+        },
+        "wafer_sizes_mm": {
+          "value": [
+            300
+          ],
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.acmr.com/products/cleaning/ultra-c-saps-ii/"
+          }
+        },
+        "node_applicability": {
+          "value": "7nm-28nm",
+          "provenance": {
+            "tier": "vendor_confirmed",
+            "source": "https://www.acmr.com/products/cleaning/ultra-c-saps-ii/"
+          }
+        }
+      },
+      "physical": {},
+      "process_capability": {
+        "capabilities": [
+          {
+            "process": "Cleaning",
+            "detail": {
+              "value": "Single-wafer megasonic cleaning platform; 8 to 12 chambers; throughput up to 225+ wph; Space Alternated Phase Shift (SAPS) non-destructive megasonics",
+              "provenance": {
+                "tier": "vendor_confirmed",
+                "source": "https://www.acmr.com/products/cleaning/ultra-c-saps-ii/"
+              }
+            }
+          }
+        ]
+      },
+      "notes": "[source note] Particle removal efficiency >98% for nanoscale defects without damage to delicate high-aspect-ratio 3D structures"
     }
   },
   {
@@ -11998,228 +13429,6 @@
         ]
       },
       "notes": "[source note] Sub-fab vacuum infrastructure dry pumping system"
-    }
-  },
-  {
-    "record_id": "a17941e5-0957-5789-a42f-c5e0cdab8127",
-    "vendor": "KLA",
-    "model": "2920 Series Broadband Plasma Inspection",
-    "category": "inspection",
-    "conformance_level": "draft",
-    "completeness_pct": 62.5,
-    "tier_summary": {
-      "vendor_confirmed": 5
-    },
-    "missing_fields": [
-      "physical.width_mm",
-      "physical.depth_mm",
-      "physical.height_mm"
-    ],
-    "prefill_url": "/add-equipment?vendor=KLA&model=2920%20Series%20Broadband%20Plasma%20Inspection",
-    "record": {
-      "schema_version": "1.0",
-      "record_id": "a17941e5-0957-5789-a42f-c5e0cdab8127",
-      "conformance_level": "L1",
-      "record_status": "draft",
-      "submitted_by": "csv-migration v1.0",
-      "submitted_at": "2026-10-11",
-      "updated_at": "2026-10-11",
-      "identity": {
-        "vendor": {
-          "value": "KLA",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.kla.com/products/wafer-inspection/broadband-plasma"
-          }
-        },
-        "model": {
-          "value": "2920 Series Broadband Plasma Inspection",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.kla.com/products/wafer-inspection/broadband-plasma"
-          }
-        },
-        "category": {
-          "value": "inspection",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.kla.com/products/wafer-inspection/broadband-plasma"
-          }
-        },
-        "wafer_sizes_mm": {
-          "value": [
-            300
-          ],
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.kla.com/products/wafer-inspection/broadband-plasma"
-          }
-        }
-      },
-      "physical": {},
-      "process_capability": {
-        "capabilities": [
-          {
-            "process": "inspection",
-            "detail": {
-              "value": "Broadband plasma optical patterned wafer defect inspection system for critical defect discovery at sub-10nm nodes",
-              "provenance": {
-                "tier": "vendor_confirmed",
-                "source": "https://www.kla.com/products/wafer-inspection/broadband-plasma"
-              }
-            }
-          }
-        ]
-      },
-      "notes": "[source note] Broadband plasma optical defect discovery platform"
-    }
-  },
-  {
-    "record_id": "5b0a3bb2-da3e-5981-9431-99e04edda4c0",
-    "vendor": "Tokyo Electron",
-    "model": "CLEAN TRACK ACT 12",
-    "category": "resist_track",
-    "conformance_level": "draft",
-    "completeness_pct": 62.5,
-    "tier_summary": {
-      "vendor_confirmed": 5
-    },
-    "missing_fields": [
-      "physical.width_mm",
-      "physical.depth_mm",
-      "physical.height_mm"
-    ],
-    "prefill_url": "/add-equipment?vendor=Tokyo%20Electron&model=CLEAN%20TRACK%20ACT%2012",
-    "record": {
-      "schema_version": "1.0",
-      "record_id": "5b0a3bb2-da3e-5981-9431-99e04edda4c0",
-      "conformance_level": "L1",
-      "record_status": "draft",
-      "submitted_by": "csv-migration v1.0",
-      "submitted_at": "2026-10-11",
-      "updated_at": "2026-10-11",
-      "identity": {
-        "vendor": {
-          "value": "Tokyo Electron",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/act12/"
-          }
-        },
-        "model": {
-          "value": "CLEAN TRACK ACT 12",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/act12/"
-          }
-        },
-        "category": {
-          "value": "resist_track",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/act12/"
-          }
-        },
-        "wafer_sizes_mm": {
-          "value": [
-            300
-          ],
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/act12/"
-          }
-        }
-      },
-      "physical": {},
-      "process_capability": {
-        "capabilities": [
-          {
-            "process": "resist_track",
-            "detail": {
-              "value": "300mm coater/developer track platform for immersion and ArF/KrF lithography integration; high reliability and particle control",
-              "provenance": {
-                "tier": "vendor_confirmed",
-                "source": "https://www.tel.com/products/coater_developer/act12/"
-              }
-            }
-          }
-        ]
-      },
-      "notes": "[source note] Industry benchmark coater/developer track platform"
-    }
-  },
-  {
-    "record_id": "b8574715-05b3-5bd4-9449-3c34dd00ed02",
-    "vendor": "Tokyo Electron",
-    "model": "CLEAN TRACK LITHIUS Pro Z",
-    "category": "resist_track",
-    "conformance_level": "draft",
-    "completeness_pct": 62.5,
-    "tier_summary": {
-      "vendor_confirmed": 5
-    },
-    "missing_fields": [
-      "physical.width_mm",
-      "physical.depth_mm",
-      "physical.height_mm"
-    ],
-    "prefill_url": "/add-equipment?vendor=Tokyo%20Electron&model=CLEAN%20TRACK%20LITHIUS%20Pro%20Z",
-    "record": {
-      "schema_version": "1.0",
-      "record_id": "b8574715-05b3-5bd4-9449-3c34dd00ed02",
-      "conformance_level": "L1",
-      "record_status": "draft",
-      "submitted_by": "csv-migration v1.0",
-      "submitted_at": "2026-10-11",
-      "updated_at": "2026-10-11",
-      "identity": {
-        "vendor": {
-          "value": "Tokyo Electron",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
-          }
-        },
-        "model": {
-          "value": "CLEAN TRACK LITHIUS Pro Z",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
-          }
-        },
-        "category": {
-          "value": "resist_track",
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
-          }
-        },
-        "wafer_sizes_mm": {
-          "value": [
-            300
-          ],
-          "provenance": {
-            "tier": "vendor_confirmed",
-            "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
-          }
-        }
-      },
-      "physical": {},
-      "process_capability": {
-        "capabilities": [
-          {
-            "process": "resist_track",
-            "detail": {
-              "value": "Advanced EUV and ArF immersion track system; ultra-low defectivity and line edge roughness control",
-              "provenance": {
-                "tier": "vendor_confirmed",
-                "source": "https://www.tel.com/products/coater_developer/lithius_pro_z/"
-              }
-            }
-          }
-        ]
-      },
-      "notes": "[source note] Designed for advanced EUV and high-NA immersion clusters"
     }
   }
 ]
