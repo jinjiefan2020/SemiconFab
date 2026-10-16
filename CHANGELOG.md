@@ -4,6 +4,16 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ---
 
+## [1.3.0] - 2026-10-15
+
+### In-Browser MIMAC-2026 Benchmark Demo (Pyodide WASM)
+
+- **Interactive In-Browser Simulation**: Added zero-backend, browser-native simulation demo on `benchmark.html` (`#try-it`) using Pyodide (v0.27.7 WebAssembly Python runtime). Visitors can test dispatching policies (`FIFO`, `SPT`, `EDD`, `CR`) without downloading packages or setting up local Python environments.
+- **Dedicated Web Worker Pipeline**: Offloads simulation (10-day warmup + 60-day run horizon) to a background Web Worker, keeping the main UI responsive. Stages progress indicators (`loading-pyodide` → `installing-simpy` → `loading-model` → `running` → `done`/`error`).
+- **5 Core Performance Metrics**: Real-time rendering of Mean Cycle Time, Mean Tardiness, Wafer Throughput, Mean WIP, and TG01_LITHO Bottleneck Utilization, plus completed lots and wall-clock execution time.
+- **Session History & Comparison**: Cumulative session history table allowing side-by-side comparison across multiple policy runs and seeds.
+- **Honesty & Bilingual Standards**: Explicit honesty banners distinguishing the shortened interactive demo from the full 365-day multi-replication benchmark protocol; seamless bilingual toggle (`en-only` / `zh-only`) adhering to existing site design system.
+
 ## [1.2.0] - 2026-10-15
 
 ### Catalog expansion: 153 → 167 records
