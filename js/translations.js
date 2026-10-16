@@ -89,14 +89,14 @@ const I18N_DICTIONARY = {
     odr_title: "Open Semiconductor Data & Research Platform",
     odr_subtitle:
       "Transparent OEM machine specifications, reproducible 300mm fab scheduling benchmarks, and an open equipment schema.",
-    odr_catalog_badge: "121 OEM SPECIFICATIONS",
+    odr_catalog_badge: "153 OEM SPECIFICATIONS",
     odr_catalog_title: "Open Equipment Catalog",
     odr_catalog_desc:
-      "Machine-readable specifications for 121 production tools from global OEM vendors across 13 process categories. Built on the 7-layer open schema.",
+      "Machine-readable specifications for 153 production tools from global OEM vendors across 13 process categories. Built on the 7-layer open schema.",
     odr_catalog_funnel_label: "Catalog Maturity & Contribution Funnel",
     odr_catalog_l1_label: "L1 Verified (Footprint & Manual)",
     odr_catalog_draft_label: "Draft (Awaiting Dimensions & Hookups)",
-    odr_catalog_cta: "Browse 121 Tools →",
+    odr_catalog_cta: "Browse 153 Tools →",
     odr_benchmark_badge: "CITABLE RESEARCH TESTBED",
     odr_benchmark_title: "MIMAC-2026 Benchmark Testbed",
     odr_benchmark_desc:
@@ -206,7 +206,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "300mm Semiconductor Manufacturing",
     hero_title_2: "Fab Digital Twin Platform",
     hero_desc:
-      "Architectural cleanroom layout, 121 OEM equipment engineering taxonomy, cascading process yield simulation, and SEMI E10 equipment telemetry.",
+      "Architectural cleanroom layout, 153 OEM equipment engineering taxonomy, cascading process yield simulation, and SEMI E10 equipment telemetry.",
     cta_launch: "Enter 3D Digital Twin",
     cta_explore: "Explore Equipment Catalog",
     stat_cad: "Precision CAD Elevations",
@@ -395,7 +395,7 @@ const I18N_DICTIONARY = {
     device_models_badge: "FEOL Device Physics & 3D Fabrication Twins",
     feat_1_tag: "CLEANROOM CLASS 1 / ISO 3",
     feat_1_cta: "Explore 3D →",
-    feat_2_tag: "121 OEM TOOLS · 13 CATEGORIES",
+    feat_2_tag: "153 OEM TOOLS · 13 CATEGORIES",
     feat_2_cta: "View Elevations →",
     feat_3_tag: "CASCADING YIELD WATERFALL",
     feat_3_cta: "Inspect Yield Waterfall →",
@@ -418,14 +418,14 @@ const I18N_DICTIONARY = {
       "Direct technical definitions, cleanroom standards, and architectural specifications of the SemiconFab.org platform.",
     faq_q1: "What is SemiconFab.org?",
     faq_a1:
-      "SemiconFab.org is an open-access engineering digital twin platform for 300mm (12-inch) semiconductor wafer fabrication cleanrooms. It models architectural cleanroom elevations, subfab MEP utility networks, a 121 OEM equipment engineering taxonomy, real-time SECS/GEM & SEMI E10 industrial telemetry, and microscopic yield analytics directly in the browser.",
+      "SemiconFab.org is an open-access engineering digital twin platform for 300mm (12-inch) semiconductor wafer fabrication cleanrooms. It models architectural cleanroom elevations, subfab MEP utility networks, a 153 OEM equipment engineering taxonomy, real-time SECS/GEM & SEMI E10 industrial telemetry, and microscopic yield analytics directly in the browser.",
     faq_q2: "What cleanroom and architectural standards are modeled?",
     faq_a2:
       "The platform follows SEMI standards and ISO 14644-1 Class 1 cleanroom specifications (< 10 particles/m³ for particles ≥ 0.1 µm). It models a 4.5m process cleanroom with raised waffle-slab access flooring (600mm × 600mm perforated tiles), an amber-lit photolithography core, fan filter units (FFU), and a 6.0m subfab utility basement (Class 10,000 / ISO 7) for vacuum pumps, RF generators, and scrubbers.",
     faq_q3:
       "Which semiconductor equipment categories and OEM tools are included?",
     faq_a3:
-      "The taxonomy covers 121 OEM equipment models across 13 process categories: Photolithography (EUV 13.5nm, ArFi 193nm Immersion, KrF), Photoresist Track (Coater/Developer), Dry Etching (RIE, ICP, ALE), Thin Films (PECVD, LPCVD, ALD, PVD, ECD), Wet Cleaning, CMP, Thermal Processing & Ion Implantation, and Metrology/Inspection (CD-SEM, DR-SEM, Ellipsometry).",
+      "The taxonomy covers 153 OEM equipment models across 13 process categories: Photolithography (EUV 13.5nm, ArFi 193nm Immersion, KrF), Photoresist Track (Coater/Developer), Dry Etching (RIE, ICP, ALE), Thin Films (PECVD, LPCVD, ALD, PVD, ECD), Wet Cleaning, CMP, Thermal Processing & Ion Implantation, and Metrology/Inspection (CD-SEM, DR-SEM, Ellipsometry).",
     faq_q4:
       "How does the Yield Management System (YMS) & Defect Simulator work?",
     faq_a4:
@@ -526,14 +526,14 @@ const I18N_DICTIONARY = {
     odr_title: "开放半导体数据与科研创新平台",
     odr_subtitle:
       "真实透明的设备工程规范、可复现的 300mm 晶圆厂排程基准、以及共建的开放数据漏斗。",
-    odr_catalog_badge: "121 款 OEM 真实机台规格",
+    odr_catalog_badge: "153 款 OEM 真实机台规格",
     odr_catalog_title: "开放半导体设备目录",
     odr_catalog_desc:
-      "收录覆盖全球 13 大半导体制造分类、121 款生产级机台的机器可读参数，基于 7 层开放数据模式构建。",
+      "收录覆盖全球 13 大半导体制造分类、153 款生产级机台的机器可读参数，基于 7 层开放数据模式构建。",
     odr_catalog_funnel_label: "数据标准成熟度与社区贡献漏斗",
     odr_catalog_l1_label: "L1 已核验（含几何尺寸与原厂手册）",
     odr_catalog_draft_label: "草稿待补充（占地与厂务待社区提报）",
-    odr_catalog_cta: "浏览 121 款设备目录 →",
+    odr_catalog_cta: "浏览 153 款设备目录 →",
     odr_benchmark_badge: "可学术引用的科研基准测试集",
     odr_benchmark_title: "MIMAC-2026 基准测试集",
     odr_benchmark_desc:
@@ -636,7 +636,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "300mm 晶圆制造数字工程平台",
     hero_title_2: "晶圆制造厂 (Fab) 数字化孪生平台",
     hero_desc:
-      "真实洁净室建筑空间布局、121款核心半导体设备工程图鉴、前道8大工序级联良率模型与SECS/GEM工业设备遥测系统。",
+      "真实洁净室建筑空间布局、153款核心半导体设备工程图鉴、前道8大工序级联良率模型与SECS/GEM工业设备遥测系统。",
     cta_launch: "进入 3D 洁净厂房",
     cta_explore: "浏览半导体设备图鉴",
     stat_cad: "精密标定立面线图",
@@ -816,7 +816,7 @@ const I18N_DICTIONARY = {
     device_models_badge: "前道器件物理与三维微观制造工艺数字孪生",
     feat_1_tag: "ISO 3 级 / 1 级洁净室标准",
     feat_1_cta: "探索 3D 洁净厂房 →",
-    feat_2_tag: "121 款核心机台 · 13 大制程分类",
+    feat_2_tag: "153 款核心机台 · 13 大制程分类",
     feat_2_cta: "查看立面图工程数据 →",
     feat_3_tag: "级联良率瀑布模型",
     feat_3_cta: "查看前道良率模型 →",
@@ -838,13 +838,13 @@ const I18N_DICTIONARY = {
       "关于 SemiconFab.org 平台的权威技术定义、洁净室工业标准与架构规范指南。",
     faq_q1: "什么是 SemiconFab.org？",
     faq_a1:
-      "SemiconFab.org 是一个面向 300mm（12英寸）半导体晶圆制造洁净室的全球开放工程级数字孪生平台。它在浏览器内直接建模洁净室物理建筑立体构造、Subfab 辅助动力管网系统、121 款半导体核心设备分类工程图鉴、实时 SECS/GEM 与 SEMI E10 工业遥测系统，以及前道微观级联良率仿真分析。",
+      "SemiconFab.org 是一个面向 300mm（12英寸）半导体晶圆制造洁净室的全球开放工程级数字孪生平台。它在浏览器内直接建模洁净室物理建筑立体构造、Subfab 辅助动力管网系统、153 款半导体核心设备分类工程图鉴、实时 SECS/GEM 与 SEMI E10 工业遥测系统，以及前道微观级联良率仿真分析。",
     faq_q2: "平台遵循哪些洁净室与半导体工业标准？",
     faq_a2:
       "平台严格遵循 SEMI 国际标准以及 ISO 14644-1 Class 1（1级）洁净室规范（对于 ≥ 0.1 µm 的微粒，微粒浓度小于 10 颗/m³）。三维模型包含 4.5 米高前道工艺厂房（采用 600mm × 600mm 铝合金穿孔高架抗静电地板）、黄光微影曝光核心区、风机过滤机组（FFU）循环系统，以及 6.0 米高的下层动力 Subfab 地下室（Class 10,000 / ISO 7），用于安装干泵、射频电源与废气尾气洗涤塔。",
     faq_q3: "平台涵盖了哪些半导体设备分类与领军 OEM 机台？",
     faq_a3:
-      "工程设备库覆盖 13 大半导体制造分类的 121 款核心 OEM 设备：光刻微影（13.5nm EUV、193nm 浸润式 ArFi、KrF）、涂胶显影机（Track）、等离子体干法刻蚀（RIE、ICP、ALE）、薄膜沉积（PECVD、LPCVD、ALD、PVD、超充铜电镀 ECD）、湿法清洗机、化学机械研磨（CMP）、高温退火氧化与离子注入机，以及量测检测机台（CD-SEM、缺陷复检 SEM、椭偏仪）。",
+      "工程设备库覆盖 13 大半导体制造分类的 153 款核心 OEM 设备：光刻微影（13.5nm EUV、193nm 浸润式 ArFi、KrF）、涂胶显影机（Track）、等离子体干法刻蚀（RIE、ICP、ALE）、薄膜沉积（PECVD、LPCVD、ALD、PVD、超充铜电镀 ECD）、湿法清洗机、化学机械研磨（CMP）、高温退火氧化与离子注入机，以及量测检测机台（CD-SEM、缺陷复检 SEM、椭偏仪）。",
     faq_q4: "良率管理系统 (YMS) 与缺陷模拟器如何工作？",
     faq_a4:
       "YMS 模拟引擎在 8 大工序流中实现泊松模型 (Y = exp(-D0 · A)) 与墨菲良率模型。内嵌交互式 WebGL 300mm 晶圆图谱渲染，支持生成并分类 WM-811K 工业标准空间缺陷指纹（边缘环状、中心聚集、机械划痕、甜甜圈分布、随机分布），并提供 STDF V4 生产测试日志解析。",
@@ -888,14 +888,14 @@ const I18N_DICTIONARY = {
     odr_title: "開放半導體數據與科研創新平台",
     odr_subtitle:
       "真實透明的設備工程規範、可復現的 300mm 晶圓廠排程基準、以及共建的開放數據漏斗。",
-    odr_catalog_badge: "121 款 OEM 真实機台規格",
+    odr_catalog_badge: "153 款 OEM 真实機台規格",
     odr_catalog_title: "開放半導體設備目錄",
     odr_catalog_desc:
-      "收錄覆蓋全球 13 大半導體製造分類、121 款生產級機台的機器可讀參數，基於 7 層開放數據模式構建。",
+      "收錄覆蓋全球 13 大半導體製造分類、153 款生產級機台的機器可讀參數，基於 7 層開放數據模式構建。",
     odr_catalog_funnel_label: "數據標準成熟度與社區貢獻漏斗",
     odr_catalog_l1_label: "L1 已核驗（含幾何尺寸與原廠手冊）",
     odr_catalog_draft_label: "草稿待補充（佔地與廠務待社區提報）",
-    odr_catalog_cta: "瀏覽 121 款設備目錄 →",
+    odr_catalog_cta: "瀏覽 153 款設備目錄 →",
     odr_benchmark_badge: "可學術引用的科研基準測試集",
     odr_benchmark_title: "MIMAC-2026 基準測試集",
     odr_benchmark_desc:
@@ -998,7 +998,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "300mm 晶圓製造數位工程平台",
     hero_title_2: "晶圓製造廠 (Fab) 數位孿生平台",
     hero_desc:
-      "真實無塵室建築空間布局、121款核心半導體設備工程圖鑑、前段8大工序級聯良率模型與SECS/GEM工業設備遙測系統。",
+      "真實無塵室建築空間布局、153款核心半導體設備工程圖鑑、前段8大工序級聯良率模型與SECS/GEM工業設備遙測系統。",
     cta_launch: "進入 3D 無塵廠房",
     cta_explore: "瀏覽半導體設備圖鑑",
     stat_tools: "核心製造設備圖鑑",
@@ -1088,7 +1088,7 @@ const I18N_DICTIONARY = {
     device_models_badge: "前道元件物理與三維微觀製造工藝數位雙生",
     feat_1_tag: "ISO 3 級 / 1 級無塵室標準",
     feat_1_cta: "探索 3D 無塵廠房 →",
-    feat_2_tag: "121 款核心機台 · 13 大製程分類",
+    feat_2_tag: "153 款核心機台 · 13 大製程分類",
     feat_2_cta: "查看立面圖工程數據 →",
     feat_3_tag: "級聯良率瀑布模型",
     feat_3_cta: "查看前道良率模型 →",
@@ -1110,13 +1110,13 @@ const I18N_DICTIONARY = {
       "關於 SemiconFab.org 平台的權威技術定義、無塵室工業標準與架構規範指南。",
     faq_q1: "什麼是 SemiconFab.org？",
     faq_a1:
-      "SemiconFab.org 是一個面向 300mm（12吋）半導體晶圓製造無塵室的全球開放工程級數位雙生平台。它在瀏覽器內直接建模無塵室物理建築立體構造、Subfab 輔助動力管網系統、121 款半導體核心設備分類工程圖鑑、即時 SECS/GEM 與 SEMI E10 工業遙測系統，以及前道微觀級聯良率模擬分析。",
+      "SemiconFab.org 是一個面向 300mm（12吋）半導體晶圓製造無塵室的全球開放工程級數位雙生平台。它在瀏覽器內直接建模無塵室物理建築立體構造、Subfab 輔助動力管網系統、153 款半導體核心設備分類工程圖鑑、即時 SECS/GEM 與 SEMI E10 工業遙測系統，以及前道微觀級聯良率模擬分析。",
     faq_q2: "平台遵循哪些無塵室與半導體工業標準？",
     faq_a2:
       "平台嚴格遵循 SEMI 國際標準以及 ISO 14644-1 Class 1（1級）無塵室規範（對於 ≥ 0.1 µm 的微粒，微粒濃度小於 10 顆/m³）。三維模型包含 4.5 米高前道工藝廠房（採用 600mm × 600mm 鋁合金穿孔高架防靜電地板）、黃光微影曝光核心區、風機過濾機組（FFU）循環系統，以及 6.0 米高的下層動力 Subfab 地下室（Class 10,000 / ISO 7），用於安裝乾泵、射頻電源與廢氣尾氣洗滌塔。",
     faq_q3: "平台涵蓋了哪些半導體設備分類與領軍 OEM 機台？",
     faq_a3:
-      "工程設備庫覆蓋 13 大半導體製造分類的 121 款核心 OEM 設備：微影曝光（13.5nm EUV、193nm 浸潤式 ArFi、KrF）、塗膠顯影機（Track）、電漿乾蝕刻（RIE、ICP、ALE）、薄膜沉積（PECVD、LPCVD、ALD、PVD、超充電鍍銅 ECD）、濕法清洗機、化學機械研磨（CMP）、高溫退火氧化與離子植入機，以及量測檢測機台（CD-SEM、缺陷複檢 SEM、橢偏儀）。",
+      "工程設備庫覆蓋 13 大半導體製造分類的 153 款核心 OEM 設備：微影曝光（13.5nm EUV、193nm 浸潤式 ArFi、KrF）、塗膠顯影機（Track）、電漿乾蝕刻（RIE、ICP、ALE）、薄膜沉積（PECVD、LPCVD、ALD、PVD、超充電鍍銅 ECD）、濕法清洗機、化學機械研磨（CMP）、高溫退火氧化與離子植入機，以及量測檢測機台（CD-SEM、缺陷複檢 SEM、橢偏儀）。",
     faq_q4: "良率管理系統 (YMS) 與缺陷模擬器如何運作？",
     faq_a4:
       "YMS 模擬引擎在 8 大工序流中實現泊松模型 (Y = exp(-D0 · A)) 與墨菲良率模型。內嵌互動式 WebGL 300mm 晶圓圖譜渲染，支援生成並分類 WM-811K 工業標準空間缺陷指紋（邊緣環狀、中心聚集、機械刮痕、甜甜圈分佈、隨機分佈），並提供 STDF V4 生產測試日誌解析。",
@@ -1302,7 +1302,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "次世代 300mm 先端半導体",
     hero_title_2: "Fab デジタルツインプラットフォーム",
     hero_desc:
-      "高精度クリーンルーム空間レイアウト、121 OEM 主要製造装置ライブラリ（13プロセス分類）、前工程8大プロセス連鎖歩留まりモデル、SECS/GEMテレメトリを統合。",
+      "高精度クリーンルーム空間レイアウト、153 OEM 主要製造装置ライブラリ（13プロセス分類）、前工程8大プロセス連鎖歩留まりモデル、SECS/GEMテレメトリを統合。",
     cta_launch: "3D クリーンルームに入る",
     cta_explore: "製造装置カタログを見る",
     stat_tools: "コアOEM装置",
@@ -1460,7 +1460,7 @@ const I18N_DICTIONARY = {
     device_models_badge: "FEOLデバイス物理 & 3D微細加工ツイン",
     feat_1_tag: "ISO 3 / クラス1 クリーンルーム",
     feat_1_cta: "3D空間を探索 →",
-    feat_2_tag: "121 OEM 装置 · 13 カテゴリ",
+    feat_2_tag: "153 OEM 装置 · 13 カテゴリ",
     feat_2_cta: "立面図データを見る →",
     feat_3_tag: "カスケード歩留まりウォーターフォール",
     feat_3_cta: "歩留まりウォーターフォールを確認 →",
@@ -1482,13 +1482,13 @@ const I18N_DICTIONARY = {
       "SemiconFab.org プラットフォームの技術的定義、クリーンルーム規格、アーキテクチャ仕様。",
     faq_q1: "SemiconFab.org とは何ですか？",
     faq_a1:
-      "SemiconFab.org は、300mm半導体ウェーハ製造クリーンルームのためのオープンなエンジニアリング・デジタルツインです。クリーンルーム建築立面、サブファブMEP配管設備、121 OEM 装置カタログ、SECS/GEM & SEMI E10産業テレメトリ、微細歩留まり解析をブラウザ上で再現します。",
+      "SemiconFab.org は、300mm半導体ウェーハ製造クリーンルームのためのオープンなエンジニアリング・デジタルツインです。クリーンルーム建築立面、サブファブMEP配管設備、153 OEM 装置カタログ、SECS/GEM & SEMI E10産業テレメトリ、微細歩留まり解析をブラウザ上で再現します。",
     faq_q2: "どのようなクリーンルーム規格や建築基準が反映されていますか？",
     faq_a2:
       "SEMI規格およびISO 14644-1 クラス1規格（0.1µm以上の粒子が10個/m³未満）に準拠。600mm×600mmの有孔アクセスフロアを備えた高さ4.5mのプロセスクリーンルーム、黄色照明のリソグラフィコア、FFU循環系、真空ポンプや除害装置を収容する高さ6.0mのサブファブ（クラス10,000 / ISO 7）をモデル化しています。",
     faq_q3: "どの半導体製造装置カテゴリとOEM装置が含まれていますか？",
     faq_a3:
-      "13主要カテゴリの121 OEM装置を網羅：フォトリソグラフィ（13.5nm EUV、193nm液浸ArFi、KrF）、コータ/デベロッパ（Track）、ドライエッチング（RIE、ICP、ALE）、薄膜成膜（PECVD、LPCVD、ALD、PVD、銅めっきECD）、ウェット洗浄、CMP研磨、熱処理・イオン注入、計測検査（CD-SEM、欠陥レビューSEM、エリプソメトリ）。",
+      "13主要カテゴリの153 OEM装置を網羅：フォトリソグラフィ（13.5nm EUV、193nm液浸ArFi、KrF）、コータ/デベロッパ（Track）、ドライエッチング（RIE、ICP、ALE）、薄膜成膜（PECVD、LPCVD、ALD、PVD、銅めっきECD）、ウェット洗浄、CMP研磨、熱処理・イオン注入、計測検査（CD-SEM、欠陥レビューSEM、エリプソメトリ）。",
     faq_q4:
       "歩留まり管理システム (YMS) & 欠陥シミュレータはどのように動作しますか？",
     faq_a4:
@@ -1681,7 +1681,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "차세대 300mm 첨단 공정 반도체",
     hero_title_2: "웨이퍼 팹 (Fab) 디지털 트윈 플랫폼",
     hero_desc:
-      "실제 클린룸 건축 레이아웃, 121 OEM 반도체 핵심 장비 라이브러리(13대 공정 범주), 8대 전공정 캐스케이딩 수율 모델 및 SECS/GEM 텔레메트리 시스템을 일괄 통합.",
+      "실제 클린룸 건축 레이아웃, 153 OEM 반도체 핵심 장비 라이브러리(13대 공정 범주), 8대 전공정 캐스케이딩 수율 모델 및 SECS/GEM 텔레메트리 시스템을 일괄 통합.",
     cta_launch: "3D 클린룸 입장",
     cta_explore: "장비 도감 살펴보기",
     stat_tools: "핵심 OEM 장비",
@@ -1836,7 +1836,7 @@ const I18N_DICTIONARY = {
     device_models_badge: "FEOL 소자 물리 및 3D 미세 제조 공정 트윈",
     feat_1_tag: "ISO 3 / 클래스 1 클린룸 표준",
     feat_1_cta: "3D 클린룸 탐색 →",
-    feat_2_tag: "121 OEM 장비 · 13대 공정 범주",
+    feat_2_tag: "153 OEM 장비 · 13대 공정 범주",
     feat_2_cta: "입면도 데이터 보기 →",
     feat_3_tag: "캐스케이드 수율 워터폴 모델",
     feat_3_cta: "수율 워터폴 모델 검사 →",
@@ -1858,13 +1858,13 @@ const I18N_DICTIONARY = {
       "SemiconFab.org 플랫폼의 기술 정의, 클린룸 산업 표준 및 아키텍처 사양에 대한 안내입니다.",
     faq_q1: "SemiconFab.org는 무엇인가요?",
     faq_a1:
-      "SemiconFab.org는 300mm(12인치) 반도체 웨이퍼 제조 클린룸을 위한 오픈 엔지니어링 디지털 트윈 플랫폼입니다. 건축 클린룸 입면, 서브팹 MEP 배관망, 121 OEM 장비 도감, 실시간 SECS/GEM 및 SEMI E10 원격 측정, 미세 수율 분석을 브라우저에서 직접 모델링합니다.",
+      "SemiconFab.org는 300mm(12인치) 반도체 웨이퍼 제조 클린룸을 위한 오픈 엔지니어링 디지털 트윈 플랫폼입니다. 건축 클린룸 입면, 서브팹 MEP 배관망, 153 OEM 장비 도감, 실시간 SECS/GEM 및 SEMI E10 원격 측정, 미세 수율 분석을 브라우저에서 직접 모델링합니다.",
     faq_q2: "어떤 클린룸 및 건축 표준이 모델링되었나요?",
     faq_a2:
       "플랫폼은 SEMI 표준 및 ISO 14644-1 클래스 1 사양(0.1µm 이상 입자 10개/m³ 미만)을 준수합니다. 600mm×600mm 타공 액세스 플로어가 적용된 4.5m 높이의 공정 클린룸, 황색광 노광 코어, FFU 순환 시스템, 진공 펌프와 스크러버를 위한 6.0m 서브팹 지하층(클래스 10,000 / ISO 7)을 모델링합니다.",
     faq_q3: "어떤 반도체 장비 범주 및 OEM 장비가 포함되어 있나요?",
     faq_a3:
-      "13대 핵심 공정 121 OEM 장비 분류를 지원합니다: 포토리소그래피(13.5nm EUV, 193nm ArFi 이머전, KrF), 트랙 코터/디벨로퍼, 건식 식각(RIE, ICP, ALE), 박막 증착(PECVD, LPCVD, ALD, PVD, 구리 도금 ECD), 습식 세정, CMP, 열처리 및 이온 주입, 계측/검사(CD-SEM, 결함 리뷰 SEM, 엘립소미터).",
+      "13대 핵심 공정 153 OEM 장비 분류를 지원합니다: 포토리소그래피(13.5nm EUV, 193nm ArFi 이머전, KrF), 트랙 코터/디벨로퍼, 건식 식각(RIE, ICP, ALE), 박막 증착(PECVD, LPCVD, ALD, PVD, 구리 도금 ECD), 습식 세정, CMP, 열처리 및 이온 주입, 계측/검사(CD-SEM, 결함 리뷰 SEM, 엘립소미터).",
     faq_q4: "수율 관리 시스템(YMS) 및 결함 시뮬레이터는 어떻게 작동하나요?",
     faq_a4:
       "YMS 시뮬레이터는 8단계 캐스케이드 공정 흐름에서 포아송 모델(Y = exp(-D0 · A)) 및 머피 수율 모델을 구현합니다. WM-811K 벤치마크 공간 결함 지문(에지 링, 센터, 스크래치, 도넛, 랜덤)을 렌더링하는 대화형 WebGL 300mm 웨이퍼 맵과 STDF V4 로그 파싱을 포함합니다.",
@@ -2057,7 +2057,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "Next-Gen 300mm Halbleiter",
     hero_title_2: "Wafer-Fab Digital-Twin Plattform",
     hero_desc:
-      "Architektonisches Reinraum-Layout, 121 OEM-Halbleiteranlagen in 13 Kategorien, kaskadierendes Prozessausbeute-Modell und SECS/GEM-Telemetrie.",
+      "Architektonisches Reinraum-Layout, 153 OEM-Halbleiteranlagen in 13 Kategorien, kaskadierendes Prozessausbeute-Modell und SECS/GEM-Telemetrie.",
     cta_launch: "3D Reinraum Betreten",
     cta_explore: "Anlagenkatalog Durchsuchen",
     stat_tools: "Kern-OEM-Anlagen",
@@ -2218,7 +2218,7 @@ const I18N_DICTIONARY = {
     device_models_badge: "FEOL-Bauelementephysik & 3D-Fertigungszwillinge",
     feat_1_tag: "REINRAUM KLASSE 1 / ISO 3",
     feat_1_cta: "3D erkunden →",
-    feat_2_tag: "121 OEM-ANLAGEN · 13 KATEGORIEN",
+    feat_2_tag: "153 OEM-ANLAGEN · 13 KATEGORIEN",
     feat_2_cta: "Aufrisse ansehen →",
     feat_3_tag: "KASKADIERENDE AUSBEUTE",
     feat_3_cta: "Ausbeutekaskade prüfen →",
@@ -2241,13 +2241,13 @@ const I18N_DICTIONARY = {
       "Direkte technische Definitionen, Reinraumstandards und Architekturspezifikationen der Plattform.",
     faq_q1: "Was ist SemiconFab.org?",
     faq_a1:
-      "SemiconFab.org ist eine frei zugängliche Digital-Twin-Plattform für 300mm-Halbleiter-Reinräume. Sie modelliert Reinraum-Aufrisse, Subfab-MEP-Netzwerke, eine Taxonomie von 121 OEM-Anlagen, SECS/GEM- & SEMI E10-Telemetrie und mikroskopische Ausbeuteanalysen im Browser.",
+      "SemiconFab.org ist eine frei zugängliche Digital-Twin-Plattform für 300mm-Halbleiter-Reinräume. Sie modelliert Reinraum-Aufrisse, Subfab-MEP-Netzwerke, eine Taxonomie von 153 OEM-Anlagen, SECS/GEM- & SEMI E10-Telemetrie und mikroskopische Ausbeuteanalysen im Browser.",
     faq_q2: "Welche Reinraum- und Architekturstandards werden modelliert?",
     faq_a2:
       "Die Plattform erfüllt SEMI-Standards und ISO 14644-1 Klasse 1 (< 10 Partikel/m³ für ≥ 0,1 µm). Modelliert werden ein 4,5m Prozessreinraum mit Doppelboden (600×600mm Lochplatten), gelb beleuchteter Lithografie-Kern, FFUs und ein 6,0m Subfab-Geschoss (Klasse 10.000 / ISO 7) für Vakuumpumpen, HF-Generatoren und Wäscher.",
     faq_q3: "Welche Halbleiteranlagen-Kategorien und OEM-Tools sind enthalten?",
     faq_a3:
-      "Die Taxonomie umfasst 121 OEM-Anlagen in 8 Hauptmodulen: Photolithografie (EUV 13,5nm, ArFi 193nm Immersion, KrF), Coater/Developer (Track), Trockenätzen (RIE, ICP, ALE), Dünnschichten (PECVD, LPCVD, ALD, PVD, ECD), Nassreinigung, CMP, thermische Prozesse & Ionenimplantation sowie Messtechnik/Inspektion (CD-SEM, DR-SEM, Ellipsometrie).",
+      "Die Taxonomie umfasst 153 OEM-Anlagen in 8 Hauptmodulen: Photolithografie (EUV 13,5nm, ArFi 193nm Immersion, KrF), Coater/Developer (Track), Trockenätzen (RIE, ICP, ALE), Dünnschichten (PECVD, LPCVD, ALD, PVD, ECD), Nassreinigung, CMP, thermische Prozesse & Ionenimplantation sowie Messtechnik/Inspektion (CD-SEM, DR-SEM, Ellipsometrie).",
     faq_q4:
       "Wie funktionieren das Ausbeutemanagementsystem (YMS) und der Defektsimulator?",
     faq_a4:
@@ -2445,7 +2445,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "Semi-Conducteurs 300mm Nouvelle Génération",
     hero_title_2: "Plateforme Jumeau Numérique de Fab",
     hero_desc:
-      "Agencement architectural de salle blanche, taxonomie de 121 équipements OEM majeurs sur 13 catégories, modèle de rendement en cascade et télémétrie SECS/GEM.",
+      "Agencement architectural de salle blanche, taxonomie de 153 équipements OEM majeurs sur 13 catégories, modèle de rendement en cascade et télémétrie SECS/GEM.",
     cta_launch: "Entrer dans la Salle Blanche 3D",
     cta_explore: "Consulter le Catalogue",
     stat_tools: "Équipements OEM Clés",
@@ -2609,7 +2609,7 @@ const I18N_DICTIONARY = {
       "Physique des composants FEOL & jumeaux de fabrication 3D",
     feat_1_tag: "SALLE BLANCHE CLASSE 1 / ISO 3",
     feat_1_cta: "Explorer en 3D →",
-    feat_2_tag: "121 ÉQUIPEMENTS OEM · 13 CATÉGORIES",
+    feat_2_tag: "153 ÉQUIPEMENTS OEM · 13 CATÉGORIES",
     feat_2_cta: "Voir les élévations →",
     feat_3_tag: "CASCADE DE RENDEMENT",
     feat_3_cta: "Inspecter le rendement →",
@@ -2632,14 +2632,14 @@ const I18N_DICTIONARY = {
       "Définitions techniques, normes de salle blanche et spécifications architecturales de la plateforme.",
     faq_q1: "Qu'est-ce que SemiconFab.org ?",
     faq_a1:
-      "SemiconFab.org est une plateforme ouverte de jumeau numérique pour les salles blanches de fabrication de semi-conducteurs 300 mm. Elle modélise les élévations architecturales, les réseaux subfab, 121 équipements OEM, la télémétrie SECS/GEM & SEMI E10 et l'analyse de rendement dans le navigateur.",
+      "SemiconFab.org est une plateforme ouverte de jumeau numérique pour les salles blanches de fabrication de semi-conducteurs 300 mm. Elle modélise les élévations architecturales, les réseaux subfab, 153 équipements OEM, la télémétrie SECS/GEM & SEMI E10 et l'analyse de rendement dans le navigateur.",
     faq_q2:
       "Quelles normes de salle blanche et d'architecture sont modélisées ?",
     faq_a2:
       "La plateforme respecte les normes SEMI et ISO 14644-1 Classe 1 (< 10 particules/m³ pour ≥ 0,1 µm). Elle modélise une salle blanche de 4,5 m avec faux-plancher perforé (dalles 600×600 mm), un cœur de lithographie à lumière jaune, des FFU et un sous-sol technique de 6,0 m (Classe 10 000 / ISO 7) pour pompes et laveurs.",
     faq_q3: "Quelles catégories d'équipements et machines OEM sont incluses ?",
     faq_a3:
-      "La taxonomie couvre 121 équipements OEM sur 8 modules majeurs : photolithographie (EUV 13,5 nm, ArFi 193 nm immersion, KrF), pisteuse (track), gravure sèche (RIE, ICP, ALE), couches minces (PECVD, LPCVD, ALD, PVD, ECD), nettoyage humide, CMP, traitement thermique & implantation ionique, et métrologie/inspection (CD-SEM, DR-SEM, ellipsométrie).",
+      "La taxonomie couvre 153 équipements OEM sur 8 modules majeurs : photolithographie (EUV 13,5 nm, ArFi 193 nm immersion, KrF), pisteuse (track), gravure sèche (RIE, ICP, ALE), couches minces (PECVD, LPCVD, ALD, PVD, ECD), nettoyage humide, CMP, traitement thermique & implantation ionique, et métrologie/inspection (CD-SEM, DR-SEM, ellipsométrie).",
     faq_q4:
       "Comment fonctionnent le système de gestion du rendement (YMS) et le simulateur de défauts ?",
     faq_a4:
@@ -2835,7 +2835,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "Semiconduttori 300mm di Nuova Generazione",
     hero_title_2: "Piattaforma Digital Twin per Wafer Fab",
     hero_desc:
-      "Layout architettonico di camera bianca, tassonomia di 121 macchinari OEM avanzati in 13 categorie, modello di resa a cascata e telemetria industriale SECS/GEM.",
+      "Layout architettonico di camera bianca, tassonomia di 153 macchinari OEM avanzati in 13 categorie, modello di resa a cascata e telemetria industriale SECS/GEM.",
     cta_launch: "Entra nella Camera Bianca 3D",
     cta_explore: "Esplora Catalogo Macchinari",
     stat_tools: "Macchinari OEM Principali",
@@ -3000,7 +3000,7 @@ const I18N_DICTIONARY = {
       "Fisica dei dispositivi FEOL e gemelli di fabbricazione 3D",
     feat_1_tag: "CAMERA BIANCA CLASSE 1 / ISO 3",
     feat_1_cta: "Esplora 3D →",
-    feat_2_tag: "121 STRUMENTI OEM · 13 CATEGORIE",
+    feat_2_tag: "153 STRUMENTI OEM · 13 CATEGORIE",
     feat_2_cta: "Visualizza prospetti →",
     feat_3_tag: "RENDIMENTO A CASCATA",
     feat_3_cta: "Ispeziona resa a cascata →",
@@ -3023,13 +3023,13 @@ const I18N_DICTIONARY = {
       "Definizioni tecniche, standard di camera bianca e specifiche architetturali della piattaforma.",
     faq_q1: "Che cos'è SemiconFab.org?",
     faq_a1:
-      "SemiconFab.org è una piattaforma aperta di gemello digitale per camere bianche di fabbricazione wafer da 300 mm. Modella prospetti architettonici, reti subfab MEP, tassonomia di 121 macchinari OEM, telemetria SECS/GEM e SEMI E10 e analisi microscopica della resa nel browser.",
+      "SemiconFab.org è una piattaforma aperta di gemello digitale per camere bianche di fabbricazione wafer da 300 mm. Modella prospetti architettonici, reti subfab MEP, tassonomia di 153 macchinari OEM, telemetria SECS/GEM e SEMI E10 e analisi microscopica della resa nel browser.",
     faq_q2: "Quali standard di camera bianca e architettura sono modellati?",
     faq_a2:
       "La piattaforma rispetta gli standard SEMI e ISO 14644-1 Classe 1 (< 10 particelle/m³ per ≥ 0,1 µm). Modella una camera bianca di processo da 4,5 m con pavimento sopraelevato forato (piastrelle 600×600 mm), nucleo fotolitografico a luce ambrata, FFU e un piano subfab da 6,0 m (Classe 10.000 / ISO 7) per pompe a vuoto e scrubber.",
     faq_q3: "Quali categorie di apparecchiature e macchinari OEM sono inclusi?",
     faq_a3:
-      "La tassonomia include 121 apparecchiature OEM in 13 categorie: fotolitografia (EUV 13,5 nm, ArFi 193 nm immersione, KrF), coater/developer (track), incisione a secco (RIE, ICP, ALE), film sottili (PECVD, LPCVD, ALD, PVD, ECD), pulizia a umido, CMP, trattamenti termici e impiantazione ionica, metrologia e ispezione (CD-SEM, DR-SEM, ellissometria).",
+      "La tassonomia include 153 apparecchiature OEM in 13 categorie: fotolitografia (EUV 13,5 nm, ArFi 193 nm immersione, KrF), coater/developer (track), incisione a secco (RIE, ICP, ALE), film sottili (PECVD, LPCVD, ALD, PVD, ECD), pulizia a umido, CMP, trattamenti termici e impiantazione ionica, metrologia e ispezione (CD-SEM, DR-SEM, ellissometria).",
     faq_q4:
       "Come funzionano il sistema di gestione della resa (YMS) e il simulatore di difetti?",
     faq_a4:
@@ -3224,7 +3224,7 @@ const I18N_DICTIONARY = {
     hero_title_1: "Semiconductores 300mm de Nueva Generación",
     hero_title_2: "Plataforma Gemelo Digital de Fab",
     hero_desc:
-      "Diseño arquitectónico de sala limpia, catálogo de 121 equipos OEM de vanguardia en 13 categorías, modelo de rendimiento en cascada y telemetría SECS/GEM.",
+      "Diseño arquitectónico de sala limpia, catálogo de 153 equipos OEM de vanguardia en 13 categorías, modelo de rendimiento en cascada y telemetría SECS/GEM.",
     cta_launch: "Entrar a la Sala Limpia 3D",
     cta_explore: "Explorar Catálogo de Equipos",
     stat_tools: "Equipos OEM Clave",
@@ -3387,7 +3387,7 @@ const I18N_DICTIONARY = {
       "Física de dispositivos FEOL y gemelos de fabricación 3D",
     feat_1_tag: "SALA LIMPIA CLASE 1 / ISO 3",
     feat_1_cta: "Explorar en 3D →",
-    feat_2_tag: "121 EQUIPOS OEM · 13 CATEGORÍAS",
+    feat_2_tag: "153 EQUIPOS OEM · 13 CATEGORÍAS",
     feat_2_cta: "Ver elevaciones →",
     feat_3_tag: "CASCADA DE RENDIMIENTO",
     feat_3_cta: "Inspeccionar cascada de rendimiento →",
@@ -3410,13 +3410,13 @@ const I18N_DICTIONARY = {
       "Definiciones técnicas directas, estándares de sala limpia y especificaciones de arquitectura.",
     faq_q1: "¿Qué es SemiconFab.org?",
     faq_a1:
-      "SemiconFab.org es una plataforma abierta de gemelo digital para salas limpias de fabricación de obleas de 300 mm. Modela elevaciones arquitectónicas, redes MEP de subfab, taxonomía de 121 equipos OEM, telemetría SECS/GEM y SEMI E10 y análisis de rendimiento directamente en el navegador.",
+      "SemiconFab.org es una plataforma abierta de gemelo digital para salas limpias de fabricación de obleas de 300 mm. Modela elevaciones arquitectónicas, redes MEP de subfab, taxonomía de 153 equipos OEM, telemetría SECS/GEM y SEMI E10 y análisis de rendimiento directamente en el navegador.",
     faq_q2: "¿Qué estándares de sala limpia y arquitectura están modelados?",
     faq_a2:
       "La plataforma sigue normas SEMI e ISO 14644-1 Clase 1 (< 10 partículas/m³ para ≥ 0,1 µm). Modela una sala de procesos de 4,5 m con suelo técnico perforado (losas 600×600 mm), núcleo de fotolitografía con luz ámbar, FFU y un sótano subfab de 6,0 m (Clase 10.000 / ISO 7) para bombas de vacío y lavadores.",
     faq_q3: "¿Qué categorías de equipos y máquinas OEM están incluidas?",
     faq_a3:
-      "La taxonomía abarca 121 equipos OEM en 13 categorías principales: fotolitografía (EUV 13,5 nm, ArFi 193 nm inmersión, KrF), pista coater/developer (track), grabado en seco (RIE, ICP, ALE), películas delgadas (PECVD, LPCVD, ALD, PVD, ECD), limpieza húmeda, CMP, procesos térmicos e implantación iónica, y metrología/inspección (CD-SEM, DR-SEM, elipsometría).",
+      "La taxonomía abarca 153 equipos OEM en 13 categorías principales: fotolitografía (EUV 13,5 nm, ArFi 193 nm inmersión, KrF), pista coater/developer (track), grabado en seco (RIE, ICP, ALE), películas delgadas (PECVD, LPCVD, ALD, PVD, ECD), limpieza húmeda, CMP, procesos térmicos e implantación iónica, y metrología/inspección (CD-SEM, DR-SEM, elipsometría).",
     faq_q4:
       "¿Cómo funcionan el sistema de gestión de rendimiento (YMS) y el simulador de defectos?",
     faq_a4:

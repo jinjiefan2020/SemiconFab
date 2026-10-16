@@ -17,7 +17,7 @@ SemiconFab is a source-available 300mm logic semiconductor wafer fabrication dig
 │ 1. 3D Digital Twin             │ Cleanroom ballroom, subfab MEP loops, │
 │    (/twin, twin.html)          │ SEMI E10 stack lights, AMHS monorail  │
 ├────────────────────────────────┼───────────────────────────────────────┤
-│ 2. Equipment Catalog           │ 121 normalized OEM equipment records, │
+│ 2. Equipment Catalog           │ 153 normalized OEM equipment records, │
 │    (/catalog-demo.html,        │ 5 data provenance tiers, 13 process   │
 │     catalog.json, schema.json) │ categories, Schema v1.0 standard     │
 ├────────────────────────────────┼───────────────────────────────────────┤

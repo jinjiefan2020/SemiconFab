@@ -14,6 +14,16 @@ from pathlib import Path
 import re
 import sys
 import uuid
+
+# Deterministic record IDs: uuid5 over "vendor||model" so catalog rebuilds are
+# stable across runs. (Changed from uuid.uuid4() in v1.1.0 — random IDs
+# invalidated layout-default.json tool_ids and catalog-fallback.js on every rebuild.)
+RECORD_ID_NAMESPACE = uuid.uuid5(uuid.NAMESPACE_URL, "https://semiconfab.org/schema/equipment-record/v1")
+
+
+def make_record_id(vendor: str, model: str, category: str = "") -> str:
+    key = f"{(vendor or '').strip().lower()}||{(model or '').strip().lower()}||{(category or '').strip().lower()}"
+    return str(uuid.uuid5(RECORD_ID_NAMESPACE, key))
 from typing import Any, Dict, List, Optional, Tuple
 
 import jsonschema
@@ -170,7 +180,7 @@ def map_csv_row_to_record(row: Dict[str, str], row_idx: int) -> Tuple[Dict[str, 
     # Base record structure
     record: Dict[str, Any] = {
         "schema_version": "1.0",
-        "record_id": str(uuid.uuid4()),
+        "record_id": make_record_id(vendor_str, model_str, cat),
         "conformance_level": "L1",
         "record_status": "draft",
         "submitted_by": "csv-migration v1.0",

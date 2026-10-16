@@ -66,7 +66,7 @@ SemiconFab.org provides interactive 10-step 3D CAD fabrication digital twins for
 
 ## Canonical Data Endpoints
 
-- `/catalog.json`: Canonical 121-record equipment catalog dataset.
+- `/catalog.json`: Canonical 153-record equipment catalog dataset.
 - `/schema.json`: Schema v1.0 machine-readable equipment specification JSON schema.
 - `/benchmark/routes.json`: MIMAC-2026 300mm manufacturing process route definitions.
 

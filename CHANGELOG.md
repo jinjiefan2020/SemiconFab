@@ -4,6 +4,14 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ---
 
+## [1.1.0] - 2026-10-15
+
+### Catalog expansion: 121 → 153 records, deterministic record IDs
+
+- **Equipment catalog**: 121 → **153 records** (7 L1 verified / 146 draft). Added 27 used-market models from SemiMarket pilot extraction (Canon FPA-5500iZ series, Nikon NSR steppers, TEL Tactras/Telius/Trias, Lam 2300/Vector/C3, AMAT Producer/Centura, ASM Dragon 2300, SUSSMicroTec MA200...), all `inferred` tier with per-listing source URLs; plus 5 DB-newer models (SKYVERSE SPRUCE-600, Changchuan QT-8000, C1/C3Q/C8, Lam Akara, Hanmi MSVP 6.0 Griffin) and 5 retained models absent from the research DB (TEL CLEAN TRACK ACT 12 / LITHIUS Pro Z, KLA 2920, AMAT UVision 4, Edwards iXH1820 — kept to avoid data loss; DB reconciliation pending).
+- **Deterministic record IDs**: `tools/migrate.py` now derives `record_id` as UUIDv5 over `vendor||model||category` (was random UUIDv4). Catalog rebuilds are now stable — IDs no longer churn on every regeneration.
+- **Cascading updates**: `twin/layout-default.json` (121 placements remapped), `js/catalog-fallback.js` (153 entries), `catalog-demo.html` demo records, `catalog-index.json` — all re-keyed to the new IDs; zero stale UUIDs site-wide.
+
 ## [1.0.0] - 2026-10-14
 
 ### Initial Source-Available Release

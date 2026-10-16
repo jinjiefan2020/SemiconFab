@@ -12,3 +12,6 @@ backups/
 *.zip
 !downloads/mimac2026-simulator.zip
 SemiconFab-1.0.0/
+SemiconFab-1.1.0/
+pkg/
+
