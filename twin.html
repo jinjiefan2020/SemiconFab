@@ -820,6 +820,146 @@
         </div>
       </div>
 
+      <!-- Roof & HVAC Schematic Honesty Badge -->
+      <div
+        id="roof-schematic-badge"
+        class="hidden fixed bottom-14 left-4 z-20 bg-slate-900/90 backdrop-blur-md border border-sky-500/50 rounded-xl px-2.5 py-1.5 shadow-2xl text-white text-[10px] pointer-events-none font-sans flex items-center gap-1.5"
+      >
+        <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse shrink-0"></span>
+        <span class="font-bold text-sky-300" data-i18n="roof_schematic_label">Roof & HVAC: Schematic</span>
+      </div>
+
+      <!-- Roof Duct & Chimney Interactive Tooltip -->
+      <div
+        id="roof-duct-tooltip"
+        class="pointer-events-none fixed hidden z-50 bg-slate-900/95 text-white text-[11px] px-3 py-1.5 rounded-lg shadow-2xl border border-slate-700/80 backdrop-blur-md font-sans max-w-xs leading-snug"
+      ></div>
+
+      <!-- Follow a Wafer Route HUD Panel (Workstream 1) -->
+      <div
+        id="wafer-follow-panel"
+        class="hidden fixed bottom-12 left-1/2 -translate-x-1/2 z-30 pointer-events-auto bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl p-3.5 shadow-2xl flex flex-col gap-2.5 text-white w-[94vw] max-w-lg transition-all font-sans"
+      >
+        <!-- Header Row: Title, Route Summary, Close Button -->
+        <div class="flex items-center justify-between border-b border-slate-700/80 pb-2">
+          <div class="flex items-center gap-2">
+            <div class="w-5 h-5 rounded-md bg-amber-500/20 text-amber-400 flex items-center justify-center border border-amber-500/40">
+              <i data-lucide="package" class="w-3 h-3"></i>
+            </div>
+            <span class="font-bold text-slate-100 text-xs" data-i18n="wafer_follow_title">Follow a Wafer</span>
+            <span id="wafer-route-badge" class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40">Product A · 120 Steps</span>
+          </div>
+          <button
+            onclick="closeWaferFollow()"
+            class="w-5 h-5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition cursor-pointer"
+            title="Close Panel & Exit Roaming"
+          >
+            <i data-lucide="x" class="w-3 h-3"></i>
+          </button>
+        </div>
+
+        <!-- Product Selector & Roaming Controls -->
+        <div class="flex flex-wrap items-center justify-between gap-2 text-[10px]">
+          <div class="flex items-center gap-1.5">
+            <span class="text-slate-400" data-i18n="wafer_product_label">Product:</span>
+            <select
+              id="wafer-product-select"
+              onchange="onWaferProductChange(this.value)"
+              class="bg-slate-800 border border-slate-700 text-slate-100 text-[10px] rounded-lg px-2 py-0.5 focus:outline-none focus:border-amber-500 font-medium cursor-pointer"
+            >
+              <option value="A">Product A (120 Steps)</option>
+              <option value="B">Product B (104 Steps)</option>
+              <option value="C">Product C (92 Steps)</option>
+            </select>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <button
+              id="wafer-play-btn"
+              onclick="toggleWaferPlay()"
+              class="w-6 h-6 rounded-lg bg-amber-500 hover:bg-amber-600 text-slate-900 flex items-center justify-center transition shadow-sm shrink-0 cursor-pointer"
+              title="Play / Pause"
+            >
+              <i id="wafer-play-icon" data-lucide="play" class="w-3 h-3 fill-current"></i>
+            </button>
+
+            <!-- Speed Controls: 1x, 4x, 16x (default 1x) -->
+            <div class="flex items-center bg-slate-800 rounded-lg p-0.5 border border-slate-700">
+              <button
+                onclick="setWaferSpeed(1)"
+                id="wafer-speed-1"
+                class="px-1.5 py-0.5 rounded text-[9px] font-bold transition bg-amber-500 text-slate-900 shadow-sm cursor-pointer"
+              >1x</button>
+              <button
+                onclick="setWaferSpeed(4)"
+                id="wafer-speed-4"
+                class="px-1.5 py-0.5 rounded text-[9px] font-bold transition text-slate-400 hover:text-slate-200 cursor-pointer"
+              >4x</button>
+              <button
+                onclick="setWaferSpeed(16)"
+                id="wafer-speed-16"
+                class="px-1.5 py-0.5 rounded text-[9px] font-bold transition text-slate-400 hover:text-slate-200 cursor-pointer"
+              >16x</button>
+            </div>
+
+            <!-- Follow Camera Switch -->
+            <button
+              id="wafer-cam-toggle-btn"
+              onclick="toggleWaferCamFollow()"
+              class="flex items-center gap-1 px-2 py-0.5 rounded-lg text-[9px] font-semibold transition border border-amber-500/70 bg-amber-500/20 text-amber-300 cursor-pointer"
+              title="Toggle Follow / Free Camera"
+            >
+              <i data-lucide="video" class="w-2.5 h-2.5 text-amber-400"></i>
+              <span id="wafer-cam-text" data-i18n="wafer_cam_follow">Follow Cam</span>
+            </button>
+
+            <!-- Replay Button -->
+            <button
+              id="wafer-replay-btn"
+              onclick="replayWaferRoute()"
+              class="hidden flex items-center gap-1 px-2 py-0.5 rounded-lg text-[9px] font-semibold transition bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm cursor-pointer"
+              title="Replay Route from Step 1"
+            >
+              <i data-lucide="rotate-ccw" class="w-2.5 h-2.5"></i>
+              <span data-i18n="wafer_btn_replay">Replay</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Progress Bar & Readout -->
+        <div class="space-y-1">
+          <div class="flex items-center justify-between text-[10px]">
+            <span id="wafer-step-readout" class="font-mono font-bold text-amber-400">Step 1/120</span>
+            <span id="wafer-status-readout" class="text-slate-400 text-[9px]">Navigating...</span>
+          </div>
+          <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden border border-slate-700/60">
+            <div id="wafer-progress-bar" class="h-full bg-gradient-to-r from-amber-500 to-amber-300 transition-all duration-150" style="width: 0.8%"></div>
+          </div>
+        </div>
+
+        <!-- Current Step Info Card -->
+        <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-[9.5px] bg-slate-800/80 rounded-xl p-2 border border-slate-700/60 font-mono">
+          <div>
+            <span class="text-slate-400 block text-[8px]">TOOL GROUP</span>
+            <strong id="wafer-tg-val" class="text-slate-100">TG13_WET_BENCH</strong>
+          </div>
+          <div>
+            <span class="text-slate-400 block text-[8px]">RECIPE</span>
+            <strong id="wafer-recipe-val" class="text-emerald-400">REC_WET_RCA_CLEAN</strong>
+          </div>
+          <div class="col-span-2 pt-0.5 border-t border-slate-700/40">
+            <span class="text-slate-400 block text-[8px]">BAY LOCATION</span>
+            <strong id="wafer-bay-val" class="text-sky-300">Automated Wet Cleaning Bay (湿法清洗腐蚀工作台区)</strong>
+          </div>
+        </div>
+
+        <!-- Mandatory Honesty Disclosure Banner -->
+        <div class="flex items-start gap-1.5 px-2 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300/90 text-[8.5px] leading-tight">
+          <i data-lucide="info" class="w-3 h-3 shrink-0 text-amber-400 mt-0.5"></i>
+          <span data-i18n="wafer_honesty_banner">Illustrative: the wafer visits a representative tool of each tool group, not a real dispatch schedule.</span>
+        </div>
+      </div>
+
       <!-- Unified Master Floating HUD (One Panel, Mutually Exclusive, Zero Overlap) -->
       <div
         id="master-spatial-hud"
@@ -1352,6 +1492,14 @@
             <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
           </button>
           <button
+            onclick="setCameraPreset('roof')"
+            title="Roof & HVAC Overview"
+            data-i18n-title="cam_roof_title"
+            class="w-6 h-6 flex items-center justify-center hover:bg-sky-50 text-sky-600 rounded-md transition"
+          >
+            <i data-lucide="building" class="w-3.5 h-3.5"></i>
+          </button>
+          <button
             id="btn-focus-patrol"
             onclick="focusPatrolEngineer()"
             title="Track Inspection Engineer"
@@ -1420,16 +1568,6 @@
           >
             <i data-lucide="flame" class="w-2.5 h-2.5 text-amber-600"></i>
             <span data-i18n="toggle_heatmap">Heatmap</span>
-          </button>
-          <button
-            id="btn-toggle-cut"
-            onclick="toggleSpatialMode('cut')"
-            title="Dynamic 3D Section Clipping"
-            data-i18n-title="btn_cut_title"
-            class="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md bg-white text-slate-600 border border-slate-200 font-medium hover:bg-cyan-50 transition whitespace-nowrap shrink-0"
-          >
-            <i data-lucide="scissors" class="w-2.5 h-2.5 text-cyan-600"></i>
-            <span data-i18n="btn_cut">Section</span>
           </button>
           <button
             id="btn-toggle-xray"
@@ -1568,6 +1706,45 @@
       >
         <i data-lucide="disc" class="w-2.5 h-2.5 text-sky-600"></i>
         <span data-i18n="nav_yms">YMS Map</span>
+      </button>
+
+      <!-- Divider -->
+      <div class="h-3 w-px bg-slate-200 mx-0.5"></div>
+
+      <!-- Section Clipping Trigger -->
+      <button
+        id="btn-toggle-cut"
+        onclick="toggleSpatialMode('cut')"
+        title="Dynamic 3D Section Clipping"
+        data-i18n-title="btn_cut_title"
+        class="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md bg-white text-slate-600 border border-slate-200 font-medium hover:bg-cyan-50 transition whitespace-nowrap shrink-0 cursor-pointer"
+      >
+        <i data-lucide="scissors" class="w-2.5 h-2.5 text-cyan-600"></i>
+        <span data-i18n="btn_cut">Section</span>
+      </button>
+
+      <!-- Roof & HVAC Layer Trigger -->
+      <button
+        id="btn-toggle-roof"
+        onclick="toggleRoofVisibility()"
+        title="Roof & HVAC Layer (MAU, Ducts, Exhaust)"
+        data-i18n-title="toggle_roof_title"
+        class="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md bg-white text-slate-600 border border-slate-200 font-medium hover:bg-slate-50 transition whitespace-nowrap shrink-0 cursor-pointer"
+      >
+        <i data-lucide="warehouse" class="w-2.5 h-2.5"></i>
+        <span data-i18n="toggle_roof">Roof</span>
+      </button>
+
+      <!-- Follow a Wafer Trigger -->
+      <button
+        id="btn-follow-wafer"
+        onclick="toggleWaferFollowPanel()"
+        title="Follow Wafer Process Route"
+        data-i18n-title="btn_follow_wafer_title"
+        class="flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md bg-white text-amber-700 border border-amber-200 font-medium hover:bg-amber-50 transition whitespace-nowrap shrink-0 cursor-pointer"
+      >
+        <i data-lucide="package" class="w-2.5 h-2.5 text-amber-600"></i>
+        <span data-i18n="btn_follow_wafer">Follow a wafer</span>
       </button>
     </div>
 
@@ -7658,6 +7835,16 @@
                 ) {
                   stopCinematicTour();
                 }
+                if (
+                  typeof waferFollowState !== "undefined" &&
+                  waferFollowState.isActive &&
+                  waferFollowState.isFollowingCam
+                ) {
+                  waferFollowState.isFollowingCam = false;
+                  if (typeof updateWaferCamToggleUI === "function") {
+                    updateWaferCamToggleUI();
+                  }
+                }
               });
 
               // 5. Lights (Clear, high CRI studio cleanroom lighting)
@@ -7674,6 +7861,20 @@
 
               // 9. Ceiling FFU Grid
               buildCeilingFFU();
+
+              // 9C. Roof & HVAC Infrastructure Layer (Workstream 2)
+              try {
+                buildRoofHVACLayer();
+              } catch (e) {
+                console.error("buildRoofHVACLayer error:", e);
+              }
+
+              // 9D. Follow-a-Wafer Process Roaming System (Workstream 1)
+              try {
+                initWaferFollowSystem();
+              } catch (e) {
+                console.error("initWaferFollowSystem error:", e);
+              }
 
               // 9B. Pascal Multi-Tier Exploded Interconnect Link Conduits
               try {
@@ -9655,6 +9856,10 @@
               updateModeSelectOptions(lang);
             if (typeof updateScenarioSelectOptions === "function")
               updateScenarioSelectOptions(lang);
+            if (typeof updateWaferFollowLanguage === "function")
+              updateWaferFollowLanguage(lang);
+            if (typeof updateRoofHVACLanguage === "function")
+              updateRoofHVACLanguage(lang);
 
             // If an equipment is currently open in inspector panel, refresh its drawer text immediately
             if (typeof selectedEquipmentId !== "undefined" && selectedEquipmentId) {
@@ -15397,6 +15602,1016 @@
             scene.add(ceilingMesh);
           }
 
+
+// ==========================================
+// WORKSTREAM 2: ROOF & EXTERIOR HVAC INFRASTRUCTURE LAYER
+// ==========================================
+let showRoof = false;
+let roofGroup = null;
+let roofDuctMeshes = [];
+let roofMauSprites = [];
+let roofExhaustParticles = null;
+
+function buildRoofHVACLayer() {
+  if (roofGroup) return;
+  roofGroup = new THREE.Group();
+  roofGroup.name = 'roofHVACLayer';
+  roofGroup.visible = false;
+  roofDuctMeshes = [];
+  roofMauSprites = [];
+
+  // 1. Concrete Roof Slab: x in [-38, 47], z in [-29, 31], y = 8m, thickness 0.3m
+  // Center: x = 4.5, y = 8.0, z = 1.0; Width = 85, Depth = 60, Height = 0.3
+  const slabGeo = new THREE.BoxGeometry(85, 0.3, 60);
+  const slabMat = new THREE.MeshStandardMaterial({
+    color: 0xcfd4dc, // Light gray solid slab
+    roughness: 0.65,
+    metalness: 0.2,
+  });
+  const roofSlab = new THREE.Mesh(slabGeo, slabMat);
+  roofSlab.position.set(4.5, 8.0, 1.0);
+  roofSlab.receiveShadow = true;
+  roofGroup.add(roofSlab);
+
+  // Roof Parapet Perimeter Wall (low architectural border)
+  const parapetMat = new THREE.MeshStandardMaterial({
+    color: 0x94a3b8,
+    roughness: 0.7,
+    metalness: 0.2,
+  });
+  const parNSGeo = new THREE.BoxGeometry(85, 0.45, 0.3);
+  const parN = new THREE.Mesh(parNSGeo, parapetMat);
+  parN.position.set(4.5, 8.35, -29);
+  const parS = new THREE.Mesh(parNSGeo, parapetMat);
+  parS.position.set(4.5, 8.35, 31);
+
+  const parEWGeo = new THREE.BoxGeometry(0.3, 0.45, 60);
+  const parW = new THREE.Mesh(parEWGeo, parapetMat);
+  parW.position.set(-38, 8.35, 1.0);
+  const parE = new THREE.Mesh(parEWGeo, parapetMat);
+  parE.position.set(47, 8.35, 1.0);
+  roofGroup.add(parN, parS, parW, parE);
+
+  // 2. 3 Make-up Air Units (MAU-1, MAU-2, MAU-3): 6m x 3m x 4m along X at z = -20
+  const mauCoords = [
+    { id: 'MAU-1', x: -20, z: -20, nameEn: 'MAU-1 Make-up Air Unit', nameZh: 'MAU-1 新风机组' },
+    { id: 'MAU-2', x: 5, z: -20, nameEn: 'MAU-2 Make-up Air Unit', nameZh: 'MAU-2 新风机组' },
+    { id: 'MAU-3', x: 30, z: -20, nameEn: 'MAU-3 Make-up Air Unit', nameZh: 'MAU-3 新风机组' },
+  ];
+
+  const mauEnclosureMat = new THREE.MeshStandardMaterial({
+    color: 0x94a3b8,
+    metalness: 0.55,
+    roughness: 0.35,
+  });
+  const mauLouverMat = new THREE.MeshStandardMaterial({
+    color: 0x334155,
+    metalness: 0.4,
+    roughness: 0.7,
+  });
+  const mauFanMat = new THREE.MeshStandardMaterial({
+    color: 0x475569,
+    metalness: 0.6,
+    roughness: 0.3,
+  });
+
+  mauCoords.forEach((mau) => {
+    const mauGrp = new THREE.Group();
+    mauGrp.position.set(mau.x, 9.65, mau.z);
+
+    // Main enclosure body (6 x 3 x 4)
+    const bodyGeo = new THREE.BoxGeometry(6, 3, 4);
+    const bodyMesh = new THREE.Mesh(bodyGeo, mauEnclosureMat);
+    bodyMesh.castShadow = true;
+    bodyMesh.receiveShadow = true;
+    mauGrp.add(bodyMesh);
+
+    // Air intake louvers on front face
+    const louverGeo = new THREE.PlaneGeometry(5.2, 2.2);
+    const louverMesh = new THREE.Mesh(louverGeo, mauLouverMat);
+    louverMesh.position.set(0, 0, 2.02);
+    mauGrp.add(louverMesh);
+
+    // Top centrifugal fan discharge cowls (2 per MAU)
+    const cowlGeo = new THREE.CylinderGeometry(0.7, 0.7, 0.5, 16);
+    const cowl1 = new THREE.Mesh(cowlGeo, mauFanMat);
+    cowl1.position.set(-1.6, 1.75, 0);
+    const cowl2 = new THREE.Mesh(cowlGeo, mauFanMat);
+    cowl2.position.set(1.6, 1.75, 0);
+    mauGrp.add(cowl1, cowl2);
+
+    // Concrete curb base
+    const curbGeo = new THREE.BoxGeometry(6.4, 0.2, 4.4);
+    const curbMesh = new THREE.Mesh(curbGeo, parapetMat);
+    curbMesh.position.set(0, -1.4, 0);
+    mauGrp.add(curbMesh);
+
+    bodyMesh.userData = {
+      isDuct: true,
+      tooltipEn: mau.nameEn + ' → Cleanroom Make-up Air & Filtration',
+      tooltipZh: mau.nameZh + ' → 洁净厂房新风预调理与高效过滤',
+    };
+    roofDuctMeshes.push(bodyMesh);
+
+    // Floating bilingual sprite
+    const sprite = createRoofSprite(mau.nameEn, mau.nameZh);
+    sprite.position.set(0, 2.8, 0);
+    mauGrp.add(sprite);
+    roofMauSprites.push({ sprite, mau });
+
+    roofGroup.add(mauGrp);
+  });
+
+  // 3. Main Supply Ducts (送风主管): Rectangular 1.2m x 0.8m, z = -15, 0, 15
+  const supplyMat = new THREE.MeshStandardMaterial({
+    color: 0x7db8e8, // Supply blue #7db8e8
+    roughness: 0.35,
+    metalness: 0.3,
+  });
+
+  const mainDuctConfigs = [
+    {
+      z: -15,
+      tooltipEn: 'Supply Air Main (North Line) → Lithography, Etch & Thin Film Bays',
+      tooltipZh: '送风主管 (北干线) → 光刻/刻蚀/薄膜核心工艺区',
+    },
+    {
+      z: 0,
+      tooltipEn: 'Supply Air Main (Central Line) → Resist Track, Metrology & Inspection',
+      tooltipZh: '送风主管 (中干线) → 涂胶显影、量测与缺陷检测区',
+    },
+    {
+      z: 15,
+      tooltipEn: 'Supply Air Main (South Line) → Diffusion, Wet Clean, CMP & Implant Bays',
+      tooltipZh: '送风主管 (南干线) → 扩散炉管/湿法清洗/CMP/离子注入区',
+    },
+  ];
+
+  // 3 horizontal mains along X from x = -36 to 45 (length 81m)
+  const mainDuctGeo = new THREE.BoxGeometry(81, 0.8, 1.2);
+  mainDuctConfigs.forEach((cfg) => {
+    const ductMesh = new THREE.Mesh(mainDuctGeo, supplyMat);
+    ductMesh.position.set(4.5, 8.65, cfg.z);
+    ductMesh.castShadow = true;
+    ductMesh.userData = {
+      isDuct: true,
+      tooltipEn: cfg.tooltipEn,
+      tooltipZh: cfg.tooltipZh,
+    };
+    roofDuctMeshes.push(ductMesh);
+    roofGroup.add(ductMesh);
+  });
+
+  // Transverse feeder ducts connecting MAUs (z = -20) to main ducts (z = -15, 0, 15)
+  mauCoords.forEach((mau) => {
+    const feederGeo = new THREE.BoxGeometry(0.9, 0.7, 35);
+    const feederMesh = new THREE.Mesh(feederGeo, supplyMat);
+    feederMesh.position.set(mau.x, 8.65, -2.5);
+    feederMesh.userData = {
+      isDuct: true,
+      tooltipEn: 'Supply Distribution Header (' + mau.id + ') → Process Mains',
+      tooltipZh: '送风分配总管 (' + mau.id + ') → 各工艺分支主管',
+    };
+    roofDuctMeshes.push(feederMesh);
+    roofGroup.add(feederMesh);
+  });
+
+  // Branch Drop Pipes (分支下沉管): connecting down from roof duct y = 8.65 to ceiling grid y = 5.22
+  const bayDropBranches = [
+    { x: -27.5, z: -15, nameEn: 'Lithography Scanner Bay', nameZh: '光刻曝光核心间 (黄光区)' },
+    { x: -27.5, z: 0, nameEn: 'Resist Track & Coater/Dev Bay', nameZh: '涂胶显影跟踪机区 (黄光区)' },
+    { x: -4.5, z: -15, nameEn: 'Plasma Dry Etch Bay', nameZh: '等离子干法刻蚀区' },
+    { x: 20, z: -15, nameEn: 'Thin Film Deposition Bay (CVD/PVD)', nameZh: '薄膜沉积与外延区' },
+    { x: 25.5, z: 15, nameEn: 'Thermal Diffusion & Oxidation Bay', nameZh: '高温氧化扩散炉管区' },
+    { x: 15.5, z: 15, nameEn: 'Ion Implantation Bay', nameZh: '离子注入机区' },
+    { x: -8.5, z: 15, nameEn: 'CMP Planarization Bay', nameZh: '化学机械研磨平坦化区' },
+    { x: 0.5, z: 15, nameEn: 'Automated Wet Cleaning Bay', nameZh: '湿法清洗腐蚀工作台区' },
+    { x: -27.5, z: 15, nameEn: 'In-line CD-SEM Metrology Bay', nameZh: '在线微观量测与椭偏仪区' },
+    { x: -27.5, z: 25, nameEn: 'Darkfield Defect Inspection Bay', nameZh: '光学缺陷暗场检测区' },
+    { x: 39, z: -15, nameEn: 'Advanced Packaging Bay', nameZh: '先进封装与异构集成区' },
+    { x: 39, z: 8, nameEn: 'Wafer Sort & ATE Final Test Bay', nameZh: '晶圆探针测试与ATE分选区' },
+  ];
+
+  const dropGeo = new THREE.BoxGeometry(0.75, 3.43, 0.75);
+  bayDropBranches.forEach((b) => {
+    const dropMesh = new THREE.Mesh(dropGeo, supplyMat);
+    dropMesh.position.set(b.x, 6.935, b.z);
+    dropMesh.userData = {
+      isDuct: true,
+      tooltipEn: 'Supply air branch → ' + b.nameEn,
+      tooltipZh: '送风支管 → ' + b.nameZh,
+    };
+    roofDuctMeshes.push(dropMesh);
+    roofGroup.add(dropMesh);
+  });
+
+  // 4. Exhaust Chimneys (排气烟囱): 5 cylinders, h = 4m, d = 1m (r = 0.5m)
+  const exhaustMat = new THREE.MeshStandardMaterial({
+    color: 0xe8935a, // Exhaust orange #e8935a
+    roughness: 0.35,
+    metalness: 0.3,
+  });
+
+  const exhaustChimneys = [
+    { x: -25, z: 27, stack: '#1', nameEn: 'Acid / Corrosive Wet Scrubber Stack', nameZh: '酸性腐蚀废气洗涤塔排气烟囱' },
+    { x: -10, z: 27, stack: '#2', nameEn: 'Ammonia / Alkali Exhaust Stack', nameZh: '碱性含氨废气排气烟囱' },
+    { x: 5, z: 27, stack: '#3', nameEn: 'VOC Thermal Oxidizer (RTO) Stack', nameZh: 'VOC 挥发性有机物热氧化排气烟囱' },
+    { x: 20, z: 27, stack: '#4', nameEn: 'Pyrophoric / Silane Abatement Stack', nameZh: '硅烷与特种易燃毒性尾气燃烧筒' },
+    { x: 35, z: 27, stack: '#5', nameEn: 'General Cleanroom Thermal Exhaust Stack', nameZh: '厂房综合工艺散热排气烟囱' },
+  ];
+
+  const chimneyGeo = new THREE.CylinderGeometry(0.5, 0.5, 4.0, 20);
+  const cowlExhaustGeo = new THREE.CylinderGeometry(0.65, 0.5, 0.3, 20);
+  exhaustChimneys.forEach((ch) => {
+    const chMesh = new THREE.Mesh(chimneyGeo, exhaustMat);
+    chMesh.position.set(ch.x, 10.15, ch.z);
+    chMesh.castShadow = true;
+    chMesh.userData = {
+      isDuct: true,
+      tooltipEn: 'Exhaust Chimney (Stack ' + ch.stack + ') → ' + ch.nameEn,
+      tooltipZh: '工艺排气烟囱 (' + ch.stack + ') → ' + ch.nameZh,
+    };
+    roofDuctMeshes.push(chMesh);
+
+    const cowl = new THREE.Mesh(cowlExhaustGeo, exhaustMat);
+    cowl.position.set(ch.x, 12.2, ch.z);
+    cowl.userData = chMesh.userData;
+    roofDuctMeshes.push(cowl);
+
+    roofGroup.add(chMesh, cowl);
+  });
+
+  // Dynamic exhaust particles
+  initRoofExhaustParticles(exhaustChimneys);
+
+  scene.add(roofGroup);
+  setupRoofDuctHover();
+}
+
+function initRoofExhaustParticles(chimneys) {
+  const particleCount = chimneys.length * 14;
+  const positions = new Float32Array(particleCount * 3);
+  const pData = [];
+
+  let idx = 0;
+  chimneys.forEach((ch) => {
+    for (let i = 0; i < 14; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const r = Math.random() * 0.35;
+      const y = 12.2 + Math.random() * 2.0;
+      positions[idx * 3] = ch.x + Math.cos(angle) * r;
+      positions[idx * 3 + 1] = y;
+      positions[idx * 3 + 2] = ch.z + Math.sin(angle) * r;
+      pData.push({
+        baseX: ch.x,
+        baseZ: ch.z,
+        speed: 0.015 + Math.random() * 0.02,
+        r: r,
+      });
+      idx++;
+    }
+  });
+
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  const pMat = new THREE.PointsMaterial({
+    color: 0xfed7aa,
+    size: 0.22,
+    transparent: true,
+    opacity: 0.45,
+  });
+  roofExhaustParticles = {
+    points: new THREE.Points(pGeo, pMat),
+    pData: pData,
+    count: particleCount,
+  };
+  roofGroup.add(roofExhaustParticles.points);
+}
+
+function updateRoofHVACParticles() {
+  if (!showRoof || !roofExhaustParticles) return;
+  const posAttr = roofExhaustParticles.points.geometry.attributes.position;
+  const pos = posAttr.array;
+  const data = roofExhaustParticles.pData;
+  for (let i = 0; i < roofExhaustParticles.count; i++) {
+    let y = pos[i * 3 + 1] + data[i].speed;
+    if (y > 14.5) {
+      y = 12.2 + Math.random() * 0.2;
+    }
+    pos[i * 3 + 1] = y;
+  }
+  posAttr.needsUpdate = true;
+}
+
+function createRoofSprite(nameEn, nameZh) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 384;
+  canvas.height = 96;
+  const ctx = canvas.getContext('2d');
+  renderRoofSpriteCanvas(ctx, nameEn, nameZh);
+
+  const texture = new THREE.CanvasTexture(canvas);
+  const mat = new THREE.SpriteMaterial({ map: texture, transparent: true });
+  const sprite = new THREE.Sprite(mat);
+  sprite.scale.set(4.0, 1.0, 1.0);
+  sprite.userData = { canvas, ctx, texture, nameEn, nameZh };
+  return sprite;
+}
+
+function renderRoofSpriteCanvas(ctx, nameEn, nameZh) {
+  ctx.clearRect(0, 0, 384, 96);
+  ctx.fillStyle = 'rgba(15, 23, 42, 0.90)';
+  if (ctx.roundRect) {
+    ctx.beginPath();
+    ctx.roundRect(6, 6, 372, 84, 16);
+    ctx.fill();
+  } else {
+    ctx.fillRect(6, 6, 372, 84);
+  }
+  ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)';
+  ctx.lineWidth = 3;
+  if (ctx.roundRect) {
+    ctx.beginPath();
+    ctx.roundRect(6, 6, 372, 84, 16);
+    ctx.stroke();
+  } else {
+    ctx.strokeRect(6, 6, 372, 84);
+  }
+
+  const isZh = typeof currentLang === 'string' && currentLang.startsWith('zh');
+  ctx.fillStyle = '#38bdf8';
+  ctx.font = 'bold 24px "JetBrains Mono", system-ui, sans-serif';
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(nameEn.split(' ')[0], 192, 34);
+
+  ctx.fillStyle = '#ffffff';
+  ctx.font = 'bold 18px system-ui, -apple-system, sans-serif';
+  ctx.fillText(isZh ? nameZh : nameEn, 192, 64);
+}
+
+function updateRoofHVACLanguage(lang) {
+  if (roofMauSprites) {
+    roofMauSprites.forEach(({ sprite, mau }) => {
+      if (sprite && sprite.userData && sprite.userData.ctx) {
+        renderRoofSpriteCanvas(
+          sprite.userData.ctx,
+          sprite.userData.nameEn,
+          sprite.userData.nameZh
+        );
+        sprite.userData.texture.needsUpdate = true;
+      }
+    });
+  }
+  const badge = document.getElementById('roof-schematic-badge');
+  if (badge) {
+    const isZh = typeof lang === 'string' && lang.startsWith('zh');
+    badge.textContent = isZh ? '屋顶暖通: 示意' : 'Roof & HVAC: Schematic';
+  }
+}
+
+function setupRoofDuctHover() {
+  if (!threeCanvas) return;
+  const raycaster = new THREE.Raycaster();
+  const mouse = new THREE.Vector2();
+  const tooltipEl = document.getElementById('roof-duct-tooltip');
+
+  threeCanvas.addEventListener('pointermove', (e) => {
+    if (!showRoof || roofDuctMeshes.length === 0 || !tooltipEl) {
+      if (tooltipEl) tooltipEl.classList.add('hidden');
+      return;
+    }
+    const rect = threeCanvas.getBoundingClientRect();
+    mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+    raycaster.setFromCamera(mouse, camera);
+    const hits = raycaster.intersectObjects(roofDuctMeshes, false);
+    if (hits.length > 0) {
+      const obj = hits[0].object;
+      if (obj && obj.userData && (obj.userData.tooltipEn || obj.userData.tooltipZh)) {
+        const isZh = typeof currentLang === 'string' && currentLang.startsWith('zh');
+        tooltipEl.textContent = isZh
+          ? (obj.userData.tooltipZh || obj.userData.tooltipEn)
+          : (obj.userData.tooltipEn || obj.userData.tooltipZh);
+        tooltipEl.style.left = (e.clientX + 14) + 'px';
+        tooltipEl.style.top = (e.clientY + 14) + 'px';
+        tooltipEl.classList.remove('hidden');
+        return;
+      }
+    }
+    tooltipEl.classList.add('hidden');
+  });
+
+  threeCanvas.addEventListener('pointerleave', () => {
+    if (tooltipEl) tooltipEl.classList.add('hidden');
+  });
+}
+
+function toggleRoofVisibility(forceState) {
+  if (typeof forceState === 'boolean') {
+    showRoof = forceState;
+  } else {
+    showRoof = !showRoof;
+  }
+  if (roofGroup) roofGroup.visible = showRoof;
+  const btn = document.getElementById('btn-toggle-roof');
+  if (btn) {
+    btn.className = 'flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md font-medium shadow-sm transition whitespace-nowrap shrink-0 ' +
+      (showRoof ? 'bg-slate-900 text-white border border-slate-900' : 'bg-white text-slate-600 border border-slate-200');
+  }
+  const badge = document.getElementById('roof-schematic-badge');
+  if (badge) {
+    if (showRoof) badge.classList.remove('hidden');
+    else badge.classList.add('hidden');
+  }
+  const tooltip = document.getElementById('roof-duct-tooltip');
+  if (tooltip && !showRoof) tooltip.classList.add('hidden');
+}
+
+
+// ==========================================
+// WORKSTREAM 1: "FOLLOW A WAFER" ROUTE ROAMING SYSTEM
+// ==========================================
+const WAFER_TOOL_GROUP_TO_CATEGORY = {
+  TG01_LITHO: 'lithography',
+  TG02_TRACK: 'resist_track',
+  TG03_ETCH: 'dry_etch',
+  TG04_STRIP: 'dry_etch',
+  TG05_CVD: 'thin_film_deposition',
+  TG06_PVD: 'thin_film_deposition',
+  TG07_FURN_DIFF: 'thermal_processing',
+  TG08_FURN_LPCVD: 'thin_film_deposition',
+  TG09_IMPL_MED: 'ion_implantation',
+  TG10_IMPL_HIGH: 'ion_implantation',
+  TG11_CMP_OX: 'cmp',
+  TG12_CMP_MET: 'cmp',
+  TG13_WET_BENCH: 'wet_clean',
+  TG14_WET_SINGLE: 'wet_clean',
+  TG15_RTP: 'thermal_processing',
+  TG16_MET_CD: 'metrology',
+  TG17_MET_THICK: 'metrology',
+  TG18_INSPECT: 'inspection',
+};
+
+const EMBEDDED_WAFER_ROUTES = {"A":[{"step":1,"tool_group":"TG13_WET_BENCH","recipe":"REC_WET_RCA_CLEAN"},{"step":2,"tool_group":"TG07_FURN_DIFF","recipe":"REC_DIFF_PAD_OXIDE"},{"step":3,"tool_group":"TG17_MET_THICK"},{"step":4,"tool_group":"TG08_FURN_LPCVD","recipe":"REC_LPCVD_NITRIDE_PAD"},{"step":5,"tool_group":"TG02_TRACK"},{"step":6,"tool_group":"TG01_LITHO"},{"step":7,"tool_group":"TG03_ETCH"},{"step":8,"tool_group":"TG04_STRIP"},{"step":9,"tool_group":"TG14_WET_SINGLE"},{"step":10,"tool_group":"TG05_CVD"},{"step":11,"tool_group":"TG11_CMP_OX"},{"step":12,"tool_group":"TG18_INSPECT"},{"step":13,"tool_group":"TG02_TRACK"},{"step":14,"tool_group":"TG01_LITHO"},{"step":15,"tool_group":"TG10_IMPL_HIGH"},{"step":16,"tool_group":"TG04_STRIP"},{"step":17,"tool_group":"TG02_TRACK"},{"step":18,"tool_group":"TG01_LITHO"},{"step":19,"tool_group":"TG09_IMPL_MED"},{"step":20,"tool_group":"TG04_STRIP"},{"step":21,"tool_group":"TG13_WET_BENCH","recipe":"REC_WET_PRE_DIFF"},{"step":22,"tool_group":"TG07_FURN_DIFF","recipe":"REC_DIFF_WELL_DRIVE"},{"step":23,"tool_group":"TG08_FURN_LPCVD","recipe":"REC_LPCVD_POLY_GATE"},{"step":24,"tool_group":"TG03_ETCH"},{"step":25,"tool_group":"TG04_STRIP"},{"step":26,"tool_group":"TG14_WET_SINGLE"},{"step":27,"tool_group":"TG02_TRACK"},{"step":28,"tool_group":"TG01_LITHO"},{"step":29,"tool_group":"TG16_MET_CD"},{"step":30,"tool_group":"TG03_ETCH"},{"step":31,"tool_group":"TG04_STRIP"},{"step":32,"tool_group":"TG14_WET_SINGLE"},{"step":33,"tool_group":"TG05_CVD"},{"step":34,"tool_group":"TG03_ETCH"},{"step":35,"tool_group":"TG02_TRACK"},{"step":36,"tool_group":"TG01_LITHO"},{"step":37,"tool_group":"TG09_IMPL_MED"},{"step":38,"tool_group":"TG02_TRACK"},{"step":39,"tool_group":"TG01_LITHO"},{"step":40,"tool_group":"TG09_IMPL_MED"},{"step":41,"tool_group":"TG02_TRACK"},{"step":42,"tool_group":"TG01_LITHO"},{"step":43,"tool_group":"TG10_IMPL_HIGH"},{"step":44,"tool_group":"TG04_STRIP"},{"step":45,"tool_group":"TG15_RTP"},{"step":46,"tool_group":"TG06_PVD"},{"step":47,"tool_group":"TG15_RTP"},{"step":48,"tool_group":"TG05_CVD"},{"step":49,"tool_group":"TG11_CMP_OX"},{"step":50,"tool_group":"TG02_TRACK"},{"step":51,"tool_group":"TG01_LITHO"},{"step":52,"tool_group":"TG16_MET_CD"},{"step":53,"tool_group":"TG03_ETCH"},{"step":54,"tool_group":"TG02_TRACK"},{"step":55,"tool_group":"TG01_LITHO"},{"step":56,"tool_group":"TG03_ETCH"},{"step":57,"tool_group":"TG06_PVD"},{"step":58,"tool_group":"TG05_CVD"},{"step":59,"tool_group":"TG12_CMP_MET"},{"step":60,"tool_group":"TG05_CVD"},{"step":61,"tool_group":"TG02_TRACK"},{"step":62,"tool_group":"TG01_LITHO"},{"step":63,"tool_group":"TG03_ETCH"},{"step":64,"tool_group":"TG11_CMP_OX"},{"step":65,"tool_group":"TG14_WET_SINGLE"},{"step":66,"tool_group":"TG17_MET_THICK"},{"step":67,"tool_group":"TG06_PVD"},{"step":68,"tool_group":"TG12_CMP_MET"},{"step":69,"tool_group":"TG18_INSPECT"},{"step":70,"tool_group":"TG05_CVD"},{"step":71,"tool_group":"TG02_TRACK"},{"step":72,"tool_group":"TG01_LITHO"},{"step":73,"tool_group":"TG03_ETCH"},{"step":74,"tool_group":"TG02_TRACK"},{"step":75,"tool_group":"TG01_LITHO"},{"step":76,"tool_group":"TG03_ETCH"},{"step":77,"tool_group":"TG06_PVD"},{"step":78,"tool_group":"TG12_CMP_MET"},{"step":79,"tool_group":"TG05_CVD"},{"step":80,"tool_group":"TG02_TRACK"},{"step":81,"tool_group":"TG01_LITHO"},{"step":82,"tool_group":"TG03_ETCH"},{"step":83,"tool_group":"TG02_TRACK"},{"step":84,"tool_group":"TG01_LITHO"},{"step":85,"tool_group":"TG03_ETCH"},{"step":86,"tool_group":"TG02_TRACK"},{"step":87,"tool_group":"TG01_LITHO"},{"step":88,"tool_group":"TG03_ETCH"},{"step":89,"tool_group":"TG02_TRACK"},{"step":90,"tool_group":"TG01_LITHO"},{"step":91,"tool_group":"TG03_ETCH"},{"step":92,"tool_group":"TG02_TRACK"},{"step":93,"tool_group":"TG01_LITHO"},{"step":94,"tool_group":"TG03_ETCH"},{"step":95,"tool_group":"TG02_TRACK"},{"step":96,"tool_group":"TG01_LITHO"},{"step":97,"tool_group":"TG03_ETCH"},{"step":98,"tool_group":"TG02_TRACK"},{"step":99,"tool_group":"TG01_LITHO"},{"step":100,"tool_group":"TG03_ETCH"},{"step":101,"tool_group":"TG02_TRACK"},{"step":102,"tool_group":"TG01_LITHO"},{"step":103,"tool_group":"TG05_CVD"},{"step":104,"tool_group":"TG02_TRACK"},{"step":105,"tool_group":"TG01_LITHO"},{"step":106,"tool_group":"TG02_TRACK"},{"step":107,"tool_group":"TG01_LITHO"},{"step":108,"tool_group":"TG02_TRACK"},{"step":109,"tool_group":"TG01_LITHO"},{"step":110,"tool_group":"TG02_TRACK"},{"step":111,"tool_group":"TG01_LITHO"},{"step":112,"tool_group":"TG02_TRACK"},{"step":113,"tool_group":"TG01_LITHO"},{"step":114,"tool_group":"TG02_TRACK"},{"step":115,"tool_group":"TG01_LITHO"},{"step":116,"tool_group":"TG02_TRACK"},{"step":117,"tool_group":"TG01_LITHO"},{"step":118,"tool_group":"TG16_MET_CD"},{"step":119,"tool_group":"TG02_TRACK"},{"step":120,"tool_group":"TG01_LITHO"}],"B":[{"step":1,"tool_group":"TG13_WET_BENCH","recipe":"REC_WET_RCA_CLEAN"},{"step":2,"tool_group":"TG07_FURN_DIFF","recipe":"REC_DIFF_PAD_OXIDE"},{"step":3,"tool_group":"TG17_MET_THICK"},{"step":4,"tool_group":"TG08_FURN_LPCVD","recipe":"REC_LPCVD_NITRIDE_PAD"},{"step":5,"tool_group":"TG02_TRACK"},{"step":6,"tool_group":"TG01_LITHO"},{"step":7,"tool_group":"TG03_ETCH"},{"step":8,"tool_group":"TG04_STRIP"},{"step":9,"tool_group":"TG14_WET_SINGLE"},{"step":10,"tool_group":"TG05_CVD"},{"step":11,"tool_group":"TG11_CMP_OX"},{"step":12,"tool_group":"TG18_INSPECT"},{"step":13,"tool_group":"TG02_TRACK"},{"step":14,"tool_group":"TG01_LITHO"},{"step":15,"tool_group":"TG10_IMPL_HIGH"},{"step":16,"tool_group":"TG04_STRIP"},{"step":17,"tool_group":"TG02_TRACK"},{"step":18,"tool_group":"TG01_LITHO"},{"step":19,"tool_group":"TG09_IMPL_MED"},{"step":20,"tool_group":"TG04_STRIP"},{"step":21,"tool_group":"TG13_WET_BENCH","recipe":"REC_WET_PRE_DIFF"},{"step":22,"tool_group":"TG07_FURN_DIFF","recipe":"REC_DIFF_WELL_DRIVE"},{"step":23,"tool_group":"TG08_FURN_LPCVD","recipe":"REC_LPCVD_POLY_GATE"},{"step":24,"tool_group":"TG14_WET_SINGLE"},{"step":25,"tool_group":"TG02_TRACK"},{"step":26,"tool_group":"TG01_LITHO"},{"step":27,"tool_group":"TG16_MET_CD"},{"step":28,"tool_group":"TG03_ETCH"},{"step":29,"tool_group":"TG04_STRIP"},{"step":30,"tool_group":"TG14_WET_SINGLE"},{"step":31,"tool_group":"TG05_CVD"},{"step":32,"tool_group":"TG03_ETCH"},{"step":33,"tool_group":"TG02_TRACK"},{"step":34,"tool_group":"TG01_LITHO"},{"step":35,"tool_group":"TG09_IMPL_MED"},{"step":36,"tool_group":"TG02_TRACK"},{"step":37,"tool_group":"TG01_LITHO"},{"step":38,"tool_group":"TG10_IMPL_HIGH"},{"step":39,"tool_group":"TG04_STRIP"},{"step":40,"tool_group":"TG15_RTP"},{"step":41,"tool_group":"TG15_RTP"},{"step":42,"tool_group":"TG06_PVD"},{"step":43,"tool_group":"TG05_CVD"},{"step":44,"tool_group":"TG11_CMP_OX"},{"step":45,"tool_group":"TG02_TRACK"},{"step":46,"tool_group":"TG01_LITHO"},{"step":47,"tool_group":"TG16_MET_CD"},{"step":48,"tool_group":"TG03_ETCH"},{"step":49,"tool_group":"TG02_TRACK"},{"step":50,"tool_group":"TG01_LITHO"},{"step":51,"tool_group":"TG03_ETCH"},{"step":52,"tool_group":"TG06_PVD"},{"step":53,"tool_group":"TG05_CVD"},{"step":54,"tool_group":"TG12_CMP_MET"},{"step":55,"tool_group":"TG05_CVD"},{"step":56,"tool_group":"TG17_MET_THICK"},{"step":57,"tool_group":"TG02_TRACK"},{"step":58,"tool_group":"TG01_LITHO"},{"step":59,"tool_group":"TG11_CMP_OX"},{"step":60,"tool_group":"TG03_ETCH"},{"step":61,"tool_group":"TG06_PVD"},{"step":62,"tool_group":"TG12_CMP_MET"},{"step":63,"tool_group":"TG18_INSPECT"},{"step":64,"tool_group":"TG05_CVD"},{"step":65,"tool_group":"TG02_TRACK"},{"step":66,"tool_group":"TG01_LITHO"},{"step":67,"tool_group":"TG03_ETCH"},{"step":68,"tool_group":"TG02_TRACK"},{"step":69,"tool_group":"TG01_LITHO"},{"step":70,"tool_group":"TG03_ETCH"},{"step":71,"tool_group":"TG05_CVD"},{"step":72,"tool_group":"TG02_TRACK"},{"step":73,"tool_group":"TG01_LITHO"},{"step":74,"tool_group":"TG03_ETCH"},{"step":75,"tool_group":"TG02_TRACK"},{"step":76,"tool_group":"TG01_LITHO"},{"step":77,"tool_group":"TG03_ETCH"},{"step":78,"tool_group":"TG02_TRACK"},{"step":79,"tool_group":"TG01_LITHO"},{"step":80,"tool_group":"TG03_ETCH"},{"step":81,"tool_group":"TG02_TRACK"},{"step":82,"tool_group":"TG01_LITHO"},{"step":83,"tool_group":"TG03_ETCH"},{"step":84,"tool_group":"TG02_TRACK"},{"step":85,"tool_group":"TG01_LITHO"},{"step":86,"tool_group":"TG03_ETCH"},{"step":87,"tool_group":"TG02_TRACK"},{"step":88,"tool_group":"TG01_LITHO"},{"step":89,"tool_group":"TG03_ETCH"},{"step":90,"tool_group":"TG02_TRACK"},{"step":91,"tool_group":"TG01_LITHO"},{"step":92,"tool_group":"TG02_TRACK"},{"step":93,"tool_group":"TG01_LITHO"},{"step":94,"tool_group":"TG02_TRACK"},{"step":95,"tool_group":"TG01_LITHO"},{"step":96,"tool_group":"TG02_TRACK"},{"step":97,"tool_group":"TG01_LITHO"},{"step":98,"tool_group":"TG02_TRACK"},{"step":99,"tool_group":"TG01_LITHO"},{"step":100,"tool_group":"TG02_TRACK"},{"step":101,"tool_group":"TG01_LITHO"},{"step":102,"tool_group":"TG16_MET_CD"},{"step":103,"tool_group":"TG02_TRACK"},{"step":104,"tool_group":"TG01_LITHO"}],"C":[{"step":1,"tool_group":"TG13_WET_BENCH","recipe":"REC_WET_RCA_CLEAN"},{"step":2,"tool_group":"TG07_FURN_DIFF","recipe":"REC_DIFF_PAD_OXIDE"},{"step":3,"tool_group":"TG17_MET_THICK"},{"step":4,"tool_group":"TG08_FURN_LPCVD","recipe":"REC_LPCVD_NITRIDE_PAD"},{"step":5,"tool_group":"TG02_TRACK"},{"step":6,"tool_group":"TG01_LITHO"},{"step":7,"tool_group":"TG03_ETCH"},{"step":8,"tool_group":"TG04_STRIP"},{"step":9,"tool_group":"TG14_WET_SINGLE"},{"step":10,"tool_group":"TG05_CVD"},{"step":11,"tool_group":"TG11_CMP_OX"},{"step":12,"tool_group":"TG18_INSPECT"},{"step":13,"tool_group":"TG02_TRACK"},{"step":14,"tool_group":"TG01_LITHO"},{"step":15,"tool_group":"TG10_IMPL_HIGH"},{"step":16,"tool_group":"TG04_STRIP"},{"step":17,"tool_group":"TG02_TRACK"},{"step":18,"tool_group":"TG01_LITHO"},{"step":19,"tool_group":"TG09_IMPL_MED"},{"step":20,"tool_group":"TG04_STRIP"},{"step":21,"tool_group":"TG13_WET_BENCH","recipe":"REC_WET_PRE_DIFF"},{"step":22,"tool_group":"TG07_FURN_DIFF","recipe":"REC_DIFF_WELL_DRIVE"},{"step":23,"tool_group":"TG08_FURN_LPCVD","recipe":"REC_LPCVD_POLY_GATE"},{"step":24,"tool_group":"TG14_WET_SINGLE"},{"step":25,"tool_group":"TG02_TRACK"},{"step":26,"tool_group":"TG01_LITHO"},{"step":27,"tool_group":"TG16_MET_CD"},{"step":28,"tool_group":"TG03_ETCH"},{"step":29,"tool_group":"TG04_STRIP"},{"step":30,"tool_group":"TG14_WET_SINGLE"},{"step":31,"tool_group":"TG05_CVD"},{"step":32,"tool_group":"TG03_ETCH"},{"step":33,"tool_group":"TG02_TRACK"},{"step":34,"tool_group":"TG01_LITHO"},{"step":35,"tool_group":"TG09_IMPL_MED"},{"step":36,"tool_group":"TG02_TRACK"},{"step":37,"tool_group":"TG01_LITHO"},{"step":38,"tool_group":"TG10_IMPL_HIGH"},{"step":39,"tool_group":"TG04_STRIP"},{"step":40,"tool_group":"TG15_RTP"},{"step":41,"tool_group":"TG15_RTP"},{"step":42,"tool_group":"TG06_PVD"},{"step":43,"tool_group":"TG05_CVD"},{"step":44,"tool_group":"TG11_CMP_OX"},{"step":45,"tool_group":"TG02_TRACK"},{"step":46,"tool_group":"TG01_LITHO"},{"step":47,"tool_group":"TG16_MET_CD"},{"step":48,"tool_group":"TG03_ETCH"},{"step":49,"tool_group":"TG02_TRACK"},{"step":50,"tool_group":"TG01_LITHO"},{"step":51,"tool_group":"TG03_ETCH"},{"step":52,"tool_group":"TG06_PVD"},{"step":53,"tool_group":"TG05_CVD"},{"step":54,"tool_group":"TG12_CMP_MET"},{"step":55,"tool_group":"TG05_CVD"},{"step":56,"tool_group":"TG17_MET_THICK"},{"step":57,"tool_group":"TG02_TRACK"},{"step":58,"tool_group":"TG01_LITHO"},{"step":59,"tool_group":"TG03_ETCH"},{"step":60,"tool_group":"TG06_PVD"},{"step":61,"tool_group":"TG12_CMP_MET"},{"step":62,"tool_group":"TG18_INSPECT"},{"step":63,"tool_group":"TG05_CVD"},{"step":64,"tool_group":"TG02_TRACK"},{"step":65,"tool_group":"TG01_LITHO"},{"step":66,"tool_group":"TG03_ETCH"},{"step":67,"tool_group":"TG02_TRACK"},{"step":68,"tool_group":"TG01_LITHO"},{"step":69,"tool_group":"TG03_ETCH"},{"step":70,"tool_group":"TG05_CVD"},{"step":71,"tool_group":"TG02_TRACK"},{"step":72,"tool_group":"TG01_LITHO"},{"step":73,"tool_group":"TG03_ETCH"},{"step":74,"tool_group":"TG02_TRACK"},{"step":75,"tool_group":"TG01_LITHO"},{"step":76,"tool_group":"TG03_ETCH"},{"step":77,"tool_group":"TG02_TRACK"},{"step":78,"tool_group":"TG01_LITHO"},{"step":79,"tool_group":"TG03_ETCH"},{"step":80,"tool_group":"TG02_TRACK"},{"step":81,"tool_group":"TG01_LITHO"},{"step":82,"tool_group":"TG03_ETCH"},{"step":83,"tool_group":"TG02_TRACK"},{"step":84,"tool_group":"TG01_LITHO"},{"step":85,"tool_group":"TG02_TRACK"},{"step":86,"tool_group":"TG01_LITHO"},{"step":87,"tool_group":"TG02_TRACK"},{"step":88,"tool_group":"TG01_LITHO"},{"step":89,"tool_group":"TG02_TRACK"},{"step":90,"tool_group":"TG01_LITHO"},{"step":91,"tool_group":"TG02_TRACK"},{"step":92,"tool_group":"TG01_LITHO"}]};
+const EMBEDDED_LAYOUT_TOOLS = [{"id":"c327b57f-9e72-50d5-87a3-0986242ffb86","category":"lithography","x":-31,"z":-22.5,"vendor":"ASML","model":"TWINSCAN NXT:2050i"},{"id":"80de0311-3bee-589e-be9e-c6e58527668c","category":"lithography","x":-24,"z":-22.5,"vendor":"ASML","model":"TWINSCAN NXT:2000i"},{"id":"a46a0eaf-8fac-578a-b4d0-3496f2cb94f2","category":"lithography","x":-31,"z":-17.5,"vendor":"ASML","model":"TWINSCAN NXE:3400C"},{"id":"640e01d7-420a-5ada-b39c-0e363ec47f11","category":"lithography","x":-24,"z":-17.5,"vendor":"ASML","model":"TWINSCAN NXE:3600D"},{"id":"cde65e61-a3f5-5b18-a11f-7c2a9a220442","category":"lithography","x":-31,"z":-12.5,"vendor":"ASML","model":"TWINSCAN NXE:3800E"},{"id":"bc44c286-8316-5bcf-867e-6990181bc9c4","category":"lithography","x":-24,"z":-12.5,"vendor":"ASML","model":"TWINSCAN EXE:5000"},{"id":"752bb9b8-00dc-594d-9003-4e49aaf84d94","category":"lithography","x":-31,"z":-7.5,"vendor":"ASML","model":"TWINSCAN EXE:5200 / 5200B"},{"id":"c20129c0-b029-5da5-8576-fdabf3f96753","category":"lithography","x":-24,"z":-7.5,"vendor":"Nikon","model":"NSR-S635E"},{"id":"5b0a3bb2-da3e-5981-9431-99e04edda4c0","category":"resist_track","x":-32.75,"z":-1.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK ACT 12"},{"id":"b8574715-05b3-5bd4-9449-3c34dd00ed02","category":"resist_track","x":-29.25,"z":-1.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK LITHIUS Pro Z"},{"id":"5b0a3bb2-da3e-5981-9431-99e04edda4c0","category":"resist_track","x":-25.75,"z":-1.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK ACT 12"},{"id":"b8574715-05b3-5bd4-9449-3c34dd00ed02","category":"resist_track","x":-22.25,"z":-1.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK LITHIUS Pro Z"},{"id":"5b0a3bb2-da3e-5981-9431-99e04edda4c0","category":"resist_track","x":-32.75,"z":4.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK ACT 12"},{"id":"b8574715-05b3-5bd4-9449-3c34dd00ed02","category":"resist_track","x":-29.25,"z":4.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK LITHIUS Pro Z"},{"id":"5b0a3bb2-da3e-5981-9431-99e04edda4c0","category":"resist_track","x":-25.75,"z":4.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK ACT 12"},{"id":"b8574715-05b3-5bd4-9449-3c34dd00ed02","category":"resist_track","x":-22.25,"z":4.5,"vendor":"Tokyo Electron","model":"CLEAN TRACK LITHIUS Pro Z"},{"id":"c88c9684-f141-5d2f-9c83-2ec670767089","category":"dry_etch","x":-10.5,"z":-23.5,"vendor":"Lam Research","model":"2300 Versys Kiyo3x / Kiyo F series"},{"id":"dbaa6c67-67ba-52e5-8406-f0358e5eda94","category":"dry_etch","x":-10.5,"z":-19.5,"vendor":"Lam Research","model":"Flex G Series"},{"id":"2ce14b1f-68b3-5111-a9c4-1e1191ca6272","category":"dry_etch","x":-10.5,"z":-15.5,"vendor":"Lam Research","model":"2300 Syndion / Syndion GP"},{"id":"7ae544a6-85c8-56e6-b84d-a942fffd85af","category":"dry_etch","x":-10.5,"z":-11.5,"vendor":"Lam Research","model":"Vantex"},{"id":"e75be56f-ac9d-5f9c-97d8-dc8788185d22","category":"dry_etch","x":-10.5,"z":-7.5,"vendor":"Tokyo Electron","model":"Tactras Vigus"},{"id":"a5dc900e-762e-57ab-aa7c-9fea763e60b9","category":"dry_etch","x":-6.5,"z":-23.5,"vendor":"Tokyo Electron","model":"Tactras-UDEMAE"},{"id":"f5e193da-325c-51c6-b39e-b79a5c34f4bd","category":"dry_etch","x":-6.5,"z":-19.5,"vendor":"Applied Materials","model":"Centura AdvantEdge (Mesa)"},{"id":"0fa9f3d2-9283-50cc-b179-5ce3eea7715f","category":"dry_etch","x":-6.5,"z":-15.5,"vendor":"Applied Materials","model":"Producer Etch"},{"id":"ca805c75-37f2-590e-96c0-d10090990e6c","category":"dry_etch","x":-6.5,"z":-11.5,"vendor":"Hitachi High-Tech","model":"M-8000 Series (Conductor Etch)"},{"id":"15a7fae3-29b8-5be4-90e6-d2124bff4b0c","category":"dry_etch","x":-6.5,"z":-7.5,"vendor":"Hitachi High-Tech","model":"EMCP Etch Chamber"},{"id":"8e4c6025-2b2d-5f90-adc5-89a7cc5c787e","category":"dry_etch","x":-2.5,"z":-23.5,"vendor":"AMEC","model":"Primo HD-RIE"},{"id":"8e8831fb-1f58-5bdc-9d46-160abc86c1fe","category":"dry_etch","x":-2.5,"z":-19.5,"vendor":"AMEC","model":"Primo XD-RIE"},{"id":"830aae95-3738-5796-9f9a-ab6737647d28","category":"dry_etch","x":-2.5,"z":-15.5,"vendor":"NAURA","model":"(model not disclosed)"},{"id":"556a9772-9972-5c70-b0bd-8ca790b4156e","category":"dry_etch","x":-2.5,"z":-11.5,"vendor":"NAURA","model":"NMC612H"},{"id":"26f68b6d-99a8-510a-9319-ae7c6ba9225e","category":"dry_etch","x":1.5,"z":-23.5,"vendor":"NAURA","model":"Acme Glaion130"},{"id":"c88c9684-f141-5d2f-9c83-2ec670767089","category":"dry_etch","x":1.5,"z":-19.5,"vendor":"Lam Research","model":"2300 Versys Kiyo3x / Kiyo F series"},{"id":"dbaa6c67-67ba-52e5-8406-f0358e5eda94","category":"dry_etch","x":1.5,"z":-15.5,"vendor":"Lam Research","model":"Flex G Series"},{"id":"2ce14b1f-68b3-5111-a9c4-1e1191ca6272","category":"dry_etch","x":1.5,"z":-11.5,"vendor":"Lam Research","model":"2300 Syndion / Syndion GP"},{"id":"e6a771bf-392c-51f8-a79b-95bdf6e51980","category":"thin_film_deposition","x":13.5,"z":-23.5,"vendor":"Applied Materials","model":"Producer GT"},{"id":"d32faad5-0b46-5364-a423-d7d6ccd06d19","category":"thin_film_deposition","x":13.5,"z":-19.5,"vendor":"Applied Materials","model":"Endura 5500/XP"},{"id":"7bfdc673-da69-5c8e-ad61-15a64b78dac9","category":"thin_film_deposition","x":13.5,"z":-15.5,"vendor":"Lam Research","model":"Vector Extreme"},{"id":"6b2814d7-78f4-57be-a738-3a4b64501406","category":"thin_film_deposition","x":13.5,"z":-11.5,"vendor":"Lam Research","model":"Striker FE"},{"id":"d789e8ed-c89d-577b-ac0a-001f076565df","category":"thin_film_deposition","x":13.5,"z":-7.5,"vendor":"ASM International","model":"Epsilon 300"},{"id":"46eb2c49-e770-5b66-adcf-5efc55366f3c","category":"thin_film_deposition","x":17.5,"z":-23.5,"vendor":"ASM International","model":"Intrepid ES"},{"id":"9a91170f-bca1-56b6-b6d9-c57b16e696a2","category":"thin_film_deposition","x":17.5,"z":-19.5,"vendor":"Tokyo Electron","model":"Trias"},{"id":"86c91512-c56a-5b1a-a573-67ed75449aec","category":"thin_film_deposition","x":17.5,"z":-15.5,"vendor":"Kokusai Electric","model":"TSURUGI-C2"},{"id":"c519ba08-2236-5b8a-9059-bcb6279fae8b","category":"thin_film_deposition","x":17.5,"z":-11.5,"vendor":"NAURA","model":"Cygnus PECVD"},{"id":"97fd4069-802a-5f8c-9835-06c29603480e","category":"thin_film_deposition","x":17.5,"z":-7.5,"vendor":"AMEC","model":"Prismo A7"},{"id":"6828d3b2-1285-5ed5-8125-64f9ee5f5130","category":"thin_film_deposition","x":22.5,"z":-23.5,"vendor":"Piotech","model":"PF-300T"},{"id":"4566b1a5-caae-5be9-a767-09a2ee8b84db","category":"thin_film_deposition","x":22.5,"z":-19.5,"vendor":"Piotech","model":"FT-300T"},{"id":"e6a771bf-392c-51f8-a79b-95bdf6e51980","category":"thin_film_deposition","x":22.5,"z":-15.5,"vendor":"Applied Materials","model":"Producer GT"},{"id":"d32faad5-0b46-5364-a423-d7d6ccd06d19","category":"thin_film_deposition","x":22.5,"z":-11.5,"vendor":"Applied Materials","model":"Endura 5500/XP"},{"id":"7bfdc673-da69-5c8e-ad61-15a64b78dac9","category":"thin_film_deposition","x":26.5,"z":-23.5,"vendor":"Lam Research","model":"Vector Extreme"},{"id":"6b2814d7-78f4-57be-a738-3a4b64501406","category":"thin_film_deposition","x":26.5,"z":-19.5,"vendor":"Lam Research","model":"Striker FE"},{"id":"d789e8ed-c89d-577b-ac0a-001f076565df","category":"thin_film_deposition","x":26.5,"z":-15.5,"vendor":"ASM International","model":"Epsilon 300"},{"id":"46eb2c49-e770-5b66-adcf-5efc55366f3c","category":"thin_film_deposition","x":26.5,"z":-11.5,"vendor":"ASM International","model":"Intrepid ES"},{"id":"2c8ee49e-b417-50be-a642-6fe000760c2a","category":"cmp","x":-10.5,"z":7,"vendor":"Ebara","model":"F-REX300"},{"id":"1cf7aafa-36a9-57c7-bbab-b18ce6f8535d","category":"cmp","x":-6.5,"z":7,"vendor":"Applied Materials","model":"Reflexion LK Prime"},{"id":"746eba13-baf5-5ec1-959c-ad66fd799932","category":"cmp","x":-10.5,"z":12,"vendor":"Applied Materials","model":"Reflexion LK"},{"id":"0274d687-f89d-5c0c-bd5d-61b502a60c15","category":"cmp","x":-6.5,"z":12,"vendor":"Applied Materials","model":"Reflexion LK Ecmp"},{"id":"c5ce9e6e-a036-55d6-8527-e01bff1f68f9","category":"cmp","x":-10.5,"z":17,"vendor":"Ebara","model":"F-REX300S"},{"id":"26b49060-218b-545a-ad86-eaa342c47fc5","category":"cmp","x":-6.5,"z":17,"vendor":"Ebara","model":"F-REX300X / F-REX300XA"},{"id":"6d356eb0-506f-5d19-9bf1-6c3068bb0699","category":"cmp","x":-10.5,"z":22,"vendor":"Ebara","model":"FREX200"},{"id":"e87575b6-6ce2-50c7-bd7b-cf8c1ca4e97b","category":"cmp","x":-6.5,"z":22,"vendor":"Huahai Qingke","model":"(model not confirmed)"},{"id":"5e19f35a-ac9d-50ee-b8c2-a836b6ee861f","category":"wet_clean","x":-1.5,"z":6.5,"vendor":"SCREEN","model":"SU-3300"},{"id":"b5300e1d-9189-5962-81e2-64c1d3524339","category":"wet_clean","x":2.5,"z":6.5,"vendor":"SCREEN","model":"SS-3300S"},{"id":"48494344-f8b9-5f1a-9995-80ad51cd7a01","category":"wet_clean","x":-1.5,"z":10.7,"vendor":"Tokyo Electron","model":"CELLESTA SCD"},{"id":"e83fa592-c53f-548a-9c30-3dcd2b7c9fd7","category":"wet_clean","x":2.5,"z":10.7,"vendor":"Tokyo Electron","model":"CELLESTA -i MD"},{"id":"ffb7c3a3-7f53-5cbf-8337-ca7eb5b96638","category":"wet_clean","x":-1.5,"z":14.9,"vendor":"Lam Research","model":"DV-Prime"},{"id":"663778ae-ca7e-5e09-bb9c-a03c7a2d1cec","category":"wet_clean","x":2.5,"z":14.9,"vendor":"Lam Research","model":"Da Vinci"},{"id":"57218784-3aaf-5203-80b1-3485be695b5e","category":"wet_clean","x":-1.5,"z":19.1,"vendor":"SEMES","model":"(model not disclosed)"},{"id":"0692771c-1149-5fc9-be7d-98d849256bc8","category":"wet_clean","x":2.5,"z":19.1,"vendor":"ACM Research","model":"Ultra C Tahoe"},{"id":"81497b52-7ff7-527f-8f82-a7ad2aa9e498","category":"wet_clean","x":-1.5,"z":23.3,"vendor":"ACMR","model":"Ultra C VI"},{"id":"5e19f35a-ac9d-50ee-b8c2-a836b6ee861f","category":"wet_clean","x":2.5,"z":23.3,"vendor":"SCREEN","model":"SU-3300"},{"id":"7f4f54a9-d416-5a3c-a522-2064c07790d7","category":"ion_implantation","x":15.5,"z":6.5,"vendor":"SRII","model":"SRII-4.5M"},{"id":"4876fdc8-11e8-5d2b-8fe9-5ad9ff8cda4e","category":"ion_implantation","x":13.5,"z":11.5,"vendor":"Axcelis","model":"Purion H200"},{"id":"fc9fa2bd-fe5a-5c9a-b679-aa8d7c727997","category":"ion_implantation","x":17.5,"z":11.5,"vendor":"Axcelis","model":"Purion XEmax"},{"id":"8f81cb70-a28d-5804-b1fb-a76a4eab063c","category":"ion_implantation","x":13.5,"z":16,"vendor":"Applied Materials","model":"VIISta 900 3D"},{"id":"e5a97846-cf6d-5034-b7a2-13b30cdba992","category":"ion_implantation","x":17.5,"z":16,"vendor":"Applied Materials","model":"VIISta Trident XP2"},{"id":"91cd500b-46ac-5a34-afd7-8cfba43a23ef","category":"ion_implantation","x":13.5,"z":20.5,"vendor":"SMIT (Sumitomo Heavy Industries)","model":"SHX-III (HC)"},{"id":"836a5356-bd8f-563c-ae4f-b5a91235e1f6","category":"ion_implantation","x":17.5,"z":20.5,"vendor":"Nissin Ion Equipment","model":"EXCEED9600A"},{"id":"841a47b6-428b-5c29-9ab9-5109afd9dc1e","category":"ion_implantation","x":13.5,"z":25,"vendor":"Nissin Ion Equipment","model":"IMPHEAT-II"},{"id":"84ec4cb1-7fc7-5cf5-bbd0-9be5db89a817","category":"thermal_processing","x":23.5,"z":7,"vendor":"Kokusai Electric","model":"QUIXACE"},{"id":"6964f52b-7e71-5a46-a03f-e1610a0374e8","category":"thermal_processing","x":27.5,"z":7,"vendor":"ASM International","model":"A412"},{"id":"41c16e65-cc7c-5907-b2e2-98af1095dcd5","category":"thermal_processing","x":23.5,"z":12,"vendor":"ASM International","model":"SONORA"},{"id":"47121709-93b4-5896-931e-1c6fe6290821","category":"thermal_processing","x":27.5,"z":12,"vendor":"Tokyo Electron","model":"Alpha-8SE"},{"id":"0fcf58f8-4126-540b-8a8b-2fd77d23e18a","category":"thermal_processing","x":23.5,"z":17,"vendor":"Tokyo Electron","model":"Alpha 303i"},{"id":"7ceaf1c8-7910-5bc9-bd68-adbd81367034","category":"thermal_processing","x":27.5,"z":17,"vendor":"Applied Materials","model":"Radiance Vantage"},{"id":"e08bdd1a-8dda-517c-8506-32bd3f3b5110","category":"thermal_processing","x":23.5,"z":22,"vendor":"Mattson (now Ferrotec)","model":"Helios"},{"id":"4b5ef9ed-188c-5b4e-9d2e-d5fe27d2cd99","category":"thermal_processing","x":27.5,"z":22,"vendor":"NAURA","model":"(model not disclosed)"},{"id":"042c350c-d1a0-51f2-ba11-ef22e2507f73","category":"metrology","x":-31,"z":10.5,"vendor":"KLA","model":"Archer 750"},{"id":"3a03fd80-7476-588a-919d-cf605f154958","category":"metrology","x":-24,"z":10.5,"vendor":"KLA","model":"SpectraShape 11k"},{"id":"5f374ae5-af0d-5f2b-88a7-ce1863356bc5","category":"metrology","x":-31,"z":13.5,"vendor":"KLA","model":"Aleris 8500"},{"id":"09b4a776-277f-5203-8f72-80361b049f10","category":"metrology","x":-24,"z":13.5,"vendor":"KLA","model":"3935 (39xx series)"},{"id":"bdd36ff2-ada4-5655-8230-ccd30e4919a6","category":"metrology","x":-31,"z":16.5,"vendor":"KLA","model":"2930 (29xx series)"},{"id":"5adab9b7-42f7-5df0-be24-4e9f9a7e9fca","category":"metrology","x":-24,"z":16.5,"vendor":"KLA","model":"eDR7280"},{"id":"65a9c409-0449-5ea6-a5df-089ae1bfb174","category":"metrology","x":-31,"z":19.5,"vendor":"ASML","model":"YieldStar 385"},{"id":"03719f6a-8748-5223-b1d1-88769f43b79d","category":"metrology","x":-24,"z":19.5,"vendor":"Onto Innovation","model":"Atlas V"},{"id":"1618a1eb-086d-5dbc-9635-1d7577b0602c","category":"inspection","x":-32.75,"z":25,"vendor":"KLA","model":"2920 Series Broadband Plasma Inspection"},{"id":"ac5b0753-0843-5980-a016-cc5297bb0438","category":"inspection","x":-29.25,"z":25,"vendor":"Applied Materials","model":"UVision 4"},{"id":"1618a1eb-086d-5dbc-9635-1d7577b0602c","category":"inspection","x":-25.75,"z":25,"vendor":"KLA","model":"2920 Series Broadband Plasma Inspection"},{"id":"ac5b0753-0843-5980-a016-cc5297bb0438","category":"inspection","x":-22.25,"z":25,"vendor":"Applied Materials","model":"UVision 4"},{"id":"3e5137b6-78c4-5ac8-a6ef-912562fb9311","category":"packaging","x":35.5,"z":-23,"vendor":"BESI","model":"Datacon 2200 EVO"},{"id":"cb1548a3-cdb0-5c6b-9798-f86b99ae10ad","category":"packaging","x":39,"z":-23,"vendor":"ACMR","model":"Ultra ECP 3d"},{"id":"1fdd1137-9952-5584-8236-48bd6f119cb6","category":"packaging","x":42.5,"z":-23,"vendor":"BESI","model":"9800 TC next"},{"id":"de700138-a965-51b6-b2c3-ec6e39d03c6f","category":"packaging","x":35.5,"z":-17.5,"vendor":"BESI","model":"Datacon 8800 CHAMEO ultra plus"},{"id":"4d551549-f6fb-514f-9fac-51c9f2eca182","category":"packaging","x":39,"z":-17.5,"vendor":"ASMPT","model":"AD838L-G2"},{"id":"3f391e71-feb9-5bb8-8c26-271898119fca","category":"packaging","x":42.5,"z":-17.5,"vendor":"ASMPT","model":"AMICRA CoS Die Bonder"},{"id":"333f4c12-f6d3-5e59-86ad-f34a93da85a1","category":"packaging","x":35.5,"z":-12,"vendor":"ASMPT","model":"AERO PRO"},{"id":"ea7acafa-f623-5b53-9820-cff153396595","category":"packaging","x":39,"z":-12,"vendor":"EV Group","model":"GEMINI FB XT"},{"id":"0e08ee0e-204e-5c35-93ee-9d4449bd50de","category":"packaging","x":42.5,"z":-12,"vendor":"SUSS MicroTec","model":"XBS200"},{"id":"b7dd05c1-c14a-5a5b-8c2c-237c1828de31","category":"packaging","x":35.5,"z":-6.8,"vendor":"Kulicke & Soffa","model":"Asterion"},{"id":"178aac84-6158-559f-a04e-1d86d6b5ad09","category":"packaging","x":39,"z":-6.8,"vendor":"Kulicke & Soffa","model":"ASTERION-TW"},{"id":"4dec86af-c292-57a5-95ef-535c36c929f4","category":"packaging","x":42.5,"z":-6.8,"vendor":"ACMR","model":"Ultra ECP ap-p"},{"id":"dd6715e4-f628-5687-9e2a-8ede1b0d6071","category":"test","x":36.8,"z":-1.5,"vendor":"Advantest","model":"V93000 EXA Scale"},{"id":"640c395b-69d8-5a73-890f-6d72ef905241","category":"test","x":41.2,"z":-1.5,"vendor":"Advantest","model":"T5835"},{"id":"1bf9bd68-eaa2-5a6a-a0d6-81341e6b83de","category":"test","x":36.8,"z":3.5,"vendor":"Advantest","model":"T5833"},{"id":"21a38ffd-f475-5a84-a4de-518a96be045f","category":"test","x":41.2,"z":3.5,"vendor":"Teradyne","model":"UltraFLEX"},{"id":"e7bff566-aa87-59c9-be15-c628195812e0","category":"test","x":36.8,"z":8.5,"vendor":"Teradyne","model":"J750Ex-HD"},{"id":"0b9c07fe-924b-59c0-8922-bf120d0d5bf1","category":"test","x":41.2,"z":8.5,"vendor":"Cohu (Rasco)","model":"Jupiter"},{"id":"edbdcab9-5356-5e8d-81f5-edb3843f21f5","category":"test","x":36.8,"z":13.5,"vendor":"Cohu (Rasco)","model":"Jaguar (SO3000)"},{"id":"b53c0b48-f9a7-5b68-9f78-981de60654e4","category":"test","x":41.2,"z":13.5,"vendor":"Cohu (Rasco)","model":"SO1000A"},{"id":"888d0ee7-2fb8-52f1-909b-b36ac0f9509e","category":"test","x":36.8,"z":18.5,"vendor":"Accretech (Tokyo Seimitsu)","model":"UF3000EX"},{"id":"400f5451-48aa-51d9-b987-cf98fa5a5566","category":"test","x":41.2,"z":18.5,"vendor":"Changchuan","model":"CTA series"},{"id":"f0bb0ec9-b4d6-5086-a98d-fef8ae9ccd29","category":"other","x":39,"z":25,"vendor":"Edwards Vacuum","model":"iXH1820"}];
+
+let waferRoutesData = null;
+let waferLayoutTools = null;
+let waferFollowState = {
+  isActive: false,
+  isPlaying: false,
+  product: 'A',
+  speed: 1, // 1, 4, 16 (default 1x)
+  currentStepIndex: 0,
+  stepTimer: 0,
+  isFollowingCam: true,
+  waypoints: [],
+};
+
+let foupGroup = null;
+let waferTrailLine = null;
+let waferTrailHistory = [];
+let waferLastFrameTime = 0;
+
+async function loadWaferFollowData() {
+  if (!waferRoutesData) {
+    const routePaths = ['benchmark/routes.json', '/benchmark/routes.json', './benchmark/routes.json'];
+    for (const p of routePaths) {
+      try {
+        const res = await fetch(p);
+        if (res.ok) {
+          const json = await res.json();
+          if (json && json.products) {
+            waferRoutesData = {
+              A: json.products.A.route,
+              B: json.products.B.route,
+              C: json.products.C.route,
+            };
+            break;
+          }
+        }
+      } catch (e) {}
+    }
+    if (!waferRoutesData) {
+      waferRoutesData = EMBEDDED_WAFER_ROUTES;
+    }
+  }
+
+  if (!waferLayoutTools) {
+    const layoutPaths = ['twin/layout-default.json', '/twin/layout-default.json', './twin/layout-default.json'];
+    for (const p of layoutPaths) {
+      try {
+        const res = await fetch(p);
+        if (res.ok) {
+          const json = await res.json();
+          if (json && Array.isArray(json.tools) && json.tools.length > 0) {
+            waferLayoutTools = json.tools;
+            break;
+          }
+        }
+      } catch (e) {}
+    }
+    if (!waferLayoutTools) {
+      waferLayoutTools = EMBEDDED_LAYOUT_TOOLS;
+    }
+  }
+}
+
+function computeWaferWaypoints(productKey) {
+  if (!waferRoutesData || !waferRoutesData[productKey]) return [];
+  const steps = waferRoutesData[productKey];
+
+  const toolsByCat = {};
+  if (waferLayoutTools && Array.isArray(waferLayoutTools)) {
+    waferLayoutTools.forEach((t) => {
+      if (!toolsByCat[t.category]) toolsByCat[t.category] = [];
+      toolsByCat[t.category].push(t);
+    });
+  }
+
+  const roundRobin = {};
+  const waypoints = [];
+
+  steps.forEach((s) => {
+    const tg = s.tool_group || s.tg;
+    const cat = WAFER_TOOL_GROUP_TO_CATEGORY[tg] || 'other';
+    const list = toolsByCat[cat] || [];
+    let tool = null;
+    let x = 0, z = 0;
+
+    if (list.length > 0) {
+      const idx = roundRobin[cat] || 0;
+      tool = list[idx % list.length];
+      roundRobin[cat] = idx + 1;
+      x = tool.x;
+      z = tool.z;
+    } else {
+      const bay = (typeof CATEGORY_BAYS !== 'undefined' && CATEGORY_BAYS[cat]) || CATEGORY_BAYS['other'];
+      x = (bay.xRange[0] + bay.xRange[1]) / 2;
+      z = (bay.zRange[0] + bay.zRange[1]) / 2;
+    }
+
+    waypoints.push({
+      step: s.step,
+      tool_group: tg,
+      recipe: s.recipe || null,
+      category: cat,
+      tool: tool,
+      x: x,
+      y: 2.5,
+      z: z,
+    });
+  });
+
+  return waypoints;
+}
+
+function initProductRoute(prod) {
+  waferFollowState.waypoints = computeWaferWaypoints(prod);
+}
+
+function initWaferFollowSystem() {
+  if (foupGroup) return;
+
+  // 1. Build FOUP 3D Box (0.5m x 0.35m x 0.4m), Amber emissive
+  foupGroup = new THREE.Group();
+  foupGroup.name = 'foupWaferCarrier';
+  foupGroup.visible = false;
+
+  const foupBodyGeo = new THREE.BoxGeometry(0.5, 0.35, 0.4);
+  const foupMat = new THREE.MeshStandardMaterial({
+    color: 0xf59e0b,
+    emissive: 0xd97706,
+    emissiveIntensity: 0.65,
+    roughness: 0.3,
+    metalness: 0.35,
+  });
+  const foupBody = new THREE.Mesh(foupBodyGeo, foupMat);
+  foupBody.castShadow = true;
+  foupGroup.add(foupBody);
+
+  // Top kinematic flange / robotic gripping handle
+  const flangeGeo = new THREE.BoxGeometry(0.12, 0.04, 0.12);
+  const darkFlangeMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 });
+  const flange = new THREE.Mesh(flangeGeo, darkFlangeMat);
+  flange.position.set(0, 0.35 / 2 + 0.02, 0);
+  foupGroup.add(flange);
+
+  // Front cassette door panel
+  const doorGeo = new THREE.PlaneGeometry(0.44, 0.3);
+  const doorMat = new THREE.MeshStandardMaterial({
+    color: 0x1e293b,
+    roughness: 0.2,
+    metalness: 0.5,
+  });
+  const door = new THREE.Mesh(doorGeo, doorMat);
+  door.position.set(0, 0, 0.201);
+  foupGroup.add(door);
+
+  // Subtle point light
+  const foupLight = new THREE.PointLight(0xf59e0b, 0.9, 4.0);
+  foupLight.position.set(0, 0.3, 0);
+  foupGroup.add(foupLight);
+
+  scene.add(foupGroup);
+
+  // 2. Build Trail Line (THREE.Line with vertex colors)
+  const trailGeo = new THREE.BufferGeometry();
+  const maxTrailPoints = 32;
+  const initialPositions = new Float32Array(maxTrailPoints * 3);
+  const initialColors = new Float32Array(maxTrailPoints * 3);
+  trailGeo.setAttribute('position', new THREE.BufferAttribute(initialPositions, 3));
+  trailGeo.setAttribute('color', new THREE.BufferAttribute(initialColors, 3));
+  trailGeo.setDrawRange(0, 0);
+
+  const trailMat = new THREE.LineBasicMaterial({
+    vertexColors: true,
+    transparent: true,
+    opacity: 0.9,
+    blending: THREE.AdditiveBlending,
+    linewidth: 3,
+  });
+  waferTrailLine = new THREE.Line(trailGeo, trailMat);
+  waferTrailLine.name = 'waferFadingTrail';
+  waferTrailLine.visible = false;
+  scene.add(waferTrailLine);
+
+  // Load data & prepare waypoints
+  loadWaferFollowData().then(() => {
+    initProductRoute(waferFollowState.product);
+  });
+}
+
+function getCatmullRomSplinePoint(p0, p1, p2, p3, u) {
+  const u2 = u * u;
+  const u3 = u2 * u;
+  return {
+    x: 0.5 * (2 * p1.x + (-p0.x + p2.x) * u + (2 * p0.x - 5 * p1.x + 4 * p2.x - p3.x) * u2 + (-p0.x + 3 * p1.x - 3 * p2.x + p3.x) * u3),
+    y: 2.5,
+    z: 0.5 * (2 * p1.z + (-p0.z + p2.z) * u + (2 * p0.z - 5 * p1.z + 4 * p2.z - p3.z) * u2 + (-p0.z + 3 * p1.z - 3 * p2.z + p3.z) * u3),
+  };
+}
+
+function recordWaferTrailPoint(pos) {
+  if (!waferTrailLine) return;
+  const len = waferTrailHistory.length;
+  if (len === 0 || pos.distanceTo(waferTrailHistory[len - 1]) > 0.25) {
+    waferTrailHistory.push(pos.clone());
+    if (waferTrailHistory.length > 30) {
+      waferTrailHistory.shift();
+    }
+    updateWaferTrailMesh();
+  }
+}
+
+function updateWaferTrailMesh() {
+  if (!waferTrailLine || waferTrailHistory.length < 2) {
+    if (waferTrailLine) waferTrailLine.visible = false;
+    return;
+  }
+  waferTrailLine.visible = true;
+  const count = waferTrailHistory.length;
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+
+  for (let i = 0; i < count; i++) {
+    const pt = waferTrailHistory[i];
+    positions[i * 3] = pt.x;
+    positions[i * 3 + 1] = pt.y;
+    positions[i * 3 + 2] = pt.z;
+
+    const f = (i + 1) / count;
+    colors[i * 3] = 0.96 * f;
+    colors[i * 3 + 1] = (0.6 + 0.3 * f) * f;
+    colors[i * 3 + 2] = 0.05 * f;
+  }
+
+  waferTrailLine.geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+  waferTrailLine.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+  waferTrailLine.geometry.setDrawRange(0, count);
+  waferTrailLine.geometry.attributes.position.needsUpdate = true;
+  waferTrailLine.geometry.attributes.color.needsUpdate = true;
+}
+
+function clearWaferTrail() {
+  waferTrailHistory = [];
+  if (waferTrailLine) {
+    waferTrailLine.visible = false;
+    waferTrailLine.geometry.setDrawRange(0, 0);
+  }
+}
+
+function updateWaferFollowFrame() {
+  if (!waferFollowState.isActive || !foupGroup) return;
+
+  const now = performance.now();
+  if (!waferLastFrameTime) waferLastFrameTime = now;
+  const dt = Math.min((now - waferLastFrameTime) / 1000, 0.1);
+  waferLastFrameTime = now;
+
+  const wps = waferFollowState.waypoints;
+  if (!wps || wps.length === 0) return;
+
+  const k = waferFollowState.currentStepIndex;
+  const total = wps.length;
+
+  if (waferFollowState.isPlaying) {
+    const dur = 2.0 / waferFollowState.speed; // 1x=2s, 4x=0.5s, 16x=0.125s
+    waferFollowState.stepTimer += dt;
+    const p = Math.min(waferFollowState.stepTimer / dur, 1.0);
+
+    let curPos;
+    let dx = 0, dz = 0;
+    if (k === 0) {
+      curPos = { x: wps[0].x, y: 2.5, z: wps[0].z };
+    } else {
+      const p0 = wps[Math.max(0, k - 2)];
+      const p1 = wps[k - 1];
+      const p2 = wps[k];
+      const p3 = wps[Math.min(total - 1, k + 1)];
+
+      if (p < 0.75) {
+        // Smooth transit along Catmull-Rom spline
+        const u = p / 0.75;
+        curPos = getCatmullRomSplinePoint(p0, p1, p2, p3, u);
+        const nextU = Math.min(u + 0.02, 1.0);
+        const nextPos = getCatmullRomSplinePoint(p0, p1, p2, p3, nextU);
+        dx = nextPos.x - curPos.x;
+        dz = nextPos.z - curPos.z;
+      } else {
+        // Dwell at destination equipment
+        curPos = { x: p2.x, y: 2.5, z: p2.z };
+      }
+    }
+
+    foupGroup.position.set(curPos.x, curPos.y, curPos.z);
+    if (dx * dx + dz * dz > 0.00001) {
+      foupGroup.rotation.y = Math.atan2(dx, dz);
+    }
+
+    // Record trail
+    recordWaferTrailPoint(foupGroup.position);
+
+    // Step progression
+    if (p >= 1.0) {
+      waferFollowState.stepTimer = 0;
+      if (k + 1 < total) {
+        waferFollowState.currentStepIndex++;
+        updateWaferFollowHUD();
+      } else {
+        waferFollowState.isPlaying = false;
+        onWaferRouteFinished();
+      }
+    }
+  }
+
+  // Follow Camera: offset (0, 6, -8) from FOUP
+  if (waferFollowState.isFollowingCam) {
+    const fp = foupGroup.position;
+    camera.position.set(fp.x + 0, fp.y + 6.0, fp.z - 8.0);
+    controls.target.copy(fp);
+    camera.lookAt(fp);
+  }
+}
+
+function updateWaferFollowHUD() {
+  const wps = waferFollowState.waypoints;
+  if (!wps || wps.length === 0) return;
+  const idx = Math.min(waferFollowState.currentStepIndex, wps.length - 1);
+  const cur = wps[idx];
+  const total = wps.length;
+  const isZh = typeof currentLang === 'string' && currentLang.startsWith('zh');
+
+  const stepEl = document.getElementById('wafer-step-readout');
+  if (stepEl) {
+    stepEl.textContent = isZh ? ('步骤 ' + cur.step + '/' + total) : ('Step ' + cur.step + '/' + total);
+  }
+
+  const barEl = document.getElementById('wafer-progress-bar');
+  if (barEl) {
+    const pct = (cur.step / total) * 100;
+    barEl.style.width = pct.toFixed(1) + '%';
+  }
+
+  const tgEl = document.getElementById('wafer-tg-val');
+  if (tgEl) tgEl.textContent = cur.tool_group;
+
+  const recEl = document.getElementById('wafer-recipe-val');
+  if (recEl) recEl.textContent = cur.recipe || '—';
+
+  const bayEl = document.getElementById('wafer-bay-val');
+  if (bayEl) {
+    const bay = (typeof CATEGORY_BAYS !== 'undefined' && CATEGORY_BAYS[cur.category]) || CATEGORY_BAYS['other'];
+    bayEl.textContent = isZh
+      ? (bay.nameZh + ' (' + bay.nameEn + ')')
+      : (bay.nameEn + ' (' + bay.nameZh + ')');
+  }
+
+  const statEl = document.getElementById('wafer-status-readout');
+  if (statEl) {
+    if (idx === total - 1 && !waferFollowState.isPlaying) {
+      statEl.textContent = isZh ? '路线完成' : 'Route complete';
+    } else if (waferFollowState.isPlaying) {
+      statEl.textContent = isZh ? '晶圆流转中...' : 'Navigating...';
+    } else {
+      statEl.textContent = isZh ? '已暂停' : 'Paused';
+    }
+  }
+
+  const badgeEl = document.getElementById('wafer-route-badge');
+  if (badgeEl) {
+    badgeEl.textContent = 'Product ' + waferFollowState.product + ' · ' + total + ' Steps';
+  }
+}
+
+function updateWaferFollowLanguage(lang) {
+  updateWaferFollowHUD();
+  updateWaferCamToggleUI();
+}
+
+async function toggleWaferFollowPanel() {
+  const panel = document.getElementById('wafer-follow-panel');
+  if (!panel) return;
+  const isHidden = panel.classList.contains('hidden');
+
+  if (isHidden) {
+    // 1. Mutually exclusive: stop visitor tour automatically
+    if (typeof stopCinematicTour === 'function') {
+      stopCinematicTour();
+    }
+    // Ensure cleanroom level is active so wafer is visible
+    if (typeof currentFabLevel !== 'undefined' && currentFabLevel === 'B1' && typeof setFabLevelQuiet === 'function') {
+      setFabLevelQuiet('L1');
+    }
+
+    panel.classList.remove('hidden');
+    waferFollowState.isActive = true;
+    const btn = document.getElementById('btn-follow-wafer');
+    if (btn) {
+      btn.className = 'flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md bg-amber-500 text-slate-900 border border-amber-600 font-bold transition whitespace-nowrap shrink-0 shadow-sm';
+    }
+
+    await loadWaferFollowData();
+    if (waferFollowState.waypoints.length === 0) {
+      initProductRoute(waferFollowState.product);
+    }
+
+    // Reset to beginning if already reached the end of the route
+    if (waferFollowState.currentStepIndex >= waferFollowState.waypoints.length - 1) {
+      waferFollowState.currentStepIndex = 0;
+      waferFollowState.stepTimer = 0;
+      clearWaferTrail();
+      const replayBtn = document.getElementById('wafer-replay-btn');
+      if (replayBtn) replayBtn.classList.add('hidden');
+    }
+
+    // Start playing immediately upon opening
+    waferFollowState.isPlaying = true;
+    const playIcon = document.getElementById('wafer-play-icon');
+    if (playIcon) {
+      playIcon.setAttribute('data-lucide', 'pause');
+    }
+
+    if (foupGroup) {
+      foupGroup.visible = true;
+      const p0 = waferFollowState.waypoints[waferFollowState.currentStepIndex] || waferFollowState.waypoints[0];
+      if (p0) foupGroup.position.set(p0.x, 2.5, p0.z);
+    }
+
+    waferLastFrameTime = performance.now();
+    updateWaferFollowHUD();
+    if (window.lucide && lucide.createIcons) lucide.createIcons();
+  } else {
+    closeWaferFollow(true);
+  }
+}
+
+function closeWaferFollow(shouldResetCamera = true) {
+  waferFollowState.isActive = false;
+  waferFollowState.isPlaying = false;
+  if (foupGroup) foupGroup.visible = false;
+  clearWaferTrail();
+  const panel = document.getElementById('wafer-follow-panel');
+  if (panel) panel.classList.add('hidden');
+  const btn = document.getElementById('btn-follow-wafer');
+  if (btn) {
+    btn.className = 'flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md bg-white text-amber-700 border border-amber-200 font-medium hover:bg-amber-50 transition whitespace-nowrap shrink-0';
+  }
+  const playIcon = document.getElementById('wafer-play-icon');
+  if (playIcon) {
+    playIcon.setAttribute('data-lucide', 'play');
+    if (window.lucide) lucide.createIcons();
+  }
+  if (shouldResetCamera) {
+    resetCamera();
+  }
+}
+
+function toggleWaferPlay() {
+  waferFollowState.isPlaying = !waferFollowState.isPlaying;
+  if (waferFollowState.isPlaying && typeof stopCinematicTour === 'function') {
+    stopCinematicTour();
+  }
+  waferLastFrameTime = performance.now();
+  const icon = document.getElementById('wafer-play-icon');
+  if (icon) {
+    icon.setAttribute('data-lucide', waferFollowState.isPlaying ? 'pause' : 'play');
+    if (window.lucide) lucide.createIcons();
+  }
+  updateWaferFollowHUD();
+}
+
+function setWaferSpeed(spd) {
+  waferFollowState.speed = spd;
+  [1, 4, 16].forEach((s) => {
+    const el = document.getElementById('wafer-speed-' + s);
+    if (el) {
+      if (s === spd) {
+        el.className = 'px-1.5 py-0.5 rounded text-[9px] font-bold transition bg-amber-500 text-slate-900 shadow-sm cursor-pointer';
+      } else {
+        el.className = 'px-1.5 py-0.5 rounded text-[9px] font-bold transition text-slate-400 hover:text-slate-200 cursor-pointer';
+      }
+    }
+  });
+}
+
+function toggleWaferCamFollow() {
+  waferFollowState.isFollowingCam = !waferFollowState.isFollowingCam;
+  updateWaferCamToggleUI();
+}
+
+function updateWaferCamToggleUI() {
+  const btn = document.getElementById('wafer-cam-toggle-btn');
+  const txt = document.getElementById('wafer-cam-text');
+  const isZh = typeof currentLang === 'string' && currentLang.startsWith('zh');
+
+  if (waferFollowState.isFollowingCam) {
+    if (btn) btn.className = 'flex items-center gap-1 px-2 py-0.5 rounded-lg text-[9px] font-semibold transition border border-amber-500/70 bg-amber-500/20 text-amber-300 cursor-pointer';
+    if (txt) txt.textContent = isZh ? '跟随视角' : 'Follow Cam';
+  } else {
+    if (btn) btn.className = 'flex items-center gap-1 px-2 py-0.5 rounded-lg text-[9px] font-semibold transition border border-slate-700 bg-slate-800 text-slate-400 cursor-pointer';
+    if (txt) txt.textContent = isZh ? '自由视角' : 'Free Cam';
+  }
+}
+
+function replayWaferRoute() {
+  if (typeof stopCinematicTour === 'function') {
+    stopCinematicTour();
+  }
+  waferFollowState.currentStepIndex = 0;
+  waferFollowState.stepTimer = 0;
+  clearWaferTrail();
+  waferFollowState.isPlaying = true;
+  const replayBtn = document.getElementById('wafer-replay-btn');
+  if (replayBtn) replayBtn.classList.add('hidden');
+  const icon = document.getElementById('wafer-play-icon');
+  if (icon) {
+    icon.setAttribute('data-lucide', 'pause');
+    if (window.lucide) lucide.createIcons();
+  }
+  if (foupGroup && waferFollowState.waypoints[0]) {
+    const p0 = waferFollowState.waypoints[0];
+    foupGroup.position.set(p0.x, 2.5, p0.z);
+  }
+  updateWaferFollowHUD();
+}
+
+function onWaferProductChange(prod) {
+  waferFollowState.product = prod;
+  initProductRoute(prod);
+  waferFollowState.currentStepIndex = 0;
+  waferFollowState.stepTimer = 0;
+  clearWaferTrail();
+  const replayBtn = document.getElementById('wafer-replay-btn');
+  if (replayBtn) replayBtn.classList.add('hidden');
+  waferFollowState.isPlaying = true;
+  const playIcon = document.getElementById('wafer-play-icon');
+  if (playIcon) {
+    playIcon.setAttribute('data-lucide', 'pause');
+    if (window.lucide) lucide.createIcons();
+  }
+  if (foupGroup && waferFollowState.waypoints[0]) {
+    const p0 = waferFollowState.waypoints[0];
+    foupGroup.position.set(p0.x, 2.5, p0.z);
+  }
+  updateWaferFollowHUD();
+}
+
+function onWaferRouteFinished() {
+  waferFollowState.isPlaying = false;
+  const icon = document.getElementById('wafer-play-icon');
+  if (icon) {
+    icon.setAttribute('data-lucide', 'play');
+    if (window.lucide) lucide.createIcons();
+  }
+  const replayBtn = document.getElementById('wafer-replay-btn');
+  if (replayBtn) replayBtn.classList.remove('hidden');
+  updateWaferFollowHUD();
+}
+
+
           // 射线投射拾取设备
           function setupRaycaster() {
             const raycaster = new THREE.Raycaster();
@@ -15495,6 +16710,20 @@
                 if (playIcon) playIcon.setAttribute("data-lucide", "play");
                 if (window.lucide) lucide.createIcons();
               }
+            }
+
+            // 0B. Follow a Wafer Process Roaming Frame Update (Workstream 1)
+            if (typeof updateWaferFollowFrame === "function") {
+              try {
+                updateWaferFollowFrame();
+              } catch (e) {}
+            }
+
+            // 0C. Roof & HVAC Dynamic Exhaust Particles (Workstream 2)
+            if (typeof updateRoofHVACParticles === "function") {
+              try {
+                updateRoofHVACParticles();
+              } catch (e) {}
             }
 
             // 1. 等离子体工艺腔体高频脉动发光 (High-Frequency RF Plasma Viewports Pulsing)
@@ -15801,6 +17030,11 @@
           // ==========================================
           // NEW: MULTI-LEVEL FAB SWITCHER (L1 CLEANROOM vs B1 SUBFAB vs DUAL)
           // ==========================================
+          let activeCameraAnimId = 0;
+          function cancelActiveCameraAnimation() {
+            activeCameraAnimId++;
+          }
+
           function tweenCamera(
             targetPos,
             targetLookAt,
@@ -15808,6 +17042,7 @@
             onComplete,
           ) {
             if (!camera || !controls) return;
+            const animId = ++activeCameraAnimId;
             const startPos = camera.position.clone();
             const endPos = new THREE.Vector3(targetPos.x, targetPos.y, targetPos.z);
             const startTarget = controls.target.clone();
@@ -15818,7 +17053,8 @@
             );
 
             const startTime = performance.now();
-            function animate(now) {
+            function animateTween(now) {
+              if (animId !== activeCameraAnimId) return;
               const elapsed = now - startTime;
               const progress = Math.min(elapsed / duration, 1);
               const ease = 0.5 - Math.cos(progress * Math.PI) / 2;
@@ -15828,14 +17064,14 @@
               controls.update();
 
               if (progress < 1) {
-                requestAnimationFrame(animate);
+                requestAnimationFrame(animateTween);
               } else {
                 if (typeof onComplete === "function") {
                   onComplete();
                 }
               }
             }
-            requestAnimationFrame(animate);
+            requestAnimationFrame(animateTween);
           }
 
           // ==========================================
@@ -16077,6 +17313,16 @@
           }
 
           function startCinematicTour() {
+            // Vice versa: mutually exclude Follow a Wafer roaming
+            if (
+              typeof waferFollowState !== "undefined" &&
+              (waferFollowState.isActive || waferFollowState.isPlaying)
+            ) {
+              if (typeof closeWaferFollow === "function") {
+                closeWaferFollow(false);
+              }
+            }
+
             isCinematicTourActive = true;
             currentTourWaypointIndex = 0;
             clearTourTimers();
@@ -16101,9 +17347,9 @@
           }
 
           function stopCinematicTour() {
-            if (!isCinematicTourActive) return;
             isCinematicTourActive = false;
             clearTourTimers();
+            cancelActiveCameraAnimation();
 
             const hud = document.getElementById("cinematic-hud");
             if (hud) hud.classList.add("hidden");
@@ -17790,6 +19036,14 @@
               } else {
                 selectEquipment("fac.airshower.main.1", true);
               }
+            } else if (type === "roof") {
+              if (!showRoof) {
+                toggleRoofVisibility(true);
+              }
+              flyCameraTo(
+                new THREE.Vector3(0, 45, 55),
+                new THREE.Vector3(0, 4, 0),
+              );
             }
           }
 
@@ -17832,11 +19086,13 @@
             duration = 1000,
             onComplete = null,
           ) {
+            const animId = ++activeCameraAnimId;
             const startPos = camera.position.clone();
             const startTarget = controls.target.clone();
             const startTime = performance.now();
 
             function step(time) {
+              if (animId !== activeCameraAnimId) return;
               const elapsed = time - startTime;
               const progress = Math.min(elapsed / duration, 1);
               const ease = 0.5 - Math.cos(progress * Math.PI) / 2;

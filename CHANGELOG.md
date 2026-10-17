@@ -4,6 +4,14 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ---
 
+## [1.4.0] - 2026-10-16
+
+### "Follow a Wafer" Route Roaming & Roof / HVAC Infrastructure Layer (`twin.html`)
+
+- **Follow a Wafer (Process Route Roaming)**: Integrated full 3D interactive route tracking across Products A (120 steps), B (104 steps), and C (92 steps) defined in canonical `benchmark/routes.json`. Features an amber-glowing FOUP carrier with point lighting, smooth Catmull-Rom spline interpolation visiting representative tools across all 18 tool groups mapped to `twin/layout-default.json`, a 30-segment fading path trail, follow/free camera tracking with OrbitControls auto-release, default 1x (with 4x/16x) playback speed controls with auto-play, seamless mutual exclusion with visitor cinematic inspection tour, and bilingual step metadata with mandatory honesty disclosure.
+- **Roof & HVAC Facility Layer**: Added a comprehensive exterior roof and cleanroom HVAC infrastructure view ($y=8\text{m}$) rendered in solid PBR materials. Includes a 85m × 60m roof slab, 3 Make-up Air Units (MAU-1/2/3) with bilingual floating 3D sprites, triple main supply air ducts (`#7db8e8`) with vertical bay drop pipes reaching the ceiling grid ($y=5.22\text{m}$), 5 orange exhaust chimneys (`#e8935a`) with subtle rising particulate plumes, interactive duct hover tooltips, a dedicated `'roof'` camera preset, and schematic honesty badging without altering existing MEP/aerodynamic layer controls.
+- **Navigation & Layout Alignment**: Repositioned Section clipping, Roof HVAC layer, and Follow a wafer action controls to the second-row status bar directly adjacent to YMS Map for a streamlined, uncluttered primary toolbar.
+
 ## [1.3.0] - 2026-10-15
 
 ### In-Browser MIMAC-2026 Benchmark Demo (Pyodide WASM)

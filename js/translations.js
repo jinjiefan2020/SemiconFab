@@ -437,6 +437,23 @@ const I18N_DICTIONARY = {
       "Is SemiconFab.org free and open to universities and research institutions?",
     faq_a6:
       "Yes. SemiconFab.org is committed to open access for semiconductor engineering education, cleanroom workforce training, and digital twin research. It runs entirely inside standard web browsers without downloads or proprietary CAD software required.",
+
+    toggle_roof: "Roof",
+    toggle_roof_title: "Roof & HVAC Infrastructure Layer",
+    cam_roof_title: "Roof & HVAC Overview",
+    btn_follow_wafer: "Follow a wafer",
+    btn_follow_wafer_title: "Follow Wafer Process Route",
+    wafer_follow_title: "Follow a Wafer",
+    wafer_product_label: "Product:",
+    wafer_speed_label: "Speed:",
+    wafer_step_label: "Step",
+    wafer_cam_follow: "Follow Cam",
+    wafer_cam_free: "Free Cam",
+    wafer_btn_replay: "Replay",
+    wafer_route_complete: "Route complete",
+    wafer_honesty_banner:
+      "Illustrative: the wafer visits a representative tool of each tool group, not a real dispatch schedule.",
+    roof_schematic_label: "Roof & HVAC: Schematic",
   },
   "zh-CN": {
     nav_layout_editor: "布局编辑器",
@@ -854,6 +871,23 @@ const I18N_DICTIONARY = {
     faq_q6: "SemiconFab.org 是否向高校与科研机构免费开放？",
     faq_a6:
       "是的。SemiconFab.org 致力于半导体制造工程教育、洁净室产业人才培训以及数字孪生前沿学术研究的全球开放访问。所有功能均在标准现代网页浏览器中以 WebGL 原生运行，无需安装专有商业 CAD 软件或昂贵插件。",
+
+    toggle_roof: "屋顶",
+    toggle_roof_title: "屋顶与暖通 HVAC 设施层",
+    cam_roof_title: "屋顶与暖通俯视预设",
+    btn_follow_wafer: "跟随晶圆",
+    btn_follow_wafer_title: "跟随晶圆工艺路线漫游",
+    wafer_follow_title: "跟随晶圆漫游",
+    wafer_product_label: "产品:",
+    wafer_speed_label: "倍速:",
+    wafer_step_label: "步骤",
+    wafer_cam_follow: "跟随视角",
+    wafer_cam_free: "自由视角",
+    wafer_btn_replay: "重新播放",
+    wafer_route_complete: "路线完成",
+    wafer_honesty_banner:
+      "示意：晶圆访问每类设备的代表性机台，不代表实际派工。",
+    roof_schematic_label: "屋顶暖通: 示意",
   },
   "zh-TW": {
     nav_layout_editor: "佈局編輯器",
@@ -1268,6 +1302,23 @@ const I18N_DICTIONARY = {
       "涵盖 ISA-95 L1-L4 层级，将商业制造套件映射至主流开源生态与 SEMI 国际标准规范的参考架构。",
     footer_active_tools: "车间机台数",
     footer_full_db: "全量数据库",
+
+    toggle_roof: "屋頂",
+    toggle_roof_title: "屋頂與暖通 HVAC 設施層",
+    cam_roof_title: "屋頂與暖通俯視預設",
+    btn_follow_wafer: "跟隨晶圓",
+    btn_follow_wafer_title: "跟隨晶圓工藝路線漫遊",
+    wafer_follow_title: "跟隨晶圓漫遊",
+    wafer_product_label: "產品:",
+    wafer_speed_label: "倍速:",
+    wafer_step_label: "步驟",
+    wafer_cam_follow: "跟隨視角",
+    wafer_cam_free: "自由視角",
+    wafer_btn_replay: "重新播放",
+    wafer_route_complete: "路線完成",
+    wafer_honesty_banner:
+      "示意：晶圓造訪每類設備的代表性機台，不代表實際派工。",
+    roof_schematic_label: "屋頂暖通: 示意",
   },
   ja: {
     nav_layout_editor: "レイアウトエディタ",
