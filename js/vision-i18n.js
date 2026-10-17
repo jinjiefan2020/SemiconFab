@@ -18,7 +18,7 @@ const VISION_I18N = {
     vision_hero_title_1: "The Open Semiconductor",
     vision_hero_title_2: "Fab Digital Twin Vision",
     vision_hero_desc:
-      "Semiconductor manufacturing represents the pinnacle of precision engineering and computing. Yet legacy industrial software has long been monopolized inside closed walled gardens. The <b>SemiconFab Open Initiative</b> aims to unite global engineers, researchers, and ecosystem partners to build the first source-available, first-principles 300mm advanced fab digital twin reference framework spanning physical cleanrooms to microscopic wafer physics.",
+      "Semiconductor manufacturing represents the pinnacle of precision engineering and computing. Yet legacy industrial software has long been monopolized inside closed walled gardens. The <b>SemiconFab Open Initiative</b> aims to unite global engineers, researchers, and ecosystem partners to build a source-available, first-principles 300mm advanced fab digital twin reference framework spanning physical cleanrooms to microscopic wafer physics.",
     vision_hero_cta_pillars: "Explore 6 Core Pillars",
     vision_hero_cta_phase1: "Phase 1 Morphological Strategy",
     vision_hero_cta_twin: "Experience 3D Cleanroom Prototype",
@@ -51,6 +51,27 @@ const VISION_I18N = {
     vision_why_p3_title: "3. Scarcity of Open Reference Benchmarks",
     vision_why_p3_desc:
       "AI researchers seeking to advance FDC diagnostics, OHT dispatching, or yield root-cause analysis lack compliant, physics-consistent benchmarks. The Open Initiative creates this golden standard.",
+    vision_why_p4_title: "4. Winner-take-all ecosystem",
+    vision_why_p4_desc:
+      "Every equipment category is owned by one or two giants — lithography, etch, inspection alike. The moat isn't just technology; it's the cost of evaluation. No fab can risk production to qualify a challenger's tool, so challengers can never earn the track record they'd need. An open equipment catalog plus reference-grade simulation attacks exactly this wall.",
+
+    // Design Principles
+    vision_principles_badge: "CORE PRINCIPLES",
+    vision_principles_title: "Design Principles",
+    vision_principles_sub:
+      "Four foundational values guiding our open-architecture engineering approach.",
+    vision_principle_1_title: "Open knowledge",
+    vision_principle_1_desc:
+      "Fab know-how is among the most secretive in industry. An open equipment catalog and scheduling benchmark give students, researchers, and the curious a place to start.",
+    vision_principle_2_title: "Honesty over precision",
+    vision_principle_2_desc:
+      "A teaching and research tool, not an industrial twin. Every record carries a source tier; gaps are labeled, synthetic data is marked synthetic.",
+    vision_principle_3_title: "Source-available",
+    vision_principle_3_desc:
+      "PolyForm Noncommercial 1.0.0, free for education and personal use. (Deliberately not 'open source': the noncommercial term matters.)",
+    vision_principle_4_title: "A healthier ecosystem",
+    vision_principle_4_desc:
+      "An open catalog lets challengers sit side by side with incumbents under one schema; reference simulation gives new tools a credible first step; subfab vendors get their first public storefront.",
 
     // Section 6 Pillars
     vision_pillars_badge: "THE SIX FOUNDATIONAL PILLARS",
@@ -190,10 +211,10 @@ const VISION_I18N = {
     vision_p6_c4_desc:
       "Rigorous compliance with OEM commercial secrets and foundry IP through mathematically synthesized parametric data.",
     vision_p6_spec_title: "// Governance & Ecosystem Model",
-    vision_p6_spec_s1: "Apache 2.0 (Code) / CC-BY-4.0 (Specs)",
+    vision_p6_spec_s1: "PolyForm Noncommercial 1.0.0 (source-available)",
     vision_p6_spec_s2: "Docker-Compose / Helm Chart",
     vision_p6_spec_s3: "RISC-V International / OpenROAD Project",
-    vision_p6_spec_s4: "SemiconFab Foundation (Open Consortium)",
+    vision_p6_spec_s4: "Community-driven",
     vision_p6_spec_s5: "OpenFab gRPC & REST Standard",
 
     // Phase 1 Strategy
@@ -264,13 +285,14 @@ const VISION_I18N = {
     vision_roadmap_title: "Four-Phase Evolution Roadmap",
     vision_roadmap_sub:
       "A pragmatic progression from authentic visual form to fully closed-loop industrial digital twins.",
+    vision_rm_completed: "✓ Completed",
     vision_rm_p1_title: "High-Fidelity Visual Form",
     vision_rm_p1_desc:
       "Modular tool anatomy (EFEM/Chambers), perforated flooring, amber litho bay, Subfab utility racks, OHT kinematics, and physics-consistent FDC waveforms.",
     vision_rm_p1_tag: "✓ Pure frontend · Low cost · High impact",
     vision_rm_p2_title: "Discrete-Event Simulation (DES)",
     vision_rm_p2_desc:
-      "Introducing SimPy/Rust DES engines: re-entrant 800+ step lot routing, strict Q-Time residency windows, and deadlock-free OHT logistics scheduling.",
+      "Introducing SimPy/Rust DES engines: re-entrant 800+ step lot routing, strict Q-Time residency windows, and deadlock-free OHT logistics scheduling. (delivered via the MIMAC-2026 benchmark and in-browser simulation)",
     vision_rm_p2_tag: "→ Physics-consistent fab logistics",
     vision_rm_p3_title: "GEM300 Virtual Tool Sandbox",
     vision_rm_p3_desc:
@@ -279,7 +301,20 @@ const VISION_I18N = {
     vision_rm_p4_title: "Closed-Loop Ecosystem Benchmark",
     vision_rm_p4_desc:
       "STDF/KLARF stream parsing, open 28nm benchmark dataset release, one-click Docker sandbox, and open plugin ecosystem.",
-    vision_rm_p4_tag: "→ Recognized open standard",
+    vision_rm_p4_tag: "→ Growing open ecosystem",
+
+    // Version Milestones
+    vision_milestones_badge: "RELEASE MILESTONES",
+    vision_milestones_title: "Release Milestones",
+    vision_milestones_sub:
+      "Continuous iteration journey from public release to the current version.",
+    vision_ms_v1_0:
+      "Public launch: 121-record catalog, 3D twin, pure-static site",
+    vision_ms_v1_1: "153 records, deterministic IDs; used-market data merged",
+    vision_ms_v1_2: "167 records, 8 true-scale L1 models",
+    vision_ms_v1_3:
+      "Interactive benchmark: in-browser Pyodide dispatching simulation",
+    vision_ms_v1_4: "Follow-a-wafer route animation; roof/HVAC layer",
 
     // Matrix
     vision_matrix_title:
@@ -335,7 +370,7 @@ const VISION_I18N = {
     vision_hero_title_1: "开放半导体晶圆制造",
     vision_hero_title_2: "数字孪生全景愿景白皮书",
     vision_hero_desc:
-      "半导体芯片制造是人类精密工程与计算科学的最高峰。然而，传统的工业软件长期被寡头垄断于封闭的“围墙花园”中。<b>SemiconFab Open Initiative</b> 旨在联合全球工程师、学者与生态伙伴，构建首个开放透明、基于第一性原理、贯穿物理洁净室与微观晶圆物理的 300mm 先进制程数字孪生参考框架。",
+      "半导体芯片制造是人类精密工程与计算科学的最高峰。然而，传统的工业软件长期被寡头垄断于封闭的“围墙花园”中。<b>SemiconFab Open Initiative</b> 旨在联合全球工程师、学者与生态伙伴，构建开放透明、基于第一性原理、贯穿物理洁净室与微观晶圆物理的 300mm 先进制程数字孪生参考框架。",
     vision_hero_cta_pillars: "深入探索 6 大核心支柱",
     vision_hero_cta_phase1: "Phase 1 形态拟真方案",
     vision_hero_cta_twin: "体验 3D 洁净室原型",
@@ -367,6 +402,26 @@ const VISION_I18N = {
     vision_why_p3_title: "3. 缺乏开源参考基准（Benchmarks）",
     vision_why_p3_desc:
       "AI 算法学者想要做 FDC 故障诊断、天车调度优化或良率溯源，却根本找不到一份公开合规、物理自洽的先进制程基准数据包。开放倡议将建立首个“黄金参考基准”。",
+    vision_why_p4_title: "4. 赢家通吃的设备生态",
+    vision_why_p4_desc:
+      "每个设备品类都被一两家巨头把持——光刻、刻蚀、检测莫不如此。护城河不只是技术，更是评估成本：一座 fab 承担不起拿量产去验证挑战者设备的风险，挑战者于是永远攒不出进入 fab 所需的 track record。开放的设备目录与参考级仿真，攻击的正是这道评估成本墙。",
+
+    // Design Principles
+    vision_principles_badge: "CORE PRINCIPLES",
+    vision_principles_title: "设计原则",
+    vision_principles_sub: "指导 SemiconFab 开放数字孪生演进的四项核心准则。",
+    vision_principle_1_title: "开放知识",
+    vision_principle_1_desc:
+      "Fab know-how 是全工业界最封闭的知识之一。开放的设备目录与调度 benchmark 给学生、研究者和好奇的人一个起点。",
+    vision_principle_2_title: "诚实优先于精确",
+    vision_principle_2_desc:
+      "教学研究级工具，非工业级数字孪生。每条记录带来源分级，数据不全就明说，合成数据就标注合成。",
+    vision_principle_3_title: "源码公开",
+    vision_principle_3_desc:
+      "PolyForm Noncommercial 1.0.0，教育与个人使用免费。（刻意不用“开源”：非商业条款对我们很重要。）",
+    vision_principle_4_title: "更健康的设备生态",
+    vision_principle_4_desc:
+      "开放目录让挑战者设备与巨头同 schema 并排可比，参考仿真给新设备一个可信的第一步；subfab 长尾厂商第一次拥有公开店面。",
 
     // Section 6 Pillars
     vision_pillars_badge: "THE SIX FOUNDATIONAL PILLARS",
@@ -507,10 +562,10 @@ const VISION_I18N = {
     vision_p6_c4_desc:
       "严格遵守知识产权与 OEM 商业机密规范，使用参数化合成数据确保工程合法合规。",
     vision_p6_spec_title: "// 开放生态治理模式",
-    vision_p6_spec_s1: "Apache 2.0 (代码) / CC-BY-4.0 (规范)",
+    vision_p6_spec_s1: "PolyForm Noncommercial 1.0.0（源码公开）",
     vision_p6_spec_s2: "Docker-Compose / Helm Chart",
     vision_p6_spec_s3: "RISC-V International / OpenROAD Project",
-    vision_p6_spec_s4: "SemiconFab Foundation (开放联盟)",
+    vision_p6_spec_s4: "社区共建 (Community-driven)",
     vision_p6_spec_s5: "OpenFab gRPC & REST Standard",
 
     // Phase 1 Strategy
@@ -572,13 +627,14 @@ const VISION_I18N = {
     // Roadmap
     vision_roadmap_title: "四阶段演进路线图 (Roadmap)",
     vision_roadmap_sub: "从“外观模块形似”到“全闭环工业孪生”的务实演进路径。",
+    vision_rm_completed: "✓ 已完成",
     vision_rm_p1_title: "形态与视觉高拟真",
     vision_rm_p1_desc:
       "模块看起来极其完整逼真。机台解构(EFEM/Chamber)、微孔地板、黄光区、Subfab管廊、OHT天车取放动作、拟真FDC波形。",
     vision_rm_p1_tag: "✓ 纯前端低成本高感知",
     vision_rm_p2_title: "离散事件与仿真流转",
     vision_rm_p2_desc:
-      "引入真实 SimPy / Rust 离散事件仿真（DES）。实现重入式 Routing 工步流转、Q-Time 驻留时间窗口与天车路网防死锁调度。",
+      "引入真实 SimPy / Rust 离散事件仿真（DES）。实现重入式 Routing 工步流转、Q-Time 驻留时间窗口与天车路网防死锁调度。（已通过 MIMAC-2026 benchmark 与浏览器内仿真交付）",
     vision_rm_p2_tag: "→ 物流与节拍真实自洽",
     vision_rm_p3_title: "GEM300 与虚拟机台沙箱",
     vision_rm_p3_desc:
@@ -587,7 +643,17 @@ const VISION_I18N = {
     vision_rm_p4_title: "全闭环生态与开放基准",
     vision_rm_p4_desc:
       "集成 STDF/KLARF 工业流解析，发布开放 28nm 参考基准数据包；支持 Docker-Compose 本地单键拉起与开放 API 插件扩展。",
-    vision_rm_p4_tag: "→ 成为全球开放标准",
+    vision_rm_p4_tag: "→ 开放生态持续演进",
+
+    // Version Milestones
+    vision_milestones_badge: "RELEASE MILESTONES",
+    vision_milestones_title: "版本里程碑",
+    vision_milestones_sub: "SemiconFab 从公开发布至今的持续迭代轨迹。",
+    vision_ms_v1_0: "公开发布：121 条记录的设备目录、3D twin、纯静态网站",
+    vision_ms_v1_1: "153 条记录，确定性 ID；二手设备市场数据并入",
+    vision_ms_v1_2: "167 条记录，8 个真实比例 L1 模型",
+    vision_ms_v1_3: "benchmark 可交互：浏览器内 Pyodide 派工仿真",
+    vision_ms_v1_4: "Follow-a-wafer 路线动画；屋顶/HVAC 基础设施层",
 
     // Matrix
     vision_matrix_title: "商业巨头方案 vs 开源技术栈替代矩阵",
