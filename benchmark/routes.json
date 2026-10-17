@@ -460,7 +460,8 @@
         },
         {
           "step": 111,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG05_CVD",
+          "recipe": "REC_CVD_PASSIVATION"
         },
         {
           "step": 112,
@@ -468,35 +469,40 @@
         },
         {
           "step": 113,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG01_LITHO",
+          "recipe": "REC_LITHO_PAD_OPEN"
         },
         {
           "step": 114,
-          "tool_group": "TG02_TRACK"
-        },
-        {
-          "step": 115,
-          "tool_group": "TG01_LITHO"
-        },
-        {
-          "step": 116,
-          "tool_group": "TG02_TRACK"
-        },
-        {
-          "step": 117,
-          "tool_group": "TG01_LITHO"
-        },
-        {
-          "step": 118,
           "tool_group": "TG16_MET_CD"
         },
         {
+          "step": 115,
+          "tool_group": "TG03_ETCH",
+          "recipe": "REC_ETCH_PAD_OPEN"
+        },
+        {
+          "step": 116,
+          "tool_group": "TG04_STRIP"
+        },
+        {
+          "step": 117,
+          "tool_group": "TG14_WET_SINGLE",
+          "recipe": "REC_WET_POST_STRIP"
+        },
+        {
+          "step": 118,
+          "tool_group": "TG13_WET_BENCH",
+          "recipe": "REC_WET_FINAL_CLEAN"
+        },
+        {
           "step": 119,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG17_MET_THICK"
         },
         {
           "step": 120,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG18_INSPECT",
+          "recipe": "REC_INSPECT_FINAL"
         }
       ]
     },
@@ -886,7 +892,8 @@
         },
         {
           "step": 95,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG05_CVD",
+          "recipe": "REC_CVD_PASSIVATION"
         },
         {
           "step": 96,
@@ -894,35 +901,40 @@
         },
         {
           "step": 97,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG01_LITHO",
+          "recipe": "REC_LITHO_PAD_OPEN"
         },
         {
           "step": 98,
-          "tool_group": "TG02_TRACK"
-        },
-        {
-          "step": 99,
-          "tool_group": "TG01_LITHO"
-        },
-        {
-          "step": 100,
-          "tool_group": "TG02_TRACK"
-        },
-        {
-          "step": 101,
-          "tool_group": "TG01_LITHO"
-        },
-        {
-          "step": 102,
           "tool_group": "TG16_MET_CD"
         },
         {
+          "step": 99,
+          "tool_group": "TG03_ETCH",
+          "recipe": "REC_ETCH_PAD_OPEN"
+        },
+        {
+          "step": 100,
+          "tool_group": "TG04_STRIP"
+        },
+        {
+          "step": 101,
+          "tool_group": "TG14_WET_SINGLE",
+          "recipe": "REC_WET_POST_STRIP"
+        },
+        {
+          "step": 102,
+          "tool_group": "TG13_WET_BENCH",
+          "recipe": "REC_WET_FINAL_CLEAN"
+        },
+        {
           "step": 103,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG17_MET_THICK"
         },
         {
           "step": 104,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG18_INSPECT",
+          "recipe": "REC_INSPECT_FINAL"
         }
       ]
     },
@@ -1264,43 +1276,49 @@
         },
         {
           "step": 83,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG05_CVD",
+          "recipe": "REC_CVD_PASSIVATION"
         },
         {
           "step": 84,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG02_TRACK"
         },
         {
           "step": 85,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG01_LITHO",
+          "recipe": "REC_LITHO_PAD_OPEN"
         },
         {
           "step": 86,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG16_MET_CD"
         },
         {
           "step": 87,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG03_ETCH",
+          "recipe": "REC_ETCH_PAD_OPEN"
         },
         {
           "step": 88,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG04_STRIP"
         },
         {
           "step": 89,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG14_WET_SINGLE",
+          "recipe": "REC_WET_POST_STRIP"
         },
         {
           "step": 90,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG13_WET_BENCH",
+          "recipe": "REC_WET_FINAL_CLEAN"
         },
         {
           "step": 91,
-          "tool_group": "TG02_TRACK"
+          "tool_group": "TG17_MET_THICK"
         },
         {
           "step": 92,
-          "tool_group": "TG01_LITHO"
+          "tool_group": "TG18_INSPECT",
+          "recipe": "REC_INSPECT_FINAL"
         }
       ]
     }
