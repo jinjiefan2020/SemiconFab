@@ -96,10 +96,15 @@ const VISION_I18N = {
     vision_p1_c4_desc:
       "UV-blocking 589nm amber yellow lighting zone to prevent photoresist premature exposure.",
     vision_p1_spec_title: "// Spatial CAD Specifications",
+    vision_p1_spec_l1: "Footprint Standard:",
     vision_p1_spec_s1: "SEMI E72 Equipment Footprint",
+    vision_p1_spec_l2: "Model Format:",
     vision_p1_spec_s2: "glTF 2.0 / USD / IFC BIM",
+    vision_p1_spec_l3: "Level of Detail:",
     vision_p1_spec_s3: "LOD0 (Layout) ~ LOD300 (Detailed Assembly)",
+    vision_p1_spec_l4: "Utility Pipe Codes:",
     vision_p1_spec_s4: "SEMI S2 / NFPA 79 Facility Standards",
+    vision_p1_spec_l5: "Rendering Engine:",
     vision_p1_spec_s5: "Three.js (Web) / WebGPU",
 
     // Pillar 2
@@ -119,10 +124,15 @@ const VISION_I18N = {
     vision_p2_c4_desc:
       "Integration with Google OR-Tools for dispatching heuristics (FIFO, SPT, Critical Ratio) to maximize bottleneck tool OEE.",
     vision_p2_spec_title: "// MES & Logistics Engine Stack",
+    vision_p2_spec_l1: "DES Kernel:",
     vision_p2_spec_s1: "SimPy / Salabim (Python) / Rust-DES",
+    vision_p2_spec_l2: "Operations Solver:",
     vision_p2_spec_s2: "Google OR-Tools / OptaPlanner",
+    vision_p2_spec_l3: "Carrier Standard:",
     vision_p2_spec_s3: "SEMI E87 CMS / SEMI E40 PJM",
+    vision_p2_spec_l4: "Commercial Suite:",
     vision_p2_spec_s4: "Siemens Tecnomatix / FlexSim / Muratec",
+    vision_p2_spec_l5: "Time Sync:",
     vision_p2_spec_s5: "Discrete-Event Virtual Clock Engine",
 
     // Pillar 3
@@ -142,10 +152,15 @@ const VISION_I18N = {
     vision_p3_c4_desc:
       "Open62541 and Eclipse Milo bridges connecting tool controllers to modern enterprise IoT buses.",
     vision_p3_spec_title: "// Industrial Protocol Stack",
+    vision_p3_spec_l1: "Transport Layer:",
     vision_p3_spec_s1: "HSMS (SEMI E37) / SECS-II (E5)",
+    vision_p3_spec_l2: "Generic Model:",
     vision_p3_spec_s2: "GEM (SEMI E30) / GEM300",
+    vision_p3_spec_l3: "Open Protocol Lib:",
     vision_p3_spec_s3: "secsgem (Python) / Open-SECS",
+    vision_p3_spec_l4: "Commercial Suite:",
     vision_p3_spec_s4: "PEER Group / Cimetrix CIM300",
+    vision_p3_spec_l5: "State Definition:",
     vision_p3_spec_s5: "SEMI E10 RAM (Reliability, Availability)",
 
     // Pillar 4
@@ -165,10 +180,15 @@ const VISION_I18N = {
     vision_p4_c4_desc:
       "Subtracting baseline defect maps between consecutive inspection points to isolate tool-induced particle adders.",
     vision_p4_spec_title: "// Process & Yield Engine Stack",
+    vision_p4_spec_l1: "Test Data Standard:",
     vision_p4_spec_s1: "SEMI STDF V4 / STDF-V4-Spec",
+    vision_p4_spec_l2: "Open Parser:",
     vision_p4_spec_s2: "PySTDF (Python) / rust-stdf (Rust)",
+    vision_p4_spec_l3: "Defect Benchmark:",
     vision_p4_spec_s3: "WM-811K (811,472 Wafers)",
+    vision_p4_spec_l4: "Commercial Suite:",
     vision_p4_spec_s4: "KLA Klarity / PDF Solutions Exensio",
+    vision_p4_spec_l5: "Yield Model:",
     vision_p4_spec_s5: "Poisson / Murphy / Seeds Negative Binomial",
 
     // Pillar 5
@@ -188,10 +208,15 @@ const VISION_I18N = {
     vision_p5_c4_desc:
       "Real-time Cp/Cpk process capability calculations and Shewhart charts triggering automated alarms and tool interlocks.",
     vision_p5_spec_title: "// Data Architecture Stack",
+    vision_p5_spec_l1: "Event Bus:",
     vision_p5_spec_s1: "Apache Kafka / Eclipse Mosquitto",
+    vision_p5_spec_l2: "Time-Series DB:",
     vision_p5_spec_s2: "TimescaleDB / InfluxDB",
+    vision_p5_spec_l3: "OLAP Columnar:",
     vision_p5_spec_s3: "ClickHouse / DuckDB",
+    vision_p5_spec_l4: "SPC Algorithm:",
     vision_p5_spec_s4: "pyspc / spc-kit (SQL) / mfgQC",
+    vision_p5_spec_l5: "Telemetry Dashboard:",
     vision_p5_spec_s5: "Grafana / Apache Superset",
 
     // Pillar 6
@@ -211,10 +236,15 @@ const VISION_I18N = {
     vision_p6_c4_desc:
       "Rigorous compliance with OEM commercial secrets and foundry IP through mathematically synthesized parametric data.",
     vision_p6_spec_title: "// Governance & Ecosystem Model",
+    vision_p6_spec_l1: "License:",
     vision_p6_spec_s1: "PolyForm Noncommercial 1.0.0 (source-available)",
+    vision_p6_spec_l2: "Deployment Stack:",
     vision_p6_spec_s2: "Docker-Compose / Helm Chart",
+    vision_p6_spec_l3: "Analogy Benchmark:",
     vision_p6_spec_s3: "RISC-V International / OpenROAD Project",
+    vision_p6_spec_l4: "Governance Model:",
     vision_p6_spec_s4: "Community-driven",
+    vision_p6_spec_l5: "Open APIs:",
     vision_p6_spec_s5: "OpenFab gRPC & REST Standard",
 
     // Phase 1 Strategy
@@ -432,10 +462,10 @@ const VISION_I18N = {
       "一个真正的晶圆厂数字孪生，绝不仅仅是 3D 展厅，而是贯通“几何空间、调度运筹、工业通讯、工艺物理、流式数据、开源生态”的完整技术体系。",
 
     // Pillar 1
-    vision_p1_name: "物理与几何空间孪生 (Physical & CAD Spatial Twin)",
+    vision_p1_name: "物理与几何空间孪生",
     vision_p1_desc:
       "将传统单一的长方体白模，升华为符合 <b>SEMI E72</b> 占地标准与 BIM LOD300 规范的高保真物理模型体系。精细化还原机台内部结构、洁净室微环境与地下 Subfab 动力管廊。",
-    vision_p1_c1_title: "机台内部机构解构 (Modular Anatomy)",
+    vision_p1_c1_title: "机台内部机构解构",
     vision_p1_c1_desc:
       "细化 EFEM 前端微环境仓、Load Port 晶圆盒装载口、真空传输室(VTC)机械臂、多腔体(Cluster Chambers)法兰与观察视窗。",
     vision_p1_c2_title: "Subfab 地下动力层与管线拓扑",
@@ -448,17 +478,22 @@ const VISION_I18N = {
     vision_p1_c4_desc:
       "防紫外线琥珀色纯黄色滤光区（589nm 波长），防光刻胶意外曝光的专属隔离空间。",
     vision_p1_spec_title: "// 几何与空间规范指标",
+    vision_p1_spec_l1: "外形标准:",
     vision_p1_spec_s1: "SEMI E72 Equipment Footprint",
+    vision_p1_spec_l2: "模型格式:",
     vision_p1_spec_s2: "glTF 2.0 / USD / IFC BIM",
+    vision_p1_spec_l3: "精细度级别:",
     vision_p1_spec_s3: "LOD0 (规划) ~ LOD300 (设备结构)",
+    vision_p1_spec_l4: "动力管线色标:",
     vision_p1_spec_s4: "SEMI S2 / NFPA 79 Facility Standard",
+    vision_p1_spec_l5: "渲染引擎:",
     vision_p1_spec_s5: "Three.js (Web) / WebGPU",
 
     // Pillar 2
-    vision_p2_name: "制造执行与物流离散仿真 (MES & AMHS DES Engine)",
+    vision_p2_name: "制造执行与物流离散仿真",
     vision_p2_desc:
       "真正的半导体制造是极度重入式（Re-entrant）的超级物流系统。基于离散事件仿真（Discrete Event Simulation - DES）驱动晶圆批次（FOUP 25片/批）在全厂数百台机台间穿梭流转。",
-    vision_p2_c1_title: "800+ 工步重入式路由树 (Routing)",
+    vision_p2_c1_title: "800+ 工步重入式路由树",
     vision_p2_c1_desc:
       "光刻、刻蚀、注入、沉积、CMP 循环往复，精确模拟每道工序对同一机台的重复访问与等待。",
     vision_p2_c2_title: "苛刻的 Q-Time 超时管控",
@@ -471,14 +506,19 @@ const VISION_I18N = {
     vision_p2_c4_desc:
       "支持 Google OR-Tools 求解派工规则（FIFO, SPT, Critical Ratio），优化全厂瓶颈工序 OEE。",
     vision_p2_spec_title: "// 制造执行与物流技术选型",
+    vision_p2_spec_l1: "离散仿真内核:",
     vision_p2_spec_s1: "SimPy / Salabim (Python) / Rust-DES",
+    vision_p2_spec_l2: "运筹优化器:",
     vision_p2_spec_s2: "Google OR-Tools / OptaPlanner",
+    vision_p2_spec_l3: "载具标准:",
     vision_p2_spec_s3: "SEMI E87 CMS / SEMI E40 PJM",
+    vision_p2_spec_l4: "商业替代标杆:",
     vision_p2_spec_s4: "Siemens Tecnomatix / FlexSim / Muratec",
+    vision_p2_spec_l5: "时间同步:",
     vision_p2_spec_s5: "Discrete-Event Virtual Clock Engine",
 
     // Pillar 3
-    vision_p3_name: "工业通信与虚拟设备层 (Connectivity & Virtual GEM300)",
+    vision_p3_name: "工业通信与虚拟设备层",
     vision_p3_desc:
       "实现完整的 SEMI 300mm 工业通讯标准。提供完全开放的<b>“虚拟设备服务端（Virtual Tool Simulators）”</b>，无需实体机台即可完整体验与调试 MES 指令下发、状态上报与报警机制。",
     vision_p3_c1_title: "完整 GEM300 标准族实现",
@@ -494,80 +534,99 @@ const VISION_I18N = {
     vision_p3_c4_desc:
       "集成 open62541 与 Eclipse Milo，实现设备底座与现代物联网工业总线的无缝转换。",
     vision_p3_spec_title: "// 工业通信技术协议栈",
+    vision_p3_spec_l1: "通讯底层:",
     vision_p3_spec_s1: "HSMS (SEMI E37) / SECS-II (E5)",
+    vision_p3_spec_l2: "通用模型:",
     vision_p3_spec_s2: "GEM (SEMI E30) / GEM300",
+    vision_p3_spec_l3: "开源协议库:",
     vision_p3_spec_s3: "secsgem (Python) / Open-SECS",
+    vision_p3_spec_l4: "商业替代标杆:",
     vision_p3_spec_s4: "PEER Group / Cimetrix CIM300",
+    vision_p3_spec_l5: "状态定义:",
     vision_p3_spec_s5: "SEMI E10 RAM (Reliability, Availability)",
 
     // Pillar 4
-    vision_p4_name: "工艺物理与良率工程引擎 (Process Physics & YMS Engine)",
+    vision_p4_name: "工艺物理与良率工程引擎",
     vision_p4_desc:
       "良率（Yield）是晶圆厂的生命线。从简单的宏观经验公式，迈向紧凑物理代理模型（Surrogate Physics）、工业级 STDF/KLARF 数据解析与时空缺陷共性根因溯源（RCA）。",
-    vision_p4_c1_title: "紧凑物理代理模型 (Physics Metamodels)",
+    vision_p4_c1_title: "紧凑物理代理模型",
     vision_p4_c1_desc:
       "刻蚀与薄膜片内不均匀性 (WIWNU)、腔体季化老化漂移 (Seasoning Drift)、光刻套刻误差 (Overlay) 模型。",
     vision_p4_c2_title: "STDF V4 与 KLARF 工业流解析",
     vision_p4_c2_desc:
       "并行解析 ATE 自动测试机台标准测试数据流，提取 Bin Map 与数万颗测试晶粒的电学参数。",
-    vision_p4_c3_title: "共性分析与根因溯源 (Commonality RCA)",
+    vision_p4_c3_title: "共性分析与根因溯源",
     vision_p4_c3_desc:
       "对产生环状(Ring)或局部聚集缺陷的晶圆批次，逆向检索其共同途经的机台与腔体号。",
-    vision_p4_c4_title: "缺陷空间减法 (Defect Adder)",
+    vision_p4_c4_title: "缺陷空间减法",
     vision_p4_c4_desc:
       "对比前后道暗场光学缺陷检测图，滤除已有缺陷，精确计算当前机台引入的新增颗粒。",
     vision_p4_spec_title: "// 良率与工艺工程技术方案",
+    vision_p4_spec_l1: "测试数据标准:",
     vision_p4_spec_s1: "SEMI STDF V4 / STDF-V4-Spec",
+    vision_p4_spec_l2: "开源解析器:",
     vision_p4_spec_s2: "PySTDF (Python) / rust-stdf (Rust)",
+    vision_p4_spec_l3: "缺陷基准数据集:",
     vision_p4_spec_s3: "WM-811K (811,472 Wafers)",
+    vision_p4_spec_l4: "商业替代标杆:",
     vision_p4_spec_s4: "KLA Klarity / PDF Solutions Exensio",
+    vision_p4_spec_l5: "良率理论模型:",
     vision_p4_spec_s5: "Poisson / Murphy / Seeds Negative Binomial",
 
     // Pillar 5
-    vision_p5_name:
-      "实时工业数据底座架构 (Industrial High-Throughput Data Fabric)",
+    vision_p5_name: "实时工业数据底座架构",
     vision_p5_desc:
       "300mm 晶圆厂每日产生数以 TB 计的高频时序与缺陷数据。必须摆脱单机关系型数据库局限，采用现代“消息流 + 时序库 + 列式分析”的高通量工业混合数仓架构。",
-    vision_p5_c1_title: "毫秒级工业消息总线 (Event Bus)",
+    vision_p5_c1_title: "毫秒级工业消息总线",
     vision_p5_c1_desc:
       "基于 Apache Kafka 或 MQTT，吞吐全厂数万点位 S6F11 事件、机台状态变更与 OHT 天车站网坐标。",
-    vision_p5_c2_title: "时序数据存储 (Time-Series DB)",
+    vision_p5_c2_title: "时序数据存储",
     vision_p5_c2_desc:
       "TimescaleDB / InfluxDB 存储腔体高频射频功率、气体流量(MFC)、静电吸盘温度与真空度工步曲线。",
-    vision_p5_c3_title: "高通量列式分析 (OLAP Engine)",
+    vision_p5_c3_title: "高通量列式分析",
     vision_p5_c3_desc:
       "ClickHouse / DuckDB 实现亿级晶圆芯片参数测试点跨批次秒级聚合与多维钻取。",
     vision_p5_c4_title: "实时 SPC 与 Nelson 规则引擎",
     vision_p5_c4_desc:
       "流式计算 Cp/Cpk 能力指数与休哈特控制图，毫秒级触发异常报警并推送机台联锁。",
     vision_p5_spec_title: "// 工业数据中枢架构栈",
+    vision_p5_spec_l1: "消息流总线:",
     vision_p5_spec_s1: "Apache Kafka / Eclipse Mosquitto",
+    vision_p5_spec_l2: "时序遥测库:",
     vision_p5_spec_s2: "TimescaleDB / InfluxDB",
+    vision_p5_spec_l3: "OLAP 列式库:",
     vision_p5_spec_s3: "ClickHouse / DuckDB",
+    vision_p5_spec_l4: "SPC 算法库:",
     vision_p5_spec_s4: "pyspc / spc-kit (SQL) / mfgQC",
+    vision_p5_spec_l5: "可视化大屏:",
     vision_p5_spec_s5: "Grafana / Apache Superset",
 
     // Pillar 6
-    vision_p6_name: "开放倡议生态与数据治理 (Open Ecosystem & Benchmarks)",
+    vision_p6_name: "开放倡议生态与数据治理",
     vision_p6_desc:
       "倡议之所以能够长久，核心在于建立开源开放的标准、合规安全的数据边界与可复现的评测基准，让全球半导体科研机构与工业界共同受益。",
-    vision_p6_c1_title: "开放 28nm 参考制程包 (Open Benchmark)",
+    vision_p6_c1_title: "开放 28nm 参考制程包",
     vision_p6_c1_desc:
       "提供自洽、脱敏的完整 300mm 流程配置（包含机台清单、标准工步、Q-Time 参数与参考良率）。",
-    vision_p6_c2_title: "单键运行的本地沙箱 (One-Click Sandbox)",
+    vision_p6_c2_title: "单键运行的本地沙箱",
     vision_p6_c2_desc:
       "基于 Docker-Compose 提供完整测试环境：前端看板 + 虚拟 MES + 模拟器机台 + 时序数据库。",
-    vision_p6_c3_title: "插件化接入规范 (Open Fab Plugin API)",
+    vision_p6_c3_title: "插件化接入规范",
     vision_p6_c3_desc:
       "基于 gRPC / REST 定义清晰的机台模型扩展插槽、FDC 异常算法插槽与 AMHS 调度求解器插槽。",
     vision_p6_c4_title: "学术与工业脱敏治理规范",
     vision_p6_c4_desc:
       "严格遵守知识产权与 OEM 商业机密规范，使用参数化合成数据确保工程合法合规。",
     vision_p6_spec_title: "// 开放生态治理模式",
+    vision_p6_spec_l1: "许可协议:",
     vision_p6_spec_s1: "PolyForm Noncommercial 1.0.0（源码公开）",
+    vision_p6_spec_l2: "部署载体:",
     vision_p6_spec_s2: "Docker-Compose / Helm Chart",
+    vision_p6_spec_l3: "类比参照:",
     vision_p6_spec_s3: "RISC-V International / OpenROAD Project",
-    vision_p6_spec_s4: "社区共建 (Community-driven)",
+    vision_p6_spec_l4: "组织形式:",
+    vision_p6_spec_s4: "社区共建",
+    vision_p6_spec_l5: "开放 API:",
     vision_p6_spec_s5: "OpenFab gRPC & REST Standard",
 
     // Phase 1 Strategy
@@ -627,7 +686,7 @@ const VISION_I18N = {
     vision_p1_takeaway_btn: "查看当前 Phase 1 原型",
 
     // Roadmap
-    vision_roadmap_title: "四阶段演进路线图 (Roadmap)",
+    vision_roadmap_title: "四阶段演进路线图",
     vision_roadmap_sub: "从“外观模块形似”到“全闭环工业孪生”的务实演进路径。",
     vision_rm_completed: "✓ 已完成",
     vision_rm_p1_title: "形态与视觉高拟真",
@@ -661,9 +720,9 @@ const VISION_I18N = {
     vision_matrix_title: "商业巨头方案 vs 开源技术栈替代矩阵",
     vision_matrix_sub:
       "对标国际领先半导体制造软件，梳理各功能层的开放架构替代方案。",
-    vision_matrix_th_layer: "架构层级 (Layer)",
+    vision_matrix_th_layer: "架构层级",
     vision_matrix_th_std: "工业标准 / 协议",
-    vision_matrix_th_comm: "商业垄断方案 (Benchmark)",
+    vision_matrix_th_comm: "商业垄断方案",
     vision_matrix_th_open: "Open Initiative 推荐栈",
     vision_matrix_th_val: "实现功能与价值",
     vision_mat_r1_layer: "空间与设备三维",
