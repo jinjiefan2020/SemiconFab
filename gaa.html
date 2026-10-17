@@ -919,10 +919,10 @@
           </a>
         </div>
         <div>
-          <span
+          <span id="footer-license"
             >Source-available &middot; PolyForm Noncommercial 1.0.0 &middot;
-            Free for education &amp; personal use; commercial use requires a
-            separate license. (源码公开 &middot; 商业使用需另行授权)</span
+            Free for education and personal use &middot; Commercial licensing
+            funds ongoing development.</span
           >
         </div>
       </footer>
@@ -2318,6 +2318,13 @@
           optDim.innerText = isEnglish
             ? "Physical Dimensions (5nm/8nm)"
             : "纳米尺寸标尺 (5nm/8nm)";
+
+        const footerLicense = document.getElementById("footer-license");
+        if (footerLicense) {
+          footerLicense.innerHTML = isEnglish
+            ? "Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; Free for education and personal use &middot; Commercial licensing funds ongoing development."
+            : "源码公开 &middot; PolyForm Noncommercial 1.0.0 &middot; 教育与个人使用免费 &middot; 商业授权支持持续开发。";
+        }
       }
 
       function toggleLanguage() {

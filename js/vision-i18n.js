@@ -354,6 +354,8 @@ const VISION_I18N = {
     vision_cta_btn_contact: "Contact Working Group",
     vision_footer_home: "Home",
     vision_footer_twin: "3D Twin",
+    vision_footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
   },
 
   "zh-CN": {
@@ -685,6 +687,8 @@ const VISION_I18N = {
     vision_cta_btn_contact: "联系倡议工作组",
     vision_footer_home: "首页",
     vision_footer_twin: "3D 数字孪生",
+    vision_footer_license:
+      "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费 · 商业授权支持持续开发。",
   },
 };
 

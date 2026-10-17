@@ -229,6 +229,8 @@ const I18N_DICTIONARY = {
       "SEMI E10 equipment operational state machine (Running, Idle, Down, Maintenance) with live sensor sparklines and fault injection scenarios.",
     footer_copy: "© 2026 SemiconFab.org. All rights reserved.",
     footer_contact: "Contact:",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm Advanced Semiconductor Fab",
     twin_header_sub:
       "Core Equipment 2D Architectural Layout / 3D High-Fidelity Cleanroom Digital Twin",
@@ -675,6 +677,8 @@ const I18N_DICTIONARY = {
       "符合 SEMI E10 工业标准设备状态机（运行/待料/告警/维护），支持 6 大预设生产故障场景与一键注入演练。",
     footer_copy: "© 2026 SemiconFab.org. 版权所有.",
     footer_contact: "联系方式:",
+    footer_license:
+      "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费 · 商业授权支持持续开发。",
     twin_header_title: "300mm 先进制程晶圆制造厂 (Fab)",
     twin_header_sub: "半导体核心制造设备 2D 建筑布局 / 3D 高精度数字孪生车间",
     mode_3d: "3D",
@@ -1055,6 +1059,8 @@ const I18N_DICTIONARY = {
       "符合 SEMI E10 工業標準設備狀態機（運行/待料/告警/維護），支援 6 大預設生產故障場景與一鍵注入演練。",
     footer_copy: "© 2026 SemiconFab.org. 版權所有.",
     footer_contact: "聯絡方式:",
+    footer_license:
+      "源碼公開 · PolyForm Noncommercial 1.0.0 · 教育與個人使用免費 · 商業授權支持持續開發。",
     twin_header_title: "300mm 先進製程晶圓製造廠 (Fab)",
     twin_header_sub: "半導體核心製造設備 2D 建築布局 / 3D 高精度數位孿生車間",
     mode_3d: "3D",
@@ -1377,6 +1383,8 @@ const I18N_DICTIONARY = {
       "SEMI E10準拠の装置稼働状態（稼働中/待機/停止/保全）および6大異常シナリオの即時注入に対応。",
     footer_copy: "© 2026 SemiconFab.org. All rights reserved.",
     footer_contact: "お問い合わせ:",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm 先端半導体製造ライン (Fab)",
     twin_header_sub: "半導体中核製造装置 2D配置図 / 3D高精度デジタルツイン",
     mode_3d: "3D",
@@ -1755,6 +1763,8 @@ const I18N_DICTIONARY = {
       "SEMI E10 표준 장비 상태 머신(가동/대기/경보/유지보수)을 반영하고 6대 제조 고장 시나리오의 즉각적인 주입을 지원.",
     footer_copy: "© 2026 SemiconFab.org. All rights reserved.",
     footer_contact: "문의:",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm 첨단 반도체 제조 라인 (Fab)",
     twin_header_sub: "반도체 핵심 제조 장비 2D 배치도 / 3D 고정밀 디지털 트윈",
     mode_3d: "3D",
@@ -2132,6 +2142,8 @@ const I18N_DICTIONARY = {
       "SEMI E10 konforme Zustandsmaschine (Running, Idle, Down, PM) mit Echtzeit-Sensorkurven und 6 Störungsszenarien.",
     footer_copy: "© 2026 SemiconFab.org. Alle Rechte vorbehalten.",
     footer_contact: "Kontakt:",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm Halbleiter-Fabrikationsanlage (Fab)",
     twin_header_sub:
       "Kernfertigungsanlagen 2D-Layout / 3D-Hochpräzisions-Reinraum",
@@ -2520,6 +2532,8 @@ const I18N_DICTIONARY = {
       "Machine à états d'équipement conforme SEMI E10 (En marche, En attente, En panne, Maintenance) avec 6 scénarios d'incidents.",
     footer_copy: "© 2026 SemiconFab.org. Tous droits réservés.",
     footer_contact: "Contact :",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "Fabrique de Semi-Conducteurs 300mm (Fab)",
     twin_header_sub:
       "Équipements de Fabrication Plan 2D / Jumeau Numérique 3D Haute Précision",
@@ -2910,6 +2924,8 @@ const I18N_DICTIONARY = {
       "Macchina a stati SEMI E10 (In funzione, Standby, Guasto, Manutenzione) con curve dei sensori e 6 scenari di test.",
     footer_copy: "© 2026 SemiconFab.org. Tutti i diritti riservati.",
     footer_contact: "Contatto:",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "Impianto di Fabbricazione Wafer 300mm (Fab)",
     twin_header_sub:
       "Layout 2D Impianti Principali / Digital Twin 3D ad Alta Precisione",
@@ -3299,6 +3315,8 @@ const I18N_DICTIONARY = {
       "Máquina de estados conforme a SEMI E10 (En marcha, Espera, Avería, Mantenimiento) con gráficas de sensores en tiempo real y 6 escenarios de prueba.",
     footer_copy: "© 2026 SemiconFab.org. \u0054odos los derechos reservados.",
     footer_contact: "Contacto:",
+    footer_license:
+      "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "Planta de Fabricación de Obleas 300mm (Fab)",
     twin_header_sub:
       "Plano 2D de Equipos / Gemelo Digital 3D de Alta Precisión",

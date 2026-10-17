@@ -823,21 +823,13 @@
             >info@semiconfab.org</a
           >
         </div>
-        <p style="margin: 0; font-size: 12px; line-height: 1.5">
-          Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; Free
-          for education &amp; personal use; commercial use requires a separate
-          license.
-        </p>
         <p
-          style="
-            margin-top: 2px;
-            font-size: 11.5px;
-            line-height: 1.5;
-            color: var(--text-dim);
-          "
+          id="ui-footer-license"
+          style="margin: 0; font-size: 12px; line-height: 1.5"
         >
-          源码公开 &middot; PolyForm Noncommercial 1.0.0 &middot;
-          教育与个人使用免费；商业使用需另行授权。
+          Source-available &middot; PolyForm Noncommercial 1.0.0 &middot; Free
+          for education and personal use &middot; Commercial licensing funds
+          ongoing development.
         </p>
       </footer>
     </main>
@@ -10527,6 +10519,8 @@
           hideDetails: "Hide Details",
           emptyTitle: "No equipment found",
           emptyDesc: "Try adjusting your search query or category filters.",
+          footerLicense:
+            "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
           fields: {
             category: "Category",
             waferSizes: "Wafer Sizes",
@@ -10580,6 +10574,8 @@
           hideDetails: "收起详情",
           emptyTitle: "未找到匹配的设备记录",
           emptyDesc: "请尝试清除搜索关键词或切换不同的类别筛选。",
+          footerLicense:
+            "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费 · 商业授权支持持续开发。",
           fields: {
             category: "设备类别",
             waferSizes: "适用晶圆尺寸",
@@ -10669,6 +10665,8 @@
           t.legSynthetic;
         document.getElementById("search-box").placeholder = t.searchPlaceholder;
         document.getElementById("ui-hide-drafts").textContent = t.hideDrafts;
+        const footerLic = document.getElementById("ui-footer-license");
+        if (footerLic) footerLic.textContent = t.footerLicense;
       }
 
       function renderCategoryChips() {
