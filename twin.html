@@ -1542,19 +1542,6 @@
             <i data-lucide="train-track" class="w-2.5 h-2.5"></i>
             <span data-i18n="toggle_oht">AMHS</span>
           </button>
-          <!-- AMHS Telemetry Mini-HUD (Pill) -->
-          <div
-            id="amhs-hud-pill"
-            class="flex items-center gap-1.5 text-[8.5px] font-mono px-2 py-0.5 rounded-md bg-slate-900/85 text-slate-200 border border-slate-700/80 shadow-sm shrink-0 whitespace-nowrap"
-            title="AMHS Simulated Telemetry: Completed Jobs · Avg Delivery · Active Fleet"
-          >
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
-            <span id="amhs-hud-lbl-jobs" class="text-slate-400" data-i18n="amhs_hud_jobs">Jobs</span>:<b id="amhs-hud-jobs" class="text-emerald-300 font-bold">0</b>
-            <span class="text-slate-600">·</span>
-            <span id="amhs-hud-lbl-avg" class="text-slate-400" data-i18n="amhs_hud_avg">Avg</span>:<b id="amhs-hud-avg" class="text-sky-300 font-bold">--</b>
-            <span class="text-slate-600">·</span>
-            <span id="amhs-hud-lbl-active" class="text-slate-400" data-i18n="amhs_hud_active">Active</span>:<b id="amhs-hud-active" class="text-amber-300 font-bold">0</b><span class="text-slate-400">/24</span>
-          </div>
           <button
             id="btn-toggle-ceiling"
             onclick="toggleCeilingGrid()"
@@ -2649,6 +2636,44 @@
       <i data-lucide="layout-grid" class="w-3.5 h-3.5"></i>
       <span data-i18n="btn_edit_layout">Edit layout →</span>
     </a>
+
+    <!-- AMHS Telemetry Mini-HUD (Pill - Floating Center Above Bottom Legend) -->
+    <div
+      id="amhs-hud-pill"
+      class="fixed bottom-[46px] left-1/2 -translate-x-1/2 md:left-[calc(50%+160px)] z-20 flex items-center gap-2 text-[10px] font-mono px-3 py-1 rounded-lg bg-slate-900/90 backdrop-blur-md text-slate-200 border border-slate-700/80 shadow-xl transition-all select-none pointer-events-auto whitespace-nowrap"
+      title="AMHS Simulated Telemetry: Completed Jobs · Avg Delivery · Active Fleet"
+    >
+      <div
+        class="flex items-center gap-1.5 font-sans font-semibold text-emerald-400 border-r border-slate-700/80 pr-2.5"
+      >
+        <i data-lucide="train-track" class="w-3.5 h-3.5"></i>
+        <span>AMHS</span>
+      </div>
+      <span
+        class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"
+      ></span>
+      <span
+        id="amhs-hud-lbl-jobs"
+        class="text-slate-400 font-sans"
+        data-i18n="amhs_hud_jobs"
+        >Jobs</span
+      >:<b id="amhs-hud-jobs" class="text-emerald-300 font-bold">0</b>
+      <span class="text-slate-600">·</span>
+      <span
+        id="amhs-hud-lbl-avg"
+        class="text-slate-400 font-sans"
+        data-i18n="amhs_hud_avg"
+        >Avg</span
+      >:<b id="amhs-hud-avg" class="text-sky-300 font-bold">--</b>
+      <span class="text-slate-600">·</span>
+      <span
+        id="amhs-hud-lbl-active"
+        class="text-slate-400 font-sans"
+        data-i18n="amhs_hud_active"
+        >Active</span
+      >:<b id="amhs-hud-active" class="text-amber-300 font-bold">0</b
+      ><span class="text-slate-400">/24</span>
+    </div>
 
     <!-- BOTTOM TOOLBAR: Legends & Navigation Controls -->
     <footer
