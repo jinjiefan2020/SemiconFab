@@ -2,6 +2,19 @@
 
 All notable changes to the SemiconFab source-available repository will be documented in this file.
 
+## [1.5.5] - 2026-10-18
+
+### Fab Construction Cost Breakdown Report & Parametric Estimator (`fab-cost.html`)
+
+- **Bilingual Fab Construction Cost Report (`fab-cost.html`)**: Created a dedicated, publication-grade cost research report and parametric model analyzing where capital expenditures go beyond process tools (the remaining 20–30% in cleanroom, UPW, power, gases, HVAC, AMHS, land, and engineering design).
+- **Interactive Parametric Estimator**: Built a real-time parametric cost model driven by process node anchors (2nm IBS, 2nm Samsung Taylor, 3nm IBS range, 5nm early TSMC Arizona, 28nm-class TSMC Kumamoto Fab 1, advanced DRAM SK hynix Yongin Y2) × monthly wafer capacity (WSPM) × facility share slider (20% to 35%) × regional construction timelines (Asia, US, Europe), with dynamic multi-tier cost breakdown and split visualizer.
+- **Node Scaling & Dynamic SVG Chart**: Implemented node-scaling cost comparison per 1k WSPM with hand-authored SVG range chart and responsive dark/light palette synchronization.
+- **Honesty Disclosure & Data Gaps Architecture**: Strictly observed data integrity red lines — zero fabrication/interpolation of unanchored nodes (e.g. 7nm omitted), clear preservation of all data confidence flags (`Weak source`, `IBS figures considered high`, `Not confirmed by TSMC`, `Treat with caution`), and explicit enumeration of the 8 unverified industry data gaps.
+- **27 Verified Public Reference Links**: Included 19 categorized bibliographic entries containing 27+ live, verified citations across trade journals, engineering interviews, and corporate regulatory disclosures.
+- **Comprehensive Multilingual i18n (`js/fab-cost-i18n.js` & `js/translations.js`)**: Implemented complete 1-click bilingual switching between English and Simplified Chinese across all 296 text keys, form inputs, dynamic calculator metrics, SVG charts, and responsive mobile card headers via `data-i18n-lbl`.
+- **Homepage Strategic Feature Card (`index.html`)**: Integrated an amber-themed functional card in the open data & research grid adjacent to the MIMAC-2026 Benchmark card, adapting the layout cleanly to `grid-cols-1 md:grid-cols-2 xl:grid-cols-4`.
+- **Global Navigation & Sitemap Integration**: Added `fab-cost.html` across site headers (`index.html`, `benchmark.html`, `data-standard.html`, `verification.html`, `404.html`) and XML sitemap index (`sitemap.xml`).
+
 ---
 
 ## [1.5.0] - 2026-10-18

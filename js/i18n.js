@@ -78,6 +78,24 @@ function setLanguage(langCode) {
     }
   });
 
+  // 1.2 Update data-lbl for responsive mobile table cells
+  document.querySelectorAll("[data-i18n-lbl]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-lbl");
+    const translated = t(key);
+    if (translated && translated !== key) {
+      el.setAttribute("data-lbl", translated);
+    }
+  });
+
+  // 1.3 Update aria-label for accessibility & chart SVGs
+  document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+    const key = el.getAttribute("data-i18n-aria-label");
+    const translated = t(key);
+    if (translated && translated !== key) {
+      el.setAttribute("aria-label", translated);
+    }
+  });
+
   // 2. Update placeholders for inputs
   document.querySelectorAll("[data-i18n-placeholder]").forEach((el) => {
     const key = el.getAttribute("data-i18n-placeholder");

@@ -1,0 +1,3375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title data-i18n="fab_cost_page_title">
+      Fab Construction Costs: What's Beyond the Equipment — SemiconFab.org
+    </title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta
+      name="description"
+      content="Parametric estimation and detailed breakdown of semiconductor fab construction costs beyond process equipment: cleanrooms, UPW, power, gases, HVAC, and 10 reference projects."
+    />
+    <link rel="canonical" href="https://semiconfab.org/fab-cost" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f2f1ec;
+        --surface: #ffffff;
+        --surface-2: #e9e7df;
+        --ink: #1c2126;
+        --ink-2: #4c5560;
+        --ink-3: #7a838d;
+        --line: #d8d4c8;
+        --accent: #0e6e6b;
+        --accent-ink: #0a5451;
+        --amber: #b45309;
+        --amber-bg: #fdf3e3;
+        --red: #a83226;
+        --chart-grid: #ddd9cc;
+        --shadow:
+          0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #12161a;
+          --surface: #1a2026;
+          --surface-2: #232b33;
+          --ink: #e8eaec;
+          --ink-2: #aeb7bf;
+          --ink-3: #7e8891;
+          --line: #333c45;
+          --accent: #3fbdb8;
+          --accent-ink: #7fd8d3;
+          --amber: #e8a04c;
+          --amber-bg: #2c2417;
+          --red: #e0786a;
+          --chart-grid: #2c343d;
+          --shadow:
+            0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+        }
+      }
+      html.dark {
+        --bg: #12161a;
+        --surface: #1a2026;
+        --surface-2: #232b33;
+        --ink: #e8eaec;
+        --ink-2: #aeb7bf;
+        --ink-3: #7e8891;
+        --line: #333c45;
+        --accent: #3fbdb8;
+        --accent-ink: #7fd8d3;
+        --amber: #e8a04c;
+        --amber-bg: #2c2417;
+        --red: #e0786a;
+        --chart-grid: #2c343d;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+      html.light {
+        --bg: #f2f1ec;
+        --surface: #ffffff;
+        --surface-2: #e9e7df;
+        --ink: #1c2126;
+        --ink-2: #4c5560;
+        --ink-3: #7a838d;
+        --line: #d8d4c8;
+        --accent: #0e6e6b;
+        --accent-ink: #0a5451;
+        --amber: #b45309;
+        --amber-bg: #fdf3e3;
+        --red: #a83226;
+        --chart-grid: #ddd9cc;
+        --shadow:
+          0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: "Manrope", system-ui, sans-serif;
+        font-size: 15.5px;
+        line-height: 1.65;
+        overflow-x: hidden;
+      }
+      .mono {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
+      }
+
+      /* Site Header & Navigation */
+      .site-header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+      }
+      .site-header-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 12px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+      }
+      .site-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: var(--ink);
+        font-weight: 800;
+        font-size: 16px;
+      }
+      .brand-dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--accent);
+      }
+      .site-nav-links {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .site-nav-links a {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink-2);
+        text-decoration: none;
+        padding: 4px 8px;
+        border-radius: 6px;
+        transition: all 0.2s;
+      }
+      .site-nav-links a:hover {
+        color: var(--ink);
+        background: var(--surface-2);
+      }
+      .site-nav-links a.active {
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .site-nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .site-nav-btn {
+        font: inherit;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 6px 11px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        transition: all 0.2s;
+      }
+      .site-nav-btn:hover {
+        background: var(--surface-2);
+      }
+
+      main {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 28px 20px 64px;
+      }
+      h1,
+      h2,
+      h3 {
+        font-family: "Manrope", sans-serif;
+        line-height: 1.25;
+        margin: 0;
+      }
+      h1 {
+        font-size: clamp(26px, 4.5vw, 40px);
+        font-weight: 800;
+        letter-spacing: -0.01em;
+      }
+      h2 {
+        font-size: clamp(20px, 3vw, 26px);
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      h3 {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      p {
+        margin: 0 0 10px;
+      }
+      .lede {
+        color: var(--ink-2);
+        font-size: 16.5px;
+        max-width: 46em;
+        margin-top: 12px;
+      }
+      .meta-line {
+        color: var(--ink-3);
+        font-size: 13px;
+        margin-top: 10px;
+      }
+      section {
+        margin-top: 44px;
+      }
+      .sec-note {
+        color: var(--ink-2);
+        max-width: 48em;
+      }
+      a {
+        color: var(--accent-ink);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 2px;
+        word-break: break-all;
+        overflow-wrap: anywhere;
+      }
+
+      /* ---------- key stats ---------- */
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .stat {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px 16px 13px;
+        box-shadow: var(--shadow);
+      }
+      .stat .num {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: clamp(22px, 3vw, 30px);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+      .stat .lbl {
+        font-weight: 700;
+        margin-top: 4px;
+        font-size: 14px;
+      }
+      .stat .src {
+        color: var(--ink-3);
+        font-size: 12px;
+        margin-top: 2px;
+      }
+
+      /* ---------- estimator ---------- */
+      .calc {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+      }
+      .calc-grid {
+        display: grid;
+        grid-template-columns: 340px 1fr;
+      }
+      .calc-controls {
+        padding: 22px;
+        border-right: 1px solid var(--line);
+        background: var(--surface-2);
+      }
+      .calc-results {
+        padding: 22px;
+      }
+      .ctl {
+        margin-bottom: 20px;
+      }
+      .ctl:last-child {
+        margin-bottom: 0;
+      }
+      .ctl label,
+      .ctl .lbl {
+        display: block;
+        font-weight: 700;
+        font-size: 13.5px;
+        margin-bottom: 8px;
+      }
+      .ctl .hint {
+        font-weight: 400;
+        color: var(--ink-2);
+        font-size: 12.5px;
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+      select,
+      input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        font: inherit;
+        font-size: 15px;
+        color: var(--ink);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+      .range-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .range-row output {
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 600;
+        font-size: 17px;
+        min-width: 92px;
+        text-align: right;
+      }
+      .seg {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .seg button {
+        font: inherit;
+        font-size: 13.5px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 7px 13px;
+        border-radius: 999px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink-2);
+      }
+      .seg button[aria-pressed="true"] {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+      @media (prefers-color-scheme: dark) {
+        .seg button[aria-pressed="true"] {
+          color: #0c2221;
+        }
+      }
+      html.dark .seg button[aria-pressed="true"] {
+        color: #0c2221;
+      }
+
+      .res-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+      .res-card {
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 15px 16px;
+      }
+      .res-card.hero {
+        grid-column: 1 / -1;
+        background: var(--amber-bg);
+        border-color: var(--amber);
+      }
+      .res-card .r-lbl {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink-2);
+      }
+      .res-card.hero .r-lbl {
+        color: var(--amber);
+      }
+      .res-card .r-num {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: clamp(24px, 3.4vw, 34px);
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        margin-top: 2px;
+      }
+      .res-card .r-sub {
+        font-size: 12.5px;
+        color: var(--ink-2);
+        margin-top: 2px;
+      }
+      .splitbar {
+        display: flex;
+        height: 16px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-top: 18px;
+        border: 1px solid var(--line);
+      }
+      .splitbar > div {
+        height: 100%;
+      }
+      .split-legend {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+        font-size: 12.5px;
+        color: var(--ink-2);
+        margin-top: 8px;
+      }
+      .split-legend .dot {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        border-radius: 3px;
+        margin-right: 6px;
+        vertical-align: -1px;
+      }
+      .calc-foot {
+        font-size: 12.5px;
+        color: var(--ink-3);
+        margin-top: 16px;
+        line-height: 1.6;
+      }
+
+      /* ---------- tables ---------- */
+      .tbl-wrap {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        overflow: hidden;
+        margin-top: 14px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14.5px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 11px 14px;
+        vertical-align: top;
+      }
+      thead th {
+        background: var(--surface-2);
+        font-size: 13px;
+        font-weight: 700;
+        border-bottom: 1px solid var(--line);
+        white-space: nowrap;
+      }
+      tbody tr + tr td {
+        border-top: 1px solid var(--line);
+      }
+      td.num,
+      th.num {
+        text-align: right;
+        font-family: "IBM Plex Mono", monospace;
+        white-space: nowrap;
+      }
+      .proj-table table {
+        table-layout: fixed;
+      }
+      .proj-table td,
+      .proj-table th {
+        overflow-wrap: break-word;
+      }
+      .proj-table td.num,
+      .proj-table th.num {
+        white-space: normal;
+        text-align: left;
+      }
+      .proj-table th.num {
+        text-align: left;
+      }
+      .src-cell {
+        color: var(--ink-3);
+        font-size: 12.5px;
+      }
+      .flag {
+        display: inline-block;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--amber);
+        background: var(--amber-bg);
+        border: 1px solid var(--amber);
+        border-radius: 4px;
+        padding: 0 6px;
+        margin-left: 6px;
+        vertical-align: 1px;
+        white-space: nowrap;
+      }
+      .flag.red {
+        color: var(--red);
+        border-color: var(--red);
+        background: transparent;
+      }
+
+      /* ---------- chart ---------- */
+      .chart-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 18px 18px 10px;
+        margin-top: 14px;
+      }
+      .chart-card svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .chart-note {
+        font-size: 12.5px;
+        color: var(--ink-3);
+        padding: 8px 2px 6px;
+      }
+
+      /* ---------- misc blocks ---------- */
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        margin-top: 14px;
+      }
+      .panel {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+      .panel p:last-child {
+        margin-bottom: 0;
+      }
+      .panel ul {
+        margin: 8px 0 0;
+        padding-left: 20px;
+      }
+      .panel li {
+        margin-bottom: 6px;
+      }
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-top: 14px;
+      }
+      .tl {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px;
+        box-shadow: var(--shadow);
+      }
+      .tl .t-num {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 30px;
+        font-weight: 600;
+      }
+      .tl .t-lbl {
+        font-weight: 700;
+        margin-top: 2px;
+      }
+      .tl .t-sub {
+        color: var(--ink-2);
+        font-size: 13px;
+      }
+      .gaps {
+        background: var(--surface);
+        border: 1px dashed var(--amber);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-top: 14px;
+      }
+      .gaps ol {
+        margin: 8px 0 0;
+        padding-left: 22px;
+      }
+      .gaps li {
+        margin-bottom: 7px;
+      }
+      .sources {
+        font-size: 13px;
+        color: var(--ink-2);
+      }
+      .sources li {
+        margin-bottom: 6px;
+      }
+      .sources ul {
+        padding-left: 20px;
+        margin-top: 10px;
+      }
+      footer {
+        margin-top: 48px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+        color: var(--ink-3);
+        font-size: 12.5px;
+      }
+      .footer-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+        font-size: 13px;
+      }
+      .footer-links a {
+        color: var(--accent-ink);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      @media (max-width: 760px) {
+        .stats {
+          grid-template-columns: 1fr 1fr;
+        }
+        .calc-grid {
+          grid-template-columns: 1fr;
+        }
+        .calc-controls {
+          border-right: none;
+          border-bottom: 1px solid var(--line);
+        }
+        .res-grid {
+          grid-template-columns: 1fr;
+        }
+        .two-col {
+          grid-template-columns: 1fr;
+        }
+        .timeline {
+          grid-template-columns: 1fr;
+        }
+        /* tables become stacked cards */
+        .tbl-wrap {
+          border: none;
+          background: transparent;
+          box-shadow: none;
+          overflow: visible;
+        }
+        table,
+        tbody,
+        tr,
+        td {
+          display: block;
+          width: 100%;
+        }
+        thead {
+          display: none;
+        }
+        tbody tr {
+          background: var(--surface);
+          border: 1px solid var(--line);
+          border-radius: 10px;
+          box-shadow: var(--shadow);
+          margin-bottom: 10px;
+          padding: 8px 4px;
+        }
+        tbody tr + tr td {
+          border-top: none;
+        }
+        td {
+          padding: 5px 14px;
+        }
+        td.num {
+          text-align: left;
+          white-space: normal;
+        }
+        td::before {
+          content: attr(data-lbl);
+          display: block;
+          font-size: 11.5px;
+          font-weight: 700;
+          color: var(--ink-3);
+          margin-bottom: 1px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .stats {
+          grid-template-columns: 1fr;
+        }
+        .site-header-inner {
+          padding: 10px 14px;
+        }
+        .site-nav-links {
+          gap: 6px;
+        }
+        .site-nav-links a {
+          font-size: 12px;
+          padding: 3px 6px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Site Header Navigation -->
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="index.html" class="site-brand">
+          <span class="brand-dot"></span>
+          <span>SemiconFab.org</span>
+        </a>
+        <nav class="site-nav-links">
+          <a href="index.html" data-i18n="nav_home">Home</a>
+          <a href="catalog-demo.html" data-i18n="nav_catalog">Catalog</a>
+          <a href="twin.html" data-i18n="nav_twin">3D Twin</a>
+          <a href="benchmark.html" data-i18n="nav_benchmark">Benchmark</a>
+          <a href="fab-cost.html" class="active" data-i18n="nav_fab_cost"
+            >Fab Cost</a
+          >
+          <a href="data-standard.html" data-i18n="nav_standard"
+            >Data Standard</a
+          >
+          <a href="verification.html" data-i18n="nav_verification"
+            >Verification</a
+          >
+          <a href="add-equipment.html" data-i18n="nav_add_equipment"
+            >Add Equipment</a
+          >
+        </nav>
+        <div class="site-nav-controls">
+          <button
+            id="theme-toggle-btn"
+            class="site-nav-btn"
+            onclick="toggleTheme()"
+            title="Switch Day / Dark Mode"
+          >
+            <span id="theme-icon">☀️</span>
+            <span id="theme-label">Day</span>
+          </button>
+          <button
+            id="lang-toggle-btn"
+            class="site-nav-btn"
+            onclick="toggleLanguage()"
+            title="Switch English / 中文"
+          >
+            <span id="lang-label"><strong>EN</strong> / 中</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <h1 data-i18n="fab_cost_h1">
+        Building a Fab: Where the Money Goes Beyond the Equipment
+      </h1>
+      <p class="lede" data-i18n-html="fab_cost_lede">
+        Process tools account for 70–80% of the total investment in an advanced
+        fab. The remaining 20–30% — building, cleanroom, ultrapure water, power,
+        gases, wastewater, AMHS, land, and engineering design — is the so-called
+        "construction cost". This page brings together the shares, unit prices,
+        and reference projects that can be found in public sources into a
+        parametric model that estimates cost by
+        <strong>process node × capacity (WSPM)</strong>, and states plainly
+        which figures come from official sources, which are triangulated across
+        multiple sources, and which cannot be found at all.
+      </p>
+      <p class="meta-line" data-i18n="fab_cost_meta_line">
+        Sources: public web research conducted on 2026-10-18 (trade media,
+        practitioner interviews, analyst estimates, and company announcements).
+        All amounts are in US dollars. No institution (SEMI / McKinsey / BCG /
+        SIA) has ever published a complete cost breakdown in public channels —
+        the breakdown below is triangulated across multiple sources and is the
+        weakest link in this data; read it with that caveat.
+      </p>
+
+      <!-- 4 Key Stats -->
+      <div class="stats">
+        <div class="stat">
+          <div class="num" data-i18n="fab_cost_stat1_num">70–80%</div>
+          <div class="lbl" data-i18n="fab_cost_stat1_lbl">
+            Process tools as a share of total cost
+          </div>
+          <div class="src" data-i18n="fab_cost_stat1_src">
+            New advanced fab · construction-physics, 2024; lithography alone is
+            ~20% of total cost
+          </div>
+        </div>
+        <div class="stat">
+          <div class="num" data-i18n="fab_cost_stat2_num">$4–6B</div>
+          <div class="lbl" data-i18n="fab_cost_stat2_lbl">
+            Facility portion (building + cleanroom + utilities)
+          </div>
+          <div class="src" data-i18n="fab_cost_stat2_src">
+            For a large fab with total investment &gt;$20B · Exyte/M+W
+            practitioner Blaschitz, 2025
+          </div>
+        </div>
+        <div class="stat">
+          <div class="num" data-i18n="fab_cost_stat3_num">≈ 2/3</div>
+          <div class="lbl" data-i18n="fab_cost_stat3_lbl">
+            MEP &amp; utilities share of "construction" cost
+          </div>
+          <div class="src" data-i18n="fab_cost_stat3_src">
+            The remaining ~1/3 is cleanroom fit-out and building structure ·
+            construction-physics, 2024
+          </div>
+        </div>
+        <div class="stat">
+          <div class="num" data-i18n="fab_cost_stat4_num">$6B / $11B</div>
+          <div class="lbl" data-i18n="fab_cost_stat4_lbl">
+            Samsung Taylor official split
+          </div>
+          <div class="src" data-i18n="fab_cost_stat4_src">
+            Of the $17B total: building $6B (35%) / equipment $11B (65%) ·
+            Samsung official announcement, Nov 2021
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ ESTIMATOR ============ -->
+      <section aria-labelledby="calc-h">
+        <h2 id="calc-h" data-i18n="fab_cost_calc_title">
+          Parametric Estimator
+        </h2>
+        <p class="sec-note" data-i18n="fab_cost_calc_note">
+          Method: total investment = cost per 1k WSPM (process anchor) ×
+          capacity; non-equipment construction cost = total investment ×
+          facility share. All anchors are published figures from the "Node
+          scaling" table below; the facility share uses the report's 20–30%
+          range (the upper bound can be relaxed to Samsung Taylor's official 35%
+          building share). This is a rough model, not a quotation.
+        </p>
+        <div class="calc" style="margin-top: 14px">
+          <div class="calc-grid">
+            <div class="calc-controls">
+              <div class="ctl">
+                <label for="nodeSel" data-i18n="fab_cost_calc_lbl_node"
+                  >Process anchor (total-cost basis, incl. equipment)</label
+                >
+                <select id="nodeSel">
+                  <option value="mature28" data-i18n="fab_cost_opt_mature28">
+                    28nm-class mature — $156M / 1k WSPM (Kumamoto Fab 1 actual)
+                  </option>
+                  <option value="node3" data-i18n="fab_cost_opt_node3">
+                    3nm — $375–500M / 1k WSPM (IBS)
+                  </option>
+                  <option
+                    value="node2samsung"
+                    data-i18n="fab_cost_opt_node2samsung"
+                  >
+                    2nm — $340M / 1k WSPM (Samsung Taylor published figure)
+                  </option>
+                  <option
+                    value="node2ibs"
+                    selected
+                    data-i18n="fab_cost_opt_node2ibs"
+                  >
+                    2nm — $560M / 1k WSPM (IBS)
+                  </option>
+                  <option
+                    value="node5early"
+                    data-i18n="fab_cost_opt_node5early"
+                  >
+                    5nm early — $600M / 1k WSPM (TSMC Arizona 2020 announcement
+                    basis)
+                  </option>
+                  <option value="dram" data-i18n="fab_cost_opt_dram">
+                    Advanced DRAM — $69M / 1k WSPM (SK hynix Yongin Y2)
+                  </option>
+                </select>
+                <p class="hint" data-i18n="fab_cost_calc_node_hint">
+                  The report gives no per-1k-WSPM cost anchor for 7nm, so no 7nm
+                  option is offered — do not fabricate data by interpolation.
+                  IBS figures are considered high by SemiWiki practitioners; for
+                  the same 2nm node there is also Samsung's published $340M
+                  figure, listed side by side for comparison.
+                </p>
+              </div>
+              <div class="ctl">
+                <label for="wspm" data-i18n="fab_cost_calc_lbl_wspm"
+                  >Capacity, WSPM (wafer starts per month)</label
+                >
+                <div class="range-row">
+                  <input
+                    type="range"
+                    id="wspm"
+                    min="5000"
+                    max="100000"
+                    step="5000"
+                    value="50000"
+                  />
+                  <output id="wspmOut" for="wspm">50,000</output>
+                </div>
+                <p class="hint" data-i18n="fab_cost_calc_wspm_hint">
+                  Actual scale of the anchor projects: Kumamoto Fab 1 55k, IBS's
+                  2nm model 50k, Yongin Y2 up to 360k at full build-out (six
+                  phases).
+                </p>
+              </div>
+              <div class="ctl">
+                <span
+                  class="lbl"
+                  id="shareLbl"
+                  data-i18n="fab_cost_calc_lbl_share"
+                  >Facility (non-equipment) share of total investment</span
+                >
+                <div class="range-row">
+                  <input
+                    type="range"
+                    id="share"
+                    min="20"
+                    max="35"
+                    step="1"
+                    value="25"
+                    aria-labelledby="shareLbl"
+                  />
+                  <output id="shareOut" for="share">25%</output>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    justify-content: space-between;
+                    font-size: 11.5px;
+                    color: var(--ink-3);
+                    margin-top: 2px;
+                  "
+                >
+                  <span data-i18n="fab_cost_calc_share_lo"
+                    >20% (report range low end)</span
+                  ><span data-i18n="fab_cost_calc_share_hi"
+                    >35% (Samsung official building share)</span
+                  >
+                </div>
+                <p class="hint" data-i18n="fab_cost_calc_share_hint">
+                  20–30% is the reported range for large advanced fabs
+                  (facilities $4–6B / total investment &gt;$20B); 35%
+                  corresponds to Samsung Taylor's official building share.
+                  Mature-node fabs have a lower equipment share (in IMARC's
+                  split of an Indian mature fab, equipment is only 45%), so the
+                  facility share would be correspondingly higher — this slider's
+                  upper bound does not cover that case; judge such results
+                  separately.
+                </p>
+              </div>
+              <div class="ctl">
+                <span class="lbl" data-i18n="fab_cost_calc_lbl_region"
+                  >Construction region (affects timeline display only)</span
+                >
+                <div class="seg" role="group" aria-label="Construction region">
+                  <button
+                    type="button"
+                    data-region="asia"
+                    aria-pressed="true"
+                    data-i18n="fab_cost_calc_reg_asia"
+                  >
+                    Asia
+                  </button>
+                  <button
+                    type="button"
+                    data-region="us"
+                    aria-pressed="false"
+                    data-i18n="fab_cost_calc_reg_us"
+                  >
+                    US
+                  </button>
+                  <button
+                    type="button"
+                    data-region="eu"
+                    aria-pressed="false"
+                    data-i18n="fab_cost_calc_reg_eu"
+                  >
+                    Europe
+                  </button>
+                </div>
+                <p class="hint" data-i18n="fab_cost_calc_reg_hint">
+                  Timeline basis: permitting + design → first wafer out
+                  (Blaschitz, 2025). The report gives no credible regional cost
+                  multiplier, so region does not enter the cost calculation;
+                  what is known is that building a fab in the US costs 30%
+                  (Intel basis) to 4× (TSMC basis) more than in Taiwan, and much
+                  of the premium comes from the longer schedule itself.
+                </p>
+              </div>
+            </div>
+            <div class="calc-results" aria-live="polite">
+              <div class="res-grid">
+                <div class="res-card hero">
+                  <div class="r-lbl" data-i18n="fab_cost_res_build_lbl">
+                    Estimated non-equipment construction cost (building +
+                    cleanroom + utilities, etc.)
+                  </div>
+                  <div class="r-num" id="resBuild">—</div>
+                  <div class="r-sub" id="resBuildSub">—</div>
+                </div>
+                <div class="res-card">
+                  <div class="r-lbl" data-i18n="fab_cost_res_total_lbl">
+                    Total investment (incl. equipment)
+                  </div>
+                  <div class="r-num" id="resTotal">—</div>
+                  <div class="r-sub" id="resTotalSub">—</div>
+                </div>
+                <div class="res-card">
+                  <div class="r-lbl" data-i18n="fab_cost_res_equip_lbl">
+                    Of which: process tools
+                  </div>
+                  <div class="r-num" id="resEquip">—</div>
+                  <div class="r-sub" data-i18n="fab_cost_res_equip_sub">
+                    Total investment minus construction cost
+                  </div>
+                </div>
+                <div class="res-card">
+                  <div class="r-lbl" data-i18n="fab_cost_res_services_lbl">
+                    Within construction: MEP &amp; utility services
+                  </div>
+                  <div class="r-num" id="resServices">—</div>
+                  <div class="r-sub" data-i18n="fab_cost_res_services_sub">
+                    ≈ 2/3 of construction cost: HVAC, UPW, power, exhaust, gas
+                    and chemical systems, etc. (construction-physics)
+                  </div>
+                </div>
+                <div class="res-card">
+                  <div class="r-lbl" data-i18n="fab_cost_res_shell_lbl">
+                    Within construction: cleanroom fit-out &amp; building
+                    structure
+                  </div>
+                  <div class="r-num" id="resShell">—</div>
+                  <div class="r-sub" data-i18n="fab_cost_res_shell_sub">
+                    ≈ 1/3 of construction cost (construction-physics)
+                  </div>
+                </div>
+                <div class="res-card">
+                  <div class="r-lbl" data-i18n="fab_cost_res_amhs_lbl">
+                    Of which: AMHS (overhead transport / stocker systems),
+                    order-of-magnitude estimate
+                  </div>
+                  <div class="r-num" id="resAmhs">—</div>
+                  <div class="r-sub" data-i18n="fab_cost_res_amhs_sub">
+                    5–10% of construction cost (market-research basis, 2025–26);
+                    another basis is 3–5% of equipment investment
+                  </div>
+                </div>
+                <div class="res-card">
+                  <div class="r-lbl" data-i18n="fab_cost_res_time_lbl">
+                    Reference timeline: permitting + design → first wafer out
+                  </div>
+                  <div class="r-num" id="resTime">—</div>
+                  <div class="r-sub" id="resTimeSub">—</div>
+                </div>
+              </div>
+              <div class="splitbar" aria-hidden="true">
+                <div id="barEquip" style="background: var(--ink-3)"></div>
+                <div id="barServices" style="background: var(--accent)"></div>
+                <div id="barShell" style="background: var(--amber)"></div>
+              </div>
+              <div class="split-legend">
+                <span
+                  ><span class="dot" style="background: var(--ink-3)"></span
+                  ><span data-i18n="fab_cost_legend_equip"
+                    >Process tools</span
+                  ></span
+                >
+                <span
+                  ><span class="dot" style="background: var(--accent)"></span
+                  ><span data-i18n="fab_cost_legend_services"
+                    >MEP &amp; utilities</span
+                  ></span
+                >
+                <span
+                  ><span class="dot" style="background: var(--amber)"></span
+                  ><span data-i18n="fab_cost_legend_shell"
+                    >Cleanroom fit-out &amp; building structure</span
+                  ></span
+                >
+              </div>
+              <p class="calc-foot" data-i18n-html="fab_cost_calc_foot">
+                Model limitations (from the report): ① No parametric capacity
+                curve (cost ∝ WSPM<sup>x</sup>) exists in public sources; this
+                model extrapolates total cost linearly with capacity — but the
+                facility portion actually scales sub-linearly (a UPW plant,
+                substation, or CUB does not double with capacity), so the
+                facility share will be underestimated for small fabs and
+                overestimated for large ones; a phase-2 fab on the same campus
+                shares infrastructure and costs significantly less. ② Land
+                (~3–5%, $20M–200M, 100–500 acres; weak source quality) and
+                engineering / permitting / commissioning (~3–8%) are not
+                itemized separately and are contained within the uncertainty
+                range of the facility share. ③ The ~+30% per-node rule of thumb
+                (construction-physics) is driven mainly by more expensive tools
+                and more mask / process steps, and lands on the equipment side.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ COST SPLIT ============ -->
+      <section aria-labelledby="split-h">
+        <h2 id="split-h" data-i18n="fab_cost_split_title">
+          Total Cost Breakdown
+        </h2>
+        <p class="sec-note" data-i18n="fab_cost_split_note">
+          The table below is stitched together from multiple sources, and the
+          bases are not consistent across rows (some are shares of total project
+          cost, others of the construction budget) — cite any figure together
+          with its note. A table on civilstructures.in lists "manufacturing
+          equipment" at 35–50%, but its line items sum to over 100% and it
+          describes a construction / installation budget, not total project
+          cost; this page does not adopt it on a total-cost basis, citing it
+          only where no better source exists for a facility line item, with a
+          flag.
+        </p>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="fab_cost_th_component">Component</th>
+                <th class="num" data-i18n="fab_cost_th_share">
+                  Share of total cost
+                </th>
+                <th data-i18n="fab_cost_th_notes">Notes</th>
+                <th data-i18n="fab_cost_th_source">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-lbl="Component" data-i18n-lbl="fab_cost_lbl_component">
+                  <strong
+                    >(a)
+                    <span data-i18n="fab_cost_split_a_comp"
+                      >Process tools</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Share of total cost"
+                  data-i18n-lbl="fab_cost_lbl_share"
+                  data-i18n="fab_cost_split_a_share"
+                >
+                  70–80%
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_split_a_notes"
+                >
+                  Advanced-node basis. Samsung Taylor's official announcement
+                  was 65% ($11B / $17B); IMARC's split for a mature fab (India)
+                  is only 45%. The equipment share has risen over time:
+                  mid-1980s DRAM fabs were roughly 50/50, and equipment has
+                  dominated since the late 1990s. Lithography alone is ~20% of
+                  total cost.
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_split_a_src"
+                >
+                  construction-physics (2024); Samsung official announcement
+                  (Nov 2021); imarcgroup.com
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Component" data-i18n-lbl="fab_cost_lbl_component">
+                  <strong
+                    >(b)
+                    <span data-i18n="fab_cost_split_b_comp"
+                      >Building + cleanroom</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Share of total cost"
+                  data-i18n-lbl="fab_cost_lbl_share"
+                  data-i18n="fab_cost_split_b_share"
+                >
+                  ~10–15%
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_split_b_notes"
+                >
+                  An implied value backed out by subtracting the utilities
+                  portion from "total facilities 20–30%", not a directly
+                  published figure. Samsung Taylor's $6B (35%) is the official
+                  figure for building + site (incl. cleanroom), not fully
+                  comparable in basis.
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_split_b_src"
+                >
+                  Exyte/M+W practitioner via TechSpot (2025); Samsung official
+                  (2021)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Component" data-i18n-lbl="fab_cost_lbl_component">
+                  <strong
+                    >(c)
+                    <span data-i18n="fab_cost_split_c_comp"
+                      >Utilities</span
+                    ></strong
+                  >
+                  (<span data-i18n="fab_cost_split_c_notes_sub"
+                    >UPW, power, HVAC, gases, chemicals, wastewater</span
+                  >)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Share of total cost"
+                  data-i18n-lbl="fab_cost_lbl_share"
+                  data-i18n="fab_cost_split_c_share"
+                >
+                  ~8–15%
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_split_c_notes"
+                >
+                  Another basis: ~2/3 of total construction cost. In IMARC's
+                  split, utilities are 8% and cleanroom infrastructure (HVAC)
+                  15% (mature-node basis). See the "Facility line items" table
+                  below for unit prices.
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_split_c_src"
+                >
+                  construction-physics (2024); imarcgroup.com
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Component" data-i18n-lbl="fab_cost_lbl_component">
+                  <strong
+                    >(d)
+                    <span data-i18n="fab_cost_split_d_comp">Land</span></strong
+                  >
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Share of total cost"
+                  data-i18n-lbl="fab_cost_lbl_share"
+                  data-i18n="fab_cost_split_d_share"
+                >
+                  3–5%
+                </td>
+                <td data-lbl="Notes" data-i18n-lbl="fab_cost_lbl_notes">
+                  <span data-i18n="fab_cost_split_d_notes"
+                    >Roughly $20M–200M, 100–500 acres. Cases such as Kumamoto
+                    and Boise show land itself is a small share; site
+                    development is counted separately.</span
+                  ><span class="flag" data-i18n="fab_cost_flag_weak"
+                    >Weak source</span
+                  >
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_split_d_src"
+                >
+                  civilstructures.in (2026)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Component" data-i18n-lbl="fab_cost_lbl_component">
+                  <strong
+                    >(e)
+                    <span data-i18n="fab_cost_split_e_comp">Other</span></strong
+                  >
+                  (<span data-i18n="fab_cost_split_e_notes_sub"
+                    >engineering design, permitting, commissioning</span
+                  >)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Share of total cost"
+                  data-i18n-lbl="fab_cost_lbl_share"
+                  data-i18n="fab_cost_split_e_share"
+                >
+                  ~3–8%
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_split_e_notes"
+                >
+                  civilstructures basis: design 5–10%, test / commissioning 3%;
+                  IMARC basis: IT / security / compliance 5%. This is the
+                  weakest line item, with no strong industry source.
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_split_e_src"
+                >
+                  civilstructures.in; imarcgroup.com
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ NODE SCALING ============ -->
+      <section aria-labelledby="node-h">
+        <h2 id="node-h" data-i18n="fab_cost_node_title">
+          Node Scaling: Total Cost per 1k WSPM
+        </h2>
+        <p class="sec-note" data-i18n-html="fab_cost_node_note">
+          On a consistent basis (total investment incl. equipment), node is the
+          second-largest variable — the largest is actually
+          <strong>logic vs. memory</strong>: advanced DRAM costs less than half
+          per 1k WSPM ($69M) of mature 28nm logic ($156M). Rule of thumb: each
+          node advance adds ~30% to total cost.
+        </p>
+        <div class="chart-card">
+          <div
+            id="nodeChart"
+            role="img"
+            aria-label="Bar chart: total cost per 1k WSPM — DRAM 69, 28nm 156, 2nm Samsung basis 340, 3nm range 375 to 500, 2nm IBS basis 560, 5nm early 600, in millions of dollars"
+            data-i18n-aria-label="fab_cost_chart_aria"
+          ></div>
+          <p class="chart-note" data-i18n="fab_cost_chart_note">
+            Units: millions of dollars per 1k WSPM. The 3nm figure is the range
+            IBS gives ($15–20B @ 40k WSPM), shown as a range bar; the rest are
+            single-point anchors. The early 5nm figure (TSMC Arizona 2020
+            announcement, $12B / 20k) includes a first-fab premium and does not
+            represent mature 5nm levels.
+          </p>
+        </div>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="fab_cost_th_node">Node</th>
+                <th class="num" data-i18n="fab_cost_th_wspm_cost">$/1k WSPM</th>
+                <th data-i18n="fab_cost_th_basis">Basis</th>
+                <th data-i18n="fab_cost_th_source">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r1_name"
+                >
+                  Advanced DRAM
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r1_cost"
+                >
+                  ~$69M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r1_basis"
+                >
+                  SK hynix Yongin Y2: $24.8B / 360k WSPM (full build-out, six
+                  phases)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r1_src"
+                >
+                  fool.com / techtimes (2026)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r2_name"
+                >
+                  28nm-class (mature)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r2_cost"
+                >
+                  ~$156M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r2_basis"
+                >
+                  TSMC Kumamoto Fab 1 (22/28nm, 12/16nm): $8.6B / 55k WSPM,
+                  incl. $3.2B Japanese government subsidy
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r2_src"
+                >
+                  semiwiki / trendforce (2024–25)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r3_name"
+                >
+                  28–90nm (mature, general)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r3_cost"
+                >
+                  ~$125–275M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r3_basis"
+                >
+                  India target fabs: $5–11B each
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r3_src"
+                >
+                  fabs.pranaykotas.com India tracker (2026)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r4_name"
+                >
+                  Mature specialty
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r4_cost"
+                >
+                  ~$133M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r4_basis"
+                >
+                  GlobalFoundries Malta phase 1: $10B / ~75k WSPM (900k wafers /
+                  year)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r4_src"
+                >
+                  medium / tai-semicon (2026)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r5_name"
+                >
+                  3nm
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r5_cost"
+                >
+                  $375–500M
+                </td>
+                <td data-lbl="Basis" data-i18n-lbl="fab_cost_lbl_basis">
+                  <span data-i18n="fab_cost_node_r5_basis"
+                    >IBS: $15–20B @ 40k WSPM</span
+                  ><span class="flag" data-i18n="fab_cost_flag_ibs_high"
+                    >IBS figures considered high by practitioners</span
+                  >
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r5_src"
+                >
+                  IBS via semiwiki / techspot (2014/2023)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r6_name"
+                >
+                  2nm (published basis)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r6_cost"
+                >
+                  ~$340M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r6_basis"
+                >
+                  Samsung Taylor: $17B / ~50k WSPM (announced in 2021 as 5nm;
+                  now 2nm GAA)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r6_src"
+                >
+                  dmc-education / sammyguru
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r7_name"
+                >
+                  2nm (IBS basis)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r7_cost"
+                >
+                  $560M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r7_basis"
+                >
+                  IBS: $28B @ 50k WSPM
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r7_src"
+                >
+                  techspot.com (Dec 2023)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r8_name"
+                >
+                  5nm (early adopter)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r8_cost"
+                >
+                  ~$600M
+                </td>
+                <td
+                  data-lbl="Basis"
+                  data-i18n-lbl="fab_cost_lbl_basis"
+                  data-i18n="fab_cost_node_r8_basis"
+                >
+                  TSMC Arizona 2020 announcement: $12B / 20k WSPM
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r8_src"
+                >
+                  nasdaq.com (2020)
+                </td>
+              </tr>
+              <tr>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_node_r9_name"
+                >
+                  3nm (small fab)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="$/1k WSPM"
+                  data-i18n-lbl="fab_cost_lbl_wspm_cost"
+                  data-i18n="fab_cost_node_r9_cost"
+                >
+                  ~$1.1B
+                </td>
+                <td data-lbl="Basis" data-i18n-lbl="fab_cost_lbl_basis">
+                  Kumamoto Fab 2: $17B / 15k WSPM<span
+                    class="flag red"
+                    data-i18n="fab_cost_flag_unconfirmed_tsmc"
+                    >Not confirmed by TSMC</span
+                  >
+                  <span data-i18n="fab_cost_node_r9_basis_note"
+                    >Small fabs have markedly higher unit facility costs — see
+                    "Capacity scaling"</span
+                  >
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_node_r9_src"
+                >
+                  datacenterdynamics citing Japanese local media (2026)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ FACILITIES DETAIL ============ -->
+      <section aria-labelledby="fac-h">
+        <h2 id="fac-h" data-i18n="fab_cost_fac_title">
+          Facility Line Items (the Core of Non-Equipment Cost)
+        </h2>
+        <p class="sec-note" data-i18n="fab_cost_fac_note">
+          Below are the line-item anchors found in the report. Note the enormous
+          spread in cleanroom unit prices: base fit-out and "tool-ready" state
+          differ by more than 4×, and EUV lithography bays double again — a unit
+          price without a state condition is meaningless.
+        </p>
+        <div class="tbl-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th data-i18n="fab_cost_th_item">Line item</th>
+                <th data-i18n="fab_cost_th_price_scale">Price / scale</th>
+                <th data-i18n="fab_cost_th_notes">Notes</th>
+                <th data-i18n="fab_cost_th_source">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r1_name"
+                      >Cleanroom</span
+                    ></strong
+                  >
+                  (<span data-i18n="fab_cost_fac_r1_sub"
+                    >ISO Class 1–3 ballroom</span
+                  >)
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r1_price"
+                >
+                  Fit-out + hardware $1,200–2,500/m²; tool-ready
+                  $5,000–10,000/m²; EUV bays $20,000+/m²; another ISO Class 3
+                  basis cites &gt;$700/ft² (≈$7,500/m²)
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r1_notes"
+                >
+                  Large fabs can have 500k–1M sq ft of cleanroom; a typical
+                  large fab is ~430k sq ft with 2,000 tools (Blaschitz)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r1_src"
+                >
+                  civilstructures.in (2026); sst.semiconductor-digest.com;
+                  asianometry via construction-physics
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r2_name"
+                      >Ultrapure water (UPW) system</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r2_price"
+                >
+                  Advanced node, 100k WSPM: $200–500M, capacity 10–20 MGD,
+                  ~2,000–5,000 gallons of water per wafer start, reuse systems
+                  add another $50–150M; mature node: $50–150M, 2–8 MGD
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r2_notes"
+                >
+                  Hard anchor: Veolia's contract for Intel Chandler Fabs 52+62
+                  was $120M, 6 MGD total, 18.2 MΩ·cm (Sep 2023)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r2_src"
+                >
+                  semiconductorx.com; emergenresearch (Veolia contract)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r3_name">Power</span></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r3_price"
+                >
+                  A large advanced fab draws on the order of 100 MW; TSMC
+                  Arizona at full build-out ~200 MW; 2nm uses 3.5× the energy of
+                  28nm
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n-html="fab_cost_fac_r3_notes"
+                >
+                  Electrical infrastructure total $500M–2B (weak source
+                  quality);
+                  <strong>no standalone substation cost found</strong>. TSMC
+                  power intensity per wafer·mask-layer: 27.7 kW in 2022 → 40.5
+                  kW in the 3nm ramp period (S&amp;P basis; units as in the
+                  original source)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r3_src"
+                >
+                  construction-physics (2024); sanieinstitute (2025); Deloitte;
+                  datacenterdynamics
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r4_name"
+                      >HVAC / cleanroom air handling</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r4_price"
+                >
+                  No standalone unit price: included within "MEP services ≈ 2/3
+                  of construction cost"; in small cleanroom projects HVAC can be
+                  30–50%
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r4_notes"
+                >
+                  Cleanroom air recirculates hundreds of times per hour, making
+                  HVAC one of the main drivers of facility energy use and cost
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r4_src"
+                >
+                  construction-physics (2024); crestmontcapital.com
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r5_name"
+                      >Bulk gases (N₂/O₂/Ar)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r5_price"
+                >
+                  On-site air separation unit (ASU): large cryogenic plants
+                  $50–300M; &gt;500 t/day class $200–350M
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r5_notes"
+                >
+                  Hard anchor: Linde's $1B Phoenix gas complex (2 new ASUs
+                  serving two other fabs, Jul 2026). A large logic fab uses
+                  ~50,000 Nm³/h of nitrogen
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r5_src"
+                >
+                  dataintelo (2026); openpr (Linde announcement);
+                  construction-physics
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r6_name"
+                      >Chemicals + wastewater / exhaust treatment</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n-html="fab_cost_fac_r6_price"
+                >
+                  <strong>No standalone cost found</strong>; only a combined
+                  water + wastewater basis of $200M–1B (incl. UPW)
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r6_notes"
+                >
+                  TSMC Arizona has committed to 100% water reuse
+                  (semiconductorx)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r6_src"
+                >
+                  civilstructures.in (envelope basis, weak quality)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r7_name"
+                      >AMHS (overhead transport + stockers)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r7_price"
+                >
+                  5–10% of construction cost; or 3–5% of equipment investment —
+                  i.e., ~$0.2–0.8B for a $20B fab
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r7_notes"
+                >
+                  Both bases come from market research firms, not project
+                  disclosures
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r7_src"
+                >
+                  snsinsider.com; indexbox.io (2025–26)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Line item" data-i18n-lbl="fab_cost_lbl_line_item">
+                  <strong
+                    ><span data-i18n="fab_cost_fac_r8_name"
+                      >Buildings (fab + subfab + CUB central utility
+                      building)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Price / scale"
+                  data-i18n-lbl="fab_cost_lbl_price_scale"
+                  data-i18n="fab_cost_fac_r8_price"
+                >
+                  Total facilities $4–6B (for a fab with total investment
+                  &gt;$20B, incl. cleanroom and utilities); Samsung Taylor
+                  building $6B / total $17B
+                </td>
+                <td
+                  data-lbl="Notes"
+                  data-i18n-lbl="fab_cost_lbl_notes"
+                  data-i18n="fab_cost_fac_r8_notes"
+                >
+                  Construction inputs for one large fab, order of magnitude:
+                  30–40M labor-hours, 83,000 tons of steel, 785,000 cubic yards
+                  of concrete (Blaschitz)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_fac_r8_src"
+                >
+                  Blaschitz/Exyte via TechSpot (2025); Samsung official (2021)
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ REFERENCE PROJECTS ============ -->
+      <section aria-labelledby="proj-h">
+        <h2 id="proj-h" data-i18n="fab_cost_proj_title">
+          Reference Projects (Published Figures)
+        </h2>
+        <p class="sec-note" data-i18n-html="fab_cost_proj_note">
+          All totals in this table are
+          <strong>total investment including equipment</strong> —
+          "building-only" figures are almost never disclosed, and Samsung
+          Taylor's $6B building figure is the only clean official anchor.
+          Projects without disclosed capacity are marked as such; nothing is
+          inferred.
+        </p>
+        <div class="tbl-wrap proj-table">
+          <table>
+            <colgroup>
+              <col style="width: 16%" />
+              <col style="width: 17%" />
+              <col style="width: 15%" />
+              <col style="width: 19%" />
+              <col style="width: 11%" />
+              <col style="width: 22%" />
+            </colgroup>
+            <thead>
+              <tr>
+                <th data-i18n="fab_cost_th_project">Project</th>
+                <th data-i18n="fab_cost_th_node">Node</th>
+                <th class="num" data-i18n="fab_cost_th_capacity">
+                  Capacity (WSPM)
+                </th>
+                <th class="num" data-i18n="fab_cost_th_pub_invest">
+                  Published total investment
+                </th>
+                <th data-i18n="fab_cost_th_year_ann">Year announced</th>
+                <th data-i18n="fab_cost_th_source">Source</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r1_name"
+                      >Samsung Taylor, Texas</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r1_node"
+                >
+                  2nm GAA (Fab 1; announced as 5nm)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r1_cap"
+                >
+                  ~50k (trade reporting)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r1_inv"
+                >
+                  $17B
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r1_yr"
+                >
+                  2021
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r1_src"
+                >
+                  dmc-education.com (official breakdown); actual regional spend
+                  including R&amp;D and Austin ~$37B
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r2_name"
+                      >TSMC Kumamoto Fab 1 (JASM)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r2_node"
+                >
+                  22/28nm, 12/16nm
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r2_cap"
+                >
+                  55k
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r2_inv"
+                >
+                  $8.6B
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r2_yr"
+                >
+                  2021
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r2_src"
+                >
+                  semiwiki.com; trendforce.com (incl. $3.2B Japanese subsidy)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r3_name"
+                      >TSMC Kumamoto, both fabs</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r3_node"
+                >
+                  40/22/28/12/16/6/7nm; Fab 2 moving to 3nm
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r3_cap"
+                >
+                  &gt;100k combined; Fab 2 15k @3nm
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r3_inv"
+                >
+                  &gt;$20B
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r3_yr"
+                >
+                  2024
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                >
+                  ejinsight.com; datacenterdynamics.com; Fab 2's "$17B" is a
+                  local-media figure<span
+                    class="flag red"
+                    data-i18n="fab_cost_flag_unconfirmed_tsmc"
+                    >Not confirmed by TSMC</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r4_name"
+                      >TSMC Arizona (all phases)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r4_node"
+                >
+                  Phase 1 4nm, Phase 2 3nm, Phase 3 1.6/2nm
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r4_cap"
+                >
+                  Phase 1 10k → planned 30k; Phases 2–3 not disclosed
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r4_inv"
+                >
+                  $12B → $40B → $65B → $165B → $265B (successive increases)
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r4_yr"
+                >
+                  2020 / 2022 / 2024 / Mar 2025 / Jul 2026
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                >
+                  en.wikipedia.org/wiki/TSMC_Arizona; the $265B figure and "600k
+                  capacity by 2030" come from earnings-call reporting and
+                  low-quality aggregators<span
+                    class="flag"
+                    data-i18n="fab_cost_flag_treat_caution"
+                    >Treat with caution</span
+                  >
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r5_name"
+                      >Intel Ohio One (two fabs)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r5_node"
+                >
+                  Advanced logic (node not disclosed)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r5_cap"
+                >
+                  Not disclosed
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r5_inv"
+                >
+                  $20B → $28B
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r5_yr"
+                >
+                  2022; raised Mar 2024
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r5_src"
+                >
+                  sdxcentral.com (2025); ~$5–7B spent so far
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r6_name"
+                      >SK hynix Yongin Y2</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r6_node"
+                >
+                  Advanced DRAM / HBM
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r6_cap"
+                >
+                  360k (full, 6 phases × 60k)
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r6_inv"
+                >
+                  ₩35.2T ≈ $24.8B
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r6_yr"
+                >
+                  Aug 2026 (board approval)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r6_src"
+                >
+                  fool.com; siliconangle.com; techtimes.com
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r7_name"
+                      >SK hynix Cheongju M17</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r7_node"
+                >
+                  NAND
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r7_cap"
+                >
+                  Not disclosed
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r7_inv"
+                >
+                  ₩19.1T ≈ $13.5B
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r7_yr"
+                >
+                  2026
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r7_src"
+                >
+                  fool.com
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r8_name"
+                      >Micron Boise (two DRAM fabs)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r8_node"
+                >
+                  Advanced DRAM
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r8_cap"
+                >
+                  Not disclosed
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r8_inv"
+                >
+                  $50B (~$25B each)
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r8_yr"
+                >
+                  2022–2026
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r8_src"
+                >
+                  intellectia.ai; industrialinfo.com
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r9_name"
+                      >Micron Hiroshima expansion</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r9_node"
+                >
+                  DRAM / HBM
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r9_cap"
+                >
+                  Not disclosed
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r9_inv"
+                >
+                  $9.3B (¥1.5T)
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r9_yr"
+                >
+                  2026
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r9_src"
+                >
+                  zerohedge.com (citing Bloomberg)
+                </td>
+              </tr>
+              <tr>
+                <td data-lbl="Project" data-i18n-lbl="fab_cost_lbl_project">
+                  <strong
+                    ><span data-i18n="fab_cost_proj_r10_name"
+                      >Micron Clay, New York (four DRAM fabs)</span
+                    ></strong
+                  >
+                </td>
+                <td
+                  data-lbl="Node"
+                  data-i18n-lbl="fab_cost_lbl_node"
+                  data-i18n="fab_cost_proj_r10_node"
+                >
+                  DRAM
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Capacity (WSPM)"
+                  data-i18n-lbl="fab_cost_lbl_capacity"
+                  data-i18n="fab_cost_proj_r10_cap"
+                >
+                  Not disclosed
+                </td>
+                <td
+                  class="num"
+                  data-lbl="Published total investment"
+                  data-i18n-lbl="fab_cost_lbl_pub_invest"
+                  data-i18n="fab_cost_proj_r10_inv"
+                >
+                  $100B (~20 years)
+                </td>
+                <td
+                  data-lbl="Year announced"
+                  data-i18n-lbl="fab_cost_lbl_year_ann"
+                  data-i18n="fab_cost_proj_r10_yr"
+                >
+                  Jan 2026 (groundbreaking)
+                </td>
+                <td
+                  class="src-cell"
+                  data-lbl="Source"
+                  data-i18n-lbl="fab_cost_lbl_source"
+                  data-i18n="fab_cost_proj_r10_src"
+                >
+                  techtimes.com
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ============ CAPACITY SCALING + OSAT ============ -->
+      <section aria-labelledby="scale-h">
+        <h2 id="scale-h" data-i18n="fab_cost_scale_title">
+          Capacity Scaling and Back-End (OSAT)
+        </h2>
+        <div class="two-col">
+          <div class="panel">
+            <h3 data-i18n="fab_cost_scale_left_h">
+              Capacity: equipment linear, facilities sub-linear
+            </h3>
+            <ul>
+              <li data-i18n-html="fab_cost_scale_l1">
+                <strong>Equipment</strong> scales roughly in proportion to wafer
+                starts at a given node (double the capacity ≈ double the
+                equipment), so the 70–80% equipment share broadly holds across
+                fab sizes.
+              </li>
+              <li data-i18n-html="fab_cost_scale_l2">
+                <strong>Facilities</strong> show real but limited economies of
+                scale: a UPW plant, ASU, substation, and CUB do not double with
+                WSPM. Indirect evidence: Kumamoto Fab 1 at $156M per 1k WSPM,
+                versus the unconfirmed Fab 2 at ~$1.1B/1k — small fabs carry far
+                higher unit facility costs.
+              </li>
+              <li data-i18n-html="fab_cost_scale_l3">
+                <strong>A phase-2 fab on the same campus</strong> is
+                significantly cheaper: shared power, water, logistics, permits,
+                and talent pool (GF Malta case; both Kumamoto Fab 2 and Samsung
+                Taylor Fab 2 sit on existing campuses).
+              </li>
+              <li data-i18n-html="fab_cost_scale_l4">
+                Part of the driver of giant fabs has nothing to do with cost:
+                utilization headroom, fewer managers, faster yield learning,
+                fewer financing rounds (chiphistory.org).
+              </li>
+              <li data-i18n-html="fab_cost_scale_l5">
+                Modeling suggestion: total cost = campus fixed items (land,
+                substation, UPW, CUB — sub-linear) + cleanroom / facility items
+                linear in WSPM + equipment (linear).
+                <strong
+                  >No parametric curve (e.g., cost ∝ WSPM<sup>0.x</sup>) has
+                  ever been published in public sources — this is an explicit
+                  data gap.</strong
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3 data-i18n="fab_cost_scale_right_h">
+              OSAT / back-end packaging &amp; test plants
+            </h3>
+            <ul>
+              <li data-i18n-html="fab_cost_scale_r1">
+                Reference anchor: Amkor's Arizona advanced packaging campus grew
+                from a $2B plan to <strong>$7B</strong> (before the first
+                building produced; broke ground 2025, production early 2028),
+                covering advanced packaging + test, not traditional packaging
+                alone (3dincites.com, Oct 2026).
+              </li>
+              <li data-i18n-html="fab_cost_scale_r2">
+                Cost drivers: high-end testers cost several million dollars each
+                (wevolver.com); fine-pitch RDL lithography and precision bonding
+                are the other two major capital items. 2025 bonding equipment
+                market structure: wire bonding 38.5% ($3.54B), die bonding 31.2%
+                (dataintelo).
+              </li>
+              <li data-i18n-html="fab_cost_scale_r3">
+                Equipment share is higher than in front-end fabs: ASE's 2025 ATM
+                revenue mix was packaging 81%, test 18.5% (dataintelo), and test
+                is precisely the capital-intensive bottleneck.
+              </li>
+              <li data-i18n-html="fab_cost_scale_r4">
+                Scale reference: Taiwan test house Sigurd raised 2025 capex to
+                NT$8.8B (~$270M) for test capacity expansion, including a new
+                plant (asiadaily.org).
+              </li>
+              <li data-i18n-html="fab_cost_scale_r5">
+                Model magnitudes: traditional packaging/test plant $0.5–2B;
+                advanced packaging (CoWoS / fan-out) campus $2–7B.
+                <strong
+                  >"Equipment ≈ 60–75% of OSAT capex" is an estimate backed out
+                  from cost drivers, not a directly sourced figure — cite it as
+                  such.</strong
+                >
+                No unit-capacity cost found (e.g., dollars per million units /
+                month).
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ TIMELINE ============ -->
+      <section aria-labelledby="time-h">
+        <h2 id="time-h" data-i18n="fab_cost_time_title">
+          Timeline: Time Itself Is Cost
+        </h2>
+        <p class="sec-note" data-i18n-html="fab_cost_time_note">
+          Typical durations for permitting + design → first wafer out (Blaschitz
+          / Exyte·M+W, via TechSpot, 2025). Building a fab in the US costs 30%
+          (Intel basis) to 4× (TSMC basis) more than in Taiwan, with a schedule
+          roughly twice as long; a substantial part of the premium is
+          "time-driven" — labor, extended site management costs, a
+          ~12,000-person construction workforce (TSMC Arizona). Kumamoto Fab 1
+          compressed its schedule with 24/7 construction, but
+          <strong
+            >no public source quantifies the expediting premium (dollars per
+            month saved) — not found</strong
+          >.
+        </p>
+        <div class="timeline">
+          <div class="tl">
+            <div class="t-num" data-i18n="fab_cost_tl_asia_num">~20 months</div>
+            <div class="t-lbl" data-i18n="fab_cost_tl_asia_lbl">
+              Asia (Taiwan basis)
+            </div>
+            <div class="t-sub" data-i18n="fab_cost_tl_asia_sub">
+              Permitting + design → first wafer out
+            </div>
+          </div>
+          <div class="tl">
+            <div class="t-num" data-i18n="fab_cost_tl_us_num">~38 months</div>
+            <div class="t-lbl" data-i18n="fab_cost_tl_us_lbl">US</div>
+            <div class="t-sub" data-i18n="fab_cost_tl_us_sub">
+              Permitting + design → first wafer out; groundbreaking → first
+              wafer is typically 2.5–3+ years (2010s US average 900+ days vs.
+              Asia 600–700 days)
+            </div>
+          </div>
+          <div class="tl">
+            <div class="t-num" data-i18n="fab_cost_tl_eu_num">~34 months</div>
+            <div class="t-lbl" data-i18n="fab_cost_tl_eu_lbl">Europe</div>
+            <div class="t-sub" data-i18n="fab_cost_tl_eu_sub">
+              Permitting + design → first wafer out
+            </div>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="panel">
+            <h3 data-i18n="fab_cost_time_later_h">Later stages</h3>
+            <ul>
+              <li data-i18n-html="fab_cost_time_later_1">
+                Tool install → acceptable yield: a further
+                <strong>6–12 months</strong> of ramp (construction-physics,
+                2024).
+              </li>
+              <li data-i18n-html="fab_cost_time_later_2">
+                First wafer out → volume production: a further
+                <strong>6–18 months</strong>, depending on node maturity (e.g.,
+                VSMC risk production Sep 2026 → volume production Q1 2027).
+              </li>
+              <li data-i18n-html="fab_cost_time_later_3">
+                A large fab typically needs <strong>2–5 years</strong> from
+                groundbreaking to full capacity (e.g., SK hynix Y2 planned
+                groundbreaking Jul 2027 → first cleanroom ready Jun 2029).
+              </li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3 data-i18n="fab_cost_time_gap_h">
+              Where the regional gap actually is
+            </h3>
+            <p data-i18n-html="fab_cost_time_gap_p">
+              SK hynix's schedule (groundbreaking → first cleanroom in just 23
+              months) shows cleanroom shell construction speeds are similar
+              across regions; the US gap lies mainly in
+              <strong
+                >permitting, labor supply, and the tool-install / qualification
+                ecosystem</strong
+              >, not in pouring concrete. In other words, the first lever for
+              lowering US fab costs is process and ecosystem, not building unit
+              prices.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ GAPS ============ -->
+      <section aria-labelledby="gap-h">
+        <h2 id="gap-h" data-i18n="fab_cost_gap_title">
+          Unverified / Gaps in the Public Data
+        </h2>
+        <div class="gaps">
+          <p style="margin: 0" data-i18n-html="fab_cost_gap_intro">
+            The following questions have
+            <strong>no reliable public answer</strong> from this round of
+            research. Any model claiming to answer them precisely should be
+            asked for its sources.
+          </p>
+          <ol>
+            <li data-i18n-html="fab_cost_gap_1">
+              <strong
+                >No authoritative breakdown table (in public channels):</strong
+              >
+              no SEMI / McKinsey / BCG / SIA table of "equipment / building /
+              facilities / land / other" percentages was found; this page's
+              breakdown is triangulated from second-hand sources of uneven
+              quality.
+            </li>
+            <li data-i18n-html="fab_cost_gap_2">
+              <strong>Capacity undisclosed by several makers:</strong> WSPM for
+              Intel Ohio and Micron Boise / Hiroshima / New York is not
+              published, so unit-capacity costs cannot be computed.
+            </li>
+            <li data-i18n-html="fab_cost_gap_3">
+              <strong>No parametric capacity curve:</strong> no published cost ∝
+              WSPM<sup>x</sup> curve exists — only qualitative evidence.
+            </li>
+            <li data-i18n-html="fab_cost_gap_4">
+              <strong
+                >Standalone substation cost; standalone chemicals / wastewater
+                cost:</strong
+              >
+              no standalone figures found for either — only combined bases.
+            </li>
+            <li data-i18n-html="fab_cost_gap_5">
+              <strong>OSAT unit-capacity cost</strong> (e.g., dollars per
+              million units / month): not found.
+            </li>
+            <li data-i18n-html="fab_cost_gap_6">
+              <strong>Expediting premium</strong> (dollars per month saved): not
+              found.
+            </li>
+            <li data-i18n-html="fab_cost_gap_7">
+              <strong
+                >Official equipment-vs-building splits have nearly
+                vanished:</strong
+              >
+              treated as company secrets; Samsung Taylor's $6B / $11B is the
+              only official announced split.
+            </li>
+            <li data-i18n-html="fab_cost_gap_8">
+              <strong
+                >Some 2026 news figures come from low-quality
+                aggregators</strong
+              >
+              (e.g., TSMC's $265B total, Samsung's $37B regional spend): flagged
+              in the tables above — treat with caution; the core anchors
+              (Wikipedia, company announcements, practitioner interviews, IBS)
+              are relatively stronger.
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============ SOURCES ============ -->
+      <section aria-labelledby="src-h" class="sources">
+        <h2 id="src-h" data-i18n="fab_cost_src_title">Key Sources</h2>
+        <ul>
+          <li>
+            <a
+              href="https://www.construction-physics.com/p/how-to-build-a-20-billion-semiconductor"
+              target="_blank"
+              rel="noopener noreferrer"
+              >construction-physics.com — How to build a $20 billion
+              semiconductor fab</a
+            >:
+            <span data-i18n="fab_cost_src_1_sub"
+              >cost structure, equipment 70–80%, MEP ≈ 2/3 of construction cost,
+              +30% per node, timelines</span
+            >
+          </li>
+          <li>
+            <a
+              href="https://Www.Techspot.com/news/106848-building-fabs-us-takes-twice-long-costs-twice.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >TechSpot — Building fabs in the US takes twice as long and costs
+              twice as much (Blaschitz / Exyte)</a
+            >:
+            <span data-i18n="fab_cost_src_2_sub"
+              >facilities $4–6B / total &gt;$20B; 20/38/34-month timelines;
+              construction inputs</span
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.techspot.com/news/101319-2nm-capable-wafer-fab-come-28-billion-tag.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >TechSpot — IBS 2nm $28B / 50k WSPM</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://semiwiki.com/forum/threads/5nm-wafer-cost-very-high.13101/page-2"
+              target="_blank"
+              rel="noopener noreferrer"
+              >SemiWiki forum — IBS 3nm $15–20B / 40k WSPM</a
+            >
+            <span data-i18n="fab_cost_src_4_sub"
+              >(incl. practitioner pushback that IBS runs high)</span
+            >
+          </li>
+          <li>
+            <a
+              href="https://en.wikipedia.org/wiki/TSMC_Arizona"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Wikipedia — TSMC Arizona</a
+            >:
+            <span data-i18n="fab_cost_src_5_sub"
+              >capacity and investment by phase, CHIPS Act support</span
+            >
+          </li>
+          <li>
+            <a
+              href="https://dmc-education.com/2026/10/17/samsung-taylor-fab-2-project-texas-usa-17-billion-investment-2-7-million-sq-ft-semiconductor-plant-2026-2030/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >dmc-education.com — Samsung Taylor $6B / $11B official split</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://semiconductorx.com/fab-water.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >semiconductorx.com — Fab water use and UPW benchmarks</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.emergenresearch.com/industry-report/ultra-pure-water-market"
+              target="_blank"
+              rel="noopener noreferrer"
+              >emergenresearch — Veolia's $120M UPW contract for Intel</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.snsinsider.com/reports/amhs-for-semiconductor-market-8136"
+              target="_blank"
+              rel="noopener noreferrer"
+              >SNS Insider — AMHS market report</a
+            >;
+            <a
+              href="https://www.indexbox.io/blog/amhs-for-semiconductor-market-forecast-points-higher-toward-2035-driven-by-global-fab-expansion-and-ai-chip-demand/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >IndexBox — AMHS share basis</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.datacenterdynamics.com/en/news/tsmc-could-account-for-24-of-taiwans-electricity-consumption-by-2030/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >DataCenterDynamics — TSMC power intensity (S&amp;P basis)</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.deloitte.com/us/en/insights/industry/technology/technology-media-and-telecom-predictions/2024/semiconductor-sustainability-forecast.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Deloitte — 2nm uses 3.5× the energy of 28nm</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.openpr.com/news/4663787/semiconductor-specialty-gases-market-2035-linde-air"
+              target="_blank"
+              rel="noopener noreferrer"
+              >openPR — Linde's $1B Phoenix gas complex</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://dataintelo.com/report/global-cryogenic-air-separation-plant-market"
+              target="_blank"
+              rel="noopener noreferrer"
+              >dataintelo — ASU costs $50–300M</a
+            >;
+            <a
+              href="https://dataintelo.com/report/outsourced-semiconductor-assembly-and-test-osat-market"
+              target="_blank"
+              rel="noopener noreferrer"
+              >dataintelo — OSAT market and revenue structure</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.3dincites.com/2026/10/scaling-advanced-packaging-why-it-matters/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >3DInCites — Amkor advanced packaging campus $2B → $7B</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://semiwiki.com/semiconductor-manufacturers/tsmc/363007-tsmc-kumamoto-pioneering-japans-semiconductor-revival/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >SemiWiki — TSMC Kumamoto</a
+            >;
+            <a
+              href="https://www.trendforce.com/news/2024/12/27/news-tsmc-sets-key-milestone-in-japan-as-kumamoto-fab-begins-mass-production/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >TrendForce — Kumamoto enters volume production</a
+            >;
+            <a
+              href="https://www.datacenterdynamics.com/en/news/tsmc-says-3nm-wafer-production-at-second-japanese-fab-will-begin-in-2028/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >DCD — Kumamoto Fab 2 to run 3nm</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.fool.com/investing/2026/08/15/sk-hynix-approved-38-billion-of-new-memory-fabs-th/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >Motley Fool — SK hynix approves new memory fabs</a
+            >;
+            <a
+              href="https://www.techtimes.com/articles/317859/20260606/sk-hynix-dram-capacity-roadmap-revealed-yongin-alone-adds-360k-wafers-monthly.htm"
+              target="_blank"
+              rel="noopener noreferrer"
+              >TechTimes — Yongin 360k WSPM roadmap</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.sdxcentral.com/news/intel-further-delays-28bn-ohio-chip-fabs-by-half-a-decade/"
+              target="_blank"
+              rel="noopener noreferrer"
+              >SDxCentral — Intel Ohio $28B</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://imarcgroup.com/insight/semiconductor-manufacturing-cost-analysis-testing"
+              target="_blank"
+              rel="noopener noreferrer"
+              >IMARC — Mature-node fab cost breakdown</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://www.civilstructures.in/2026/07/semiconductor-chip-factory-construction.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              >civilstructures.in — Semiconductor fab construction</a
+            >
+            <span data-i18n="fab_cost_src_19_sub"
+              >(weak quality; cited only where no better source exists, and
+              flagged)</span
+            >
+          </li>
+        </ul>
+      </section>
+
+      <footer>
+        <div class="footer-links">
+          <span>&copy; 2026 SemiconFab.org</span>
+          <span>&middot;</span>
+          <a
+            href="https://github.com/jinjiefan2020/SemiconFab"
+            target="_blank"
+            rel="noopener noreferrer"
+            >GitHub (Source code)</a
+          >
+          <span>&middot;</span>
+          <a href="mailto:info@semiconfab.org">info@semiconfab.org</a>
+        </div>
+        <p data-i18n="fab_cost_footer">
+          All figures on this page come from the public sources listed above
+          (researched 2026-10-18). Anything flagged "unverified / weak quality /
+          estimate" must not be cited alone as a basis for decisions. The
+          estimator is a rough model based on published anchors; actual project
+          costs vary enormously by region, subsidies, exchange rates, and
+          schedule.
+        </p>
+      </footer>
+    </main>
+
+    <!-- Load i18n & Translations -->
+    <script src="js/translations.js"></script>
+    <script src="js/fab-cost-i18n.js"></script>
+    <script src="js/i18n.js"></script>
+
+    <script>
+      // Theme engine (light by default, matches site)
+      let currentTheme = localStorage.getItem("semicon_theme") || "light";
+
+      function applyTheme(theme) {
+        currentTheme = theme;
+        localStorage.setItem("semicon_theme", theme);
+        const html = document.documentElement;
+        const icon = document.getElementById("theme-icon");
+        const label = document.getElementById("theme-label");
+
+        if (theme === "dark") {
+          html.classList.add("dark");
+          html.classList.remove("light");
+          if (icon) icon.textContent = "🌙";
+          if (label) label.textContent = "Dark";
+        } else {
+          html.classList.add("light");
+          html.classList.remove("dark");
+          if (icon) icon.textContent = "☀️";
+          if (label) label.textContent = "Day";
+        }
+        if (typeof renderChart === "function") renderChart();
+      }
+
+      function toggleTheme() {
+        applyTheme(currentTheme === "light" ? "dark" : "light");
+      }
+
+      applyTheme(currentTheme);
+
+      // Language Switcher & Helpers
+      function updateLangToggleBtnUI() {
+        const btn = document.getElementById("lang-label");
+        if (btn) {
+          if (currentLang === "zh-CN" || currentLang.startsWith("zh")) {
+            btn.innerHTML =
+              '<span style="opacity:0.6;font-weight:normal">EN</span> / <strong>中</strong>';
+          } else {
+            btn.innerHTML =
+              '<strong>EN</strong> / <span style="opacity:0.6;font-weight:normal">中</span>';
+          }
+        }
+      }
+
+      // Estimator & Chart Model
+      (function () {
+        var ANCHORS = {
+          mature28: {
+            lo: 156,
+            hi: 156,
+            en: "28nm-class · $156M/1k WSPM (Kumamoto Fab 1 actual)",
+            zh: "28nm 级 · $156M/1k WSPM（熊本一厂实际值）",
+          },
+          node3: {
+            lo: 375,
+            hi: 500,
+            en: "3nm · $375–500M/1k WSPM (IBS range)",
+            zh: "3nm · $375–500M/1k WSPM（IBS 区间）",
+          },
+          node2samsung: {
+            lo: 340,
+            hi: 340,
+            en: "2nm · $340M/1k WSPM (Samsung Taylor published figure)",
+            zh: "2nm · $340M/1k WSPM（三星 Taylor 公布数字）",
+          },
+          node2ibs: {
+            lo: 560,
+            hi: 560,
+            en: "2nm · $560M/1k WSPM (IBS)",
+            zh: "2nm · $560M/1k WSPM（IBS）",
+          },
+          node5early: {
+            lo: 600,
+            hi: 600,
+            en: "5nm early · $600M/1k WSPM (Arizona 2020 announcement)",
+            zh: "5nm 早期 · $600M/1k WSPM（亚利桑那 2020 年公告）",
+          },
+          dram: {
+            lo: 69,
+            hi: 69,
+            en: "Advanced DRAM · $69M/1k WSPM (SK hynix Yongin Y2)",
+            zh: "先进 DRAM · $69M/1k WSPM（SK hynix 龙仁 Y2）",
+          },
+        };
+
+        var TIMELINES = {
+          asia: {
+            en: {
+              months: "~20 months",
+              sub: "Asia basis: permitting + design → first wafer out (Blaschitz, 2025)",
+            },
+            zh: {
+              months: "约 20 个月",
+              sub: "亚洲口径：许可 + 设计 → 首片出片（Blaschitz，2025）",
+            },
+          },
+          us: {
+            en: {
+              months: "~38 months",
+              sub: "US basis: permitting + design → first wafer out (Blaschitz, 2025); a further 6–12 months of yield ramp after that",
+            },
+            zh: {
+              months: "约 38 个月",
+              sub: "美国口径：许可 + 设计 → 首片出片（Blaschitz，2025）；其后再需 6–12 个月良率爬坡",
+            },
+          },
+          eu: {
+            en: {
+              months: "~34 months",
+              sub: "Europe basis: permitting + design → first wafer out (Blaschitz, 2025)",
+            },
+            zh: {
+              months: "约 34 个月",
+              sub: "欧洲口径：许可 + 设计 → 首片出片（Blaschitz，2025）",
+            },
+          },
+        };
+
+        var region = "asia";
+        var nodeSel = document.getElementById("nodeSel");
+        var wspm = document.getElementById("wspm");
+        var wspmOut = document.getElementById("wspmOut");
+        var share = document.getElementById("share");
+        var shareOut = document.getElementById("shareOut");
+
+        function fmtB(v) {
+          if (v >= 10) return "$" + v.toFixed(1) + "B";
+          if (v >= 1) return "$" + v.toFixed(2) + "B";
+          return "$" + Math.round(v * 1000) + "M";
+        }
+        function fmtRange(lo, hi) {
+          return lo === hi ? fmtB(lo) : fmtB(lo) + " – " + fmtB(hi);
+        }
+
+        window.compute = function () {
+          var isZh =
+            typeof currentLang !== "undefined" && currentLang.startsWith("zh");
+          var a = ANCHORS[nodeSel.value];
+          var anchorLabel = isZh ? a.zh : a.en;
+          var k = Number(wspm.value) / 1000; /* thousands of WSPM */
+          var s = Number(share.value) / 100;
+          wspmOut.textContent = Number(wspm.value).toLocaleString(
+            isZh ? "zh-CN" : "en-US",
+          );
+          shareOut.textContent = share.value + "%";
+
+          var totLo = (a.lo * k) / 1000,
+            totHi = (a.hi * k) / 1000; /* $B */
+          var bLo = totLo * s,
+            bHi = totHi * s;
+          var eLo = totLo - bHi,
+            eHi = totHi - bLo;
+
+          document.getElementById("resTotal").textContent = fmtRange(
+            totLo,
+            totHi,
+          );
+          document.getElementById("resTotalSub").textContent =
+            anchorLabel + " × " + k + "k WSPM";
+          document.getElementById("resBuild").textContent = fmtRange(bLo, bHi);
+          document.getElementById("resBuildSub").textContent = isZh
+            ? "总投资 × " + share.value + "% 设施占比"
+            : "Total investment × " + share.value + "% facility share";
+          document.getElementById("resEquip").textContent = fmtRange(
+            Math.max(eLo, 0),
+            eHi,
+          );
+          document.getElementById("resServices").textContent = fmtRange(
+            (bLo * 2) / 3,
+            (bHi * 2) / 3,
+          );
+          document.getElementById("resShell").textContent = fmtRange(
+            bLo / 3,
+            bHi / 3,
+          );
+          document.getElementById("resAmhs").textContent = fmtRange(
+            bLo * 0.05,
+            bHi * 0.1,
+          );
+          var t = TIMELINES[region][isZh ? "zh" : "en"];
+          document.getElementById("resTime").textContent = t.months;
+          document.getElementById("resTimeSub").textContent = t.sub;
+
+          /* split bar uses midpoints */
+          var totMid = (totLo + totHi) / 2 || 1;
+          var bMid = (bLo + bHi) / 2;
+          var svc = (bMid * 2) / 3,
+            shl = bMid / 3,
+            eq = Math.max(totMid - bMid, 0);
+          document.getElementById("barEquip").style.width =
+            (eq / totMid) * 100 + "%";
+          document.getElementById("barServices").style.width =
+            (svc / totMid) * 100 + "%";
+          document.getElementById("barShell").style.width =
+            (shl / totMid) * 100 + "%";
+        };
+
+        nodeSel.addEventListener("change", window.compute);
+        wspm.addEventListener("input", window.compute);
+        share.addEventListener("input", window.compute);
+        var segBtns = document.querySelectorAll(".seg button");
+        segBtns.forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            segBtns.forEach(function (b) {
+              b.setAttribute("aria-pressed", "false");
+            });
+            btn.setAttribute("aria-pressed", "true");
+            region = btn.getAttribute("data-region");
+            window.compute();
+          });
+        });
+
+        /* ---------- node scaling bar chart (SVG) ---------- */
+        window.renderChart = function () {
+          var isZh =
+            typeof currentLang !== "undefined" && currentLang.startsWith("zh");
+          var data = [
+            {
+              label: isZh ? "先进 DRAM" : "Advanced DRAM",
+              sub: "SK hynix Y2",
+              lo: 69,
+              hi: 69,
+            },
+            {
+              label: isZh ? "28nm 级" : "28nm-class",
+              sub: isZh ? "熊本一厂" : "Kumamoto Fab 1",
+              lo: 156,
+              hi: 156,
+            },
+            {
+              label: "2nm",
+              sub: isZh ? "三星公布" : "Samsung published",
+              lo: 340,
+              hi: 340,
+            },
+            {
+              label: "3nm",
+              sub: isZh ? "IBS 区间" : "IBS range",
+              lo: 375,
+              hi: 500,
+            },
+            { label: "2nm", sub: "IBS", lo: 560, hi: 560 },
+            {
+              label: isZh ? "5nm 早期" : "5nm early",
+              sub: isZh ? "亚利桑那 2020" : "Arizona 2020",
+              lo: 600,
+              hi: 600,
+            },
+          ];
+          var W = 720,
+            rowH = 46,
+            top = 26,
+            left = isZh ? 140 : 168,
+            right = 86;
+          var plotW = W - left - right,
+            maxV = 650;
+          var H = top + data.length * rowH + 8;
+          var accent =
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--accent")
+              .trim() || "#0e6e6b";
+          var grid =
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--chart-grid")
+              .trim() || "#ddd";
+          var ink2 =
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--ink-2")
+              .trim() || "#555";
+          var ink =
+            getComputedStyle(document.documentElement)
+              .getPropertyValue("--ink")
+              .trim() || "#222";
+          var s =
+            '<svg viewBox="0 0 ' +
+            W +
+            " " +
+            H +
+            '" xmlns="http://www.w3.org/2000/svg" font-family="\'IBM Plex Mono\', monospace">';
+          [0, 200, 400, 600].forEach(function (g) {
+            var x = left + (plotW * g) / maxV;
+            s +=
+              '<line x1="' +
+              x +
+              '" y1="' +
+              (top - 8) +
+              '" x2="' +
+              x +
+              '" y2="' +
+              (H - 6) +
+              '" stroke="' +
+              grid +
+              '" stroke-width="1"/>';
+            s +=
+              '<text x="' +
+              x +
+              '" y="' +
+              (top - 14) +
+              '" font-size="11" fill="' +
+              ink2 +
+              '" text-anchor="middle">$' +
+              g +
+              "M</text>";
+          });
+          data.forEach(function (d, i) {
+            var y = top + i * rowH;
+            var x0 = left + (plotW * d.lo) / maxV;
+            var x1 = left + (plotW * d.hi) / maxV;
+            s +=
+              '<text x="' +
+              (left - 12) +
+              '" y="' +
+              (y + 15) +
+              '" font-size="13.5" font-weight="600" fill="' +
+              ink +
+              '" text-anchor="end" font-family="\'Manrope\', sans-serif">' +
+              d.label +
+              "</text>";
+            s +=
+              '<text x="' +
+              (left - 12) +
+              '" y="' +
+              (y + 31) +
+              '" font-size="11" fill="' +
+              ink2 +
+              '" text-anchor="end" font-family="\'Manrope\', sans-serif">' +
+              d.sub +
+              "</text>";
+            s +=
+              '<rect x="' +
+              x0 +
+              '" y="' +
+              (y + 4) +
+              '" width="' +
+              Math.max(x1 - x0, 5) +
+              '" height="20" rx="4" fill="' +
+              accent +
+              '" opacity="' +
+              (d.lo === d.hi ? "0.9" : "0.55") +
+              '"/>';
+            if (d.lo !== d.hi) {
+              s +=
+                '<rect x="' +
+                x0 +
+                '" y="' +
+                (y + 4) +
+                '" width="5" height="20" rx="2" fill="' +
+                accent +
+                '"/>';
+              s +=
+                '<rect x="' +
+                (x1 - 5) +
+                '" y="' +
+                (y + 4) +
+                '" width="5" height="20" rx="2" fill="' +
+                accent +
+                '"/>';
+            }
+            var val =
+              d.lo === d.hi ? "$" + d.lo + "M" : "$" + d.lo + "–" + d.hi + "M";
+            s +=
+              '<text x="' +
+              (x1 + 10) +
+              '" y="' +
+              (y + 19) +
+              '" font-size="13" font-weight="600" fill="' +
+              ink +
+              '">' +
+              val +
+              "</text>";
+          });
+          s += "</svg>";
+          var chartEl = document.getElementById("nodeChart");
+          if (chartEl) chartEl.innerHTML = s;
+        };
+
+        window.addEventListener("semiconfab:langChanged", function () {
+          updateLangToggleBtnUI();
+          window.compute();
+          window.renderChart();
+        });
+
+        document.addEventListener("DOMContentLoaded", function () {
+          if (typeof initI18n === "function") initI18n();
+          updateLangToggleBtnUI();
+          window.compute();
+          window.renderChart();
+        });
+      })();
+    </script>
+  </body>
+</html>
