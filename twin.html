@@ -1503,13 +1503,14 @@
       <div class="flex items-center gap-1.5 shrink-0">
         <!-- Camera Presets -->
         <div
+          id="camera-presets-group"
           class="flex items-center bg-white rounded-lg px-1 py-0.5 border border-slate-200/90 shadow-sm gap-0.5 shrink-0 h-[28px]"
         >
           <button
             onclick="setCameraPreset('iso')"
             title="Isometric View"
             data-i18n-title="cam_iso_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-md transition"
           >
             <i data-lucide="compass" class="w-3.5 h-3.5"></i>
           </button>
@@ -1517,7 +1518,7 @@
             onclick="setCameraPreset('top')"
             title="Top Down Plan View"
             data-i18n-title="cam_top_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-md transition"
           >
             <i data-lucide="arrow-down-to-line" class="w-3.5 h-3.5"></i>
           </button>
@@ -1525,7 +1526,7 @@
             onclick="setCameraPreset('litho')"
             title="Focus Litho Amber Core"
             data-i18n-title="cam_litho_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-amber-50 text-amber-600 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-amber-50 text-amber-600 rounded-md transition"
           >
             <i data-lucide="sun" class="w-3.5 h-3.5"></i>
           </button>
@@ -1533,7 +1534,7 @@
             onclick="setCameraPreset('airshower')"
             title="Focus Cleanroom Air Shower"
             data-i18n-title="cam_airshower_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-sky-50 text-sky-600 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-sky-50 text-sky-600 rounded-md transition"
           >
             <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
           </button>
@@ -1541,7 +1542,7 @@
             onclick="setCameraPreset('roof')"
             title="Roof & HVAC Overview"
             data-i18n-title="cam_roof_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-sky-50 text-sky-600 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-sky-50 text-sky-600 rounded-md transition"
           >
             <i data-lucide="building" class="w-3.5 h-3.5"></i>
           </button>
@@ -1550,7 +1551,7 @@
             onclick="focusPatrolEngineer()"
             title="Track Inspection Engineer"
             data-i18n-title="cam_patrol_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-emerald-50 text-emerald-600 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-emerald-50 text-emerald-600 rounded-md transition"
           >
             <i data-lucide="user-check" class="w-3.5 h-3.5"></i>
           </button>
@@ -1558,7 +1559,7 @@
             onclick="resetCamera()"
             title="Reset Camera"
             data-i18n-title="cam_reset_title"
-            class="w-6 h-6 flex items-center justify-center hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-md transition"
+            class="cam-preset-btn w-6 h-6 flex items-center justify-center hover:bg-slate-100 text-slate-600 hover:text-slate-900 rounded-md transition"
           >
             <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
           </button>
@@ -1567,7 +1568,8 @@
             id="btn-cinematic-tour"
             onclick="toggleCinematicTour()"
             title="Start Cinematic Inspection Tour"
-            class="ml-0.5 flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white font-semibold text-[9px] transition shadow-sm whitespace-nowrap"
+            data-i18n-title="cam_tour_title"
+            class="cam-preset-btn ml-0.5 flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-gradient-to-r from-emerald-500 to-sky-500 hover:from-emerald-600 hover:to-sky-600 text-white font-semibold text-[9px] transition shadow-sm whitespace-nowrap"
           >
             <i data-lucide="video" class="w-3 h-3 text-white"></i>
             <span>Tour</span>
@@ -2762,6 +2764,7 @@
           ><span data-i18n="legend_subfab">Subfab Utilities</span></span
         >
       </div>
+    </div>
 
       <!-- Mouse navigation guide -->
       <div
@@ -21664,6 +21667,107 @@ function onWaferRouteFinished() {
             });
           }
 
+          // Hover-up Popover Tooltips for Top View Controls & Camera Presets
+          function initTopActionTooltips() {
+            const tooltip = document.getElementById("top-action-tooltip");
+            const tooltipText = document.getElementById(
+              "top-action-tooltip-text",
+            );
+            const tooltipArrow = document.getElementById(
+              "top-action-tooltip-arrow",
+            );
+            if (!tooltip || !tooltipText) return;
+
+            function getTooltipText(el) {
+              const key = el.getAttribute("data-i18n-title");
+              if (key) {
+                if (typeof t === "function") {
+                  const val = t(key);
+                  if (val && val !== key) return val;
+                }
+                const dict = typeof I18N_DICTIONARY !== "undefined" ? I18N_DICTIONARY : (window.TRANSLATIONS || {});
+                const lang = typeof currentLang !== "undefined" ? currentLang : "en";
+                if (dict[lang] && dict[lang][key]) return dict[lang][key];
+                if (dict["en"] && dict["en"][key]) return dict["en"][key];
+              }
+              return (
+                el.getAttribute("data-tip") ||
+                el.getAttribute("title") ||
+                el.getAttribute("data-original-title") ||
+                ""
+              );
+            }
+
+            function showTooltip(btn) {
+              if (btn.hasAttribute("title")) {
+                btn.setAttribute(
+                  "data-original-title",
+                  btn.getAttribute("title"),
+                );
+                btn.removeAttribute("title");
+              }
+
+              const text = getTooltipText(btn);
+              if (!text) return;
+              tooltipText.textContent = text;
+
+              // Position tooltip right below the button (pointing up)
+              const rect = btn.getBoundingClientRect();
+              const centerX = rect.left + rect.width / 2;
+              const topY = rect.bottom + 6;
+
+              tooltip.style.left = centerX + "px";
+              tooltip.style.top = topY + "px";
+
+              tooltip.classList.remove("opacity-0");
+              tooltip.classList.add("opacity-100");
+
+              // Clamp tooltip inside viewport if near edges
+              const tRect = tooltip.getBoundingClientRect();
+              if (tRect.left < 8) {
+                const offset = 8 - tRect.left;
+                tooltip.style.left = centerX + offset + "px";
+                if (tooltipArrow)
+                  tooltipArrow.style.left = `calc(50% - ${offset}px)`;
+              } else if (tRect.right > window.innerWidth - 8) {
+                const offset = tRect.right - (window.innerWidth - 8);
+                tooltip.style.left = centerX - offset + "px";
+                if (tooltipArrow)
+                  tooltipArrow.style.left = `calc(50% + ${offset}px)`;
+              } else {
+                if (tooltipArrow) tooltipArrow.style.left = "50%";
+              }
+            }
+
+            function hideTooltip() {
+              tooltip.classList.remove("opacity-100");
+              tooltip.classList.add("opacity-0");
+            }
+
+            window.showTopActionTooltip = showTooltip;
+            window.hideTopActionTooltip = hideTooltip;
+
+            const selector =
+              "#camera-presets-group button, .cam-preset-btn, #btn-cinematic-tour, #btn-toggle-oht, #btn-toggle-ceiling, #btn-toggle-laminar, #btn-toggle-heatmap, #btn-toggle-xray, .level-btn";
+            const targets = document.querySelectorAll(selector);
+
+            targets.forEach((btn) => {
+              if (btn.hasAttribute("title")) {
+                btn.setAttribute(
+                  "data-original-title",
+                  btn.getAttribute("title"),
+                );
+                btn.removeAttribute("title");
+              }
+
+              btn.addEventListener("pointerenter", () => showTooltip(btn));
+              btn.addEventListener("mouseenter", () => showTooltip(btn));
+              btn.addEventListener("pointerleave", hideTooltip);
+              btn.addEventListener("mouseleave", hideTooltip);
+              btn.addEventListener("click", hideTooltip);
+            });
+          }
+
           window.addEventListener("DOMContentLoaded", () => {
             // Cross-browser Font Normalization Detector (Identifies if browser forces >=12px clamp)
             try {
@@ -21693,6 +21797,7 @@ function onWaferRouteFinished() {
 
             loadApprovedCustomEquipment();
             initDigitalTwinEngine();
+            initTopActionTooltips();
             if (window.lucide && lucide.createIcons) lucide.createIcons();
             try {
               initThree();
@@ -22673,6 +22778,19 @@ function onWaferRouteFinished() {
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Top Action Hover Tooltip Popover (Floating under top icons) -->
+    <div
+      id="top-action-tooltip"
+      class="fixed z-[9999] pointer-events-none opacity-0 transition-opacity duration-150 px-2.5 py-1 rounded-md bg-slate-900/95 backdrop-blur-md text-white text-[10.5px] font-sans font-medium shadow-2xl border border-slate-700/80 whitespace-nowrap flex items-center gap-1.5"
+      style="top: 0; left: 0; transform: translate(-50%, 0);"
+    >
+      <span id="top-action-tooltip-text"></span>
+      <span
+        id="top-action-tooltip-arrow"
+        class="absolute -top-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-900 border-t border-l border-slate-700/80 rotate-45"
+      ></span>
     </div>
   </body>
 </html>
