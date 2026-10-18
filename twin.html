@@ -671,9 +671,11 @@
             >
             <span
               id="research-amhs-badge"
-              class="text-[8.5px] font-mono px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 border border-amber-500/40 whitespace-nowrap"
-              title="T1 benchmark models material transport as instant; vehicle animation is illustrative"
-              >AMHS Illustrative</span
+              class="text-[8.5px] font-mono px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 whitespace-nowrap"
+              title="Loop traffic model: demand-driven dispatch, accel/decel, car-following. Simplified — no junction deadlocks, not coupled to MIMAC DES."
+              data-i18n="amhs_badge"
+              data-i18n-title="amhs_badge_tooltip"
+              >AMHS Simulated</span
             >
           </div>
           <div class="flex items-center gap-2.5 shrink-0 ml-auto sm:ml-0">
@@ -1540,6 +1542,19 @@
             <i data-lucide="train-track" class="w-2.5 h-2.5"></i>
             <span data-i18n="toggle_oht">AMHS</span>
           </button>
+          <!-- AMHS Telemetry Mini-HUD (Pill) -->
+          <div
+            id="amhs-hud-pill"
+            class="flex items-center gap-1.5 text-[8.5px] font-mono px-2 py-0.5 rounded-md bg-slate-900/85 text-slate-200 border border-slate-700/80 shadow-sm shrink-0 whitespace-nowrap"
+            title="AMHS Simulated Telemetry: Completed Jobs · Avg Delivery · Active Fleet"
+          >
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+            <span id="amhs-hud-lbl-jobs" class="text-slate-400" data-i18n="amhs_hud_jobs">Jobs</span>:<b id="amhs-hud-jobs" class="text-emerald-300 font-bold">0</b>
+            <span class="text-slate-600">·</span>
+            <span id="amhs-hud-lbl-avg" class="text-slate-400" data-i18n="amhs_hud_avg">Avg</span>:<b id="amhs-hud-avg" class="text-sky-300 font-bold">--</b>
+            <span class="text-slate-600">·</span>
+            <span id="amhs-hud-lbl-active" class="text-slate-400" data-i18n="amhs_hud_active">Active</span>:<b id="amhs-hud-active" class="text-amber-300 font-bold">0</b><span class="text-slate-400">/24</span>
+          </div>
           <button
             id="btn-toggle-ceiling"
             onclick="toggleCeilingGrid()"
@@ -14274,10 +14289,10 @@
             const isZh = lang === "zh-CN" || lang === "zh-TW";
             const amhsBadge = document.getElementById("research-amhs-badge");
             if (amhsBadge) {
-              amhsBadge.textContent = isZh ? "AMHS 动画示意" : "AMHS Illustrative";
+              amhsBadge.textContent = isZh ? "AMHS 仿真运行" : "AMHS Simulated";
               amhsBadge.title = isZh
-                ? "T1 基准将物料转运抽象为瞬时，车辆动画仅为示意"
-                : "T1 benchmark models material transport as instant; vehicle animation is illustrative";
+                ? "环路交通简化模型：需求派单、加减速、跟车。未建模道岔死锁，未与 MIMAC DES 耦合。"
+                : "Loop traffic model: demand-driven dispatch, accel/decel, car-following. Simplified — no junction deadlocks, not coupled to MIMAC DES.";
             }
             const utilBtnText = document.getElementById("research-util-btn-text");
             if (utilBtnText) {
@@ -14285,6 +14300,19 @@
                 ? "机台稼动率热力图"
                 : "Utilization Heatmap";
             }
+            if (typeof updateAmhsHudLanguage === "function") {
+              updateAmhsHudLanguage(lang);
+            }
+          }
+
+          function updateAmhsHudLanguage(lang) {
+            const isZh = lang === "zh-CN" || lang === "zh-TW";
+            const lblJobs = document.getElementById("amhs-hud-lbl-jobs");
+            const lblAvg = document.getElementById("amhs-hud-lbl-avg");
+            const lblActive = document.getElementById("amhs-hud-lbl-active");
+            if (lblJobs) lblJobs.textContent = isZh ? "已完成" : "Jobs";
+            if (lblAvg) lblAvg.textContent = isZh ? "均时" : "Avg";
+            if (lblActive) lblActive.textContent = isZh ? "在途" : "Active";
           }
 
           function updateModeSelectOptions(lang) {
@@ -14975,8 +15003,76 @@
             if (tabOemEl) tabOemEl.textContent = OEM_EQUIPMENT_DATABASE.length;
           }
 
-          // 构建 AMHS 密集天轨系统、天轨下方暂存架 (UTB)、车间移动暂存手推车与 8 台巡航天车
+          // ==========================================
+          // AMHS 需求驱动环路交通仿真引擎 (AMHS Simulated Loop Traffic System)
+          // 24 台 OHT 天车分布于 2 条独立闭环天轨，无道岔/不可换环
+          // ==========================================
+
+          // 站点表推导依据：
+          // 从 twin/layout-default.json 中 121 台核心机台的 13 个工艺 Bay 坐标几何质心投影推导：
+          // Loop 1 (外环总长 265.33m): 覆盖外围工艺区与进出厂/测试/封装接口，共 7 个 Load Port 工位
+          // Loop 2 (内环总长 196.07m): 穿梭内部高频工艺 Bay（光刻-涂胶显影-刻蚀-薄膜-清洗-CMP），共 7 个 Load Port 工位
+          const AMHS_STATIONS_LOOP1 = [
+            { id: "L1-ST01", loopId: 1, s: 28.0, bay: "dry_etch", bayName: "Dry Etch Bay", bayNameZh: "干法刻蚀工区" },
+            { id: "L1-ST02", loopId: 1, s: 52.5, bay: "thin_film_deposition", bayName: "Deposition Bay", bayNameZh: "薄膜沉积工区" },
+            { id: "L1-ST03", loopId: 1, s: 88.0, bay: "packaging", bayName: "Packaging Bay", bayNameZh: "先进封装工区" },
+            { id: "L1-ST04", loopId: 1, s: 112.0, bay: "test", bayName: "Wafer Test Bay", bayNameZh: "晶圆测试工区" },
+            { id: "L1-ST05", loopId: 1, s: 153.0, bay: "thermal_processing", bayName: "Thermal / Implant Bay", bayNameZh: "热处理/离子注入工区" },
+            { id: "L1-ST06", loopId: 1, s: 176.0, bay: "wet_clean", bayName: "Clean & CMP Bay", bayNameZh: "湿法清洗/CMP工区" },
+            { id: "L1-ST07", loopId: 1, s: 245.0, bay: "lithography", bayName: "Photolithography Bay", bayNameZh: "光刻黄光核心区" },
+          ];
+
+          const AMHS_STATIONS_LOOP2 = [
+            { id: "L2-ST01", loopId: 2, s: 0.0, bay: "lithography", bayName: "Litho Core Bay", bayNameZh: "光刻曝光中心" },
+            { id: "L2-ST02", loopId: 2, s: 28.0, bay: "resist_track", bayName: "Coater/Developer Bay", bayNameZh: "涂胶显影工区" },
+            { id: "L2-ST03", loopId: 2, s: 55.0, bay: "thin_film_deposition", bayName: "Thin Film CVD/ALD Bay", bayNameZh: "CVD/ALD薄膜工区" },
+            { id: "L2-ST04", loopId: 2, s: 86.0, bay: "thermal_processing", bayName: "Furnace / Diffusion Bay", bayNameZh: "氧化扩散炉管工区" },
+            { id: "L2-ST05", loopId: 2, s: 112.0, bay: "cmp", bayName: "Planarization CMP Bay", bayNameZh: "化学机械抛光工区" },
+            { id: "L2-ST06", loopId: 2, s: 132.0, bay: "wet_clean", bayName: "Wet Cleaning Bay", bayNameZh: "全自动清洗机台区" },
+            { id: "L2-ST07", loopId: 2, s: 162.5, bay: "dry_etch", bayName: "Plasma Etch Bay", bayNameZh: "等离子刻蚀机台区" },
+          ];
+
+          const AMHS_LED_COLORS = {
+            IDLE: 0x10b981,        // 绿灯：巡航/空闲
+            TO_PICKUP: 0x38bdf8,   // 蓝灯：已派单前往取货
+            LOADING: 0xf59e0b,     // 琥珀黄灯：装卸中 (装载)
+            TO_DROPOFF: 0x38bdf8,  // 蓝灯：已派单前往卸货
+            UNLOADING: 0xf59e0b,   // 琥珀黄灯：装卸中 (卸载)
+          };
+
+          // 仿真状态与任务统计
           let ohtVehicles = [];
+          let amhsCurve1 = null;
+          let amhsCurve2 = null;
+          let amhsLoopLength1 = 265.33;
+          let amhsLoopLength2 = 196.07;
+          let amhsTaskQueue = [];
+          let amhsCompletedTasks = [];
+          let amhsTaskSeq = 0;
+          let amhsNextTaskTime = 1.0;
+          let amhsSimTime = 0;
+          let amhsTotalDeliveryTime = 0;
+          let amhsMinObservedGap = Infinity;
+          let amhsGapViolations = 0;
+          let amhsLastHudUpdate = 0;
+          let amhsLastFrameTime = 0;
+
+          // 热点循环零分配临时对象
+          const _amhsVecUnitX = new THREE.Vector3(1, 0, 0);
+          const _amhsTempPos = new THREE.Vector3();
+          const _amhsTempTangent = new THREE.Vector3();
+
+          window.AMHS_STATIONS_LOOP1 = AMHS_STATIONS_LOOP1;
+          window.AMHS_STATIONS_LOOP2 = AMHS_STATIONS_LOOP2;
+          window.AMHS_LED_COLORS = AMHS_LED_COLORS;
+          window.ohtVehicles = ohtVehicles;
+
+          function setVehicleLedColor(veh, hex) {
+            if (veh.lightBar && veh.lightBar.material) {
+              veh.lightBar.material.color.setHex(hex);
+              veh.lightBar.material.emissive.setHex(hex);
+            }
+          }
 
           function buildAmhsSystem() {
             const amhsMasterGroup = new THREE.Group();
@@ -14991,6 +15087,8 @@
               "catmullrom",
               0.15,
             );
+            amhsCurve1 = curve1;
+            amhsLoopLength1 = curve1.getLength();
             const tubeGeo1 = new THREE.TubeGeometry(curve1, 160, 0.14, 8, true);
             const tubeMat = new THREE.MeshStandardMaterial({
               color: 0x059669,
@@ -15010,9 +15108,27 @@
               "catmullrom",
               0.15,
             );
+            amhsCurve2 = curve2;
+            amhsLoopLength2 = curve2.getLength();
             const tubeGeo2 = new THREE.TubeGeometry(curve2, 120, 0.14, 8, true);
             const track2 = new THREE.Mesh(tubeGeo2, tubeMat);
             amhsMasterGroup.add(track2);
+
+            // 在天轨轨道上方设置 14 处工位 Load Port 停靠标签 (Station Docking Tags)
+            const stationTagGeo = new THREE.BoxGeometry(0.5, 0.08, 0.22);
+            const stationTagMat = new THREE.MeshStandardMaterial({
+              color: 0x38bdf8,
+              metalness: 0.7,
+              roughness: 0.3,
+            });
+            [...AMHS_STATIONS_LOOP1, ...AMHS_STATIONS_LOOP2].forEach((st) => {
+              const cur = st.loopId === 1 ? curve1 : curve2;
+              const len = st.loopId === 1 ? amhsLoopLength1 : amhsLoopLength2;
+              const pt = cur.getPointAt(st.s / len);
+              const marker = new THREE.Mesh(stationTagGeo, stationTagMat);
+              marker.position.set(pt.x, 5.95, pt.z);
+              amhsMasterGroup.add(marker);
+            });
 
             // 3. 天轨下方挂架缓存区 (Under-Track Buffers / UTB - 还原实景图中吊装在空中的密集晶圆盒)
             const utbMat = new THREE.MeshStandardMaterial({
@@ -15121,32 +15237,19 @@
             ohtTrackMesh = amhsMasterGroup;
             scene.add(amhsMasterGroup);
 
-            // 5. 部署 24 台全自动巡航滑行的高密度 OHT 天车车队 (按用户需求将天车数量增加 2 倍至 24 台，完美重现实景照片中密集天车穿梭场景)
-            const vehicleConfigs = [];
-
-            // Loop 1 外环主干线部署 12 台天车 (均匀分布在 260m 大环线上)
+            // 5. 部署 24 台全自动仿真运行的高密度 OHT 天车车队 (Loop 1 外环 12 台，Loop 2 内环 12 台)
+            ohtVehicles = [];
             const numLoop1 = 12;
-            for (let i = 0; i < numLoop1; i++) {
-              vehicleConfigs.push({
-                curve: curve1,
-                progress: (i / numLoop1 + 0.02) % 1,
-                speed: 0.00062 + (i % 3) * 0.00003,
-                canHoist: i % 3 === 0, // 1/3 的天车支持垂直取放盒动作
-              });
-            }
-
-            // Loop 2 内部工艺 Bay 穿梭环线部署 12 台天车 (均匀分布在 180m 内环线上)
             const numLoop2 = 12;
-            for (let i = 0; i < numLoop2; i++) {
-              vehicleConfigs.push({
-                curve: curve2,
-                progress: (i / numLoop2 + 0.04) % 1,
-                speed: 0.00078 + (i % 3) * 0.00004,
-                canHoist: i % 3 === 1, // 错开取放盒动作
-              });
-            }
 
-            vehicleConfigs.forEach((cfg, idx) => {
+            for (let i = 0; i < numLoop1 + numLoop2; i++) {
+              const isLoop1 = i < numLoop1;
+              const loopId = isLoop1 ? 1 : 2;
+              const curve = isLoop1 ? curve1 : curve2;
+              const loopLen = isLoop1 ? amhsLoopLength1 : amhsLoopLength2;
+              const loopIdx = isLoop1 ? i : i - numLoop1;
+              const numInLoop = isLoop1 ? numLoop1 : numLoop2;
+
               const vGroup = new THREE.Group();
 
               // 白色流线型车身 (象牙白工程塑料与铝合金骨架)
@@ -15159,13 +15262,11 @@
               const cart = new THREE.Mesh(cartGeo, cartMat);
               cart.position.y = 5.8;
 
-              // 天车车顶状态指示灯 (运行绿灯 / 派工蓝灯 / 通信青灯)
+              // 天车车顶状态指示灯 (运行绿灯 / 派工蓝灯 / 装卸琥珀灯)
               const lightBarGeo = new THREE.BoxGeometry(0.8, 0.04, 0.08);
-              const ledColor =
-                idx % 3 === 0 ? 0x10b981 : idx % 3 === 1 ? 0x38bdf8 : 0x06b6d4;
               const lightBarMat = new THREE.MeshStandardMaterial({
-                color: ledColor,
-                emissive: ledColor,
+                color: AMHS_LED_COLORS.IDLE,
+                emissive: AMHS_LED_COLORS.IDLE,
                 emissiveIntensity: 0.85,
               });
               const lightBar = new THREE.Mesh(lightBarGeo, lightBarMat);
@@ -15182,21 +15283,11 @@
               const gripper = new THREE.Mesh(gripperGeo, gripperMat);
               gripper.position.y = 5.3;
 
-              // 吊运中的 300mm FOUP 晶圆盒 (约 80% 载盒率，20% 空车调度返回)
-              const isCarryingFoup = idx % 5 !== 0;
-              if (isCarryingFoup) {
-                const foupColor =
-                  idx % 4 === 0
-                    ? "amber"
-                    : idx % 6 === 0
-                      ? "ruby"
-                      : idx % 5 === 0
-                        ? "cyan"
-                        : "standard";
-                const foup = createFoupMesh({ colorType: foupColor });
-                foup.position.y = 4.6;
-                hoistGroup.add(foup);
-              }
+              // 载具中的 300mm FOUP 晶圆盒 (初始空载隐藏，装卸时动态显隐)
+              const foup = createFoupMesh({ colorType: "standard" });
+              foup.position.y = 4.6;
+              foup.visible = false;
+              hoistGroup.add(foup);
               hoistGroup.add(gripper);
 
               // 双垂直高强度提升钢丝绳 (Dual Hoist Steel Cables)
@@ -15219,24 +15310,40 @@
               vGroup.add(cart, lightBar, hoistGroup, cable1, cable2);
               scene.add(vGroup);
 
+              // 初始弧长坐标 s 均匀分布
+              const initialS = (loopIdx / numInLoop) * loopLen;
+
+              // 初始化 3D 姿态与位置
+              const u = initialS / loopLen;
+              curve.getPointAt(u, _amhsTempPos);
+              curve.getTangentAt(u, _amhsTempTangent);
+              vGroup.position.copy(_amhsTempPos);
+              vGroup.position.y = 0;
+              vGroup.quaternion.setFromUnitVectors(_amhsVecUnitX, _amhsTempTangent);
+
               ohtVehicles.push({
-                id: idx,
+                id: i,
+                name: `OHT-${i + 1}`,
+                loopId: loopId,
+                curve: curve,
+                loopLength: loopLen,
+                s: initialS,
+                speed: 1.4, // 初始平稳巡航 (m/s)
+                state: "IDLE", // IDLE, TO_PICKUP, LOADING, TO_DROPOFF, UNLOADING
+                task: null,
+                targetStation: null,
+                dwellTimer: 0,
                 group: vGroup,
                 hoistGroup: hoistGroup,
+                gripper: gripper,
+                foupMesh: foup,
                 cables: [cable1, cable2],
                 lightBar: lightBar,
-                curve: cfg.curve,
-                progress: cfg.progress,
-                baseSpeed: cfg.speed,
-                speed: cfg.speed,
-                hoistState: "CRUISING",
-                hoistProgress: 0,
-                hoistTimer: 0,
-                canHoist: cfg.canHoist,
               });
-            });
+            }
 
             ohtVehicleGroup = ohtVehicles[0].group; // 兼容原有单车引用
+            window.ohtVehicles = ohtVehicles;
           }
 
           // ==========================================
@@ -16690,6 +16797,356 @@ function onWaferRouteFinished() {
             });
           }
 
+          // 需求驱动 AMHS 闭环交通仿真逻辑 (AMHS Closed-Loop Simulation)
+          function updateAmhsSimulation(dt) {
+            if (!ohtVehicles || ohtVehicles.length === 0) return;
+            const clampedDt = Math.min(0.1, Math.max(0.001, dt));
+            amhsSimTime += clampedDt;
+
+            // 1. 泊松流任务生成器 (平均间隔 ~4s)
+            if (amhsSimTime >= amhsNextTaskTime) {
+              const loopId = Math.random() < 0.5 ? 1 : 2;
+              const stations =
+                loopId === 1 ? AMHS_STATIONS_LOOP1 : AMHS_STATIONS_LOOP2;
+              const pIdx = Math.floor(Math.random() * stations.length);
+              let dIdx = Math.floor(Math.random() * stations.length);
+              while (dIdx === pIdx) {
+                dIdx = Math.floor(Math.random() * stations.length);
+              }
+              const newTask = {
+                id: "TSK-" + ++amhsTaskSeq,
+                loopId: loopId,
+                pickup: stations[pIdx],
+                dropoff: stations[dIdx],
+                createdAt: amhsSimTime,
+                assignedAt: null,
+                deliveredAt: null,
+                state: "QUEUED",
+              };
+              amhsTaskQueue.push(newTask);
+
+              // 泊松间隔：Exp(1/4.0)
+              const interval = -Math.log(1 - Math.random() * 0.98) * 4.0;
+              amhsNextTaskTime = amhsSimTime + Math.max(1.2, interval);
+            }
+
+            // 2. 任务派单调度器 (Nearest Vehicle First，FIFO 队列)
+            for (const loopId of [1, 2]) {
+              const L = loopId === 1 ? amhsLoopLength1 : amhsLoopLength2;
+              for (let qi = 0; qi < amhsTaskQueue.length; qi++) {
+                if (amhsTaskQueue[qi].loopId === loopId) {
+                  const task = amhsTaskQueue[qi];
+                  let bestVeh = null;
+                  let minDistance = Infinity;
+
+                  for (let i = 0; i < ohtVehicles.length; i++) {
+                    const v = ohtVehicles[i];
+                    if (v.loopId === loopId && v.state === "IDLE") {
+                      const dist = (task.pickup.s - v.s + L) % L;
+                      if (dist < minDistance) {
+                        minDistance = dist;
+                        bestVeh = v;
+                      }
+                    }
+                  }
+
+                  if (bestVeh) {
+                    bestVeh.state = "TO_PICKUP";
+                    bestVeh.task = task;
+                    bestVeh.targetStation = task.pickup;
+                    task.assignedAt = amhsSimTime;
+                    task.state = "ASSIGNED";
+                    setVehicleLedColor(bestVeh, AMHS_LED_COLORS.TO_PICKUP);
+                    amhsTaskQueue.splice(qi, 1);
+                    qi--;
+                  }
+                }
+              }
+            }
+
+            // 3. 车辆运动学、跟车防追尾与装卸仿真
+            const a_accel = 1.5;
+            const a_decel = 1.5;
+            const a_hard_brake = 4.0;
+            const vmax = 3.0;
+
+            for (const loopId of [1, 2]) {
+              const L = loopId === 1 ? amhsLoopLength1 : amhsLoopLength2;
+              const loopVehs = ohtVehicles.filter((v) => v.loopId === loopId);
+
+              for (let i = 0; i < loopVehs.length; i++) {
+                const v = loopVehs[i];
+
+                // 计算前车与后车距离
+                let minGap = Infinity;
+                let leadVeh = null;
+                let rearVeh = null;
+                let minRearGap = Infinity;
+
+                for (let j = 0; j < loopVehs.length; j++) {
+                  if (i === j) continue;
+                  const g = (loopVehs[j].s - v.s + L) % L;
+                  if (g < minGap) {
+                    minGap = g;
+                    leadVeh = loopVehs[j];
+                  }
+                  const rg = (v.s - loopVehs[j].s + L) % L;
+                  if (rg < minRearGap) {
+                    minRearGap = rg;
+                    rearVeh = loopVehs[j];
+                  }
+                }
+
+                // 统计最小车距自证指标
+                if (minGap < amhsMinObservedGap) {
+                  amhsMinObservedGap = minGap;
+                }
+                if (minGap < 2.0) {
+                  amhsGapViolations++;
+                }
+
+                // 装载中 (LOADING) 3.0s 动力学与视觉
+                if (v.state === "LOADING") {
+                  v.speed = 0;
+                  v.dwellTimer += clampedDt;
+                  const t = v.dwellTimer;
+
+                  if (t < 1.1) {
+                    // 下放抓手直抵 Load Port
+                    const p = t / 1.1;
+                    const ease = 0.5 - Math.cos(p * Math.PI) / 2;
+                    const dropDist = 3.2 * ease;
+                    v.hoistGroup.position.y = -dropDist;
+                    const cableLen = Math.max(0.5, dropDist + 0.5);
+                    v.cables.forEach((c) => {
+                      c.scale.y = cableLen;
+                      c.position.y = 5.8 - cableLen / 2;
+                    });
+                  } else if (t < 1.9) {
+                    // SEMI E84/E87 载具握手抓取
+                    v.hoistGroup.position.y = -3.2;
+                    v.cables.forEach((c) => {
+                      c.scale.y = 3.7;
+                      c.position.y = 3.95;
+                    });
+                    if (t >= 1.5 && v.foupMesh) {
+                      v.foupMesh.visible = true; // 抓取晶圆盒
+                    }
+                  } else if (t < 3.0) {
+                    // 提升抓手回车厢
+                    const p = (t - 1.9) / 1.1;
+                    const ease = 0.5 - Math.cos(p * Math.PI) / 2;
+                    const dropDist = 3.2 * (1 - ease);
+                    v.hoistGroup.position.y = -dropDist;
+                    const cableLen = Math.max(0.5, dropDist + 0.5);
+                    v.cables.forEach((c) => {
+                      c.scale.y = cableLen;
+                      c.position.y = 5.8 - cableLen / 2;
+                    });
+                  } else {
+                    // 完成装载，出发前往卸货点
+                    v.hoistGroup.position.y = 0;
+                    v.cables.forEach((c) => {
+                      c.scale.y = 0.5;
+                      c.position.y = 5.55;
+                    });
+                    v.state = "TO_DROPOFF";
+                    v.targetStation = v.task.dropoff;
+                    v.dwellTimer = 0;
+                    setVehicleLedColor(v, AMHS_LED_COLORS.TO_DROPOFF);
+                  }
+                  continue;
+                }
+
+                // 卸载中 (UNLOADING) 3.0s 动力学与视觉
+                if (v.state === "UNLOADING") {
+                  v.speed = 0;
+                  v.dwellTimer += clampedDt;
+                  const t = v.dwellTimer;
+
+                  if (t < 1.1) {
+                    // 下放载具直抵 Load Port
+                    const p = t / 1.1;
+                    const ease = 0.5 - Math.cos(p * Math.PI) / 2;
+                    const dropDist = 3.2 * ease;
+                    v.hoistGroup.position.y = -dropDist;
+                    const cableLen = Math.max(0.5, dropDist + 0.5);
+                    v.cables.forEach((c) => {
+                      c.scale.y = cableLen;
+                      c.position.y = 5.8 - cableLen / 2;
+                    });
+                  } else if (t < 1.9) {
+                    // SEMI E84/E87 载具释放
+                    v.hoistGroup.position.y = -3.2;
+                    v.cables.forEach((c) => {
+                      c.scale.y = 3.7;
+                      c.position.y = 3.95;
+                    });
+                    if (t >= 1.5 && v.foupMesh) {
+                      v.foupMesh.visible = false; // 卸下晶圆盒
+                    }
+                  } else if (t < 3.0) {
+                    // 空抓手提升回位
+                    const p = (t - 1.9) / 1.1;
+                    const ease = 0.5 - Math.cos(p * Math.PI) / 2;
+                    const dropDist = 3.2 * (1 - ease);
+                    v.hoistGroup.position.y = -dropDist;
+                    const cableLen = Math.max(0.5, dropDist + 0.5);
+                    v.cables.forEach((c) => {
+                      c.scale.y = cableLen;
+                      c.position.y = 5.8 - cableLen / 2;
+                    });
+                  } else {
+                    // 交付完成，重置车辆为空闲
+                    v.hoistGroup.position.y = 0;
+                    v.cables.forEach((c) => {
+                      c.scale.y = 0.5;
+                      c.position.y = 5.55;
+                    });
+                    if (v.task) {
+                      v.task.deliveredAt = amhsSimTime;
+                      v.task.state = "COMPLETED";
+                      amhsCompletedTasks.push(v.task);
+                      amhsTotalDeliveryTime +=
+                        v.task.deliveredAt - v.task.createdAt;
+                    }
+                    v.task = null;
+                    v.targetStation = null;
+                    v.state = "IDLE";
+                    v.dwellTimer = 0;
+                    setVehicleLedColor(v, AMHS_LED_COLORS.IDLE);
+                  }
+                  continue;
+                }
+
+                // 运动学期望速度计算
+                let v_kinematic = 1.4; // 空闲车基准巡航速度
+                if (
+                  v.state === "IDLE" &&
+                  rearVeh &&
+                  rearVeh.state !== "IDLE" &&
+                  minRearGap < 12.0
+                ) {
+                  v_kinematic = vmax; // 避免阻挡后方任务车
+                }
+
+                if (v.targetStation) {
+                  const distToStation = (v.targetStation.s - v.s + L) % L;
+                  const CREEP_DIST = 1.2;
+                  const v_creep = 0.22;
+                  let v_station_limit;
+                  if (distToStation <= CREEP_DIST) {
+                    v_station_limit = v_creep; // 提前平滑降至 0.22 m/s 蠕行进站 (严格 <0.3 m/s)
+                  } else {
+                    v_station_limit = Math.sqrt(
+                      v_creep * v_creep +
+                        2 * a_decel * (distToStation - CREEP_DIST),
+                    );
+                  }
+
+                  // 到站判定：进站速度 <0.3 m/s，到达工位对齐停稳
+                  const stepPredict = Math.max(0.12, v.speed * clampedDt * 1.5);
+                  if (
+                    (distToStation <= 0.25 && v.speed < 0.32) ||
+                    distToStation <= Math.max(0.06, v.speed * clampedDt)
+                  ) {
+                    v.s = v.targetStation.s;
+                    v.speed = 0;
+                    if (v.state === "TO_PICKUP") {
+                      v.state = "LOADING";
+                      v.dwellTimer = 0;
+                      setVehicleLedColor(v, AMHS_LED_COLORS.LOADING);
+                    } else if (v.state === "TO_DROPOFF") {
+                      v.state = "UNLOADING";
+                      v.dwellTimer = 0;
+                      setVehicleLedColor(v, AMHS_LED_COLORS.UNLOADING);
+                    }
+                    continue;
+                  }
+                  v_kinematic = Math.min(vmax, v_station_limit);
+                }
+
+                // 跟车模型 (Car-Following Model): 车间距 <4m 限速，<=2.08m 停车
+                const MIN_SAFETY_GAP = 2.08;
+                let v_follow_limit = vmax;
+                if (minGap <= MIN_SAFETY_GAP) {
+                  v_follow_limit = 0;
+                } else if (minGap < 4.0) {
+                  const v_brake_curve = Math.sqrt(
+                    2 * a_decel * (minGap - MIN_SAFETY_GAP),
+                  );
+                  const v_ratio =
+                    vmax * ((minGap - MIN_SAFETY_GAP) / (4.0 - MIN_SAFETY_GAP));
+                  const leadSpeed = leadVeh ? Math.max(0, leadVeh.speed) : 0;
+                  v_follow_limit = Math.min(v_ratio, v_brake_curve, leadSpeed);
+                }
+
+                const v_desired = Math.min(v_kinematic, v_follow_limit);
+
+                // 加速度与减速度积分更新
+                if (v.speed < v_desired) {
+                  v.speed = Math.min(v_desired, v.speed + a_accel * clampedDt);
+                } else if (v.speed > v_desired) {
+                  const brakeRate = minGap < 2.5 ? a_hard_brake : a_decel;
+                  v.speed = Math.max(
+                    0,
+                    Math.max(v_desired, v.speed - brakeRate * clampedDt),
+                  );
+                }
+
+                // 刚性步长约束：严格禁止超车，车间距硬性限制 >=2.0m
+                const maxAdvance = Math.max(0, minGap - 2.02);
+                const step = Math.min(v.speed * clampedDt, maxAdvance);
+                if (step < v.speed * clampedDt && v.speed > 0) {
+                  v.speed = step / clampedDt;
+                }
+                v.s = (v.s + step) % L;
+
+                // 热点循环零分配更新 3D 姿态与位置
+                if (showOht && v.group) {
+                  const u = v.s / L;
+                  v.curve.getPointAt(u, _amhsTempPos);
+                  v.curve.getTangentAt(u, _amhsTempTangent);
+                  v.group.position.copy(_amhsTempPos);
+                  v.group.position.y = 0;
+                  v.group.quaternion.setFromUnitVectors(
+                    _amhsVecUnitX,
+                    _amhsTempTangent,
+                  );
+                }
+              }
+            }
+
+            // 4. 定时节流刷新 HUD 小统计 UI (每 200ms 一次)
+            if (amhsSimTime - amhsLastHudUpdate > 0.2) {
+              amhsLastHudUpdate = amhsSimTime;
+              const jobsEl = document.getElementById("amhs-hud-jobs");
+              const avgEl = document.getElementById("amhs-hud-avg");
+              const activeEl = document.getElementById("amhs-hud-active");
+
+              if (jobsEl) jobsEl.textContent = amhsCompletedTasks.length;
+              if (avgEl) {
+                avgEl.textContent =
+                  amhsCompletedTasks.length > 0
+                    ? (
+                        amhsTotalDeliveryTime / amhsCompletedTasks.length
+                      ).toFixed(1) + "s"
+                    : "--";
+              }
+              if (activeEl) {
+                const activeCount = ohtVehicles.filter(
+                  (v) => v.state !== "IDLE",
+                ).length;
+                activeEl.textContent = activeCount;
+              }
+            }
+
+            window.amhsMinObservedGap = amhsMinObservedGap;
+            window.amhsGapViolations = amhsGapViolations;
+            window.amhsTaskQueue = amhsTaskQueue;
+            window.amhsCompletedTasks = amhsCompletedTasks;
+          }
+
           // 逐帧动画循环
           function animate() {
             requestAnimationFrame(animate);
@@ -16738,91 +17195,13 @@ function onWaferRouteFinished() {
               });
             }
 
-            // 2. 多台 AMHS 天车在各自轨道网络上巡航，并为特定天车执行工位垂直吊索取放盒“假动作”
-            if (showOht && ohtVehicles.length > 0) {
-              ohtVehicles.forEach((veh) => {
-                if (veh.canHoist) {
-                  if (veh.hoistState === "CRUISING") {
-                    veh.progress = (veh.progress + veh.speed) % 1;
-                    // 当天车行驶至机台 Bay 上方触发垂直放盒假动作
-                    const trigger1 = veh.progress > 0.22 && veh.progress < 0.23;
-                    const trigger2 = veh.progress > 0.72 && veh.progress < 0.73;
-                    if (trigger1 || trigger2) {
-                      veh.hoistState = "DECEL";
-                    }
-                  } else if (veh.hoistState === "DECEL") {
-                    veh.speed *= 0.88;
-                    veh.progress += veh.speed;
-                    if (veh.speed < 0.00005) {
-                      veh.speed = 0;
-                      veh.hoistState = "LOWERING";
-                      veh.hoistProgress = 0;
-                      if (veh.lightBar)
-                        veh.lightBar.material.color.setHex(0xf59e0b); // 待命琥珀黄灯
-                    }
-                  } else if (veh.hoistState === "LOWERING") {
-                    veh.hoistProgress += 0.016;
-                    const ease =
-                      0.5 - Math.cos(Math.min(veh.hoistProgress, 1) * Math.PI) / 2;
-                    const dropDist = 3.2 * ease; // 垂直下降 3.2 米直抵 Load Port
-                    veh.hoistGroup.position.y = -dropDist;
-                    const cableLen = Math.max(0.5, dropDist + 0.5);
-                    veh.cables.forEach((c) => {
-                      c.scale.y = cableLen;
-                      c.position.y = 5.8 - cableLen / 2;
-                    });
-                    if (veh.hoistProgress >= 1) {
-                      veh.hoistState = "HANDSHAKE";
-                      veh.hoistTimer = 0;
-                      if (veh.lightBar)
-                        veh.lightBar.material.color.setHex(0x10b981); // 成功交付绿光闪烁
-                    }
-                  } else if (veh.hoistState === "HANDSHAKE") {
-                    veh.hoistTimer++;
-                    if (veh.hoistTimer > 75) {
-                      // 停留约 1.2 秒完成 SEMI E87 载具握手
-                      veh.hoistState = "RAISING";
-                      veh.hoistProgress = 0;
-                      if (veh.lightBar)
-                        veh.lightBar.material.color.setHex(0x38bdf8); // 提升回位青色灯
-                    }
-                  } else if (veh.hoistState === "RAISING") {
-                    veh.hoistProgress += 0.016;
-                    const ease =
-                      0.5 - Math.cos(Math.min(veh.hoistProgress, 1) * Math.PI) / 2;
-                    const dropDist = 3.2 * (1 - ease);
-                    veh.hoistGroup.position.y = -dropDist;
-                    const cableLen = Math.max(0.5, dropDist + 0.5);
-                    veh.cables.forEach((c) => {
-                      c.scale.y = cableLen;
-                      c.position.y = 5.8 - cableLen / 2;
-                    });
-                    if (veh.hoistProgress >= 1) {
-                      veh.hoistGroup.position.y = 0;
-                      veh.cables.forEach((c) => {
-                        c.scale.y = 0.5;
-                        c.position.y = 5.55;
-                      });
-                      veh.hoistState = "CRUISING";
-                      veh.speed = veh.baseSpeed;
-                      if (veh.lightBar)
-                        veh.lightBar.material.color.setHex(0x10b981);
-                      veh.progress += 0.018; // 越过触发窗口继续巡航
-                    }
-                  }
-                } else {
-                  veh.progress = (veh.progress + veh.speed) % 1;
-                }
-
-                const pos = veh.curve.getPointAt(veh.progress);
-                const tangent = veh.curve.getTangentAt(veh.progress);
-                veh.group.position.copy(pos);
-                veh.group.position.y = 0;
-                veh.group.quaternion.setFromUnitVectors(
-                  new THREE.Vector3(1, 0, 0),
-                  tangent,
-                );
-              });
+            // 2. AMHS 需求驱动环路交通仿真 (AMHS Simulated Loop Traffic System)
+            if (ohtVehicles.length > 0) {
+              const nowPerf = performance.now();
+              const amhsDt =
+                amhsLastFrameTime > 0 ? (nowPerf - amhsLastFrameTime) / 1000 : 0.016;
+              amhsLastFrameTime = nowPerf;
+              updateAmhsSimulation(amhsDt);
             }
 
             // 告警设备三维指示灯红光同步呼吸闪烁 (Alarm Beacon Pulsing)
@@ -19119,6 +19498,8 @@ function onWaferRouteFinished() {
             ohtVehicles.forEach((v) => {
               if (v && v.group) v.group.visible = showOht;
             });
+            const hudPill = document.getElementById("amhs-hud-pill");
+            if (hudPill) hudPill.style.display = showOht ? "flex" : "none";
             const btn = document.getElementById("btn-toggle-oht");
             if (btn) {
               btn.className = `flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md font-medium shadow-sm transition whitespace-nowrap shrink-0 ${showOht ? "bg-emerald-50 text-emerald-800 border border-emerald-200/80" : "bg-white text-slate-600 border border-slate-200"}`;

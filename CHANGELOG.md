@@ -4,6 +4,19 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ---
 
+## [1.5.0] - 2026-10-18
+
+### Demand-Driven AMHS Closed-Loop Traffic Simulation (`twin.html`)
+
+- **Loop Traffic Simulation Engine**: Upgraded the AMHS (Automated Material Handling System) OHT monorail logistics from a decorative constant-speed loop into a demand-driven closed-loop traffic simulation across 24 ceiling vehicles (12 vehicles on Loop 1, 12 on Loop 2).
+- **Bay Station Geometry & Derivation**: Established formal load port stations mapped directly from cleanroom tool positions in `twin/layout-default.json`: 7 stations on outer perimeter Loop 1 (265.3m) and 7 stations on inner inter-bay Loop 2 (196.1m), with arc-length coordinates ($s$) and process bay annotations.
+- **Poisson Task Generation & NVF Dispatching**: Implemented a stochastic Poisson process (mean arrival interval ~4s) generating intra-loop point-to-point wafer transport tasks. Implemented Nearest Vehicle First (NVF) dispatching upstream of pickup stations with a FIFO task queue.
+- **Kinematic Accel/Decel & Smooth Docking**: Integrated physical motion control ($s \in [0, L)$, $v_{\max} = 3.0\text{ m/s}$, $a = 1.5\text{ m/s}^2$). Approaching vehicles follow the parabolic braking profile $v(dist) = \min(v_{\max}, \sqrt{2 \cdot a \cdot dist})$ and dock with smooth station arrival speeds strictly $< 0.3\text{ m/s}$.
+- **Car-Following Safety & Anti-Collision ($\ge 2.0\text{m}$)**: Implemented front-vehicle distance tracking. Vehicles enforce speed constraints when gap $< 4.0\text{m}$ and hard-stop when gap $\le 2.05\text{m}$ with strict step bounds, guaranteeing a minimum headway of $\ge 2.0\text{m}$ and zero overtaking.
+- **Physical Hoist & Cargo Handling**: Replaced hardcoded fake actions with realistic 3.0s dwell cycles. Empty grippers descend, latch FOUPs at machine load port elevation ($y=2.1\text{m}$), and hoist them into vehicle carriages; at dropoff, FOUPs descend, unlatch, and empty grippers return aloft.
+- **Multi-State LED Status Signaling**: Vehicles reflect real-time operational states via luminescent roof status bars: Emerald Green (`IDLE` cruising), Sky Blue (`TO_PICKUP` / `TO_DROPOFF`), and Amber (`LOADING` / `UNLOADING`).
+- **Telemetry HUD & Honesty Badge**: Added an unobtrusive live telemetry mini-HUD on the main toolbar displaying completed jobs, average delivery cycle time, and active vehicle count. Updated research honesty badge to "AMHS Simulated" / "AMHS 仿真运行" with bilingual tooltip transparency disclosing loop model simplifications.
+
 ## [1.4.0] - 2026-10-16
 
 ### "Follow a Wafer" Route Roaming & Roof / HVAC Infrastructure Layer (`twin.html`)
