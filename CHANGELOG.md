@@ -6,7 +6,7 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ## [1.5.0] - 2026-10-18
 
-### Demand-Driven AMHS Closed-Loop Traffic Simulation (`twin.html`)
+### Demand-Driven AMHS Closed-Loop Traffic Simulation & UI Polish (`twin.html`)
 
 - **Loop Traffic Simulation Engine**: Upgraded the AMHS (Automated Material Handling System) OHT monorail logistics from a decorative constant-speed loop into a demand-driven closed-loop traffic simulation across 24 ceiling vehicles (12 vehicles on Loop 1, 12 on Loop 2).
 - **Bay Station Geometry & Derivation**: Established formal load port stations mapped directly from cleanroom tool positions in `twin/layout-default.json`: 7 stations on outer perimeter Loop 1 (265.3m) and 7 stations on inner inter-bay Loop 2 (196.1m), with arc-length coordinates ($s$) and process bay annotations.
@@ -15,7 +15,9 @@ All notable changes to the SemiconFab source-available repository will be docume
 - **Car-Following Safety & Anti-Collision ($\ge 2.0\text{m}$)**: Implemented front-vehicle distance tracking. Vehicles enforce speed constraints when gap $< 4.0\text{m}$ and hard-stop when gap $\le 2.05\text{m}$ with strict step bounds, guaranteeing a minimum headway of $\ge 2.0\text{m}$ and zero overtaking.
 - **Physical Hoist & Cargo Handling**: Replaced hardcoded fake actions with realistic 3.0s dwell cycles. Empty grippers descend, latch FOUPs at machine load port elevation ($y=2.1\text{m}$), and hoist them into vehicle carriages; at dropoff, FOUPs descend, unlatch, and empty grippers return aloft.
 - **Multi-State LED Status Signaling**: Vehicles reflect real-time operational states via luminescent roof status bars: Emerald Green (`IDLE` cruising), Sky Blue (`TO_PICKUP` / `TO_DROPOFF`), and Amber (`LOADING` / `UNLOADING`).
-- **Telemetry HUD & Honesty Badge**: Added an unobtrusive live telemetry mini-HUD on the main toolbar displaying completed jobs, average delivery cycle time, and active vehicle count. Updated research honesty badge to "AMHS Simulated" / "AMHS 仿真运行" with bilingual tooltip transparency disclosing loop model simplifications.
+- **Telemetry HUD Relocation & Bottom Stack Architecture**: Relocated the floating AMHS telemetry pill from the top toolbar to the bottom center directly above the legend bar, avoiding top-bar button overflow. Integrated into a unified vertical stack (`#bottom-center-hud-stack`) with Airflow and Heatmap telemetry panels, dynamically stacking upwards with flex-col-reverse. Docked the 2D floor plan editor trigger button (`#btn-edit-layout`) cleanly inside the bottom toolbar, completely eliminating horizontal and vertical overlapping across all resolutions.
+- **Top Camera Presets & Action Buttons Hover Popover Tooltips**: Added dark semi-transparent frosted glass popover tooltips (`bg-slate-900/95` with subtle border and upward-pointing arrow) for all 7 camera preset buttons (Isometric, Top-Down, Litho Core, Cleanroom Air Shower, Roof/HVAC, Patrol Engineer, Reset) and Cinematic Tour button. Fully supports dynamic bilingual text in English and Simplified Chinese via `I18N_DICTIONARY` and `t()` without native browser tooltip delay or viewport clipping.
+- **DOM Hierarchy Integrity**: Closed lingering container tags in `open-architecture-modal` and `bottom-hud-footer`, restoring strict well-formed HTML5 DOM tree structure.
 
 ## [1.4.0] - 2026-10-16
 

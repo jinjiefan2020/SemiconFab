@@ -345,6 +345,8 @@ const VISION_I18N = {
     vision_ms_v1_3:
       "Interactive benchmark: in-browser Pyodide dispatching simulation",
     vision_ms_v1_4: "Follow-a-wafer route animation; roof/HVAC layer",
+    vision_ms_v1_5:
+      "Demand-driven AMHS closed-loop traffic simulation; bottom HUD stack; hover popover tooltips",
 
     // Matrix
     vision_matrix_title:
@@ -715,6 +717,8 @@ const VISION_I18N = {
     vision_ms_v1_2: "167 条记录，8 个真实比例 L1 模型",
     vision_ms_v1_3: "benchmark 可交互：浏览器内 Pyodide 派工仿真",
     vision_ms_v1_4: "Follow-a-wafer 路线动画；屋顶/HVAC 基础设施层",
+    vision_ms_v1_5:
+      "AMHS 闭环物流交通仿真与智能派工；底部无遮挡 HUD 架构；顶部视角预设悬停提示气泡",
 
     // Matrix
     vision_matrix_title: "商业巨头方案 vs 开源技术栈替代矩阵",
