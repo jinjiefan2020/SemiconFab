@@ -70,7 +70,7 @@ html.dark, [data-theme="dark"] {
 1. **左侧品牌区**：
    - 包含 300mm 晶圆图章（金色芯片微光 `fill="var(--accent)"`）。
    - 品牌字样 `SemiconFab<span style="color:var(--accent)">.org</span>`。
-   - `v1.6` 胶囊徽章（背景 `var(--surface-2)`，文字 `var(--ink-2)`）。
+   - `v1.7` 胶囊徽章（背景 `var(--surface-2)`，文字 `var(--ink-2)`）。
    - **禁止添加多余的“首页”链接**：品牌 Logo 自身即直达首页交互，顶部导航菜单内不得包含“首页”。
 2. **中心导航菜单**：
    - 保持专业与克制，**不得出现“提交您的设备”**（该入口仅在全量设备库或特定工具页面提供）。

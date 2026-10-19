@@ -224,7 +224,7 @@
             </div>
             <div class="sc-brand-title">
               <span>SemiconFab<span class="sc-brand-tld">.org</span></span>
-              <span class="sc-brand-tag">v1.6</span>
+              <span class="sc-brand-tag">v1.7</span>
             </div>
           </a>
 
