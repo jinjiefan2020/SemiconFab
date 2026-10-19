@@ -19,7 +19,8 @@ let currentLang = "en";
 function detectInitialLanguage() {
   // 1. Explicit URL search param: ?lang=...
   const urlParams = new URLSearchParams(window.location.search);
-  const langParam = urlParams.get("lang");
+  let langParam = urlParams.get("lang");
+  if (langParam === "zh") langParam = "zh-CN";
   if (langParam && I18N_DICTIONARY[langParam]) {
     return langParam;
   }
@@ -55,10 +56,13 @@ function toggleLanguage() {
 }
 
 function setLanguage(langCode) {
+  if (langCode === "zh") langCode = "zh-CN";
   if (!I18N_DICTIONARY[langCode]) langCode = "en";
   currentLang = langCode;
   localStorage.setItem("semiconfab_lang", langCode);
+  localStorage.setItem("semicon_lang", langCode.startsWith("zh") ? "zh" : langCode);
   document.documentElement.lang = langCode;
+  document.documentElement.setAttribute("data-lang", langCode.startsWith("zh") ? "zh" : langCode);
 
   // 1. Update textContent for elements with data-i18n
   document.querySelectorAll("[data-i18n]").forEach((el) => {
@@ -110,6 +114,14 @@ function setLanguage(langCode) {
 
   // 4. Update language picker UI state
   updateLangPickerUI();
+
+  // 4.1 Update theme-label bilingual text
+  const themeLabel = document.getElementById("theme-label");
+  if (themeLabel) {
+    const isDark = document.documentElement.classList.contains("dark") || document.documentElement.getAttribute("data-theme") === "dark";
+    const isZh = langCode.startsWith("zh");
+    themeLabel.textContent = isZh ? (isDark ? "暗色" : "亮色") : (isDark ? "Dark" : "Day");
+  }
 
   // 5. Update language dropdown active state
   setupLangDropdown();

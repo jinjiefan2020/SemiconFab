@@ -1,0 +1,1113 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+/**
+ * SemiconFab.org - Unified Design System & Mobile Responsive Theme
+ * Architecture: Dual-Theme (Light Mode Default + Dark Mode Option) + Mobile-First Component Library
+ * Palette aligned with fab-cost.html warm editorial research standard
+ * Offline Compatible · Pure CSS Custom Properties
+ */
+
+/* ==========================================================================
+   1. Light Mode (Default Theme — Fab-Cost Editorial Warm Paper)
+   ========================================================================== */
+:root,
+html.light,
+[data-theme="light"] {
+  color-scheme: light dark;
+
+  /* Surface Layers (Matching fab-cost.html warm editorial aesthetic) */
+  --sc-bg-base: #f2f1ec;        /* warm linen / paper background */
+  --sc-bg-panel: #ffffff;       /* pure white card surface */
+  --sc-bg-card: #ffffff;        /* card surface */
+  --sc-bg-subpanel: #e9e7df;    /* warm stone secondary surface */
+  --sc-bg-input: #ffffff;
+  --sc-bg-dropdown: #ffffff;
+  --sc-bg-hover: rgba(14, 110, 107, 0.08); /* signature teal tint */
+  --sc-header-bg: rgba(242, 241, 236, 0.94);
+  --sc-footer-bg: #f2f1ec;
+  --sc-table-th-bg: #e9e7df;
+  --sc-table-tr-hover: rgba(233, 231, 223, 0.65);
+
+  /* Brand Accents (Signature Viridian Teal / Amber / Brick Red from fab-cost.html) */
+  --sc-accent-cyan: #0e6e6b;    /* signature viridian teal */
+  --sc-accent-cyan-glow: rgba(14, 110, 107, 0.22);
+  --sc-accent-emerald: #0e6e6b;
+  --sc-accent-emerald-glow: rgba(14, 110, 107, 0.22);
+  --sc-accent-amber: #b45309;   /* warm amber */
+  --sc-accent-amber-bg: #fdf3e3;
+  --sc-accent-rose: #a83226;    /* editorial red */
+  --sc-accent-indigo: #2c4a6f;
+
+  /* Typography Colors (Rich Charcoal Ink from fab-cost.html) */
+  --sc-text-main: #1c2126;      /* rich charcoal ink */
+  --sc-text-muted: #4c5560;     /* secondary ink */
+  --sc-text-dim: #7a838d;       /* tertiary ink */
+  --sc-text-link: #0e6e6b;      /* accent teal link */
+  --sc-text-link-hover: #0a5451;
+
+  /* Borders & Dividers (Warm Stone Line from fab-cost.html) */
+  --sc-border: #d8d4c8;         /* warm stone line */
+  --sc-border-light: #e4e1d7;
+  --sc-border-active: #0e6e6b;
+
+  /* Elevation Shadows (fab-cost.html subtle elevation) */
+  --sc-shadow-sm: 0 1px 2px rgba(28, 33, 38, 0.06), 0 2px 4px rgba(28, 33, 38, 0.04);
+  --sc-shadow-md: 0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+  --sc-shadow-lg: 0 12px 32px rgba(28, 33, 38, 0.1);
+  --sc-shadow-drawer: rgba(28, 33, 38, 0.18);
+
+  /* Global Token Compatibility Aliases */
+  --bg-page: var(--sc-bg-base);
+  --bg-main: var(--sc-bg-base);
+  --bg-panel: var(--sc-bg-panel);
+  --bg-card: var(--sc-bg-card);
+  --bg-card-hover: var(--sc-bg-subpanel);
+  --bg-card-alt: var(--sc-bg-subpanel);
+  --bg: var(--sc-bg-base);
+  --surface: var(--sc-bg-panel);
+  --surface-2: var(--sc-bg-subpanel);
+  --ink: var(--sc-text-main);
+  --ink-2: var(--sc-text-muted);
+  --ink-3: var(--sc-text-dim);
+  --line: var(--sc-border);
+  --accent: var(--sc-accent-cyan);
+  --accent-ink: #0a5451;
+  --amber: var(--sc-accent-amber);
+  --amber-bg: #fdf3e3;
+  --red: var(--sc-accent-rose);
+  --chart-grid: #ddd9cc;
+  --shadow: var(--sc-shadow-md);
+
+  --border-card: var(--sc-border);
+  --border-color: var(--sc-border);
+  --border: var(--sc-border);
+  --border-focus: var(--sc-accent-cyan);
+  --border-highlight: var(--sc-accent-cyan);
+  --text-main: var(--sc-text-main);
+  --text-muted: var(--sc-text-muted);
+  --text-subtle: var(--sc-text-dim);
+  --text-dim: var(--sc-text-dim);
+  --primary: var(--sc-accent-cyan);
+  --primary-hover: var(--sc-text-link-hover);
+  --accent-blue: var(--sc-accent-cyan);
+  --accent-blue-bg: rgba(14, 110, 107, 0.12);
+  --accent-emerald: var(--sc-accent-emerald);
+  --accent-amber: var(--sc-accent-amber);
+  --accent-rose: var(--sc-accent-rose);
+  --accent-purple: var(--sc-accent-indigo);
+
+  /* Geometry & Header */
+  --sc-radius-sm: 6px;
+  --sc-radius-md: 10px;
+  --sc-radius-lg: 14px;
+  --sc-radius-full: 9999px;
+  --sc-header-height: 60px;
+}
+
+/* ==========================================================================
+   2. Dark Mode (Matching fab-cost.html Charcoal Navy)
+   ========================================================================== */
+html.dark,
+[data-theme="dark"] {
+  /* Surface Layers (Deep Charcoal Navy from fab-cost.html) */
+  --sc-bg-base: #12161a;
+  --sc-bg-panel: #1a2026;
+  --sc-bg-card: #1a2026;
+  --sc-bg-subpanel: #232b33;
+  --sc-bg-input: #12161a;
+  --sc-bg-dropdown: #1a2026;
+  --sc-bg-hover: rgba(63, 189, 184, 0.1);
+  --sc-header-bg: rgba(18, 22, 26, 0.94);
+  --sc-footer-bg: #0d1013;
+  --sc-table-th-bg: #232b33;
+  --sc-table-tr-hover: rgba(35, 43, 51, 0.7);
+
+  /* Brand Accents (Luminous Mint Teal from fab-cost.html) */
+  --sc-accent-cyan: #3fbdb8;
+  --sc-accent-cyan-glow: rgba(63, 189, 184, 0.25);
+  --sc-accent-emerald: #3fbdb8;
+  --sc-accent-emerald-glow: rgba(63, 189, 184, 0.25);
+  --sc-accent-amber: #e8a04c;
+  --sc-accent-amber-bg: #2c2417;
+  --sc-accent-rose: #e0786a;
+  --sc-accent-indigo: #818cf8;
+
+  /* Typography Colors (Clean Luminous Off-White from fab-cost.html) */
+  --sc-text-main: #e8eaec;
+  --sc-text-muted: #aeb7bf;
+  --sc-text-dim: #7e8891;
+  --sc-text-link: #3fbdb8;
+  --sc-text-link-hover: #7fd8d3;
+
+  /* Borders & Dividers */
+  --sc-border: #333c45;
+  --sc-border-light: rgba(63, 189, 184, 0.25);
+  --sc-border-active: #3fbdb8;
+
+  /* Elevation Shadows */
+  --sc-shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.25);
+  --sc-shadow-md: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  --sc-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.5);
+  --sc-shadow-drawer: rgba(0, 0, 0, 0.6);
+
+  /* Global Token Compatibility Aliases */
+  --bg-page: var(--sc-bg-base);
+  --bg-main: var(--sc-bg-base);
+  --bg-panel: var(--sc-bg-panel);
+  --bg-card: var(--sc-bg-card);
+  --bg-card-hover: var(--sc-bg-subpanel);
+  --bg-card-alt: var(--sc-bg-subpanel);
+  --bg: var(--sc-bg-base);
+  --surface: var(--sc-bg-panel);
+  --surface-2: var(--sc-bg-subpanel);
+  --ink: var(--sc-text-main);
+  --ink-2: var(--sc-text-muted);
+  --ink-3: var(--sc-text-dim);
+  --line: var(--sc-border);
+  --accent: var(--sc-accent-cyan);
+  --accent-ink: #7fd8d3;
+  --amber: var(--sc-accent-amber);
+  --amber-bg: #2c2417;
+  --red: var(--sc-accent-rose);
+  --chart-grid: #2c343d;
+  --shadow: var(--sc-shadow-md);
+
+  --border-card: var(--sc-border);
+  --border-color: var(--sc-border);
+  --border: var(--sc-border);
+  --border-focus: var(--sc-accent-cyan);
+  --border-highlight: var(--sc-accent-cyan);
+  --text-main: var(--sc-text-main);
+  --text-muted: var(--sc-text-muted);
+  --text-subtle: var(--sc-text-dim);
+  --text-dim: var(--sc-text-dim);
+  --primary: var(--sc-accent-cyan);
+  --primary-hover: var(--sc-text-link-hover);
+  --accent-blue: var(--sc-accent-cyan);
+  --accent-blue-bg: rgba(63, 189, 184, 0.15);
+  --accent-emerald: var(--sc-accent-emerald);
+  --accent-amber: var(--sc-accent-amber);
+  --accent-rose: var(--sc-accent-rose);
+  --accent-purple: var(--sc-accent-indigo);
+}
+
+/* ==========================================================================
+   3. Base Layout & Typography (Manrope & IBM Plex Mono)
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body.sc-themed {
+  background-color: var(--sc-bg-base);
+  color: var(--sc-text-main);
+  font-family:
+    "Manrope",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+  margin: 0;
+  padding: 0;
+  padding-top: var(--sc-header-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.mono,
+.font-mono,
+code,
+pre,
+kbd,
+samp {
+  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.sc-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 768px) {
+  .sc-container {
+    padding: 0 14px;
+  }
+}
+
+/* ==========================================================================
+   4. Unified Navigation Header
+   ========================================================================== */
+.sc-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--sc-header-height);
+  background: var(--sc-header-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--sc-border);
+  z-index: 1000;
+  transition: all 0.25s ease;
+}
+
+.sc-header-inner {
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Brand Area */
+.sc-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--sc-text-main);
+  font-weight: 800;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  transition: opacity 0.2s;
+  flex-shrink: 0;
+}
+
+.sc-brand:hover {
+  opacity: 0.9;
+}
+
+.sc-brand-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
+  background: var(--sc-bg-subpanel);
+  border: 1.5px solid var(--sc-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sc-text-dim);
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.sc-brand-title {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--sc-text-main);
+}
+
+.sc-brand-tld {
+  color: var(--sc-accent-emerald);
+  font-weight: 700;
+}
+
+.sc-brand-tag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--sc-accent-cyan);
+  border: 1px solid rgba(2, 132, 199, 0.25);
+  text-transform: uppercase;
+  margin-left: 4px;
+}
+
+html.dark .sc-brand-tag {
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.3);
+}
+
+/* Desktop Navigation Menu */
+.sc-desktop-nav {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+@media (max-width: 890px) {
+  .sc-desktop-nav {
+    display: none !important;
+  }
+}
+
+.sc-nav-item {
+  position: relative;
+}
+
+.sc-nav-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  border-radius: var(--sc-radius-sm);
+  color: var(--sc-text-muted);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sc-nav-link:hover,
+.sc-nav-link.active,
+.sc-nav-item:hover > .sc-nav-link {
+  color: var(--sc-text-main);
+  background: var(--sc-bg-hover);
+}
+
+.sc-nav-link.active {
+  color: var(--sc-accent-cyan);
+  background: rgba(2, 132, 199, 0.1);
+}
+
+html.dark .sc-nav-link.active {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.sc-nav-arrow {
+  width: 12px;
+  height: 12px;
+  opacity: 0.6;
+  transition: transform 0.2s ease;
+}
+
+.sc-nav-item:hover .sc-nav-arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Desktop Dropdown Panel */
+.sc-dropdown-panel {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  min-width: 230px;
+  background: var(--sc-bg-dropdown);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--sc-border);
+  border-radius: var(--sc-radius-md);
+  box-shadow: var(--sc-shadow-lg);
+  padding: 6px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(6px);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1010;
+}
+
+.sc-nav-item:hover .sc-dropdown-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.sc-dropdown-item {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 12px;
+  border-radius: var(--sc-radius-sm);
+  text-decoration: none;
+  transition: all 0.15s ease;
+}
+
+.sc-dropdown-item:hover {
+  background: var(--sc-bg-hover);
+}
+
+.sc-dropdown-item.active {
+  background: rgba(2, 132, 199, 0.12);
+}
+
+html.dark .sc-dropdown-item.active {
+  background: rgba(56, 189, 248, 0.15);
+}
+
+.sc-dropdown-title {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--sc-text-main);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sc-dropdown-item.active .sc-dropdown-title {
+  color: var(--sc-accent-cyan);
+}
+
+.sc-dropdown-desc {
+  font-size: 0.6875rem;
+  color: var(--sc-text-dim);
+  margin-top: 2px;
+}
+
+/* Right Controls Area */
+.sc-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sc-btn-lang,
+.sc-btn-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--sc-radius-sm);
+  border: 1px solid var(--sc-border);
+  background: var(--sc-bg-subpanel);
+  color: var(--sc-text-main);
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sc-btn-lang:hover,
+.sc-btn-theme-toggle:hover {
+  border-color: var(--sc-accent-cyan);
+  color: var(--sc-accent-cyan);
+  background: var(--sc-bg-hover);
+}
+
+@media (max-width: 600px) {
+  .sc-header-inner {
+    padding: 0 12px;
+  }
+  .sc-brand-tag {
+    display: none;
+  }
+  .sc-brand-title {
+    font-size: 0.95rem;
+  }
+  .sc-btn-lang,
+  .sc-btn-theme-toggle {
+    padding: 5px 8px;
+    font-size: 0.72rem;
+  }
+  .sc-header-actions {
+    gap: 6px;
+  }
+}
+
+/* Mobile Hamburger Button */
+.sc-hamburger-btn {
+  display: none;
+  background: var(--sc-bg-subpanel);
+  border: 1px solid var(--sc-border);
+  border-radius: 8px;
+  color: var(--sc-text-main);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.sc-hamburger-btn:hover {
+  border-color: var(--sc-accent-cyan);
+}
+
+@media (max-width: 890px) {
+  .sc-hamburger-btn {
+    display: inline-flex;
+  }
+}
+
+/* Mobile Slide-Out Drawer & Backdrop */
+.sc-mobile-backdrop {
+  position: fixed;
+  top: var(--sc-header-height);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+  z-index: 998;
+}
+
+html.dark .sc-mobile-backdrop {
+  background: rgba(2, 6, 23, 0.7);
+}
+
+.sc-mobile-drawer {
+  position: fixed;
+  top: var(--sc-header-height);
+  right: 0;
+  bottom: 0;
+  width: 85vw;
+  max-width: 340px;
+  background: var(--sc-bg-panel);
+  border-left: 1px solid var(--sc-border);
+  box-shadow: -10px 0 30px var(--sc-shadow-drawer);
+  padding: 16px;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.25s ease;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body.sc-drawer-open {
+  overflow: hidden;
+}
+
+body.sc-drawer-open .sc-mobile-backdrop {
+  opacity: 1;
+  visibility: visible;
+}
+
+body.sc-drawer-open .sc-mobile-drawer {
+  transform: translateX(0);
+}
+
+.sc-drawer-section {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sc-drawer-heading {
+  font-size: 0.6875rem;
+  font-weight: 800;
+  color: var(--sc-text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 8px;
+  border-bottom: 1px solid var(--sc-border);
+  margin-bottom: 4px;
+}
+
+.sc-drawer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-radius: var(--sc-radius-sm);
+  color: var(--sc-text-main);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  min-height: 44px; /* Touch friendly standard */
+  transition: background 0.15s, color 0.15s;
+}
+
+.sc-drawer-link:hover,
+.sc-drawer-link.active {
+  background: var(--sc-bg-hover);
+  color: var(--sc-accent-cyan);
+}
+
+.sc-drawer-badge {
+  font-size: 0.6875rem;
+  padding: 2px 6px;
+  border-radius: 999px;
+  background: rgba(2, 132, 199, 0.12);
+  color: var(--sc-accent-cyan);
+}
+
+html.dark .sc-drawer-badge {
+  background: rgba(56, 189, 248, 0.2);
+}
+
+.sc-drawer-controls {
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid var(--sc-border);
+  display: flex;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   5. Responsive Table Wrap Component
+   ========================================================================== */
+.sc-table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--sc-radius-md);
+  border: 1px solid var(--sc-border);
+  background: var(--sc-bg-panel);
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.sc-table-responsive::-webkit-scrollbar {
+  height: 8px;
+}
+
+.sc-table-responsive::-webkit-scrollbar-track {
+  background: var(--sc-bg-subpanel);
+}
+
+.sc-table-responsive::-webkit-scrollbar-thumb {
+  background: var(--sc-border-light);
+  border-radius: 4px;
+}
+
+.sc-table-responsive::-webkit-scrollbar-thumb:hover {
+  background: var(--sc-text-dim);
+}
+
+/* ==========================================================================
+   6. Unified Footer Component
+   ========================================================================== */
+.sc-footer {
+  margin-top: 60px;
+  border-top: 1px solid var(--sc-border);
+  background: var(--sc-footer-bg);
+  padding: 40px 20px 24px 20px;
+  color: var(--sc-text-dim);
+  font-size: 0.8125rem;
+  transition: background-color 0.25s ease;
+}
+
+.sc-footer-inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 900px) {
+  .sc-footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 540px) {
+  .sc-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sc-footer-col h5 {
+  color: var(--sc-text-main);
+  font-size: 0.875rem;
+  font-weight: 700;
+  margin: 0 0 12px 0;
+}
+
+.sc-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sc-footer-col a {
+  color: var(--sc-text-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.sc-footer-col a:hover {
+  color: var(--sc-accent-cyan);
+}
+
+.sc-footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-top: 20px;
+  border-top: 1px solid var(--sc-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.75rem;
+}
+
+/* ==========================================================================
+   7. Card, Input & Table Dual-Theme General Polish
+   ========================================================================== */
+html.light .card,
+html.light .kpi-card,
+html.light .card-box,
+html.light .control-panel,
+html.light .table-box,
+html.light .stack-bar-wrap {
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+html.light select,
+html.light input[type="text"],
+html.light input[type="search"] {
+  background-color: #ffffff;
+  color: #0f172a;
+  border-color: #cbd5e1;
+}
+
+html.light select:focus,
+html.light input:focus {
+  border-color: #0284c7;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+/* ==========================================================================
+   8. Component Palettes Aligned with fab-cost.html Editorial Theme
+   ========================================================================== */
+
+/* 8.1 Filter Chips & Category Badges */
+.chip {
+  background: var(--sc-bg-subpanel);
+  color: var(--sc-text-muted);
+  border: 1px solid var(--sc-border);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+html.light .chip {
+  background: #ffffff;
+  color: #4c5560;
+  border-color: #d8d4c8;
+}
+html.light .chip:hover {
+  background: #e9e7df;
+  border-color: #0e6e6b;
+  color: #1c2126;
+}
+html.light .chip.active {
+  background: #0e6e6b;
+  border-color: #0e6e6b;
+  color: #ffffff;
+  font-weight: 700;
+}
+html.light .chip .chip-count {
+  background: #e9e7df;
+  color: #4c5560;
+}
+html.light .chip.active .chip-count {
+  background: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+
+html.dark .chip {
+  background: #1a2026;
+  color: #aeb7bf;
+  border-color: #333c45;
+}
+html.dark .chip:hover {
+  background: #232b33;
+  border-color: #3fbdb8;
+  color: #e8eaec;
+}
+html.dark .chip.active {
+  background: #3fbdb8;
+  border-color: #3fbdb8;
+  color: #0c2221;
+  font-weight: 700;
+}
+html.dark .chip .chip-count {
+  background: rgba(255, 255, 255, 0.12);
+  color: #aeb7bf;
+}
+html.dark .chip.active .chip-count {
+  background: rgba(12, 34, 33, 0.35);
+  color: #0c2221;
+}
+
+/* 8.2 Disclaimer Notes & Info Boxes */
+.disclaimer-note,
+.disclaimer-box {
+  margin-top: 14px;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+html.light .disclaimer-note,
+html.light .disclaimer-box {
+  background: #e9e7df;
+  border: 1px solid #d8d4c8;
+  color: #4c5560;
+}
+html.dark .disclaimer-note,
+html.dark .disclaimer-box {
+  background: #232b33;
+  border: 1px solid #333c45;
+  color: #aeb7bf;
+}
+
+/* 8.3 Draft / Warning Alert Banners */
+.draft-banner {
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+  transition: all 0.2s ease;
+}
+html.light .draft-banner {
+  background: #fdf3e3;
+  border: 1px solid #b45309;
+}
+html.light .draft-banner-title {
+  color: #b45309;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+html.light .draft-missing-text {
+  color: #1c2126;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+html.light .draft-missing-text strong {
+  color: #b45309;
+  font-weight: 700;
+}
+html.light .btn-contribute {
+  background: #b45309;
+  color: #ffffff;
+}
+html.light .btn-contribute:hover {
+  background: #92400e;
+}
+
+html.dark .draft-banner {
+  background: #2c2417;
+  border: 1px solid #e8a04c;
+}
+html.dark .draft-banner-title {
+  color: #e8a04c;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+html.dark .draft-missing-text {
+  color: #e8eaec;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+html.dark .draft-missing-text strong {
+  color: #e8a04c;
+}
+html.dark .btn-contribute {
+  background: #e8a04c;
+  color: #1a2026;
+}
+html.dark .btn-contribute:hover {
+  background: #f59e0b;
+}
+
+/* 8.4 Form Control Labels & Values */
+html.light .control-label {
+  color: #1c2126 !important;
+  font-weight: 700;
+}
+html.light .control-value {
+  color: #0e6e6b !important;
+}
+html.light .control-desc {
+  color: #4c5560 !important;
+}
+
+html.dark .control-label {
+  color: #e8eaec !important;
+  font-weight: 700;
+}
+html.dark .control-value {
+  color: #3fbdb8 !important;
+}
+html.dark .control-desc {
+  color: #aeb7bf !important;
+}
+
+/* 8.5 Model Indicator Box (Pilot Line vs HVM) */
+.model-indicator-box {
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all 0.25s ease;
+}
+html.light .model-indicator-box.pilot-mode {
+  background: #fdf3e3 !important;
+  border: 1px solid #b45309 !important;
+}
+html.light .model-indicator-box.hvm-mode {
+  background: #e6f4f1 !important;
+  border: 1px solid #0e6e6b !important;
+}
+html.light .model-indicator-title {
+  color: #1c2126 !important;
+  font-weight: 800;
+}
+html.light .model-badge-pill.pilot {
+  background: #fde68a !important;
+  color: #b45309 !important;
+  border: 1px solid #fcd34d !important;
+}
+html.light .model-badge-pill.hvm {
+  background: #c8ece9 !important;
+  color: #0a5451 !important;
+  border: 1px solid #0e6e6b !important;
+}
+html.light .model-indicator-box.pilot-mode .model-litho-ratio {
+  color: #b45309 !important;
+}
+html.light .model-indicator-box.hvm-mode .model-litho-ratio {
+  color: #0e6e6b !important;
+}
+html.light .model-indicator-desc {
+  color: #4c5560 !important;
+}
+
+html.dark .model-indicator-box.pilot-mode {
+  background: #2c2417 !important;
+  border: 1px solid #e8a04c !important;
+}
+html.dark .model-indicator-box.hvm-mode {
+  background: rgba(63, 189, 184, 0.12) !important;
+  border: 1px solid #3fbdb8 !important;
+}
+html.dark .model-indicator-title {
+  color: #e8eaec !important;
+  font-weight: 800;
+}
+html.dark .model-badge-pill.pilot {
+  background: rgba(232, 160, 76, 0.2) !important;
+  color: #e8a04c !important;
+  border: 1px solid rgba(232, 160, 76, 0.4) !important;
+}
+html.dark .model-badge-pill.hvm {
+  background: rgba(63, 189, 184, 0.2) !important;
+  color: #3fbdb8 !important;
+  border: 1px solid rgba(63, 189, 184, 0.4) !important;
+}
+html.dark .model-indicator-box.pilot-mode .model-litho-ratio {
+  color: #e8a04c !important;
+}
+html.dark .model-indicator-box.hvm-mode .model-litho-ratio {
+  color: #3fbdb8 !important;
+}
+html.dark .model-indicator-desc {
+  color: #aeb7bf !important;
+}
+
+/* 8.6 KPI Cards Light Mode Optimization */
+html.light .kpi-card {
+  background: #ffffff;
+  border: 1px solid #d8d4c8;
+  box-shadow: 0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+}
+html.light .kpi-price {
+  color: #1c2126 !important;
+}
+html.light .kpi-card.recommended {
+  background: linear-gradient(180deg, #f0f7f6 0%, #ffffff 100%) !important;
+  border: 2px solid #0e6e6b !important;
+  box-shadow: 0 4px 20px -2px rgba(14, 110, 107, 0.15), 0 2px 6px -1px rgba(14, 110, 107, 0.08) !important;
+}
+html.light .kpi-card.recommended .kpi-price {
+  color: #0e6e6b !important;
+}
+html.light .kpi-card.recommended .recommended-pill {
+  background: #e0f2f1;
+  color: #0a5451;
+  border: 1px solid #0e6e6b;
+  font-weight: 700;
+}
+
+/* 8.7 Basis & Conformance Badges */
+html.light .basis-reported {
+  background: #fdf3e3;
+  color: #b45309;
+  border: 1px solid #b45309;
+}
+html.light .basis-category_estimate {
+  background: #e6f4f1;
+  color: #0e6e6b;
+  border: 1px solid #0e6e6b;
+}
+html.light .basis-observed_listing {
+  background: #e9e7df;
+  color: #4c5560;
+  border: 1px solid #d8d4c8;
+}
+html.light .conf-badge-l1 {
+  background: #e6f4f1;
+  color: #0e6e6b;
+  border: 1px solid #0e6e6b;
+}
+html.light .conf-badge-draft {
+  background: #fdf3e3;
+  color: #b45309;
+  border: 1px solid #b45309;
+}
+html.light .cat-badge,
+html.light .pill-cat {
+  background: #e6f4f1;
+  color: #0e6e6b;
+  border: 1px solid #0e6e6b;
+}
+
+/* 8.8 Industrial Grayscale Gradient Text (Solemn Precision Style) */
+.industrial-gradient-text {
+  background: linear-gradient(
+    135deg,
+    #090d16 0%,
+    #334155 50%,
+    #64748b 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+html.dark .industrial-gradient-text,
+[data-theme="dark"] .industrial-gradient-text {
+  background: linear-gradient(
+    135deg,
+    #ffffff 0%,
+    #cbd5e1 50%,
+    #94a3b8 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+

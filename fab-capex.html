@@ -1,0 +1,4096 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Fab Total Capex Estimator & Cleanroom Equipment BOM — SemiconFab.org
+    </title>
+    <meta
+      name="description"
+      content="Parametric cleanroom equipment BOM and total fab construction capital expenditure (Capex) estimator combining 3D digital twin layout tools, verified equipment price estimates, and facility infrastructure models."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="fonts.css" />
+    <link rel="stylesheet" href="css/semicon-theme.css" />
+
+    <style>
+      :root {
+        --bg-main: var(--sc-bg-base);
+        --bg-panel: var(--sc-bg-panel);
+        --bg-card: var(--sc-bg-card);
+        --bg-card-hover: var(--sc-bg-subpanel);
+        --border-color: var(--sc-border);
+        --border-highlight: var(--sc-accent-cyan);
+        --text-main: var(--sc-text-main);
+        --text-muted: var(--sc-text-muted);
+        --text-subtle: var(--sc-text-dim);
+        --accent-blue: var(--sc-accent-cyan);
+        --accent-emerald: var(--sc-accent-emerald);
+        --accent-amber: var(--sc-accent-amber);
+        --accent-rose: var(--sc-accent-rose);
+        --accent-purple: var(--sc-accent-indigo);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Helvetica,
+          Arial,
+          sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Navbar */
+      .navbar {
+        background: rgba(15, 23, 42, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        padding: 12px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        color: var(--text-main);
+      }
+
+      .nav-brand-title {
+        font-weight: 700;
+        font-size: 1.125rem;
+        background: linear-gradient(135deg, #38bdf8, #818cf8);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .nav-link {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: color 0.2s;
+      }
+      .nav-link:hover {
+        color: #fff;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        font-size: 0.8125rem;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        border: 1px solid transparent;
+      }
+
+      .btn-secondary {
+        background: var(--sc-bg-subpanel);
+        color: var(--sc-text-main);
+        border: 1px solid var(--sc-border);
+      }
+      .btn-secondary:hover {
+        background: var(--sc-border);
+        color: var(--sc-text-main);
+      }
+
+      .container {
+        max-width: 1560px;
+        margin: 0 auto;
+        padding: 24px 20px 60px;
+        width: 100%;
+        flex: 1;
+      }
+
+      /* Hero Title */
+      .hero-header {
+        margin-bottom: 24px;
+      }
+
+      .hero-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(14, 110, 107, 0.12);
+        color: var(--sc-accent-cyan);
+        border: 1px solid rgba(14, 110, 107, 0.25);
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        margin-bottom: 8px;
+      }
+      html.dark .hero-tag {
+        background: rgba(63, 189, 184, 0.15);
+        color: #3fbdb8;
+        border-color: rgba(63, 189, 184, 0.3);
+      }
+
+      .hero-title {
+        font-size: 1.85rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+        margin-bottom: 6px;
+      }
+
+      .hero-subtitle {
+        color: var(--text-muted);
+        font-size: 0.9375rem;
+        max-width: 900px;
+      }
+
+      /* Interactive Control Bar */
+      .control-panel {
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+        box-shadow: var(--sc-shadow-md);
+      }
+
+      .control-group.scale-highlight-row {
+        grid-column: 1 / -1;
+        background: var(--sc-bg-hover);
+        border: 1.5px solid var(--border-color);
+        border-radius: 10px;
+        padding: 16px 18px;
+        gap: 10px;
+        box-shadow: var(--sc-shadow-sm);
+      }
+
+      .scale-highlight-row .control-label {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        color: var(--text-main);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .scale-highlight-row .control-label-left {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .scale-highlight-badge {
+        font-size: 0.6875rem;
+        font-weight: 800;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        background: rgba(2, 132, 199, 0.15);
+        color: var(--sc-accent-cyan);
+        border: 1px solid var(--border-color);
+        padding: 2px 8px;
+        border-radius: 999px;
+      }
+
+      .scale-highlight-row .control-value {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        color: var(--sc-accent-cyan);
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        padding: 4px 12px;
+        border-radius: 6px;
+      }
+
+      .scale-highlight-row select {
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 12px 14px;
+        background: var(--bg-card);
+        color: var(--text-main);
+        border: 1.5px solid var(--border-color);
+        border-radius: 8px;
+        box-shadow: var(--sc-shadow-sm);
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .scale-highlight-row select:focus {
+        border-color: var(--sc-accent-cyan);
+        box-shadow: 0 0 0 3px var(--sc-accent-cyan-glow);
+      }
+
+      .scale-highlight-row select option {
+        background: var(--bg-card);
+        color: var(--text-main);
+        padding: 8px;
+      }
+
+      .scale-highlight-row .control-desc {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+      }
+
+      @media (max-width: 768px) {
+        .control-panel {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .control-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .control-label {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: var(--text-main);
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .control-value {
+        color: var(--sc-accent-cyan);
+        font-family: ui-monospace, monospace;
+      }
+
+      .control-desc {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+      }
+
+      select,
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--sc-accent-cyan);
+      }
+
+      select {
+        background: var(--bg-card);
+        color: var(--text-main);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 0.875rem;
+      }
+
+      /* Model Indicator Box */
+      .model-indicator-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        transition: all 0.25s ease;
+      }
+      .model-indicator-title {
+        font-weight: 700;
+        font-size: 0.9375rem;
+        color: var(--text-main);
+      }
+      .model-litho-ratio {
+        font-size: 0.8125rem;
+        font-weight: 700;
+        color: var(--sc-accent-amber);
+      }
+      .model-indicator-desc {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+      .model-badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 10px;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      /* Top 3 KPI Cards */
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      .kpi-card {
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
+
+      .kpi-card.recommended {
+        border-color: var(--sc-accent-cyan);
+        background: linear-gradient(
+          180deg,
+          rgba(30, 41, 59, 0.95),
+          rgba(15, 23, 42, 0.98)
+        );
+        box-shadow:
+          0 0 0 1px rgba(59, 130, 246, 0.5),
+          0 10px 30px rgba(0, 0, 0, 0.4);
+      }
+
+      .kpi-card.recommended::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #38bdf8, #818cf8);
+      }
+
+      .kpi-badge {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .kpi-badge.low {
+        color: var(--text-muted);
+      }
+      .kpi-badge.median {
+        color: var(--sc-accent-cyan);
+      }
+      .kpi-badge.high {
+        color: var(--sc-accent-rose);
+      }
+
+      .recommended-pill {
+        background: rgba(59, 130, 246, 0.2);
+        color: #60a5fa;
+        border: 1px solid rgba(59, 130, 246, 0.4);
+        padding: 2px 8px;
+        border-radius: 999px;
+        font-size: 0.6875rem;
+      }
+
+      .kpi-price {
+        font-size: 2.25rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--text-main);
+        line-height: 1.1;
+        margin-bottom: 12px;
+      }
+
+      .kpi-sub-breakdown {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        padding-top: 12px;
+        border-top: 1px solid var(--border-color);
+        font-size: 0.8125rem;
+      }
+
+      .kpi-sub-row {
+        display: flex;
+        justify-content: space-between;
+        color: var(--text-muted);
+      }
+      .kpi-sub-row strong {
+        color: var(--text-main);
+      }
+
+      /* Visual Stack Bar */
+      .stack-bar-wrap {
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 24px;
+      }
+
+      .stack-bar-title {
+        font-size: 0.9375rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .progress-multi {
+        height: 16px;
+        border-radius: 999px;
+        overflow: hidden;
+        display: flex;
+        background: var(--sc-bg-subpanel);
+        margin-bottom: 14px;
+      }
+
+      .progress-seg {
+        height: 100%;
+        transition: width 0.3s;
+      }
+
+      .legend-chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        font-size: 0.75rem;
+      }
+
+      .legend-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        color: var(--text-muted);
+      }
+
+      .legend-color {
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+      }
+
+      /* Dual Column: Process Bay Breakdown vs Facility Breakdown */
+      .dual-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 24px;
+      }
+
+      .card-box {
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
+      }
+
+      .box-title {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin-bottom: 14px;
+        color: var(--text-main);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .breakdown-list {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .breakdown-item {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .breakdown-header {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.8125rem;
+      }
+      .breakdown-name {
+        color: var(--text-main);
+        font-weight: 600;
+      }
+      .breakdown-cost {
+        font-weight: 700;
+        color: var(--sc-accent-cyan);
+      }
+
+      .breakdown-mini-bar {
+        height: 6px;
+        background: var(--sc-bg-subpanel);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+      .breakdown-mini-fill {
+        height: 100%;
+        border-radius: 999px;
+      }
+
+      /* BOM Table Section */
+      .table-box {
+        background: var(--bg-panel);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 24px;
+      }
+
+      .table-header-bar {
+        padding: 16px 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .table-filter-group {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+
+      .table-scroll {
+        max-height: 600px;
+        overflow-y: auto;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+        font-size: 0.8125rem;
+      }
+
+      th {
+        background: var(--sc-table-th-bg);
+        padding: 12px 16px;
+        color: var(--text-muted);
+        font-weight: 600;
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+      }
+
+      td {
+        padding: 12px 16px;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-main);
+      }
+
+      tr:hover td {
+        background: var(--sc-table-tr-hover);
+      }
+
+      .pill-cat {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        border-radius: 3px;
+        background: var(--accent-blue-bg);
+        color: var(--sc-accent-cyan);
+        font-weight: 600;
+      }
+
+      .basis-pill {
+        font-size: 0.6875rem;
+        padding: 1px 6px;
+        border-radius: 3px;
+        text-transform: uppercase;
+        font-weight: 700;
+      }
+      .basis-reported {
+        background: #fdf3e3;
+        color: #b45309;
+        border: 1px solid #b45309;
+      }
+      .basis-category_estimate {
+        background: #e6f4f1;
+        color: #0e6e6b;
+        border: 1px solid #0e6e6b;
+      }
+      html.dark .basis-reported {
+        background: #2c2417;
+        color: #e8a04c;
+        border-color: rgba(232, 160, 76, 0.4);
+      }
+      html.dark .basis-category_estimate {
+        background: rgba(63, 189, 184, 0.15);
+        color: #3fbdb8;
+        border-color: rgba(63, 189, 184, 0.35);
+      }
+
+      /* Notes and Caveats */
+      .notes-box {
+        background: var(--bg-card);
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 30px;
+      }
+      .notes-box h4 {
+        font-size: 0.9375rem;
+        color: var(--text-main);
+        margin-bottom: 8px;
+      }
+      .notes-box ul {
+        padding-left: 20px;
+        color: #94a3b8;
+        font-size: 0.8125rem;
+        line-height: 1.6;
+      }
+
+      /* Footer */
+      footer {
+        background: #090e1a;
+        border-top: 1px solid var(--border-color);
+        padding: 24px;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.8125rem;
+      }
+
+      @media (max-width: 1024px) {
+        .kpi-grid {
+          grid-template-columns: 1fr;
+        }
+        .dual-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (max-width: 768px) {
+        .container {
+          padding: 16px 12px 40px !important;
+        }
+        .hero-title {
+          font-size: 1.5rem !important;
+          line-height: 1.25 !important;
+          word-break: break-word;
+        }
+        .scale-highlight-row .control-label {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+        .scale-highlight-row .control-label-left {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Unified Header Mount -->
+    <div id="sc-header-mount"></div>
+
+    <main class="container">
+      <!-- Hero -->
+      <div class="hero-header">
+        <div class="hero-tag" id="ui-hero-tag">
+          Alpha Version · Cleanroom BOM & Capex Model
+        </div>
+        <h1 class="hero-title" id="ui-title">
+          Fab Total Capital Expenditure Estimator
+        </h1>
+        <p class="hero-subtitle" id="ui-subtitle">
+          Bottom-up cleanroom equipment BOM aggregated from the 3D digital twin
+          layout (121 tools) combined with verified public equipment cost ranges
+          and top-down parametric facility infrastructure allocation.
+        </p>
+      </div>
+
+      <!-- Parameter Controllers -->
+      <div class="control-panel">
+        <!-- Scale / Multiplier (Primary Driver - Full Width Row) -->
+        <div class="control-group scale-highlight-row">
+          <label class="control-label">
+            <span class="control-label-left">
+              <span id="ui-lbl-scale">Production Scale / WSPM Multiplier:</span>
+              <span class="scale-highlight-badge" id="ui-scale-badge">Primary Driver</span>
+            </span>
+            <span class="control-value" id="val-scale"
+              >1.0x (121 Tools Baseline)</span
+            >
+          </label>
+          <select id="sel-scale" onchange="recalculate()">
+            <option value="1" id="opt-scale-1">
+              1.0x · Advanced Pilot Line Baseline (121 Tools, ~1k WSPM)
+            </option>
+            <option value="5" id="opt-scale-5">
+              5.0x · Specialty Fab (~5k–10k WSPM, ~730 Tools · HVM Balanced)
+            </option>
+            <option value="10" id="opt-scale-10">
+              10.0x · Single-Phase Commercial Fab (~20k–25k WSPM, ~1,460 Tools · HVM Balanced)
+            </option>
+            <option value="20" id="opt-scale-20">
+              20.0x · Dual-Phase MegaFab (~40k–50k WSPM, ~2,920 Tools · HVM Balanced)
+            </option>
+            <option value="60" id="opt-scale-60">
+              60.0x · GIGAFAB® Campus (~100k–120k WSPM, ~8,750 Tools · 4–6 Phases)
+            </option>
+            <option value="80" id="opt-scale-80">
+              80.0x · Mega GIGAFAB® Campus (~150k+ WSPM, ~11,660 Tools · Full 8 Phases)
+            </option>
+          </select>
+          <div class="control-desc" id="ui-desc-scale">
+            Scales modular cleanroom equipment count proportionally to target
+            fab monthly capacity.
+          </div>
+        </div>
+
+        <!-- Facility Share -->
+        <div class="control-group">
+          <label class="control-label">
+            <span id="ui-lbl-share">Facility & Infrastructure Share:</span>
+            <span class="control-value" id="val-share">25% (WFE: 75%)</span>
+          </label>
+          <input
+            type="range"
+            id="slider-share"
+            min="20"
+            max="35"
+            step="1"
+            value="25"
+            oninput="recalculate()"
+          />
+          <div class="control-desc" id="ui-desc-share">
+            Building, cleanroom, UPW, power, gases, HVAC & AMHS share of total
+            capex (Industry range: 20%–35%).
+          </div>
+        </div>
+
+        <!-- Regional Multiplier -->
+        <div class="control-group">
+          <label class="control-label">
+            <span id="ui-lbl-region">Construction Region / Geography:</span>
+            <span class="control-value" id="val-region">Asia (1.00x)</span>
+          </label>
+          <select id="sel-region" onchange="recalculate()">
+            <option value="1.0">
+              Asia Baseline (Taiwan, Japan, China, Korea) · 1.00x
+            </option>
+            <option value="1.25">
+              Europe (Germany, Ireland, France) · 1.25x
+            </option>
+            <option value="1.35">
+              United States (Arizona, Ohio, Texas) · 1.35x
+            </option>
+          </select>
+          <div class="control-desc" id="ui-desc-region">
+            Accounts for regional labor, regulatory compliance, engineering
+            timelines, and local supply chains.
+          </div>
+        </div>
+      </div>
+
+      <!-- Model Indicator Banner (Pilot Prototype vs HVM Balanced) -->
+      <div id="model-indicator-banner" class="model-indicator-box pilot-mode">
+        <div
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+          "
+        >
+          <div style="display: flex; align-items: center; gap: 8px">
+            <span id="model-badge-pill" class="model-badge-pill pilot"
+              >Pilot Baseline</span
+            >
+            <span
+              id="model-indicator-title"
+              class="model-indicator-title"
+            >
+              Advanced Pilot Line Baseline Model
+            </span>
+          </div>
+          <span
+            id="model-litho-ratio"
+            class="model-litho-ratio"
+          >
+            Litho Share: 77.0% WFE / 57.7% Capex
+          </span>
+        </div>
+        <div
+          id="model-indicator-desc"
+          class="model-indicator-desc"
+        >
+          Baseline cleanroom sandbox: multi-generation R&D scanner deployment (2
+          High-NA + 3 Low-NA EUV) produces 77.0% WFE litho concentration
+          alongside 18 etch/dep tools.
+        </div>
+      </div>
+
+      <!-- Top 3 Scenario Cards -->
+      <div class="kpi-grid">
+        <!-- Low -->
+        <div class="kpi-card">
+          <div class="kpi-badge low" id="ui-kpi-low-title">
+            <span>● Low Scenario (Conservative Minimum)</span>
+          </div>
+          <div class="kpi-price" id="kpi-total-low">$2.24 B</div>
+          <div class="kpi-sub-breakdown">
+            <div class="kpi-sub-row">
+              <span id="ui-kpi-low-wfe">Tool Equipment (WFE):</span>
+              <strong id="kpi-wfe-low">$1.68 B</strong>
+            </div>
+            <div class="kpi-sub-row">
+              <span id="ui-kpi-low-fac">Facility & Infrastructure:</span>
+              <strong id="kpi-fac-low">$559 M</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Median -->
+        <div class="kpi-card recommended">
+          <div class="kpi-badge median">
+            <span id="ui-kpi-med-title"
+              >★ Median Scenario (Recommended Baseline)</span
+            >
+            <span class="recommended-pill" id="ui-recommended-pill"
+              >Industry Standard</span
+            >
+          </div>
+          <div class="kpi-price" id="kpi-total-med" style="color: #38bdf8">
+            $2.78 B
+          </div>
+          <div class="kpi-sub-breakdown">
+            <div class="kpi-sub-row">
+              <span id="ui-kpi-med-wfe">Tool Equipment (WFE):</span>
+              <strong id="kpi-wfe-med" style="color: #38bdf8">$2.09 B</strong>
+            </div>
+            <div class="kpi-sub-row">
+              <span id="ui-kpi-med-fac">Facility & Infrastructure:</span>
+              <strong id="kpi-fac-med" style="color: #60a5fa">$695 M</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- High -->
+        <div class="kpi-card">
+          <div class="kpi-badge high" id="ui-kpi-high-title">
+            <span>▲ High Scenario (Maximum Full-Spec)</span>
+          </div>
+          <div class="kpi-price" id="kpi-total-high">$3.32 B</div>
+          <div class="kpi-sub-breakdown">
+            <div class="kpi-sub-row">
+              <span id="ui-kpi-high-wfe">Tool Equipment (WFE):</span>
+              <strong id="kpi-wfe-high">$2.49 B</strong>
+            </div>
+            <div class="kpi-sub-row">
+              <span id="ui-kpi-high-fac">Facility & Infrastructure:</span>
+              <strong id="kpi-fac-high">$831 M</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Macro Stack Bar -->
+      <div class="stack-bar-wrap">
+        <div class="stack-bar-title">
+          <span id="ui-stack-title"
+            >Capital Allocation Breakdown (Median Scenario)</span
+          >
+          <span style="font-size: 0.8125rem; color: #94a3b8" id="ui-stack-sub"
+            >Cleanroom WFE Equipment vs Facility Systems</span
+          >
+        </div>
+        <div class="progress-multi" id="progress-multi">
+          <div
+            class="progress-seg"
+            id="seg-wfe"
+            style="background: #38bdf8; width: 75%"
+          ></div>
+          <div
+            class="progress-seg"
+            id="seg-shell"
+            style="background: #818cf8; width: 8.3%"
+          ></div>
+          <div
+            class="progress-seg"
+            id="seg-mep"
+            style="background: #f59e0b; width: 14.2%"
+          ></div>
+          <div
+            class="progress-seg"
+            id="seg-amhs"
+            style="background: #10b981; width: 2.5%"
+          ></div>
+        </div>
+        <div class="legend-chips">
+          <div class="legend-chip">
+            <span class="legend-color" style="background: #38bdf8"></span
+            ><span id="ui-leg-wfe">Process Tools (WFE): 75.0%</span>
+          </div>
+          <div class="legend-chip">
+            <span class="legend-color" style="background: #818cf8"></span
+            ><span id="ui-leg-shell">Building & Cleanroom Shell: 8.3%</span>
+          </div>
+          <div class="legend-chip">
+            <span class="legend-color" style="background: #f59e0b"></span
+            ><span id="ui-leg-mep">MEP, UPW, Gases & Power: 14.2%</span>
+          </div>
+          <div class="legend-chip">
+            <span class="legend-color" style="background: #10b981"></span
+            ><span id="ui-leg-amhs">AMHS Monorail Logistics: 2.5%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dual Breakdown: Process Bay vs Facility Subsystems -->
+      <div class="dual-grid">
+        <!-- Process Bay Tool Breakdown -->
+        <div class="card-box">
+          <div class="box-title">
+            <span id="ui-box-process">WFE Equipment by Process Bay</span>
+            <span
+              style="font-size: 0.75rem; color: #94a3b8"
+              id="ui-box-process-sub"
+              >12 Categories</span
+            >
+          </div>
+          <div class="breakdown-list" id="process-breakdown-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Facility Subsystems Breakdown -->
+        <div class="card-box">
+          <div class="box-title">
+            <span id="ui-box-facility">Facility Infrastructure Subsystems</span>
+            <span
+              style="font-size: 0.75rem; color: #94a3b8"
+              id="ui-box-facility-sub"
+              >Top-Down Allocation</span
+            >
+          </div>
+          <div class="breakdown-list" id="facility-breakdown-list">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Detailed BOM Table -->
+      <div class="table-box">
+        <div class="table-header-bar">
+          <div>
+            <h3
+              style="font-size: 1.125rem; font-weight: 700; color: var(--text-main)"
+              id="ui-bom-title"
+            >
+              Cleanroom Tool BOM & Unit Cost Breakdown
+            </h3>
+            <p style="font-size: 0.8125rem; color: var(--text-muted)" id="ui-bom-sub">
+              121 tools aggregated across 103 models from
+              twin/layout-default.json
+            </p>
+          </div>
+          <div class="table-filter-group">
+            <select
+              id="filter-category"
+              onchange="renderBomTable()"
+              style="width: auto; padding: 4px 10px"
+            >
+              <option value="all">All Process Categories</option>
+              <option value="lithography">Lithography (8)</option>
+              <option value="dry_etch">Dry Etch (18)</option>
+              <option value="thin_film_deposition">
+                Thin Film Deposition (18)
+              </option>
+              <option value="ion_implantation">Ion Implantation (8)</option>
+              <option value="metrology">Metrology (8)</option>
+              <option value="wet_clean">Wet Clean (10)</option>
+              <option value="resist_track">Resist Track (8)</option>
+              <option value="cmp">CMP (8)</option>
+              <option value="packaging">Packaging (12)</option>
+              <option value="thermal_processing">Thermal (8)</option>
+              <option value="test">Test (10)</option>
+            </select>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th id="th-cat">Category</th>
+                <th id="th-tool">Vendor & Model</th>
+                <th id="th-count" style="text-align: center">Count</th>
+                <th id="th-unit">Unit Price (Low – High)</th>
+                <th id="th-basis">Basis</th>
+                <th id="th-subtotal" style="text-align: right">
+                  Subtotal (Low / Median / High)
+                </th>
+                <th id="th-actions" style="text-align: center">Action</th>
+              </tr>
+            </thead>
+            <tbody id="bom-tbody">
+              <!-- Rendered via JS -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Engineering Caveats & Notes -->
+      <div class="notes-box">
+        <h4 id="ui-notes-title">
+          ⚠️ Engineering Assumptions & Methodology Caveats
+        </h4>
+        <ul id="ui-notes-list">
+          <li>
+            <strong>Baseline Prototype Line vs. High-Volume GigaFab:</strong>
+            The 3D Digital Twin cleanroom layout represents a balanced modular
+            prototype line (121 tools across all 18 bays). In commercial
+            high-volume manufacturing (30k–50k WSPM), dry etch and thin-film
+            deposition tools scale significantly faster than EUV scanners to
+            resolve process bottlenecks.
+          </li>
+          <li>
+            <strong>Statistical Extreme Stacking:</strong> Summing all minimums
+            (Low) and all maximums (High) assumes correlated extremes across
+            100+ separate procurement negotiations. The
+            <strong>Median Scenario</strong> represents the most mathematically
+            robust baseline for engineering budget feasibility.
+          </li>
+          <li>
+            <strong>Infrastructure & Subfab Boundary:</strong> Facility shares
+            (20%–35%) are anchored to verified industrial data from TSMC
+            Arizona, Kumamoto Fab 1, and Samsung Taylor disclosures, covering
+            civil shell, UPW, gases, high-voltage power, HVAC FFU, and AMHS
+            monorails.
+          </li>
+        </ul>
+      </div>
+    </main>
+
+    <!-- Footer Mount -->
+    <div id="sc-footer-mount"></div>
+
+    <!-- Scripts -->
+    <script id="embedded-bom-data" type="application/json">
+      [
+        {
+          "tool_id": "bc44c286-8316-5bcf-867e-6990181bc9c4",
+          "vendor": "ASML",
+          "model": "TWINSCAN EXE:5000",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 350000000,
+          "high_usd": 400000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.reuters.com/technology/asml-ships-first-high-na-euv-machine-intel-2023-12-21/",
+          "note": "Reported ASML High-NA EUV contract price for Intel shipment (~$380M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": -12.5
+            }
+          ]
+        },
+        {
+          "tool_id": "752bb9b8-00dc-594d-9003-4e49aaf84d94",
+          "vendor": "ASML",
+          "model": "TWINSCAN EXE:5200 / 5200B",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 350000000,
+          "high_usd": 400000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.reuters.com/technology/asml-ships-first-high-na-euv-machine-intel-2023-12-21/",
+          "note": "Reported ASML High-NA EUV contract price for Intel shipment (~$380M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": -7.5
+            }
+          ]
+        },
+        {
+          "tool_id": "a46a0eaf-8fac-578a-b4d0-3496f2cb94f2",
+          "vendor": "ASML",
+          "model": "TWINSCAN NXE:3400C",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 180000000,
+          "high_usd": 250000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.tomshardware.com/tech-industry/asml-unveils-faster-twinscan-nxe-3800e-low-na-euv-scanner",
+          "note": "ASML low-NA EUV NXE series reported average selling price between $180M and $250M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": -17.5
+            }
+          ]
+        },
+        {
+          "tool_id": "640e01d7-420a-5ada-b39c-0e363ec47f11",
+          "vendor": "ASML",
+          "model": "TWINSCAN NXE:3600D",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 180000000,
+          "high_usd": 250000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.tomshardware.com/tech-industry/asml-unveils-faster-twinscan-nxe-3800e-low-na-euv-scanner",
+          "note": "ASML low-NA EUV NXE series reported average selling price between $180M and $250M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": -17.5
+            }
+          ]
+        },
+        {
+          "tool_id": "cde65e61-a3f5-5b18-a11f-7c2a9a220442",
+          "vendor": "ASML",
+          "model": "TWINSCAN NXE:3800E",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 180000000,
+          "high_usd": 250000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.tomshardware.com/tech-industry/asml-unveils-faster-twinscan-nxe-3800e-low-na-euv-scanner",
+          "note": "ASML low-NA EUV NXE series reported average selling price between $180M and $250M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": -12.5
+            }
+          ]
+        },
+        {
+          "tool_id": "c327b57f-9e72-50d5-87a3-0986242ffb86",
+          "vendor": "ASML",
+          "model": "TWINSCAN NXT:2050i",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 55000000,
+          "high_usd": 85000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+          "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": -22.5
+            }
+          ]
+        },
+        {
+          "tool_id": "80de0311-3bee-589e-be9e-c6e58527668c",
+          "vendor": "ASML",
+          "model": "TWINSCAN NXT:2000i",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 55000000,
+          "high_usd": 85000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+          "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": -22.5
+            }
+          ]
+        },
+        {
+          "tool_id": "c20129c0-b029-5da5-8576-fdabf3f96753",
+          "vendor": "Nikon",
+          "model": "NSR-S635E",
+          "category": "lithography",
+          "bay": "lithography",
+          "count": 1,
+          "low_usd": 55000000,
+          "high_usd": 85000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+          "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": -7.5
+            }
+          ]
+        },
+        {
+          "tool_id": "b8574715-05b3-5bd4-9449-3c34dd00ed02",
+          "vendor": "Tokyo Electron",
+          "model": "CLEAN TRACK LITHIUS Pro Z",
+          "category": "resist_track",
+          "bay": "resist_track",
+          "count": 4,
+          "low_usd": 3500000,
+          "high_usd": 7000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading-edge inline EUV/ArFi track coater/developer cluster engineering estimate ($3.5M-$7M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -29.25,
+              "z": -1.5
+            },
+            {
+              "x": -22.25,
+              "z": -1.5
+            },
+            {
+              "x": -29.25,
+              "z": 4.5
+            },
+            {
+              "x": -22.25,
+              "z": 4.5
+            }
+          ]
+        },
+        {
+          "tool_id": "1618a1eb-086d-5dbc-9635-1d7577b0602c",
+          "vendor": "KLA",
+          "model": "2920 Series Broadband Plasma Inspection",
+          "category": "inspection",
+          "bay": "inspection",
+          "count": 2,
+          "low_usd": 5000000,
+          "high_usd": 12000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Broadband optical wafer defect inspection engineering estimate ($5M-$12M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -32.75,
+              "z": 25.0
+            },
+            {
+              "x": -25.75,
+              "z": 25.0
+            }
+          ]
+        },
+        {
+          "tool_id": "ac5b0753-0843-5980-a016-cc5297bb0438",
+          "vendor": "Applied Materials",
+          "model": "UVision 4",
+          "category": "inspection",
+          "bay": "inspection",
+          "count": 2,
+          "low_usd": 5000000,
+          "high_usd": 12000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Broadband optical wafer defect inspection engineering estimate ($5M-$12M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -29.25,
+              "z": 25.0
+            },
+            {
+              "x": -22.25,
+              "z": 25.0
+            }
+          ]
+        },
+        {
+          "tool_id": "5b0a3bb2-da3e-5981-9431-99e04edda4c0",
+          "vendor": "Tokyo Electron",
+          "model": "CLEAN TRACK ACT 12",
+          "category": "resist_track",
+          "bay": "resist_track",
+          "count": 4,
+          "low_usd": 2000000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm mature inline coater/developer track engineering estimate ($2M-$4.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -32.75,
+              "z": -1.5
+            },
+            {
+              "x": -25.75,
+              "z": -1.5
+            },
+            {
+              "x": -32.75,
+              "z": 4.5
+            },
+            {
+              "x": -25.75,
+              "z": 4.5
+            }
+          ]
+        },
+        {
+          "tool_id": "09b4a776-277f-5203-8f72-80361b049f10",
+          "vendor": "KLA",
+          "model": "3935 (39xx series)",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 8000000,
+          "high_usd": 18000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Sub-3nm broadband plasma patterned/unpatterned wafer defect inspection engineering estimate ($8M-$18M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": 13.5
+            }
+          ]
+        },
+        {
+          "tool_id": "c88c9684-f141-5d2f-9c83-2ec670767089",
+          "vendor": "Lam Research",
+          "model": "2300 Versys Kiyo3x / Kiyo F series",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 2,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": -23.5
+            },
+            {
+              "x": 1.5,
+              "z": -19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "dbaa6c67-67ba-52e5-8406-f0358e5eda94",
+          "vendor": "Lam Research",
+          "model": "Flex G Series",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 2,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": -19.5
+            },
+            {
+              "x": 1.5,
+              "z": -15.5
+            }
+          ]
+        },
+        {
+          "tool_id": "e6a771bf-392c-51f8-a79b-95bdf6e51980",
+          "vendor": "Applied Materials",
+          "model": "Producer GT",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 2,
+          "low_usd": 3000000,
+          "high_usd": 8500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": -23.5
+            },
+            {
+              "x": 22.5,
+              "z": -15.5
+            }
+          ]
+        },
+        {
+          "tool_id": "d32faad5-0b46-5364-a423-d7d6ccd06d19",
+          "vendor": "Applied Materials",
+          "model": "Endura 5500/XP",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 2,
+          "low_usd": 3000000,
+          "high_usd": 8500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": -19.5
+            },
+            {
+              "x": 22.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "7bfdc673-da69-5c8e-ad61-15a64b78dac9",
+          "vendor": "Lam Research",
+          "model": "Vector Extreme",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 2,
+          "low_usd": 3000000,
+          "high_usd": 8500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": -15.5
+            },
+            {
+              "x": 26.5,
+              "z": -23.5
+            }
+          ]
+        },
+        {
+          "tool_id": "6b2814d7-78f4-57be-a738-3a4b64501406",
+          "vendor": "Lam Research",
+          "model": "Striker FE",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 2,
+          "low_usd": 3000000,
+          "high_usd": 7500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced atomic layer deposition (ALD) multi-chamber platform engineering estimate ($3M-$7.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": -11.5
+            },
+            {
+              "x": 26.5,
+              "z": -19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "d789e8ed-c89d-577b-ac0a-001f076565df",
+          "vendor": "ASM International",
+          "model": "Epsilon 300",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 2,
+          "low_usd": 2500000,
+          "high_usd": 7000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": -7.5
+            },
+            {
+              "x": 26.5,
+              "z": -15.5
+            }
+          ]
+        },
+        {
+          "tool_id": "46eb2c49-e770-5b66-adcf-5efc55366f3c",
+          "vendor": "ASM International",
+          "model": "Intrepid ES",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 2,
+          "low_usd": 2500000,
+          "high_usd": 7000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": -23.5
+            },
+            {
+              "x": 26.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "7ae544a6-85c8-56e6-b84d-a942fffd85af",
+          "vendor": "Lam Research",
+          "model": "Vantex",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 5500000,
+          "high_usd": 12000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading-edge cryogenic/high-aspect-ratio 3D NAND and sub-3nm multi-chamber etch cluster estimate ($5.5M-$12M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "5e19f35a-ac9d-50ee-b8c2-a836b6ee861f",
+          "vendor": "SCREEN",
+          "model": "SU-3300",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 2,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -1.5,
+              "z": 6.5
+            },
+            {
+              "x": 2.5,
+              "z": 23.3
+            }
+          ]
+        },
+        {
+          "tool_id": "bdd36ff2-ada4-5655-8230-ccd30e4919a6",
+          "vendor": "KLA",
+          "model": "2930 (29xx series)",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 5000000,
+          "high_usd": 12000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Broadband optical wafer defect inspection engineering estimate ($5M-$12M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": 16.5
+            }
+          ]
+        },
+        {
+          "tool_id": "2ce14b1f-68b3-5111-a9c4-1e1191ca6272",
+          "vendor": "Lam Research",
+          "model": "2300 Syndion / Syndion GP",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 2,
+          "low_usd": 2500000,
+          "high_usd": 5500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Specialty power / TSV deep silicon etch (DRIE) cluster estimate ($2.5M-$5.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": -15.5
+            },
+            {
+              "x": 1.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "7f4f54a9-d416-5a3c-a522-2064c07790d7",
+          "vendor": "SRII",
+          "model": "SRII-4.5M",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "L1",
+          "positions": [
+            {
+              "x": 15.5,
+              "z": 6.5
+            }
+          ]
+        },
+        {
+          "tool_id": "4876fdc8-11e8-5d2b-8fe9-5ad9ff8cda4e",
+          "vendor": "Axcelis",
+          "model": "Purion H200",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": 11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "fc9fa2bd-fe5a-5c9a-b679-aa8d7c727997",
+          "vendor": "Axcelis",
+          "model": "Purion XEmax",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": 11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "8f81cb70-a28d-5804-b1fb-a76a4eab063c",
+          "vendor": "Applied Materials",
+          "model": "VIISta 900 3D",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": 16.0
+            }
+          ]
+        },
+        {
+          "tool_id": "e5a97846-cf6d-5034-b7a2-13b30cdba992",
+          "vendor": "Applied Materials",
+          "model": "VIISta Trident XP2",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": 16.0
+            }
+          ]
+        },
+        {
+          "tool_id": "91cd500b-46ac-5a34-afd7-8cfba43a23ef",
+          "vendor": "SMIT (Sumitomo Heavy Industries)",
+          "model": "SHX-III (HC)",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": 20.5
+            }
+          ]
+        },
+        {
+          "tool_id": "836a5356-bd8f-563c-ae4f-b5a91235e1f6",
+          "vendor": "Nissin Ion Equipment",
+          "model": "EXCEED9600A",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": 20.5
+            }
+          ]
+        },
+        {
+          "tool_id": "841a47b6-428b-5c29-9ab9-5109afd9dc1e",
+          "vendor": "Nissin Ion Equipment",
+          "model": "IMPHEAT-II",
+          "category": "ion_implantation",
+          "bay": "ion_implantation",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 10000000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+          "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 13.5,
+              "z": 25.0
+            }
+          ]
+        },
+        {
+          "tool_id": "e75be56f-ac9d-5f9c-97d8-dc8788185d22",
+          "vendor": "Tokyo Electron",
+          "model": "Tactras Vigus",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": -7.5
+            }
+          ]
+        },
+        {
+          "tool_id": "f5e193da-325c-51c6-b39e-b79a5c34f4bd",
+          "vendor": "Applied Materials",
+          "model": "Centura AdvantEdge (Mesa)",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": -19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "0fa9f3d2-9283-50cc-b179-5ce3eea7715f",
+          "vendor": "Applied Materials",
+          "model": "Producer Etch",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": -15.5
+            }
+          ]
+        },
+        {
+          "tool_id": "ca805c75-37f2-590e-96c0-d10090990e6c",
+          "vendor": "Hitachi High-Tech",
+          "model": "M-8000 Series (Conductor Etch)",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "15a7fae3-29b8-5be4-90e6-d2124bff4b0c",
+          "vendor": "Hitachi High-Tech",
+          "model": "EMCP Etch Chamber",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": -7.5
+            }
+          ]
+        },
+        {
+          "tool_id": "830aae95-3738-5796-9f9a-ab6737647d28",
+          "vendor": "NAURA",
+          "model": "(model not disclosed)",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -2.5,
+              "z": -15.5
+            }
+          ]
+        },
+        {
+          "tool_id": "556a9772-9972-5c70-b0bd-8ca790b4156e",
+          "vendor": "NAURA",
+          "model": "NMC612H",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -2.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "26f68b6d-99a8-510a-9319-ae7c6ba9225e",
+          "vendor": "NAURA",
+          "model": "Acme Glaion130",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 9000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 1.5,
+              "z": -23.5
+            }
+          ]
+        },
+        {
+          "tool_id": "9a91170f-bca1-56b6-b6d9-c57b16e696a2",
+          "vendor": "Tokyo Electron",
+          "model": "Trias",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 1,
+          "low_usd": 3000000,
+          "high_usd": 8500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": -19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "8e4c6025-2b2d-5f90-adc5-89a7cc5c787e",
+          "vendor": "AMEC",
+          "model": "Primo HD-RIE",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 7500000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "AMEC STAR IPO prospectus officially discloses etch equipment chamber average price at ~8M RMB/chamber (~$1.2M/chamber); typical multi-chamber cluster costs $3.5M-$7.5M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -2.5,
+              "z": -23.5
+            }
+          ]
+        },
+        {
+          "tool_id": "8e8831fb-1f58-5bdc-9d46-160abc86c1fe",
+          "vendor": "AMEC",
+          "model": "Primo XD-RIE",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 3500000,
+          "high_usd": 7500000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "AMEC STAR IPO prospectus officially discloses etch equipment chamber average price at ~8M RMB/chamber (~$1.2M/chamber); typical multi-chamber cluster costs $3.5M-$7.5M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -2.5,
+              "z": -19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "86c91512-c56a-5b1a-a573-67ed75449aec",
+          "vendor": "Kokusai Electric",
+          "model": "TSURUGI-C2",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 7000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": -15.5
+            }
+          ]
+        },
+        {
+          "tool_id": "c519ba08-2236-5b8a-9059-bcb6279fae8b",
+          "vendor": "NAURA",
+          "model": "Cygnus PECVD",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 7000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": -11.5
+            }
+          ]
+        },
+        {
+          "tool_id": "97fd4069-802a-5f8c-9835-06c29603480e",
+          "vendor": "AMEC",
+          "model": "Prismo A7",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 7000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 17.5,
+              "z": -7.5
+            }
+          ]
+        },
+        {
+          "tool_id": "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca",
+          "vendor": "KLA",
+          "model": "eDR7280",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Critical Dimension Scanning Electron Microscope (CD-SEM) review tool estimate ($2.5M-$6.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": 16.5
+            }
+          ]
+        },
+        {
+          "tool_id": "2c8ee49e-b417-50be-a642-6fe000760c2a",
+          "vendor": "Ebara",
+          "model": "F-REX300",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark.",
+          "conformance_level": "L1",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": 7.0
+            }
+          ]
+        },
+        {
+          "tool_id": "1cf7aafa-36a9-57c7-bbab-b18ce6f8535d",
+          "vendor": "Applied Materials",
+          "model": "Reflexion LK Prime",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": 7.0
+            }
+          ]
+        },
+        {
+          "tool_id": "746eba13-baf5-5ec1-959c-ad66fd799932",
+          "vendor": "Applied Materials",
+          "model": "Reflexion LK",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": 12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "0274d687-f89d-5c0c-bd5d-61b502a60c15",
+          "vendor": "Applied Materials",
+          "model": "Reflexion LK Ecmp",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": 12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "c5ce9e6e-a036-55d6-8527-e01bff1f68f9",
+          "vendor": "Ebara",
+          "model": "F-REX300S",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": 17.0
+            }
+          ]
+        },
+        {
+          "tool_id": "26b49060-218b-545a-ad86-eaa342c47fc5",
+          "vendor": "Ebara",
+          "model": "F-REX300X / F-REX300XA",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": 17.0
+            }
+          ]
+        },
+        {
+          "tool_id": "b5300e1d-9189-5962-81e2-64c1d3524339",
+          "vendor": "SCREEN",
+          "model": "SS-3300S",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 2.5,
+              "z": 6.5
+            }
+          ]
+        },
+        {
+          "tool_id": "48494344-f8b9-5f1a-9995-80ad51cd7a01",
+          "vendor": "Tokyo Electron",
+          "model": "CELLESTA SCD",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -1.5,
+              "z": 10.7
+            }
+          ]
+        },
+        {
+          "tool_id": "e83fa592-c53f-548a-9c30-3dcd2b7c9fd7",
+          "vendor": "Tokyo Electron",
+          "model": "CELLESTA -i MD",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 2.5,
+              "z": 10.7
+            }
+          ]
+        },
+        {
+          "tool_id": "042c350c-d1a0-51f2-ba11-ef22e2507f73",
+          "vendor": "KLA",
+          "model": "Archer 750",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced optical overlay / critical dimension (OCD) metrology engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": 10.5
+            }
+          ]
+        },
+        {
+          "tool_id": "3a03fd80-7476-588a-919d-cf605f154958",
+          "vendor": "KLA",
+          "model": "SpectraShape 11k",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced optical overlay / critical dimension (OCD) metrology engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": 10.5
+            }
+          ]
+        },
+        {
+          "tool_id": "65a9c409-0449-5ea6-a5df-089ae1bfb174",
+          "vendor": "ASML",
+          "model": "YieldStar 385",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 6000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced optical overlay / critical dimension (OCD) metrology engineering estimate ($2.5M-$6M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": 19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "a5dc900e-762e-57ab-aa7c-9fea763e60b9",
+          "vendor": "Tokyo Electron",
+          "model": "Tactras-UDEMAE",
+          "category": "dry_etch",
+          "bay": "dry_etch",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 5500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Specialty power / TSV deep silicon etch (DRIE) cluster estimate ($2.5M-$5.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": -23.5
+            }
+          ]
+        },
+        {
+          "tool_id": "0692771c-1149-5fc9-be7d-98d849256bc8",
+          "vendor": "ACM Research",
+          "model": "Ultra C Tahoe",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "ACM Research Shanghai STAR IPO prospectus reports single-wafer cleaning equipment ASP of 20M-25M RMB (~$2.8M-$3.8M USD).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 2.5,
+              "z": 19.1
+            }
+          ]
+        },
+        {
+          "tool_id": "81497b52-7ff7-527f-8f82-a7ad2aa9e498",
+          "vendor": "ACMR",
+          "model": "Ultra C VI",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "ACM Research Shanghai STAR IPO prospectus reports single-wafer cleaning equipment ASP of 20M-25M RMB (~$2.8M-$3.8M USD).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -1.5,
+              "z": 23.3
+            }
+          ]
+        },
+        {
+          "tool_id": "de700138-a965-51b6-b2c3-ec6e39d03c6f",
+          "vendor": "BESI",
+          "model": "Datacon 8800 CHAMEO ultra plus",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Sub-micron die-to-wafer hybrid bonding equipment engineering estimate ($2.5M-$4.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 35.5,
+              "z": -17.5
+            }
+          ]
+        },
+        {
+          "tool_id": "e87575b6-6ce2-50c7-bd7b-cf8c1ca4e97b",
+          "vendor": "Huahai Qingke",
+          "model": "(model not confirmed)",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 2500000,
+          "high_usd": 4200000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "Hwatsing STAR IPO prospectus officially discloses 300-series CMP equipment ASP of 19.5M-20.0M RMB (~$3.0M-$3.1M USD).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -6.5,
+              "z": 22.0
+            }
+          ]
+        },
+        {
+          "tool_id": "6828d3b2-1285-5ed5-8125-64f9ee5f5130",
+          "vendor": "Piotech",
+          "model": "PF-300T",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "Piotech STAR IPO prospectus discloses PECVD and ALD equipment sales average prices of 5M-6.2M RMB ($800k-$1M per chamber), multi-chamber cluster at $1.5M-$4.5M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 22.5,
+              "z": -23.5
+            }
+          ]
+        },
+        {
+          "tool_id": "4566b1a5-caae-5be9-a767-09a2ee8b84db",
+          "vendor": "Piotech",
+          "model": "FT-300T",
+          "category": "thin_film_deposition",
+          "bay": "thin_film_deposition",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "reported",
+          "source_url": "http://www.sse.com.cn",
+          "note": "Piotech STAR IPO prospectus discloses PECVD and ALD equipment sales average prices of 5M-6.2M RMB ($800k-$1M per chamber), multi-chamber cluster at $1.5M-$4.5M.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 22.5,
+              "z": -19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "5f374ae5-af0d-5f2b-88a7-ce1863356bc5",
+          "vendor": "KLA",
+          "model": "Aleris 8500",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -31.0,
+              "z": 13.5
+            }
+          ]
+        },
+        {
+          "tool_id": "03719f6a-8748-5223-b1d1-88769f43b79d",
+          "vendor": "Onto Innovation",
+          "model": "Atlas V",
+          "category": "metrology",
+          "bay": "metrology",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -24.0,
+              "z": 19.5
+            }
+          ]
+        },
+        {
+          "tool_id": "dd6715e4-f628-5687-9e2a-8ede1b0d6071",
+          "vendor": "Advantest",
+          "model": "V93000 EXA Scale",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-end SoC / AI automated test equipment (ATE) engineering estimate ($1.5M-$4.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 36.8,
+              "z": -1.5
+            }
+          ]
+        },
+        {
+          "tool_id": "21a38ffd-f475-5a84-a4de-518a96be045f",
+          "vendor": "Teradyne",
+          "model": "UltraFLEX",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-end SoC / AI automated test equipment (ATE) engineering estimate ($1.5M-$4.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 41.2,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "tool_id": "ffb7c3a3-7f53-5cbf-8337-ca7eb5b96638",
+          "vendor": "Lam Research",
+          "model": "DV-Prime",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Wet cleaning bench / single-wafer cleaning tool engineering estimate ($1.5M-$4M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -1.5,
+              "z": 14.9
+            }
+          ]
+        },
+        {
+          "tool_id": "663778ae-ca7e-5e09-bb9c-a03c7a2d1cec",
+          "vendor": "Lam Research",
+          "model": "Da Vinci",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Wet cleaning bench / single-wafer cleaning tool engineering estimate ($1.5M-$4M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 2.5,
+              "z": 14.9
+            }
+          ]
+        },
+        {
+          "tool_id": "57218784-3aaf-5203-80b1-3485be695b5e",
+          "vendor": "SEMES",
+          "model": "(model not disclosed)",
+          "category": "wet_clean",
+          "bay": "wet_clean",
+          "count": 1,
+          "low_usd": 1500000,
+          "high_usd": 4000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Wet cleaning bench / single-wafer cleaning tool engineering estimate ($1.5M-$4M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -1.5,
+              "z": 19.1
+            }
+          ]
+        },
+        {
+          "tool_id": "cb1548a3-cdb0-5c6b-9798-f86b99ae10ad",
+          "vendor": "ACMR",
+          "model": "Ultra ECP 3d",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 1800000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced packaging electroplating (ECP) equipment engineering estimate ($1.8M-$3.5M).",
+          "conformance_level": "L1",
+          "positions": [
+            {
+              "x": 39.0,
+              "z": -23.0
+            }
+          ]
+        },
+        {
+          "tool_id": "4dec86af-c292-57a5-95ef-535c36c929f4",
+          "vendor": "ACMR",
+          "model": "Ultra ECP ap-p",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 1800000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced packaging electroplating (ECP) equipment engineering estimate ($1.8M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 42.5,
+              "z": -6.8
+            }
+          ]
+        },
+        {
+          "tool_id": "84ec4cb1-7fc7-5cf5-bbd0-9be5db89a817",
+          "vendor": "Kokusai Electric",
+          "model": "QUIXACE",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 23.5,
+              "z": 7.0
+            }
+          ]
+        },
+        {
+          "tool_id": "6964f52b-7e71-5a46-a03f-e1610a0374e8",
+          "vendor": "ASM International",
+          "model": "A412",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 27.5,
+              "z": 7.0
+            }
+          ]
+        },
+        {
+          "tool_id": "41c16e65-cc7c-5907-b2e2-98af1095dcd5",
+          "vendor": "ASM International",
+          "model": "SONORA",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 23.5,
+              "z": 12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "0fcf58f8-4126-540b-8a8b-2fd77d23e18a",
+          "vendor": "Tokyo Electron",
+          "model": "Alpha 303i",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 23.5,
+              "z": 17.0
+            }
+          ]
+        },
+        {
+          "tool_id": "7ceaf1c8-7910-5bc9-bd68-adbd81367034",
+          "vendor": "Applied Materials",
+          "model": "Radiance Vantage",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 27.5,
+              "z": 17.0
+            }
+          ]
+        },
+        {
+          "tool_id": "e08bdd1a-8dda-517c-8506-32bd3f3b5110",
+          "vendor": "Mattson (now Ferrotec)",
+          "model": "Helios",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 23.5,
+              "z": 22.0
+            }
+          ]
+        },
+        {
+          "tool_id": "4b5ef9ed-188c-5b4e-9d2e-d5fe27d2cd99",
+          "vendor": "NAURA",
+          "model": "(model not disclosed)",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 1200000,
+          "high_usd": 3500000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 27.5,
+              "z": 22.0
+            }
+          ]
+        },
+        {
+          "tool_id": "640c395b-69d8-5a73-890f-6d72ef905241",
+          "vendor": "Advantest",
+          "model": "T5835",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 1000000,
+          "high_usd": 3000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-speed memory automated test equipment (ATE) engineering estimate ($1.0M-$3.0M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 41.2,
+              "z": -1.5
+            }
+          ]
+        },
+        {
+          "tool_id": "1bf9bd68-eaa2-5a6a-a0d6-81341e6b83de",
+          "vendor": "Advantest",
+          "model": "T5833",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 1000000,
+          "high_usd": 3000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "High-speed memory automated test equipment (ATE) engineering estimate ($1.0M-$3.0M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 36.8,
+              "z": 3.5
+            }
+          ]
+        },
+        {
+          "tool_id": "3e5137b6-78c4-5ac8-a6ef-912562fb9311",
+          "vendor": "BESI",
+          "model": "Datacon 2200 EVO",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 900000,
+          "high_usd": 2200000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced multi-chip packaging and thermo-compression bonder engineering estimate ($900k-$2.2M).",
+          "conformance_level": "L1",
+          "positions": [
+            {
+              "x": 35.5,
+              "z": -23.0
+            }
+          ]
+        },
+        {
+          "tool_id": "1fdd1137-9952-5584-8236-48bd6f119cb6",
+          "vendor": "BESI",
+          "model": "9800 TC next",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 900000,
+          "high_usd": 2200000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Advanced multi-chip packaging and thermo-compression bonder engineering estimate ($900k-$2.2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 42.5,
+              "z": -23.0
+            }
+          ]
+        },
+        {
+          "tool_id": "6d356eb0-506f-5d19-9bf1-6c3068bb0699",
+          "vendor": "Ebara",
+          "model": "FREX200",
+          "category": "cmp",
+          "bay": "cmp",
+          "count": 1,
+          "low_usd": 700000,
+          "high_usd": 2000000,
+          "condition": "used",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "200mm legacy CMP (e.g., AMAT Mirra Mesa) refurbished secondary market valuation ($700k-$2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": -10.5,
+              "z": 22.0
+            }
+          ]
+        },
+        {
+          "tool_id": "4d551549-f6fb-514f-9fac-51c9f2eca182",
+          "vendor": "ASMPT",
+          "model": "AD838L-G2",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 500000,
+          "high_usd": 2000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 39.0,
+              "z": -17.5
+            }
+          ]
+        },
+        {
+          "tool_id": "3f391e71-feb9-5bb8-8c26-271898119fca",
+          "vendor": "ASMPT",
+          "model": "AMICRA CoS Die Bonder",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 500000,
+          "high_usd": 2000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 42.5,
+              "z": -17.5
+            }
+          ]
+        },
+        {
+          "tool_id": "333f4c12-f6d3-5e59-86ad-f34a93da85a1",
+          "vendor": "ASMPT",
+          "model": "AERO PRO",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 500000,
+          "high_usd": 2000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 35.5,
+              "z": -12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "ea7acafa-f623-5b53-9820-cff153396595",
+          "vendor": "EV Group",
+          "model": "GEMINI FB XT",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 500000,
+          "high_usd": 2000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 39.0,
+              "z": -12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "0e08ee0e-204e-5c35-93ee-9d4449bd50de",
+          "vendor": "SUSS MicroTec",
+          "model": "XBS200",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 500000,
+          "high_usd": 2000000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 42.5,
+              "z": -12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "47121709-93b4-5896-931e-1c6fe6290821",
+          "vendor": "Tokyo Electron",
+          "model": "Alpha-8SE",
+          "category": "thermal_processing",
+          "bay": "thermal_processing",
+          "count": 1,
+          "low_usd": 400000,
+          "high_usd": 1400000,
+          "condition": "used",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Legacy 200mm vertical/horizontal furnace secondary market valuation ($400k-$1.4M).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 27.5,
+              "z": 12.0
+            }
+          ]
+        },
+        {
+          "tool_id": "888d0ee7-2fb8-52f1-909b-b36ac0f9509e",
+          "vendor": "Accretech (Tokyo Seimitsu)",
+          "model": "UF3000EX",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 450000,
+          "high_usd": 900000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Fully automated 300mm wafer prober equipment engineering estimate ($450k-$900k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 36.8,
+              "z": 18.5
+            }
+          ]
+        },
+        {
+          "tool_id": "e7bff566-aa87-59c9-be15-c628195812e0",
+          "vendor": "Teradyne",
+          "model": "J750Ex-HD",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 250000,
+          "high_usd": 850000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 36.8,
+              "z": 8.5
+            }
+          ]
+        },
+        {
+          "tool_id": "0b9c07fe-924b-59c0-8922-bf120d0d5bf1",
+          "vendor": "Cohu (Rasco)",
+          "model": "Jupiter",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 250000,
+          "high_usd": 850000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 41.2,
+              "z": 8.5
+            }
+          ]
+        },
+        {
+          "tool_id": "edbdcab9-5356-5e8d-81f5-edb3843f21f5",
+          "vendor": "Cohu (Rasco)",
+          "model": "Jaguar (SO3000)",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 250000,
+          "high_usd": 850000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 36.8,
+              "z": 13.5
+            }
+          ]
+        },
+        {
+          "tool_id": "b53c0b48-f9a7-5b68-9f78-981de60654e4",
+          "vendor": "Cohu (Rasco)",
+          "model": "SO1000A",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 250000,
+          "high_usd": 850000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 41.2,
+              "z": 13.5
+            }
+          ]
+        },
+        {
+          "tool_id": "b7dd05c1-c14a-5a5b-8c2c-237c1828de31",
+          "vendor": "Kulicke & Soffa",
+          "model": "Asterion",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 250000,
+          "high_usd": 800000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Power module wedge bonder / sawing & placement system engineering estimate ($250k-$800k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 35.5,
+              "z": -6.8
+            }
+          ]
+        },
+        {
+          "tool_id": "178aac84-6158-559f-a04e-1d86d6b5ad09",
+          "vendor": "Kulicke & Soffa",
+          "model": "ASTERION-TW",
+          "category": "packaging",
+          "bay": "packaging",
+          "count": 1,
+          "low_usd": 250000,
+          "high_usd": 800000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Power module wedge bonder / sawing & placement system engineering estimate ($250k-$800k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 39.0,
+              "z": -6.8
+            }
+          ]
+        },
+        {
+          "tool_id": "400f5451-48aa-51d9-b987-cf98fa5a5566",
+          "vendor": "Changchuan",
+          "model": "CTA series",
+          "category": "test",
+          "bay": "test",
+          "count": 1,
+          "low_usd": 150000,
+          "high_usd": 600000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Domestic discrete, analog, and digital IC test equipment engineering estimate ($150k-$600k).",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 41.2,
+              "z": 18.5
+            }
+          ]
+        },
+        {
+          "tool_id": "f0bb0ec9-b4d6-5086-a98d-fef8ae9ccd29",
+          "vendor": "Edwards Vacuum",
+          "model": "iXH1820",
+          "category": "other",
+          "bay": "other",
+          "count": 1,
+          "low_usd": 25000,
+          "high_usd": 65000,
+          "condition": "new",
+          "basis": "category_estimate",
+          "source_url": "",
+          "note": "Sub-fab harsh-duty dry vacuum pump engineering estimate ($25k-$65k) based on vendor quotes.",
+          "conformance_level": "draft",
+          "positions": [
+            {
+              "x": 39.0,
+              "z": 25.0
+            }
+          ]
+        }
+      ]
+    </script>
+    <script src="js/catalog-fallback.js"></script>
+    <script src="js/price-estimates-fallback.js"></script>
+    <script>
+      const I18N = {
+        en: {
+          heroTag: "Alpha Version · Cleanroom BOM & Capex Model",
+          scaleBadge: "Primary Driver",
+          title: "Fab Total Capital Expenditure Estimator",
+          subtitle:
+            "Bottom-up cleanroom equipment BOM aggregated from the 3D digital twin layout (121 tools) combined with verified public equipment cost ranges and top-down parametric facility infrastructure allocation.",
+          lblScale: "Production Scale / WSPM Multiplier:",
+          descScale:
+            "Scales modular cleanroom equipment count proportionally to target fab monthly capacity.",
+          lblShare: "Facility & Infrastructure Share:",
+          descShare:
+            "Building, cleanroom, UPW, power, gases, HVAC & AMHS share of total capex (Industry range: 20%–35%).",
+          lblRegion: "Construction Region / Geography:",
+          descRegion:
+            "Accounts for regional labor, regulatory compliance, engineering timelines, and local supply chains.",
+          kpiLowTitle: "● Low Scenario (Conservative Minimum)",
+          kpiMedTitle: "★ Median Scenario (Recommended Baseline)",
+          recommendedPill: "Industry Standard",
+          kpiHighTitle: "▲ High Scenario (Maximum Full-Spec)",
+          kpiWfe: "Tool Equipment (WFE):",
+          kpiFac: "Facility & Infrastructure:",
+          stackTitle: "Capital Allocation Breakdown (Median Scenario)",
+          stackSub: "Cleanroom WFE Equipment vs Facility Systems",
+          legWfe: "Process Tools (WFE):",
+          legShell: "Building & Cleanroom Shell:",
+          legMep: "MEP, UPW, Gases & Power:",
+          legAmhs: "AMHS Monorail Logistics:",
+          boxProcess: "WFE Equipment by Process Bay",
+          boxProcessSub: "12 Categories",
+          boxFacility: "Facility Infrastructure Subsystems",
+          boxFacilitySub: "Top-Down Allocation",
+          bomTitle: "Cleanroom Tool BOM & Unit Cost Breakdown",
+          bomSub:
+            "121 tools aggregated across 103 models from twin/layout-default.json",
+          thCat: "Category",
+          thTool: "Vendor & Model",
+          thCount: "Count",
+          thUnit: "Unit Price (Low – High)",
+          thBasis: "Basis",
+          thSubtotal: "Subtotal (Low / Median / High)",
+          thActions: "Action",
+          compareBtn: "Compare →",
+          notesTitle: "⚠️ Engineering Assumptions & Methodology Caveats",
+          footerDisc:
+            "Disclaimer: All equipment prices and facility cost models are derived from public disclosures, regulatory SEC/SSE filings, and engineering parametric estimates for educational and research evaluation. They do not constitute formal binding commercial quotes.",
+          scaleOpt1:
+            "1.0x · Advanced Pilot Line Baseline (121 Tools, ~1k WSPM)",
+          scaleOpt5:
+            "5.0x · Specialty Fab (~5k–10k WSPM, ~730 Tools · HVM Balanced)",
+          scaleOpt10:
+            "10.0x · Single-Phase Commercial Fab (~20k–25k WSPM, ~1,460 Tools · HVM Balanced)",
+          scaleOpt20:
+            "20.0x · Dual-Phase MegaFab (~40k–50k WSPM, ~2,920 Tools · HVM Balanced)",
+          scaleOpt60:
+            "60.0x · GIGAFAB® Campus (~100k–120k WSPM, ~8,750 Tools · 4–6 Phases)",
+          scaleOpt80:
+            "80.0x · Mega GIGAFAB® Campus (~150k+ WSPM, ~11,660 Tools · Full 8 Phases)",
+          modelPilotPill: "Pilot Baseline",
+          modelPilotTitle: "Advanced Pilot Line Baseline Model",
+          modelPilotDesc:
+            "Baseline cleanroom sandbox: multi-generation R&D scanner deployment (2 High-NA + 3 Low-NA EUV) produces 77.0% WFE litho concentration alongside 18 etch/dep tools.",
+          modelHvmPill: "HVM Balanced Active",
+          modelHvmTitle:
+            "HVM Production-Balanced Model Active (Realistic Volume Allocation)",
+          modelHvmDesc:
+            "Rebalanced to high-volume manufacturing (HVM) industry benchmarks: lithography normalized to 22%–25% WFE (~17%–19% Total Capex), while bottleneck process tools (deposition 23%–24%, etch 23%, metrology/inspection 14%) scale to meet volume throughput.",
+          notesListHtml:
+            `<li><strong>Pilot Baseline vs. MegaFab & GIGAFAB® Campus:</strong> The 3D Digital Twin cleanroom layout represents a balanced modular prototype line (121 tools across all 18 bays). In commercial high-volume manufacturing (HVM), dry etch, thin-film deposition, wet clean, and metrology scale significantly faster than EUV scanners to resolve process throughput bottlenecks. A standard single-phase cleanroom operates at ~20k–25k WSPM with ~1,460 main tools, while a full GIGAFAB® campus (such as TSMC Fab 18 Phase 1–8 in Tainan, or Fab 20/22) connects 4 to 8 phases into a massive contiguous cleanroom, reaching 100k–150k+ WSPM and operating 8,000 to 12,000+ main process and inspection tools.</li><li><strong>Statistical Extreme Stacking:</strong> Summing all minimums (Low) and all maximums (High) assumes correlated extremes across 100+ separate procurement negotiations. The <strong>Median Scenario</strong> represents the most mathematically robust baseline for engineering budget feasibility.</li><li><strong>Infrastructure & Subfab Boundary:</strong> Facility shares (20%–35%) are anchored to verified industrial data from TSMC Arizona, Kumamoto Fab 1, and Samsung Taylor disclosures, covering civil shell, UPW, gases, high-voltage power, HVAC FFU, and AMHS monorails.</li>`,
+        },
+        zh: {
+          heroTag: "Alpha Version · 洁净室 BOM 与总造价模型",
+          scaleBadge: "核心主控变量",
+          title: "晶圆厂全厂总建设成本测算器 (Fab Capex)",
+          subtitle:
+            "基于数字孪生 3D 洁净室布局 121 台机台 BOM 汇总，结合真实公开设备估算区间与自顶向下厂务基础设施经验模型闭环测算。",
+          lblScale: "晶圆制造产能规模 / 产线倍率:",
+          descScale:
+            "基于模块化洁净室通线原型，按月产能 (WSPM) 等比扩展全厂设备数量与负荷。",
+          lblShare: "厂务基础设施投资占比:",
+          descShare:
+            "厂房土建、洁净室、超纯水、特气、动力电力、暖通与天车物流占总建厂投资比例（行业区间：20%–35%）。",
+          lblRegion: "厂区建设地理区域系数:",
+          descRegion:
+            "反映不同地区的建筑劳工、法规许可合规周期与本土半导体供应链溢价。",
+          kpiLowTitle: "● 最低投资场景 (保守极值方案)",
+          kpiMedTitle: "★ 基准推荐场景 (工业中位基准)",
+          recommendedPill: "工业推荐基准",
+          kpiHighTitle: "▲ 最高投资场景 (先进制程顶配)",
+          kpiWfe: "工艺设备支出 (WFE):",
+          kpiFac: "厂务与洁净室基建:",
+          stackTitle: "资本支出流向切分 (基准推荐场景)",
+          stackSub: "洁净室工艺设备 vs 厂务设施各子系统",
+          legWfe: "工艺设备 (WFE):",
+          legShell: "厂房土建与洁净室外壳:",
+          legMep: "机电、超纯水、特气与电力:",
+          legAmhs: "AMHS 天车空中物流:",
+          boxProcess: "按工艺机台类型划分 (WFE 投资)",
+          boxProcessSub: "12 大工艺品类分布",
+          boxFacility: "厂务基础设施七大子系统",
+          boxFacilitySub: "自顶向下比例拆解",
+          bomTitle: "洁净室设备清单 (BOM) 与单机成本明细",
+          bomSub:
+            "来源于 twin/layout-default.json 的 121 台机台，归并为 103 个设备选型条目",
+          thCat: "工艺类别",
+          thTool: "设备厂商与机型",
+          thCount: "台数",
+          thUnit: "单台估价区间 (Low – High)",
+          thBasis: "估价依据",
+          thSubtotal: "机型投资小计 (最低 / 中位 / 最高)",
+          thActions: "操作",
+          compareBtn: "横向对比 →",
+          notesTitle: "⚠️ 关键工程假设与方法论声明",
+          footerDisc:
+            "免责声明：所有设备价格与厂务测算模型均源于官方招股书、监管披露与工程参数模型，仅供学术研究与方案评估，不构成正式商业采购要约与报价。",
+          scaleOpt1: "1.0x · 先进试验线基线 (121台试验机, ~1k WSPM)",
+          scaleOpt5:
+            "5.0x · 特色工艺/研发先导厂 (~5k–10k WSPM, ~730台机台 · 现实量产配比)",
+          scaleOpt10:
+            "10.0x · 单期标准商业晶圆厂 (~20k–25k WSPM, ~1,460台机台 · 现实量产配比)",
+          scaleOpt20:
+            "20.0x · 双期大型晶圆厂 MegaFab (~40k–50k WSPM, ~2,920台机台 · 现实量产配比)",
+          scaleOpt60:
+            "60.0x · 超大晶圆厂园区 GIGAFAB® (~100k–120k WSPM, ~8,750台主设备 · 4~6期联合)",
+          scaleOpt80:
+            "80.0x · 满产超大晶圆厂园区 GIGAFAB® (~150k+ WSPM, ~11,660台主设备 · 完整8期集群)",
+          modelPilotPill: "试验线原型",
+          modelPilotTitle: "先进试验线基线模型",
+          modelPilotDesc:
+            "3D 数字孪生洁净室通线沙箱原始基线：配置多代先进制程研发评估机台（含 2 台 High-NA EUV + 3 台 Low-NA EUV），光刻机占 WFE 77.0%（总投资约 57.7%），并列 18 台刻蚀/薄膜机台。",
+          modelHvmPill: "现实量产配比生效",
+          modelHvmTitle: "现实量产均衡配比模型生效",
+          modelHvmDesc:
+            "已切换为半导体规模量产真实配比：光刻机支出回归行业标杆 22%–25% WFE（总 Capex 约 17%–19%），薄膜沉积（23%–24%）、干法刻蚀（23%）、量测检测（14%）等通量瓶颈机台按量产节拍充分配齐。",
+          notesListHtml:
+            `<li><strong>试验线原型 vs. 大型晶圆厂 (MegaFab) 与超大晶圆厂园区 (GIGAFAB®)：</strong>3D 数字孪生洁净室沙箱代表模块化试验线通线原型（18 个工艺区共 121 台机台）。在商业规模量产（HVM）中，干法刻蚀、薄膜沉积、湿法清洗与量测检测等机台因多重曝光与薄膜循环而需要远快于 EUV 光刻机进行通量配齐。单期标准商业洁净室（Phase 1）月产能约 20k–25k WSPM（约 1,460 台主设备）；双期大型厂（MegaFab）为 ~40k–50k WSPM（约 2,920 台主设备）；而完整的超大晶圆厂园区（如台积电南科 Fab 18 Phase 1–8，或竹科/高雄 Fab 20/22 规划）由 4 到 8 期建筑内部连通组成超大连续洁净室，整厂月产能达 10万～15万片以上，园区内运转的芯片制造与检测主设备总数达 <strong>8,000 至 12,000+ 台</strong>。</li><li><strong>统计极值叠加说明：</strong>最低（Low）与最高（High）是将所有设备采买的最严苛最低报价或顶配溢价单向累加，代表极端谈判假设。<strong>基准推荐场景（中位价）</strong>是工程可行性评估中最具统计鲁棒性的基准。</li><li><strong>厂务基建与动力子系统范围：</strong>厂务占比（20%–35%）锚定台积电亚利桑那、熊本一厂与三星泰勒厂公开投资数据，包含厂房土建、洁净室隔断、超纯水（UPW）、大宗特气、高压动力电网、暖通 FFU 循环系统及 AMHS 天车空中物流。</li>`,
+        },
+      };
+
+      let currentLang = "en";
+      let bomData = [];
+
+      function fmtB(val) {
+        if (val >= 1e9) {
+          return "$" + (val / 1e9).toFixed(2) + " B";
+        }
+        if (val >= 1e6) {
+          return "$" + Math.round(val / 1e6) + " M";
+        }
+        if (val >= 1e3) {
+          return "$" + Math.round(val / 1e3) + " k";
+        }
+        return "$" + Math.round(val);
+      }
+
+      function fmtPriceUSD(amount) {
+        if (!amount) return "$0";
+        if (amount >= 1000000) {
+          const m = amount / 1000000;
+          return "$" + (m % 1 === 0 ? m.toFixed(0) : m.toFixed(1)) + "M";
+        }
+        if (amount >= 1000) {
+          return "$" + (amount / 1000).toFixed(0) + "k";
+        }
+        return "$" + amount.toLocaleString();
+      }
+
+      function escapeHtml(str) {
+        if (!str) return "";
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      async function initData() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const langParam = urlParams.get("lang");
+        if (langParam && (langParam === "zh" || langParam === "en")) {
+          currentLang = langParam;
+        } else {
+          const savedLang = localStorage.getItem("semiconfab_lang");
+          if (savedLang && savedLang.startsWith("zh")) {
+            currentLang = "zh";
+          }
+        }
+
+        const scaleParam = urlParams.get("scale");
+        if (
+          scaleParam &&
+          ["1", "5", "10", "20", "60", "80"].includes(scaleParam)
+        ) {
+          const selScale = document.getElementById("sel-scale");
+          if (selScale) selScale.value = scaleParam;
+        }
+
+        const regionParam = urlParams.get("region");
+        if (regionParam && ["1.0", "1.25", "1.35"].includes(regionParam)) {
+          const selRegion = document.getElementById("sel-region");
+          if (selRegion) selRegion.value = regionParam;
+        }
+
+        // 1. Read embedded BOM data immediately (works offline & with file:// protocol)
+        try {
+          const embeddedEl = document.getElementById("embedded-bom-data");
+          if (embeddedEl && embeddedEl.textContent.trim()) {
+            bomData = JSON.parse(embeddedEl.textContent.trim());
+          }
+        } catch (err) {
+          console.warn("Error parsing embedded BOM:", err);
+        }
+
+        // 2. Try fetching updated json if served via HTTP server
+        try {
+          const res = await fetch("data/twin_bom_costs.json");
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data) && data.length > 0) {
+              bomData = data;
+            }
+          }
+        } catch (e) {
+          // Ignored for file:// protocol
+        }
+
+        recalculate();
+      }
+
+      function toggleLanguage() {
+        currentLang = currentLang === "zh" ? "en" : "zh";
+        recalculate();
+      }
+
+      const HVM_LITHO_COUNTS = {
+        5: {
+          "TWINSCAN EXE:5000": 0,
+          "TWINSCAN EXE:5200 / 5200B": 0,
+          "TWINSCAN NXE:3400C": 0,
+          "TWINSCAN NXE:3600D": 1,
+          "TWINSCAN NXE:3800E": 2,
+          "TWINSCAN NXT:2050i": 2,
+          "TWINSCAN NXT:2000i": 2,
+          "NSR-S635E": 1,
+        },
+        10: {
+          "TWINSCAN EXE:5000": 0,
+          "TWINSCAN EXE:5200 / 5200B": 1,
+          "TWINSCAN NXE:3400C": 1,
+          "TWINSCAN NXE:3600D": 2,
+          "TWINSCAN NXE:3800E": 3,
+          "TWINSCAN NXT:2050i": 3,
+          "TWINSCAN NXT:2000i": 3,
+          "NSR-S635E": 2,
+        },
+        20: {
+          "TWINSCAN EXE:5000": 1,
+          "TWINSCAN EXE:5200 / 5200B": 2,
+          "TWINSCAN NXE:3400C": 2,
+          "TWINSCAN NXE:3600D": 4,
+          "TWINSCAN NXE:3800E": 6,
+          "TWINSCAN NXT:2050i": 6,
+          "TWINSCAN NXT:2000i": 6,
+          "NSR-S635E": 4,
+        },
+        60: {
+          "TWINSCAN EXE:5000": 3,
+          "TWINSCAN EXE:5200 / 5200B": 6,
+          "TWINSCAN NXE:3400C": 6,
+          "TWINSCAN NXE:3600D": 12,
+          "TWINSCAN NXE:3800E": 18,
+          "TWINSCAN NXT:2050i": 18,
+          "TWINSCAN NXT:2000i": 18,
+          "NSR-S635E": 12,
+        },
+        80: {
+          "TWINSCAN EXE:5000": 4,
+          "TWINSCAN EXE:5200 / 5200B": 8,
+          "TWINSCAN NXE:3400C": 8,
+          "TWINSCAN NXE:3600D": 16,
+          "TWINSCAN NXE:3800E": 24,
+          "TWINSCAN NXT:2050i": 24,
+          "TWINSCAN NXT:2000i": 24,
+          "NSR-S635E": 16,
+        },
+      };
+
+      const HVM_CAT_MULT_5X = {
+        dry_etch: 10.0,
+        thin_film_deposition: 12.0,
+        metrology: 10.0,
+        inspection: 6.0,
+        wet_clean: 6.0,
+        cmp: 4.0,
+        ion_implantation: 3.0,
+        resist_track: 3.0,
+        thermal_processing: 4.0,
+        packaging: 2.0,
+        test: 2.0,
+        other: 5.0,
+      };
+
+      function getToolCount(item, scale) {
+        if (scale === 1) return item.count;
+        const scaleFactor = scale / 5.0;
+        if (item.category === "lithography") {
+          const cfg = HVM_LITHO_COUNTS[scale];
+          if (cfg && cfg[item.model] !== undefined) return cfg[item.model];
+          return Math.max(1, Math.round(item.count * scaleFactor));
+        }
+        const mult = (HVM_CAT_MULT_5X[item.category] || 5.0) * scaleFactor;
+        return Math.max(1, Math.round(item.count * mult));
+      }
+
+      function recalculate() {
+        const t = I18N[currentLang];
+        document.getElementById("btn-toggle-lang").textContent =
+          currentLang === "zh" ? "English" : "中文";
+
+        // Update Option Texts
+        const opt1 = document.getElementById("opt-scale-1");
+        const opt5 = document.getElementById("opt-scale-5");
+        const opt10 = document.getElementById("opt-scale-10");
+        const opt20 = document.getElementById("opt-scale-20");
+        const opt60 = document.getElementById("opt-scale-60");
+        const opt80 = document.getElementById("opt-scale-80");
+        if (opt1) opt1.textContent = t.scaleOpt1;
+        if (opt5) opt5.textContent = t.scaleOpt5;
+        if (opt10) opt10.textContent = t.scaleOpt10;
+        if (opt20) opt20.textContent = t.scaleOpt20;
+        if (opt60) opt60.textContent = t.scaleOpt60;
+        if (opt80) opt80.textContent = t.scaleOpt80;
+
+        // Update Static Labels
+        document.getElementById("ui-hero-tag").textContent = t.heroTag;
+        document.getElementById("ui-title").textContent = t.title;
+        document.getElementById("ui-subtitle").textContent = t.subtitle;
+        document.getElementById("ui-lbl-scale").textContent = t.lblScale;
+        const scaleBadgeEl = document.getElementById("ui-scale-badge");
+        if (scaleBadgeEl) scaleBadgeEl.textContent = t.scaleBadge;
+        document.getElementById("ui-desc-scale").textContent = t.descScale;
+        document.getElementById("ui-lbl-share").textContent = t.lblShare;
+        document.getElementById("ui-desc-share").textContent = t.descShare;
+        document.getElementById("ui-lbl-region").textContent = t.lblRegion;
+        document.getElementById("ui-desc-region").textContent = t.descRegion;
+        document.getElementById("ui-kpi-low-title").textContent = t.kpiLowTitle;
+        document.getElementById("ui-kpi-med-title").textContent = t.kpiMedTitle;
+        document.getElementById("ui-recommended-pill").textContent =
+          t.recommendedPill;
+        document.getElementById("ui-kpi-high-title").textContent =
+          t.kpiHighTitle;
+        document.getElementById("ui-kpi-low-wfe").textContent = t.kpiWfe;
+        document.getElementById("ui-kpi-med-wfe").textContent = t.kpiWfe;
+        document.getElementById("ui-kpi-high-wfe").textContent = t.kpiWfe;
+        document.getElementById("ui-kpi-low-fac").textContent = t.kpiFac;
+        document.getElementById("ui-kpi-med-fac").textContent = t.kpiFac;
+        document.getElementById("ui-kpi-high-fac").textContent = t.kpiFac;
+        document.getElementById("ui-stack-title").textContent = t.stackTitle;
+        document.getElementById("ui-stack-sub").textContent = t.stackSub;
+        document.getElementById("ui-box-process").textContent = t.boxProcess;
+        document.getElementById("ui-box-process-sub").textContent =
+          t.boxProcessSub;
+        document.getElementById("ui-box-facility").textContent = t.boxFacility;
+        document.getElementById("ui-box-facility-sub").textContent =
+          t.boxFacilitySub;
+        document.getElementById("ui-bom-title").textContent = t.bomTitle;
+        document.getElementById("th-cat").textContent = t.thCat;
+        document.getElementById("th-tool").textContent = t.thTool;
+        document.getElementById("th-count").textContent = t.thCount;
+        document.getElementById("th-unit").textContent = t.thUnit;
+        document.getElementById("th-basis").textContent = t.thBasis;
+        document.getElementById("th-subtotal").textContent = t.thSubtotal;
+        document.getElementById("th-actions").textContent = t.thActions;
+        document.getElementById("ui-notes-title").textContent = t.notesTitle;
+        document.getElementById("ui-footer-disc").textContent = t.footerDisc;
+        if (t.notesListHtml) {
+          document.getElementById("ui-notes-list").innerHTML = t.notesListHtml;
+        }
+
+        // Sliders & inputs
+        const scaleVal = parseFloat(document.getElementById("sel-scale").value);
+        const shareVal = parseFloat(
+          document.getElementById("slider-share").value,
+        );
+        const regionVal = parseFloat(
+          document.getElementById("sel-region").value,
+        );
+
+        const selScaleEl = document.getElementById("sel-scale");
+        const scaleText = selScaleEl.options[selScaleEl.selectedIndex].text
+          .split("·")[0]
+          .trim();
+
+        // Calculate WFE Totals from BOM with getToolCount
+        let baseLow = 0,
+          baseHigh = 0,
+          totalTools = 0;
+        const catMap = {};
+
+        bomData.forEach((item) => {
+          const count = getToolCount(item, scaleVal);
+          const lo = item.low_usd * count;
+          const hi = item.high_usd * count;
+          baseLow += lo;
+          baseHigh += hi;
+          totalTools += count;
+
+          const cat = item.category || "other";
+          if (!catMap[cat]) catMap[cat] = { low: 0, high: 0, count: 0 };
+          catMap[cat].low += lo;
+          catMap[cat].high += hi;
+          catMap[cat].count += count;
+        });
+
+        document.getElementById("val-scale").textContent =
+          currentLang === "zh"
+            ? `${scaleText} (${totalTools.toLocaleString()} 台主设备)`
+            : `${scaleText} (${totalTools.toLocaleString()} Tools)`;
+        document.getElementById("val-share").textContent =
+          `${shareVal}% (WFE: ${100 - shareVal}%)`;
+
+        const selRegEl = document.getElementById("sel-region");
+        const regionText = selRegEl.options[selRegEl.selectedIndex].text
+          .split("·")[0]
+          .trim();
+        document.getElementById("val-region").textContent =
+          `${regionText} (${regionVal.toFixed(2)}x)`;
+
+        // Update BOM subtitle
+        document.getElementById("ui-bom-sub").textContent =
+          currentLang === "zh"
+            ? scaleVal === 1
+              ? "来源于 twin/layout-default.json 的 121 台试验机台，归并为 103 个设备选型条目"
+              : `现实量产均衡配比已生效：共 ${totalTools.toLocaleString()} 台设备（基于 103 个设备选型按通量瓶颈均衡扩展）`
+            : scaleVal === 1
+              ? "121 tools aggregated across 103 models from twin/layout-default.json"
+              : `HVM balanced configuration active: ${totalTools.toLocaleString()} total tools scaled by process throughput bottlenecks`;
+
+        // Apply region multiplier
+        const wfeLow = baseLow * regionVal;
+        const wfeHigh = baseHigh * regionVal;
+        const wfeMed = (wfeLow + wfeHigh) / 2;
+
+        const facFraction = shareVal / 100;
+        const toolFraction = (100 - shareVal) / 100;
+
+        // Total = WFE / (1 - facFraction)
+        const totalLow = wfeLow / toolFraction;
+        const totalMed = wfeMed / toolFraction;
+        const totalHigh = wfeHigh / toolFraction;
+
+        const facLow = totalLow * facFraction;
+        const facMed = totalMed * facFraction;
+        const facHigh = totalHigh * facFraction;
+
+        // Update Model Indicator Banner
+        const bannerEl = document.getElementById("model-indicator-banner");
+        const pillEl = document.getElementById("model-badge-pill");
+        const titleEl = document.getElementById("model-indicator-title");
+        const descEl = document.getElementById("model-indicator-desc");
+        const ratioEl = document.getElementById("model-litho-ratio");
+
+        const lithoMed = catMap["lithography"]
+          ? ((catMap["lithography"].low + catMap["lithography"].high) / 2) *
+            regionVal
+          : 0;
+        const lithoWfePct = wfeMed > 0 ? (lithoMed / wfeMed) * 100 : 0;
+        const lithoCapexPct = totalMed > 0 ? (lithoMed / totalMed) * 100 : 0;
+
+        if (scaleVal === 1) {
+          bannerEl.className = "model-indicator-box pilot-mode";
+          pillEl.className = "model-badge-pill pilot";
+          pillEl.textContent = t.modelPilotPill;
+          titleEl.textContent = t.modelPilotTitle;
+          descEl.textContent = t.modelPilotDesc;
+          ratioEl.style.color = "";
+          ratioEl.textContent =
+            currentLang === "zh"
+              ? `光刻占比: ${lithoWfePct.toFixed(1)}% WFE / ${lithoCapexPct.toFixed(1)}% 总Capex (密集试验机)`
+              : `Litho Share: ${lithoWfePct.toFixed(1)}% WFE / ${lithoCapexPct.toFixed(1)}% Total Capex (Dense R&D Scanners)`;
+        } else {
+          bannerEl.className = "model-indicator-box hvm-mode";
+          pillEl.className = "model-badge-pill hvm";
+          pillEl.textContent = t.modelHvmPill;
+          titleEl.textContent = t.modelHvmTitle;
+          descEl.textContent = t.modelHvmDesc;
+          ratioEl.style.color = "";
+          ratioEl.textContent =
+            currentLang === "zh"
+              ? `光刻占比: ${lithoWfePct.toFixed(1)}% WFE / ${lithoCapexPct.toFixed(1)}% 总Capex (量产标杆均衡)`
+              : `Litho Share: ${lithoWfePct.toFixed(1)}% WFE / ${lithoCapexPct.toFixed(1)}% Total Capex (HVM Production Benchmark)`;
+        }
+
+        // Render KPI Cards
+        document.getElementById("kpi-total-low").textContent = fmtB(totalLow);
+        document.getElementById("kpi-wfe-low").textContent = fmtB(wfeLow);
+        document.getElementById("kpi-fac-low").textContent = fmtB(facLow);
+
+        document.getElementById("kpi-total-med").textContent = fmtB(totalMed);
+        document.getElementById("kpi-wfe-med").textContent = fmtB(wfeMed);
+        document.getElementById("kpi-fac-med").textContent = fmtB(facMed);
+
+        document.getElementById("kpi-total-high").textContent = fmtB(totalHigh);
+        document.getElementById("kpi-wfe-high").textContent = fmtB(wfeHigh);
+        document.getElementById("kpi-fac-high").textContent = fmtB(facHigh);
+
+        // Render Macro Progress Bar
+        const shellShare = facFraction * 0.333;
+        const mepShare = facFraction * 0.587;
+        const amhsShare = facFraction * 0.08;
+        document.getElementById("seg-wfe").style.width =
+          `${toolFraction * 100}%`;
+        document.getElementById("seg-shell").style.width =
+          `${shellShare * 100}%`;
+        document.getElementById("seg-mep").style.width = `${mepShare * 100}%`;
+        document.getElementById("seg-amhs").style.width = `${amhsShare * 100}%`;
+
+        document.getElementById("ui-leg-wfe").textContent =
+          `${t.legWfe} ${(toolFraction * 100).toFixed(1)}% (${fmtB(wfeMed)})`;
+        document.getElementById("ui-leg-shell").textContent =
+          `${t.legShell} ${(shellShare * 100).toFixed(1)}% (${fmtB(totalMed * shellShare)})`;
+        document.getElementById("ui-leg-mep").textContent =
+          `${t.legMep} ${(mepShare * 100).toFixed(1)}% (${fmtB(totalMed * mepShare)})`;
+        document.getElementById("ui-leg-amhs").textContent =
+          `${t.legAmhs} ${(amhsShare * 100).toFixed(1)}% (${fmtB(totalMed * amhsShare)})`;
+
+        // Render Process Bay Breakdown
+        renderProcessBayBreakdown(catMap, wfeMed, regionVal);
+
+        // Render Facility Subsystem Breakdown
+        renderFacilityBreakdown(facMed);
+
+        // Render BOM Table
+        renderBomTable();
+      }
+
+      function renderProcessBayBreakdown(catMap, totalWfeMed, regionVal) {
+        const container = document.getElementById("process-breakdown-list");
+        const cats = Object.keys(catMap).map((k) => {
+          const med = ((catMap[k].low + catMap[k].high) / 2) * regionVal;
+          return {
+            name: k,
+            median: med,
+            count: catMap[k].count,
+            share: totalWfeMed > 0 ? (med / totalWfeMed) * 100 : 0,
+          };
+        });
+
+        cats.sort((a, b) => b.median - a.median);
+
+        const colors = {
+          lithography: "#38bdf8",
+          dry_etch: "#818cf8",
+          thin_film_deposition: "#c084fc",
+          ion_implantation: "#f43f5e",
+          metrology: "#fbbf24",
+          wet_clean: "#34d399",
+          resist_track: "#f97316",
+          inspection: "#a855f7",
+          cmp: "#06b6d4",
+          packaging: "#ec4899",
+          thermal_processing: "#14b8a6",
+          test: "#eab308",
+          other: "#94a3b8",
+        };
+
+        let html = "";
+        cats.forEach((c) => {
+          const col = colors[c.name] || "#64748b";
+          const formattedName = c.name
+            .replace(/_/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase());
+          html += `
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span class="breakdown-name">${formattedName} <span style="color:#64748b; font-weight:normal;">(${c.count} tools)</span></span>
+                <span class="breakdown-cost">${fmtB(c.median)} <span style="color:#94a3b8; font-weight:normal;">(${c.share.toFixed(1)}%)</span></span>
+              </div>
+              <div class="breakdown-mini-bar">
+                <div class="breakdown-mini-fill" style="width: ${c.share}%; background: ${col};"></div>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      }
+
+      function renderFacilityBreakdown(totalFacMed) {
+        const container = document.getElementById("facility-breakdown-list");
+        const subsystems = [
+          {
+            name:
+              currentLang === "zh"
+                ? "土建主体结构与洁净室外壳 (Shell)"
+                : "Cleanroom Architecture & Civil Shell",
+            share: 33.3,
+            col: "#818cf8",
+          },
+          {
+            name:
+              currentLang === "zh"
+                ? "超纯水制备与循环回收 (UPW System)"
+                : "Ultra-Pure Water (UPW) Generation & Recycle",
+            share: 12.0,
+            col: "#06b6d4",
+          },
+          {
+            name:
+              currentLang === "zh"
+                ? "高纯特气与大宗化学品输送 (Bulk & Spec Gases)"
+                : "Specialty Gases & Chemical Distribution",
+            share: 15.0,
+            col: "#f59e0b",
+          },
+          {
+            name:
+              currentLang === "zh"
+                ? "动力变电站、双回路配电与 UPS (Power)"
+                : "High-Voltage Substations & Power Distribution",
+            share: 16.0,
+            col: "#e11d48",
+          },
+          {
+            name:
+              currentLang === "zh"
+                ? "暖通空调、MAU 与 FFU 空气净化 (HVAC)"
+                : "Cleanroom HVAC, MAU & FFU Air Handling",
+            share: 13.7,
+            col: "#10b981",
+          },
+          {
+            name:
+              currentLang === "zh"
+                ? "AMHS 天车空中悬挂自动化物流 (OHT)"
+                : "AMHS Automated Material Handling Monorails",
+            share: 7.0,
+            col: "#38bdf8",
+          },
+          {
+            name:
+              currentLang === "zh"
+                ? "次层真空泵房与尾气废液处理 (Subfab)"
+                : "Subfab Vacuum Pumps & Abatement Scrubbers",
+            share: 3.0,
+            col: "#a855f7",
+          },
+        ];
+
+        let html = "";
+        subsystems.forEach((sub) => {
+          const cost = totalFacMed * (sub.share / 100);
+          html += `
+            <div class="breakdown-item">
+              <div class="breakdown-header">
+                <span class="breakdown-name">${sub.name}</span>
+                <span class="breakdown-cost">${fmtB(cost)} <span style="color:var(--text-muted); font-weight:normal;">(${sub.share.toFixed(1)}%)</span></span>
+              </div>
+              <div class="breakdown-mini-bar">
+                <div class="breakdown-mini-fill" style="width: ${sub.share}%; background: ${sub.col};"></div>
+              </div>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      }
+
+      function renderBomTable() {
+        const filterCat = document.getElementById("filter-category").value;
+        const scaleVal = parseFloat(document.getElementById("sel-scale").value);
+        const regionVal = parseFloat(
+          document.getElementById("sel-region").value,
+        );
+        const tbody = document.getElementById("bom-tbody");
+        const t = I18N[currentLang];
+
+        const filtered = bomData.filter((item) => {
+          if (filterCat !== "all" && item.category !== filterCat) return false;
+          return true;
+        });
+
+        let html = "";
+        filtered.forEach((item) => {
+          const count = getToolCount(item, scaleVal);
+          const lo = item.low_usd * regionVal;
+          const hi = item.high_usd * regionVal;
+          const subLo = lo * count;
+          const subHi = hi * count;
+          const subMed = (subLo + subHi) / 2;
+
+          const basisLabel =
+            item.basis === "reported" ? "Reported" : "Estimate";
+          const basisClass = `basis-${item.basis}`;
+
+          const countDisplay =
+            count > 0
+              ? count
+              : `<span style="color:var(--text-dim); font-size:0.75rem;" title="${
+                  currentLang === "zh"
+                    ? "该规模下未配置量产机台（试验线机型/更高代系）"
+                    : "Not deployed in this HVM scale (R&D / next-gen node)"
+                }">0</span>`;
+
+          const subtotalDisplay =
+            count > 0
+              ? `
+                <span style="color:var(--text-muted); font-size:0.75rem;">${fmtB(subLo)} / </span>
+                <strong style="color:var(--sc-accent-cyan);">${fmtB(subMed)}</strong>
+                <span style="color:var(--text-muted); font-size:0.75rem;"> / ${fmtB(subHi)}</span>
+              `
+              : `<span style="color:var(--text-dim); font-size:0.75rem;">$0</span>`;
+
+          html += `
+            <tr style="${count === 0 ? "opacity:0.55;" : ""}">
+              <td><span class="pill-cat">${escapeHtml(item.category)}</span></td>
+              <td>
+                <div style="font-weight:700; color:var(--text-main);">${escapeHtml(item.vendor)} ${escapeHtml(item.model)}</div>
+                <div style="font-size:0.75rem; color:var(--text-muted);">Bay: ${escapeHtml(item.bay)}</div>
+              </td>
+              <td style="text-align: center; font-weight:700; color:var(--text-main);">${countDisplay}</td>
+              <td>${fmtPriceUSD(lo)} – ${fmtPriceUSD(hi)}</td>
+              <td><span class="basis-pill ${basisClass}">● ${basisLabel}</span></td>
+              <td style="text-align: right; font-weight:600;">
+                ${subtotalDisplay}
+              </td>
+              <td style="text-align: center;">
+                <a href="compare.html?compare=${item.tool_id}" class="btn btn-secondary" style="padding:2px 8px; font-size:0.75rem;">
+                  ${t.compareBtn}
+                </a>
+              </td>
+            </tr>
+          `;
+        });
+
+        tbody.innerHTML = html;
+      }
+
+      window.onSemiconLanguageChange = function (nextLang) {
+        currentLang = nextLang;
+        recalculate();
+      };
+
+      const btnToggle = document.getElementById("btn-toggle-lang");
+      if (btnToggle) {
+        btnToggle.addEventListener("click", toggleLanguage);
+      }
+
+      window.addEventListener("DOMContentLoaded", initData);
+    </script>
+    <script src="js/site-nav.js"></script>
+  </body>
+</html>

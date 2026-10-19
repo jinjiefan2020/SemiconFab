@@ -22,6 +22,7 @@
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="css/semicon-theme.css" />
     <style>
       :root {
         color-scheme: light dark;
@@ -718,54 +719,22 @@
     </style>
   </head>
   <body>
-    <!-- Site Header Navigation -->
-    <header class="site-header">
-      <div class="site-header-inner">
-        <a href="index.html" class="site-brand">
-          <span class="brand-dot"></span>
-          <span>SemiconFab.org</span>
-        </a>
-        <nav class="site-nav-links">
-          <a href="index.html" data-i18n="nav_home">Home</a>
-          <a href="catalog-demo.html" data-i18n="nav_catalog">Catalog</a>
-          <a href="twin.html" data-i18n="nav_twin">3D Twin</a>
-          <a href="benchmark.html" data-i18n="nav_benchmark">Benchmark</a>
-          <a href="fab-cost.html" class="active" data-i18n="nav_fab_cost"
-            >Fab Cost</a
-          >
-          <a href="data-standard.html" data-i18n="nav_standard"
-            >Data Standard</a
-          >
-          <a href="verification.html" data-i18n="nav_verification"
-            >Verification</a
-          >
-          <a href="add-equipment.html" data-i18n="nav_add_equipment"
-            >Add Equipment</a
-          >
-        </nav>
-        <div class="site-nav-controls">
-          <button
-            id="theme-toggle-btn"
-            class="site-nav-btn"
-            onclick="toggleTheme()"
-            title="Switch Day / Dark Mode"
-          >
-            <span id="theme-icon">☀️</span>
-            <span id="theme-label">Day</span>
-          </button>
-          <button
-            id="lang-toggle-btn"
-            class="site-nav-btn"
-            onclick="toggleLanguage()"
-            title="Switch English / 中文"
-          >
-            <span id="lang-label"><strong>EN</strong> / 中</span>
-          </button>
-        </div>
-      </div>
-    </header>
+    <!-- Unified Header Mount -->
+    <div id="sc-header-mount"></div>
 
     <main>
+      <div style="display: flex; justify-content: flex-end; margin-bottom: 8px;">
+        <button
+          id="theme-toggle-btn"
+          class="site-nav-btn"
+          onclick="toggleTheme()"
+          title="Switch Day / Dark Mode"
+          style="display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 6px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 12.5px; font-weight: 600; cursor: pointer;"
+        >
+          <span id="theme-icon">☀️</span>
+          <span id="theme-label">Day</span>
+        </button>
+      </div>
       <h1 data-i18n="fab_cost_h1">
         Building a Fab: Where the Money Goes Beyond the Equipment
       </h1>
@@ -2951,36 +2920,23 @@
         </ul>
       </section>
 
-      <footer>
-        <div class="footer-links">
-          <span>&copy; 2026 SemiconFab.org</span>
-          <span>&middot;</span>
-          <a
-            href="https://github.com/jinjiefan2020/SemiconFab"
-            target="_blank"
-            rel="noopener noreferrer"
-            >GitHub (Source code)</a
-          >
-          <span>&middot;</span>
-          <a href="mailto:info@semiconfab.org">info@semiconfab.org</a>
-        </div>
-        <p data-i18n="fab_cost_footer">
-          All figures on this page come from the public sources listed above
-          (researched 2026-10-18). Anything flagged "unverified / weak quality /
-          estimate" must not be cited alone as a basis for decisions. The
-          estimator is a rough model based on published anchors; actual project
-          costs vary enormously by region, subsidies, exchange rates, and
-          schedule.
-        </p>
-      </footer>
+      <!-- Unified Footer Mount -->
+      <div id="sc-footer-mount"></div>
     </main>
 
     <!-- Load i18n & Translations -->
     <script src="js/translations.js"></script>
     <script src="js/fab-cost-i18n.js"></script>
     <script src="js/i18n.js"></script>
+    <script src="js/site-nav.js"></script>
 
     <script>
+      window.onSemiconLanguageChange = function (nextLang) {
+        if (currentLang !== nextLang) {
+          toggleLanguage();
+        }
+      };
+
       // Theme engine (light by default, matches site)
       let currentTheme = localStorage.getItem("semicon_theme") || "light";
 
@@ -3008,6 +2964,10 @@
       function toggleTheme() {
         applyTheme(currentTheme === "light" ? "dark" : "light");
       }
+
+      window.onSemiconThemeChange = function(theme) {
+        applyTheme(theme);
+      };
 
       applyTheme(currentTheme);
 

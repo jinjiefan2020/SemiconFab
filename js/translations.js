@@ -681,7 +681,8 @@ const I18N_DICTIONARY = {
     footer_contact: "Contact:",
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
-    twin_header_title: "300mm Advanced Semiconductor Fab",
+    twin_header_title: "300mm Semiconductor Fab",
+    twin_header_pilot_line: "Advanced Pilot Line",
     twin_header_sub:
       "Core Equipment 2D Architectural Layout / 3D High-Fidelity Cleanroom Digital Twin",
     mode_3d: "3D",
@@ -912,6 +913,53 @@ const I18N_DICTIONARY = {
     wafer_route_complete: "Route complete",
     wafer_honesty_banner:
       "Illustrative: the wafer visits a representative tool of each tool group, not a real dispatch schedule.",
+    // Equipment Comparison and Price Estimates
+    cmp_nav_compare: "Equipment Compare",
+    cmp_btn_compare: "Compare",
+    cmp_btn_selected: "Selected",
+    cmp_btn_compare_now: "Compare Now",
+    cmp_btn_clear: "Clear All",
+    cmp_select_hint: "Select 2–4 tools to compare side-by-side",
+    cmp_limit_reached: "Maximum 4 tools can be compared at once",
+    cmp_title: "Semiconductor Equipment Side-by-Side Comparison",
+    cmp_subtitle:
+      "Cross-dimensional engineering specification, provenance confidence, and price estimate comparison",
+    cmp_cross_category_warning:
+      "⚠️ Cross-category comparison is for reference only: Selected equipment belongs to different functional categories.",
+    cmp_col_property: "Specification / Metric",
+    cmp_row_vendor: "Vendor",
+    cmp_row_model: "Model",
+    cmp_row_category: "Category",
+    cmp_row_conformance: "Conformance Level",
+    cmp_row_price: "Price Estimate",
+    cmp_row_condition: "Condition",
+    cmp_row_basis: "Estimation Basis",
+    cmp_row_dimensions: "Dimensions (W × D × H)",
+    cmp_row_weight: "Weight",
+    cmp_row_wafers: "Wafer Sizes",
+    cmp_row_node: "Target Process Node",
+    cmp_row_capabilities: "Key Process Capabilities",
+    cmp_row_provenance: "Provenance Breakdown",
+    cmp_row_completeness: "Data Completeness",
+    cmp_row_notes: "Source Notes",
+    cmp_row_actions: "Actions",
+    cmp_btn_remove: "Remove",
+    cmp_btn_add_tool: "+ Add Tool",
+    cmp_back_to_catalog: "← Back to Catalog",
+    cmp_copy_link: "Share Comparison Link",
+    cmp_link_copied: "Comparison link copied to clipboard!",
+    cmp_empty_title: "No Equipment Selected",
+    cmp_empty_desc:
+      "Please select 2 to 4 tools from the catalog or click Add Tool below.",
+    cmp_disclaimer:
+      "Prices are curated from public reports and engineering estimates for reference only, not official commercial quotes. Actual transaction prices vary widely by configuration, region, and procurement negotiations.",
+    cmp_basis_reported: "Reported",
+    cmp_basis_observed_listing: "Observed Listing",
+    cmp_basis_category_estimate: "Category Estimate",
+    cmp_basis_unknown: "Unknown",
+    cmp_condition_new: "New",
+    cmp_condition_used: "Used",
+    cmp_condition_refurbished: "Refurbished",
     roof_schematic_label: "Roof & HVAC: Schematic",
   },
   "zh-CN": {
@@ -1564,7 +1612,8 @@ const I18N_DICTIONARY = {
     footer_contact: "联系方式:",
     footer_license:
       "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费 · 商业授权支持持续开发。",
-    twin_header_title: "300mm 先进制程晶圆制造厂 (Fab)",
+    twin_header_title: "300mm晶圆制造厂 (Fab)",
+    twin_header_pilot_line: "先进试验线",
     twin_header_sub: "半导体核心制造设备 2D 建筑布局 / 3D 高精度数字孪生车间",
     mode_3d: "3D",
     mode_label: "模式:",
@@ -1783,6 +1832,52 @@ const I18N_DICTIONARY = {
     wafer_route_complete: "路线完成",
     wafer_honesty_banner:
       "示意：晶圆访问每类设备的代表性机台，不代表实际派工。",
+    // Equipment Comparison and Price Estimates
+    cmp_nav_compare: "设备对比",
+    cmp_btn_compare: "对比",
+    cmp_btn_selected: "已选",
+    cmp_btn_compare_now: "立即对比",
+    cmp_btn_clear: "清空选择",
+    cmp_select_hint: "请选择 2–4 台设备进行横向对比",
+    cmp_limit_reached: "最多同时对比 4 台设备",
+    cmp_title: "半导体设备多维横向对比",
+    cmp_subtitle: "覆盖工艺能力、物理几何、数据置信度分级与设备价格估算区间",
+    cmp_cross_category_warning:
+      "⚠️ 跨品类对比仅供参考：所选机台属于不同工艺功能品类。",
+    cmp_col_property: "对比指标 / 规格维度",
+    cmp_row_vendor: "设备厂商",
+    cmp_row_model: "机台型号",
+    cmp_row_category: "工艺品类",
+    cmp_row_conformance: "验证等级",
+    cmp_row_price: "价格估算区间",
+    cmp_row_condition: "机台状态",
+    cmp_row_basis: "估算依据",
+    cmp_row_dimensions: "外形尺寸 (宽×深×高)",
+    cmp_row_weight: "机台重量",
+    cmp_row_wafers: "适用晶圆尺寸",
+    cmp_row_node: "目标工艺制程",
+    cmp_row_capabilities: "关键工艺能力摘要",
+    cmp_row_provenance: "数据溯源分级汇总",
+    cmp_row_completeness: "核心数据完整度",
+    cmp_row_notes: "来源说明与依据",
+    cmp_row_actions: "操作",
+    cmp_btn_remove: "移除",
+    cmp_btn_add_tool: "+ 添加对比机台",
+    cmp_back_to_catalog: "← 返回设备目录",
+    cmp_copy_link: "复制对比链接",
+    cmp_link_copied: "对比链接已复制到剪贴板！",
+    cmp_empty_title: "尚未选择对比设备",
+    cmp_empty_desc:
+      "请从设备目录中勾选 2 至 4 台机台，或点击下方按钮添加设备。",
+    cmp_disclaimer:
+      "价格为公开信息整理与估算区间，不构成报价；实际成交价因配置、地区、谈判而异。",
+    cmp_basis_reported: "公开报道",
+    cmp_basis_observed_listing: "公开挂牌",
+    cmp_basis_category_estimate: "估算区间",
+    cmp_basis_unknown: "未知",
+    cmp_condition_new: "全新",
+    cmp_condition_used: "二手",
+    cmp_condition_refurbished: "翻新",
     roof_schematic_label: "屋顶暖通: 示意",
   },
   "zh-TW": {
@@ -1954,7 +2049,8 @@ const I18N_DICTIONARY = {
     footer_contact: "聯絡方式:",
     footer_license:
       "源碼公開 · PolyForm Noncommercial 1.0.0 · 教育與個人使用免費 · 商業授權支持持續開發。",
-    twin_header_title: "300mm 先進製程晶圓製造廠 (Fab)",
+    twin_header_title: "300mm晶圓製造廠 (Fab)",
+    twin_header_pilot_line: "先進試驗線",
     twin_header_sub: "半導體核心製造設備 2D 建築布局 / 3D 高精度數位孿生車間",
     mode_3d: "3D",
     mode_label: "模式:",
@@ -2287,6 +2383,7 @@ const I18N_DICTIONARY = {
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm 先端半導体製造ライン (Fab)",
+    twin_header_pilot_line: "先端パイロットライン",
     twin_header_sub: "半導体中核製造装置 2D配置図 / 3D高精度デジタルツイン",
     mode_3d: "3D",
     scenario_label: "シミュレーションシナリオ",
@@ -2674,6 +2771,7 @@ const I18N_DICTIONARY = {
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm 첨단 반도체 제조 라인 (Fab)",
+    twin_header_pilot_line: "첨단 파일럿 라인",
     twin_header_sub: "반도체 핵심 제조 장비 2D 배치도 / 3D 고정밀 디지털 트윈",
     mode_3d: "3D",
     scenario_label: "시뮬레이션 시나리오",
@@ -3060,6 +3158,7 @@ const I18N_DICTIONARY = {
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "300mm Halbleiter-Fabrikationsanlage (Fab)",
+    twin_header_pilot_line: "Erweiterte Pilotlinie",
     twin_header_sub:
       "Kernfertigungsanlagen 2D-Layout / 3D-Hochpräzisions-Reinraum",
     mode_3d: "3D",
@@ -3457,6 +3556,7 @@ const I18N_DICTIONARY = {
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "Fabrique de Semi-Conducteurs 300mm (Fab)",
+    twin_header_pilot_line: "Ligne Pilote Avancée",
     twin_header_sub:
       "Équipements de Fabrication Plan 2D / Jumeau Numérique 3D Haute Précision",
     mode_3d: "3D",
@@ -3856,6 +3956,7 @@ const I18N_DICTIONARY = {
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "Impianto di Fabbricazione Wafer 300mm (Fab)",
+    twin_header_pilot_line: "Linea Pilota Avanzata",
     twin_header_sub:
       "Layout 2D Impianti Principali / Digital Twin 3D ad Alta Precisione",
     mode_3d: "3D",
@@ -4254,6 +4355,7 @@ const I18N_DICTIONARY = {
     footer_license:
       "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
     twin_header_title: "Planta de Fabricación de Obleas 300mm (Fab)",
+    twin_header_pilot_line: "Línea Piloto Avanzada",
     twin_header_sub:
       "Plano 2D de Equipos / Gemelo Digital 3D de Alta Precisión",
     mode_3d: "3D",

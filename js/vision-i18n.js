@@ -347,6 +347,8 @@ const VISION_I18N = {
     vision_ms_v1_4: "Follow-a-wafer route animation; roof/HVAC layer",
     vision_ms_v1_5:
       "Demand-driven AMHS closed-loop traffic simulation; bottom HUD stack; hover popover tooltips",
+    vision_ms_v1_6:
+      "Equipment cross-comparison matrix, 167-model full price coverage, Fab Capex & BOM estimator, and editorial design system",
 
     // Matrix
     vision_matrix_title:
@@ -719,6 +721,8 @@ const VISION_I18N = {
     vision_ms_v1_4: "Follow-a-wafer 路线动画；屋顶/HVAC 基础设施层",
     vision_ms_v1_5:
       "AMHS 闭环物流交通仿真与智能派工；底部无遮挡 HUD 架构；顶部视角预设悬停提示气泡",
+    vision_ms_v1_6:
+      "设备横向多维对比矩阵、167台全量价格数据覆盖、晶圆厂Capex总造价与BOM测算器、全新设计规范",
 
     // Matrix
     vision_matrix_title: "商业巨头方案 vs 开源技术栈替代矩阵",

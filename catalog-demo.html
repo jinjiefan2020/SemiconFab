@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemiconFab Equipment Catalog · Schema v1.0</title>
+    <!-- Unified Design System Theme -->
+    <link rel="stylesheet" href="css/semicon-theme.css" />
     <style>
       :root {
         --tier-vendor: #16a34a;
@@ -11,21 +13,21 @@
         --tier-community: #9333ea;
         --tier-inferred: #9ca3af;
         --tier-synthetic: #f59e0b;
-        --bg-page: #0f172a;
-        --bg-card: #1e293b;
-        --bg-card-hover: #24344d;
-        --border-card: #334155;
-        --text-main: #f8fafc;
-        --text-muted: #94a3b8;
-        --text-dim: #64748b;
+        --bg-page: var(--sc-bg-base);
+        --bg-card: var(--sc-bg-panel);
+        --bg-card-hover: var(--sc-bg-subpanel);
+        --border-card: var(--sc-border);
+        --text-main: var(--sc-text-main);
+        --text-muted: var(--sc-text-muted);
+        --text-dim: var(--sc-text-dim);
         --badge-l1-bg: rgba(22, 163, 74, 0.15);
         --badge-l1-border: #16a34a;
-        --badge-l1-text: #4ade80;
+        --badge-l1-text: #16a34a;
         --badge-draft-bg: rgba(245, 158, 11, 0.15);
         --badge-draft-border: #f59e0b;
-        --badge-draft-text: #fbbf24;
-        --accent-blue: #38bdf8;
-        --accent-blue-bg: rgba(56, 189, 248, 0.12);
+        --badge-draft-text: #d97706;
+        --accent-blue: var(--sc-accent-cyan);
+        --accent-blue-bg: var(--sc-bg-hover);
       }
 
       * {
@@ -36,7 +38,7 @@
 
       body {
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
           Arial, sans-serif;
         background-color: var(--bg-page);
         color: var(--text-main);
@@ -44,14 +46,11 @@
         padding-bottom: 80px;
       }
 
-      header {
-        background: #111827;
-        border-bottom: 1px solid #1f2937;
-        padding: 24px 32px;
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      .catalog-sub-header {
+        background: var(--bg-card);
+        border-bottom: 1px solid var(--border-card);
+        padding: 20px 32px;
+        box-shadow: var(--sc-shadow-sm);
       }
 
       .header-top {
@@ -67,7 +66,7 @@
       .logo-area h1 {
         font-size: 1.5rem;
         font-weight: 700;
-        color: #fff;
+        color: var(--text-main);
         display: flex;
         align-items: center;
         gap: 10px;
@@ -96,9 +95,9 @@
       }
 
       .lang-toggle-btn {
-        background: #334155;
-        color: #fff;
-        border: 1px solid #475569;
+        background: var(--sc-bg-subpanel);
+        color: var(--sc-text-main);
+        border: 1px solid var(--sc-border);
         padding: 8px 16px;
         border-radius: 6px;
         font-size: 0.875rem;
@@ -108,14 +107,14 @@
       }
 
       .lang-toggle-btn:hover {
-        background: #475569;
-        border-color: #64748b;
+        background: var(--sc-border);
+        color: var(--sc-text-main);
       }
 
       .file-input-label {
-        background: #1e293b;
-        color: var(--text-muted);
-        border: 1px solid var(--border-card);
+        background: var(--sc-bg-subpanel);
+        color: var(--sc-text-main);
+        border: 1px solid var(--sc-border);
         padding: 8px 14px;
         border-radius: 6px;
         font-size: 0.8125rem;
@@ -127,8 +126,8 @@
       }
 
       .file-input-label:hover {
-        background: #334155;
-        color: #fff;
+        background: var(--sc-border);
+        color: var(--sc-text-main);
       }
 
       .file-input-label input {
@@ -150,7 +149,7 @@
       }
 
       .stat-pill {
-        background: #1e293b;
+        background: var(--bg-card);
         border: 1px solid var(--border-card);
         padding: 8px 16px;
         border-radius: 8px;
@@ -158,10 +157,11 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        color: var(--text-muted);
       }
 
       .stat-pill strong {
-        color: #fff;
+        color: var(--text-main);
         font-size: 1rem;
       }
 
@@ -170,7 +170,7 @@
         background: rgba(22, 163, 74, 0.08);
       }
       .stat-pill.l1 strong {
-        color: #4ade80;
+        color: #16a34a;
       }
 
       .stat-pill.draft {
@@ -178,12 +178,12 @@
         background: rgba(245, 158, 11, 0.08);
       }
       .stat-pill.draft strong {
-        color: #fbbf24;
+        color: #d97706;
       }
 
       /* Legend */
       .legend-card {
-        background: #162032;
+        background: var(--bg-card);
         border: 1px solid var(--border-card);
         border-radius: 10px;
         padding: 14px 20px;
@@ -192,6 +192,7 @@
         align-items: center;
         flex-wrap: wrap;
         gap: 20px;
+        box-shadow: var(--sc-shadow-sm);
       }
 
       .legend-title {
@@ -243,11 +244,12 @@
 
       /* Filters Section */
       .controls-panel {
-        background: #1e293b;
+        background: var(--bg-card);
         border: 1px solid var(--border-card);
         border-radius: 12px;
         padding: 20px;
         margin-bottom: 28px;
+        box-shadow: var(--sc-shadow-sm);
       }
 
       .search-row {
@@ -266,11 +268,11 @@
 
       .search-input {
         width: 100%;
-        background: #0f172a;
-        border: 1px solid #334155;
+        background: var(--bg-card-hover);
+        border: 1px solid var(--border-card);
         padding: 12px 16px 12px 42px;
         border-radius: 8px;
-        color: #fff;
+        color: var(--text-main);
         font-size: 0.9375rem;
         outline: none;
         transition: border-color 0.2s;
@@ -312,39 +314,47 @@
       }
 
       .chip {
-        background: #0f172a;
+        background: var(--sc-bg-subpanel);
         color: var(--text-muted);
-        border: 1px solid #334155;
+        border: 1px solid var(--border-color);
         padding: 6px 14px;
         border-radius: 20px;
         font-size: 0.8125rem;
         font-weight: 500;
         cursor: pointer;
-        transition: all 0.2s;
+        transition: all 0.15s ease;
         display: inline-flex;
         align-items: center;
         gap: 6px;
       }
 
       .chip:hover {
-        background: #1e293b;
-        border-color: #475569;
-        color: #fff;
+        border-color: var(--sc-accent-cyan);
+        color: var(--text-main);
       }
 
       .chip.active {
-        background: #0284c7;
-        border-color: #38bdf8;
+        background: var(--sc-accent-cyan);
+        border-color: var(--sc-accent-cyan);
         color: #fff;
         font-weight: 600;
       }
 
       .chip-count {
         font-size: 0.75rem;
-        opacity: 0.8;
-        background: rgba(255, 255, 255, 0.15);
+        font-weight: 600;
+        opacity: 0.9;
+        background: rgba(0, 0, 0, 0.08);
+        color: inherit;
         padding: 1px 6px;
         border-radius: 10px;
+      }
+      .chip.active .chip-count {
+        background: rgba(255, 255, 255, 0.25);
+        color: #fff;
+      }
+      html.dark .chip-count {
+        background: rgba(255, 255, 255, 0.12);
       }
 
       /* Grid */
@@ -433,7 +443,7 @@
       .model-name {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #fff;
+        color: var(--text-main);
         margin-top: 2px;
         word-break: break-word;
       }
@@ -441,10 +451,10 @@
       /* Completeness Section */
       .completeness-section {
         margin-bottom: 14px;
-        background: rgba(15, 23, 42, 0.6);
+        background: var(--bg-card-hover);
         padding: 10px 12px;
         border-radius: 8px;
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        border: 1px solid var(--border-card);
       }
 
       .completeness-header {
@@ -495,8 +505,6 @@
 
       /* Draft Banner */
       .draft-banner {
-        background: rgba(245, 158, 11, 0.1);
-        border: 1px solid rgba(245, 158, 11, 0.3);
         border-radius: 8px;
         padding: 12px;
         margin-bottom: 14px;
@@ -505,7 +513,6 @@
       .draft-banner-title {
         font-size: 0.8125rem;
         font-weight: 700;
-        color: #fbbf24;
         display: flex;
         align-items: center;
         gap: 6px;
@@ -514,7 +521,6 @@
 
       .draft-missing-text {
         font-size: 0.75rem;
-        color: #cbd5e1;
         margin-bottom: 10px;
       }
 
@@ -630,10 +636,11 @@
       }
 
       .specs-text {
-        background: #0f172a;
+        background: var(--sc-bg-subpanel);
+        border: 1px solid var(--border-color);
         border-radius: 6px;
         padding: 8px 10px;
-        color: #cbd5e1;
+        color: var(--text-main);
         font-size: 0.75rem;
         line-height: 1.4;
         margin-top: 4px;
@@ -649,17 +656,323 @@
 
       .empty-state h3 {
         font-size: 1.25rem;
-        color: #fff;
+        color: var(--text-main);
         margin-bottom: 8px;
+      }
+
+      /* Equipment Comparison UI (1.6.0) */
+      .card.selected-for-compare {
+        border-color: var(--sc-accent-cyan) !important;
+        box-shadow:
+          0 0 0 2px rgba(2, 132, 199, 0.4),
+          var(--sc-shadow-md) !important;
+      }
+
+      .compare-card-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--sc-bg-subpanel);
+        border: 1px solid var(--border-color);
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        cursor: pointer;
+        user-select: none;
+        transition: all 0.2s;
+      }
+      .compare-card-toggle:hover {
+        background: var(--sc-bg-hover);
+        color: var(--text-main);
+      }
+      .compare-card-toggle input[type="checkbox"] {
+        cursor: pointer;
+        accent-color: var(--sc-accent-cyan);
+      }
+      .compare-card-toggle.checked {
+        background: var(--accent-blue-bg);
+        border-color: var(--sc-accent-cyan);
+        color: var(--sc-accent-cyan);
+      }
+
+      /* Card Price Block */
+      .card-price-row {
+        background: var(--sc-bg-subpanel);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 8px 12px;
+        margin: 10px 0 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .card-price-val {
+        font-size: 0.9375rem;
+        font-weight: 800;
+        color: var(--sc-accent-cyan);
+        letter-spacing: -0.01em;
+      }
+
+      .card-price-tags {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .basis-pill {
+        font-size: 0.6875rem;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+        display: inline-flex;
+        align-items: center;
+        gap: 3px;
+      }
+      .basis-pill.basis-reported {
+        background: #fdf3e3;
+        color: #b45309;
+        border: 1px solid #b45309;
+      }
+      .basis-pill.basis-category_estimate {
+        background: #e6f4f1;
+        color: #0e6e6b;
+        border: 1px solid #0e6e6b;
+      }
+      .basis-pill.basis-observed_listing {
+        background: #e9e7df;
+        color: #4c5560;
+        border: 1px solid #d8d4c8;
+      }
+      .basis-pill.basis-unknown {
+        background: var(--sc-bg-subpanel);
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+      html.dark .basis-pill.basis-reported {
+        background: #2c2417;
+        color: #e8a04c;
+        border-color: rgba(232, 160, 76, 0.4);
+      }
+      html.dark .basis-pill.basis-category_estimate {
+        background: rgba(63, 189, 184, 0.15);
+        color: #3fbdb8;
+        border-color: rgba(63, 189, 184, 0.35);
+      }
+      html.dark .basis-pill.basis-observed_listing {
+        background: rgba(35, 43, 51, 0.8);
+        color: #aeb7bf;
+        border-color: #333c45;
+      }
+
+      .cond-pill {
+        font-size: 0.6875rem;
+        font-weight: 600;
+        padding: 1px 5px;
+        border-radius: 3px;
+        background: var(--sc-bg-subpanel);
+        color: var(--text-muted);
+        border: 1px solid var(--border-color);
+      }
+
+      /* Floating Bottom Compare Drawer */
+      .compare-drawer {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: var(--sc-header-bg);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-top: 1px solid var(--border-color);
+        padding: 12px 24px;
+        z-index: 100;
+        box-shadow: var(--sc-shadow-lg);
+        transform: translateY(110%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .compare-drawer.show {
+        transform: translateY(0);
+      }
+
+      .compare-drawer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
+
+      .compare-drawer-info {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+
+      .compare-drawer-count {
+        font-weight: 700;
+        font-size: 0.9375rem;
+        color: var(--text-main);
+        background: var(--accent-blue-bg);
+        border: 1px solid var(--sc-border-light);
+        padding: 4px 10px;
+        border-radius: 6px;
+      }
+
+      .compare-drawer-hint {
+        font-size: 0.8125rem;
+        color: var(--text-muted);
+      }
+
+      .compare-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .compare-pill-item {
+        background: var(--sc-bg-subpanel);
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        padding: 3px 8px;
+        font-size: 0.75rem;
+        color: var(--text-main);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .compare-pill-item button {
+        background: none;
+        border: none;
+        color: var(--text-muted);
+        cursor: pointer;
+        font-size: 0.875rem;
+        line-height: 1;
+      }
+      .compare-pill-item button:hover {
+        color: #f43f5e;
+      }
+
+      .compare-drawer-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn-clear-compare {
+        background: none;
+        border: 1px solid var(--border-color);
+        color: var(--text-muted);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.8125rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-clear-compare:hover {
+        color: var(--text-main);
+        background: var(--sc-bg-hover);
+      }
+
+      .btn-compare-now {
+        background: var(--sc-accent-cyan);
+        border: none;
+        color: #fff;
+        padding: 8px 18px;
+        border-radius: 6px;
+        font-size: 0.875rem;
+        font-weight: 700;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+        text-decoration: none;
+      }
+      .btn-compare-now:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+      .btn-compare-now:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .disclaimer-note {
+        margin-top: 14px;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        max-width: 900px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 10px 14px;
+        background: var(--sc-bg-subpanel);
+        border: 1px solid var(--border-color);
+        border-radius: 6px;
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .container {
+          padding: 16px 12px 60px !important;
+        }
+        .catalog-sub-header {
+          padding: 16px 14px;
+        }
+        .catalog-grid {
+          grid-template-columns: 1fr !important;
+        }
+        .header-top {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .header-actions {
+          width: 100%;
+          justify-content: flex-start;
+        }
+        .search-row {
+          flex-direction: column;
+          align-items: stretch;
+        }
+        .search-input-wrap {
+          min-width: 0;
+          width: 100%;
+        }
+        .compare-drawer {
+          padding: 12px 14px;
+        }
+        .compare-drawer-content {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 10px;
+        }
+        .compare-drawer-actions {
+          justify-content: flex-end;
+        }
+        .logo-area h1 {
+          font-size: 1.25rem;
+        }
       }
     </style>
   </head>
-  <body>
-    <header>
+  <body class="sc-themed">
+    <!-- Unified Header Mount -->
+    <div id="sc-header-mount"></div>
+
+    <section class="catalog-sub-header">
       <div class="header-top">
         <div class="logo-area">
           <h1>
-            <span>SemiconFab</span>
+            <span id="ui-catalog-title">Equipment Catalog</span>
             <span class="tag">Schema v1.0</span>
           </h1>
           <p id="ui-subtitle">
@@ -683,16 +996,9 @@
             <span id="ui-load-json">Load catalog.json</span>
             <input type="file" id="file-picker" accept=".json" />
           </label>
-          <button
-            id="lang-btn"
-            class="lang-toggle-btn"
-            title="Switch English / 中文"
-          >
-            EN/中文
-          </button>
         </div>
       </div>
-    </header>
+    </section>
 
     <main class="container">
       <!-- Stats Bar -->
@@ -831,7 +1137,44 @@
           for education and personal use &middot; Commercial licensing funds
           ongoing development.
         </p>
+        <p id="ui-disclaimer-note" class="disclaimer-note">
+          Prices are curated from public reports and engineering estimates for
+          reference only, not official commercial quotes. Actual transaction
+          prices vary widely by configuration, region, and procurement
+          negotiations.
+        </p>
       </footer>
+      <!-- Floating Bottom Compare Drawer (1.6.0) -->
+      <div id="compare-drawer" class="compare-drawer">
+        <div class="compare-drawer-content">
+          <div class="compare-drawer-info">
+            <span class="compare-drawer-count" id="ui-compare-count"
+              >Selected (0/4)</span
+            >
+            <span class="compare-drawer-hint" id="ui-compare-hint"
+              >Select 2–4 tools to compare</span
+            >
+            <div class="compare-pills" id="compare-pills"></div>
+          </div>
+          <div class="compare-drawer-actions">
+            <button
+              class="btn-clear-compare"
+              onclick="clearAllCompare()"
+              id="ui-btn-clear-compare"
+            >
+              Clear All
+            </button>
+            <button
+              class="btn-compare-now"
+              id="btn-compare-now"
+              onclick="goToComparison()"
+              disabled
+            >
+              <span id="ui-btn-compare-now">Compare Now (0)</span> &rarr;
+            </button>
+          </div>
+        </div>
+      </div>
     </main>
 
     <!-- Embedded fallback catalog JSON data -->
@@ -10487,6 +10830,7 @@
       ]
     </script>
 
+    <script src="js/price-estimates-fallback.js"></script>
     <script>
       // --- Bilingual UI Dictionaries ---
       const I18N = {
@@ -10521,6 +10865,21 @@
           emptyDesc: "Try adjusting your search query or category filters.",
           footerLicense:
             "Source-available · PolyForm Noncommercial 1.0.0 · Free for education and personal use · Commercial licensing funds ongoing development.",
+          disclaimer:
+            "Prices are curated from public reports and engineering estimates for reference only, not official commercial quotes. Actual transaction prices vary widely by configuration, region, and procurement negotiations.",
+          compareCheckbox: "Compare",
+          compareCount: "Selected",
+          compareHint: "Select 2–4 tools to compare side-by-side",
+          compareNow: "Compare Now",
+          compareClear: "Clear All",
+          compareLimit: "Maximum 4 tools can be compared at once",
+          basisReported: "Reported",
+          basisEstimate: "Estimate",
+          basisObserved: "Observed",
+          basisUnknown: "Unknown",
+          condNew: "New",
+          condUsed: "Used",
+          condRefurbished: "Refurbished",
           fields: {
             category: "Category",
             waferSizes: "Wafer Sizes",
@@ -10576,6 +10935,21 @@
           emptyDesc: "请尝试清除搜索关键词或切换不同的类别筛选。",
           footerLicense:
             "源码公开 · PolyForm Noncommercial 1.0.0 · 教育与个人使用免费 · 商业授权支持持续开发。",
+          disclaimer:
+            "价格为公开信息整理与估算区间，不构成报价；实际成交价因配置、地区、谈判而异。",
+          compareCheckbox: "对比",
+          compareCount: "已选",
+          compareHint: "请选择 2–4 台设备进行横向对比",
+          compareNow: "立即对比",
+          compareClear: "清空选择",
+          compareLimit: "最多同时对比 4 台设备",
+          basisReported: "公开报道",
+          basisEstimate: "估算区间",
+          basisObserved: "公开挂牌",
+          basisUnknown: "未知",
+          condNew: "全新",
+          condUsed: "二手",
+          condRefurbished: "翻新",
           fields: {
             category: "设备类别",
             waferSizes: "适用晶圆尺寸",
@@ -10606,12 +10980,29 @@
 
       let currentLang = "en"; // Default to EN, toggleable
       let catalogData = [];
+      let priceEstimatesData = {};
+      let selectedCompareIds = [];
       let activeCategory = "all";
       let searchQuery = "";
       let hideDrafts = false;
 
+      function formatPriceUSD(amount) {
+        if (!amount) return "$0";
+        if (amount >= 1000000) {
+          const m = amount / 1000000;
+          return "$" + (m % 1 === 0 ? m.toFixed(0) : m.toFixed(1)) + "M";
+        }
+        if (amount >= 1000) {
+          return "$" + (amount / 1000).toFixed(0) + "k";
+        }
+        return "$" + amount.toLocaleString();
+      }
+
       // Load initial data
       function initData() {
+        if (window.semiconGetLang) {
+          currentLang = window.semiconGetLang();
+        }
         try {
           const embeddedEl = document.getElementById("embedded-catalog-data");
           if (embeddedEl && embeddedEl.textContent.trim()) {
@@ -10619,6 +11010,10 @@
           }
         } catch (err) {
           console.error("Failed to parse embedded data:", err);
+        }
+
+        if (window.PRICE_ESTIMATES_FALLBACK) {
+          priceEstimatesData = window.PRICE_ESTIMATES_FALLBACK;
         }
 
         // Attempt fetch in case running on local webserver
@@ -10632,21 +11027,38 @@
           })
           .catch(() => {});
 
+        fetch("data/price_estimates.json")
+          .then((res) => res.json())
+          .then((data) => {
+            if (data && typeof data === "object") {
+              priceEstimatesData = data;
+              renderGrid();
+            }
+          })
+          .catch(() => {});
+
         renderAll();
       }
 
       function switchLanguage() {
         currentLang = currentLang === "zh" ? "en" : "zh";
-        document.getElementById("lang-btn").textContent = "EN/中文";
-        document.getElementById("lang-btn").title =
-          currentLang === "zh" ? "Switch to English" : "切换到中文";
+        const langBtn = document.getElementById("lang-btn");
+        if (langBtn) {
+          langBtn.textContent = "EN/中文";
+          langBtn.title = currentLang === "zh" ? "Switch to English" : "切换到中文";
+        }
         applyI18nChrome();
         renderCategoryChips();
         renderGrid();
+        updateCompareDrawer();
       }
 
       function applyI18nChrome() {
         const t = I18N[currentLang];
+        const titleEl = document.getElementById("ui-catalog-title");
+        if (titleEl) {
+          titleEl.textContent = currentLang === "zh" ? "半导体设备全名录" : "Equipment Catalog";
+        }
         document.getElementById("ui-subtitle").textContent = t.subtitle;
         document.getElementById("ui-load-json").textContent = t.loadJson;
         document.getElementById("ui-stat-total-label").textContent =
@@ -10667,13 +11079,100 @@
         document.getElementById("ui-hide-drafts").textContent = t.hideDrafts;
         const footerLic = document.getElementById("ui-footer-license");
         if (footerLic) footerLic.textContent = t.footerLicense;
+        const discEl = document.getElementById("ui-disclaimer-note");
+        if (discEl) discEl.textContent = t.disclaimer;
+      }
+
+      function toggleCompareTool(recId, isChecked) {
+        const t = I18N[currentLang];
+        if (isChecked) {
+          if (selectedCompareIds.length >= 4) {
+            alert(t.compareLimit);
+            renderGrid();
+            return;
+          }
+          if (!selectedCompareIds.includes(recId)) {
+            selectedCompareIds.push(recId);
+          }
+        } else {
+          selectedCompareIds = selectedCompareIds.filter((id) => id !== recId);
+        }
+        updateCompareDrawer();
+        renderGrid();
+      }
+
+      function removeCompareTool(recId) {
+        selectedCompareIds = selectedCompareIds.filter((id) => id !== recId);
+        updateCompareDrawer();
+        renderGrid();
+      }
+
+      function clearAllCompare() {
+        selectedCompareIds = [];
+        updateCompareDrawer();
+        renderGrid();
+      }
+
+      function goToComparison() {
+        if (selectedCompareIds.length >= 2) {
+          window.location.href = `compare.html?compare=${selectedCompareIds.join(",")}`;
+        }
+      }
+
+      function updateCompareDrawer() {
+        const drawer = document.getElementById("compare-drawer");
+        const countEl = document.getElementById("ui-compare-count");
+        const hintEl = document.getElementById("ui-compare-hint");
+        const pillsEl = document.getElementById("compare-pills");
+        const btnClear = document.getElementById("ui-btn-clear-compare");
+        const btnNow = document.getElementById("btn-compare-now");
+        const btnNowText = document.getElementById("ui-btn-compare-now");
+        const t = I18N[currentLang];
+
+        if (!drawer) return;
+
+        const count = selectedCompareIds.length;
+        if (count === 0) {
+          drawer.classList.remove("show");
+          return;
+        }
+
+        drawer.classList.add("show");
+        countEl.textContent = `${t.compareCount} (${count}/4)`;
+        btnClear.textContent = t.compareClear;
+        btnNowText.textContent = `${t.compareNow} (${count})`;
+
+        if (count >= 2) {
+          btnNow.disabled = false;
+          hintEl.textContent = t.compareHint;
+        } else {
+          btnNow.disabled = true;
+          hintEl.textContent =
+            currentLang === "zh"
+              ? "请再选择至少 1 台设备以开启对比 (2–4 台)"
+              : "Select at least 1 more tool to compare (2–4 tools)";
+        }
+
+        // Render pills
+        let pillsHtml = "";
+        selectedCompareIds.forEach((id) => {
+          const item = catalogData.find((x) => x.record_id === id);
+          if (item) {
+            pillsHtml += `
+            <span class="compare-pill-item">
+              <span>${escapeHtml(item.vendor)} ${escapeHtml(item.model)}</span>
+              <button onclick="removeCompareTool('${id}')" title="Remove">✕</button>
+            </span>
+          `;
+          }
+        });
+        pillsEl.innerHTML = pillsHtml;
       }
 
       function renderCategoryChips() {
         const chipsBar = document.getElementById("category-chips-bar");
         const t = I18N[currentLang];
 
-        // Calculate counts per category from current catalogData
         const catCounts = {};
         let totalCount = catalogData.length;
         catalogData.forEach((item) => {
@@ -10681,7 +11180,6 @@
           catCounts[c] = (catCounts[c] || 0) + 1;
         });
 
-        // 13 categories defined in schema.json
         const categoryKeys = [
           "lithography",
           "resist_track",
@@ -10762,15 +11260,12 @@
         const t = I18N[currentLang];
 
         const filtered = catalogData.filter((item) => {
-          // Category check
           if (activeCategory !== "all" && item.category !== activeCategory) {
             return false;
           }
-          // Hide drafts check
           if (hideDrafts && item.conformance_level === "draft") {
             return false;
           }
-          // Search query check
           if (searchQuery) {
             const q = searchQuery.toLowerCase();
             const v = (item.vendor || "").toLowerCase();
@@ -10799,6 +11294,36 @@
           const badgeText = isL1 ? t.badgeL1 : t.badgeDraft;
           const fillClass = isL1 ? "fill-l1" : "fill-draft";
           const categoryLabel = t.categories[item.category] || item.category;
+          const isSelected = selectedCompareIds.includes(item.record_id);
+
+          // Price estimate
+          const est = priceEstimatesData[item.record_id];
+          let priceBlockHtml = "";
+          if (est && est.basis !== "unknown" && est.low_usd) {
+            const lowStr = formatPriceUSD(est.low_usd);
+            const highStr = formatPriceUSD(est.high_usd);
+            const basisKey = est.basis || "category_estimate";
+            let basisLabel = t.basisEstimate;
+            if (basisKey === "reported") basisLabel = t.basisReported;
+            else if (basisKey === "observed_listing")
+              basisLabel = t.basisObserved;
+            else if (basisKey === "unknown") basisLabel = t.basisUnknown;
+
+            const condKey = est.condition || "new";
+            let condLabel = t.condNew;
+            if (condKey === "used") condLabel = t.condUsed;
+            else if (condKey === "refurbished") condLabel = t.condRefurbished;
+
+            priceBlockHtml = `
+              <div class="card-price-row">
+                <div class="card-price-val">${lowStr} – ${highStr} USD</div>
+                <div class="card-price-tags">
+                  <span class="basis-pill basis-${basisKey}">● ${basisLabel}</span>
+                  <span class="cond-pill">${condLabel}</span>
+                </div>
+              </div>
+            `;
+          }
 
           // Missing fields text
           let missingFieldsText = "";
@@ -10840,7 +11365,6 @@
           const phys = rec.physical || {};
           const proc = rec.process_capability || {};
 
-          // Wafer size
           let waferSizesVal = t.fields.notAvailable;
           let waferSizesTier = "";
           if (ident.wafer_sizes_mm && ident.wafer_sizes_mm.value) {
@@ -10850,7 +11374,6 @@
               : "";
           }
 
-          // Node
           let nodeVal = t.fields.notAvailable;
           let nodeTier = "";
           if (ident.node_applicability && ident.node_applicability.value) {
@@ -10860,7 +11383,6 @@
               : "";
           }
 
-          // Footprint
           let dimVal = t.fields.notAvailable;
           let dimTier = "";
           if (phys.width_mm && phys.depth_mm && phys.height_mm) {
@@ -10870,7 +11392,6 @@
               : "";
           }
 
-          // Weight
           let weightVal = t.fields.notAvailable;
           let weightTier = "";
           if (phys.weight_kg && phys.weight_kg.value) {
@@ -10880,7 +11401,6 @@
               : "";
           }
 
-          // Specs
           let specsVal = "";
           if (proc.capabilities && proc.capabilities.length > 0) {
             specsVal = proc.capabilities[0].detail
@@ -10888,20 +11408,27 @@
               : "";
           }
 
-          // Notes
           let notesVal = rec.notes || "";
 
           html += `
-          <div class="card" id="card-${item.record_id}">
+          <div class="card ${isSelected ? "selected-for-compare" : ""}" id="card-${item.record_id}">
             <div class="card-header">
               <span class="card-category-tag">${categoryLabel}</span>
-              <span class="badge ${badgeClass}">${badgeText}</span>
+              <div style="display:flex; align-items:center; gap:8px;">
+                <span class="badge ${badgeClass}">${badgeText}</span>
+                <label class="compare-card-toggle ${isSelected ? "checked" : ""}" onclick="event.stopPropagation()">
+                  <input type="checkbox" onchange="toggleCompareTool('${item.record_id}', this.checked)" ${isSelected ? "checked" : ""}>
+                  <span>${t.compareCheckbox}</span>
+                </label>
+              </div>
             </div>
 
             <div class="equipment-title">
               <div class="vendor-name">${escapeHtml(item.vendor)}</div>
               <div class="model-name">${escapeHtml(item.model)}</div>
             </div>
+
+            ${priceBlockHtml}
 
             <div class="completeness-section">
               <div class="completeness-header">
@@ -10980,6 +11507,29 @@
               `
                   : ""
               }
+
+              <!-- Price Details Section in Drawer (1.6.0) -->
+              <div style="margin-top: 14px; padding-top: 10px; border-top: 1px solid #334155; display: flex; flex-direction: column; gap: 6px;">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="field-label" style="font-weight: 700; color: #38bdf8;">${currentLang === "zh" ? "设备价格估算与依据" : "Estimated Price & Valuation Basis"}:</span>
+                  <a href="compare.html?compare=${item.record_id}" style="font-size: 0.75rem; color: #60a5fa; text-decoration: underline;">
+                    ${currentLang === "zh" ? "对比此机台 →" : "Compare this tool →"}
+                  </a>
+                </div>
+                ${
+                  est && est.basis !== "unknown" && est.low_usd
+                    ? `
+                  <div style="font-size: 0.875rem; font-weight: 800; color: #fff;">
+                    ${formatPriceUSD(est.low_usd)} – ${formatPriceUSD(est.high_usd)} USD
+                    <span class="basis-pill basis-${est.basis || "category_estimate"}" style="margin-left: 6px;">● ${est.basis === "reported" ? t.basisReported : est.basis === "observed_listing" ? t.basisObserved : t.basisEstimate}</span>
+                    <span class="cond-pill">${est.condition === "used" ? t.condUsed : est.condition === "refurbished" ? t.condRefurbished : t.condNew}</span>
+                  </div>
+                  ${est.note ? `<div style="font-size: 0.75rem; color: #94a3b8; line-height: 1.4;">${escapeHtml(est.note)}</div>` : ""}
+                  ${est.source_url ? `<div><a href="${escapeHtml(est.source_url)}" target="_blank" rel="noopener noreferrer" style="font-size: 0.75rem; color: #38bdf8; text-decoration: underline;">🔗 ${currentLang === "zh" ? "公开来源出处 / 报道" : "Public Source Citation"}</a></div>` : ""}
+                `
+                    : `<div style="color: #64748b; font-size: 0.75rem;">${t.fields.notAvailable}</div>`
+                }
+              </div>
             </div>
 
           </div>
@@ -11017,12 +11567,22 @@
         renderStats();
         renderCategoryChips();
         renderGrid();
+        updateCompareDrawer();
       }
 
       // Event Listeners
-      document
-        .getElementById("lang-btn")
-        .addEventListener("click", switchLanguage);
+      const langBtn = document.getElementById("lang-btn");
+      if (langBtn) {
+        langBtn.addEventListener("click", switchLanguage);
+      }
+
+      window.onSemiconLanguageChange = function (newLang) {
+        currentLang = newLang;
+        applyI18nChrome();
+        renderCategoryChips();
+        renderGrid();
+        updateCompareDrawer();
+      };
 
       document.getElementById("search-box").addEventListener("input", (e) => {
         searchQuery = e.target.value.trim();
@@ -11059,5 +11619,11 @@
       // Initialize
       window.addEventListener("DOMContentLoaded", initData);
     </script>
+
+    <!-- Unified Footer Mount -->
+    <div id="sc-footer-mount"></div>
+
+    <!-- Unified Site Navigation Script -->
+    <script src="js/site-nav.js"></script>
   </body>
 </html>

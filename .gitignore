@@ -16,4 +16,5 @@ SemiconFab-*/
 # Archives and build artifacts
 *.zip
 !downloads/mimac2026-simulator.zip
+output/
 

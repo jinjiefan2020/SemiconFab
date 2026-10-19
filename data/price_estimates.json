@@ -1,0 +1,1505 @@
+{
+  "3acd7b05-e6e8-5312-bb5b-045e7dd3074b": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm i-line / KrF dry stepper engineering estimate based on Canon financial segment reporting ($3.5M-$9M)."
+  },
+  "e3021724-ec73-534e-be7c-ba3374f4ddb8": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm i-line / KrF dry stepper engineering estimate based on Canon financial segment reporting ($3.5M-$9M)."
+  },
+  "fc2170cf-ce41-599f-82a5-d3e3676bcd65": {
+    "low_usd": 15000000,
+    "high_usd": 30000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.datacenterdynamics.com/en/news/canon-ceo-says-its-nanoimprint-machines-will-cost-a-fraction-of-asmls-euv-scanners/",
+    "note": "Canon CEO interview confirming nanoimprint lithography tool costs 'one digit less' than ASML EUV ($15M-$30M)."
+  },
+  "2c8ee49e-b417-50be-a642-6fe000760c2a": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark."
+  },
+  "3e5137b6-78c4-5ac8-a6ef-912562fb9311": {
+    "low_usd": 900000,
+    "high_usd": 2200000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced multi-chip packaging and thermo-compression bonder engineering estimate ($900k-$2.2M)."
+  },
+  "cb1548a3-cdb0-5c6b-9798-f86b99ae10ad": {
+    "low_usd": 1800000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced packaging electroplating (ECP) equipment engineering estimate ($1.8M-$3.5M)."
+  },
+  "7f4f54a9-d416-5a3c-a522-2064c07790d7": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "9f2dd614-22fd-5568-baff-5ef0473bf17d": {
+    "low_usd": 500000,
+    "high_usd": 2200000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm stepper / aligner secondary market valuation range ($500k-$2.2M)."
+  },
+  "c327b57f-9e72-50d5-87a3-0986242ffb86": {
+    "low_usd": 55000000,
+    "high_usd": 85000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+    "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures."
+  },
+  "80de0311-3bee-589e-be9e-c6e58527668c": {
+    "low_usd": 55000000,
+    "high_usd": 85000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+    "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures."
+  },
+  "62932674-3374-53e7-b643-e3fd2000d11f": {
+    "low_usd": 55000000,
+    "high_usd": 85000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+    "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures."
+  },
+  "3777f75c-67f3-585f-9980-cbe05fbbd5f6": {
+    "low_usd": 3000000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Lithography exposure tool engineering estimate based on generation and optics ($3M-$12M)."
+  },
+  "a46a0eaf-8fac-578a-b4d0-3496f2cb94f2": {
+    "low_usd": 180000000,
+    "high_usd": 250000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.tomshardware.com/tech-industry/asml-unveils-faster-twinscan-nxe-3800e-low-na-euv-scanner",
+    "note": "ASML low-NA EUV NXE series reported average selling price between $180M and $250M."
+  },
+  "640e01d7-420a-5ada-b39c-0e363ec47f11": {
+    "low_usd": 180000000,
+    "high_usd": 250000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.tomshardware.com/tech-industry/asml-unveils-faster-twinscan-nxe-3800e-low-na-euv-scanner",
+    "note": "ASML low-NA EUV NXE series reported average selling price between $180M and $250M."
+  },
+  "cde65e61-a3f5-5b18-a11f-7c2a9a220442": {
+    "low_usd": 180000000,
+    "high_usd": 250000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.tomshardware.com/tech-industry/asml-unveils-faster-twinscan-nxe-3800e-low-na-euv-scanner",
+    "note": "ASML low-NA EUV NXE series reported average selling price between $180M and $250M."
+  },
+  "bc44c286-8316-5bcf-867e-6990181bc9c4": {
+    "low_usd": 350000000,
+    "high_usd": 400000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.reuters.com/technology/asml-ships-first-high-na-euv-machine-intel-2023-12-21/",
+    "note": "Reported ASML High-NA EUV contract price for Intel shipment (~$380M)."
+  },
+  "752bb9b8-00dc-594d-9003-4e49aaf84d94": {
+    "low_usd": 350000000,
+    "high_usd": 400000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.reuters.com/technology/asml-ships-first-high-na-euv-machine-intel-2023-12-21/",
+    "note": "Reported ASML High-NA EUV contract price for Intel shipment (~$380M)."
+  },
+  "c20129c0-b029-5da5-8576-fdabf3f96753": {
+    "low_usd": 55000000,
+    "high_usd": 85000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.reuters.com/technology/asml-says-china-sales-driven-by-past-orders-older-technology-2023-10-18/",
+    "note": "Immersion DUV scanners (193nm ArFi) reported ASP range $60M-$85M in ASML investor disclosures."
+  },
+  "1c050c35-6da5-552e-ad93-4077c9427a35": {
+    "low_usd": 8000000,
+    "high_usd": 22000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Nikon NSR dry ArF/KrF scanner engineering estimate ($8M-$22M)."
+  },
+  "787532a0-e0b7-549a-b8a8-9e15d395279e": {
+    "low_usd": 8000000,
+    "high_usd": 22000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Nikon NSR dry ArF/KrF scanner engineering estimate ($8M-$22M)."
+  },
+  "c88c9684-f141-5d2f-9c83-2ec670767089": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "dbaa6c67-67ba-52e5-8406-f0358e5eda94": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "2ce14b1f-68b3-5111-a9c4-1e1191ca6272": {
+    "low_usd": 2500000,
+    "high_usd": 5500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Specialty power / TSV deep silicon etch (DRIE) cluster estimate ($2.5M-$5.5M)."
+  },
+  "7ae544a6-85c8-56e6-b84d-a942fffd85af": {
+    "low_usd": 5500000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading-edge cryogenic/high-aspect-ratio 3D NAND and sub-3nm multi-chamber etch cluster estimate ($5.5M-$12M)."
+  },
+  "e75be56f-ac9d-5f9c-97d8-dc8788185d22": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "a5dc900e-762e-57ab-aa7c-9fea763e60b9": {
+    "low_usd": 2500000,
+    "high_usd": 5500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Specialty power / TSV deep silicon etch (DRIE) cluster estimate ($2.5M-$5.5M)."
+  },
+  "f5e193da-325c-51c6-b39e-b79a5c34f4bd": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "0fa9f3d2-9283-50cc-b179-5ce3eea7715f": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "ca805c75-37f2-590e-96c0-d10090990e6c": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "15a7fae3-29b8-5be4-90e6-d2124bff4b0c": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "8e4c6025-2b2d-5f90-adc5-89a7cc5c787e": {
+    "low_usd": 3500000,
+    "high_usd": 7500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "AMEC STAR IPO prospectus officially discloses etch equipment chamber average price at ~8M RMB/chamber (~$1.2M/chamber); typical multi-chamber cluster costs $3.5M-$7.5M."
+  },
+  "8e8831fb-1f58-5bdc-9d46-160abc86c1fe": {
+    "low_usd": 3500000,
+    "high_usd": 7500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "AMEC STAR IPO prospectus officially discloses etch equipment chamber average price at ~8M RMB/chamber (~$1.2M/chamber); typical multi-chamber cluster costs $3.5M-$7.5M."
+  },
+  "830aae95-3738-5796-9f9a-ab6737647d28": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "e6a771bf-392c-51f8-a79b-95bdf6e51980": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "d32faad5-0b46-5364-a423-d7d6ccd06d19": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "7bfdc673-da69-5c8e-ad61-15a64b78dac9": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "6b2814d7-78f4-57be-a738-3a4b64501406": {
+    "low_usd": 3000000,
+    "high_usd": 7500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced atomic layer deposition (ALD) multi-chamber platform engineering estimate ($3M-$7.5M)."
+  },
+  "d789e8ed-c89d-577b-ac0a-001f076565df": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "46eb2c49-e770-5b66-adcf-5efc55366f3c": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "9a91170f-bca1-56b6-b6d9-c57b16e696a2": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "86c91512-c56a-5b1a-a573-67ed75449aec": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "c519ba08-2236-5b8a-9059-bcb6279fae8b": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "042c350c-d1a0-51f2-ba11-ef22e2507f73": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced optical overlay / critical dimension (OCD) metrology engineering estimate ($2.5M-$6M)."
+  },
+  "3a03fd80-7476-588a-919d-cf605f154958": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced optical overlay / critical dimension (OCD) metrology engineering estimate ($2.5M-$6M)."
+  },
+  "5f374ae5-af0d-5f2b-88a7-ce1863356bc5": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M)."
+  },
+  "09b4a776-277f-5203-8f72-80361b049f10": {
+    "low_usd": 8000000,
+    "high_usd": 18000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Sub-3nm broadband plasma patterned/unpatterned wafer defect inspection engineering estimate ($8M-$18M)."
+  },
+  "bdd36ff2-ada4-5655-8230-ccd30e4919a6": {
+    "low_usd": 5000000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Broadband optical wafer defect inspection engineering estimate ($5M-$12M)."
+  },
+  "5adab9b7-42f7-5df0-be24-4e9f9a7e9fca": {
+    "low_usd": 2500000,
+    "high_usd": 6500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Critical Dimension Scanning Electron Microscope (CD-SEM) review tool estimate ($2.5M-$6.5M)."
+  },
+  "65a9c409-0449-5ea6-a5df-089ae1bfb174": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced optical overlay / critical dimension (OCD) metrology engineering estimate ($2.5M-$6M)."
+  },
+  "03719f6a-8748-5223-b1d1-88769f43b79d": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M)."
+  },
+  "3061533c-b15b-5720-840f-7f8b6ceb206c": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M)."
+  },
+  "60112472-1189-5cad-bc15-29eaa22d00c9": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M)."
+  },
+  "64785fe1-4cb5-5284-8037-3d4c37e46ec3": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Semiconductor metrology and defect inspection equipment engineering estimate ($1.5M-$4.5M)."
+  },
+  "cf12cc89-6883-5cef-b110-b5fcf604f1f8": {
+    "low_usd": 2500000,
+    "high_usd": 6500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Critical Dimension Scanning Electron Microscope (CD-SEM) review tool estimate ($2.5M-$6.5M)."
+  },
+  "3ec5df59-2f2e-565d-bb9c-ab9974fa6720": {
+    "low_usd": 15000000,
+    "high_usd": 30000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Actinic / deep-UV EUV photomask inspection platform engineering estimate ($15M-$30M)."
+  },
+  "1cf7aafa-36a9-57c7-bbab-b18ce6f8535d": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark."
+  },
+  "746eba13-baf5-5ec1-959c-ad66fd799932": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark."
+  },
+  "0274d687-f89d-5c0c-bd5d-61b502a60c15": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark."
+  },
+  "c5ce9e6e-a036-55d6-8527-e01bff1f68f9": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark."
+  },
+  "26b49060-218b-545a-ad86-eaa342c47fc5": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading 300mm multi-platen CMP system engineering estimate ($2.5M-$6M) anchored to Hwatsing regulatory benchmark."
+  },
+  "6d356eb0-506f-5d19-9bf1-6c3068bb0699": {
+    "low_usd": 700000,
+    "high_usd": 2000000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "200mm legacy CMP (e.g., AMAT Mirra Mesa) refurbished secondary market valuation ($700k-$2M)."
+  },
+  "e87575b6-6ce2-50c7-bd7b-cf8c1ca4e97b": {
+    "low_usd": 2500000,
+    "high_usd": 4200000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Hwatsing STAR IPO prospectus officially discloses 300-series CMP equipment ASP of 19.5M-20.0M RMB (~$3.0M-$3.1M USD)."
+  },
+  "5e19f35a-ac9d-50ee-b8c2-a836b6ee861f": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M)."
+  },
+  "b5300e1d-9189-5962-81e2-64c1d3524339": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M)."
+  },
+  "48494344-f8b9-5f1a-9995-80ad51cd7a01": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M)."
+  },
+  "e83fa592-c53f-548a-9c30-3dcd2b7c9fd7": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M)."
+  },
+  "ffb7c3a3-7f53-5cbf-8337-ca7eb5b96638": {
+    "low_usd": 1500000,
+    "high_usd": 4000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Wet cleaning bench / single-wafer cleaning tool engineering estimate ($1.5M-$4M)."
+  },
+  "663778ae-ca7e-5e09-bb9c-a03c7a2d1cec": {
+    "low_usd": 1500000,
+    "high_usd": 4000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Wet cleaning bench / single-wafer cleaning tool engineering estimate ($1.5M-$4M)."
+  },
+  "57218784-3aaf-5203-80b1-3485be695b5e": {
+    "low_usd": 1500000,
+    "high_usd": 4000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Wet cleaning bench / single-wafer cleaning tool engineering estimate ($1.5M-$4M)."
+  },
+  "0692771c-1149-5fc9-be7d-98d849256bc8": {
+    "low_usd": 2500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "ACM Research Shanghai STAR IPO prospectus reports single-wafer cleaning equipment ASP of 20M-25M RMB (~$2.8M-$3.8M USD)."
+  },
+  "4876fdc8-11e8-5d2b-8fe9-5ad9ff8cda4e": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "fc9fa2bd-fe5a-5c9a-b679-aa8d7c727997": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "8f81cb70-a28d-5804-b1fb-a76a4eab063c": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "e5a97846-cf6d-5034-b7a2-13b30cdba992": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "91cd500b-46ac-5a34-afd7-8cfba43a23ef": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "836a5356-bd8f-563c-ae4f-b5a91235e1f6": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "841a47b6-428b-5c29-9ab9-5109afd9dc1e": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "ffec9096-69dd-5dfb-bfd9-f49c8f97d3ae": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "84ec4cb1-7fc7-5cf5-bbd0-9be5db89a817": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "6964f52b-7e71-5a46-a03f-e1610a0374e8": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "41c16e65-cc7c-5907-b2e2-98af1095dcd5": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "47121709-93b4-5896-931e-1c6fe6290821": {
+    "low_usd": 400000,
+    "high_usd": 1400000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm vertical/horizontal furnace secondary market valuation ($400k-$1.4M)."
+  },
+  "0fcf58f8-4126-540b-8a8b-2fd77d23e18a": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "7ceaf1c8-7910-5bc9-bd68-adbd81367034": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "e08bdd1a-8dda-517c-8506-32bd3f3b5110": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "4b5ef9ed-188c-5b4e-9d2e-d5fe27d2cd99": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "1fdd1137-9952-5584-8236-48bd6f119cb6": {
+    "low_usd": 900000,
+    "high_usd": 2200000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced multi-chip packaging and thermo-compression bonder engineering estimate ($900k-$2.2M)."
+  },
+  "de700138-a965-51b6-b2c3-ec6e39d03c6f": {
+    "low_usd": 2500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Sub-micron die-to-wafer hybrid bonding equipment engineering estimate ($2.5M-$4.5M)."
+  },
+  "4d551549-f6fb-514f-9fac-51c9f2eca182": {
+    "low_usd": 500000,
+    "high_usd": 2000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M)."
+  },
+  "3f391e71-feb9-5bb8-8c26-271898119fca": {
+    "low_usd": 500000,
+    "high_usd": 2000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M)."
+  },
+  "333f4c12-f6d3-5e59-86ad-f34a93da85a1": {
+    "low_usd": 500000,
+    "high_usd": 2000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M)."
+  },
+  "ea7acafa-f623-5b53-9820-cff153396595": {
+    "low_usd": 500000,
+    "high_usd": 2000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M)."
+  },
+  "0e08ee0e-204e-5c35-93ee-9d4449bd50de": {
+    "low_usd": 500000,
+    "high_usd": 2000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Back-end semiconductor packaging tool engineering estimate ($500k-$2M)."
+  },
+  "b7dd05c1-c14a-5a5b-8c2c-237c1828de31": {
+    "low_usd": 250000,
+    "high_usd": 800000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Power module wedge bonder / sawing & placement system engineering estimate ($250k-$800k)."
+  },
+  "178aac84-6158-559f-a04e-1d86d6b5ad09": {
+    "low_usd": 250000,
+    "high_usd": 800000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Power module wedge bonder / sawing & placement system engineering estimate ($250k-$800k)."
+  },
+  "dd6715e4-f628-5687-9e2a-8ede1b0d6071": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-end SoC / AI automated test equipment (ATE) engineering estimate ($1.5M-$4.5M)."
+  },
+  "640c395b-69d8-5a73-890f-6d72ef905241": {
+    "low_usd": 1000000,
+    "high_usd": 3000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-speed memory automated test equipment (ATE) engineering estimate ($1.0M-$3.0M)."
+  },
+  "1bf9bd68-eaa2-5a6a-a0d6-81341e6b83de": {
+    "low_usd": 1000000,
+    "high_usd": 3000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-speed memory automated test equipment (ATE) engineering estimate ($1.0M-$3.0M)."
+  },
+  "21a38ffd-f475-5a84-a4de-518a96be045f": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-end SoC / AI automated test equipment (ATE) engineering estimate ($1.5M-$4.5M)."
+  },
+  "e7bff566-aa87-59c9-be15-c628195812e0": {
+    "low_usd": 250000,
+    "high_usd": 850000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k)."
+  },
+  "0b9c07fe-924b-59c0-8922-bf120d0d5bf1": {
+    "low_usd": 250000,
+    "high_usd": 850000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k)."
+  },
+  "edbdcab9-5356-5e8d-81f5-edb3843f21f5": {
+    "low_usd": 250000,
+    "high_usd": 850000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k)."
+  },
+  "b53c0b48-f9a7-5b68-9f78-981de60654e4": {
+    "low_usd": 250000,
+    "high_usd": 850000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Standard microcontroller tester / automated test handler equipment engineering estimate ($250k-$850k)."
+  },
+  "888d0ee7-2fb8-52f1-909b-b36ac0f9509e": {
+    "low_usd": 450000,
+    "high_usd": 900000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Fully automated 300mm wafer prober equipment engineering estimate ($450k-$900k)."
+  },
+  "92eeb6a3-aabb-5666-8981-3a47205f3edb": {
+    "low_usd": 2500000,
+    "high_usd": 4200000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Hwatsing STAR IPO prospectus officially discloses 300-series CMP equipment ASP of 19.5M-20.0M RMB (~$3.0M-$3.1M USD)."
+  },
+  "558565b3-0cf6-5c74-bc23-f6768f08ca5d": {
+    "low_usd": 3500000,
+    "high_usd": 10000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.fortunebusinessinsights.com/semiconductor-ion-implanter-market-103328",
+    "note": "High-energy / high-current 300mm ion implanter pricing documented in Fortune Business Insights and SEC filings ($3.5M-$10M)."
+  },
+  "556a9772-9972-5c70-b0bd-8ca790b4156e": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "97082fd9-b40e-5954-b94d-3c4a18d1fa2f": {
+    "low_usd": 1200000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm vertical batch furnace / LPCVD thermal processing system engineering estimate ($1.2M-$3.5M)."
+  },
+  "26f68b6d-99a8-510a-9319-ae7c6ba9225e": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "97fd4069-802a-5f8c-9835-06c29603480e": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "81497b52-7ff7-527f-8f82-a7ad2aa9e498": {
+    "low_usd": 2500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "ACM Research Shanghai STAR IPO prospectus reports single-wafer cleaning equipment ASP of 20M-25M RMB (~$2.8M-$3.8M USD)."
+  },
+  "4dec86af-c292-57a5-95ef-535c36c929f4": {
+    "low_usd": 1800000,
+    "high_usd": 3500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced packaging electroplating (ECP) equipment engineering estimate ($1.8M-$3.5M)."
+  },
+  "6828d3b2-1285-5ed5-8125-64f9ee5f5130": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Piotech STAR IPO prospectus discloses PECVD and ALD equipment sales average prices of 5M-6.2M RMB ($800k-$1M per chamber), multi-chamber cluster at $1.5M-$4.5M."
+  },
+  "4566b1a5-caae-5be9-a767-09a2ee8b84db": {
+    "low_usd": 1500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Piotech STAR IPO prospectus discloses PECVD and ALD equipment sales average prices of 5M-6.2M RMB ($800k-$1M per chamber), multi-chamber cluster at $1.5M-$4.5M."
+  },
+  "b2320c41-48dc-5d89-bf96-669bc46659c6": {
+    "low_usd": 15000000,
+    "high_usd": 35000000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "https://www.trendforce.com",
+    "note": "SMEE front-end DUV/KrF step-and-scan procurement bidding benchmarks in Chinese fabs ($15M-$35M)."
+  },
+  "ac21f1d6-2cda-51ba-a46b-b7c56f3eda25": {
+    "low_usd": 350000,
+    "high_usd": 1200000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Skyverse STAR IPO prospectus disclosure of front-end metrology/inspection equipment ASP (2.25M-2.75M RMB, $350k-$430k base, up to $1.2M for advanced models)."
+  },
+  "400f5451-48aa-51d9-b987-cf98fa5a5566": {
+    "low_usd": 150000,
+    "high_usd": 600000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Domestic discrete, analog, and digital IC test equipment engineering estimate ($150k-$600k)."
+  },
+  "b7fd7715-e3a4-5563-bf18-a6ba7e8929f8": {
+    "low_usd": 350000,
+    "high_usd": 1200000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Skyverse STAR IPO prospectus disclosure of front-end metrology/inspection equipment ASP (2.25M-2.75M RMB, $350k-$430k base, up to $1.2M for advanced models)."
+  },
+  "5aa5cce5-521b-56aa-a77b-2d199d0b370f": {
+    "low_usd": 150000,
+    "high_usd": 600000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Domestic discrete, analog, and digital IC test equipment engineering estimate ($150k-$600k)."
+  },
+  "d1b81553-3e37-5a77-8a6b-0ae8c6081f5e": {
+    "low_usd": 150000,
+    "high_usd": 600000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Domestic discrete, analog, and digital IC test equipment engineering estimate ($150k-$600k)."
+  },
+  "88f5de1a-b644-5bc8-b8f9-6c139002600a": {
+    "low_usd": 5500000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading-edge cryogenic/high-aspect-ratio 3D NAND and sub-3nm multi-chamber etch cluster estimate ($5.5M-$12M)."
+  },
+  "85d08994-ecfa-5f9c-a09f-899576683b37": {
+    "low_usd": 250000,
+    "high_usd": 800000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Power module wedge bonder / sawing & placement system engineering estimate ($250k-$800k)."
+  },
+  "4e2d4a4e-0af2-5d56-8f07-ff536a3ab55b": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm i-line / KrF dry stepper engineering estimate based on Canon financial segment reporting ($3.5M-$9M)."
+  },
+  "787b6e0f-d009-5add-93b8-43aaa8422be8": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm i-line / KrF dry stepper engineering estimate based on Canon financial segment reporting ($3.5M-$9M)."
+  },
+  "b40d89a4-2e29-5087-9db2-b9002951b47f": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm i-line / KrF dry stepper engineering estimate based on Canon financial segment reporting ($3.5M-$9M)."
+  },
+  "849119ff-58c6-5371-98b1-857a819833c8": {
+    "low_usd": 8000000,
+    "high_usd": 22000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Nikon NSR dry ArF/KrF scanner engineering estimate ($8M-$22M)."
+  },
+  "652f7770-5060-56d3-9764-f7d408dc14c4": {
+    "low_usd": 500000,
+    "high_usd": 2200000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm stepper / aligner secondary market valuation range ($500k-$2.2M)."
+  },
+  "f26a6fef-048b-5d27-9d06-ebcf94656088": {
+    "low_usd": 500000,
+    "high_usd": 2200000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm stepper / aligner secondary market valuation range ($500k-$2.2M)."
+  },
+  "2106a7d3-f729-5df6-a05c-c245477d4159": {
+    "low_usd": 800000,
+    "high_usd": 2500000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm / mature etch cluster secondary refurbished market valuation ($800k-$2.5M)."
+  },
+  "3fc5be80-9c14-5f08-8471-3c6af02d51c4": {
+    "low_usd": 800000,
+    "high_usd": 2500000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm / mature etch cluster secondary refurbished market valuation ($800k-$2.5M)."
+  },
+  "755c6b01-36aa-5074-a5aa-7c33b234c43a": {
+    "low_usd": 5500000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading-edge cryogenic/high-aspect-ratio 3D NAND and sub-3nm multi-chamber etch cluster estimate ($5.5M-$12M)."
+  },
+  "b7e1c5b8-2193-5e5c-9157-84db82c277d2": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "36ad5772-014d-5196-8a0d-cbd3b8a4ac19": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "607daa04-49d5-5cff-b2ca-e5a509bcb4e0": {
+    "low_usd": 800000,
+    "high_usd": 2500000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm / mature etch cluster secondary refurbished market valuation ($800k-$2.5M)."
+  },
+  "9e861a4c-6724-513a-8517-d89e4227c4dd": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "00a45cff-83c5-5ac8-937c-92ee797e6a03": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "fcf89e66-4219-5f8e-8985-08470bac7256": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "72367335-7e43-56b3-b160-761e7f072f47": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "3cb6b1cb-2079-5cb0-9075-afa337e48e26": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "fbfb84ff-2235-5599-9afa-679f9ff6d7b8": {
+    "low_usd": 3500000,
+    "high_usd": 9000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm dielectric/conductor multi-chamber plasma etch cluster engineering estimate ($3.5M-$9M)."
+  },
+  "cdc54ddc-41ca-58a8-8aa2-029cd5ce24a6": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "684c5e5b-0f79-56f8-8e85-9089fc0149e8": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "f1e762af-d0bb-5fef-9bec-c8635ca9aab2": {
+    "low_usd": 800000,
+    "high_usd": 2400000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Refurbished legacy 200mm PVD/CVD equipment secondary market valuation ($800k-$2.4M)."
+  },
+  "0474de73-4594-5d5b-90f0-58b6d8828c47": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "1cad4a7c-a9d6-5c94-95c2-443e4e040af3": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "2387ba8f-0191-5824-8bcd-961713fdb4ae": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "e1a927ea-a2c0-5134-8f9e-fb31be39d5ce": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "e32d77b0-e959-5a7c-acc7-e25ac557f662": {
+    "low_usd": 3000000,
+    "high_usd": 8500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "High-volume 300mm multi-chamber CVD/PVD mainframe platform engineering estimate ($3M-$8.5M)."
+  },
+  "f3186f01-4b06-5c22-a76c-6c050d2edbc5": {
+    "low_usd": 2500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm thin film deposition tool engineering estimate ($2.5M-$7M)."
+  },
+  "b8574715-05b3-5bd4-9449-3c34dd00ed02": {
+    "low_usd": 3500000,
+    "high_usd": 7000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading-edge inline EUV/ArFi track coater/developer cluster engineering estimate ($3.5M-$7M)."
+  },
+  "5b0a3bb2-da3e-5981-9431-99e04edda4c0": {
+    "low_usd": 2000000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "300mm mature inline coater/developer track engineering estimate ($2M-$4.5M)."
+  },
+  "e27404f9-870a-5bce-8d5a-c91a6e85695c": {
+    "low_usd": 600000,
+    "high_usd": 1800000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "200mm legacy coater/developer track secondary market valuation ($600k-$1.8M)."
+  },
+  "6df5f3ad-5332-54f7-a806-0ad597beb740": {
+    "low_usd": 2000000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Kingsemi STAR IPO prospectus and fab bidding disclosures for 300mm front-end coater/developer track systems (~18M-30M RMB)."
+  },
+  "7a43403b-8206-5580-8d77-8b4133bbb23c": {
+    "low_usd": 5500000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Leading-edge cryogenic/high-aspect-ratio 3D NAND and sub-3nm multi-chamber etch cluster estimate ($5.5M-$12M)."
+  },
+  "675ad6a7-3218-5168-b518-f00fa45b978a": {
+    "low_usd": 800000,
+    "high_usd": 2500000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Legacy 200mm / mature etch cluster secondary refurbished market valuation ($800k-$2.5M)."
+  },
+  "58862876-946e-5da9-812a-7e3f239e41cf": {
+    "low_usd": 3500000,
+    "high_usd": 7500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "AMEC STAR IPO prospectus officially discloses etch equipment chamber average price at ~8M RMB/chamber (~$1.2M/chamber); typical multi-chamber cluster costs $3.5M-$7.5M."
+  },
+  "120f36d5-9f9f-5522-a9ff-9f377cca0aae": {
+    "low_usd": 3500000,
+    "high_usd": 7500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "AMEC STAR IPO prospectus officially discloses etch equipment chamber average price at ~8M RMB/chamber (~$1.2M/chamber); typical multi-chamber cluster costs $3.5M-$7.5M."
+  },
+  "9490cf72-5e74-5c66-9d82-d4d2fee147b6": {
+    "low_usd": 800000,
+    "high_usd": 2400000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Refurbished legacy 200mm PVD/CVD equipment secondary market valuation ($800k-$2.4M)."
+  },
+  "a8ea6f35-5a10-5b05-87c3-56fd8b9d2ae8": {
+    "low_usd": 3000000,
+    "high_usd": 7500000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced atomic layer deposition (ALD) multi-chamber platform engineering estimate ($3M-$7.5M)."
+  },
+  "c9f70f4b-621c-59c4-9f44-34e26ea62a33": {
+    "low_usd": 700000,
+    "high_usd": 2000000,
+    "condition": "used",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "200mm legacy CMP (e.g., AMAT Mirra Mesa) refurbished secondary market valuation ($700k-$2M)."
+  },
+  "e90409d2-5773-5692-9910-6e0ff66965c7": {
+    "low_usd": 2500000,
+    "high_usd": 4200000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "Hwatsing STAR IPO prospectus officially discloses 300-series CMP equipment ASP of 19.5M-20.0M RMB (~$3.0M-$3.1M USD)."
+  },
+  "1618a1eb-086d-5dbc-9635-1d7577b0602c": {
+    "low_usd": 5000000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Broadband optical wafer defect inspection engineering estimate ($5M-$12M)."
+  },
+  "e46e3f37-36ef-5092-930c-b8825fac2ca2": {
+    "low_usd": 8000000,
+    "high_usd": 18000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Sub-3nm broadband plasma patterned/unpatterned wafer defect inspection engineering estimate ($8M-$18M)."
+  },
+  "ac5b0753-0843-5980-a016-cc5297bb0438": {
+    "low_usd": 5000000,
+    "high_usd": 12000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Broadband optical wafer defect inspection engineering estimate ($5M-$12M)."
+  },
+  "8af8d04b-9e7b-5a0e-971e-2612b1827492": {
+    "low_usd": 2500000,
+    "high_usd": 6000000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Advanced 12-to-16 chamber single-wafer wet cleaning cluster engineering estimate ($2.5M-$6M)."
+  },
+  "2bafc8ee-b237-5b0c-851c-bb53e6c3a39b": {
+    "low_usd": 2500000,
+    "high_usd": 4500000,
+    "condition": "new",
+    "basis": "reported",
+    "as_of": "2026-10",
+    "source_url": "http://www.sse.com.cn",
+    "note": "ACM Research Shanghai STAR IPO prospectus reports single-wafer cleaning equipment ASP of 20M-25M RMB (~$2.8M-$3.8M USD)."
+  },
+  "f0bb0ec9-b4d6-5086-a98d-fef8ae9ccd29": {
+    "low_usd": 25000,
+    "high_usd": 65000,
+    "condition": "new",
+    "basis": "category_estimate",
+    "as_of": "2026-10",
+    "source_url": "",
+    "note": "Sub-fab harsh-duty dry vacuum pump engineering estimate ($25k-$65k) based on vendor quotes."
+  }
+}

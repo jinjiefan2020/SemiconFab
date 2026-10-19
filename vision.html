@@ -25,7 +25,7 @@
       name="robots"
       content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
     />
-    <meta name="theme-color" content="#090d16" />
+    <meta name="theme-color" content="#f2f1ec" />
 
     <!-- Canonical URL & Multilingual Alternates -->
     <link rel="canonical" href="https://semiconfab.org/vision" />
@@ -122,11 +122,43 @@
       }
     </script>
 
-    <!-- Tailwind CSS with Dark Mode Class support -->
+    <!-- Typography & Unified Design System Tokens -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/semicon-theme.css" />
+
+    <!-- Tailwind CSS with Dark Mode Class support & Design System Tokens -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
         darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              base: "var(--bg)",
+              surface: "var(--surface)",
+              "surface-2": "var(--surface-2)",
+              ink: "var(--ink)",
+              "ink-2": "var(--ink-2)",
+              "ink-3": "var(--ink-3)",
+              line: "var(--line)",
+              accent: "var(--accent)",
+              "accent-ink": "var(--accent-ink)",
+              amber: {
+                DEFAULT: "var(--amber)",
+                bg: "var(--amber-bg)",
+              },
+            },
+            fontFamily: {
+              sans: ["Manrope", "system-ui", "-apple-system", "sans-serif"],
+              mono: ["IBM Plex Mono", "ui-monospace", "monospace"],
+            },
+          },
+        },
       };
     </script>
     <!-- Lucide Icons -->
@@ -140,106 +172,97 @@
         box-sizing: border-box;
       }
 
+      /* ==========================================================================
+         Unified Design System Tokens — Strictly aligned with fab-cost.html
+         ========================================================================== */
       :root {
-        --bg-page: #f8fafc;
-        --text-main: #0f172a;
-        --text-muted: #475569;
-        --grid-line: rgba(148, 163, 184, 0.22);
+        color-scheme: light dark;
+        --bg: #f2f1ec;           /* 页面底色 Base: 温润纸质微暖灰 */
+        --bg-page: #f2f1ec;
+        --surface: #ffffff;      /* 主卡片面板 Surface: 纯白卡片 */
+        --surface-2: #e9e7df;    /* 次级面板/表头 Surface-2: 暖石浅色层 */
+        --card-bg: #ffffff;
+        --card-border: #d8d4c8;
+        --card-hover-bg: #ffffff;
+        --card-hover-border: #0e6e6b;
+        --card-hover-shadow: 0 16px 36px -6px rgba(28, 33, 38, 0.1);
+        --ink: #1c2126;          /* 主要文字 Ink: 深炭黑墨水色 */
+        --text-main: #1c2126;
+        --ink-2: #4c5560;        /* 次要文字 Ink-2: 冷炭灰说明文字 */
+        --text-muted: #4c5560;
+        --ink-3: #7a838d;        /* 辅助微弱说明文字 */
+        --text-dim: #7a838d;
+        --line: #d8d4c8;         /* 分割边线 Line: 暖石极细线 */
+        --accent: #0e6e6b;       /* 品牌主强调色 Accent: 雅致深青松绿 / Teal */
+        --accent-ink: #0a5451;
+        --accent-glow: rgba(14, 110, 107, 0.22);
+        --amber: #b45309;        /* 警告与草稿 Amber: #b45309 */
+        --amber-bg: #fdf3e3;     /* 警告与草稿底色 Amber-bg: #fdf3e3 */
+        --red: #a83226;          /* 错误与警示红 */
+        --red-bg: #fdf2f2;
+        --chart-grid: #ddd9cc;
+        --grid-line: rgba(216, 212, 200, 0.45);
         --glow-mesh: radial-gradient(
           circle at 50% 20%,
-          rgba(16, 185, 129, 0.12) 0%,
-          rgba(14, 165, 233, 0.08) 35%,
+          rgba(14, 110, 107, 0.12) 0%,
+          rgba(233, 231, 223, 0.1) 35%,
           transparent 70%
         );
-        --card-bg: rgba(255, 255, 255, 0.88);
-        --card-border: rgba(226, 232, 240, 0.95);
-        --card-hover-bg: rgba(255, 255, 255, 0.98);
-        --card-hover-border: rgba(14, 165, 233, 0.6);
-        --card-hover-shadow: 0 16px 36px -6px rgba(14, 165, 233, 0.16);
-        --footer-bg: #f1f5f9;
-        --footer-border: #e2e8f0;
-      }
-
-      html.dark,
-      html.dark body {
-        background-color: #090d16 !important;
-        color: #f8fafc !important;
-      }
-
-      html.dark h1,
-      html.dark h2,
-      html.dark h3,
-      html.dark h4,
-      html.dark .text-slate-900 {
-        color: #ffffff !important;
-      }
-
-      html.dark p,
-      html.dark .text-slate-600 {
-        color: #cbd5e1 !important;
-      }
-
-      html.dark .text-slate-500 {
-        color: #94a3b8 !important;
-      }
-
-      html.dark header {
-        background-color: rgba(9, 13, 22, 0.88) !important;
-        border-color: rgba(30, 41, 59, 0.88) !important;
-      }
-
-      html.dark .glass-card {
-        background-color: rgba(15, 23, 42, 0.82) !important;
-        border-color: rgba(51, 65, 85, 0.75) !important;
+        --footer-bg: #f2f1ec;
+        --footer-border: #d8d4c8;
+        --shadow: 0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
       }
 
       html.dark {
-        --bg-page: #090d16;
-        --text-main: #f1f5f9;
-        --text-muted: #94a3b8;
-        --grid-line: rgba(51, 65, 85, 0.22);
+        --bg: #12161a;           /* 洁净室暗色底色 Base: 深炭黑深空基底 */
+        --bg-page: #12161a;
+        --surface: #1a2026;      /* 主卡片面板 Surface: 炭青微光面板 */
+        --surface-2: #232b33;    /* 次级面板/表头 Surface-2: 次级炭黑 */
+        --card-bg: #1a2026;
+        --card-border: #333c45;
+        --card-hover-bg: #232b33;
+        --card-hover-border: #3fbdb8;
+        --card-hover-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45);
+        --ink: #e8eaec;          /* 主要文字 Ink: 温和高亮米白 */
+        --text-main: #e8eaec;
+        --ink-2: #aeb7bf;        /* 次要文字 Ink-2: 中阶次级灰 */
+        --text-muted: #aeb7bf;
+        --ink-3: #7e8891;
+        --text-dim: #7e8891;
+        --line: #333c45;         /* 分割边线 Line: 炭黑分割线 */
+        --accent: #3fbdb8;       /* 品牌主强调色 Accent: 薄荷荧光青 */
+        --accent-ink: #7fd8d3;
+        --accent-glow: rgba(63, 189, 184, 0.25);
+        --amber: #e8a04c;        /* 警告与草稿 Amber: #e8a04c */
+        --amber-bg: #2c2417;     /* 警告与草稿底色 Amber-bg: #2c2417 */
+        --red: #e0786a;
+        --red-bg: #2c1a18;
+        --chart-grid: #2c343d;
+        --grid-line: rgba(51, 60, 69, 0.3);
         --glow-mesh: radial-gradient(
           circle at 50% 20%,
-          rgba(16, 185, 129, 0.15) 0%,
-          rgba(14, 165, 233, 0.09) 35%,
+          rgba(63, 189, 184, 0.15) 0%,
+          rgba(18, 22, 26, 0.25) 35%,
           transparent 70%
         );
-        --card-bg: rgba(15, 23, 42, 0.78);
-        --card-border: rgba(51, 65, 85, 0.7);
-        --card-hover-bg: rgba(30, 41, 59, 0.9);
-        --card-hover-border: rgba(56, 189, 248, 0.55);
-        --card-hover-shadow: 0 16px 36px -8px rgba(14, 165, 233, 0.22);
-        --footer-bg: #070b12;
-        --footer-border: #1e293b;
+        --footer-bg: #0d1013;
+        --footer-border: #333c45;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
       }
 
       body {
-        background-color: var(--bg-page);
-        color: var(--text-main);
-        font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
-          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+        margin: 0;
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family: "Manrope", system-ui, -apple-system, sans-serif;
+        font-size: 15px;
+        line-height: 1.65;
         overflow-x: hidden;
-        transition:
-          background-color 0.3s ease,
-          color 0.3s ease;
+        transition: background-color 0.25s ease, color 0.25s ease;
       }
 
-      .glow-mesh {
-        background: var(--glow-mesh);
-      }
-      .glass-card {
-        background: var(--card-bg);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        border: 1px solid var(--card-border);
-        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      }
-      .glass-card:hover {
-        background: var(--card-hover-bg);
-        border-color: var(--card-hover-border);
-        transform: translateY(-2px);
-        box-shadow: var(--card-hover-shadow);
+      .mono, .font-mono, code, pre, th {
+        font-family: "IBM Plex Mono", ui-monospace, monospace;
       }
 
       .silicon-grid {
@@ -249,39 +272,233 @@
         background-size: 40px 40px;
       }
 
-      .btn-glow {
+      .glow-mesh {
+        background: var(--glow-mesh);
+      }
+
+      .glass-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        box-shadow: var(--shadow);
+        transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .glass-card:hover {
+        background: var(--card-hover-bg);
+        border-color: var(--card-hover-border);
+        transform: translateY(-2px);
+        box-shadow: var(--card-hover-shadow);
+      }
+
+      /* Header & Navigation Styling */
+      .site-header {
+        background: var(--surface);
+        border-bottom: 1px solid var(--line);
+        box-shadow: var(--shadow);
+      }
+      html.light .site-header {
+        background: rgba(255, 255, 255, 0.94);
+      }
+      html.dark .site-header {
+        background: rgba(26, 32, 38, 0.94);
+      }
+
+      .site-nav-btn {
+        font-family: "Manrope", sans-serif;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+        padding: 5px 12px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--surface);
+        color: var(--ink);
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        transition: all 0.2s;
+        box-shadow: 0 1px 2px rgba(28, 33, 38, 0.04);
+      }
+      .site-nav-btn:hover {
+        background: var(--surface-2);
+        color: var(--ink);
+      }
+
+      .nav-tab-link {
+        color: var(--ink-2);
+        font-weight: 600;
+        font-size: 13px;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 6px;
+        transition: all 0.15s ease;
+      }
+      .nav-tab-link:hover {
+        color: var(--ink);
+        background: var(--surface-2);
+      }
+      .nav-tab-link.active {
+        color: var(--accent);
+        font-weight: 700;
+      }
+
+      .btn-glow, .btn-cta {
         position: relative;
         overflow: hidden;
-        background: linear-gradient(135deg, #059669 0%, #0284c7 100%);
-        box-shadow:
-          0 0 25px rgba(5, 150, 105, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        transition: all 0.3s ease;
+        background: var(--accent);
+        color: #ffffff !important;
+        font-weight: 700;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px var(--accent-glow);
+        transition: all 0.2s ease;
       }
-      .btn-glow:hover {
-        box-shadow:
-          0 0 40px rgba(14, 165, 233, 0.65),
-          inset 0 1px 0 rgba(255, 255, 255, 0.4);
-        transform: scale(1.02);
+      html.dark .btn-glow, html.dark .btn-cta {
+        background: var(--accent);
+        color: #12161a !important;
+      }
+      .btn-glow:hover, .btn-cta:hover {
+        filter: brightness(1.08);
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px var(--accent-glow);
       }
 
       .timeline-badge {
-        box-shadow: 0 0 0 4px var(--bg-page);
+        box-shadow: 0 0 0 4px var(--bg);
+      }
+
+      /* Unified Palette Utility Overrides */
+      html.light .text-slate-900,
+      html.light .text-slate-800 {
+        color: var(--ink) !important;
+      }
+      html.light .text-slate-700,
+      html.light .text-slate-600 {
+        color: var(--ink-2) !important;
+      }
+      html.light .text-slate-500,
+      html.light .text-slate-400 {
+        color: var(--ink-3) !important;
+      }
+      html.light .border-slate-200,
+      html.light .border-slate-300 {
+        border-color: var(--line) !important;
+      }
+      html.light .bg-slate-50,
+      html.light .bg-slate-100 {
+        background-color: var(--surface-2) !important;
+      }
+
+      html.dark .text-slate-900,
+      html.dark .text-slate-800,
+      html.dark .text-white {
+        color: var(--ink) !important;
+      }
+      html.dark .text-slate-700,
+      html.dark .text-slate-600,
+      html.dark .text-slate-300 {
+        color: var(--ink-2) !important;
+      }
+      html.dark .text-slate-500,
+      html.dark .text-slate-400 {
+        color: var(--ink-3) !important;
+      }
+      html.dark .border-slate-700,
+      html.dark .border-slate-800 {
+        border-color: var(--line) !important;
+      }
+      html.dark .bg-slate-800,
+      html.dark .bg-slate-900 {
+        background-color: var(--surface) !important;
+      }
+      html.dark .bg-\[\#070b13\]\/50,
+      html.dark .bg-\[\#070b13\]\/70,
+      html.dark .bg-\[\#070b12\],
+      html.dark .bg-\[\#090d16\] {
+        background-color: var(--bg) !important;
+      }
+
+      /* Accent mappings */
+      .text-emerald-500,
+      .text-emerald-600,
+      .dark .text-emerald-400,
+      .dark .text-emerald-500 {
+        color: var(--accent) !important;
+      }
+      .bg-emerald-500,
+      .bg-emerald-600,
+      .dark .bg-emerald-400,
+      .dark .bg-emerald-500 {
+        background-color: var(--accent) !important;
+      }
+      .border-emerald-500,
+      .border-emerald-600,
+      .border-t-emerald-500,
+      .border-l-emerald-500,
+      .dark .border-emerald-400,
+      .dark .border-emerald-500 {
+        border-color: var(--accent) !important;
+      }
+      .bg-emerald-500\/10,
+      .bg-emerald-500\/20 {
+        background-color: rgba(14, 110, 107, 0.12) !important;
+      }
+      html.dark .bg-emerald-500\/10,
+      html.dark .bg-emerald-500\/20 {
+        background-color: rgba(63, 189, 184, 0.15) !important;
+      }
+
+      /* Amber mappings */
+      .text-amber-500,
+      .text-amber-600,
+      .dark .text-amber-400,
+      .dark .text-amber-500 {
+        color: var(--amber) !important;
+      }
+      .border-amber-500,
+      .border-t-amber-500,
+      .border-l-amber-500 {
+        border-color: var(--amber) !important;
+      }
+      .bg-amber-500\/10,
+      .bg-amber-50 {
+        background-color: var(--amber-bg) !important;
+      }
+      html.dark .bg-amber-500\/10 {
+        background-color: var(--amber-bg) !important;
+      }
+
+      /* Red mappings */
+      .text-red-500,
+      .text-red-600,
+      .dark .text-red-400 {
+        color: var(--red) !important;
+      }
+      .border-red-500,
+      .border-t-red-500,
+      .border-l-red-500 {
+        border-color: var(--red) !important;
+      }
+      .bg-red-500\/10 {
+        background-color: var(--red-bg) !important;
+      }
+      html.dark .bg-red-500\/10 {
+        background-color: var(--red-bg) !important;
       }
     </style>
   </head>
   <body class="relative min-h-screen silicon-grid">
     <!-- ================= NAVIGATION BAR ================= -->
     <header
-      class="fixed top-0 left-0 right-0 h-16 z-50 bg-white/80 dark:bg-[#090d16]/80 backdrop-blur-xl border-b border-slate-200/80 dark:border-slate-800/80 transition-colors"
+      class="site-header fixed top-0 left-0 right-0 h-16 z-50 backdrop-blur-xl border-b transition-colors"
+      style="background: var(--surface); border-color: var(--line); box-shadow: var(--shadow);"
     >
       <div
         class="max-w-7xl mx-auto h-full px-5 flex items-center justify-between"
       >
         <!-- Brand Logo (Custom 300mm Wafer with Notch & Stepper Matrix) -->
-        <a href="index.html" class="flex items-center gap-3 group">
+        <a href="index.html" class="flex items-center gap-2.5 group text-decoration-none">
           <div
-            class="w-9 h-9 rounded-xl bg-white dark:bg-slate-900 border-[1.5px] border-slate-900 dark:border-slate-300 shadow-sm group-hover:scale-105 transition flex items-center justify-center"
+            class="w-9 h-9 rounded-xl border shadow-sm group-hover:scale-105 transition flex items-center justify-center"
+            style="background: var(--surface); border-color: var(--line);"
           >
             <svg
               class="w-5 h-5"
@@ -289,19 +506,17 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <!-- 300mm Wafer with SEMI Standard Orientation Notch (Industrial Gray) -->
+              <!-- 300mm Wafer with SEMI Standard Orientation Notch -->
               <path
-                class="text-slate-500 dark:text-slate-400"
                 d="M24 4C13.2 4 4.4 12.6 4 23.3C3.6 34.3 12.3 43.4 23.3 43.98C23.6 44 23.8 43.6 23.8 43.3C23.8 42.2 24.2 41.6 24.9 41.6C25.6 41.6 26 42.2 26 43.3C26 43.6 26.2 44 26.5 43.98C37.5 43.4 46.2 34.3 45.8 23.3C45.4 12.6 36.6 4 25.8 4H24Z"
-                stroke="currentColor"
+                stroke="var(--ink-2)"
                 stroke-width="2.8"
                 stroke-linejoin="round"
                 fill="none"
               />
-              <!-- Stepper Exposure Scribe Lines Grid (Subtle Gray) -->
+              <!-- Stepper Exposure Scribe Lines Grid -->
               <g
-                class="text-slate-400 dark:text-slate-500"
-                stroke="currentColor"
+                stroke="var(--line)"
                 stroke-width="1.4"
                 stroke-linecap="round"
               >
@@ -312,28 +527,29 @@
                 <line x1="25" y1="9" x2="25" y2="39" />
                 <line x1="32" y1="12" x2="32" y2="38" />
               </g>
-              <!-- Pale Green Golden Die / Digital Twin Accent -->
+              <!-- Golden Die / Digital Twin Accent -->
               <rect
                 x="26.2"
                 y="19.2"
                 width="4.6"
                 height="4.6"
                 rx="0.8"
-                fill="#10b981"
+                fill="var(--accent)"
               />
             </svg>
           </div>
           <div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-1.5">
               <span
-                class="text-base font-bold tracking-tight text-slate-900 dark:text-white"
-                >SemiconFab<span class="text-emerald-500 dark:text-emerald-400"
-                  >.org</span
-                ></span
+                class="text-base font-extrabold tracking-tight"
+                style="color: var(--ink);"
+                >SemiconFab<span style="color: var(--accent);">.org</span></span
               >
+              <span class="mono" style="font-size:10px; font-weight:600; padding:1px 5px; border-radius:4px; background:var(--surface-2); color:var(--ink-2); border:1px solid var(--line);">v1.6</span>
             </div>
             <p
-              class="text-[10px] text-slate-500 dark:text-slate-400 tracking-wide font-sans"
+              class="text-[10px] tracking-wide font-sans m-0"
+              style="color: var(--ink-3);"
               data-i18n="vision_brand_sub"
             >
               Open Fab Digital Twin Initiative
@@ -341,76 +557,62 @@
           </div>
         </a>
 
-        <!-- Center Nav Links -->
+        <!-- Center Nav Links: Cleaned up with no "Home" and no "Submit Equipment" -->
         <nav
-          class="hidden md:flex items-center gap-6 text-xs text-slate-600 dark:text-slate-300 font-medium"
+          class="hidden md:flex items-center gap-4 text-xs font-semibold"
         >
           <a
-            href="/"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition"
-            data-i18n="nav_home"
-            >Home</a
-          >
-          <a
-            href="add-equipment.html"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300"
-          >
-            <i
-              data-lucide="plus-circle"
-              class="w-3.5 h-3.5 text-emerald-500"
-            ></i>
-            <span data-i18n="nav_add_equipment">Add your equipment</span>
-          </a>
-          <a
             href="twin.html"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center gap-1"
+            class="nav-tab-link flex items-center gap-1.5"
           >
             <span data-i18n="nav_twin">3D Digital Twin</span>
             <span
-              class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"
+              class="w-1.5 h-1.5 rounded-full animate-pulse"
+              style="background: var(--accent);"
             ></span>
           </a>
           <a
             href="#pillars"
-            class="text-emerald-600 dark:text-emerald-400 font-semibold transition flex items-center gap-1"
+            class="nav-tab-link flex items-center gap-1 active"
           >
             <span data-i18n="vision_nav_pillars">6 Core Pillars</span>
           </a>
           <a
             href="#phase1"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition"
+            class="nav-tab-link"
             data-i18n="vision_nav_phase1"
             >Phase 1 Strategy</a
           >
           <a
             href="#roadmap"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition"
+            class="nav-tab-link"
             data-i18n="vision_nav_roadmap"
             >Roadmap</a
           >
           <a
             href="#stack"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition"
+            class="nav-tab-link"
             data-i18n="vision_nav_stack"
             >Stack Matrix</a
           >
         </nav>
 
         <!-- Right Controls: Theme Switcher, Language Picker & Direct CTA -->
-        <div class="flex items-center gap-2.5">
+        <div class="flex items-center gap-2">
           <!-- Theme Switcher -->
           <button
             id="theme-toggle-btn"
             onclick="toggleTheme()"
             title="Switch Day / Dark Mode"
-            class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-xs border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 transition shadow-sm font-medium"
+            class="site-nav-btn"
           >
             <i
               id="theme-icon"
               data-lucide="sun"
-              class="w-3.5 h-3.5 text-amber-500"
+              class="w-3.5 h-3.5"
+              style="color: var(--amber);"
             ></i>
-            <span id="theme-label" class="text-[11px] font-mono">Day</span>
+            <span id="theme-label" class="mono text-[11px] font-semibold">Day</span>
           </button>
 
           <!-- Language Picker Dropdown -->
@@ -418,24 +620,25 @@
             <button
               id="lang-picker-btn"
               onclick="toggleLangDropdown()"
-              class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700/80 text-xs border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 transition shadow-sm font-medium"
+              class="site-nav-btn"
             >
               <i
                 data-lucide="globe"
-                class="w-3.5 h-3.5 text-slate-500 dark:text-slate-400"
+                class="w-3.5 h-3.5"
+                style="color: var(--ink-3);"
               ></i>
-              <span id="current-lang-label" class="flex items-center gap-1"
-                >English</span
-              >
+              <span id="current-lang-label">English</span>
               <i
                 data-lucide="chevron-down"
-                class="w-3 h-3 text-slate-500 dark:text-slate-400"
+                class="w-3 h-3"
+                style="color: var(--ink-3);"
               ></i>
             </button>
 
             <div
               id="lang-dropdown-panel"
-              class="hidden absolute right-0 mt-2 w-44 bg-white dark:bg-[#0f172a] border border-slate-200 dark:border-slate-700 rounded-xl shadow-2xl p-1.5 z-50 max-h-80 overflow-y-auto"
+              class="hidden absolute right-0 mt-2 w-44 rounded-xl p-1.5 z-50 max-h-80 overflow-y-auto"
+              style="background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);"
             >
               <div id="lang-selector-menu" class="space-y-0.5"></div>
             </div>
@@ -444,9 +647,9 @@
           <!-- Launch Twin Button -->
           <a
             href="twin.html"
-            class="btn-glow px-4 py-2 rounded-xl text-xs font-semibold text-white flex items-center gap-1.5 shadow-md"
+            class="btn-cta px-3.5 py-1.5 text-xs flex items-center gap-1.5"
           >
-            <i data-lucide="box" class="w-3.5 h-3.5 text-emerald-100"></i>
+            <i data-lucide="box" class="w-3.5 h-3.5"></i>
             <span data-i18n="nav_launch">Launch 3D Twin</span>
           </a>
         </div>
@@ -480,7 +683,7 @@
             ><br />
             <span
               data-i18n="vision_hero_title_2"
-              class="bg-gradient-to-r from-emerald-600 via-sky-600 to-indigo-600 dark:from-emerald-400 dark:via-sky-400 dark:to-indigo-400 bg-clip-text text-transparent"
+              class="industrial-gradient-text"
               >Fab Digital Twin Vision</span
             >
           </h1>
@@ -627,7 +830,8 @@
 
     <!-- ================= SECTION: WHY THE OPEN INITIATIVE ================= -->
     <section
-      class="py-16 border-t border-slate-200 dark:border-slate-800/80 relative z-10 bg-slate-50/50 dark:bg-[#070b13]/50"
+      class="py-16 border-t relative z-10"
+      style="background: var(--surface-2); border-color: var(--line);"
     >
       <div class="max-w-7xl mx-auto px-5 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
@@ -1770,7 +1974,8 @@
     <!-- ================= SECTION: PHASE 1 MORPHOLOGICAL IMITATION ================= -->
     <section
       id="phase1"
-      class="py-20 border-t border-slate-200 dark:border-slate-800/80 relative z-10 bg-slate-50/70 dark:bg-[#070b13]/70"
+      class="py-20 border-t relative z-10"
+      style="background: var(--surface-2); border-color: var(--line);"
     >
       <div class="max-w-7xl mx-auto px-5 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-14">
@@ -2244,7 +2449,7 @@
           <!-- v1.0.0 -->
           <div class="relative group">
             <div
-              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#090d16] shadow-sm"
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
             ></div>
             <div
               class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
@@ -2267,7 +2472,7 @@
           <!-- v1.1.0 -->
           <div class="relative group">
             <div
-              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#090d16] shadow-sm"
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
             ></div>
             <div
               class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
@@ -2290,7 +2495,7 @@
           <!-- v1.2.0 -->
           <div class="relative group">
             <div
-              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#090d16] shadow-sm"
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
             ></div>
             <div
               class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
@@ -2313,7 +2518,7 @@
           <!-- v1.3.0 -->
           <div class="relative group">
             <div
-              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#090d16] shadow-sm"
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
             ></div>
             <div
               class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
@@ -2336,7 +2541,7 @@
           <!-- v1.4.0 -->
           <div class="relative group">
             <div
-              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#090d16] shadow-sm"
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
             ></div>
             <div
               class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
@@ -2359,7 +2564,7 @@
           <!-- v1.5.0 -->
           <div class="relative group">
             <div
-              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#090d16] shadow-sm"
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
             ></div>
             <div
               class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
@@ -2378,6 +2583,30 @@
               </p>
             </div>
           </div>
+
+          <!-- v1.6.0 -->
+          <div class="relative group">
+            <div
+              class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-3.5 h-3.5 rounded-full bg-emerald-500 border-4 border-white dark:border-[#12161a] shadow-sm"
+            ></div>
+            <div
+              class="glass-card p-4 rounded-xl border border-slate-200/80 dark:border-slate-800/80"
+            >
+              <div class="flex items-center gap-2 mb-1">
+                <span
+                  class="px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-mono font-bold text-xs border border-emerald-500/20"
+                  >v1.6.0</span
+                >
+                <span class="mono text-[10px] px-1.5 py-0.2 rounded font-semibold" style="background:var(--accent); color:#ffffff;">CURRENT</span>
+              </div>
+              <p
+                class="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed"
+                data-i18n="vision_ms_v1_6"
+              >
+                Equipment comparison matrix, 167-tool price estimates (100% coverage), Fab Capex & BOM scaling model, and editorial design system
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -2385,7 +2614,8 @@
     <!-- ================= SECTION: COMMERCIAL VS OPEN STACK MATRIX ================= -->
     <section
       id="stack"
-      class="py-20 border-t border-slate-200 dark:border-slate-800/80 relative z-10 bg-slate-50/50 dark:bg-[#070b13]/50"
+      class="py-20 border-t relative z-10"
+      style="background: var(--surface-2); border-color: var(--line);"
     >
       <div class="max-w-7xl mx-auto px-5 lg:px-8">
         <div class="text-center max-w-3xl mx-auto mb-12">
@@ -2615,14 +2845,16 @@
 
     <!-- ================= FOOTER ================= -->
     <footer
-      class="py-8 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 relative z-10 bg-slate-100/90 dark:bg-[#070b12] transition-colors"
+      class="py-8 border-t text-xs relative z-10 transition-colors"
+      style="background: var(--surface); border-color: var(--line); color: var(--ink-3);"
     >
       <div
         class="max-w-7xl mx-auto px-5 flex flex-col sm:flex-row items-center justify-between gap-4"
       >
         <div class="flex items-center gap-3">
           <div
-            class="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border-[1.2px] border-slate-900 dark:border-slate-300 shadow-sm flex items-center justify-center shrink-0"
+            class="w-6 h-6 rounded-lg border shadow-sm flex items-center justify-center shrink-0"
+            style="background: var(--surface); border-color: var(--line);"
           >
             <svg
               class="w-3.5 h-3.5"
@@ -2631,16 +2863,14 @@
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                class="text-slate-500 dark:text-slate-400"
                 d="M24 4C13.2 4 4.4 12.6 4 23.3C3.6 34.3 12.3 43.4 23.3 43.98C23.6 44 23.8 43.6 23.8 43.3C23.8 42.2 24.2 41.6 24.9 41.6C25.6 41.6 26 42.2 26 43.3C26 43.6 26.2 44 26.5 43.98C37.5 43.4 46.2 34.3 45.8 23.3C45.4 12.6 36.6 4 25.8 4H24Z"
-                stroke="currentColor"
+                stroke="var(--ink-2)"
                 stroke-width="3"
                 stroke-linejoin="round"
                 fill="none"
               />
               <g
-                class="text-slate-400 dark:text-slate-500"
-                stroke="currentColor"
+                stroke="var(--line)"
                 stroke-width="1.6"
                 stroke-linecap="round"
               >
@@ -2657,7 +2887,7 @@
                 width="4.6"
                 height="4.6"
                 rx="0.8"
-                fill="#10b981"
+                fill="var(--accent)"
               />
             </svg>
           </div>
@@ -2719,8 +2949,33 @@
     </footer>
 
     <script>
+      function getInitialTheme() {
+        const params = new URLSearchParams(window.location.search);
+        const themeParam = params.get("theme");
+        if (themeParam === "dark" || themeParam === "light") {
+          localStorage.setItem("semicon_theme", themeParam);
+          return themeParam;
+        }
+        return localStorage.getItem("semicon_theme") || "light";
+      }
+
+      function getInitialLang() {
+        const params = new URLSearchParams(window.location.search);
+        const langParam = params.get("lang");
+        if (langParam) {
+          const l = (langParam === "zh" || langParam === "zh-CN") ? "zh-CN" : (langParam === "zh-TW" ? "zh-TW" : "en");
+          localStorage.setItem("semicon_lang", l.startsWith("zh") ? "zh" : "en");
+          localStorage.setItem("semiconfab_lang", l);
+          return l;
+        }
+        const saved = localStorage.getItem("semiconfab_lang") || localStorage.getItem("semicon_lang");
+        if (saved && (saved === "zh" || saved.startsWith("zh"))) return "zh-CN";
+        if (saved) return saved;
+        return (navigator.language && navigator.language.startsWith("zh")) ? "zh-CN" : "en";
+      }
+
       // Theme Switcher Engine (Light by default, matches site)
-      let currentTheme = localStorage.getItem("semicon_theme") || "light";
+      let currentTheme = getInitialTheme();
 
       function applyTheme(theme) {
         currentTheme = theme;
@@ -2732,19 +2987,29 @@
         if (theme === "dark") {
           html.classList.add("dark");
           html.classList.remove("light");
+          html.setAttribute("data-theme", "dark");
           if (icon) {
             icon.setAttribute("data-lucide", "moon");
-            icon.className = "w-3.5 h-3.5 text-sky-400";
+            icon.className = "w-3.5 h-3.5";
+            icon.style.color = "var(--accent)";
           }
-          if (label) label.textContent = "Dark";
+          if (label) {
+            const isZh = document.documentElement.getAttribute("data-lang") === "zh" || (localStorage.getItem("semicon_lang") || localStorage.getItem("semiconfab_lang") || "").startsWith("zh");
+            label.textContent = isZh ? "暗色" : "Dark";
+          }
         } else {
           html.classList.add("light");
           html.classList.remove("dark");
+          html.setAttribute("data-theme", "light");
           if (icon) {
             icon.setAttribute("data-lucide", "sun");
-            icon.className = "w-3.5 h-3.5 text-amber-500";
+            icon.className = "w-3.5 h-3.5";
+            icon.style.color = "var(--amber)";
           }
-          if (label) label.textContent = "Day";
+          if (label) {
+            const isZh = document.documentElement.getAttribute("data-lang") === "zh" || (localStorage.getItem("semicon_lang") || localStorage.getItem("semiconfab_lang") || "").startsWith("zh");
+            label.textContent = isZh ? "亮色" : "Day";
+          }
         }
         if (window.lucide) lucide.createIcons();
       }
@@ -2753,13 +3018,26 @@
         applyTheme(currentTheme === "light" ? "dark" : "light");
       }
 
+      window.onSemiconThemeChange = function (theme) {
+        applyTheme(theme);
+      };
+
+      window.onSemiconLanguageChange = function (nextLang) {
+        if (typeof setLanguage === "function") {
+          setLanguage(nextLang);
+        }
+      };
+
       applyTheme(currentTheme);
 
       document.addEventListener("DOMContentLoaded", () => {
-        if (!localStorage.getItem("semiconfab_lang")) {
-          localStorage.setItem("semiconfab_lang", "en");
-        }
+        const initialLang = getInitialLang();
+        localStorage.setItem("semiconfab_lang", initialLang);
+        localStorage.setItem("semicon_lang", initialLang);
         if (typeof initI18n === "function") initI18n();
+        if (typeof setLanguage === "function" && initialLang) {
+          setLanguage(initialLang);
+        }
         if (window.lucide) lucide.createIcons();
       });
     </script>

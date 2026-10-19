@@ -289,31 +289,31 @@
         box-sizing: border-box;
       }
 
-      /* Theme CSS Variables */
+      /* Theme CSS Variables (Aligned with fab-cost.html) */
       :root {
-        --bg-page: #f8fafc;
-        --text-main: #0f172a;
-        --text-muted: #475569;
-        --grid-line: rgba(148, 163, 184, 0.22);
+        --bg-page: #f2f1ec;
+        --text-main: #1c2126;
+        --text-muted: #4c5560;
+        --grid-line: rgba(216, 212, 200, 0.45);
         --glow-mesh: radial-gradient(
           circle at 50% 32%,
-          rgba(148, 163, 184, 0.16) 0%,
-          rgba(100, 116, 139, 0.08) 40%,
+          rgba(216, 212, 200, 0.3) 0%,
+          rgba(233, 231, 223, 0.15) 40%,
           transparent 70%
         );
-        --card-bg: rgba(255, 255, 255, 0.88);
-        --card-border: rgba(226, 232, 240, 0.95);
-        --card-hover-bg: rgba(255, 255, 255, 0.98);
-        --card-hover-border: rgba(100, 116, 139, 0.6);
-        --card-hover-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.12);
-        --footer-bg: #f1f5f9;
-        --footer-border: #e2e8f0;
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --card-border: #d8d4c8;
+        --card-hover-bg: #ffffff;
+        --card-hover-border: #0e6e6b;
+        --card-hover-shadow: 0 16px 36px -6px rgba(28, 33, 38, 0.1);
+        --footer-bg: #f2f1ec;
+        --footer-border: #d8d4c8;
       }
 
       html.dark,
       html.dark body {
-        background-color: #090d16 !important;
-        color: #f8fafc !important;
+        background-color: #12161a !important;
+        color: #e8eaec !important;
       }
 
       html.dark h1,
@@ -321,54 +321,59 @@
       html.dark h3,
       html.dark .text-slate-900,
       html.dark [data-i18n="hero_title_1"] {
-        color: #ffffff !important;
+        color: #e8eaec !important;
       }
 
       html.dark p,
       html.dark .text-slate-600 {
-        color: #cbd5e1 !important;
+        color: #aeb7bf !important;
       }
 
       html.dark .text-slate-500 {
-        color: #94a3b8 !important;
+        color: #7e8891 !important;
       }
 
       html.dark header {
-        background-color: rgba(9, 13, 22, 0.88) !important;
-        border-color: rgba(30, 41, 59, 0.88) !important;
+        background-color: rgba(18, 22, 26, 0.94) !important;
+        border-color: #333c45 !important;
       }
 
       html.dark .glass-card {
-        background-color: rgba(15, 23, 42, 0.85) !important;
-        border-color: rgba(51, 65, 85, 0.75) !important;
+        background-color: rgba(26, 32, 38, 0.9) !important;
+        border-color: #333c45 !important;
       }
 
       html.dark {
-        --bg-page: #090d16;
-        --text-main: #f1f5f9;
-        --text-muted: #94a3b8;
-        --grid-line: rgba(51, 65, 85, 0.22);
+        --bg-page: #12161a;
+        --text-main: #e8eaec;
+        --text-muted: #aeb7bf;
+        --grid-line: rgba(51, 60, 69, 0.3);
         --glow-mesh: radial-gradient(
           circle at 50% 32%,
-          rgba(30, 41, 59, 0.45) 0%,
-          rgba(15, 23, 42, 0.25) 40%,
+          rgba(35, 43, 51, 0.45) 0%,
+          rgba(18, 22, 26, 0.25) 40%,
           transparent 70%
         );
-        --card-bg: rgba(15, 23, 42, 0.75);
-        --card-border: rgba(51, 65, 85, 0.7);
-        --card-hover-bg: rgba(30, 41, 59, 0.88);
-        --card-hover-border: rgba(148, 163, 184, 0.45);
-        --card-hover-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.35);
-        --footer-bg: #070b12;
-        --footer-border: #1e293b;
+        --card-bg: rgba(26, 32, 38, 0.85);
+        --card-border: #333c45;
+        --card-hover-bg: rgba(35, 43, 51, 0.95);
+        --card-hover-border: #3fbdb8;
+        --card-hover-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.45);
+        --footer-bg: #0d1013;
+        --footer-border: #333c45;
       }
 
       body {
         background-color: var(--bg-page);
         color: var(--text-main);
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC",
-          "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+          "Manrope",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
         overflow-x: hidden;
         transition:
           background-color 0.3s ease,

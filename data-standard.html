@@ -11,26 +11,28 @@
       content="Open, machine-readable semiconductor equipment schema with 7 data layers, 3 conformance levels, and field-level provenance for fab planning and research."
     />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <!-- Unified Design System Theme -->
+    <link rel="stylesheet" href="css/semicon-theme.css" />
     <style>
       :root {
-        --bg-page: #f8fafc;
-        --bg-card: #ffffff;
-        --bg-card-alt: #f1f5f9;
-        --text-main: #0f172a;
-        --text-muted: #64748b;
-        --border: #cbd5e1;
-        --border-focus: #2563eb;
-        --primary: #2563eb;
-        --primary-hover: #1d4ed8;
-        --success: #16a34a;
-        --success-bg: #dcfce7;
-        --warning: #d97706;
-        --warning-bg: #fef3c7;
-        --danger: #dc2626;
-        --radius: 8px;
+        --bg-page: var(--sc-bg-base);
+        --bg-card: var(--sc-bg-panel);
+        --bg-card-alt: var(--sc-bg-subpanel);
+        --text-main: var(--sc-text-main);
+        --text-muted: var(--sc-text-muted);
+        --border: var(--sc-border);
+        --border-focus: var(--sc-accent-cyan);
+        --primary: var(--sc-accent-cyan);
+        --primary-hover: var(--sc-text-link-hover);
+        --success: var(--sc-accent-emerald);
+        --success-bg: rgba(5, 150, 105, 0.15);
+        --warning: var(--sc-accent-amber);
+        --warning-bg: rgba(217, 119, 6, 0.15);
+        --danger: var(--sc-accent-rose);
+        --radius: 10px;
         --font:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
+          Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
       }
       * {
         box-sizing: border-box;
@@ -48,57 +50,13 @@
         max-width: 1040px;
         margin: 0 auto;
       }
-      header {
-        background: var(--bg-card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 20px 24px;
-        margin-bottom: 24px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 16px;
-      }
-      .header-titles h1 {
-        font-size: 22px;
-        font-weight: 700;
-        color: var(--text-main);
-      }
-      .header-titles p {
-        font-size: 13px;
-        color: var(--text-muted);
-        margin-top: 4px;
-      }
-      .nav-links {
-        display: flex;
-        gap: 12px;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-      .nav-links a {
-        color: var(--primary);
-        text-decoration: none;
-        font-size: 13px;
-        font-weight: 600;
-      }
-      .nav-links a:hover {
-        text-decoration: underline;
-      }
-      .nav-links a.active {
-        color: var(--text-main);
-        font-weight: 700;
-        border-bottom: 2px solid var(--primary);
-        padding-bottom: 2px;
-      }
       .card {
         background: var(--bg-card);
         border: 1px solid var(--border);
         border-radius: var(--radius);
         padding: 28px 24px;
         margin-bottom: 24px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
       }
       h2 {
         font-size: 18px;
@@ -108,13 +66,13 @@
         display: flex;
         align-items: center;
         gap: 8px;
-        border-bottom: 2px solid #e2e8f0;
+        border-bottom: 2px solid var(--border);
         padding-bottom: 8px;
       }
       h3 {
         font-size: 15px;
         font-weight: 700;
-        color: #1e293b;
+        color: var(--text-main);
         margin: 16px 0 8px;
       }
       p {
@@ -122,9 +80,9 @@
         font-size: 14px;
       }
       p.zh {
-        color: #334155;
-        background: #f8fafc;
-        border-left: 3px solid #94a3b8;
+        color: var(--text-main);
+        background: var(--bg-card-alt);
+        border-left: 3px solid var(--primary);
         padding: 8px 14px;
         border-radius: 0 6px 6px 0;
         font-size: 13.5px;
@@ -134,7 +92,7 @@
         border: 1px solid var(--border);
         border-radius: 8px;
         overflow: hidden;
-        background: #fff;
+        background: #0b1120;
         text-align: center;
         padding: 16px;
       }
@@ -143,12 +101,16 @@
         max-width: 860px;
         height: auto;
         display: inline-block;
+        border-radius: 6px;
       }
       table {
         width: 100%;
         border-collapse: collapse;
         margin: 16px 0;
         font-size: 13px;
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
       }
       th,
       td {
@@ -160,10 +122,10 @@
       th {
         background-color: var(--bg-card-alt);
         font-weight: 600;
-        color: #1e293b;
+        color: #f8fafc;
       }
       tr:hover td {
-        background-color: #f8fafc;
+        background-color: rgba(56, 189, 248, 0.05);
       }
       code,
       pre {
@@ -175,7 +137,7 @@
         background-color: var(--bg-card-alt);
         padding: 2px 6px;
         border-radius: 4px;
-        color: #0f172a;
+        color: #38bdf8;
         font-weight: 600;
       }
       ul {
@@ -194,12 +156,24 @@
         font-weight: 600;
       }
       .badge-cyan {
-        background: #e0f2fe;
-        color: #0369a1;
+        background: rgba(56, 189, 248, 0.15);
+        color: #38bdf8;
       }
       .badge-purple {
-        background: #f3e8ff;
-        color: #6b21a8;
+        background: rgba(147, 51, 234, 0.15);
+        color: #c084fc;
+      }
+
+      @media (max-width: 768px) {
+        body {
+          padding: 16px 12px 60px !important;
+        }
+        .container {
+          padding: 0;
+        }
+        .card {
+          padding: 20px 14px;
+        }
       }
 
       /* Bilingual Toggle Engine */
@@ -254,65 +228,24 @@
       }
     </style>
   </head>
-  <body>
+  <body class="sc-themed">
+    <!-- Unified Header Mount -->
+    <div id="sc-header-mount"></div>
+
     <div class="container">
-      <header>
-        <div class="header-titles">
-          <h1>SemiconFab Equipment Schema v1.0</h1>
-          <p class="en-pair">
-            <span class="en-only"
-              >Open Data Standard for Semiconductor Manufacturing Equipment
-              &bull; 7-Layer Architecture</span
-            >
-            <span class="zh-only"
-              >半导体制造设备开放数据标准 &bull; 七层架构规范</span
-            >
-          </p>
+      <!-- Standard Hero Banner -->
+      <div class="card" style="border-left: 4px solid var(--primary); margin-top: 10px; margin-bottom: 24px;">
+        <div style="font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.05em; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">
+          Open Specification · Schema v1.0
         </div>
-        <div class="nav-links">
-          <a href="index.html"
-            ><span class="en-only">Home</span
-            ><span class="zh-only">首页</span></a
-          >
-          <a href="catalog-demo.html"
-            ><span class="en-only">Catalog</span
-            ><span class="zh-only">设备目录</span></a
-          >
-          <a href="twin.html"
-            ><span class="en-only">Digital Twin</span
-            ><span class="zh-only">数字孪生</span></a
-          >
-          <a href="benchmark.html"
-            ><span class="en-only">Benchmark</span
-            ><span class="zh-only">基准评测</span></a
-          >
-          <a href="fab-cost.html"
-            ><span class="en-only">Fab Cost</span
-            ><span class="zh-only">建设成本</span></a
-          >
-          <a href="data-standard.html" class="active" style="font-weight: 700"
-            ><span class="en-only">Data Standard</span
-            ><span class="zh-only">数据标准</span></a
-          >
-          <a href="verification.html"
-            ><span class="en-only">Verification</span
-            ><span class="zh-only">数据核验</span></a
-          >
-          <a href="add-equipment.html"
-            ><span class="en-only">Add Equipment</span
-            ><span class="zh-only">提交设备</span></a
-          >
-          <button
-            id="lang-toggle-btn"
-            onclick="toggleLanguage()"
-            class="lang-btn"
-            title="Switch English / 中文"
-          >
-            <strong>EN</strong> /
-            <span style="opacity: 0.6; font-weight: normal">中</span>
-          </button>
-        </div>
-      </header>
+        <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
+          SemiconFab Equipment Schema v1.0
+        </h1>
+        <p class="en-pair" style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0;">
+          <span class="en-only">Open, machine-readable semiconductor equipment specification standard with 7-layer architecture and 3 conformance levels.</span>
+          <span class="zh-only">半导体制造设备开放数据标准 · 七层架构规范、3 级合规验证体系与字段级数据溯源机制。</span>
+        </p>
+      </div>
 
       <!-- Section 1: Overview -->
       <section class="card" id="overview">
@@ -1038,9 +971,20 @@
         setLanguage(current === "zh" ? "en" : "zh");
       }
 
+      window.onSemiconLanguageChange = function (newLang) {
+        setLanguage(newLang);
+      };
+
       document.addEventListener("DOMContentLoaded", () => {
-        setLanguage(getInitialLanguage());
+        const initial = window.semiconGetLang ? window.semiconGetLang() : getInitialLanguage();
+        setLanguage(initial);
       });
     </script>
+
+    <!-- Unified Footer Mount -->
+    <div id="sc-footer-mount"></div>
+
+    <!-- Unified Site Navigation Script -->
+    <script src="js/site-nav.js"></script>
   </body>
 </html>
