@@ -436,7 +436,8 @@
       <!-- Cinematic Inspection Tour HUD Banner (Visitor Mode) -->
       <div
         id="cinematic-hud"
-        class="hidden absolute top-12 left-1/2 -translate-x-1/2 z-30 pointer-events-auto bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl px-4 py-2.5 shadow-2xl flex items-center gap-3 text-white max-w-2xl transition-all relative overflow-hidden"
+        class="hidden fixed bottom-12 left-1/2 -translate-x-1/2 z-40 pointer-events-auto bg-slate-900/95 backdrop-blur-md border border-slate-700/80 rounded-2xl px-3.5 py-2 sm:px-4 sm:py-2.5 shadow-2xl flex items-center justify-between gap-2 sm:gap-3 text-white w-[94vw] max-w-2xl transition-all overflow-hidden font-sans"
+        style="z-index: 1000;"
       >
         <!-- Progress Bar (5-second station dwell indicator) -->
         <div class="absolute bottom-0 left-0 right-0 h-1 bg-slate-800">
@@ -491,36 +492,36 @@
         <!-- Progress Indicator Dots (1-5) -->
         <div
           id="tour-dots-container"
-          class="flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-800/80 border border-slate-700/80 shrink-0"
+          class="hidden sm:flex items-center gap-1.5 px-2 py-1 rounded-full bg-slate-800/80 border border-slate-700/80 shrink-0"
         >
           <button
             onclick="playTourWaypoint(0)"
             id="tour-dot-0"
-            class="tour-dot w-2 h-2 rounded-full bg-emerald-400 hover:scale-125 transition"
+            class="tour-dot w-2 h-2 rounded-full bg-emerald-400 hover:scale-125 transition cursor-pointer"
             title="1/5 · Macro Fab"
           ></button>
           <button
             onclick="playTourWaypoint(1)"
             id="tour-dot-1"
-            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition"
+            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition cursor-pointer"
             title="2/5 · Litho Bay & Airlock"
           ></button>
           <button
             onclick="playTourWaypoint(2)"
             id="tour-dot-2"
-            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition"
+            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition cursor-pointer"
             title="3/5 · Etch Bay"
           ></button>
           <button
             onclick="playTourWaypoint(3)"
             id="tour-dot-3"
-            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition"
+            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition cursor-pointer"
             title="4/5 · AMHS OHT Monorail"
           ></button>
           <button
             onclick="playTourWaypoint(4)"
             id="tour-dot-4"
-            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition"
+            class="tour-dot w-2 h-2 rounded-full bg-slate-600 hover:scale-125 transition cursor-pointer"
             title="5/5 · B1 Subfab Infrastructure"
           ></button>
         </div>
@@ -528,7 +529,7 @@
         <div class="flex items-center gap-1.5 shrink-0 ml-1">
           <button
             onclick="prevTourWaypoint()"
-            class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white flex items-center gap-1 text-[10px] font-semibold transition"
+            class="px-2 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white flex items-center gap-1 text-[10px] font-semibold transition cursor-pointer"
             title="Previous Station"
           >
             <i data-lucide="chevron-left" class="w-3.5 h-3.5"></i>
@@ -536,7 +537,7 @@
           </button>
           <button
             onclick="nextTourWaypoint()"
-            class="px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white flex items-center gap-1 text-[10px] font-bold transition shadow-sm"
+            class="px-2.5 py-1 rounded-lg bg-emerald-500 hover:bg-emerald-600 text-white flex items-center gap-1 text-[10px] font-bold transition shadow-sm cursor-pointer"
             title="Next Station"
           >
             <span>Next</span>
@@ -544,11 +545,77 @@
           </button>
           <button
             onclick="stopCinematicTour()"
-            class="px-2 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 hover:text-white border border-rose-500/30 text-[9.5px] font-bold transition flex items-center gap-1 shrink-0"
+            class="px-2 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/40 text-rose-300 hover:text-white border border-rose-500/30 text-[9.5px] font-bold transition flex items-center gap-1 shrink-0 cursor-pointer"
             title="Skip Tour"
           >
             <span>Skip</span>
             <i data-lucide="skip-forward" class="w-3 h-3"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3-STEP BEGINNER ONBOARDING BUBBLE -->
+      <div
+        id="onboarding-bubble"
+        class="hidden fixed bottom-14 right-4 z-50 pointer-events-auto bg-slate-900/95 backdrop-blur-md border border-emerald-500/50 rounded-2xl p-4 shadow-2xl text-white w-80 max-w-[92vw] transition-all duration-300 font-sans"
+        style="z-index: 1000; box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(16, 185, 129, 0.2);"
+      >
+        <div class="flex items-start justify-between gap-2 mb-2">
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-[10px] font-mono font-bold text-emerald-400 tracking-wider uppercase" id="onboarding-step-counter">STEP 1 OF 3</span>
+          </div>
+          <button
+            onclick="dismissOnboarding(true)"
+            class="text-slate-400 hover:text-white transition p-0.5 rounded cursor-pointer"
+            title="Close / 关闭"
+          >
+            <i data-lucide="x" class="w-3.5 h-3.5"></i>
+          </button>
+        </div>
+
+        <div class="space-y-1 mb-3">
+          <h4 class="text-xs font-bold text-slate-100 flex items-center gap-1.5" id="onboarding-title">
+            300mm Cleanroom Digital Twin
+          </h4>
+          <p class="text-[11px] text-slate-300 leading-relaxed" id="onboarding-desc">
+            Explore the cleanroom bays, subfab infrastructure, and dual-loop AMHS OHT monorail logistics in real-time 3D.
+          </p>
+        </div>
+
+        <!-- Step Indicator Dots -->
+        <div class="flex items-center justify-between pt-1 border-t border-slate-800">
+          <div class="flex items-center gap-1">
+            <span id="onboard-dot-1" class="w-2 h-2 rounded-full bg-emerald-400 transition-all"></span>
+            <span id="onboard-dot-2" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></span>
+            <span id="onboard-dot-3" class="w-2 h-2 rounded-full bg-slate-600 transition-all"></span>
+          </div>
+
+          <div class="flex items-center gap-1.5">
+            <button
+              id="onboarding-prev-btn"
+              onclick="prevOnboardingStep()"
+              class="hidden px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[10.5px] font-medium transition cursor-pointer"
+            >
+              Previous
+            </button>
+            <button
+              id="onboarding-next-btn"
+              onclick="nextOnboardingStep()"
+              class="px-2.5 py-1 rounded bg-emerald-500 hover:bg-emerald-600 text-white text-[10.5px] font-bold transition shadow-sm cursor-pointer"
+            >
+              Next →
+            </button>
+          </div>
+        </div>
+
+        <div class="mt-2.5 pt-2 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-400">
+          <label class="flex items-center gap-1.5 cursor-pointer hover:text-slate-200">
+            <input type="checkbox" id="onboarding-dont-show" class="rounded border-slate-700 text-emerald-500 focus:ring-0 cursor-pointer" />
+            <span id="onboarding-dont-show-text">Don't show again / 不再提示</span>
+          </label>
+          <button onclick="dismissOnboarding(true)" class="hover:text-white underline cursor-pointer text-[10px]">
+            Skip / 跳过
           </button>
         </div>
       </div>
@@ -14391,7 +14458,7 @@
           if (researchHud) researchHud.classList.add("hidden");
           if (utilOverlay) utilOverlay.classList.add("hidden");
           researchIsPlaying = false;
-          startCinematicTour();
+          // Note: Tour is not auto-started by default; user can trigger it via Tour button
         } else if (mode === "engineer") {
           stopCinematicTour();
           if (researchHud) researchHud.classList.add("hidden");
@@ -19432,10 +19499,11 @@
         clearTourTimers();
 
         if (index >= CINEMATIC_WAYPOINTS.length) {
-          index = 0;
+          stopCinematicTour();
+          return;
         }
         if (index < 0) {
-          index = CINEMATIC_WAYPOINTS.length - 1;
+          index = 0;
         }
         currentTourWaypointIndex = index;
         const wp = CINEMATIC_WAYPOINTS[index];
@@ -19461,7 +19529,7 @@
                 "tour-dot w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-emerald-300/80 shadow-sm transition-all";
             } else {
               dot.className =
-                "tour-dot w-2 h-2 rounded-full bg-slate-600 hover:bg-slate-400 transition-all";
+                "tour-dot w-2 h-2 rounded-full bg-slate-600 hover:bg-slate-400 transition-all cursor-pointer";
             }
           }
         }
@@ -19490,6 +19558,11 @@
 
             if (remaining <= 0) {
               clearTourTimers();
+              // Stop tour after completing the full round of waypoints
+              if (index + 1 >= CINEMATIC_WAYPOINTS.length) {
+                stopCinematicTour();
+                return;
+              }
               playTourWaypoint(index + 1);
             }
           }, 100);
@@ -19499,9 +19572,11 @@
       function nextTourWaypoint() {
         if (!isCinematicTourActive) return;
         clearTourTimers();
-        const nextIdx =
-          (currentTourWaypointIndex + 1) % CINEMATIC_WAYPOINTS.length;
-        playTourWaypoint(nextIdx);
+        if (currentTourWaypointIndex + 1 >= CINEMATIC_WAYPOINTS.length) {
+          stopCinematicTour();
+          return;
+        }
+        playTourWaypoint(currentTourWaypointIndex + 1);
       }
 
       function prevTourWaypoint() {
@@ -19522,6 +19597,10 @@
           if (typeof closeWaferFollow === "function") {
             closeWaferFollow(false);
           }
+        }
+
+        if (typeof dismissOnboarding === "function") {
+          dismissOnboarding(false);
         }
 
         isCinematicTourActive = true;
@@ -19582,6 +19661,125 @@
           nextTourWaypoint();
         } else if (e.key === "ArrowLeft" && isCinematicTourActive) {
           prevTourWaypoint();
+        }
+      });
+
+      // ==========================================
+      // 3-STEP BEGINNER ONBOARDING BUBBLE CONTROLLER
+      // ==========================================
+      const ONBOARDING_STEPS = [
+        {
+          tagEn: "STEP 1 OF 3",
+          tagZh: "第 1 / 3 步",
+          titleEn: "300mm Fab Digital Twin",
+          titleZh: "这里是 300mm 晶圆厂数字孪生",
+          descEn: "Explore the cleanroom bays, subfab infrastructure, and dual-loop AMHS OHT monorail logistics in real-time 3D.",
+          descZh: "全景漫游 300mm 晶圆制造洁净室，包含生产 Bay 区、动力机房与天车物流网络。"
+        },
+        {
+          tagEn: "STEP 2 OF 3",
+          tagZh: "第 2 / 3 步",
+          titleEn: "Inspect Equipment & Parameters",
+          titleZh: "点击左侧设备列表查看机台参数",
+          descEn: "Select tools from the left catalog drawer or click directly on 3D equipment to inspect SEMI dimensions, weight, and specs.",
+          descZh: "在左侧设备名录选择机台，或在 3D 场景中直接点选设备，查看 SEMI 规格、物理尺寸及工艺指标。"
+        },
+        {
+          tagEn: "STEP 3 OF 3",
+          tagZh: "第 3 / 3 步",
+          titleEn: "Cinematic Tour Anytime",
+          titleZh: "点击右上角 Tour 可随时开启导览",
+          descEn: "Click the Tour button in the top-right header anytime to enjoy a 5-station guided inspection across the fab.",
+          descZh: "点击右上角 Tour / 导览 按钮，可随时开启全厂 5 大核心站点的自动化巡检与镜头漫游。"
+        }
+      ];
+      let currentOnboardingStep = 0;
+
+      function renderOnboardingStep() {
+        const step = ONBOARDING_STEPS[currentOnboardingStep];
+        const isZh = (typeof currentLang !== "undefined" && (currentLang === "zh-CN" || currentLang === "zh-TW" || currentLang.startsWith("zh")));
+        const tagEl = document.getElementById("onboarding-step-counter");
+        const titleEl = document.getElementById("onboarding-title");
+        const descEl = document.getElementById("onboarding-desc");
+        const prevBtn = document.getElementById("onboarding-prev-btn");
+        const nextBtn = document.getElementById("onboarding-next-btn");
+        const dontShowText = document.getElementById("onboarding-dont-show-text");
+
+        if (tagEl) tagEl.textContent = isZh ? step.tagZh : step.tagEn;
+        if (titleEl) titleEl.textContent = isZh ? step.titleZh : step.titleEn;
+        if (descEl) descEl.textContent = isZh ? step.descZh : step.descEn;
+        if (dontShowText) dontShowText.textContent = isZh ? "不再提示" : "Don't show again";
+
+        for (let i = 1; i <= 3; i++) {
+          const dot = document.getElementById(`onboard-dot-${i}`);
+          if (dot) {
+            dot.className = (i - 1 === currentOnboardingStep)
+              ? "w-2.5 h-2.5 rounded-full bg-emerald-400 ring-2 ring-emerald-300/80 transition-all"
+              : "w-2 h-2 rounded-full bg-slate-600 transition-all";
+          }
+        }
+
+        if (prevBtn) {
+          prevBtn.classList.toggle("hidden", currentOnboardingStep === 0);
+          prevBtn.textContent = isZh ? "上一步" : "Previous";
+        }
+        if (nextBtn) {
+          if (currentOnboardingStep === 2) {
+            nextBtn.textContent = isZh ? "知道了 / 开始探索" : "Got it / Explore";
+          } else {
+            nextBtn.textContent = isZh ? "下一步 →" : "Next →";
+          }
+        }
+        if (window.lucide && lucide.createIcons) {
+          const bubble = document.getElementById("onboarding-bubble");
+          if (bubble) lucide.createIcons({ root: bubble });
+        }
+      }
+
+      function nextOnboardingStep() {
+        if (currentOnboardingStep < 2) {
+          currentOnboardingStep++;
+          renderOnboardingStep();
+        } else {
+          dismissOnboarding(true);
+        }
+      }
+
+      function prevOnboardingStep() {
+        if (currentOnboardingStep > 0) {
+          currentOnboardingStep--;
+          renderOnboardingStep();
+        }
+      }
+
+      function dismissOnboarding(persist) {
+        const bubble = document.getElementById("onboarding-bubble");
+        if (bubble) bubble.classList.add("hidden");
+        const dontShow = document.getElementById("onboarding-dont-show");
+        if (persist || (dontShow && dontShow.checked)) {
+          try {
+            localStorage.setItem("semicon_twin_onboarding_dismissed", "1");
+          } catch (e) {}
+        }
+      }
+
+      function initOnboarding() {
+        try {
+          if (localStorage.getItem("semicon_twin_onboarding_dismissed") === "1") {
+            return;
+          }
+        } catch (e) {}
+        const bubble = document.getElementById("onboarding-bubble");
+        if (bubble) {
+          currentOnboardingStep = 0;
+          renderOnboardingStep();
+          bubble.classList.remove("hidden");
+        }
+      }
+
+      window.addEventListener("semiconfab:langChanged", () => {
+        if (typeof renderOnboardingStep === "function") {
+          renderOnboardingStep();
         }
       });
 
@@ -23524,6 +23722,7 @@
       }
 
       window.addEventListener("DOMContentLoaded", () => {
+        window.I18N_LANG_ALLOWLIST = ["en", "zh-CN"];
         if (typeof initI18n === "function") {
           initI18n();
         }
@@ -23582,12 +23781,20 @@
         } else {
           setTimeout(() => {
             // Check for modal queries
-            if (urlParams.get("modal") === "yms") {
+            const modalParam = urlParams.get("modal");
+            if (modalParam === "catalog") {
+              if (typeof openOemDatabaseModal === "function") {
+                openOemDatabaseModal();
+              }
+            } else if (modalParam === "yms") {
               toggleWaferMapModal(true);
-            } else if (urlParams.get("modal") === "arch") {
+            } else if (modalParam === "arch") {
               toggleOpenArchitectureModal(true);
             }
-          }, 400);
+            if (!modalParam && typeof initOnboarding === "function") {
+              initOnboarding();
+            }
+          }, 600);
         }
       });
     </script>

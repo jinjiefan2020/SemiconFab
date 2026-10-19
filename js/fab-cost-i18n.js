@@ -6,8 +6,11 @@
 const FAB_COST_I18N = {
   en: {
     fab_cost_page_title:
-      "Fab Construction Costs: What's Beyond the Equipment — SemiconFab.org",
-    fab_cost_h1: "Building a Fab: Where the Money Goes Beyond the Equipment",
+      "Fab Construction Cost Report · 晶圆厂建设成本研究报告 — SemiconFab.org",
+    fab_cost_h1: "Fab Construction Cost Report",
+    fab_cost_sub: "Top-down · 自顶向下：从已发表的每千片成本锚点估算建设成本",
+    fab_cost_banner_text: "This is the research report. For interactive Capex estimation →",
+    fab_cost_banner_link: "Capex Estimator →",
     fab_cost_lede:
       'Process tools account for 70–80% of the total investment in an advanced fab. The remaining 20–30% — building, cleanroom, ultrapure water, power, gases, wastewater, AMHS, land, and engineering design — is the so-called "construction cost". This page brings together the shares, unit prices, and reference projects that can be found in public sources into a parametric model that estimates cost by <strong>process node × capacity (WSPM)</strong>, and states plainly which figures come from official sources, which are triangulated across multiple sources, and which cannot be found at all.',
     fab_cost_meta_line:
@@ -471,8 +474,11 @@ const FAB_COST_I18N = {
     fab_cost_lbl_year_ann: "Year announced",
   },
   "zh-CN": {
-    fab_cost_page_title: "Fab 建设成本：设备之外的构成 — SemiconFab.org",
-    fab_cost_h1: "建一座 Fab：设备之外的钱花在哪",
+    fab_cost_page_title: "晶圆厂建设成本研究报告 · Fab Construction Cost Report — SemiconFab.org",
+    fab_cost_h1: "晶圆厂建设成本研究报告",
+    fab_cost_sub: "Top-down · 自顶向下：从已发表的每千片成本锚点估算建设成本",
+    fab_cost_banner_text: "这是研究报告。要交互式测算总投资 →",
+    fab_cost_banner_link: "Capex Estimator 总投资测算器 →",
     fab_cost_lede:
       '在一座先进制程 Fab 的总投资中，工艺设备占 70–80%。剩下的 20–30%——厂房、洁净室、超纯水、电力、气体、废水、AMHS、土地与工程设计——就是所谓的"建设成本"。本页把公开来源中能查到的占比、单项价格与参考项目汇总成一个按 <strong>制程节点 × 产能（WSPM）</strong> 估算成本的参数化模型，并明确标注：哪些数字来自官方来源，哪些是多源三角推算，哪些根本查不到。',
     fab_cost_meta_line:

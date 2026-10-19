@@ -107,7 +107,7 @@
           <div class="flex flex-col">
             <div class="flex items-center gap-1.5 leading-none">
               <span class="text-sm font-bold tracking-tight text-[var(--ink)]">SemiconFab<span class="text-[var(--accent)]">.org</span></span>
-              <span class="px-1.5 py-0.5 text-[9px] font-mono font-semibold rounded bg-[var(--surface-2)] text-[var(--ink-2)]">v1.7.0</span>
+              <span class="px-1.5 py-0.5 text-[9px] font-mono font-semibold rounded bg-[var(--surface-2)] text-[var(--ink-2)]">v1.8.0</span>
             </div>
             <span class="text-[10px] text-[var(--ink-3)] font-medium leading-tight mt-0.5" id="header-subtitle">OSAT Packaging & Test Facility · From Wafer to Shipment</span>
           </div>
@@ -195,7 +195,7 @@
           id="btn-toggle-lang"
           class="px-2.5 py-1 rounded-md border border-[var(--line)] bg-[var(--surface)] text-xs font-semibold text-[var(--ink)] hover:bg-[var(--surface-2)] transition font-mono"
         >
-          En/中文
+          EN / 中文
         </button>
       </div>
     </header>
@@ -338,7 +338,11 @@
         </div>
 
         <!-- BOTTOM CATEGORY PILLS BAR -->
-        <div class="absolute bottom-3 left-1/2 -translate-x-1/2 max-w-[95%] overflow-x-auto flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--surface)]/95 backdrop-blur-md border border-[var(--line)] shadow-lg z-10">
+        <div
+          id="cat-pills-bar"
+          class="absolute bottom-3 left-1/2 -translate-x-1/2 max-w-[95%] overflow-x-auto flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[var(--surface)]/95 backdrop-blur-md border border-[var(--line)] shadow-lg z-30 select-none"
+          style="-webkit-overflow-scrolling: touch; touch-action: pan-x; scrollbar-width: none;"
+        >
           <button onclick="filterCategory('ALL')" class="cat-pill active px-2.5 py-1 rounded-full text-xs font-semibold border border-[var(--accent)] bg-[var(--accent)] text-white transition shrink-0 flex items-center gap-1.5 shadow-sm" data-cat="ALL">
             <span class="cat-dot w-2.5 h-2.5 rounded-full shrink-0" style="background-color: #ffffff;"></span>
             <span class="cat-label">All (86)</span>
@@ -393,7 +397,7 @@
       <!-- RIGHT INSPECTOR DRAWER (SEMI E72 METRICS & HONESTY DISCLOSURE) -->
       <aside
         id="inspector-panel"
-        class="absolute right-0 top-0 w-80 md:w-96 h-full bg-[var(--surface)] border-l border-[var(--line)] z-20 transition-transform duration-300 translate-x-full shadow-2xl flex flex-col overflow-hidden"
+        class="absolute right-0 top-0 w-80 md:w-96 h-full bg-[var(--surface)] border-l border-[var(--line)] z-40 transition-transform duration-300 translate-x-full shadow-2xl flex flex-col overflow-hidden"
       >
         <!-- Inspector Header -->
         <div class="p-3 border-b border-[var(--line)] flex items-center justify-between bg-[var(--surface-2)]">
@@ -1972,7 +1976,7 @@
         const isZh = currentLang.startsWith("zh");
         document.title = isZh ? "OSAT 后道封测数字孪生工厂 | SemiconFab" : "OSAT Packaging & Testing 3D Digital Twin | SemiconFab";
         const btnToggleLang = document.getElementById("btn-toggle-lang");
-        if (btnToggleLang) btnToggleLang.textContent = isZh ? "中/En" : "En/中文";
+        if (btnToggleLang) btnToggleLang.textContent = "EN / 中文";
 
         const headerSubtitle = document.getElementById("header-subtitle");
         if (headerSubtitle) {
@@ -2154,6 +2158,16 @@
               selectEquipment(found, null, false);
             }
           }
+        }
+
+        const pillsBar = document.getElementById("cat-pills-bar");
+        if (pillsBar) {
+          pillsBar.addEventListener("wheel", (e) => {
+            if (e.deltaY !== 0) {
+              e.preventDefault();
+              pillsBar.scrollLeft += e.deltaY;
+            }
+          }, { passive: false });
         }
 
         if (window.lucide) lucide.createIcons();

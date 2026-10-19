@@ -2,6 +2,47 @@
 
 All notable changes to the SemiconFab source-available repository will be documented in this file.
 
+## [1.8.0] - 2026-10-19
+
+### Site-Wide Information Architecture (IA) Refactoring & Navigation Unification
+
+- **Unified 5-Category Navigation Architecture (`js/site-nav.js`, `index.html`)**: Refactored top navigation and mobile slide-out menus into 5 standardized categories with consistent English and Chinese bilingual labels:
+  - **3D Twins (3D 孪生)**: 300mm Fab Cleanroom (`twin.html`), OSAT Packaging & Test (`twin-osat.html`), 2D Layout Editor (`layout-editor.html`).
+  - **Equipment (设备库)**: Equipment Catalog (`catalog-demo.html`), Comparison Matrix (`compare.html`), Submit Equipment (`add-equipment.html`), Data Standards (`data-standard.html`), Verification Policy (`verification.html`).
+  - **Cost (成本模型)**: Construction Cost Report (`fab-cost.html`), Capex Estimator (`fab-capex.html`).
+  - **Learn (知识库)**: FinFET, GAAFET, DRAM, 3D NAND, HBM.
+  - **Research (研究)**: MIMAC-2026 Benchmark (`benchmark.html`), Vision & 6 Pillars (`vision.html`).
+- **Correction of Misleading Tags & Historical Labels**:
+  - Corrected `benchmark.html` references from `"System Benchmarks"` / `"Hardware & WebGL Performance"` to **MIMAC-2026 Benchmark** (fab dispatching & scheduling benchmark).
+  - Corrected `verification.html` references from `"Verification Suite"` / `"Automated Data Integrity Tests"` to **Verification** (data provenance & integrity verification policy).
+  - Cleaned up navigation terminology: standardized "Facility Cost Report" to "Construction Cost Report", and aligned "Open Initiative" in nav to "Vision".
+- **Cost Modeling Alignment & Cross-Link Banners (`fab-cost.html`, `fab-capex.html`, `js/fab-cost-i18n.js`)**:
+  - Retitled `fab-cost.html` to **Fab Construction Cost Report · 晶圆厂建设成本研究报告** (Top-down parametric model) and added a prominent cross-link banner to `fab-capex.html`.
+  - Retitled `fab-capex.html` to **Fab Capex Estimator · 晶圆厂总投资测算器** (Bottom-up cleanroom tool BOM model) and added a cross-link banner to `fab-cost.html`.
+- **Site-Wide Catalog Count Alignment (253 Tools · 24 Categories)**:
+  - Updated all outdated mentions of 167 tools / 13 categories across `index.html` (SEO meta tags, OpenGraph, Twitter cards, JSON-LD schemas, and hero/card text) and `js/translations.js` to **253 OEM equipment models across 24 categories** (167 front-end fab + 86 back-end OSAT).
+- **Sitemap Index Expansion (`sitemap.xml`)**:
+  - Added dedicated `<loc>https://semiconfab.org/twin-osat</loc>` entry directly adjacent to `/twin` with weekly update frequency and x-default/en/zh-CN hreflang links.
+- **Strict Site-Wide Language Policy**:
+  - Preserved full 9-language internationalization on the globalization portal (`index.html`).
+  - Preserved 9-language dictionary architecture in `vision.html`.
+  - Strict English and Simplified Chinese (EN / 简体中文) dual-language enforcement across all other pages.
+  - Standardized the navigation language switcher button label to **`EN / 中文`** across all pages.
+  - Added `window.I18N_LANG_ALLOWLIST` support in `js/i18n.js` and restricted `twin.html` language dropdown to English and Simplified Chinese.
+- **Cleanroom Digital Twin Interaction Enhancements (`twin.html`)**:
+  - Disabled automatic tour playback on initial entry, preserving user camera control for self-directed exploration.
+  - Restricted cinematic inspection tour to a single full 5-station cycle before automatically stopping and restoring free orbit controls.
+  - Positioned tour HUD details banner at the bottom center above the legend (`bottom-12`, matching follow-a-wafer panel layout) with elevated `z-index: 1000` to completely eliminate top status bar occlusion, guaranteeing unobstructed access to Skip, Previous, and Next buttons across all viewports.
+  - Added a lightweight 3-step dismissible beginner onboarding bubble with `localStorage` persistent dismissal memory.
+  - Enforced strict zero-reference rule with 0 links or text citations to `twin-osat.html`.
+- **OSAT 3D Twin Viewport Optimization (`twin-osat.html`)**:
+  - Added horizontal touch scrolling (`-webkit-overflow-scrolling: touch`, `touch-action: pan-x`) and mouse wheel horizontal scrolling support to the bottom 11 process category filter pills bar.
+  - Elevated bottom pills bar layer to `z-30` and inspector panel to `z-40` to prevent pointer event occlusion.
+- **Homepage Capability Cards URL Deduplication (`index.html`)**:
+  - Mapped the 4 core capability cards to 4 distinct deep-link URLs: `twin.html` (3D cleanroom), `twin.html?modal=catalog` (253-tool OEM database modal), `twin.html?modal=yms` (cascading yield & wafer map), and `twin.html?mode=engineer` (SEMI E10 engineer telemetry mode).
+
+---
+
 ## [1.7.0] - 2026-10-18
 
 ### Standalone OSAT Packaging & Testing Facility (`twin-osat.html`), Front-End Cleanroom Purification (`twin.html`) & 86 Tool Ingestion

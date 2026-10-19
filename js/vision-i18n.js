@@ -349,6 +349,10 @@ const VISION_I18N = {
       "Demand-driven AMHS closed-loop traffic simulation; bottom HUD stack; hover popover tooltips",
     vision_ms_v1_6:
       "Equipment cross-comparison matrix, 167-model full price coverage, Fab Capex & BOM estimator, and editorial design system",
+    vision_ms_v1_7:
+      "Standalone OSAT 3D Twin (twin-osat.html), dynamic AMR & cleanroom logistics simulation, 86-tool packaging & testing catalog ingestion (253 total models), and dual-domain switcher",
+    vision_ms_v1_8:
+      "Site-wide Information Architecture refactoring: 5 unified navigation categories, strict dual-language policy, 253-equipment catalog alignment, and interactive UX enhancements",
 
     // Matrix
     vision_matrix_title:
@@ -723,6 +727,10 @@ const VISION_I18N = {
       "AMHS 闭环物流交通仿真与智能派工；底部无遮挡 HUD 架构；顶部视角预设悬停提示气泡",
     vision_ms_v1_6:
       "设备横向多维对比矩阵、167台全量价格数据覆盖、晶圆厂Capex总造价与BOM测算器、全新设计规范",
+    vision_ms_v1_7:
+      "独立封测厂 3D 数字孪生（twin-osat.html）、动态 AMR 避障与洁净室物流仿真、收录 86 台先进封测机台（全站共 253 款设备）与双域联动筛选",
+    vision_ms_v1_8:
+      "全站信息架构系统化重构：5 大统一导航分类、严格中英双语规范、全站 253 台设备数据对齐与核心交互体验优化",
 
     // Matrix
     vision_matrix_title: "商业巨头方案 vs 开源技术栈替代矩阵",

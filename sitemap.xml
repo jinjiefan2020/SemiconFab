@@ -92,6 +92,17 @@
     <xhtml:link rel="alternate" hreflang="it" href="https://semiconfab.org/twin" />
   </url>
 
+  <!-- 3D OSAT Packaging & Test Cleanroom Digital Twin -->
+  <url>
+    <loc>https://semiconfab.org/twin-osat</loc>
+    <lastmod>2026-10-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/twin-osat" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://semiconfab.org/twin-osat" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://semiconfab.org/twin-osat" />
+  </url>
+
   <!-- 2D Cleanroom Fab Floor Plan Layout Editor -->
   <url>
     <loc>https://semiconfab.org/layout-editor</loc>

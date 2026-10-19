@@ -2,6 +2,7 @@
  * SemiconFab.org - Unified Site Navigation & Responsive Mobile Controller
  * Offline Compatible · Zero External Network Dependencies · Pure Vanilla JS
  * Architecture: Global Dual-Theme (Light/Dark) Engine + Multilingual Controller
+ * Version: 1.8.0
  */
 
 (function () {
@@ -10,50 +11,56 @@
   const NAV_I18N = {
     en: {
       brandSub: "300mm Fab Digital Twin",
-      navTwin: "3D Twin",
-      navProcesses: "Processes",
+      navTwins: "3D Twins",
       navEquipment: "Equipment",
-      navEconomics: "Economics",
-      navStandards: "Standards",
-      langBtn: "En/中文",
+      navCost: "Cost",
+      navLearn: "Learn",
+      navResearch: "Research",
+      langBtn: "EN / 中文",
       themeLight: "Light",
       themeDark: "Dark",
       themeTitle: "Switch Light / Dark Theme",
       // Dropdown & Drawer items
-      cleanroomTwin: "300mm Fab Cleanroom",
-      cleanroomTwinDesc: "Class 1 Cleanroom & Subfab Twin",
-      osatTwin: "OSAT Packaging & Test",
-      osatTwinDesc: "Dual-Hall Back-End Packaging & ATE Test Twin",
+      twinFab: "300mm Fab Twin",
+      twinFabDesc: "Class 1 Cleanroom & Subfab Twin",
+      twinOsat: "OSAT Packaging & Test Twin",
+      twinOsatDesc: "Dual-Hall Packaging & ATE Test Facility",
       layoutEditor: "2D Layout Editor",
       layoutEditorDesc: "Architectural Cleanroom Bay Design",
-      finfet: "FinFET (14nm/7nm)",
-      finfetDesc: "Tri-Gate RMG Architecture",
-      gaafet: "GAAFET (3nm/2nm)",
-      gaafetDesc: "Nanosheet Transistor Flow",
-      dram: "DRAM (1T1C)",
-      dramDesc: "Buried Wordline & Capacitor",
-      nand: "3D NAND Flash",
-      nandDesc: "Charge Trap & Replacement Gate",
-      hbm: "HBM3E / HBM4",
-      hbmDesc: "3D TSV Stacking & Packaging",
+
       catalog: "Equipment Catalog",
-      catalogDesc: "253 OEM Models (167 FAB · 86 OSAT)",
-      compare: "Side-by-Side Comparison",
-      compareDesc: "Cross-Tool Technical & Price Matrix",
+      catalogDesc: "253 OEM Models · 167 FAB + 86 OSAT",
+      compare: "Compare Tools",
+      compareDesc: "Side-by-side specs & price estimates",
       addEquip: "Add Equipment",
       addEquipDesc: "JSON Schema Generator",
-      fabCapex: "Fab Capex Estimator",
-      fabCapexDesc: "Total Cleanroom & Facility Capex",
-      fabCost: "Facility Cost Report",
-      fabCostDesc: "Parametric Infrastructure Breakdown",
       dataStandard: "Data Standard",
       dataStandardDesc: "Open JSON Schema v1.0",
-      verification: "Verification Suite",
-      verificationDesc: "Automated Data Integrity Tests",
-      benchmark: "System Benchmarks",
-      benchmarkDesc: "Hardware & WebGL Performance",
-      vision: "Vision & Roadmap",
-      visionDesc: "Open Science Initiative",
+      verification: "Verification",
+      verificationDesc: "Provenance policy",
+
+      fabCost: "Construction Cost Report",
+      fabCostDesc: "Top-down research report",
+      fabCapex: "Capex Estimator",
+      fabCapexDesc: "Bottom-up interactive estimator",
+
+      deviceLibrary: "3D Device Library",
+      finfet: "FinFET",
+      finfetDesc: "Tri-Gate RMG Architecture (14nm/7nm)",
+      gaafet: "GAAFET",
+      gaafetDesc: "Nanosheet Transistor Flow (3nm/2nm)",
+      dram: "DRAM",
+      dramDesc: "Buried Wordline & Capacitor (1T1C)",
+      nand: "3D NAND",
+      nandDesc: "Charge Trap & Replacement Gate",
+      hbm: "HBM",
+      hbmDesc: "3D TSV Stacking & Packaging",
+
+      benchmark: "MIMAC-2026 Benchmark",
+      benchmarkDesc: "Fab scheduling benchmark",
+      vision: "Vision",
+      visionDesc: "Open initiative manifesto",
+
       // Footer
       footerTagline: "Open-access digital twin and equipment engineering repository for 300mm semiconductor fabs.",
       footerLicense: "Source-available under PolyForm Noncommercial 1.0.0. Free for education, academic research, and personal use.",
@@ -64,50 +71,56 @@
     },
     zh: {
       brandSub: "300mm晶圆厂数字孪生",
-      navTwin: "3D孪生车间",
-      navProcesses: "先进制程",
-      navEquipment: "核心设备",
-      navEconomics: "建厂与投资",
-      navStandards: "规范验证",
-      langBtn: "En/中文",
+      navTwins: "数字孪生",
+      navEquipment: "设备",
+      navCost: "成本",
+      navLearn: "学习",
+      navResearch: "研究",
+      langBtn: "EN / 中文",
       themeLight: "亮色",
       themeDark: "暗色",
       themeTitle: "切换明暗主题 (亮色 / 暗色)",
       // Dropdown & Drawer items
-      cleanroomTwin: "300mm洁净室数字孪生",
-      cleanroomTwinDesc: "ISO 1级洁净室与次层动力系统",
-      osatTwin: "封测厂数字孪生 (OSAT)",
-      osatTwinDesc: "双大厅后道封装与高密度 ATE 终测厂房",
+      twinFab: "300mm洁净室孪生",
+      twinFabDesc: "ISO 1级洁净室与次层动力系统",
+      twinOsat: "封测厂数字孪生",
+      twinOsatDesc: "双大厅后道封装与高密度 ATE 终测厂房",
       layoutEditor: "2D厂房布局编辑器",
       layoutEditorDesc: "洁净室工艺区空间规划",
-      finfet: "FinFET (14nm/7nm 晶体管)",
-      finfetDesc: "三维鳍式场效应 RMG 工艺",
-      gaafet: "GAAFET (3nm/2nm 纳米片)",
-      gaafetDesc: "全环绕栅极纳米片全流程",
-      dram: "DRAM 内存 (1T1C)",
-      dramDesc: "埋入式字线与高深宽比电容",
-      nand: "3D NAND 闪存",
-      nandDesc: "电荷俘获与替代栅极堆叠",
-      hbm: "HBM 高带宽内存",
-      hbmDesc: "3D TSV 硅通孔微凸块先进封装",
-      catalog: "半导体设备全名录 (253台)",
-      catalogDesc: "前道晶圆制造 (167台) 与后道先进封测 (86台)",
-      compare: "机台横向多维对比",
-      compareDesc: "2~4台设备技术参数与成本矩阵",
+
+      catalog: "设备名录",
+      catalogDesc: "253款机台 · 167前道 + 86封测",
+      compare: "机台对比",
+      compareDesc: "多机台参数与价格横向对比",
       addEquip: "新增设备录入",
       addEquipDesc: "标准 JSON Schema 生成器",
-      fabCapex: "晶圆厂全厂总造价测算器",
-      fabCapexDesc: "数字孪生 BOM 与自顶向下总投资",
-      fabCost: "厂务基建成本拆解报告",
-      fabCostDesc: "超纯水、动力、特气与暖通经验模型",
       dataStandard: "数据交换标准",
       dataStandardDesc: "半导体设备 Schema v1.0",
-      verification: "数据真实性校验集",
-      verificationDesc: "自动化数据完整性审计",
-      benchmark: "性能基准测试",
-      benchmarkDesc: "硬件算力与 WebGL 渲染性能",
-      vision: "倡议愿景与路线图",
-      visionDesc: "半导体工程开放科学平台",
+      verification: "验证",
+      verificationDesc: "来源可信度政策",
+
+      fabCost: "建设成本报告",
+      fabCostDesc: "自顶向下研究报告",
+      fabCapex: "总投资测算器",
+      fabCapexDesc: "自底向上交互式测算器",
+
+      deviceLibrary: "3D器件库",
+      finfet: "FinFET",
+      finfetDesc: "三维鳍式场效应晶体管 (14nm/7nm)",
+      gaafet: "GAAFET",
+      gaafetDesc: "全环绕栅极纳米片全流程 (3nm/2nm)",
+      dram: "DRAM",
+      dramDesc: "埋入式字线与高深宽比电容 (1T1C)",
+      nand: "3D NAND",
+      nandDesc: "电荷俘获与替代栅极堆叠",
+      hbm: "HBM",
+      hbmDesc: "3D TSV 硅通孔微凸块先进封装",
+
+      benchmark: "MIMAC-2026 调度基准",
+      benchmarkDesc: "晶圆厂调度基准",
+      vision: "愿景",
+      visionDesc: "倡议宣言",
+
       // Footer
       footerTagline: "面向 300mm 晶圆制造的开放数字孪生、设备工程学与总造价建模平台。",
       footerLicense: "源码遵循 PolyForm Noncommercial 1.0.0 协议公开发布，教育、科研与个人使用完全免费。",
@@ -200,10 +213,10 @@
     const cur = getCurrentPath();
 
     const isTwinActive = ["twin.html", "twin-osat.html", "layout-editor.html"].includes(cur);
-    const isProcessActive = ["finfet.html", "gaa.html", "dram.html", "nand.html", "hbm.html"].includes(cur);
-    const isEquipActive = ["catalog-demo.html", "compare.html", "add-equipment.html"].includes(cur);
-    const isEconActive = ["fab-capex.html", "fab-cost.html"].includes(cur);
-    const isStdActive = ["data-standard.html", "verification.html", "benchmark.html", "vision.html"].includes(cur);
+    const isEquipActive = ["catalog-demo.html", "compare.html", "add-equipment.html", "data-standard.html", "verification.html"].includes(cur);
+    const isCostActive = ["fab-cost.html", "fab-capex.html"].includes(cur);
+    const isLearnActive = ["finfet.html", "gaa.html", "dram.html", "nand.html", "hbm.html"].includes(cur);
+    const isResearchActive = ["benchmark.html", "vision.html"].includes(cur);
 
     return `
       <header class="sc-header" role="banner">
@@ -224,26 +237,26 @@
             </div>
             <div class="sc-brand-title">
               <span>SemiconFab<span class="sc-brand-tld">.org</span></span>
-              <span class="sc-brand-tag">v1.7</span>
+              <span class="sc-brand-tag">v1.8</span>
             </div>
           </a>
 
-          <!-- Desktop Navigation -->
+          <!-- Desktop Navigation: 5 Categories -->
           <nav class="sc-desktop-nav" aria-label="Main Navigation">
-            <!-- 3D Twin Dropdown -->
+            <!-- 1. 3D Twins Dropdown -->
             <div class="sc-nav-item">
               <button type="button" class="sc-nav-link ${isTwinActive ? 'active' : ''}">
-                <span>${t.navTwin}</span>
+                <span>${t.navTwins}</span>
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
                 <a href="twin.html" class="sc-dropdown-item ${cur === 'twin.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.cleanroomTwin}</span>
-                  <span class="sc-dropdown-desc">${t.cleanroomTwinDesc}</span>
+                  <span class="sc-dropdown-title">${t.twinFab}</span>
+                  <span class="sc-dropdown-desc">${t.twinFabDesc}</span>
                 </a>
                 <a href="twin-osat.html" class="sc-dropdown-item ${cur === 'twin-osat.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.osatTwin}</span>
-                  <span class="sc-dropdown-desc">${t.osatTwinDesc}</span>
+                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.twinOsat}</span>
+                  <span class="sc-dropdown-desc">${t.twinOsatDesc}</span>
                 </a>
                 <a href="layout-editor.html" class="sc-dropdown-item ${cur === 'layout-editor.html' ? 'active' : ''}">
                   <span class="sc-dropdown-title">${t.layoutEditor}</span>
@@ -252,13 +265,64 @@
               </div>
             </div>
 
-            <!-- Processes Dropdown -->
+            <!-- 2. Equipment Dropdown -->
             <div class="sc-nav-item">
-              <button type="button" class="sc-nav-link ${isProcessActive ? 'active' : ''}">
-                <span>${t.navProcesses}</span>
+              <button type="button" class="sc-nav-link ${isEquipActive ? 'active' : ''}">
+                <span>${t.navEquipment}</span>
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
+                <a href="catalog-demo.html" class="sc-dropdown-item ${cur === 'catalog-demo.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.catalog}</span>
+                  <span class="sc-dropdown-desc">${t.catalogDesc}</span>
+                </a>
+                <a href="compare.html" class="sc-dropdown-item ${cur === 'compare.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.compare}</span>
+                  <span class="sc-dropdown-desc">${t.compareDesc}</span>
+                </a>
+                <a href="add-equipment.html" class="sc-dropdown-item ${cur === 'add-equipment.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.addEquip}</span>
+                  <span class="sc-dropdown-desc">${t.addEquipDesc}</span>
+                </a>
+                <a href="data-standard.html" class="sc-dropdown-item ${cur === 'data-standard.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.dataStandard}</span>
+                  <span class="sc-dropdown-desc">${t.dataStandardDesc}</span>
+                </a>
+                <a href="verification.html" class="sc-dropdown-item ${cur === 'verification.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.verification}</span>
+                  <span class="sc-dropdown-desc">${t.verificationDesc}</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 3. Cost Dropdown -->
+            <div class="sc-nav-item">
+              <button type="button" class="sc-nav-link ${isCostActive ? 'active' : ''}">
+                <span>${t.navCost}</span>
+                <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="sc-dropdown-panel">
+                <a href="fab-cost.html" class="sc-dropdown-item ${cur === 'fab-cost.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.fabCost}</span>
+                  <span class="sc-dropdown-desc">${t.fabCostDesc}</span>
+                </a>
+                <a href="fab-capex.html" class="sc-dropdown-item ${cur === 'fab-capex.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.fabCapex}</span>
+                  <span class="sc-dropdown-desc">${t.fabCapexDesc}</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 4. Learn Dropdown -->
+            <div class="sc-nav-item">
+              <button type="button" class="sc-nav-link ${isLearnActive ? 'active' : ''}">
+                <span>${t.navLearn}</span>
+                <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="sc-dropdown-panel">
+                <div class="sc-dropdown-header" style="padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--sc-text-dim); text-transform: uppercase; letter-spacing: 0.05em;">
+                  ${t.deviceLibrary}
+                </div>
                 <a href="finfet.html" class="sc-dropdown-item ${cur === 'finfet.html' ? 'active' : ''}">
                   <span class="sc-dropdown-title">${t.finfet}</span>
                   <span class="sc-dropdown-desc">${t.finfetDesc}</span>
@@ -282,61 +346,13 @@
               </div>
             </div>
 
-            <!-- Equipment Dropdown -->
+            <!-- 5. Research Dropdown -->
             <div class="sc-nav-item">
-              <button type="button" class="sc-nav-link ${isEquipActive ? 'active' : ''}">
-                <span>${t.navEquipment}</span>
+              <button type="button" class="sc-nav-link ${isResearchActive ? 'active' : ''}">
+                <span>${t.navResearch}</span>
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
-                <a href="catalog-demo.html" class="sc-dropdown-item ${cur === 'catalog-demo.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.catalog}</span>
-                  <span class="sc-dropdown-desc">${t.catalogDesc}</span>
-                </a>
-                <a href="compare.html" class="sc-dropdown-item ${cur === 'compare.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.compare}</span>
-                  <span class="sc-dropdown-desc">${t.compareDesc}</span>
-                </a>
-                <a href="add-equipment.html" class="sc-dropdown-item ${cur === 'add-equipment.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.addEquip}</span>
-                  <span class="sc-dropdown-desc">${t.addEquipDesc}</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- Economics Dropdown -->
-            <div class="sc-nav-item">
-              <button type="button" class="sc-nav-link ${isEconActive ? 'active' : ''}">
-                <span>${t.navEconomics}</span>
-                <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="sc-dropdown-panel">
-                <a href="fab-capex.html" class="sc-dropdown-item ${cur === 'fab-capex.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.fabCapex}</span>
-                  <span class="sc-dropdown-desc">${t.fabCapexDesc}</span>
-                </a>
-                <a href="fab-cost.html" class="sc-dropdown-item ${cur === 'fab-cost.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.fabCost}</span>
-                  <span class="sc-dropdown-desc">${t.fabCostDesc}</span>
-                </a>
-              </div>
-            </div>
-
-            <!-- Standards Dropdown -->
-            <div class="sc-nav-item">
-              <button type="button" class="sc-nav-link ${isStdActive ? 'active' : ''}">
-                <span>${t.navStandards}</span>
-                <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-              </button>
-              <div class="sc-dropdown-panel">
-                <a href="data-standard.html" class="sc-dropdown-item ${cur === 'data-standard.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.dataStandard}</span>
-                  <span class="sc-dropdown-desc">${t.dataStandardDesc}</span>
-                </a>
-                <a href="verification.html" class="sc-dropdown-item ${cur === 'verification.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title">${t.verification}</span>
-                  <span class="sc-dropdown-desc">${t.verificationDesc}</span>
-                </a>
                 <a href="benchmark.html" class="sc-dropdown-item ${cur === 'benchmark.html' ? 'active' : ''}">
                   <span class="sc-dropdown-title">${t.benchmark}</span>
                   <span class="sc-dropdown-desc">${t.benchmarkDesc}</span>
@@ -359,7 +375,7 @@
 
             <!-- Language Switcher Button -->
             <button type="button" id="sc-btn-lang-toggle" class="sc-btn-lang" title="${lang === 'zh' ? 'Switch to English' : '切换为中文'}">
-              <span>En/中文</span>
+              <span>EN / 中文</span>
             </button>
 
             <!-- Mobile Hamburger Button -->
@@ -379,15 +395,15 @@
 
       <!-- Mobile Slide-Out Drawer -->
       <aside id="sc-mobile-drawer" class="sc-mobile-drawer" aria-label="Mobile Navigation">
-        <!-- 3D Twin & Layout -->
+        <!-- 1. 3D Twins -->
         <div class="sc-drawer-section">
-          <div class="sc-drawer-heading">${t.navTwin}</div>
+          <div class="sc-drawer-heading">${t.navTwins}</div>
           <a href="twin.html" class="sc-drawer-link ${cur === 'twin.html' ? 'active' : ''}">
-            <span>${t.cleanroomTwin}</span>
+            <span>${t.twinFab}</span>
             <span class="sc-drawer-badge">Fab</span>
           </a>
           <a href="twin-osat.html" class="sc-drawer-link ${cur === 'twin-osat.html' ? 'active' : ''}">
-            <span>${t.osatTwin}</span>
+            <span>${t.twinOsat}</span>
             <span class="sc-drawer-badge">OSAT</span>
           </a>
           <a href="layout-editor.html" class="sc-drawer-link ${cur === 'layout-editor.html' ? 'active' : ''}">
@@ -395,12 +411,12 @@
           </a>
         </div>
 
-        <!-- Equipment -->
+        <!-- 2. Equipment -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${t.navEquipment}</div>
           <a href="catalog-demo.html" class="sc-drawer-link ${cur === 'catalog-demo.html' ? 'active' : ''}">
             <span>${t.catalog}</span>
-            <span class="sc-drawer-badge">167</span>
+            <span class="sc-drawer-badge">253</span>
           </a>
           <a href="compare.html" class="sc-drawer-link ${cur === 'compare.html' ? 'active' : ''}">
             <span>${t.compare}</span>
@@ -408,23 +424,30 @@
           <a href="add-equipment.html" class="sc-drawer-link ${cur === 'add-equipment.html' ? 'active' : ''}">
             <span>${t.addEquip}</span>
           </a>
+          <a href="data-standard.html" class="sc-drawer-link ${cur === 'data-standard.html' ? 'active' : ''}">
+            <span>${t.dataStandard}</span>
+          </a>
+          <a href="verification.html" class="sc-drawer-link ${cur === 'verification.html' ? 'active' : ''}">
+            <span>${t.verification}</span>
+          </a>
         </div>
 
-        <!-- Economics -->
+        <!-- 3. Cost -->
         <div class="sc-drawer-section">
-          <div class="sc-drawer-heading">${t.navEconomics}</div>
+          <div class="sc-drawer-heading">${t.navCost}</div>
+          <a href="fab-cost.html" class="sc-drawer-link ${cur === 'fab-cost.html' ? 'active' : ''}">
+            <span>${t.fabCost}</span>
+            <span class="sc-drawer-badge">Report</span>
+          </a>
           <a href="fab-capex.html" class="sc-drawer-link ${cur === 'fab-capex.html' ? 'active' : ''}">
             <span style="color:var(--sc-accent-cyan)">${t.fabCapex}</span>
             <span class="sc-drawer-badge">BOM</span>
           </a>
-          <a href="fab-cost.html" class="sc-drawer-link ${cur === 'fab-cost.html' ? 'active' : ''}">
-            <span>${t.fabCost}</span>
-          </a>
         </div>
 
-        <!-- Advanced Process Architecture -->
+        <!-- 4. Learn -->
         <div class="sc-drawer-section">
-          <div class="sc-drawer-heading">${t.navProcesses}</div>
+          <div class="sc-drawer-heading">${t.navLearn}</div>
           <a href="finfet.html" class="sc-drawer-link ${cur === 'finfet.html' ? 'active' : ''}">
             <span>${t.finfet}</span>
           </a>
@@ -442,15 +465,9 @@
           </a>
         </div>
 
-        <!-- Standards & Verification -->
+        <!-- 5. Research -->
         <div class="sc-drawer-section">
-          <div class="sc-drawer-heading">${t.navStandards}</div>
-          <a href="data-standard.html" class="sc-drawer-link ${cur === 'data-standard.html' ? 'active' : ''}">
-            <span>${t.dataStandard}</span>
-          </a>
-          <a href="verification.html" class="sc-drawer-link ${cur === 'verification.html' ? 'active' : ''}">
-            <span>${t.verification}</span>
-          </a>
+          <div class="sc-drawer-heading">${t.navResearch}</div>
           <a href="benchmark.html" class="sc-drawer-link ${cur === 'benchmark.html' ? 'active' : ''}">
             <span>${t.benchmark}</span>
           </a>
@@ -466,7 +483,7 @@
             <span class="sc-theme-label">${theme === 'dark' ? t.themeDark : t.themeLight}</span>
           </button>
           <button type="button" id="sc-drawer-btn-lang-toggle" class="sc-btn-lang" style="flex: 1;" title="${lang === 'zh' ? 'Switch to English' : '切换为中文'}">
-            <span>En/中文</span>
+            <span>EN / 中文</span>
           </button>
         </div>
       </aside>
@@ -486,12 +503,13 @@
           <div class="sc-footer-col">
             <h5>${t.footerQuickLinks}</h5>
             <ul>
-              <li><a href="twin.html">${t.cleanroomTwin}</a></li>
-              <li><a href="twin-osat.html">${t.osatTwin}</a></li>
+              <li><a href="twin.html">${t.twinFab}</a></li>
+              <li><a href="twin-osat.html">${t.twinOsat}</a></li>
+              <li><a href="layout-editor.html">${t.layoutEditor}</a></li>
               <li><a href="catalog-demo.html">${t.catalog}</a></li>
               <li><a href="compare.html">${t.compare}</a></li>
-              <li><a href="fab-capex.html">${t.fabCapex}</a></li>
               <li><a href="fab-cost.html">${t.fabCost}</a></li>
+              <li><a href="fab-capex.html">${t.fabCapex}</a></li>
             </ul>
           </div>
           <div class="sc-footer-col">
@@ -507,16 +525,16 @@
           <div class="sc-footer-col">
             <h5>${t.footerLegal}</h5>
             <ul>
-              <li><a href="data-standard.html">${t.dataStandard}</a></li>
-              <li><a href="verification.html">${t.verification}</a></li>
               <li><a href="benchmark.html">${t.benchmark}</a></li>
               <li><a href="vision.html">${t.vision}</a></li>
+              <li><a href="data-standard.html">${t.dataStandard}</a></li>
+              <li><a href="verification.html">${t.verification}</a></li>
             </ul>
           </div>
         </div>
         <div class="sc-footer-bottom">
           <div>© 2026 ${t.footerRights}</div>
-          <div>PolyForm Noncommercial 1.0.0 · Source-Available</div>
+          <div>PolyForm Noncommercial 1.0.0 · Source-Available · v1.8.0</div>
         </div>
       </footer>
     `;

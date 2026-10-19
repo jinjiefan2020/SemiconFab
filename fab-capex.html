@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>
-      Fab Total Capex Estimator & Cleanroom Equipment BOM — SemiconFab.org
+      Fab Capex Estimator · 晶圆厂总投资测算器 — SemiconFab.org
     </title>
     <meta
       name="description"
@@ -717,18 +717,25 @@
     <div id="sc-header-mount"></div>
 
     <main class="container">
+      <!-- Cross-link Banner to Construction Cost Report -->
+      <div class="cost-nav-banner" style="background: var(--bg-card); border: 1px solid var(--border-color); border-left: 4px solid var(--accent-blue); border-radius: 8px; padding: 10px 16px; margin-bottom: 20px; font-size: 13.5px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; box-shadow: var(--sc-shadow-sm);">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 15px;">💡</span>
+          <span id="ui-banner-text">This is the interactive estimator. For research report & sources →</span>
+        </div>
+        <a href="fab-cost.html" id="ui-banner-link" style="font-weight: 700; color: var(--accent-blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">Construction Cost Report →</a>
+      </div>
+
       <!-- Hero -->
       <div class="hero-header">
         <div class="hero-tag" id="ui-hero-tag">
           Alpha Version · Cleanroom BOM & Capex Model
         </div>
         <h1 class="hero-title" id="ui-title">
-          Fab Total Capital Expenditure Estimator
+          Fab Capex Estimator
         </h1>
         <p class="hero-subtitle" id="ui-subtitle">
-          Bottom-up cleanroom equipment BOM aggregated from the 3D digital twin
-          layout (121 tools) combined with verified public equipment cost ranges
-          and top-down parametric facility infrastructure allocation.
+          Bottom-up · 自底向上：从 121 台设备 BOM 逐台计价加总
         </p>
       </div>
 
@@ -3346,9 +3353,11 @@
         en: {
           heroTag: "Alpha Version · Cleanroom BOM & Capex Model",
           scaleBadge: "Primary Driver",
-          title: "Fab Total Capital Expenditure Estimator",
+          title: "Fab Capex Estimator",
           subtitle:
-            "Bottom-up cleanroom equipment BOM aggregated from the 3D digital twin layout (121 tools) combined with verified public equipment cost ranges and top-down parametric facility infrastructure allocation.",
+            "Bottom-up · 自底向上：从 121 台设备 BOM 逐台计价加总 (Aggregated from 121 cleanroom tools BOM with verified price ranges & facility allocation)",
+          bannerText: "This is the interactive estimator. For research report & sources →",
+          bannerLink: "Construction Cost Report →",
           lblScale: "Production Scale / WSPM Multiplier:",
           descScale:
             "Scales modular cleanroom equipment count proportionally to target fab monthly capacity.",
@@ -3415,9 +3424,11 @@
         zh: {
           heroTag: "Alpha Version · 洁净室 BOM 与总造价模型",
           scaleBadge: "核心主控变量",
-          title: "晶圆厂全厂总建设成本测算器 (Fab Capex)",
+          title: "晶圆厂总投资测算器",
           subtitle:
-            "基于数字孪生 3D 洁净室布局 121 台机台 BOM 汇总，结合真实公开设备估算区间与自顶向下厂务基础设施经验模型闭环测算。",
+            "Bottom-up · 自底向上：从 121 台设备 BOM 逐台计价加总（结合公开设备价格区间与自顶向下厂务基建模型）",
+          bannerText: "这是测算器。要看研究报告与数据来源 →",
+          bannerLink: "Construction Cost Report 建设成本报告 →",
           lblScale: "晶圆制造产能规模 / 产线倍率:",
           descScale:
             "基于模块化洁净室通线原型，按月产能 (WSPM) 等比扩展全厂设备数量与负荷。",
@@ -3682,6 +3693,10 @@
         document.getElementById("ui-hero-tag").textContent = t.heroTag;
         document.getElementById("ui-title").textContent = t.title;
         document.getElementById("ui-subtitle").textContent = t.subtitle;
+        const bannerTextEl = document.getElementById("ui-banner-text");
+        if (bannerTextEl) bannerTextEl.textContent = t.bannerText;
+        const bannerLinkEl = document.getElementById("ui-banner-link");
+        if (bannerLinkEl) bannerLinkEl.textContent = t.bannerLink;
         document.getElementById("ui-lbl-scale").textContent = t.lblScale;
         const scaleBadgeEl = document.getElementById("ui-scale-badge");
         if (scaleBadgeEl) scaleBadgeEl.textContent = t.scaleBadge;

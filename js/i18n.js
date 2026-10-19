@@ -193,7 +193,11 @@ function setupLangDropdown() {
   const container = document.getElementById("lang-selector-menu");
   if (!container) return;
 
-  container.innerHTML = SUPPORTED_LANGUAGES.map(
+  const languages = Array.isArray(window.I18N_LANG_ALLOWLIST)
+    ? SUPPORTED_LANGUAGES.filter((l) => window.I18N_LANG_ALLOWLIST.includes(l.code))
+    : SUPPORTED_LANGUAGES;
+
+  container.innerHTML = languages.map(
     (l) => `
     <button onclick="setLanguage('${l.code}'); toggleLangDropdown(false);" 
             class="w-full text-left px-3 py-2 text-xs hover:bg-slate-100 flex items-center justify-between rounded-lg transition ${l.code === currentLang ? "font-bold text-slate-900 bg-slate-50" : "text-slate-600"}">
