@@ -22,6 +22,8 @@
       // Dropdown & Drawer items
       cleanroomTwin: "300mm Fab Cleanroom",
       cleanroomTwinDesc: "Class 1 Cleanroom & Subfab Twin",
+      osatTwin: "OSAT Packaging & Test",
+      osatTwinDesc: "Dual-Hall Back-End Packaging & ATE Test Twin",
       layoutEditor: "2D Layout Editor",
       layoutEditorDesc: "Architectural Cleanroom Bay Design",
       finfet: "FinFET (14nm/7nm)",
@@ -35,7 +37,7 @@
       hbm: "HBM3E / HBM4",
       hbmDesc: "3D TSV Stacking & Packaging",
       catalog: "Equipment Catalog",
-      catalogDesc: "167 OEM Machine Models",
+      catalogDesc: "253 OEM Models (167 FAB · 86 OSAT)",
       compare: "Side-by-Side Comparison",
       compareDesc: "Cross-Tool Technical & Price Matrix",
       addEquip: "Add Equipment",
@@ -74,6 +76,8 @@
       // Dropdown & Drawer items
       cleanroomTwin: "300mm洁净室数字孪生",
       cleanroomTwinDesc: "ISO 1级洁净室与次层动力系统",
+      osatTwin: "封测厂数字孪生 (OSAT)",
+      osatTwinDesc: "双大厅后道封装与高密度 ATE 终测厂房",
       layoutEditor: "2D厂房布局编辑器",
       layoutEditorDesc: "洁净室工艺区空间规划",
       finfet: "FinFET (14nm/7nm 晶体管)",
@@ -86,8 +90,8 @@
       nandDesc: "电荷俘获与替代栅极堆叠",
       hbm: "HBM 高带宽内存",
       hbmDesc: "3D TSV 硅通孔微凸块先进封装",
-      catalog: "半导体设备库 (167台)",
-      catalogDesc: "涵盖13大工艺分类的机台名录",
+      catalog: "半导体设备全名录 (253台)",
+      catalogDesc: "前道晶圆制造 (167台) 与后道先进封测 (86台)",
       compare: "机台横向多维对比",
       compareDesc: "2~4台设备技术参数与成本矩阵",
       addEquip: "新增设备录入",
@@ -195,6 +199,7 @@
     const t = NAV_I18N[lang];
     const cur = getCurrentPath();
 
+    const isTwinActive = ["twin.html", "twin-osat.html", "layout-editor.html"].includes(cur);
     const isProcessActive = ["finfet.html", "gaa.html", "dram.html", "nand.html", "hbm.html"].includes(cur);
     const isEquipActive = ["catalog-demo.html", "compare.html", "add-equipment.html"].includes(cur);
     const isEconActive = ["fab-capex.html", "fab-cost.html"].includes(cur);
@@ -225,11 +230,26 @@
 
           <!-- Desktop Navigation -->
           <nav class="sc-desktop-nav" aria-label="Main Navigation">
-            <!-- 3D Twin -->
+            <!-- 3D Twin Dropdown -->
             <div class="sc-nav-item">
-              <a href="twin.html" class="sc-nav-link ${cur === 'twin.html' ? 'active' : ''}">
+              <button type="button" class="sc-nav-link ${isTwinActive ? 'active' : ''}">
                 <span>${t.navTwin}</span>
-              </a>
+                <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+              </button>
+              <div class="sc-dropdown-panel">
+                <a href="twin.html" class="sc-dropdown-item ${cur === 'twin.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.cleanroomTwin}</span>
+                  <span class="sc-dropdown-desc">${t.cleanroomTwinDesc}</span>
+                </a>
+                <a href="twin-osat.html" class="sc-dropdown-item ${cur === 'twin-osat.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.osatTwin}</span>
+                  <span class="sc-dropdown-desc">${t.osatTwinDesc}</span>
+                </a>
+                <a href="layout-editor.html" class="sc-dropdown-item ${cur === 'layout-editor.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title">${t.layoutEditor}</span>
+                  <span class="sc-dropdown-desc">${t.layoutEditorDesc}</span>
+                </a>
+              </div>
             </div>
 
             <!-- Processes Dropdown -->
@@ -364,7 +384,11 @@
           <div class="sc-drawer-heading">${t.navTwin}</div>
           <a href="twin.html" class="sc-drawer-link ${cur === 'twin.html' ? 'active' : ''}">
             <span>${t.cleanroomTwin}</span>
-            <span class="sc-drawer-badge">3D</span>
+            <span class="sc-drawer-badge">Fab</span>
+          </a>
+          <a href="twin-osat.html" class="sc-drawer-link ${cur === 'twin-osat.html' ? 'active' : ''}">
+            <span>${t.osatTwin}</span>
+            <span class="sc-drawer-badge">OSAT</span>
           </a>
           <a href="layout-editor.html" class="sc-drawer-link ${cur === 'layout-editor.html' ? 'active' : ''}">
             <span>${t.layoutEditor}</span>
@@ -463,6 +487,7 @@
             <h5>${t.footerQuickLinks}</h5>
             <ul>
               <li><a href="twin.html">${t.cleanroomTwin}</a></li>
+              <li><a href="twin-osat.html">${t.osatTwin}</a></li>
               <li><a href="catalog-demo.html">${t.catalog}</a></li>
               <li><a href="compare.html">${t.compare}</a></li>
               <li><a href="fab-capex.html">${t.fabCapex}</a></li>

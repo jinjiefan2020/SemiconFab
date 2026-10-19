@@ -70,6 +70,17 @@ CATEGORY_MAP = {
     "CMP": "cmp",
     "Cleaning": "wet_clean",
     "Diffusion & Anneal": "thermal_processing",
+    "OSAT - Dicing": "osat_dicing",
+    "OSAT - Die Attach": "osat_die_attach",
+    "OSAT - Wire Bonding": "osat_wire_bonding",
+    "OSAT - Flip Chip": "osat_flip_chip",
+    "OSAT - Molding": "osat_molding",
+    "OSAT - Singulation": "osat_singulation",
+    "OSAT - Bumping/RDL": "osat_bumping_rdl",
+    "OSAT - Prober": "osat_prober",
+    "OSAT - ATE": "osat_ate",
+    "OSAT - Test Handler": "osat_test_handler",
+    "OSAT - Inspection": "osat_inspection",
 }
 
 SOURCE_TIER_MAP = {

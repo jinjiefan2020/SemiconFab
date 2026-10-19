@@ -192,11 +192,119 @@
     ],
     "other": [
       "f0bb0ec9-b4d6-5086-a98d-fef8ae9ccd29"
+    ],
+    "osat_dicing": [
+      "31f2135f-e97d-5923-bce2-57165b501275",
+      "e3eaf86b-42cf-5c76-a38e-ed75a630eb83",
+      "66d9bc29-5ecc-534b-94ea-c1ab24c79d2c",
+      "e0e7b605-484a-5faf-8e70-f446abae092e",
+      "4b5292d1-638f-57e8-bd4a-9a806abf59f1",
+      "12275b19-35aa-562a-8457-4c0b71109d19",
+      "96a75227-371c-5fbf-8aa5-2c4881089581",
+      "270aeb80-3d59-5d78-b41b-79bd9123a6c8",
+      "bc1e86ad-ac85-5ecd-a47a-05dfe1e1ce3a",
+      "9be336c2-fefa-55b1-9523-53c35b574817",
+      "2c33c888-3a23-5bf6-89a3-a5fc7002d1e6",
+      "dc0da5ba-faab-5cf8-96c3-ef7b0722c27d",
+      "82635bed-f86a-5b8e-b348-e543a8937cbd",
+      "02606017-45c8-555d-b628-5c780d5893a0",
+      "d1ea417c-6d77-503d-86eb-7b3319db6eed"
+    ],
+    "osat_die_attach": [
+      "a08656a9-aa8f-5267-8885-7dd2f8cfc241",
+      "1c090943-645f-544e-a929-0f21110cd94d",
+      "3a60b52a-90bf-55d2-a7a5-a86e67aa9c37",
+      "ba6e74af-8c7a-57bc-a7f3-c411c669b01d"
+    ],
+    "osat_wire_bonding": [
+      "adc304e3-fa12-5570-911b-2c9195bb15bc",
+      "b676093a-dabf-596b-9ff4-d253465a2f24",
+      "88370d35-6224-51d9-b2ff-86edeac0744a",
+      "277351d5-79c5-55b2-b8a3-f09c90ece661",
+      "7c94c9d3-7b74-5ddb-ba18-79e059fb27c2"
+    ],
+    "osat_flip_chip": [
+      "82eb7b4a-293d-5678-8b26-0051b89b3424",
+      "a91d6e97-aa48-5067-b613-c5ff9056b74d",
+      "7f9902d4-5a42-5e10-8e13-2de063b84514",
+      "24df5287-9eb2-5333-bc9d-b60afeb0c886",
+      "36c36f66-6fa5-58a5-9a8f-6ba45c2e86ba",
+      "95f59a64-0471-54d4-a208-685d23e0da96",
+      "4542ce74-1505-50cc-8702-85d0abad60c5",
+      "da57096b-afb9-5168-8832-aad02b70ffa5",
+      "5674afe7-38ea-593f-a327-410f0729e3a0",
+      "0cff4fe5-adcb-5c3e-9d2c-d96655019742",
+      "137300ba-9a01-5800-ba25-edd4dc45200e",
+      "6101c44e-b9ce-5602-8f68-a0662845061d"
+    ],
+    "osat_molding": [
+      "b4a210c8-a5b7-5f51-b738-73a5e07a7372"
+    ],
+    "osat_ate": [
+      "83aa8bec-14de-53bd-a024-3e5704d358d1",
+      "8ae1b49e-638b-5037-a642-6d719f165b2d",
+      "f6023d76-089d-5505-a620-d7dbf39f5c09",
+      "86087aa1-eeb9-5cc0-b3af-3be0a0c00082",
+      "ee1ec2b0-2a14-50d5-a29a-d9238eb6d524",
+      "0f07eab6-91d7-58f7-866a-448c012ca203",
+      "91217c74-98eb-5a32-89dc-cddfaace5595",
+      "1290af98-1b70-520f-bb51-b451f9623978",
+      "f3243958-e63b-54e8-a5b5-75f865f8f54b",
+      "f8b36c54-c08f-5a7a-9896-3c139f1de4c2",
+      "80fd4ab1-39eb-55b1-b6a5-9b9e6b9ea6e3",
+      "69de465f-2b43-543b-876f-cfbdfc2f664b",
+      "814c5afd-b9a9-5a5f-9677-384e0066919d"
+    ],
+    "osat_test_handler": [
+      "0d54f564-a759-5228-a3a4-b93fc2bebeb6",
+      "d99d5a8c-15b3-5b1f-823d-31dee68d17c1",
+      "df2ae6e3-9ec6-5033-b514-97434111c8f3",
+      "eb40ad46-3a2c-50a1-b090-1f402393c1cd",
+      "e8f97f1f-cb7a-59b3-a7f6-337c3db21401",
+      "06e81532-af85-5d58-8d0b-eee87ac2f00e",
+      "2c6fdc2c-c640-5036-ac48-44447722820c",
+      "6db43c0e-40fb-584d-bd1d-28c05f3b30ac",
+      "5d8d572f-2774-5259-9eb0-19f0a90118af"
+    ],
+    "osat_prober": [
+      "3af20cf4-c0e4-5b32-b530-4b0ab6e127d1",
+      "db050e85-b002-5ebc-90b3-dcd2ebc41068",
+      "47f5d6df-c96f-5832-9470-cd5da9b818b1",
+      "45d7f8de-9014-517a-b0f9-a940664b7103",
+      "9e18e38f-e438-59e0-8b8d-fc1d1e165afe",
+      "3d27a150-158c-5632-8ffa-46c0309aeca8",
+      "fb0c56b2-2b9f-5d83-9bdc-a11d9c8779d8",
+      "038f1dcf-ec2e-5c40-a7ed-0986c569be98"
+    ],
+    "osat_inspection": [
+      "80751d40-af8f-5b83-ab66-7fc0c4cf1c40",
+      "0d2b7bf4-d6e0-5d2b-8e23-389915e3a0b3",
+      "e8e4ac38-5a93-55ab-b2a3-4836d7f1a3cc",
+      "50837be2-c470-59ee-9186-55e9a3c233d0",
+      "ad45514f-489e-56d6-81aa-56b0a604b92c",
+      "e8530839-a76c-529d-8467-5b9b7de21dfd",
+      "5a4fbb0c-90b4-529f-8f5b-96b256b38717",
+      "f9908974-150c-5151-acc9-7d5c3e389b69",
+      "2130afb3-f7df-5d79-bc32-bf2558373015",
+      "5093ed36-cb02-5cb6-831b-6e7bb6e0234c",
+      "1c9bae10-8d5a-5517-9d96-ec02e0896bdd",
+      "3b60c494-30db-5ad8-a56f-b5dc29781b6b",
+      "5a38967d-c77a-5443-8c73-ef011b5e7d4b",
+      "54257085-0040-502f-85a0-6caa8865ddea",
+      "1287fe50-a8a8-5323-98a4-b0c9307637e9"
+    ],
+    "osat_bumping_rdl": [
+      "f65ef7e9-d6c2-54ce-be52-134743fd4ffe",
+      "250ef792-8802-5198-bafe-cfccaa66e9b5",
+      "c2ecd1d7-3621-5960-be1b-6ddc66f0303a"
+    ],
+    "osat_singulation": [
+      "1ba3f283-9c62-5848-a38c-c714a8e4a97d"
     ]
   },
   "counts": {
-    "total": 167,
-    "l1": 8,
-    "draft": 159
+    "total": 253,
+    "l1": 9,
+    "draft": 244
   }
 }

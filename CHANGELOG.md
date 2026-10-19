@@ -2,6 +2,46 @@
 
 All notable changes to the SemiconFab source-available repository will be documented in this file.
 
+## [1.7.0] - 2026-10-18
+
+### Standalone OSAT Packaging & Testing Facility (`twin-osat.html`), Front-End Cleanroom Purification (`twin.html`) & 86 Tool Ingestion
+
+- **Dedicated Standalone OSAT 3D Twin (`twin-osat.html`)**: Separated the OSAT packaging and testing facility completely from `twin.html` into a dedicated, high-performance standalone 3D twin page:
+  - **Zero-Lag Offline & HTTP Architecture**: Inlined the 86-item OSAT ground-truth dataset directly into `<script id="osat-catalog-data">` (141 KB), achieving sub-100ms instant load times and 100% `file://` protocol compatibility without CORS browser restrictions.
+  - **Centered Dual-Hall Coordinates**: Centered the facility at `(0, 0, 0)` (`x: [-54, 54]`, `z: [-25.5, 25.5]`, `H = 4.8m`) for optimal OrbitControls rotation, damping, and zooming.
+  - **Assembly Hall (ISO 7 / ISO 8, West)**: Dedicated epoxy ESD flooring, overhead crane columns, and utility spiral ducts housing bays 1 to 7 (Dicing, Die Attach, Wire Bonding, Flip Chip, Molding, Singulation, Bumping/RDL).
+  - **Final Test Hall (Data Center / Industrial, East)**: Raised anti-static flooring, CRAC precision cooling units with status LEDs, overhead busbars, and cable trays housing bays 8 to 11 (Prober, ATE, Handler, AOI Inspection).
+  - **Central Logistics Spine & 10 Glowing Chevron Flow Arrows**: Features illuminated process chevrons and floating 11-step process flow bar guiding visitors through the post-wafer manufacturing lifecycle.
+- **Front-End Fab Cleanroom Twin Purification (`twin.html`)**: Restored `twin.html` to its pure 300mm front-end pilot line focus by removing heavy procedural OSAT geometry and unneeded back-end equipment instances, reducing file size by ~200 KB and eliminating ballroom visual clutter. Added prominent `🏭 OSAT Twin →` cross-navigation pill buttons in header and camera toolbar.
+- **Global Navigation Architecture (`js/site-nav.js`)**: Upgraded the top navigation "3D Twin" item to a rich dropdown featuring both "300mm Fab Cleanroom" (`twin.html`) and "OSAT Packaging & Test" (`twin-osat.html`), fully synchronized with mobile drawer, footer links, and bilingual switching.
+- **86 OSAT Equipment Models Ingestion (`catalog.json`, `catalog-index.json`, `data/osat-86-ground-truth.json`)**: Expanded the global equipment catalog by 86 models across 23 Tier-1 vendors (DISCO, Accretech/Tokyo Seimitsu, ASMPT, Besi, Kulicke & Soffa, Shibaura Mechatronics, Toray Engineering, TOWA, Advantest, Teradyne, Cohu, Chroma, Hontech, FormFactor, MPI, Camtek, KLA, Onto Innovation, Nordson/CyberOptics, Viscom, ACM Research, Ultratech/Veeco). Total catalog count increased from 167 to 253.
+- **11 Packaging & Testing Process Categories (`schema.json`, `twin/layout-schema.json`, `tools/migrate.py`)**: Defined and validated 11 official taxonomy keys: `osat_dicing`, `osat_die_attach`, `osat_wire_bonding`, `osat_flip_chip`, `osat_molding`, `osat_singulation`, `osat_bumping_rdl`, `osat_prober`, `osat_ate`, `osat_test_handler`, and `osat_inspection`.
+- **Zero Fabrication & Strict Provenance Architecture**:
+  - **55 Official Vendor Records**: Directly verified against official OEM product specifications and catalog brochures, classified under `provenance.source_tier: "vendor_confirmed"`.
+  - **31 Trade Press Records**: Extracted from reputable technical trade press (Semiconductor Engineering, Chip1Stop, EE Times, SEMI), classified honestly under `provenance.source_tier: "inferred"`.
+  - **TOWA Compression Mold Gap Row**: Preserved as `model: "(型号未公开)"` with `is_gap_row: true` to document industry adoption of undisclosed custom multi-strip compression molding architectures without fabricating model numbers.
+- **Honest Envelope Rendering & Draft Shells**:
+  - The 5 models with verified physical dimensions (Accretech SS20, Kulicke & Soffa Asterion, Chroma 3210, Nordson/CyberOptics MX3000, Viscom X7056-II) render with exact millimeter bounding envelopes and solid opaque PBR materials.
+  - The remaining 81 unverified models render as lightweight draft instanced shells (nominal 2.2m × 2.6m × 3.2m envelope).
+  - Inspector tool drawer displays a prominent amber honesty banner ("尺寸待实测 · Dimensions pending verification"), tier provenance badge, direct source citations, and a 1-click GitHub issue submission CTA prefilled with vendor and model parameters.
+- **High-Fidelity Dynamic Logistics Simulation (`twin-osat.html`)**:
+  - **4 Autonomous Mobile Robots (AMRs)**: Cleanroom-grade AGV/AMRs equipped with front/rear safety LIDAR bumpers, flashing beacon LED masts, and forward floor-projected blue safety warning spots (`BlueSpot`), carrying realistic FOUPs, leadframe strip magazines, and JEDEC trays.
+  - **2 Cleanroom Technicians & Manual Stainless Trolleys**: Modeled technicians wearing ISO Class 7 white bunny suits, hoods, visors, and cleanroom boots pushing two-shelf stainless transport carts.
+  - **Continuous Closed-Loop Corridor System**: Dual dedicated transport lanes (Eastbound at $z = +1.15$, Westbound at $z = -1.15$) with industrial yellow dashed floor markings, smooth 180° turnaround arcs ($r = 1.15\text{m}$, total length 175.2m), zero-collision parametric trajectory at $v = 2.2\text{ m/s}$, and isolated raycasting for undisturbed equipment inspection.
+  - **Live Floating Telemetry Pill**: Real-time bilingual logistics status indicator (`● 自动化物流: 6 台运行中 (4台 AMR · 2台 人工推车)` / `● Logistics: 6 Active (4 AMR · 2 Trolleys)`).
+- **Unified Equipment Catalog & Segmented Domain Switcher (`catalog-demo.html`)**:
+  - Integrated high-performance domain switcher (`All Equipment (253)` | `Front-end FAB (167)` | `Back-end OSAT (86)`) with live dynamic category chips filtering (13 FAB vs 11 OSAT process categories).
+  - Instant live stats recalculation (Total, L1 Verified, Draft) matching the active domain.
+  - Deep linking support with URL search parameters (`?domain=osat`, `?domain=fab`, `?category=...`).
+  - Updated offline embedded JSON cache to all 253 records for 100% `file://` compatibility.
+  - Cross-linked `twin-osat.html` sidebar directly to `catalog-demo.html?domain=osat`.
+- **Top Navigation Refinement (`index.html`, `js/site-nav.js`)**:
+  - Replaced `add-equipment.html` ("Add your equipment") in `index.html` navigation with `catalog-demo.html` ("Equipment Catalog" / "设备目录") with `book-open` icon, strictly fulfilling the design system rule to maintain a focused, professional top navigation.
+  - Updated site-wide navigation dropdown descriptions to `253 OEM Models (167 FAB · 86 OSAT)`.
+  - Cleaned homepage layout flow by temporarily stashing the spotlight banner card.
+
+---
+
 ## [1.6.0] - 2026-10-18
 
 ### Equipment Cross-Comparison & Full Catalog Price Estimates (`compare.html`, `catalog-demo.html`, `data/price_estimates.json`)

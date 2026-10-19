@@ -1,1 +1,529 @@
-{"$defs":{"categoryEnum":{"enum":["lithography","resist_track","dry_etch","wet_clean","thin_film_deposition","cmp","thermal_processing","ion_implantation","metrology","inspection","test","packaging","other"]},"fieldBoolean":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"value":{"type":"boolean"}},"required":["value","provenance"],"type":"object"},"fieldInteger":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"unit":{"type":"string"},"value":{"type":"integer"}},"required":["value","provenance"],"type":"object"},"fieldNumber":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"unit":{"minLength":1,"type":"string"},"value":{"type":"number"}},"required":["value","provenance"],"type":"object"},"fieldString":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"value":{"minLength":1,"type":"string"}},"required":["value","provenance"],"type":"object"},"provenance":{"additionalProperties":false,"properties":{"note":{"type":"string"},"source":{"type":"string"},"tier":{"$ref":"#/$defs/provenanceTier"},"verified_at":{"format":"date","type":["string","null"]},"verifier":{"type":["string","null"]}},"required":["tier"],"type":"object"},"provenanceTier":{"enum":["vendor_confirmed","independent_verified","community_corroborated","inferred","synthetic"]}},"$id":"https://semiconfab.org/schema/equipment/1.0/schema.json","$schema":"https://json-schema.org/draft/2020-12/schema","additionalProperties":false,"allOf":[{"if":{"properties":{"conformance_level":{"enum":["L2","L3"]}}},"then":{"required":["facilities"]}},{"if":{"properties":{"conformance_level":{"const":"L3"}}},"then":{"required":["process_capability","reliability","commercial"]}}],"description":"Canonical record structure for the SemiconFab open equipment catalog. Spec: SPEC.md v1.0 (Draft).","properties":{"commercial":{"additionalProperties":false,"properties":{"alternative_to":{"items":{"additionalProperties":false,"properties":{"model":{"type":"string"},"note":{"type":"string"},"vendor":{"type":"string"}},"required":["vendor","model"],"type":"object"},"type":"array"},"datasheet_url":{"format":"uri","type":"string"},"regions_available":{"items":{"type":"string"},"type":"array"},"vendor_contact":{"type":"string"}},"type":"object"},"conformance_level":{"enum":["L1","L2","L3"]},"facilities":{"additionalProperties":false,"properties":{"cda_nm3h":{"$ref":"#/$defs/fieldNumber"},"cleanroom_class_required":{"$ref":"#/$defs/fieldString"},"exhaust":{"$ref":"#/$defs/fieldString"},"heat_load_kw":{"$ref":"#/$defs/fieldNumber"},"noise_db":{"$ref":"#/$defs/fieldNumber"},"pcw_kw":{"$ref":"#/$defs/fieldNumber"},"phases":{"$ref":"#/$defs/fieldInteger"},"power_kva":{"$ref":"#/$defs/fieldNumber"},"process_gases":{"items":{"additionalProperties":false,"properties":{"gas":{"type":"string"},"max_flow_slm":{"$ref":"#/$defs/fieldNumber"}},"required":["gas","max_flow_slm"],"type":"object"},"type":"array"},"upw_lpm":{"$ref":"#/$defs/fieldNumber"},"vacuum_requirement":{"$ref":"#/$defs/fieldString"},"voltage_v":{"$ref":"#/$defs/fieldNumber"}},"type":"object"},"identity":{"additionalProperties":false,"properties":{"category":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"value":{"$ref":"#/$defs/categoryEnum"}},"required":["value","provenance"],"type":"object"},"lifecycle_status":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"value":{"enum":["in_production","discontinued","concept","unknown"]}},"required":["value","provenance"],"type":"object"},"model":{"$ref":"#/$defs/fieldString"},"model_aliases":{"items":{"type":"string"},"type":"array"},"node_applicability":{"$ref":"#/$defs/fieldString"},"subcategory":{"$ref":"#/$defs/fieldString"},"vendor":{"$ref":"#/$defs/fieldString"},"wafer_sizes_mm":{"additionalProperties":false,"properties":{"provenance":{"$ref":"#/$defs/provenance"},"value":{"items":{"enum":[150,200,300]},"minItems":1,"type":"array","uniqueItems":true}},"required":["value","provenance"],"type":"object"}},"required":["vendor","model","category","wafer_sizes_mm"],"type":"object"},"notes":{"type":"string"},"physical":{"additionalProperties":false,"properties":{"depth_mm":{"$ref":"#/$defs/fieldNumber"},"efem_config":{"$ref":"#/$defs/fieldString"},"height_mm":{"$ref":"#/$defs/fieldNumber"},"load_ports":{"$ref":"#/$defs/fieldInteger"},"model_3d_lod":{"enum":["LOD0","LOD200","LOD300"]},"model_3d_url":{"format":"uri","type":"string"},"seismic_kit":{"$ref":"#/$defs/fieldBoolean"},"weight_kg":{"$ref":"#/$defs/fieldNumber"},"width_mm":{"$ref":"#/$defs/fieldNumber"}},"required":["width_mm","depth_mm","height_mm"],"type":"object"},"process_capability":{"additionalProperties":false,"properties":{"capabilities":{"items":{"additionalProperties":false,"properties":{"detail":{"$ref":"#/$defs/fieldString"},"materials":{"items":{"type":"string"},"type":"array"},"process":{"type":"string"}},"required":["process","detail"],"type":"object"},"minItems":1,"type":"array"},"particle_spec":{"$ref":"#/$defs/fieldString"},"throughput_wph":{"$ref":"#/$defs/fieldNumber"},"uniformity_pct":{"$ref":"#/$defs/fieldNumber"}},"type":"object"},"record_id":{"format":"uuid","type":"string"},"record_status":{"enum":["draft","submitted","verified","published","deprecated"]},"reliability":{"additionalProperties":false,"properties":{"availability_pct":{"$ref":"#/$defs/fieldNumber"},"mtbf_h":{"$ref":"#/$defs/fieldNumber"},"mttr_h":{"$ref":"#/$defs/fieldNumber"},"qualification_status":{"$ref":"#/$defs/fieldString"}},"type":"object"},"schema_version":{"const":"1.0"},"submitted_at":{"format":"date","type":"string"},"submitted_by":{"minLength":1,"type":"string"},"updated_at":{"format":"date","type":"string"}},"required":["schema_version","record_id","conformance_level","record_status","submitted_by","submitted_at","updated_at","identity","physical"],"title":"SemiconFab Equipment Record","type":"object"}
+{
+  "$defs": {
+    "categoryEnum": {
+      "enum": [
+        "lithography",
+        "resist_track",
+        "dry_etch",
+        "wet_clean",
+        "thin_film_deposition",
+        "cmp",
+        "thermal_processing",
+        "ion_implantation",
+        "metrology",
+        "inspection",
+        "test",
+        "packaging",
+        "other",
+        "osat_dicing",
+        "osat_die_attach",
+        "osat_wire_bonding",
+        "osat_flip_chip",
+        "osat_molding",
+        "osat_singulation",
+        "osat_bumping_rdl",
+        "osat_prober",
+        "osat_ate",
+        "osat_test_handler",
+        "osat_inspection"
+      ]
+    },
+    "fieldBoolean": {
+      "additionalProperties": false,
+      "properties": {
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "value": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "type": "object"
+    },
+    "fieldInteger": {
+      "additionalProperties": false,
+      "properties": {
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "unit": {
+          "type": "string"
+        },
+        "value": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "type": "object"
+    },
+    "fieldNumber": {
+      "additionalProperties": false,
+      "properties": {
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "unit": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "value": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "type": "object"
+    },
+    "fieldString": {
+      "additionalProperties": false,
+      "properties": {
+        "provenance": {
+          "$ref": "#/$defs/provenance"
+        },
+        "value": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "provenance"
+      ],
+      "type": "object"
+    },
+    "provenance": {
+      "additionalProperties": false,
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "#/$defs/provenanceTier"
+        },
+        "verified_at": {
+          "format": "date",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "verifier": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "tier"
+      ],
+      "type": "object"
+    },
+    "provenanceTier": {
+      "enum": [
+        "vendor_confirmed",
+        "independent_verified",
+        "community_corroborated",
+        "inferred",
+        "synthetic"
+      ]
+    }
+  },
+  "$id": "https://semiconfab.org/schema/equipment/1.0/schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "conformance_level": {
+            "enum": [
+              "L2",
+              "L3"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "facilities"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "conformance_level": {
+            "const": "L3"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "process_capability",
+          "reliability",
+          "commercial"
+        ]
+      }
+    }
+  ],
+  "description": "Canonical record structure for the SemiconFab open equipment catalog. Spec: SPEC.md v1.0 (Draft).",
+  "properties": {
+    "commercial": {
+      "additionalProperties": false,
+      "properties": {
+        "alternative_to": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "model": {
+                "type": "string"
+              },
+              "note": {
+                "type": "string"
+              },
+              "vendor": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "vendor",
+              "model"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "datasheet_url": {
+          "format": "uri",
+          "type": "string"
+        },
+        "regions_available": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "vendor_contact": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "conformance_level": {
+      "enum": [
+        "L1",
+        "L2",
+        "L3"
+      ]
+    },
+    "facilities": {
+      "additionalProperties": false,
+      "properties": {
+        "cda_nm3h": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "cleanroom_class_required": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "exhaust": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "heat_load_kw": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "noise_db": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "pcw_kw": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "phases": {
+          "$ref": "#/$defs/fieldInteger"
+        },
+        "power_kva": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "process_gases": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "gas": {
+                "type": "string"
+              },
+              "max_flow_slm": {
+                "$ref": "#/$defs/fieldNumber"
+              }
+            },
+            "required": [
+              "gas",
+              "max_flow_slm"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "upw_lpm": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "vacuum_requirement": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "voltage_v": {
+          "$ref": "#/$defs/fieldNumber"
+        }
+      },
+      "type": "object"
+    },
+    "identity": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "additionalProperties": false,
+          "properties": {
+            "provenance": {
+              "$ref": "#/$defs/provenance"
+            },
+            "value": {
+              "$ref": "#/$defs/categoryEnum"
+            }
+          },
+          "required": [
+            "value",
+            "provenance"
+          ],
+          "type": "object"
+        },
+        "lifecycle_status": {
+          "additionalProperties": false,
+          "properties": {
+            "provenance": {
+              "$ref": "#/$defs/provenance"
+            },
+            "value": {
+              "enum": [
+                "in_production",
+                "discontinued",
+                "concept",
+                "unknown"
+              ]
+            }
+          },
+          "required": [
+            "value",
+            "provenance"
+          ],
+          "type": "object"
+        },
+        "model": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "model_aliases": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "node_applicability": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "subcategory": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "vendor": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "wafer_sizes_mm": {
+          "additionalProperties": false,
+          "properties": {
+            "provenance": {
+              "$ref": "#/$defs/provenance"
+            },
+            "value": {
+              "items": {
+                "enum": [
+                  150,
+                  200,
+                  300
+                ]
+              },
+              "minItems": 1,
+              "type": "array",
+              "uniqueItems": true
+            }
+          },
+          "required": [
+            "value",
+            "provenance"
+          ],
+          "type": "object"
+        }
+      },
+      "required": [
+        "vendor",
+        "model",
+        "category",
+        "wafer_sizes_mm"
+      ],
+      "type": "object"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "physical": {
+      "additionalProperties": false,
+      "properties": {
+        "depth_mm": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "efem_config": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "height_mm": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "load_ports": {
+          "$ref": "#/$defs/fieldInteger"
+        },
+        "model_3d_lod": {
+          "enum": [
+            "LOD0",
+            "LOD200",
+            "LOD300"
+          ]
+        },
+        "model_3d_url": {
+          "format": "uri",
+          "type": "string"
+        },
+        "seismic_kit": {
+          "$ref": "#/$defs/fieldBoolean"
+        },
+        "weight_kg": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "width_mm": {
+          "$ref": "#/$defs/fieldNumber"
+        }
+      },
+      "required": [
+        "width_mm",
+        "depth_mm",
+        "height_mm"
+      ],
+      "type": "object"
+    },
+    "process_capability": {
+      "additionalProperties": false,
+      "properties": {
+        "capabilities": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "detail": {
+                "$ref": "#/$defs/fieldString"
+              },
+              "materials": {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "process": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "process",
+              "detail"
+            ],
+            "type": "object"
+          },
+          "minItems": 1,
+          "type": "array"
+        },
+        "particle_spec": {
+          "$ref": "#/$defs/fieldString"
+        },
+        "throughput_wph": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "uniformity_pct": {
+          "$ref": "#/$defs/fieldNumber"
+        }
+      },
+      "type": "object"
+    },
+    "record_id": {
+      "format": "uuid",
+      "type": "string"
+    },
+    "record_status": {
+      "enum": [
+        "draft",
+        "submitted",
+        "verified",
+        "published",
+        "deprecated"
+      ]
+    },
+    "reliability": {
+      "additionalProperties": false,
+      "properties": {
+        "availability_pct": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "mtbf_h": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "mttr_h": {
+          "$ref": "#/$defs/fieldNumber"
+        },
+        "qualification_status": {
+          "$ref": "#/$defs/fieldString"
+        }
+      },
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0"
+    },
+    "submitted_at": {
+      "format": "date",
+      "type": "string"
+    },
+    "submitted_by": {
+      "minLength": 1,
+      "type": "string"
+    },
+    "updated_at": {
+      "format": "date",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schema_version",
+    "record_id",
+    "conformance_level",
+    "record_status",
+    "submitted_by",
+    "submitted_at",
+    "updated_at",
+    "identity",
+    "physical"
+  ],
+  "title": "SemiconFab Equipment Record",
+  "type": "object"
+}

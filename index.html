@@ -574,6 +574,21 @@
                 </div>
               </a>
               <a
+                href="twin-osat.html"
+                class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 text-teal-600 dark:text-teal-400 text-xs font-semibold transition"
+              >
+                <i
+                  data-lucide="package-check"
+                  class="w-4 h-4 text-teal-500"
+                ></i>
+                <div>
+                  <div class="leading-tight">OSAT Packaging &amp; Test</div>
+                  <div class="text-[10px] font-normal text-slate-400">
+                    Dual-Hall 3D Packaging Twin
+                  </div>
+                </div>
+              </a>
+              <a
                 href="layout-editor.html"
                 class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 text-sky-600 dark:text-sky-400 text-xs font-semibold transition"
               >
@@ -691,14 +706,11 @@
           </a>
 
           <a
-            href="add-equipment.html"
-            class="hover:text-emerald-600 dark:hover:text-emerald-400 transition flex items-center gap-1 font-semibold text-slate-700 dark:text-slate-300"
+            href="catalog-demo.html"
+            class="hover:text-teal-600 dark:hover:text-teal-400 transition flex items-center gap-1.5 font-semibold text-slate-800 dark:text-slate-200"
           >
-            <i
-              data-lucide="plus-circle"
-              class="w-3.5 h-3.5 text-emerald-500"
-            ></i>
-            <span data-i18n="nav_add_equipment">Add your equipment</span>
+            <i data-lucide="book-open" class="w-3.5 h-3.5 text-teal-500"></i>
+            <span data-i18n="nav_catalog">Equipment Catalog</span>
           </a>
 
           <a
@@ -805,6 +817,17 @@
             <span>300mm Fab Cleanroom Twin</span>
           </a>
           <a
+            href="twin-osat.html"
+            onclick="toggleMobileMenu()"
+            class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-teal-600 dark:text-teal-400 text-xs font-semibold transition"
+          >
+            <i
+              data-lucide="package-check"
+              class="w-3.5 h-3.5 text-teal-500"
+            ></i>
+            <span>OSAT Packaging &amp; Test Twin</span>
+          </a>
+          <a
             href="layout-editor.html"
             onclick="toggleMobileMenu()"
             class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-sky-600 dark:text-sky-400 text-xs font-semibold transition"
@@ -898,12 +921,12 @@
               <span data-i18n="nav_verification">Verification</span>
             </a>
             <a
-              href="add-equipment.html"
+              href="catalog-demo.html"
               onclick="toggleMobileMenu()"
               class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-slate-800 dark:text-slate-200 font-semibold transition"
             >
-              <i data-lucide="plus-circle" class="w-4 h-4 text-emerald-500"></i>
-              <span data-i18n="nav_add_equipment">Add your equipment</span>
+              <i data-lucide="book-open" class="w-4 h-4 text-teal-500"></i>
+              <span data-i18n="nav_catalog">Equipment Catalog</span>
             </a>
             <a
               href="#faq"
@@ -983,6 +1006,13 @@
               >
                 <i data-lucide="play" class="w-4 h-4 fill-white"></i>
                 <span data-i18n="hero_cta_3d">Enter 3D Cleanroom</span>
+              </a>
+              <a
+                href="twin-osat.html"
+                class="px-6 py-3.5 rounded-xl text-xs font-semibold text-slate-800 dark:text-slate-100 bg-white/90 dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-700/90 border border-slate-300 dark:border-slate-700 flex items-center gap-2 transition shadow-sm"
+              >
+                <i data-lucide="package-check" class="w-4 h-4 text-teal-600 dark:text-teal-400"></i>
+                <span data-i18n="hero_cta_osat">OSAT 封测孪生 · 3D Packaging Twin</span>
               </a>
             </div>
 
@@ -1084,6 +1114,38 @@
         </div>
       </div>
     </section>
+
+    <!-- ================= OSAT PACKAGING & TEST TWIN SPOTLIGHT BANNER (HIDDEN FOR NOW)
+    <section class="py-6 border-t border-slate-200 dark:border-slate-800/80 bg-gradient-to-r from-teal-500/5 via-sky-500/5 to-emerald-500/5 relative z-10">
+      <div class="max-w-7xl mx-auto px-5">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-5 p-5 sm:p-6 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-teal-500/30 dark:border-teal-500/30 shadow-md">
+          <div class="flex items-start sm:items-center gap-4">
+            <div class="w-12 h-12 rounded-2xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-600 dark:text-teal-400 shrink-0 mt-1 sm:mt-0">
+              <i data-lucide="package-check" class="w-6 h-6"></i>
+            </div>
+            <div>
+              <div class="flex flex-wrap items-center gap-2">
+                <span class="text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-800 dark:text-teal-300 border border-teal-300 dark:border-teal-800">New · 3D Digital Twin</span>
+                <span class="text-[11px] font-mono text-slate-500 dark:text-slate-400">86 Tools · 11 Process Bays · Dual-Hall Architecture</span>
+              </div>
+              <h3 class="text-base font-bold text-slate-900 dark:text-white mt-1">
+                OSAT Back-End Packaging &amp; Test Facility Twin · 封测厂数字孪生
+              </h3>
+              <p class="text-xs text-slate-600 dark:text-slate-400 mt-0.5">
+                Explore the complete post-wafer manufacturing lifecycle "From Wafer to Shipment": Dicing, Die Attach, Wire Bond, Flip Chip, Molding, Singulation, Bumping/RDL, Prober, ATE, and Handler.
+              </p>
+            </div>
+          </div>
+          <a
+            href="twin-osat.html"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-semibold text-xs transition shadow-md shadow-teal-600/20 whitespace-nowrap shrink-0"
+          >
+            <span>Launch OSAT Twin →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+    ================= -->
 
     <!-- ================= OPEN DATA & RESEARCH PLATFORM ================= -->
     <section

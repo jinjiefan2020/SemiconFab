@@ -104,7 +104,11 @@ html.dark, [data-theme="dark"] {
 
 ## 5. 版本发布与 Git 推送规范 (Release Management)
 
-- **发布版本**：`1.6.0`（`v1.6.0`）。
-- **发布核心内容**：设备横向对比矩阵（`compare.html`）、晶圆厂全厂总造价 Capex 测算器（`fab-capex.html`）、全量 167 台机台价格与置信度数据库（`data/price_estimates.json`）、厂务成本拆解报告（`fab-cost.html`）与统一设计系统规范（`css/semicon-theme.css`、`js/site-nav.js`）。
+- **发布版本**：`1.7.0`（`v1.7.0`）。
+- **发布核心内容**：
+  1. 封测厂独立 3D 数字化孪生工厂（`twin-osat.html`）：双大厅独立厂房（108m × 51m）、86台真实机台（涵盖划片、贴装、键合、倒装、模塑、分选、ATE测试等11大工艺区）、工艺流向导览、设备状态与规格卡片。
+  2. 动态物流系统仿真：AMR 自主移动机器人（配激光雷达避障、防撞裙边、警示灯柱与前置地面安全光斑）与无尘服人员推车（双层不锈钢物料车）沿中央物流道双向闭环循环。
+  3. 全量设备库双域联动（`catalog-demo.html`）：支持全部（253台）、晶圆制造前道 FAB（167台）与先进封测后道 OSAT（86台）分段快速切换，动态联动工艺标签与统计，支持深度链接（`?domain=osat`）。
+  4. 86台封测机台全量收录：扩充 `schema.json` 支持 `osat_*` 分类标准，同步更新 `catalog.json`、`catalog-index.json` 与置信度溯源。
 
 

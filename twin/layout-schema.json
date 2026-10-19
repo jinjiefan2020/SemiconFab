@@ -4,7 +4,10 @@
   "title": "SemiconFab Cleanroom Floor Plan Layout",
   "description": "Floor plan equipment placement layout specification for the SemiconFab 300mm digital twin cleanroom",
   "type": "object",
-  "required": ["version", "tools"],
+  "required": [
+    "version",
+    "tools"
+  ],
   "properties": {
     "$schema": {
       "type": "string"
@@ -42,7 +45,13 @@
       "description": "Array of equipment instances placed in cleanroom bays",
       "items": {
         "type": "object",
-        "required": ["tool_id", "bay", "x", "z", "rotation"],
+        "required": [
+          "tool_id",
+          "bay",
+          "x",
+          "z",
+          "rotation"
+        ],
         "properties": {
           "tool_id": {
             "type": "string",
@@ -63,7 +72,18 @@
               "inspection",
               "packaging",
               "test",
-              "other"
+              "other",
+              "osat_dicing",
+              "osat_die_attach",
+              "osat_wire_bonding",
+              "osat_flip_chip",
+              "osat_molding",
+              "osat_singulation",
+              "osat_bumping_rdl",
+              "osat_prober",
+              "osat_ate",
+              "osat_test_handler",
+              "osat_inspection"
             ],
             "description": "Target cleanroom functional bay"
           },
@@ -77,7 +97,12 @@
           },
           "rotation": {
             "type": "integer",
-            "enum": [0, 90, 180, 270],
+            "enum": [
+              0,
+              90,
+              180,
+              270
+            ],
             "description": "Tool yaw orientation in degrees (0, 90, 180, 270)"
           },
           "vendor": {
