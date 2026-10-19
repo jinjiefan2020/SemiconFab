@@ -3659,8 +3659,10 @@
 
       function recalculate() {
         const t = I18N[currentLang];
-        document.getElementById("btn-toggle-lang").textContent =
-          currentLang === "zh" ? "English" : "中文";
+        const btnToggle = document.getElementById("btn-toggle-lang");
+        if (btnToggle) {
+          btnToggle.textContent = currentLang === "zh" ? "English" : "中文";
+        }
 
         // Update Option Texts
         const opt1 = document.getElementById("opt-scale-1");
@@ -3717,7 +3719,8 @@
         document.getElementById("th-subtotal").textContent = t.thSubtotal;
         document.getElementById("th-actions").textContent = t.thActions;
         document.getElementById("ui-notes-title").textContent = t.notesTitle;
-        document.getElementById("ui-footer-disc").textContent = t.footerDisc;
+        const footerDiscEl = document.getElementById("ui-footer-disc");
+        if (footerDiscEl) footerDiscEl.textContent = t.footerDisc;
         if (t.notesListHtml) {
           document.getElementById("ui-notes-list").innerHTML = t.notesListHtml;
         }
