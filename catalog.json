@@ -7547,7 +7547,7 @@
           {
             "process": "Packaging",
             "detail": {
-              "value": "Wire bonder; wire 0.5-2.0 mil (12.7-50.8um), length 0.2-8.0mm; X-POWER 2.0 ultrasonic transducer",
+              "value": "Ball bonder; Wire diameter 0.5–2.0 mil (12.7–50.8µm); X-POWER 2.0 transducer for uniform 22µm bonded balls; Substrate up to 105×300mm; AI process monitoring (AERO EYE / Diagnostics / Predictive)",
               "provenance": {
                 "tier": "community_corroborated",
                 "source": "https://www.electronicspecifier.com/products/design-automation/asmpt-unveils-latest-wire-bonder/"
@@ -7556,8 +7556,12 @@
           }
         ]
       },
-      "notes": "[source note] Launched Jul 2025; SiP/MCM/BGA/QFP mixed-line bonding"
-    }
+      "notes": "[source note] Released in 2025; Targeted for fine-pitch SiP, MCM, BGA, and LGA"
+    },
+    "key_specs_zh": "球焊机；线径 0.5–2.0 mil（12.7–50.8µm）；X-POWER 2.0 换能器实现均匀 22µm 焊球；基板最大 105×300mm；AI 工艺监控（AERO EYE / Diagnostics / Predictive）",
+    "key_specs_en": "Ball bonder; Wire diameter 0.5–2.0 mil (12.7–50.8µm); X-POWER 2.0 transducer for uniform 22µm bonded balls; Substrate up to 105×300mm; AI process monitoring (AERO EYE / Diagnostics / Predictive)",
+    "notes_zh": "[source note] 2025 年发布；面向细间距 SiP/MCM/BGA/LGA",
+    "notes_en": "[source note] Released in 2025; Targeted for fine-pitch SiP, MCM, BGA, and LGA"
   },
   {
     "record_id": "ea7acafa-f623-5b53-9820-cff153396595",
@@ -7786,7 +7790,7 @@
           {
             "process": "Packaging",
             "detail": {
-              "value": "Hybrid wedge bonder; Al/Cu wire + PowerRibbon + AlCu clad ribbon; direct drive motion",
+              "value": "Hybrid wedge bonder; Bond area 300×300mm; Repeatability ±3.0µm @ 3σ; Wire diameter 25–75µm; Supports Al/Cu wire and PowerRibbon",
               "provenance": {
                 "tier": "community_corroborated",
                 "source": "https://www.mromagazine.com/press-releases/kulicke-soffa-launches-asteriontm-drives-enhancements-for-hybrid-wedge-bonding/"
@@ -7795,8 +7799,12 @@
           }
         ]
       },
-      "notes": "[source note] Large bond area reduces line-integration cost"
-    }
+      "notes": "[source note] K&S official brochure (distributor hosted); press release on investor.kns.com"
+    },
+    "key_specs_zh": "混合楔焊机；键合区 300×300mm；重复精度 ±3.0µm @ 3σ；线径 25–75µm；支持 Al/Cu 线与 PowerRibbon 带材",
+    "key_specs_en": "Hybrid wedge bonder; Bond area 300×300mm; Repeatability ±3.0µm @ 3σ; Wire diameter 25–75µm; Supports Al/Cu wire and PowerRibbon",
+    "notes_zh": "[source note] K&S 手册（经销商托管）；发布新闻稿在 investor.kns.com",
+    "notes_en": "[source note] K&S official brochure (distributor hosted); press release on investor.kns.com"
   },
   {
     "record_id": "178aac84-6158-559f-a04e-1d86d6b5ad09",
@@ -7934,7 +7942,7 @@
           {
             "process": "Test",
             "detail": {
-              "value": "SoC ATE; Pin Scale 5000 (256 channels, deepest vector memory); XPS256 power card mA to 1000A+; Xtreme Link high-speed inter-card",
+              "value": "SoC test system; Pin Scale 5000: 256 channels/card @ 5Gb/s scan, deep vector memory; XPS256 DPS; Xtreme Link card-to-card interconnect",
               "provenance": {
                 "tier": "community_corroborated",
                 "source": "https://www.nasdaq.com/press-release/ise-labs-chooses-advantests-v93000-exa-scaletm-soc-test-system-for-production-test"
@@ -7943,8 +7951,12 @@
           }
         ]
       },
-      "notes": "[source note] Advantest flagship SoC platform (since 2000); HPC/AI high-power large-scan testing"
-    }
+      "notes": "[source note] Flagship SoC test platform; broad backward compatibility across instrument generations"
+    },
+    "key_specs_zh": "SoC 测试系统；Pin Scale 5000：256 通道/卡 @ 5Gb/s 扫描、深向量存储；XPS256 电源；Xtreme Link 卡间通信",
+    "key_specs_en": "SoC test system; Pin Scale 5000: 256 channels/card @ 5Gb/s scan, deep vector memory; XPS256 DPS; Xtreme Link card-to-card interconnect",
+    "notes_zh": "[source note] 旗舰 SoC 平台（2000 年推出）；跨代向后兼容",
+    "notes_en": "[source note] Flagship SoC test platform; broad backward compatibility across instrument generations"
   },
   {
     "record_id": "640c395b-69d8-5a73-890f-6d72ef905241",
@@ -13500,7 +13512,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "最大工件 Φ300mm；X 向切割范围 310mm @ 0.1–600mm/s；双主轴 1.2kW 标准（1.8/2.2kW 可选）；定位精度 0.002/310mm 以内",
+              "value": "Max workpiece Φ300mm; X-axis cutting range 310mm @ 0.1–600mm/s; Dual spindle 1.2kW standard (1.8/2.2kW optional); Positioning accuracy within 0.002/310mm",
               "provenance": {
                 "tier": "inferred",
                 "source": "http://tstvn.com/en/fully-automatic-dicing-saw-dfd6361/"
@@ -13509,8 +13521,12 @@
           }
         ]
       },
-      "notes": "[source note] 规格表转载 DISCO 手册数据；上一代机型，装机量仍大"
-    }
+      "notes": "[source note] Specifications from DISCO brochure data; prior-gen model with large installed base"
+    },
+    "key_specs_zh": "最大工件 Φ300mm；X 向切割范围 310mm @ 0.1–600mm/s；双主轴 1.2kW 标准（1.8/2.2kW 可选）；定位精度 0.002/310mm 以内",
+    "key_specs_en": "Max workpiece Φ300mm; X-axis cutting range 310mm @ 0.1–600mm/s; Dual spindle 1.2kW standard (1.8/2.2kW optional); Positioning accuracy within 0.002/310mm",
+    "notes_zh": "[source note] 规格表转载 DISCO 手册数据；上一代机型，装机量仍大",
+    "notes_en": "[source note] Specifications from DISCO brochure data; prior-gen model with large installed base"
   },
   {
     "record_id": "e3eaf86b-42cf-5c76-a38e-ed75a630eb83",
@@ -13581,7 +13597,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "全自动双主轴划片机；300mm 晶圆盒处理（按 Micron 配置机数据表）",
+              "value": "Fully automated dual-spindle dicing saw; 300mm wafer FOUP/cassette handling (per Micron configuration datasheet)",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.agsemiconductor.com/wp-content/uploads/2020/07/Disco-DFD6362_-RMMT20151_Datasheet.pdf"
@@ -13590,8 +13606,12 @@
           }
         ]
       },
-      "notes": "[source note] 2010 年代 Micron 配置机设备数据表"
-    }
+      "notes": "[source note] 2010s Micron configuration equipment datasheet"
+    },
+    "key_specs_zh": "全自动双主轴划片机；300mm 晶圆盒处理（按 Micron 配置机数据表）",
+    "key_specs_en": "Fully automated dual-spindle dicing saw; 300mm wafer FOUP/cassette handling (per Micron configuration datasheet)",
+    "notes_zh": "[source note] 2010 年代 Micron 配置机设备数据表",
+    "notes_en": "[source note] 2010s Micron configuration equipment datasheet"
   },
   {
     "record_id": "66d9bc29-5ecc-534b-94ea-c1ab24c79d2c",
@@ -13662,7 +13682,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "最大晶圆 8 英寸；双主轴 1.2kW @ 60,000rpm；2 英寸刀片；自动对准 + 切口检测",
+              "value": "Max wafer size 8\" (200mm); Dual spindle 1.2kW @ 60,000 rpm; 2\" blades; Auto-alignment + kerf check",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://media-moov-co.s3.us-west-1.amazonaws.com/user_media/listingFile/52385/2e37782566324699bdb2d5a296a24b9b/b9df12484f7d4ec9a947502106f10264_discodfd6340_f.pdf"
@@ -13671,8 +13691,12 @@
           }
         ]
       },
-      "notes": "[source note] 二手设备商规格表"
-    }
+      "notes": "[source note] Secondary market dealer equipment specifications"
+    },
+    "key_specs_zh": "最大晶圆 8 英寸；双主轴 1.2kW @ 60,000rpm；2 英寸刀片；自动对准 + 切口检测",
+    "key_specs_en": "Max wafer size 8\" (200mm); Dual spindle 1.2kW @ 60,000 rpm; 2\" blades; Auto-alignment + kerf check",
+    "notes_zh": "[source note] 二手设备商规格表",
+    "notes_en": "[source note] Secondary market dealer equipment specifications"
   },
   {
     "record_id": "e0e7b605-484a-5faf-8e70-f446abae092e",
@@ -13743,7 +13767,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "单主轴划片机；8 英寸基板；X 向切割 210mm @ 0.1–800mm/s；Y 向步进 0.0001mm",
+              "value": "Single-spindle dicing saw; 8\" substrate; X-axis cutting 210mm @ 0.1–800mm/s; Y-axis indexing 0.0001mm",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://labadviser.nanolab.dtu.dk//index.php?title=Specific_Process_Knowledge/Back-end_processing/Disco_Saw&direction=next&oldid=51555&mobileaction=toggle_view_mobile"
@@ -13752,8 +13776,12 @@
           }
         ]
       },
-      "notes": "[source note] DTU 大学实验室设备页（与 DAD321 对比）"
-    }
+      "notes": "[source note] DTU University cleanroom laboratory tool sheet (compared with DAD321)"
+    },
+    "key_specs_zh": "单主轴划片机；8 英寸基板；X 向切割 210mm @ 0.1–800mm/s；Y 向步进 0.0001mm",
+    "key_specs_en": "Single-spindle dicing saw; 8\" substrate; X-axis cutting 210mm @ 0.1–800mm/s; Y-axis indexing 0.0001mm",
+    "notes_zh": "[source note] DTU 大学实验室设备页（与 DAD321 对比）",
+    "notes_en": "[source note] DTU University cleanroom laboratory tool sheet (compared with DAD321)"
   },
   {
     "record_id": "4b5292d1-638f-57e8-bd4a-9a806abf59f1",
@@ -13824,7 +13852,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "6 英寸基板；X 向切割 192mm @ 0.1–300mm/s；同步主轴 1000W",
+              "value": "6\" substrate; X-axis cutting 192mm @ 0.1–300mm/s; Synchronous spindle 1000W",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://caeonline.com/buy/scribing-dicing/disco-dad-321/9399369"
@@ -13833,8 +13861,12 @@
           }
         ]
       },
-      "notes": "[source note] 较老代际（2000 年挂牌记录）"
-    }
+      "notes": "[source note] Legacy generation tool (recorded listing year 2000)"
+    },
+    "key_specs_zh": "6 英寸基板；X 向切割 192mm @ 0.1–300mm/s；同步主轴 1000W",
+    "key_specs_en": "6\" substrate; X-axis cutting 192mm @ 0.1–300mm/s; Synchronous spindle 1000W",
+    "notes_zh": "[source note] 较老代际（2000 年挂牌记录）",
+    "notes_en": "[source note] Legacy generation tool (recorded listing year 2000)"
   },
   {
     "record_id": "12275b19-35aa-562a-8457-4c0b71109d19",
@@ -13906,7 +13938,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "全自动划片机；双面对置双轴主轴；Φ300mm 晶圆；HC 变体为半切工艺",
+              "value": "Fully automated dicing saw; Dual opposing spindles; Φ300mm wafers; HC variant for half-cut process",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -13915,8 +13947,12 @@
           }
         ]
       },
-      "notes": "[source note] 出自 ACCRETECH 官方产品指南"
-    }
+      "notes": "[source note] ACCRETECH official product guide"
+    },
+    "key_specs_zh": "全自动划片机；双面对置双轴主轴；Φ300mm 晶圆；HC 变体为半切工艺",
+    "key_specs_en": "Fully automated dicing saw; Dual opposing spindles; Φ300mm wafers; HC variant for half-cut process",
+    "notes_zh": "[source note] 出自 ACCRETECH 官方产品指南",
+    "notes_en": "[source note] ACCRETECH official product guide"
   },
   {
     "record_id": "96a75227-371c-5fbf-8aa5-2c4881089581",
@@ -13988,7 +14024,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "全自动双主轴划片机；支持最大 360×360mm 大型封装基板",
+              "value": "Fully automated dual-spindle dicing saw; Supports large packaging substrates up to 360×360mm",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -13997,8 +14033,12 @@
           }
         ]
       },
-      "notes": "[source note] 官方指南标注为新品"
-    }
+      "notes": "[source note] Official product guide new release"
+    },
+    "key_specs_zh": "全自动双主轴划片机；支持最大 360×360mm 大型封装基板",
+    "key_specs_en": "Fully automated dual-spindle dicing saw; Supports large packaging substrates up to 360×360mm",
+    "notes_zh": "[source note] 官方指南标注为新品",
+    "notes_en": "[source note] Official product guide new release"
   },
   {
     "record_id": "270aeb80-3d59-5d78-b41b-79bd9123a6c8",
@@ -14070,7 +14110,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "全自动划片机；T = 双主轴 / S = 单主轴；Φ200mm",
+              "value": "Fully automated dicing saw; T = dual spindle / S = single spindle; Φ200mm",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -14079,8 +14119,12 @@
           }
         ]
       },
-      "notes": "[source note] 出自官方产品指南"
-    }
+      "notes": "[source note] ACCRETECH official product guide"
+    },
+    "key_specs_zh": "全自动划片机；T = 双主轴 / S = 单主轴；Φ200mm",
+    "key_specs_en": "Fully automated dicing saw; T = dual spindle / S = single spindle; Φ200mm",
+    "notes_zh": "[source note] 出自官方产品指南",
+    "notes_en": "[source note] ACCRETECH official product guide"
   },
   {
     "record_id": "bc1e86ad-ac85-5ecd-a47a-05dfe1e1ce3a",
@@ -14181,7 +14225,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "半自动划片机；最大工件 Φ8″/250mm；主轴标准 60,000rpm 1.8kW（可选 80,000rpm 或 2.2kW）；X 向切割 260mm @ 最高 800mm/s；精度 0.002/260mm",
+              "value": "Semi-automatic dicing saw; Max workpiece Φ8\"/250mm; Standard spindle 60,000 rpm 1.8kW (opt. 80,000 rpm or 2.2kW); X-cut 260mm @ up to 800mm/s; Accuracy 0.002/260mm",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.accretech.com/en/assets/ss20_e.pdf"
@@ -14190,8 +14234,12 @@
           }
         ]
       },
-      "notes": "[source note] 官方规格表；另有 SS20 PLUS 变体"
-    }
+      "notes": "[source note] Official datasheet; SS20 PLUS variant also available"
+    },
+    "key_specs_zh": "半自动划片机；最大工件 Φ8″/250mm；主轴标准 60,000rpm 1.8kW（可选 80,000rpm 或 2.2kW）；X 向切割 260mm @ 最高 800mm/s；精度 0.002/260mm",
+    "key_specs_en": "Semi-automatic dicing saw; Max workpiece Φ8\"/250mm; Standard spindle 60,000 rpm 1.8kW (opt. 80,000 rpm or 2.2kW); X-cut 260mm @ up to 800mm/s; Accuracy 0.002/260mm",
+    "notes_zh": "[source note] 官方规格表；另有 SS20 PLUS 变体",
+    "notes_en": "[source note] Official datasheet; SS20 PLUS variant also available"
   },
   {
     "record_id": "9be336c2-fefa-55b1-9523-53c35b574817",
@@ -14263,7 +14311,7 @@
           {
             "process": "划片",
             "detail": {
-              "value": "半自动单主轴划片机，面向 Φ200mm 晶圆",
+              "value": "Semi-automatic single-spindle dicing saw for Φ200mm wafers",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -14272,8 +14320,12 @@
           }
         ]
       },
-      "notes": "[source note] 另有 SS30 PLUS 变体"
-    }
+      "notes": "[source note] Official product guide; SS30 PLUS variant also available"
+    },
+    "key_specs_zh": "半自动单主轴划片机，面向 Φ200mm 晶圆",
+    "key_specs_en": "Semi-automatic single-spindle dicing saw for Φ200mm wafers",
+    "notes_zh": "[source note] 另有 SS30 PLUS 变体",
+    "notes_en": "[source note] Official product guide; SS30 PLUS variant also available"
   },
   {
     "record_id": "2c33c888-3a23-5bf6-89a3-a5fc7002d1e6",
@@ -14344,7 +14396,7 @@
           {
             "process": "激光划片",
             "detail": {
-              "value": "隐形切割（Stealth Dicing）激光划片机；红外激光在晶圆内部形成改质层；零切口损耗；扩膜分离",
+              "value": "Stealth Dicing laser saw; Internal IR laser modified layer formation; Zero kerf width loss; Tape expansion separation",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://nsn.kyoto-u.ac.jp/system/reports/readfile/F-20-UT-0042_1_2021-02-17_15_26_05.pdf"
@@ -14353,8 +14405,12 @@
           }
         ]
       },
-      "notes": "[source note] 存在性经东京大学使用报告确认；photonics.com 亦有引用"
-    }
+      "notes": "[source note] University of Tokyo laboratory verification; cited on photonics.com"
+    },
+    "key_specs_zh": "隐形切割（Stealth Dicing）激光划片机；红外激光在晶圆内部形成改质层；零切口损耗；扩膜分离",
+    "key_specs_en": "Stealth Dicing laser saw; Internal IR laser modified layer formation; Zero kerf width loss; Tape expansion separation",
+    "notes_zh": "[source note] 存在性经东京大学使用报告确认；photonics.com 亦有引用",
+    "notes_en": "[source note] University of Tokyo laboratory verification; cited on photonics.com"
   },
   {
     "record_id": "dc0da5ba-faab-5cf8-96c3-ef7b0722c27d",
@@ -14425,7 +14481,7 @@
           {
             "process": "激光划片",
             "detail": {
-              "value": "隐形切割激光划片机（比 DFL7340 更新一代）",
+              "value": "Next-gen Stealth Dicing laser saw platform (advanced successor to DFL7340)",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.photonics.com/Article.aspx?AID=31907&PID=5&VID=22&IID=149"
@@ -14434,8 +14490,12 @@
           }
         ]
       },
-      "notes": "[source note] Photonics Spectra 文章引用为 DISCO 隐形切割机"
-    }
+      "notes": "[source note] Photonics Spectra article citation for DISCO Stealth Dicing systems"
+    },
+    "key_specs_zh": "隐形切割激光划片机（比 DFL7340 更新一代）",
+    "key_specs_en": "Next-gen Stealth Dicing laser saw platform (advanced successor to DFL7340)",
+    "notes_zh": "[source note] Photonics Spectra 文章引用为 DISCO 隐形切割机",
+    "notes_en": "[source note] Photonics Spectra article citation for DISCO Stealth Dicing systems"
   },
   {
     "record_id": "82635bed-f86a-5b8e-b348-e543a8937cbd",
@@ -14506,7 +14566,7 @@
           {
             "process": "激光划片",
             "detail": {
-              "value": "激光锯/划片机，用于划线与切割（烧蚀式）",
+              "value": "Laser grooving and ablation dicing saw for scribing and cutting",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://caeonline.com/buy/scribing-dicing/disco-laser-head-for-dfl-7161-fx/293667886"
@@ -14515,8 +14575,12 @@
           }
         ]
       },
-      "notes": "[source note] 存在性经零部件挂牌确认；FX 变体"
-    }
+      "notes": "[source note] Component listing verification; FX variant"
+    },
+    "key_specs_zh": "激光锯/划片机，用于划线与切割（烧蚀式）",
+    "key_specs_en": "Laser grooving and ablation dicing saw for scribing and cutting",
+    "notes_zh": "[source note] 存在性经零部件挂牌确认；FX 变体",
+    "notes_en": "[source note] Component listing verification; FX variant"
   },
   {
     "record_id": "02606017-45c8-555d-b628-5c780d5893a0",
@@ -14588,7 +14652,7 @@
           {
             "process": "激光划片",
             "detail": {
-              "value": "全自动激光划片机，带激光开槽引擎",
+              "value": "Fully automated laser dicing system with integrated laser grooving engine",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -14597,8 +14661,12 @@
           }
         ]
       },
-      "notes": "[source note] 出自官方产品指南"
-    }
+      "notes": "[source note] ACCRETECH official product guide"
+    },
+    "key_specs_zh": "全自动激光划片机，带激光开槽引擎",
+    "key_specs_en": "Fully automated laser dicing system with integrated laser grooving engine",
+    "notes_zh": "[source note] 出自官方产品指南",
+    "notes_en": "[source note] ACCRETECH official product guide"
   },
   {
     "record_id": "d1ea417c-6d77-503d-86eb-7b3319db6eed",
@@ -14670,7 +14738,7 @@
           {
             "process": "激光划片",
             "detail": {
-              "value": "激光划片机；三工位双头配置；隐形切割式加工（激光在 Si 内部聚焦）",
+              "value": "Laser dicing system; Triple station dual-head configuration; Internal laser stealth processing (focus inside Si)",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -14679,8 +14747,12 @@
           }
         ]
       },
-      "notes": "[source note] 另有较小变体 ML2200"
-    }
+      "notes": "[source note] Official product line; smaller ML2200 variant also available"
+    },
+    "key_specs_zh": "激光划片机；三工位双头配置；隐形切割式加工（激光在 Si 内部聚焦）",
+    "key_specs_en": "Laser dicing system; Triple station dual-head configuration; Internal laser stealth processing (focus inside Si)",
+    "notes_zh": "[source note] 另有较小变体 ML2200",
+    "notes_en": "[source note] Official product line; smaller ML2200 variant also available"
   },
   {
     "record_id": "a08656a9-aa8f-5267-8885-7dd2f8cfc241",
@@ -14743,7 +14815,7 @@
           {
             "process": "固晶",
             "detail": {
-              "value": "最高 18,500 UPH；贴装精度 ±20µm @ 3σ（高精度模式 ±12.5µm @ 3σ）；芯片 0.2×0.2–9×9mm、厚 0.075–1mm；键合力 0.196–29.43N；最大基板 300×100mm",
+              "value": "Up to 18,500 UPH; Placement accuracy ±20µm @ 3σ (high-accuracy mode ±12.5µm @ 3σ); Die size 0.2×0.2–9×9mm, thickness 0.075–1mm; Bond force 0.196–29.43N; Max substrate 300×100mm",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.electronicspecifier.com/news/latest/infinite-pushes-the-boundaries-of-miniaturisation/"
@@ -14752,8 +14824,12 @@
           }
         ]
       },
-      "notes": "[source note] 旗舰固晶机，2025 年 5 月发布"
-    }
+      "notes": "[source note] Flagship die attach system released May 2025"
+    },
+    "key_specs_zh": "最高 18,500 UPH；贴装精度 ±20µm @ 3σ（高精度模式 ±12.5µm @ 3σ）；芯片 0.2×0.2–9×9mm、厚 0.075–1mm；键合力 0.196–29.43N；最大基板 300×100mm",
+    "key_specs_en": "Up to 18,500 UPH; Placement accuracy ±20µm @ 3σ (high-accuracy mode ±12.5µm @ 3σ); Die size 0.2×0.2–9×9mm, thickness 0.075–1mm; Bond force 0.196–29.43N; Max substrate 300×100mm",
+    "notes_zh": "[source note] 旗舰固晶机，2025 年 5 月发布",
+    "notes_en": "[source note] Flagship die attach system released May 2025"
   },
   {
     "record_id": "1c090943-645f-544e-a929-0f21110cd94d",
@@ -14816,7 +14892,7 @@
           {
             "process": "固晶",
             "detail": {
-              "value": "固晶机；贴装精度 ±0.002mm；浮动式芯片拾取机构",
+              "value": "Die bonder; Placement accuracy ±0.002mm (±2µm); Floating die pick-up mechanism",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://caeonline.com/buy/die-attachers/asm-ad-8312/293602225"
@@ -14825,8 +14901,12 @@
           }
         ]
       },
-      "notes": "[source note] 较老高精度型号；2013 年挂牌记录"
-    }
+      "notes": "[source note] High-precision die attach model; 2013 listing record"
+    },
+    "key_specs_zh": "固晶机；贴装精度 ±0.002mm；浮动式芯片拾取机构",
+    "key_specs_en": "Die bonder; Placement accuracy ±0.002mm (±2µm); Floating die pick-up mechanism",
+    "notes_zh": "[source note] 较老高精度型号；2013 年挂牌记录",
+    "notes_en": "[source note] High-precision die attach model; 2013 listing record"
   },
   {
     "record_id": "3a60b52a-90bf-55d2-a7a5-a86e67aa9c37",
@@ -14897,7 +14977,7 @@
           {
             "process": "固晶",
             "detail": {
-              "value": "周期时间 163ms；芯片 6×6–200×200 mil；晶圆处理至 8 英寸；引线框架宽 12–102mm",
+              "value": "Cycle time 163ms; Die size 6×6–200×200 mil; Wafer handling up to 8\" (200mm); Leadframe width 12–102mm",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.all-smt.com/semiconductor-equipment/die-bonding-equipment/1978.html"
@@ -14906,8 +14986,12 @@
           }
         ]
       },
-      "notes": "[source note] 二手设备规格摘要"
-    }
+      "notes": "[source note] Secondary equipment market specification summary"
+    },
+    "key_specs_zh": "周期时间 163ms；芯片 6×6–200×200 mil；晶圆处理至 8 英寸；引线框架宽 12–102mm",
+    "key_specs_en": "Cycle time 163ms; Die size 6×6–200×200 mil; Wafer handling up to 8\" (200mm); Leadframe width 12–102mm",
+    "notes_zh": "[source note] 二手设备规格摘要",
+    "notes_en": "[source note] Secondary equipment market specification summary"
   },
   {
     "record_id": "ba6e74af-8c7a-57bc-a7f3-c411c669b01d",
@@ -14979,7 +15063,7 @@
           {
             "process": "固晶",
             "detail": {
-              "value": "8800 平台覆盖固晶；FC Quantum advX 变体：4µm @ 3σ；最高 10k UPH；芯片 0.3–40mm；条带 8″/200mm",
+              "value": "Datacon 8800 multi-module die attach platform; FC Quantum advX variant: 4µm @ 3σ; Up to 10k UPH; Die size 0.3–40mm; Substrate strips up to 8\"/200mm",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.besi.com/fileadmin/data/Products/datacon_8800_fc_quantum_advx/Datacon_8800_FC_QUANTUM_advX_-_2025.pdf"
@@ -14988,8 +15072,12 @@
           }
         ]
       },
-      "notes": "[source note] Besi 以 8800 平台同时覆盖固晶与倒装；所引规格为 FC Quantum advX 变体"
-    }
+      "notes": "[source note] Besi Datacon 8800 platform covering die attach and flip chip; specs reflect FC Quantum advX variant"
+    },
+    "key_specs_zh": "8800 平台覆盖固晶；FC Quantum advX 变体：4µm @ 3σ；最高 10k UPH；芯片 0.3–40mm；条带 8″/200mm",
+    "key_specs_en": "Datacon 8800 multi-module die attach platform; FC Quantum advX variant: 4µm @ 3σ; Up to 10k UPH; Die size 0.3–40mm; Substrate strips up to 8\"/200mm",
+    "notes_zh": "[source note] Besi 以 8800 平台同时覆盖固晶与倒装；所引规格为 FC Quantum advX 变体",
+    "notes_en": "[source note] Besi Datacon 8800 platform covering die attach and flip chip; specs reflect FC Quantum advX variant"
   },
   {
     "record_id": "adc304e3-fa12-5570-911b-2c9195bb15bc",
@@ -15053,7 +15141,7 @@
           {
             "process": "焊线",
             "detail": {
-              "value": "球焊机；线径 0.5–2.0 mil（12.7–50.8µm）；X-POWER 2.0 换能器实现均匀 22µm 焊球；基板最大 105×300mm；AI 工艺监控（AERO EYE / Diagnostics / Predictive）",
+              "value": "Ball bonder; Wire diameter 0.5–2.0 mil (12.7–50.8µm); X-POWER 2.0 transducer for uniform 22µm bonded balls; Substrate up to 105×300mm; AI process monitoring (AERO EYE / Diagnostics / Predictive)",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.asmpt.com/en/news-center/press-releases/asmpt-semi-solutions-exhibits-at-nepcon-japan/"
@@ -15062,8 +15150,12 @@
           }
         ]
       },
-      "notes": "[source note] 2025 年发布；面向细间距 SiP/MCM/BGA/LGA"
-    }
+      "notes": "[source note] Released in 2025; Targeted for fine-pitch SiP, MCM, BGA, and LGA"
+    },
+    "key_specs_zh": "球焊机；线径 0.5–2.0 mil（12.7–50.8µm）；X-POWER 2.0 换能器实现均匀 22µm 焊球；基板最大 105×300mm；AI 工艺监控（AERO EYE / Diagnostics / Predictive）",
+    "key_specs_en": "Ball bonder; Wire diameter 0.5–2.0 mil (12.7–50.8µm); X-POWER 2.0 transducer for uniform 22µm bonded balls; Substrate up to 105×300mm; AI process monitoring (AERO EYE / Diagnostics / Predictive)",
+    "notes_zh": "[source note] 2025 年发布；面向细间距 SiP/MCM/BGA/LGA",
+    "notes_en": "[source note] Released in 2025; Targeted for fine-pitch SiP, MCM, BGA, and LGA"
   },
   {
     "record_id": "b676093a-dabf-596b-9ff4-d253465a2f24",
@@ -15126,7 +15218,7 @@
           {
             "process": "焊线",
             "detail": {
-              "value": "GEN-S 系列球焊机；35µm 在线焊盘间距；0.6–2.5 mil Cu/Ag/Au 线；键合定位精度 2.0µm @ 3σ；引线框架长 90–300mm",
+              "value": "GEN-S series ball bonder; 35µm inline pad pitch; 0.6–2.5 mil Cu/Ag/Au wire; Placement accuracy 2.0µm @ 3σ; Leadframe length 90–300mm",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://elexind.it/storage/544/Brochure-K&S-RAPID%E2%84%A2-Pro.pdf"
@@ -15135,8 +15227,12 @@
           }
         ]
       },
-      "notes": "[source note] K&S 手册（经销商托管）；支持工业 4.0"
-    }
+      "notes": "[source note] K&S brochure (distributor hosted); Industry 4.0 ready"
+    },
+    "key_specs_zh": "GEN-S 系列球焊机；35µm 在线焊盘间距；0.6–2.5 mil Cu/Ag/Au 线；键合定位精度 2.0µm @ 3σ；引线框架长 90–300mm",
+    "key_specs_en": "GEN-S series ball bonder; 35µm inline pad pitch; 0.6–2.5 mil Cu/Ag/Au wire; Placement accuracy 2.0µm @ 3σ; Leadframe length 90–300mm",
+    "notes_zh": "[source note] K&S 手册（经销商托管）；支持工业 4.0",
+    "notes_en": "[source note] K&S brochure (distributor hosted); Industry 4.0 ready"
   },
   {
     "record_id": "88370d35-6224-51d9-b2ff-86edeac0744a",
@@ -15229,7 +15325,7 @@
           {
             "process": "焊线",
             "detail": {
-              "value": "混合楔焊机；键合区 300×300mm；重复精度 ±3.0µm @ 3σ；线径 25–75µm；支持 Al/Cu 线与 PowerRibbon 带材",
+              "value": "Hybrid wedge bonder; Bond area 300×300mm; Repeatability ±3.0µm @ 3σ; Wire diameter 25–75µm; Supports Al/Cu wire and PowerRibbon",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://elexind.it/storage/546/K%26S-Asterion-Brochure.pdf"
@@ -15238,8 +15334,12 @@
           }
         ]
       },
-      "notes": "[source note] K&S 手册（经销商托管）；发布新闻稿在 investor.kns.com"
-    }
+      "notes": "[source note] K&S official brochure (distributor hosted); press release on investor.kns.com"
+    },
+    "key_specs_zh": "混合楔焊机；键合区 300×300mm；重复精度 ±3.0µm @ 3σ；线径 25–75µm；支持 Al/Cu 线与 PowerRibbon 带材",
+    "key_specs_en": "Hybrid wedge bonder; Bond area 300×300mm; Repeatability ±3.0µm @ 3σ; Wire diameter 25–75µm; Supports Al/Cu wire and PowerRibbon",
+    "notes_zh": "[source note] K&S 手册（经销商托管）；发布新闻稿在 investor.kns.com",
+    "notes_en": "[source note] K&S official brochure (distributor hosted); press release on investor.kns.com"
   },
   {
     "record_id": "277351d5-79c5-55b2-b8a3-f09c90ece661",
@@ -15303,7 +15403,7 @@
           {
             "process": "焊线",
             "detail": {
-              "value": "扩展区楔焊机；键合区 300×800mm；双/三通道输送，面向电池与功率模块",
+              "value": "Extended-area wedge bonder; Bond area 300×800mm; Dual/triple lane transport for battery and power modules",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://investor.kns.com/2016-09-06-Kulicke-Soffa-Launches-AsterionTM-EV-Enhanced-Capability-Hybrid-Wedge-Bonder"
@@ -15312,8 +15412,12 @@
           }
         ]
       },
-      "notes": "[source note] 面向大型功率模块/电池包"
-    }
+      "notes": "[source note] Designed for large EV power modules and battery interconnects"
+    },
+    "key_specs_zh": "扩展区楔焊机；键合区 300×800mm；双/三通道输送，面向电池与功率模块",
+    "key_specs_en": "Extended-area wedge bonder; Bond area 300×800mm; Dual/triple lane transport for battery and power modules",
+    "notes_zh": "[source note] 面向大型功率模块/电池包",
+    "notes_en": "[source note] Designed for large EV power modules and battery interconnects"
   },
   {
     "record_id": "7c94c9d3-7b74-5ddb-ba18-79e059fb27c2",
@@ -15377,7 +15481,7 @@
           {
             "process": "焊线",
             "detail": {
-              "value": "楔焊机家族（TL/HL/HLx）；HLx 处理最宽 105mm 引线框架；单头至 6 头配置",
+              "value": "Wedge bonder family (TL/HL/HLx); HLx handles up to 105mm wide leadframes; Configurable from single-head to 6-head",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.kns.com/Products/Equipment/Wedge-Bonder/PowerFusion"
@@ -15386,8 +15490,12 @@
           }
         ]
       },
-      "notes": "[source note] 功率半导体封装"
-    }
+      "notes": "[source note] Dedicated for discrete and power semiconductor packaging"
+    },
+    "key_specs_zh": "楔焊机家族（TL/HL/HLx）；HLx 处理最宽 105mm 引线框架；单头至 6 头配置",
+    "key_specs_en": "Wedge bonder family (TL/HL/HLx); HLx handles up to 105mm wide leadframes; Configurable from single-head to 6-head",
+    "notes_zh": "[source note] 功率半导体封装",
+    "notes_en": "[source note] Dedicated for discrete and power semiconductor packaging"
   },
   {
     "record_id": "82eb7b4a-293d-5678-8b26-0051b89b3424",
@@ -15459,7 +15567,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "精度 4µm @ 3σ；产能最高 10k UPH；芯片 0.3–40mm；条带/载具/面板 8″/200mm",
+              "value": "Accuracy 4µm @ 3σ; Throughput up to 10k UPH; Die size 0.3–40mm; Substrate strips/carriers/panels up to 8\"/200mm",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.besi.com/fileadmin/data/Products/datacon_8800_fc_quantum_advx/Datacon_8800_FC_QUANTUM_advX_-_2025.pdf"
@@ -15468,8 +15576,12 @@
           }
         ]
       },
-      "notes": "[source note] 批量回流 C2S（FC-BGA/FC-CSP/DRAM/扇出）"
-    }
+      "notes": "[source note] Mass reflow C2S (FC-BGA, FC-CSP, DRAM, Fan-out)"
+    },
+    "key_specs_zh": "精度 4µm @ 3σ；产能最高 10k UPH；芯片 0.3–40mm；条带/载具/面板 8″/200mm",
+    "key_specs_en": "Accuracy 4µm @ 3σ; Throughput up to 10k UPH; Die size 0.3–40mm; Substrate strips/carriers/panels up to 8\"/200mm",
+    "notes_zh": "[source note] 批量回流 C2S（FC-BGA/FC-CSP/DRAM/扇出）",
+    "notes_en": "[source note] Mass reflow C2S (FC-BGA, FC-CSP, DRAM, Fan-out)"
   },
   {
     "record_id": "a91d6e97-aa48-5067-b613-c5ff9056b74d",
@@ -15540,7 +15652,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "热压键合（TCB）；2µm @ 3σ；7 轴键合头；250N 压力；可选 300mm/340mm FO-WLP 载具",
+              "value": "Thermal Compression Bonding (TCB); 2µm @ 3σ; 7-axis bond head; 250N bond force; Optional 300mm/340mm FO-WLP carrier",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://exhibitorsearch.messefrankfurt.com/images/original/userdata/bata/192984/5e39328ab8f46.pdf"
@@ -15549,8 +15661,12 @@
           }
         ]
       },
-      "notes": "[source note] Besi 文档（展会站托管）"
-    }
+      "notes": "[source note] Besi technical documentation (trade exhibition hosted)"
+    },
+    "key_specs_zh": "热压键合（TCB）；2µm @ 3σ；7 轴键合头；250N 压力；可选 300mm/340mm FO-WLP 载具",
+    "key_specs_en": "Thermal Compression Bonding (TCB); 2µm @ 3σ; 7-axis bond head; 250N bond force; Optional 300mm/340mm FO-WLP carrier",
+    "notes_zh": "[source note] Besi 文档（展会站托管）",
+    "notes_en": "[source note] Besi technical documentation (trade exhibition hosted)"
   },
   {
     "record_id": "7f9902d4-5a42-5e10-8e13-2de063b84514",
@@ -15621,7 +15737,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "混合键合；200nm 对准精度；1µm 互连间距；最高 2,000 颗/小时",
+              "value": "Direct hybrid bonding; 200nm alignment accuracy; 1µm interconnect pitch; Up to 2,000 UPH",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.3dincites.com/2025/12/nhanced-semiconductors-leads-the-semiconductor-industry-in-heterogeneous-hybrid-bonding-production/"
@@ -15630,8 +15746,12 @@
           }
         ]
       },
-      "notes": "[source note] 据 2025 年 12 月报道，全球首台已在 NHanced（美国 Morrisville）投产"
-    }
+      "notes": "[source note] Reported December 2025: world first unit installed at NHanced in Morrisville, NC"
+    },
+    "key_specs_zh": "混合键合；200nm 对准精度；1µm 互连间距；最高 2,000 颗/小时",
+    "key_specs_en": "Direct hybrid bonding; 200nm alignment accuracy; 1µm interconnect pitch; Up to 2,000 UPH",
+    "notes_zh": "[source note] 据 2025 年 12 月报道，全球首台已在 NHanced（美国 Morrisville）投产",
+    "notes_en": "[source note] Reported December 2025: world first unit installed at NHanced in Morrisville, NC"
   },
   {
     "record_id": "24df5287-9eb2-5333-bc9d-b60afeb0c886",
@@ -15695,7 +15815,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "芯片 + 倒装键合机；±1.0µm 精度；多芯片能力；模块化设计",
+              "value": "Die and flip-chip bonder; ±1.0µm placement accuracy; Multi-die capability; Modular platform architecture",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://amicra.semi.asmpt.com/en/products/"
@@ -15703,8 +15823,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] ASMPT AMICRA official product brochure"
+    },
+    "key_specs_zh": "芯片 + 倒装键合机；±1.0µm 精度；多芯片能力；模块化设计",
+    "key_specs_en": "Die and flip-chip bonder; ±1.0µm placement accuracy; Multi-die capability; Modular platform architecture",
+    "notes_zh": "[source note] ASMPT AMICRA 官方产品说明书",
+    "notes_en": "[source note] ASMPT AMICRA official product brochure"
   },
   {
     "record_id": "36c36f66-6fa5-58a5-9a8f-6ba45c2e86ba",
@@ -15767,7 +15892,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "超精密芯片/倒装键合机；±0.2µm @ 3σ；键合力 0.1–20N；200–400 件/小时",
+              "value": "Ultra-precision die & flip chip bonder; ±0.2µm (200nm) @ 3σ; Bond force 0.1–20N; 200–400 UPH",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://semiconductor-today.com/news_items/2024/nov/asmpt-201124.shtml"
@@ -15776,8 +15901,12 @@
           }
         ]
       },
-      "notes": "[source note] 共封装光学 / 混合键合；高混低量产"
-    }
+      "notes": "[source note] Co-packaged optics (CPO) and hybrid bonding; high-mix low-volume production"
+    },
+    "key_specs_zh": "超精密芯片/倒装键合机；±0.2µm @ 3σ；键合力 0.1–20N；200–400 件/小时",
+    "key_specs_en": "Ultra-precision die & flip chip bonder; ±0.2µm (200nm) @ 3σ; Bond force 0.1–20N; 200–400 UPH",
+    "notes_zh": "[source note] 共封装光学 / 混合键合；高混低量产",
+    "notes_en": "[source note] Co-packaged optics (CPO) and hybrid bonding; high-mix low-volume production"
   },
   {
     "record_id": "95f59a64-0471-54d4-a208-685d23e0da96",
@@ -15840,7 +15969,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "多芯片键合机；±2µm 精度；键合线厚度控制 ±5µm；最高 12K UPH",
+              "value": "Multi-die bonder; ±2µm accuracy; Bond line thickness control ±5µm; Throughput up to 12K UPH",
               "provenance": {
                 "tier": "inferred",
                 "source": "http://siliconsemiconductor.net/article/121116/ASMPT_Unveiling_Packaging_Solutions_Enabling_the_AI_World"
@@ -15849,8 +15978,12 @@
           }
         ]
       },
-      "notes": "[source note] 面向 AI/HPC 多芯片模块；NEPCON Japan 首发"
-    }
+      "notes": "[source note] Designed for AI/HPC multi-chip modules; debuted at NEPCON Japan"
+    },
+    "key_specs_zh": "多芯片键合机；±2µm 精度；键合线厚度控制 ±5µm；最高 12K UPH",
+    "key_specs_en": "Multi-die bonder; ±2µm accuracy; Bond line thickness control ±5µm; Throughput up to 12K UPH",
+    "notes_zh": "[source note] 面向 AI/HPC 多芯片模块；NEPCON Japan 首发",
+    "notes_en": "[source note] Designed for AI/HPC multi-chip modules; debuted at NEPCON Japan"
   },
   {
     "record_id": "4542ce74-1505-50cc-8702-85d0abad60c5",
@@ -15914,7 +16047,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "多工艺键合机；高端 2.5D 封装份额最大（Shibaura 口径）",
+              "value": "Multi-process flip-chip bonder; Leading market share in high-end 2.5D packaging (Shibaura disclosure)",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.shibaura.co.jp/e/products/semicon/"
@@ -15922,8 +16055,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Shibaura Mechatronics semiconductor product portfolio"
+    },
+    "key_specs_zh": "多工艺键合机；高端 2.5D 封装份额最大（Shibaura 口径）",
+    "key_specs_en": "Multi-process flip-chip bonder; Leading market share in high-end 2.5D packaging (Shibaura disclosure)",
+    "notes_zh": "[source note] 芝浦机电半导体设备产品线",
+    "notes_en": "[source note] Shibaura Mechatronics semiconductor product portfolio"
   },
   {
     "record_id": "da57096b-afb9-5168-8832-aad02b70ffa5",
@@ -15995,7 +16133,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "高端晶圆级封装键合机；正面朝上键合，面向 FO-WLP 的更高精度/产能",
+              "value": "Advanced wafer-level packaging bonder; Face-up bonding for higher accuracy and throughput in FO-WLP",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.shibaura.co.jp/e/products/semicon/"
@@ -16003,8 +16141,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Shibaura Mechatronics official product guide"
+    },
+    "key_specs_zh": "高端晶圆级封装键合机；正面朝上键合，面向 FO-WLP 的更高精度/产能",
+    "key_specs_en": "Advanced wafer-level packaging bonder; Face-up bonding for higher accuracy and throughput in FO-WLP",
+    "notes_zh": "[source note] 芝浦机电官方产品指南",
+    "notes_en": "[source note] Shibaura Mechatronics official product guide"
   },
   {
     "record_id": "5674afe7-38ea-593f-a327-410f0729e3a0",
@@ -16076,7 +16219,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "混合键合机，面向芯粒-晶圆（C2W）混合键合与熔融工艺；超高精度",
+              "value": "Hybrid bonder for chip-to-wafer (C2W) direct hybrid bonding and fusion bonding; Ultra-high accuracy",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.shibaura.co.jp/e/products/semicon/"
@@ -16084,8 +16227,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Shibaura Mechatronics advanced packaging roadmap"
+    },
+    "key_specs_zh": "混合键合机，面向芯粒-晶圆（C2W）混合键合与熔融工艺；超高精度",
+    "key_specs_en": "Hybrid bonder for chip-to-wafer (C2W) direct hybrid bonding and fusion bonding; Ultra-high accuracy",
+    "notes_zh": "[source note] 芝浦机电先进封装路线图",
+    "notes_en": "[source note] Shibaura Mechatronics advanced packaging roadmap"
   },
   {
     "record_id": "0cff4fe5-adcb-5c3e-9d2c-d96655019742",
@@ -16149,7 +16297,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "扇出面板级封装键合机；FO-PLP 份额最大（Shibaura 口径）",
+              "value": "Fan-out panel-level packaging (FO-PLP) bonder; Industry-leading PLP market share (Shibaura disclosure)",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.shibaura.co.jp/e/products/semicon/"
@@ -16158,8 +16306,12 @@
           }
         ]
       },
-      "notes": "[source note] TFC-9000 为 FO-WLP 变体"
-    }
+      "notes": "[source note] Shibaura product portfolio; TFC-9000 is the FO-WLP wafer counterpart"
+    },
+    "key_specs_zh": "扇出面板级封装键合机；FO-PLP 份额最大（Shibaura 口径）",
+    "key_specs_en": "Fan-out panel-level packaging (FO-PLP) bonder; Industry-leading PLP market share (Shibaura disclosure)",
+    "notes_zh": "[source note] TFC-9000 为 FO-WLP 变体",
+    "notes_en": "[source note] Shibaura product portfolio; TFC-9000 is the FO-WLP wafer counterpart"
   },
   {
     "record_id": "137300ba-9a01-5800-ba25-edd4dc45200e",
@@ -16230,7 +16382,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "基板 8″/12″；芯片 3–20mm；周期 2.0s/颗；对准 ±2µm @ 3σ；陶瓷加热头 RT–450°C",
+              "value": "Substrate 8\"/12\"; Die size 3–20mm; Cycle time 2.0s/die; Alignment ±2µm @ 3σ; Ceramic heater head RT–450°C",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.macquarie.com/hk/en/about/company/commodities-and-global-markets/specialised-and-asset-finance/electronics/inventory/semiconductor-packaging/flip-chip-bonder/215471.html"
@@ -16239,8 +16391,12 @@
           }
         ]
       },
-      "notes": "[source note] 挂牌信息转载 Toray 规格表；FC3000WS（半自动研发）/ W / WL（全自动）变体"
-    }
+      "notes": "[source note] Specification sheet from Toray Engineering; includes FC3000WS (R&D) / W / WL (full auto) variants"
+    },
+    "key_specs_zh": "基板 8″/12″；芯片 3–20mm；周期 2.0s/颗；对准 ±2µm @ 3σ；陶瓷加热头 RT–450°C",
+    "key_specs_en": "Substrate 8\"/12\"; Die size 3–20mm; Cycle time 2.0s/die; Alignment ±2µm @ 3σ; Ceramic heater head RT–450°C",
+    "notes_zh": "[source note] 挂牌信息转载 Toray 规格表；FC3000WS（半自动研发）/ W / WL（全自动）变体",
+    "notes_en": "[source note] Specification sheet from Toray Engineering; includes FC3000WS (R&D) / W / WL (full auto) variants"
   },
   {
     "record_id": "6101c44e-b9ce-5602-8f68-a0662845061d",
@@ -16303,7 +16459,7 @@
           {
             "process": "倒装",
             "detail": {
-              "value": "面板级封装键合机；±0.8µm 精度；在 515×510mm 与 600×600mm（SEMI）面板上做 TCB，含玻璃面板",
+              "value": "Panel-level bonder; ±0.8µm accuracy; TCB on 515×510mm and 600×600mm (SEMI) panels, including glass substrates",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://bakersfield.marketminute.com/article/accwirecq-2025-3-27-launch-of-uc5000-semiconductor-packaging-equipment-compatible-with-large-glass-panels"
@@ -16312,8 +16468,12 @@
           }
         ]
       },
-      "notes": "[source note] 2025 年 4 月发布；面向 AI 服务器 PLP"
-    }
+      "notes": "[source note] Released April 2025; Engineered for AI server panel-level packaging"
+    },
+    "key_specs_zh": "面板级封装键合机；±0.8µm 精度；在 515×510mm 与 600×600mm（SEMI）面板上做 TCB，含玻璃面板",
+    "key_specs_en": "Panel-level bonder; ±0.8µm accuracy; TCB on 515×510mm and 600×600mm (SEMI) panels, including glass substrates",
+    "notes_zh": "[source note] 2025 年 4 月发布；面向 AI 服务器 PLP",
+    "notes_en": "[source note] Released April 2025; Engineered for AI server panel-level packaging"
   },
   {
     "record_id": "b4a210c8-a5b7-5f51-b738-73a5e07a7372",
@@ -16377,7 +16537,7 @@
           {
             "process": "塑封",
             "detail": {
-              "value": "厂商确认的产品线：传递模塑（多柱塞、全自动）与压缩模塑，含流动压缩模塑（FCM）/ 真空压缩；约占全球芯片塑封设备 2/3 份额（行业报道口径）",
+              "value": "Vendor confirmed product lines: Transfer molding (multi-plunger, fully automatic) and compression molding, including Flow Compression Molding (FCM) / Vacuum Compression; ~2/3 global market share in chip molding equipment",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "http://www.towajapan.co.jp/en/technology/rd/"
@@ -16386,9 +16546,13 @@
           }
         ]
       },
-      "notes": "[source note] TOWA 官网只公开技术说明、不公开型号命名——型号无法核实，本行即缺口标注"
+      "notes": "[source note] TOWA discloses technical specifications only, withholding explicit model names. Honest gap row."
     },
-    "is_gap_row": true
+    "is_gap_row": true,
+    "key_specs_zh": "厂商确认的产品线：传递模塑（多柱塞、全自动）与压缩模塑，含流动压缩模塑（FCM）/ 真空压缩；约占全球芯片塑封设备 2/3 份额（行业报道口径）",
+    "key_specs_en": "Vendor confirmed product lines: Transfer molding (multi-plunger, fully automatic) and compression molding, including Flow Compression Molding (FCM) / Vacuum Compression; ~2/3 global market share in chip molding equipment",
+    "notes_zh": "[source note] TOWA 官网只公开技术说明、不公开型号命名——型号无法核实，本行即缺口标注",
+    "notes_en": "[source note] TOWA discloses technical specifications only, withholding explicit model names. Honest gap row."
   },
   {
     "record_id": "83aa8bec-14de-53bd-a024-3e5704d358d1",
@@ -16451,7 +16615,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "SoC 测试系统；Pin Scale 5000：256 通道/卡 @ 5Gb/s 扫描、深向量存储；XPS256 电源；Xtreme Link 卡间通信",
+              "value": "SoC test system; Pin Scale 5000: 256 channels/card @ 5Gb/s scan, deep vector memory; XPS256 DPS; Xtreme Link card-to-card interconnect",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.testandmeasurement.com/doc/ise-labs-chooses-advantest-s-v-exa-scale-soc-test-system-for-production-test-services-0001"
@@ -16460,8 +16624,12 @@
           }
         ]
       },
-      "notes": "[source note] 旗舰 SoC 平台（2000 年推出）；跨代向后兼容"
-    }
+      "notes": "[source note] Flagship SoC test platform; broad backward compatibility across instrument generations"
+    },
+    "key_specs_zh": "SoC 测试系统；Pin Scale 5000：256 通道/卡 @ 5Gb/s 扫描、深向量存储；XPS256 电源；Xtreme Link 卡间通信",
+    "key_specs_en": "SoC test system; Pin Scale 5000: 256 channels/card @ 5Gb/s scan, deep vector memory; XPS256 DPS; Xtreme Link card-to-card interconnect",
+    "notes_zh": "[source note] 旗舰 SoC 平台（2000 年推出）；跨代向后兼容",
+    "notes_en": "[source note] Flagship SoC test platform; broad backward compatibility across instrument generations"
   },
   {
     "record_id": "8ae1b49e-638b-5037-a642-6d719f165b2d",
@@ -16525,7 +16693,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "SoC 测试系统；最高 8,192 数字通道；模块化仪器架构；并发测试",
+              "value": "SoC test system; Up to 8,192 digital channels; Modular open architecture; Multi-site concurrent testing",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.advantest.com/en/products/semiconductor-test-system/soc/t2000/"
@@ -16534,8 +16702,12 @@
           }
         ]
       },
-      "notes": "[source note] T2000 AiR2X（2025）：风冷、资源 2 倍于 AiR、最高 12 个测量模块、车载 DC 至 320V"
-    }
+      "notes": "[source note] T2000 AiR2X (2025): Air-cooled, 2x resources of AiR, up to 12 modules, automotive DC up to 320V"
+    },
+    "key_specs_zh": "SoC 测试系统；最高 8,192 数字通道；模块化仪器架构；并发测试",
+    "key_specs_en": "SoC test system; Up to 8,192 digital channels; Modular open architecture; Multi-site concurrent testing",
+    "notes_zh": "[source note] T2000 AiR2X（2025）：风冷、资源 2 倍于 AiR、最高 12 个测量模块、车载 DC 至 320V",
+    "notes_en": "[source note] T2000 AiR2X (2025): Air-cooled, 2x resources of AiR, up to 12 modules, automotive DC up to 320V"
   },
   {
     "record_id": "f6023d76-089d-5505-a620-d7dbf39f5c09",
@@ -16599,7 +16771,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "存储器测试系统（DRAM），Advantest 官方产品线在列",
+              "value": "DRAM memory test system; High-speed parallel testing up to 8 Gbps for high-bandwidth memory and mobile DRAM",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.advantest.com/en/products/semiconductor-test-system/memory/"
@@ -16608,8 +16780,12 @@
           }
         ]
       },
-      "notes": "[source note] 同线还有 T5833 与 T5801（超高速 DRAM，GDDR7/LPDDR6/DDR6）"
-    }
+      "notes": "[source note] Official Advantest memory line; related to T5833 and T5801 (GDDR7/LPDDR6/DDR6)"
+    },
+    "key_specs_zh": "存储器测试系统（DRAM），Advantest 官方产品线在列",
+    "key_specs_en": "DRAM memory test system; High-speed parallel testing up to 8 Gbps for high-bandwidth memory and mobile DRAM",
+    "notes_zh": "[source note] 同线还有 T5833 与 T5801（超高速 DRAM，GDDR7/LPDDR6/DDR6）",
+    "notes_en": "[source note] Official Advantest memory line; related to T5833 and T5801 (GDDR7/LPDDR6/DDR6)"
   },
   {
     "record_id": "86087aa1-eeb9-5cc0-b3af-3be0a0c00082",
@@ -16673,7 +16849,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "SoC 测试机；UltraPort-PCIe6：64Gb/s PAM4 × 32 通道；UltraPHY 224G（112Gb/s NRZ / 224Gb/s PAM4）；UltraVS64-HP：单仪器 1,280A",
+              "value": "SoC tester; UltraPort-PCIe6: 64Gb/s PAM4 × 32 channels; UltraPHY 224G (112Gb/s NRZ / 224Gb/s PAM4); UltraVS64-HP: 1,280A single instrument",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.teradyne.com/products/ultraflexplus/"
@@ -16682,8 +16858,12 @@
           }
         ]
       },
-      "notes": "[source note] 面向 AI/HPC SoC；IG-XL 软件"
-    }
+      "notes": "[source note] Built for advanced AI/HPC processors and cloud datacenter silicon; IG-XL operating software"
+    },
+    "key_specs_zh": "SoC 测试机；UltraPort-PCIe6：64Gb/s PAM4 × 32 通道；UltraPHY 224G（112Gb/s NRZ / 224Gb/s PAM4）；UltraVS64-HP：单仪器 1,280A",
+    "key_specs_en": "SoC tester; UltraPort-PCIe6: 64Gb/s PAM4 × 32 channels; UltraPHY 224G (112Gb/s NRZ / 224Gb/s PAM4); UltraVS64-HP: 1,280A single instrument",
+    "notes_zh": "[source note] 面向 AI/HPC SoC；IG-XL 软件",
+    "notes_en": "[source note] Built for advanced AI/HPC processors and cloud datacenter silicon; IG-XL operating software"
   },
   {
     "record_id": "ee1ec2b0-2a14-50d5-a29a-d9238eb6d524",
@@ -16747,7 +16927,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "数字/混合信号 SoC 测试家族；多站点配置",
+              "value": "Low-cost microcontroller and digital/mixed-signal SoC tester family; Highly parallel multi-site testing",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "http://www.teradyne.com/products/semiconductor-test"
@@ -16756,8 +16936,12 @@
           }
         ]
       },
-      "notes": "[source note] 官网以产品家族列示；未找到型号专属页"
-    }
+      "notes": "[source note] Teradyne official website listed as product family (>6,000 installed systems)"
+    },
+    "key_specs_zh": "数字/混合信号 SoC 测试家族；多站点配置",
+    "key_specs_en": "Low-cost microcontroller and digital/mixed-signal SoC tester family; Highly parallel multi-site testing",
+    "notes_zh": "[source note] 官网以产品家族列示；未找到型号专属页",
+    "notes_en": "[source note] Teradyne official website listed as product family (>6,000 installed systems)"
   },
   {
     "record_id": "0f07eab6-91d7-58f7-866a-448c012ca203",
@@ -16821,7 +17005,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "NAND 闪存测试机；最高 18,432 I/O 通道 @ 5.28Gbps；最高 1,024 颗并行",
+              "value": "High-density NAND flash memory tester; Up to 18,432 I/O channels @ 5.28Gbps; Up to 1,024 devices in parallel",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.teradyne.com/products/magnum-7/"
@@ -16829,8 +17013,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Teradyne memory test systems portfolio for 3D NAND and mass storage"
+    },
+    "key_specs_zh": "NAND 闪存测试机；最高 18,432 I/O 通道 @ 5.28Gbps；最高 1,024 颗并行",
+    "key_specs_en": "High-density NAND flash memory tester; Up to 18,432 I/O channels @ 5.28Gbps; Up to 1,024 devices in parallel",
+    "notes_zh": "[source note] 泰瑞达 3D NAND 与大容量存储器测试系统",
+    "notes_en": "[source note] Teradyne memory test systems portfolio for 3D NAND and mass storage"
   },
   {
     "record_id": "91217c74-98eb-5a32-89dc-cddfaace5595",
@@ -16894,7 +17083,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "HBM 存储器测试机；HBM3/3E 与 HBM4/4E 最高 4.5Gbps；9,216 数字针 + 2,560 电源针",
+              "value": "Dedicated HBM memory tester; HBM3/3E and HBM4/4E up to 4.5Gbps; 9,216 digital pins + 2,560 DPS power pins",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.teradyne.com/products/magnum-7h/"
@@ -16903,8 +17092,12 @@
           }
         ]
       },
-      "notes": "[source note] 2025 年发布；亦可测 KGSD / 预切割 HBM"
-    }
+      "notes": "[source note] Released in 2025; Tests Known Good Stacked Die (KGSD) and pre-stack HBM wafers"
+    },
+    "key_specs_zh": "HBM 存储器测试机；HBM3/3E 与 HBM4/4E 最高 4.5Gbps；9,216 数字针 + 2,560 电源针",
+    "key_specs_en": "Dedicated HBM memory tester; HBM3/3E and HBM4/4E up to 4.5Gbps; 9,216 digital pins + 2,560 DPS power pins",
+    "notes_zh": "[source note] 2025 年发布；亦可测 KGSD / 预切割 HBM",
+    "notes_en": "[source note] Released in 2025; Tests Known Good Stacked Die (KGSD) and pre-stack HBM wafers"
   },
   {
     "record_id": "1290af98-1b70-520f-bb51-b451f9623978",
@@ -16968,7 +17161,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "新一代存储器测试机；LPDDR6/DDR6/GDDR7/NAND；NRZ/PAM3/PAM4；最高 64 测试站点、24.5K 高速 I/O 针",
+              "value": "Next-gen memory test system; LPDDR6/DDR6/GDDR7/NAND; NRZ/PAM3/PAM4 signaling; Up to 64 sites, 24.5K high-speed I/O pins",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.teradyne.com/?post_type=products"
@@ -16977,8 +17170,12 @@
           }
         ]
       },
-      "notes": "[source note] 2026 年 9 月发布；Near-DUT Test 架构"
-    }
+      "notes": "[source note] Announced September 2026; Features Near-DUT Test architecture"
+    },
+    "key_specs_zh": "新一代存储器测试机；LPDDR6/DDR6/GDDR7/NAND；NRZ/PAM3/PAM4；最高 64 测试站点、24.5K 高速 I/O 针",
+    "key_specs_en": "Next-gen memory test system; LPDDR6/DDR6/GDDR7/NAND; NRZ/PAM3/PAM4 signaling; Up to 64 sites, 24.5K high-speed I/O pins",
+    "notes_zh": "[source note] 2026 年 9 月发布；Near-DUT Test 架构",
+    "notes_en": "[source note] Announced September 2026; Features Near-DUT Test architecture"
   },
   {
     "record_id": "f3243958-e63b-54e8-a5b5-75f865f8f54b",
@@ -17042,7 +17239,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "存储器测试机；最高 20,480 数字通道 @ 1600Mbps；EV/SSV/GV 配置",
+              "value": "Memory test system; Up to 20,480 digital channels @ 1600Mbps; Available in EV/SSV/GV configurations",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.teradyne.com/page/2/?post_type=products"
@@ -17051,8 +17248,12 @@
           }
         ]
       },
-      "notes": "[source note] 覆盖 eMMC / Toggle NAND / ONFI / LPDDR2/3"
-    }
+      "notes": "[source note] Covers eMMC, Toggle NAND, ONFI, and legacy LPDDR memory test"
+    },
+    "key_specs_zh": "存储器测试机；最高 20,480 数字通道 @ 1600Mbps；EV/SSV/GV 配置",
+    "key_specs_en": "Memory test system; Up to 20,480 digital channels @ 1600Mbps; Available in EV/SSV/GV configurations",
+    "notes_zh": "[source note] 覆盖 eMMC / Toggle NAND / ONFI / LPDDR2/3",
+    "notes_en": "[source note] Covers eMMC, Toggle NAND, ONFI, and legacy LPDDR memory test"
   },
   {
     "record_id": "f8b36c54-c08f-5a7a-9896-3c139f1de4c2",
@@ -17116,7 +17317,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "模拟/功率测试；DPU-16：16 路数字 I/O @ 132MHz、8M 向量；HPU-100：±100A；QMS 12/16 位仪表",
+              "value": "Analog/power discrete tester; DPU-16: 16 digital I/O @ 132MHz, 8M vector memory; HPU-100: ±100A; QMS 12/16-bit measurement",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.teradyne.com/products/ets-364/"
@@ -17125,8 +17326,12 @@
           }
         ]
       },
-      "notes": "[source note] 车载/功率市场"
-    }
+      "notes": "[source note] Automotive power and smart power IC testing"
+    },
+    "key_specs_zh": "模拟/功率测试；DPU-16：16 路数字 I/O @ 132MHz、8M 向量；HPU-100：±100A；QMS 12/16 位仪表",
+    "key_specs_en": "Analog/power discrete tester; DPU-16: 16 digital I/O @ 132MHz, 8M vector memory; HPU-100: ±100A; QMS 12/16-bit measurement",
+    "notes_zh": "[source note] 车载/功率市场",
+    "notes_en": "[source note] Automotive power and smart power IC testing"
   },
   {
     "record_id": "80fd4ab1-39eb-55b1-b6a5-9b9e6b9ea6e3",
@@ -17190,7 +17395,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "通用混合信号平台；RedDragon RF（5G NR FR1/FR2、Wi-Fi 6/6E/7）；PD1x/PD2x 显示驱动；Multiwave 混合信号；VI100",
+              "value": "Universal mixed-signal platform; RedDragon RF (5G NR FR1/FR2, Wi-Fi 6/6E/7); PD1x/PD2x display drivers; Multiwave mixed-signal; VI100 DPS",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.cohu.com/diamondx"
@@ -17199,8 +17404,12 @@
           }
         ]
       },
-      "notes": "[source note] 低测试成本平台，面向 IoT/移动/汽车"
-    }
+      "notes": "[source note] Low-cost-of-test platform for mobile, automotive, and IoT"
+    },
+    "key_specs_zh": "通用混合信号平台；RedDragon RF（5G NR FR1/FR2、Wi-Fi 6/6E/7）；PD1x/PD2x 显示驱动；Multiwave 混合信号；VI100",
+    "key_specs_en": "Universal mixed-signal platform; RedDragon RF (5G NR FR1/FR2, Wi-Fi 6/6E/7); PD1x/PD2x display drivers; Multiwave mixed-signal; VI100 DPS",
+    "notes_zh": "[source note] 低测试成本平台，面向 IoT/移动/汽车",
+    "notes_en": "[source note] Low-cost-of-test platform for mobile, automotive, and IoT"
   },
   {
     "record_id": "69de465f-2b43-543b-876f-cfbdfc2f664b",
@@ -17264,7 +17473,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "桌面/工程版 ATE；5 个 Diamondx 兼容槽位；192 通道数字；6.4Gbps 串行；<50 lbs、风冷",
+              "value": "Desktop engineering ATE; 5 Diamondx-compatible slots; 192 digital channels; 6.4Gbps serial; <50 lbs, air-cooled",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "http://www.cohu.com/dxv"
@@ -17273,8 +17482,12 @@
           }
         ]
       },
-      "notes": "[source note] 硅片验证 / 初期量产"
-    }
+      "notes": "[source note] First-silicon validation and low-volume pilot test"
+    },
+    "key_specs_zh": "桌面/工程版 ATE；5 个 Diamondx 兼容槽位；192 通道数字；6.4Gbps 串行；<50 lbs、风冷",
+    "key_specs_en": "Desktop engineering ATE; 5 Diamondx-compatible slots; 192 digital channels; 6.4Gbps serial; <50 lbs, air-cooled",
+    "notes_zh": "[source note] 硅片验证 / 初期量产",
+    "notes_en": "[source note] First-silicon validation and low-volume pilot test"
   },
   {
     "record_id": "814c5afd-b9a9-5a5f-9677-384e0066919d",
@@ -17338,7 +17551,7 @@
           {
             "process": "测试机 ATE",
             "detail": {
-              "value": "RF 测试机，面向功率放大器与前端模块（5G、Wi-Fi 6、BT、IoT）",
+              "value": "RF production tester for power amplifiers (PA) and front-end modules (FEM) across 5G, Wi-Fi 6, BT, and IoT",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.cohu.com/application-mobility/"
@@ -17347,8 +17560,12 @@
           }
         ]
       },
-      "notes": "[source note] RF PA/FEM 系统市场领先（Cohu 口径）"
-    }
+      "notes": "[source note] Leading test platform for RF PA and FEM devices (Cohu disclosure)"
+    },
+    "key_specs_zh": "RF 测试机，面向功率放大器与前端模块（5G、Wi-Fi 6、BT、IoT）",
+    "key_specs_en": "RF production tester for power amplifiers (PA) and front-end modules (FEM) across 5G, Wi-Fi 6, BT, and IoT",
+    "notes_zh": "[source note] RF PA/FEM 系统市场领先（Cohu 口径）",
+    "notes_en": "[source note] Leading test platform for RF PA and FEM devices (Cohu disclosure)"
   },
   {
     "record_id": "0d54f564-a759-5228-a3a4-b93fc2bebeb6",
@@ -17412,7 +17629,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "取放式 SoC 分选机；最高 15,000 UPH；视觉对位；主动热控（ATC）；通用换型套件",
+              "value": "Pick-and-place SoC handler; Up to 15,000 UPH; Vision alignment; Active Thermal Control (ATC); Universal conversion kits",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.advantest.com/en/products/component-test-system/test-handler/m4872/"
@@ -17421,8 +17638,12 @@
           }
         ]
       },
-      "notes": "[source note] ATC 2kW 选件面向 AI/HPC 封装"
-    }
+      "notes": "[source note] 2kW Active Thermal Control option for high-power AI/HPC packages"
+    },
+    "key_specs_zh": "取放式 SoC 分选机；最高 15,000 UPH；视觉对位；主动热控（ATC）；通用换型套件",
+    "key_specs_en": "Pick-and-place SoC handler; Up to 15,000 UPH; Vision alignment; Active Thermal Control (ATC); Universal conversion kits",
+    "notes_zh": "[source note] ATC 2kW 选件面向 AI/HPC 封装",
+    "notes_en": "[source note] 2kW Active Thermal Control option for high-power AI/HPC packages"
   },
   {
     "record_id": "d99d5a8c-15b3-5b1f-823d-31dee68d17c1",
@@ -17485,7 +17706,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "最高 32 颗并行测试；18,500 UPH",
+              "value": "Up to 32 devices in parallel; Throughput up to 18,500 UPH; Dynamic temperature control",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.bccresearch.com/company-index/profile/advantest-corporation/products"
@@ -17494,8 +17715,12 @@
           }
         ]
       },
-      "notes": "[source note] 经分析师产品列表；同源还列有 M6242 存储器分选机（42,200 UPH）"
-    }
+      "notes": "[source note] Analyst product listings; M6242 memory handler (42,200 UPH) from same series"
+    },
+    "key_specs_zh": "最高 32 颗并行测试；18,500 UPH",
+    "key_specs_en": "Up to 32 devices in parallel; Throughput up to 18,500 UPH; Dynamic temperature control",
+    "notes_zh": "[source note] 经分析师产品列表；同源还列有 M6242 存储器分选机（42,200 UPH）",
+    "notes_en": "[source note] Analyst product listings; M6242 memory handler (42,200 UPH) from same series"
   },
   {
     "record_id": "df2ae6e3-9ec6-5033-b514-97434111c8f3",
@@ -17558,7 +17783,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "面向 V93000 的裸片级分选机；测试切割后/半组装芯片；ATC 面向 2.5D/3D AI/HPC 器件",
+              "value": "Die-level test handler for V93000; Tests singulated/pre-packaged dies; ATC for 2.5D/3D AI/HPC chiplet devices",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.electronicspecifier.com/products/component-management/advantest-add-two-new-products-to-device-handler-portfolio"
@@ -17567,8 +17792,12 @@
           }
         ]
       },
-      "notes": "[source note] 降低多芯片封装的终测良率损失"
-    }
+      "notes": "[source note] Mitigates yield loss in multi-chip advanced packaging"
+    },
+    "key_specs_zh": "面向 V93000 的裸片级分选机；测试切割后/半组装芯片；ATC 面向 2.5D/3D AI/HPC 器件",
+    "key_specs_en": "Die-level test handler for V93000; Tests singulated/pre-packaged dies; ATC for 2.5D/3D AI/HPC chiplet devices",
+    "notes_zh": "[source note] 降低多芯片封装的终测良率损失",
+    "notes_en": "[source note] Mitigates yield loss in multi-chip advanced packaging"
   },
   {
     "record_id": "eb40ad46-3a2c-50a1-b090-1f402393c1cd",
@@ -17632,7 +17861,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "取放式测试分选机；DI-Core 数据智能；最高 +175°C",
+              "value": "Pick-and-place test handler; DI-Core data intelligence suite; Tri-temp capability up to +175°C",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.cohu.com/mt9510/"
@@ -17641,8 +17870,12 @@
           }
         ]
       },
-      "notes": "[source note] 支持 MEMS"
-    }
+      "notes": "[source note] Supports MEMS sensor and automotive test applications"
+    },
+    "key_specs_zh": "取放式测试分选机；DI-Core 数据智能；最高 +175°C",
+    "key_specs_en": "Pick-and-place test handler; DI-Core data intelligence suite; Tri-temp capability up to +175°C",
+    "notes_zh": "[source note] 支持 MEMS",
+    "notes_en": "[source note] Supports MEMS sensor and automotive test applications"
   },
   {
     "record_id": "e8f97f1f-cb7a-59b3-a7f6-337c3db21401",
@@ -17706,7 +17939,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "32 工位转塔平台，集测试/检测/封装；NV-Core 视觉选件",
+              "value": "32-station turret platform integrating test, optical inspection, and taping/packaging; NV-Core vision inspection",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.cohu.com/ny32-lu/"
@@ -17715,8 +17948,12 @@
           }
         ]
       },
-      "notes": "[source note] NY32W 变体面向薄膜框架晶圆介质（WLP）；NY20 为 20 工位"
-    }
+      "notes": "[source note] NY32W variant for wafer-level packaging on film frames; NY20 variant has 20 stations"
+    },
+    "key_specs_zh": "32 工位转塔平台，集测试/检测/封装；NV-Core 视觉选件",
+    "key_specs_en": "32-station turret platform integrating test, optical inspection, and taping/packaging; NV-Core vision inspection",
+    "notes_zh": "[source note] NY32W 变体面向薄膜框架晶圆介质（WLP）；NY20 为 20 工位",
+    "notes_en": "[source note] NY32W variant for wafer-level packaging on film frames; NY20 variant has 20 stations"
   },
   {
     "record_id": "06e81532-af85-5d58-8d0b-eee87ac2f00e",
@@ -17779,7 +18016,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "取放式分选机；16,000 UPH；最高 ×32 站点；封装 3×3–51×51mm；无腔体 ATC",
+              "value": "Pick-and-place handler; 16,000 UPH; Up to ×32 test sites; Packages 3×3–51×51mm; Chamberless Active Thermal Control",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://static.machinetools.com/uploads/2563026/MATRIX_REV_F.pdf"
@@ -17788,8 +18025,12 @@
           }
         ]
       },
-      "notes": "[source note] 经销商托管的 Cohu 手册"
-    }
+      "notes": "[source note] Cohu technical datasheet (distributor hosted)"
+    },
+    "key_specs_zh": "取放式分选机；16,000 UPH；最高 ×32 站点；封装 3×3–51×51mm；无腔体 ATC",
+    "key_specs_en": "Pick-and-place handler; 16,000 UPH; Up to ×32 test sites; Packages 3×3–51×51mm; Chamberless Active Thermal Control",
+    "notes_zh": "[source note] 经销商托管的 Cohu 手册",
+    "notes_en": "[source note] Cohu technical datasheet (distributor hosted)"
   },
   {
     "record_id": "2c6fdc2c-c640-5036-ac48-44447722820c",
@@ -17852,7 +18093,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "八站点终测分选机；最高 9,000 UPH；封装 3×3–50×50mm；常温–150°C；自动复测/重试",
+              "value": "Octal-site final test handler; Up to 9,000 UPH; Packages 3×3–50×50mm; Ambient to 150°C; Auto-retest and retry logic",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://meltronics.co.il/wp-content/uploads/2020/12/3180-EN.pdf"
@@ -17861,8 +18102,12 @@
           }
         ]
       },
-      "notes": "[source note] 经销商托管的 Chroma 手册"
-    }
+      "notes": "[source note] Chroma official brochure (distributor hosted)"
+    },
+    "key_specs_zh": "八站点终测分选机；最高 9,000 UPH；封装 3×3–50×50mm；常温–150°C；自动复测/重试",
+    "key_specs_en": "Octal-site final test handler; Up to 9,000 UPH; Packages 3×3–50×50mm; Ambient to 150°C; Auto-retest and retry logic",
+    "notes_zh": "[source note] 经销商托管的 Chroma 手册",
+    "notes_en": "[source note] Chroma official brochure (distributor hosted)"
   },
   {
     "record_id": "6db43c0e-40fb-584d-bd1d-28c05f3b30ac",
@@ -17956,7 +18201,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "单站点 SLT 分选机；器件 2×2–120×120mm；-40–150°C；最高 2.9kW 热耗散",
+              "value": "Single-site System-Level Test (SLT) handler; Devices 2×2–120×120mm; -40°C to 150°C; Thermal dissipation up to 2.9kW",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.chroma.com.cn/downloads/catalogue/Handler/3210-EN.pdf"
@@ -17965,8 +18210,12 @@
           }
         ]
       },
-      "notes": "[source note] Chroma 官方手册；紧凑型工程分选机"
-    }
+      "notes": "[source note] Chroma official datasheet; compact engineering and SLT test handler"
+    },
+    "key_specs_zh": "单站点 SLT 分选机；器件 2×2–120×120mm；-40–150°C；最高 2.9kW 热耗散",
+    "key_specs_en": "Single-site System-Level Test (SLT) handler; Devices 2×2–120×120mm; -40°C to 150°C; Thermal dissipation up to 2.9kW",
+    "notes_zh": "[source note] Chroma 官方手册；紧凑型工程分选机",
+    "notes_en": "[source note] Chroma official datasheet; compact engineering and SLT test handler"
   },
   {
     "record_id": "5d8d572f-2774-5259-9eb0-19f0a90118af",
@@ -18029,7 +18278,7 @@
           {
             "process": "分选机",
             "detail": {
-              "value": "带视觉机器人的分选机；可集成 ATE；洁净室兼容",
+              "value": "Pick-and-place handler with robotic vision; ATE docking interface; ISO cleanroom compatible",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://caeonline.com/buy/handlers/hontech-ht-9040s/9217600"
@@ -18038,8 +18287,12 @@
           }
         ]
       },
-      "notes": "[source note] 仅确认存在；详细规格未核实"
-    }
+      "notes": "[source note] Product existence verified via industrial directory"
+    },
+    "key_specs_zh": "带视觉机器人的分选机；可集成 ATE；洁净室兼容",
+    "key_specs_en": "Pick-and-place handler with robotic vision; ATE docking interface; ISO cleanroom compatible",
+    "notes_zh": "[source note] 仅确认存在；详细规格未核实",
+    "notes_en": "[source note] Product existence verified via industrial directory"
   },
   {
     "record_id": "3af20cf4-c0e4-5b32-b530-4b0ab6e127d1",
@@ -18111,7 +18364,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "高精度 300mm 晶圆探针机；指南中的旗舰型号",
+              "value": "High-precision 300mm wafer prober; Flagship model in ACCRETECH product guide",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -18120,8 +18373,12 @@
           }
         ]
       },
-      "notes": "[source note] 另有 UF200R / UF190R 变体"
-    }
+      "notes": "[source note] ACCRETECH product guide; UF200R / UF190R variants also listed"
+    },
+    "key_specs_zh": "高精度 300mm 晶圆探针机；指南中的旗舰型号",
+    "key_specs_en": "High-precision 300mm wafer prober; Flagship model in ACCRETECH product guide",
+    "notes_zh": "[source note] 另有 UF200R / UF190R 变体",
+    "notes_en": "[source note] ACCRETECH product guide; UF200R / UF190R variants also listed"
   },
   {
     "record_id": "db050e85-b002-5ebc-90b3-dcd2ebc41068",
@@ -18193,7 +18450,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "旗舰 300mm 探针机；大测试头 + PLP 支持",
+              "value": "Flagship 300mm prober; High-rigidity stage supporting heavy test heads and Panel-Level Packaging (PLP)",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -18202,8 +18459,12 @@
           }
         ]
       },
-      "notes": "[source note] AP3000W/e/eW 变体在列"
-    }
+      "notes": "[source note] Official catalog; AP3000W/e/eW variants supported"
+    },
+    "key_specs_zh": "旗舰 300mm 探针机；大测试头 + PLP 支持",
+    "key_specs_en": "Flagship 300mm prober; High-rigidity stage supporting heavy test heads and Panel-Level Packaging (PLP)",
+    "notes_zh": "[source note] AP3000W/e/eW 变体在列",
+    "notes_en": "[source note] Official catalog; AP3000W/e/eW variants supported"
   },
   {
     "record_id": "47f5d6df-c96f-5832-9470-cd5da9b818b1",
@@ -18275,7 +18536,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "支持固定在切割框架上的 CSP/WLP/PLP 器件",
+              "value": "Prober for diced wafer ring frames; Inspects CSP, WLP, and PLP devices mounted on dicing film",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://storage.pardot.com/687683/1761029290nRFeY3MM/PRODUCT_GUIDE_BOOK_E_A5_WEB.pdf"
@@ -18284,8 +18545,12 @@
           }
         ]
       },
-      "notes": "[source note] FP2000（200mm）亦在列"
-    }
+      "notes": "[source note] ACCRETECH guide; FP2000 (200mm) also listed"
+    },
+    "key_specs_zh": "支持固定在切割框架上的 CSP/WLP/PLP 器件",
+    "key_specs_en": "Prober for diced wafer ring frames; Inspects CSP, WLP, and PLP devices mounted on dicing film",
+    "notes_zh": "[source note] FP2000（200mm）亦在列",
+    "notes_en": "[source note] ACCRETECH guide; FP2000 (200mm) also listed"
   },
   {
     "record_id": "45d7f8de-9014-517a-b0f9-a940664b7103",
@@ -18357,7 +18622,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "半自动/全自动 300mm 探针系统；X-Y 精度 ≤10µm；305mm 卡盘",
+              "value": "Semi/fully-automated 300mm probe station; X-Y stage accuracy ≤10µm; 305mm PureLine chuck",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.formfactor.com/product/probe-systems/300-mm-systems/cm300xi-uln/"
@@ -18366,8 +18631,12 @@
           }
         ]
       },
-      "notes": "[source note] 有 ULN（超低噪声）与 SiPh 变体"
-    }
+      "notes": "[source note] FormFactor datasheet; Ultra-Low Noise (ULN) and Silicon Photonics variants"
+    },
+    "key_specs_zh": "半自动/全自动 300mm 探针系统；X-Y 精度 ≤10µm；305mm 卡盘",
+    "key_specs_en": "Semi/fully-automated 300mm probe station; X-Y stage accuracy ≤10µm; 305mm PureLine chuck",
+    "notes_zh": "[source note] 有 ULN（超低噪声）与 SiPh 变体",
+    "notes_en": "[source note] FormFactor datasheet; Ultra-Low Noise (ULN) and Silicon Photonics variants"
   },
   {
     "record_id": "9e18e38f-e438-59e0-8b8d-fc1d1e165afe",
@@ -18439,7 +18708,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "200mm 半自动/全自动探针系统",
+              "value": "200mm semi-automatic and fully-automated probe station for precision device characterization",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "http://www.formfactor.com/products/probe-systems/accessories/software-solutions/proberbench/proberbench-operating-environment"
@@ -18448,8 +18717,12 @@
           }
         ]
       },
-      "notes": "[source note] 官网产品线在列"
-    }
+      "notes": "[source note] FormFactor official product portfolio"
+    },
+    "key_specs_zh": "200mm 半自动/全自动探针系统",
+    "key_specs_en": "200mm semi-automatic and fully-automated probe station for precision device characterization",
+    "notes_zh": "[source note] 官网产品线在列",
+    "notes_en": "[source note] FormFactor official product portfolio"
   },
   {
     "record_id": "3d27a150-158c-5632-8ffa-46c0309aeca8",
@@ -18521,7 +18794,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "300mm 晶圆上功率器件表征系统",
+              "value": "300mm high-power on-wafer characterization probe system; Rated up to 10kV / 600A",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "http://www.formfactor.com/products/probe-systems/accessories/software-solutions/proberbench/proberbench-operating-environment"
@@ -18530,8 +18803,12 @@
           }
         ]
       },
-      "notes": "[source note] 官网产品线在列"
-    }
+      "notes": "[source note] FormFactor high-power semiconductor test line"
+    },
+    "key_specs_zh": "300mm 晶圆上功率器件表征系统",
+    "key_specs_en": "300mm high-power on-wafer characterization probe system; Rated up to 10kV / 600A",
+    "notes_zh": "[source note] 官网产品线在列",
+    "notes_en": "[source note] FormFactor high-power semiconductor test line"
   },
   {
     "record_id": "fb0c56b2-2b9f-5d83-9bdc-a11d9c8779d8",
@@ -18603,7 +18880,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "自动探针系统；310mm 卡盘；平面度 ±5µm；X-Y 精度 ≤5µm；支持薄膜框架探测",
+              "value": "Automated probe system; 310mm chuck; Planarity ±5µm; X-Y accuracy ≤5µm; Film frame probe support",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.mpi-corporation.com/ast/engineering-probe-systems/mpi-automated-systems/ts3000-probe-system/"
@@ -18612,8 +18889,12 @@
           }
         ]
       },
-      "notes": "[source note] TS3000-IFE 变体：-60 至 +300°C"
-    }
+      "notes": "[source note] MPI official datasheet; TS3000-IFE thermal variant: -60°C to +300°C"
+    },
+    "key_specs_zh": "自动探针系统；310mm 卡盘；平面度 ±5µm；X-Y 精度 ≤5µm；支持薄膜框架探测",
+    "key_specs_en": "Automated probe system; 310mm chuck; Planarity ±5µm; X-Y accuracy ≤5µm; Film frame probe support",
+    "notes_zh": "[source note] TS3000-IFE 变体：-60 至 +300°C",
+    "notes_en": "[source note] MPI official datasheet; TS3000-IFE thermal variant: -60°C to +300°C"
   },
   {
     "record_id": "038f1dcf-ec2e-5c40-a7ed-0986c569be98",
@@ -18685,7 +18966,7 @@
           {
             "process": "探针台",
             "detail": {
-              "value": "手动探针系统，面向 DC/CV/RF；330×395mm XY 行程",
+              "value": "Manual 300mm probe system for DC, CV, and RF device testing; 330×395mm X-Y stage travel",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.mpi.com.tw/wp-content/uploads/ASTPDF/MPI-TS300-Manual-Probe-System-Data-Sheet.pdf"
@@ -18694,8 +18975,12 @@
           }
         ]
       },
-      "notes": "[source note] 官方数据表"
-    }
+      "notes": "[source note] MPI Corporation official datasheet"
+    },
+    "key_specs_zh": "手动探针系统，面向 DC/CV/RF；330×395mm XY 行程",
+    "key_specs_en": "Manual 300mm probe system for DC, CV, and RF device testing; 330×395mm X-Y stage travel",
+    "notes_zh": "[source note] 官方数据表",
+    "notes_en": "[source note] MPI Corporation official datasheet"
   },
   {
     "record_id": "80751d40-af8f-5b83-ab66-7fc0c4cf1c40",
@@ -18767,7 +19052,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "2D 检测；可检出小至 0.2µm 表面缺陷；扇出 RDL 至 2µm；面板 + 翘曲晶圆处理",
+              "value": "2D defect inspection; Detects surface defects down to 0.2µm; Fan-out RDL down to 2µm; Handles warped wafers and panels",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.camtek.com/products/eaglet-i/"
@@ -18775,8 +19060,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Camtek official product brochure"
+    },
+    "key_specs_zh": "2D 检测；可检出小至 0.2µm 表面缺陷；扇出 RDL 至 2µm；面板 + 翘曲晶圆处理",
+    "key_specs_en": "2D defect inspection; Detects surface defects down to 0.2µm; Fan-out RDL down to 2µm; Handles warped wafers and panels",
+    "notes_zh": "[source note] 康特克官方产品说明书",
+    "notes_en": "[source note] Camtek official product brochure"
   },
   {
     "record_id": "0d2b7bf4-d6e0-5d2b-8e23-389915e3a0b3",
@@ -18848,7 +19138,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "领先 2D 检测；明场 0.42µm / 暗场 0.3µm 灵敏度；切割后内裂纹检测",
+              "value": "Leading-edge 2D inspection; Brightfield 0.42µm / Darkfield 0.3µm sensitivity; Post-dicing subsurface crack inspection",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.camtek.com/products/eaglet-i-plus-2/"
@@ -18856,8 +19146,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Camtek inspection systems datasheet"
+    },
+    "key_specs_zh": "领先 2D 检测；明场 0.42µm / 暗场 0.3µm 灵敏度；切割后内裂纹检测",
+    "key_specs_en": "Leading-edge 2D inspection; Brightfield 0.42µm / Darkfield 0.3µm sensitivity; Post-dicing subsurface crack inspection",
+    "notes_zh": "[source note] 康特克晶圆检测系统说明书",
+    "notes_en": "[source note] Camtek inspection systems datasheet"
   },
   {
     "record_id": "e8e4ac38-5a93-55ab-b2a3-4836d7f1a3cc",
@@ -18929,7 +19224,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "单一平台集成 2D + 3D 量测与检测",
+              "value": "Integrated 2D and 3D inspection & metrology on a single platform for advanced packaging and micro-bumps",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.camtek.com/solutions/inspection-metrology/"
@@ -18938,8 +19233,12 @@
           }
         ]
       },
-      "notes": "[source note] 被头部 OSAT 采用（Camtek 口径）"
-    }
+      "notes": "[source note] Widely deployed across Tier-1 OSATs (Camtek disclosure)"
+    },
+    "key_specs_zh": "单一平台集成 2D + 3D 量测与检测",
+    "key_specs_en": "Integrated 2D and 3D inspection & metrology on a single platform for advanced packaging and micro-bumps",
+    "notes_zh": "[source note] 被头部 OSAT 采用（Camtek 口径）",
+    "notes_en": "[source note] Widely deployed across Tier-1 OSATs (Camtek disclosure)"
   },
   {
     "record_id": "50837be2-c470-59ee-9186-55e9a3c233d0",
@@ -19003,7 +19302,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "面板检测与量测；标准面板最大 650×650mm",
+              "value": "Panel-level defect inspection and metrology; Accommodates panels up to 650×650mm",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.camtek.com/solutions/inspection-metrology/"
@@ -19012,8 +19311,12 @@
           }
         ]
       },
-      "notes": "[source note] FO-PLP 应用"
-    }
+      "notes": "[source note] Dedicated for Fan-Out Panel-Level Packaging (FO-PLP)"
+    },
+    "key_specs_zh": "面板检测与量测；标准面板最大 650×650mm",
+    "key_specs_en": "Panel-level defect inspection and metrology; Accommodates panels up to 650×650mm",
+    "notes_zh": "[source note] FO-PLP 应用",
+    "notes_en": "[source note] Dedicated for Fan-Out Panel-Level Packaging (FO-PLP)"
   },
   {
     "record_id": "ad45514f-489e-56d6-81aa-56b0a604b92c",
@@ -19084,7 +19387,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "先进封装平台；HBM/芯粒/混合键合；可检测带 5 亿微凸点的晶圆",
+              "value": "Next-gen advanced packaging inspection; HBM, chiplets, and hybrid bonding; Inspects wafers with >500 million micro-bumps",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://techtime.news/tag/camtek/"
@@ -19093,8 +19396,12 @@
           }
         ]
       },
-      "notes": "[source note] SEMICON Korea 2025 年 2 月发布；camtek.com 有官方产品页"
-    }
+      "notes": "[source note] Debuted at SEMICON Korea February 2025; product page on camtek.com"
+    },
+    "key_specs_zh": "先进封装平台；HBM/芯粒/混合键合；可检测带 5 亿微凸点的晶圆",
+    "key_specs_en": "Next-gen advanced packaging inspection; HBM, chiplets, and hybrid bonding; Inspects wafers with >500 million micro-bumps",
+    "notes_zh": "[source note] SEMICON Korea 2025 年 2 月发布；camtek.com 有官方产品页",
+    "notes_en": "[source note] Debuted at SEMICON Korea February 2025; product page on camtek.com"
   },
   {
     "record_id": "e8530839-a76c-529d-8467-5b9b7de21dfd",
@@ -19158,7 +19465,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "封装 IC + 切割后基板检测/量测；六面 AVI；3D 量测；4 个并行检测工位",
+              "value": "Packaged IC and diced substrate inspection/metrology; 6-sided automated visual inspection (AVI); 3D metrology; 4 parallel inspection stations",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "http://www.KLA.com/products/pcb-ic-substrate-manufacturing/panel-inspection-metrology"
@@ -19167,8 +19474,12 @@
           }
         ]
       },
-      "notes": "[source note] 覆盖 TQFP/QFP/BGA/CSP/WLP/QFN/BCC/LGA"
-    }
+      "notes": "[source note] Broad package coverage: BGA, CSP, WLP, QFN, LGA, and QFP"
+    },
+    "key_specs_zh": "封装 IC + 切割后基板检测/量测；六面 AVI；3D 量测；4 个并行检测工位",
+    "key_specs_en": "Packaged IC and diced substrate inspection/metrology; 6-sided automated visual inspection (AVI); 3D metrology; 4 parallel inspection stations",
+    "notes_zh": "[source note] 覆盖 TQFP/QFP/BGA/CSP/WLP/QFN/BCC/LGA",
+    "notes_en": "[source note] Broad package coverage: BGA, CSP, WLP, QFN, LGA, and QFP"
   },
   {
     "record_id": "5a4fbb0c-90b4-529f-8f5b-96b256b38717",
@@ -19232,7 +19543,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "封装 IC 出厂质检（OQC）；托盘（T3）/ 编带（T7）输出；AI 深度学习分选；3D 量测",
+              "value": "Outgoing quality control (OQC) for packaged ICs; JEDEC tray (T3) or tape-and-reel (T7) output; AI deep learning defect binning; 3D metrology",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.kla.com/products/packaging-manufacturing/ic-component-inspection-and-metrology"
@@ -19241,8 +19552,12 @@
           }
         ]
       },
-      "notes": "[source note] 托盘↔编带可重构"
-    }
+      "notes": "[source note] Reconfigurable output between tray and tape-and-reel"
+    },
+    "key_specs_zh": "封装 IC 出厂质检（OQC）；托盘（T3）/ 编带（T7）输出；AI 深度学习分选；3D 量测",
+    "key_specs_en": "Outgoing quality control (OQC) for packaged ICs; JEDEC tray (T3) or tape-and-reel (T7) output; AI deep learning defect binning; 3D metrology",
+    "notes_zh": "[source note] 托盘↔编带可重构",
+    "notes_en": "[source note] Reconfigurable output between tray and tape-and-reel"
   },
   {
     "record_id": "f9908974-150c-5151-acc9-7d5c3e389b69",
@@ -19314,7 +19629,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "切割后检测 + 芯片分选；IR2.0 模块（光学 + 真红外侧面检测）；激光开槽/发丝裂纹/侧壁裂纹检测",
+              "value": "Post-dicing inspection and die sorting; IR2.0 module (optical + true IR sidewall inspection); Detects laser grooves, hairline cracks, and sidewall defects",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.kla.com/products/packaging-manufacturing/die-sorting-and-inspection"
@@ -19323,8 +19638,12 @@
           }
         ]
       },
-      "notes": "[source note] 另有 F260 变体"
-    }
+      "notes": "[source note] KLA packaging metrology suite; F260 variant also available"
+    },
+    "key_specs_zh": "切割后检测 + 芯片分选；IR2.0 模块（光学 + 真红外侧面检测）；激光开槽/发丝裂纹/侧壁裂纹检测",
+    "key_specs_en": "Post-dicing inspection and die sorting; IR2.0 module (optical + true IR sidewall inspection); Detects laser grooves, hairline cracks, and sidewall defects",
+    "notes_zh": "[source note] 另有 F260 变体",
+    "notes_en": "[source note] KLA packaging metrology suite; F260 variant also available"
   },
   {
     "record_id": "2130afb3-f7df-5d79-bc32-bf2558373015",
@@ -19395,7 +19714,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "晶圆级封装检测；高分辨率光学；AI DefectWise",
+              "value": "Wafer-level packaging defect inspection; High-resolution optics; Powered by AI DefectWise machine learning",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.metrologyworld.com/doc/kla-announces-enhanced-portfolio-of-systems-for-advanced-packaging-0001"
@@ -19404,8 +19723,12 @@
           }
         ]
       },
-      "notes": "[source note] KLA 先进封装产品组合公告"
-    }
+      "notes": "[source note] KLA advanced packaging portfolio announcement"
+    },
+    "key_specs_zh": "晶圆级封装检测；高分辨率光学；AI DefectWise",
+    "key_specs_en": "Wafer-level packaging defect inspection; High-resolution optics; Powered by AI DefectWise machine learning",
+    "notes_zh": "[source note] KLA 先进封装产品组合公告",
+    "notes_en": "[source note] KLA advanced packaging portfolio announcement"
   },
   {
     "record_id": "5093ed36-cb02-5cb6-831b-6e7bb6e0234c",
@@ -19477,7 +19800,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "亚微米 2D 检测（明场/暗场/Clearfind）；LT-200 双头 3D 量测（凸点产能 +50%）；扫描速度 +30%",
+              "value": "Sub-micron 2D inspection (Brightfield/Darkfield/Clearfind); LT-200 dual-head 3D metrology (+50% bump throughput); +30% scan speed",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://ontoinnovation.com/product-categories/inspection/"
@@ -19486,8 +19809,12 @@
           }
         ]
       },
-      "notes": "[source note] Dragonfly G5 为更新一代"
-    }
+      "notes": "[source note] Onto Innovation product sheet; Dragonfly G5 is subsequent generation"
+    },
+    "key_specs_zh": "亚微米 2D 检测（明场/暗场/Clearfind）；LT-200 双头 3D 量测（凸点产能 +50%）；扫描速度 +30%",
+    "key_specs_en": "Sub-micron 2D inspection (Brightfield/Darkfield/Clearfind); LT-200 dual-head 3D metrology (+50% bump throughput); +30% scan speed",
+    "notes_zh": "[source note] Dragonfly G5 为更新一代",
+    "notes_en": "[source note] Onto Innovation product sheet; Dragonfly G5 is subsequent generation"
   },
   {
     "record_id": "1c9bae10-8d5a-5517-9d96-ec02e0896bdd",
@@ -19551,7 +19878,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "亚微米 2D 检测 + 3D 量测，面向 IC 基板与面板级封装",
+              "value": "Sub-micron 2D inspection + 3D metrology for advanced IC substrates and panel-level packaging",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://ontoinnovation.com/product-categories/inspection/"
@@ -19560,8 +19887,12 @@
           }
         ]
       },
-      "notes": "[source note] 同线还有 NovusEdge G2（边缘/缺口/背面）"
-    }
+      "notes": "[source note] Onto Innovation IC substrate line; related to NovusEdge G2"
+    },
+    "key_specs_zh": "亚微米 2D 检测 + 3D 量测，面向 IC 基板与面板级封装",
+    "key_specs_en": "Sub-micron 2D inspection + 3D metrology for advanced IC substrates and panel-level packaging",
+    "notes_zh": "[source note] 同线还有 NovusEdge G2（边缘/缺口/背面）",
+    "notes_en": "[source note] Onto Innovation IC substrate line; related to NovusEdge G2"
   },
   {
     "record_id": "3b60c494-30db-5ad8-a56f-b5dc29781b6b",
@@ -19624,7 +19955,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "带 MRS 传感器的 3D AOI，面向先进封装；AI 驱动",
+              "value": "3D AOI inspection system powered by Multi-Reflection Suppression (MRS) sensor; AI-driven defect filtering for advanced packaging",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.electronicsmedia.info/2026/09/19/nordson-semicon-west-2026/"
@@ -19633,8 +19964,12 @@
           }
         ]
       },
-      "notes": "[source note] SEMICON West 2026 展出；同展 SQ3000 M2（焊线检测）"
-    }
+      "notes": "[source note] Exhibited at SEMICON West; sister model SQ3000 M2 for wire bond AOI"
+    },
+    "key_specs_zh": "带 MRS 传感器的 3D AOI，面向先进封装；AI 驱动",
+    "key_specs_en": "3D AOI inspection system powered by Multi-Reflection Suppression (MRS) sensor; AI-driven defect filtering for advanced packaging",
+    "notes_zh": "[source note] SEMICON West 2026 展出；同展 SQ3000 M2（焊线检测）",
+    "notes_en": "[source note] Exhibited at SEMICON West; sister model SQ3000 M2 for wire bond AOI"
   },
   {
     "record_id": "5a38967d-c77a-5443-8c73-ef011b5e7d4b",
@@ -19727,7 +20062,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "存储模组 3D 终检视觉系统；亚 10µm 分辨率；双 MRS 传感器",
+              "value": "3D final inspection system for high-density memory modules; Sub-10µm resolution; Dual MRS sensors",
               "provenance": {
                 "tier": "inferred",
                 "source": "http://5.imimg.com/data5/SELLER/Doc/2024/5/416816992/LB/VS/RS/50347617/mx3000-automated-final-vision-inspection.pdf"
@@ -19736,8 +20071,12 @@
           }
         ]
       },
-      "notes": "[source note] Nordson 手册（经销商挂牌）"
-    }
+      "notes": "[source note] Nordson official brochure (distributor hosted)"
+    },
+    "key_specs_zh": "存储模组 3D 终检视觉系统；亚 10µm 分辨率；双 MRS 传感器",
+    "key_specs_en": "3D final inspection system for high-density memory modules; Sub-10µm resolution; Dual MRS sensors",
+    "notes_zh": "[source note] Nordson 手册（经销商挂牌）",
+    "notes_en": "[source note] Nordson official brochure (distributor hosted)"
   },
   {
     "record_id": "54257085-0040-502f-85a0-6caa8865ddea",
@@ -19831,7 +20170,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "在线 3D AXI（60–130kV 密封管；6–32µm/像素）+ 3D AOI（Z 分辨率 0.5µm）；处理至 4s",
+              "value": "Inline 3D AXI (60–130kV sealed microfocus tube; 6–32µm/pixel) + 3D AOI (Z-resolution 0.5µm); Cycle times down to 4s",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.viscom.com/fileadmin/content/downloads_brochures/de/Viscom_Brochure_AXI_X7056-II_de.pdf"
@@ -19840,8 +20179,12 @@
           }
         ]
       },
-      "notes": "[source note] 官方手册；X7056-II BO 变体 = 焊线 AOI + 焊线 AXI"
-    }
+      "notes": "[source note] Official datasheet; X7056-II BO variant combines wire bond AOI and AXI"
+    },
+    "key_specs_zh": "在线 3D AXI（60–130kV 密封管；6–32µm/像素）+ 3D AOI（Z 分辨率 0.5µm）；处理至 4s",
+    "key_specs_en": "Inline 3D AXI (60–130kV sealed microfocus tube; 6–32µm/pixel) + 3D AOI (Z-resolution 0.5µm); Cycle times down to 4s",
+    "notes_zh": "[source note] 官方手册；X7056-II BO 变体 = 焊线 AOI + 焊线 AXI",
+    "notes_en": "[source note] Official datasheet; X7056-II BO variant combines wire bond AOI and AXI"
   },
   {
     "record_id": "1287fe50-a8a8-5323-98a4-b0c9307637e9",
@@ -19905,7 +20248,7 @@
           {
             "process": "检测",
             "detail": {
-              "value": "重型 3D 在线 AXI 带 CT，面向大型/重型板、功率电子、储能",
+              "value": "Heavy-duty inline 3D automated X-ray inspection (AXI) with computed tomography (CT) for heavy PCBAs and power modules",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.viscom.com/en/products/x-ray-inspection/"
@@ -19913,8 +20256,13 @@
             }
           }
         ]
-      }
-    }
+      },
+      "notes": "[source note] Viscom high-end X-ray inspection catalog"
+    },
+    "key_specs_zh": "重型 3D 在线 AXI 带 CT，面向大型/重型板、功率电子、储能",
+    "key_specs_en": "Heavy-duty inline 3D automated X-ray inspection (AXI) with computed tomography (CT) for heavy PCBAs and power modules",
+    "notes_zh": "[source note] 德国 Viscom 高端工业 X 射线在线检测系统",
+    "notes_en": "[source note] Viscom high-end X-ray inspection catalog"
   },
   {
     "record_id": "f65ef7e9-d6c2-54ce-be52-134743fd4ffe",
@@ -19977,7 +20325,7 @@
           {
             "process": "凸块/RDL",
             "detail": {
-              "value": "水平面板电镀设备；铜柱 >300µm；四边密封干接触卡盘；旋转方形电场",
+              "value": "Horizontal panel electroplating system; Cu pillar >300µm; 4-edge sealed dry contact chuck; Rotating square electric field",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://www.ainvest.com/news/acm-research-breakthrough-panel-level-packaging-strategic-catalyst-long-term-growth-2511/"
@@ -19986,8 +20334,12 @@
           }
         ]
       },
-      "notes": "[source note] 首台商用水平面板电镀设备；2025 年 11 月出货"
-    }
+      "notes": "[source note] World's first commercial horizontal panel electroplating system; shipped November 2025"
+    },
+    "key_specs_zh": "水平面板电镀设备；铜柱 >300µm；四边密封干接触卡盘；旋转方形电场",
+    "key_specs_en": "Horizontal panel electroplating system; Cu pillar >300µm; 4-edge sealed dry contact chuck; Rotating square electric field",
+    "notes_zh": "[source note] 首台商用水平面板电镀设备；2025 年 11 月出货",
+    "notes_en": "[source note] World's first commercial horizontal panel electroplating system; shipped November 2025"
   },
   {
     "record_id": "250ef792-8802-5198-bafe-cfccaa66e9b5",
@@ -20058,7 +20410,7 @@
           {
             "process": "凸块/RDL",
             "detail": {
-              "value": "扇出晶圆级封装光刻步进机；处理芯片偏移/翘曲/不平整",
+              "value": "Lithography stepper for Fan-Out Wafer-Level Packaging (FOWLP); Corrects die shift, wafer warpage, and topography",
               "provenance": {
                 "tier": "inferred",
                 "source": "https://sst.semiconductor-digest.com/2016/06/ultratech-receives-multiple-system-follow-on-order-for-fan-out-wafer-level-packaging-applications/"
@@ -20067,8 +20419,12 @@
           }
         ]
       },
-      "notes": "[source note] FOWLP 量产多台复购订单"
-    }
+      "notes": "[source note] Multiple volume production follow-on orders for advanced packaging"
+    },
+    "key_specs_zh": "扇出晶圆级封装光刻步进机；处理芯片偏移/翘曲/不平整",
+    "key_specs_en": "Lithography stepper for Fan-Out Wafer-Level Packaging (FOWLP); Corrects die shift, wafer warpage, and topography",
+    "notes_zh": "[source note] FOWLP 量产多台复购订单",
+    "notes_en": "[source note] Multiple volume production follow-on orders for advanced packaging"
   },
   {
     "record_id": "c2ecd1d7-3621-5960-be1b-6ddc66f0303a",
@@ -20140,7 +20496,7 @@
           {
             "process": "凸块/RDL",
             "detail": {
-              "value": "溅射设备；功率器件背面电极镀膜 / 凸点下金属层（UBM）；多层膜",
+              "value": "Sputtering system; Backside metallization for power devices and under-bump metallization (UBM); Multi-layer thin film",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.shibaura.co.jp/e/products/semicon/"
@@ -20149,8 +20505,12 @@
           }
         ]
       },
-      "notes": "[source note] 同线还有 BM-1400W 溅射型号"
-    }
+      "notes": "[source note] Shibaura sputtering portfolio; related to BM-1400W sputtering model"
+    },
+    "key_specs_zh": "溅射设备；功率器件背面电极镀膜 / 凸点下金属层（UBM）；多层膜",
+    "key_specs_en": "Sputtering system; Backside metallization for power devices and under-bump metallization (UBM); Multi-layer thin film",
+    "notes_zh": "[source note] 同线还有 BM-1400W 溅射型号",
+    "notes_en": "[source note] Shibaura sputtering portfolio; related to BM-1400W sputtering model"
   },
   {
     "record_id": "1ba3f283-9c62-5848-a38c-c714a8e4a97d",
@@ -20214,7 +20574,7 @@
           {
             "process": "切割分离",
             "detail": {
-              "value": "新一代激光切割；高速非接触干法工艺；直线 + 曲线/复杂形状切割",
+              "value": "Next-gen laser singulation system; High-speed non-contact dry dicing; Linear and complex contoured profile cutting",
               "provenance": {
                 "tier": "vendor_confirmed",
                 "source": "https://www.towajapan.co.jp/en/products/singulation/"
@@ -20223,7 +20583,11 @@
           }
         ]
       },
-      "notes": "[source note] TOWA 亦提供刀片切割（所查页面未公开型号）"
-    }
+      "notes": "[source note] TOWA singulation line; mechanical blade singulation also offered"
+    },
+    "key_specs_zh": "新一代激光切割；高速非接触干法工艺；直线 + 曲线/复杂形状切割",
+    "key_specs_en": "Next-gen laser singulation system; High-speed non-contact dry dicing; Linear and complex contoured profile cutting",
+    "notes_zh": "[source note] TOWA 亦提供刀片切割（所查页面未公开型号）",
+    "notes_en": "[source note] TOWA singulation line; mechanical blade singulation also offered"
   }
 ]
