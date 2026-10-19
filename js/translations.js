@@ -2620,6 +2620,7 @@ const I18N_DICTIONARY = {
     faq_a6:
       "はい。SemiconFab.org は半導体工学教育、クリーンルーム人材育成、デジタルツイン研究のためのオープンアクセスを提供しています。プロプライエタリなCADソフト不要で、ブラウザ上のWebGLで完全に動作します。",
     hero_cta_3d: "3Dクリーンルームに入る",
+    hero_cta_osat: "OSAT 3Dパッケージングツイン",
     stat_wafer: "12インチ (300mm) 標準",
     stat_yield: "8工程カスケード歩留まり",
     stat_secsgem: "SECS/GEM テレメトリ & FDC",
@@ -3005,6 +3006,7 @@ const I18N_DICTIONARY = {
     faq_a6:
       "네. SemiconFab.org는 반도체 공학 교육, 클린룸 인력 교육 및 디지털 트윈 연구를 위해 무료 오픈 액세스를 제공합니다. 독점 CAD 소프트웨어 없이 표준 웹 브라우저의 WebGL에서 완벽하게 구동됩니다.",
     hero_cta_3d: "3D 클린룸 입장",
+    hero_cta_osat: "OSAT 3D 패키징 트윈",
     stat_wafer: "12인치 (300mm) 웨이퍼 표준",
     stat_yield: "8단계 캐스케이드 수율 모델",
     stat_secsgem: "SECS/GEM 원격측정 및 FDC",
@@ -3401,6 +3403,7 @@ const I18N_DICTIONARY = {
     faq_a6:
       "Ja. SemiconFab.org engagiert sich für freien Zugang in der Halbleiterausbildung, Reinraumschulung und Digital-Twin-Forschung. Es läuft vollständig in modernen Webbrowsern über WebGL ohne proprietäre CAD-Software.",
     hero_cta_3d: "3D-Reinraum betreten",
+    hero_cta_osat: "OSAT 3D-Packaging-Twin",
     stat_wafer: "300mm Wafer-Standard",
     stat_yield: "8-Stufen-Ausbeutemodell",
     stat_secsgem: "SECS/GEM Telemetrie & FDC",
@@ -3803,6 +3806,7 @@ const I18N_DICTIONARY = {
     faq_a6:
       "Oui. SemiconFab.org s'engage en faveur du libre accès pour la formation en ingénierie des semi-conducteurs et la recherche. Il s'exécute nativement dans les navigateurs modernes via WebGL sans logiciel propriétaire.",
     hero_cta_3d: "Entrer dans la salle blanche 3D",
+    hero_cta_osat: "Jumeau 3D Packaging OSAT",
     stat_wafer: "Standard de plaquette 300 mm",
     stat_yield: "Modèle de rendement en 8 étapes",
     stat_secsgem: "Télémétrie SECS/GEM & FDC",
@@ -4203,6 +4207,7 @@ const I18N_DICTIONARY = {
     faq_a6:
       "Sì. SemiconFab.org promuove l'accesso aperto per la formazione ingegneristica, l'addestramento in camera bianca e la ricerca sui gemelli digitali. Funziona nativamente nei browser moderni con WebGL senza software CAD proprietario.",
     hero_cta_3d: "Entra nella camera bianca 3D",
+    hero_cta_osat: "Digital Twin OSAT Packaging 3D",
     stat_wafer: "Standard wafer da 300 mm",
     stat_yield: "Modello di resa a 8 stadi",
     stat_secsgem: "Telemetria SECS/GEM & FDC",
@@ -4600,6 +4605,7 @@ const I18N_DICTIONARY = {
     faq_a6:
       "Sí. SemiconFab.org está comprometido con el acceso abierto para la educación en ingeniería de semiconductores, capacitación en salas limpias e investigación. Se ejecuta de forma nativa en navegadores web con WebGL sin software CAD propietario.",
     hero_cta_3d: "Entrar a sala limpia 3D",
+    hero_cta_osat: "Gemelo 3D de Empaquetado OSAT",
     stat_wafer: "Estándar de oblea de 300 mm",
     stat_yield: "Modelo de rendimiento de 8 etapas",
     stat_secsgem: "Telemetría SECS/GEM y FDC",
