@@ -109,11 +109,11 @@
       vision: "倡议愿景与路线图",
       visionDesc: "半导体工程开放科学平台",
       // Footer
-      footerTagline: "面向 300mm 晶圆制造的开源数字孪生、设备工程学与总造价建模平台。",
+      footerTagline: "面向 300mm 晶圆制造的开放数字孪生、设备工程学与总造价建模平台。",
       footerLicense: "源码遵循 PolyForm Noncommercial 1.0.0 协议公开发布，教育、科研与个人使用完全免费。",
       footerQuickLinks: "核心导航",
       footerModels: "3D数字化模型",
-      footerLegal: "开源规范",
+      footerLegal: "项目信息",
       footerRights: "SemiconFab.org 倡议组织 · 社区协同维护"
     }
   };

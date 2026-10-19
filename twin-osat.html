@@ -325,9 +325,15 @@
           <div id="overlay-zone-sub" class="px-2 py-0.5 rounded bg-[var(--surface-2)]/85 backdrop-blur-md border border-[var(--line)] text-[10px] font-mono text-[var(--ink-2)] shadow-sm">
             West: ISO 7-8 Assembly · East: Final Test Hall
           </div>
-          <div id="overlay-logistics-status" class="px-2 py-0.5 rounded bg-[var(--surface-2)]/85 backdrop-blur-md border border-[var(--line)] text-[10px] font-mono text-[var(--ink-2)] shadow-sm flex items-center gap-1.5 pointer-events-auto cursor-pointer hover:border-[var(--accent)] transition" onclick="toggleLogistics()" title="Toggle Logistics Simulation">
-            <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
-            <span id="logistics-status-text">Logistics: 6 Active (4 AMR · 2 Trolleys)</span>
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <div id="overlay-logistics-status" class="px-2 py-0.5 rounded bg-[var(--surface-2)]/85 backdrop-blur-md border border-[var(--line)] text-[10px] font-mono text-[var(--ink-2)] shadow-sm flex items-center gap-1.5 pointer-events-auto cursor-pointer hover:border-[var(--accent)] transition" onclick="toggleLogistics()" title="Toggle Logistics Simulation">
+              <span class="w-1.5 h-1.5 rounded-full bg-sky-500 animate-pulse"></span>
+              <span id="logistics-status-text">Logistics: 6 Active (4 AMR · 2 Trolleys)</span>
+            </div>
+            <div id="overlay-logistics-illustrative" class="px-1.5 py-0.5 rounded bg-[var(--surface-2)]/85 backdrop-blur-md border border-[var(--line)] text-[9px] font-mono text-[var(--ink-3)] shadow-sm flex items-center gap-1 whitespace-nowrap pointer-events-none transition" title="Logistics flow is parametric animation for illustration">
+              <i data-lucide="info" class="w-2.5 h-2.5 text-amber-500 shrink-0"></i>
+              <span>物流仿真为示意 · Logistics Illustrative</span>
+            </div>
           </div>
         </div>
 
@@ -1300,6 +1306,10 @@
         if (pill) {
           pill.style.opacity = showLogistics ? "1" : "0.5";
         }
+        const badge = document.getElementById("overlay-logistics-illustrative");
+        if (badge) {
+          badge.style.display = showLogistics ? "flex" : "none";
+        }
       }
 
       // ==========================================
@@ -1309,7 +1319,34 @@
         const slots = [];
         const [xMin, xMax] = bayCfg.xRange;
         const [zMin, zMax] = bayCfg.zRange;
-        const w = xMax - xMin;
+        const cx = (xMin + xMax) / 2;
+
+        // If bay is single-sided (e.g. North-only bumping & RDL bay)
+        if (zMin >= 0) {
+          const zSpan = zMax - zMin;
+          const step = zSpan / Math.max(count, 1);
+          for (let i = 0; i < count; i++) {
+            slots.push({
+              x: cx,
+              z: zMin + (i + 0.5) * step,
+              rotY: 0
+            });
+          }
+          return slots;
+        }
+
+        if (zMax <= 0) {
+          const zSpan = Math.abs(zMin - zMax);
+          const step = zSpan / Math.max(count, 1);
+          for (let i = 0; i < count; i++) {
+            slots.push({
+              x: cx,
+              z: zMax - (i + 0.5) * step,
+              rotY: Math.PI
+            });
+          }
+          return slots;
+        }
 
         // Place equipment in two rows: North aisle (z > 3.5) and South aisle (z < -3.5)
         const northSlots = [];

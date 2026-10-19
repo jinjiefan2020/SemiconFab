@@ -10897,8 +10897,22 @@
           btn.className = `flex items-center gap-1 text-[9px] px-1.5 py-0.5 rounded-md font-medium shadow-sm transition whitespace-nowrap shrink-0 ${showSubfabPiping ? "bg-indigo-50 text-indigo-800 border border-indigo-200/80" : "bg-white text-slate-600 border border-slate-200"}`;
         }
         if (subfabPipeRackGroup) subfabPipeRackGroup.visible = showSubfabPiping;
-        if (subfabUtilityDropsGroup)
-          subfabUtilityDropsGroup.visible = showSubfabPiping;
+        if (subfabUtilityDropsGroup) subfabUtilityDropsGroup.visible = showSubfabPiping;
+        if (typeof equipmentMeshMap !== "undefined" && equipmentMeshMap) {
+          equipmentMeshMap.forEach((group) => {
+            group.traverse((child) => {
+              if (
+                child.isMesh &&
+                child.geometry &&
+                child.geometry.type === "CylinderGeometry" &&
+                child.position.y > 2.0 &&
+                child.position.y < 5.0
+              ) {
+                child.visible = showSubfabPiping;
+              }
+            });
+          });
+        }
       }
 
       // ==========================================
@@ -20275,30 +20289,6 @@
         }
       }
 
-      function toggleSubfabPiping() {
-        showSubfabPiping = !showSubfabPiping;
-        const btn = document.getElementById("btn-toggle-piping");
-        if (btn) {
-          btn.className = `flex items-center gap-1 text-[10px] px-2 py-1 rounded-md font-medium shadow-sm transition whitespace-nowrap shrink-0 ${showSubfabPiping ? "bg-sky-50 text-sky-800 border border-sky-200/80" : "bg-white text-slate-600 border border-slate-200"}`;
-        }
-        // Toggle riser conduits inside equipment meshes
-        equipmentMeshMap.forEach((group) => {
-          group.traverse((child) => {
-            if (
-              child.isMesh &&
-              child.geometry &&
-              child.geometry.type === "CylinderGeometry" &&
-              child.position.y > 2.0 &&
-              child.position.y < 5.0
-            ) {
-              child.visible = showSubfabPiping;
-            }
-          });
-        });
-        if (subfabPipeRackGroup) {
-          subfabPipeRackGroup.visible = showSubfabPiping;
-        }
-      }
 
       function jumpToConnectedSubfab(subfabId) {
         switchFabLevel("B1");
