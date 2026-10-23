@@ -18,3 +18,10 @@ SemiconFab-*/
 !downloads/mimac2026-simulator.zip
 output/
 
+# AI agent instructions and developer workspace memory
+GEMINI.md
+AGENTS.md
+CLAUDE.md
+.gemini/
+
+

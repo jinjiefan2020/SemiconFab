@@ -464,6 +464,50 @@ html.dark .sc-dropdown-item.active {
   gap: 8px;
 }
 
+.sc-btn-guide {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--sc-radius-sm);
+  background: var(--sc-accent-cyan, #0e6e6b);
+  color: #ffffff !important;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px rgba(14, 110, 107, 0.25);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sc-btn-guide:hover {
+  background: var(--sc-text-link-hover, #0a5451);
+  color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(14, 110, 107, 0.35);
+  transform: translateY(-1px);
+}
+
+.sc-btn-guide.active {
+  box-shadow: 0 0 0 2px var(--sc-bg-panel, #ffffff), 0 0 0 4px var(--sc-accent-cyan, #0e6e6b);
+}
+
+html.dark .sc-btn-guide,
+[data-theme="dark"] .sc-btn-guide {
+  background: var(--sc-accent-cyan, #3fbdb8);
+  color: #0f141a !important;
+  font-weight: 800;
+  box-shadow: 0 1px 4px rgba(63, 189, 184, 0.3);
+}
+
+html.dark .sc-btn-guide:hover,
+[data-theme="dark"] .sc-btn-guide:hover {
+  background: #7fd8d3;
+  color: #0f141a !important;
+  box-shadow: 0 2px 10px rgba(63, 189, 184, 0.45);
+}
+
 .sc-btn-lang,
 .sc-btn-theme-toggle {
   display: inline-flex;
@@ -497,6 +541,10 @@ html.dark .sc-dropdown-item.active {
   }
   .sc-brand-title {
     font-size: 0.95rem;
+  }
+  .sc-btn-guide {
+    padding: 5px 10px;
+    font-size: 0.72rem;
   }
   .sc-btn-lang,
   .sc-btn-theme-toggle {

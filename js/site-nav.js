@@ -20,6 +20,8 @@
       themeLight: "Light",
       themeDark: "Dark",
       themeTitle: "Switch Light / Dark Theme",
+      navGuide: "Guide",
+      navGuideTitle: "User Guide · Platform Walkthrough",
       // Dropdown & Drawer items
       twinFab: "300mm Fab Twin",
       twinFabDesc: "Class 1 Cleanroom & Subfab Twin",
@@ -80,6 +82,8 @@
       themeLight: "亮色",
       themeDark: "暗色",
       themeTitle: "切换明暗主题 (亮色 / 暗色)",
+      navGuide: "Guide",
+      navGuideTitle: "使用指南 · 平台全景操作手册",
       // Dropdown & Drawer items
       twinFab: "300mm洁净室孪生",
       twinFabDesc: "ISO 1级洁净室与次层动力系统",
@@ -367,6 +371,15 @@
 
           <!-- Right Action Controls -->
           <div class="sc-header-actions">
+            <!-- Guide Button -->
+            <a href="guide.html" class="sc-btn-guide ${cur === 'guide.html' ? 'active' : ''}" title="${t.navGuideTitle || 'User Guide'}">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+              <span>Guide</span>
+            </a>
+
             <!-- Theme Switcher Button -->
             <button type="button" id="sc-btn-theme-toggle" class="sc-btn-theme-toggle" title="${t.themeTitle}">
               <span class="sc-theme-icon">${theme === 'dark' ? '🌙' : '☀️'}</span>
@@ -476,6 +489,15 @@
           </a>
         </div>
 
+        <!-- 6. Guide -->
+        <div class="sc-drawer-section">
+          <div class="sc-drawer-heading">${lang === 'zh' ? '使用指南' : 'Documentation'}</div>
+          <a href="guide.html" class="sc-drawer-link ${cur === 'guide.html' ? 'active' : ''}">
+            <span style="font-weight: 700; color: var(--sc-accent-cyan);">${lang === 'zh' ? '使用指南 (Guide)' : 'User Guide'}</span>
+            <span class="sc-drawer-badge">v1.8</span>
+          </a>
+        </div>
+
         <!-- Mobile Drawer Action Controls -->
         <div class="sc-drawer-controls">
           <button type="button" id="sc-drawer-btn-theme-toggle" class="sc-btn-theme-toggle" style="flex: 1;" title="${t.themeTitle}">
@@ -503,6 +525,7 @@
           <div class="sc-footer-col">
             <h5>${t.footerQuickLinks}</h5>
             <ul>
+              <li><a href="guide.html" style="font-weight: 700; color: var(--sc-accent-cyan);">${lang === 'zh' ? '使用指南 (Guide)' : 'User Guide'}</a></li>
               <li><a href="twin.html">${t.twinFab}</a></li>
               <li><a href="twin-osat.html">${t.twinOsat}</a></li>
               <li><a href="layout-editor.html">${t.layoutEditor}</a></li>
