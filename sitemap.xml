@@ -103,6 +103,17 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://semiconfab.org/twin-osat" />
   </url>
 
+  <!-- 3D Digital Twin: 3nm Dual-Phase Mega Fab (3,000 Tools) -->
+  <url>
+    <loc>https://semiconfab.org/twin-mega.html</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/twin-mega.html" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://semiconfab.org/twin-mega.html" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://semiconfab.org/twin-mega.html" />
+  </url>
+
   <!-- 2D Cleanroom Fab Floor Plan Layout Editor -->
   <url>
     <loc>https://semiconfab.org/layout-editor</loc>

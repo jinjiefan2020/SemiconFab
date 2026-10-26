@@ -24,9 +24,11 @@
       navGuideTitle: "User Guide · Platform Walkthrough",
       // Dropdown & Drawer items
       twinFab: "300mm Fab Twin",
-      twinFabDesc: "Class 1 Cleanroom & Subfab Twin",
+      twinFabDesc: "Class 1 Cleanroom & Subfab Twin (121 Tools)",
+      twinMega: "3nm Mega Fab Concept (3,000 Tools)",
+      twinMegaDesc: "Conceptual Layout Model · 50k WSPM Dual-Phase Fab",
       twinOsat: "OSAT Packaging & Test Twin",
-      twinOsatDesc: "Dual-Hall Packaging & ATE Test Facility",
+      twinOsatDesc: "Dual-Hall Packaging & ATE Test Facility (86 Tools)",
       layoutEditor: "2D Layout Editor",
       layoutEditorDesc: "Architectural Cleanroom Bay Design",
 
@@ -86,9 +88,11 @@
       navGuideTitle: "使用指南 · 平台全景操作手册",
       // Dropdown & Drawer items
       twinFab: "300mm洁净室孪生",
-      twinFabDesc: "ISO 1级洁净室与次层动力系统",
+      twinFabDesc: "ISO 1级洁净室与次层动力系统 (121台)",
+      twinMega: "3nm 概念超级晶圆厂 (3,000机台)",
+      twinMegaDesc: "概念布局推演示意模型 (Conceptual Layout Model)",
       twinOsat: "封测厂数字孪生",
-      twinOsatDesc: "双大厅后道封装与高密度 ATE 终测厂房",
+      twinOsatDesc: "双大厅后道封装与高密度 ATE 终测厂房 (86台)",
       layoutEditor: "2D厂房布局编辑器",
       layoutEditorDesc: "洁净室工艺区空间规划",
 
@@ -258,8 +262,12 @@
                   <span class="sc-dropdown-title">${t.twinFab}</span>
                   <span class="sc-dropdown-desc">${t.twinFabDesc}</span>
                 </a>
+                <a href="twin-mega.html" class="sc-dropdown-item ${cur === 'twin-mega.html' ? 'active' : ''}">
+                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan); font-weight:700;">${t.twinMega}</span>
+                  <span class="sc-dropdown-desc">${t.twinMegaDesc}</span>
+                </a>
                 <a href="twin-osat.html" class="sc-dropdown-item ${cur === 'twin-osat.html' ? 'active' : ''}">
-                  <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.twinOsat}</span>
+                  <span class="sc-dropdown-title">${t.twinOsat}</span>
                   <span class="sc-dropdown-desc">${t.twinOsatDesc}</span>
                 </a>
                 <a href="layout-editor.html" class="sc-dropdown-item ${cur === 'layout-editor.html' ? 'active' : ''}">
@@ -413,11 +421,15 @@
           <div class="sc-drawer-heading">${t.navTwins}</div>
           <a href="twin.html" class="sc-drawer-link ${cur === 'twin.html' ? 'active' : ''}">
             <span>${t.twinFab}</span>
-            <span class="sc-drawer-badge">Fab</span>
+            <span class="sc-drawer-badge">121</span>
+          </a>
+          <a href="twin-mega.html" class="sc-drawer-link ${cur === 'twin-mega.html' ? 'active' : ''}">
+            <span style="font-weight:700; color:var(--sc-accent-cyan)">${t.twinMega}</span>
+            <span class="sc-drawer-badge" style="background-color:var(--sc-accent-cyan); color:#fff">3,000</span>
           </a>
           <a href="twin-osat.html" class="sc-drawer-link ${cur === 'twin-osat.html' ? 'active' : ''}">
             <span>${t.twinOsat}</span>
-            <span class="sc-drawer-badge">OSAT</span>
+            <span class="sc-drawer-badge">86</span>
           </a>
           <a href="layout-editor.html" class="sc-drawer-link ${cur === 'layout-editor.html' ? 'active' : ''}">
             <span>${t.layoutEditor}</span>
@@ -527,6 +539,7 @@
             <ul>
               <li><a href="guide.html" style="font-weight: 700; color: var(--sc-accent-cyan);">${lang === 'zh' ? '使用指南 (Guide)' : 'User Guide'}</a></li>
               <li><a href="twin.html">${t.twinFab}</a></li>
+              <li><a href="twin-mega.html" style="font-weight: 700; color: var(--sc-accent-cyan);">${t.twinMega} (3,000)</a></li>
               <li><a href="twin-osat.html">${t.twinOsat}</a></li>
               <li><a href="layout-editor.html">${t.layoutEditor}</a></li>
               <li><a href="catalog-demo.html">${t.catalog}</a></li>

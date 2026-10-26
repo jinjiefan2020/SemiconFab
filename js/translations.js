@@ -18,6 +18,10 @@ const I18N_DICTIONARY = {
 
     hero_cta_3d: "Enter 3D Cleanroom",
     hero_cta_osat: "OSAT 3D Packaging Twin",
+    hero_cta_mega: "3nm Mega Fab Concept (3,000 Tools)",
+    nav_item_mega_twin: "3nm Mega Fab Concept",
+    nav_item_mega_twin_sub: "Conceptual Layout Model (3,000 Tools)",
+    nav_item_mega_twin_mobile: "3nm Mega Fab Concept (3,000)",
     stat_wafer: "12-Inch Wafer Standard",
     stat_tools: "Core OEM Tools",
     stat_yield: "8-Stage Yield Engine",
@@ -1041,6 +1045,10 @@ const I18N_DICTIONARY = {
 
     hero_cta_3d: "进入 3D 洁净厂房",
     hero_cta_osat: "进入 OSAT 封测孪生工厂",
+    hero_cta_mega: "3nm 概念超级晶圆厂 (3,000机台示意)",
+    nav_item_mega_twin: "3nm 概念超级晶圆厂",
+    nav_item_mega_twin_sub: "概念布局推演示意模型 (3,000机台)",
+    nav_item_mega_twin_mobile: "3nm 概念超级晶圆厂 (3,000机台)",
     stat_wafer: "12英寸先进晶圆标准",
     stat_tools: "核心制造设备图鉴",
     stat_yield: "前道级联良率模拟引擎",

@@ -17,6 +17,7 @@ SemiconFab-*/
 *.zip
 !downloads/mimac2026-simulator.zip
 output/
+.wrangler/
 
 # AI agent instructions and developer workspace memory
 GEMINI.md

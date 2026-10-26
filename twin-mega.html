@@ -1,0 +1,2288 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout Model | SemiconFab</title>
+    <meta
+      name="description"
+      content="Conceptual 3D Layout Model of an advanced 3nm FinFET (Fin-Flex™ · TSMC N3E Class) Dual-Phase Mega Fab with 50,000 WSPM capacity and 3,000 production tools across Phase 1 and Phase 2 halls connected by an automated inter-phase AMHS skybridge."
+    />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/semicon-theme.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/utils/BufferGeometryUtils.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      :root {
+        --header-height: 48px;
+        --kpi-height: 38px;
+        --cat-height: 38px;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: "Manrope", system-ui, sans-serif;
+        background-color: var(--bg);
+        color: var(--ink);
+      }
+      .font-mono {
+        font-family: "IBM Plex Mono", monospace;
+      }
+      #three-canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        touch-action: none;
+      }
+      /* Custom Scrollbars */
+      ::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--line);
+        border-radius: 2px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--ink-3);
+      }
+
+      .btn-mega-nav {
+        background-color: var(--surface);
+        border: 1px solid var(--line);
+        color: var(--ink-2);
+        transition: all 0.15s ease;
+      }
+      .btn-mega-nav:hover {
+        border-color: var(--accent);
+        color: var(--ink);
+      }
+      .btn-mega-nav.active {
+        background-color: var(--accent);
+        border-color: var(--accent);
+        color: #ffffff !important;
+        box-shadow: 0 2px 8px rgba(14, 110, 107, 0.25);
+      }
+
+      .cat-pill {
+        transition: all 0.15s ease;
+      }
+      .cat-pill.active {
+        background-color: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+        box-shadow: 0 1px 4px rgba(14, 110, 107, 0.3);
+      }
+
+      /* Radar Minimap */
+      #minimap-container {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        width: 220px;
+        height: 120px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        z-index: 20;
+        user-select: none;
+      }
+
+      /* Floating Inspector Drawer */
+      #tool-drawer {
+        position: absolute;
+        top: calc(var(--header-height) + var(--kpi-height) + var(--cat-height) + 12px);
+        right: 16px;
+        width: 360px;
+        max-height: calc(100vh - 160px);
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        z-index: 25;
+        overflow-y: auto;
+        transform: translateX(390px);
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      #tool-drawer.open {
+        transform: translateX(0);
+      }
+
+      /* Tooltip */
+      #tool-tooltip {
+        position: absolute;
+        pointer-events: none;
+        background: rgba(28, 33, 38, 0.92);
+        color: #ffffff;
+        padding: 5px 9px;
+        border-radius: 5px;
+        font-size: 11px;
+        z-index: 30;
+        transform: translate(-50%, -125%);
+        white-space: nowrap;
+        display: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+
+      /* Semi status badge */
+      .state-productive {
+        background-color: rgba(16, 185, 129, 0.15);
+        color: #059669;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .state-standby {
+        background-color: rgba(245, 158, 11, 0.15);
+        color: #d97706;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+      }
+      .state-engineering {
+        background-color: rgba(59, 130, 246, 0.15);
+        color: #2563eb;
+        border: 1px solid rgba(59, 130, 246, 0.3);
+      }
+      .state-unscheduled_down {
+        background-color: rgba(239, 68, 68, 0.15);
+        color: #dc2626;
+        border: 1px solid rgba(239, 68, 68, 0.3);
+      }
+
+      /* Subtle pulse indicator */
+      @keyframes pulse-dot {
+        0% { transform: scale(0.95); opacity: 0.8; }
+        50% { transform: scale(1.15); opacity: 1; }
+        100% { transform: scale(0.95); opacity: 0.8; }
+      }
+      .pulse-beacon {
+        animation: pulse-dot 2s infinite ease-in-out;
+      }
+    </style>
+  </head>
+  <body class="flex flex-col h-screen select-none">
+    <!-- 1. TOP GLOBAL NAVIGATION BAR (Optimized Clean Architecture) -->
+    <header class="h-[var(--header-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-30 shadow-sm gap-2">
+      <!-- Left: Brand & 3D Twins Switcher -->
+      <div class="flex items-center gap-2.5 shrink-0">
+        <a href="index.html" class="flex items-center gap-2 group decoration-none shrink-0" title="SemiconFab.org">
+          <svg class="w-6 h-6 text-[var(--accent)] shrink-0" viewBox="0 0 50 50" fill="none">
+            <circle cx="25" cy="25" r="21" stroke="currentColor" stroke-width="2.8"/>
+            <line x1="12" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="9" y1="25" x2="41" y2="25" stroke="currentColor" stroke-width="1.4"/>
+            <line x1="12" y1="32" x2="38" y2="32" stroke="currentColor" stroke-width="1.4"/>
+            <rect x="23" y="21" width="8" height="8" rx="1.5" fill="var(--accent)"/>
+          </svg>
+          <div class="flex flex-col">
+            <div class="flex items-center gap-1.5 leading-none">
+              <span class="text-sm font-bold tracking-tight text-[var(--ink)] whitespace-nowrap">SemiconFab<span class="text-[var(--accent)]">.org</span></span>
+              <span class="px-1.5 py-0.5 text-[9px] font-mono font-semibold rounded bg-[var(--surface-2)] text-[var(--ink-2)] shrink-0">v1.8.0</span>
+              <span class="px-1.5 py-0.5 text-[9px] font-mono font-bold rounded bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 whitespace-nowrap shrink-0" id="badge-concept">Conceptual Model</span>
+            </div>
+            <span class="hidden xl:inline text-[10px] text-[var(--ink-3)] font-medium leading-tight mt-0.5 whitespace-nowrap" id="header-subtitle">3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout Model</span>
+          </div>
+        </a>
+
+        <!-- Sibling Twins Switcher Dropdown (Replaces crowded dual buttons) -->
+        <div class="relative group border-l border-[var(--line)] pl-2.5 shrink-0">
+          <button
+            type="button"
+            class="flex items-center gap-1.5 px-2 py-1 text-xs font-semibold rounded border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition whitespace-nowrap shadow-xs"
+            title="Switch 3D Twin Environment"
+          >
+            <i data-lucide="layers" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+            <span id="txt-twins-menu">3D Twins (3)</span>
+            <i data-lucide="chevron-down" class="w-3 h-3 text-[var(--ink-3)] opacity-70"></i>
+          </button>
+          <div class="hidden group-hover:block group-focus-within:block absolute top-full left-2.5 mt-1 w-52 bg-[var(--surface)] border border-[var(--line)] rounded-lg shadow-xl p-1 z-50">
+            <div class="px-2.5 py-1 text-[10px] font-mono font-bold text-[var(--ink-3)] uppercase tracking-wider" id="txt-twins-menu-hdr">Digital Twins</div>
+            <a href="twin-mega.html" class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs font-bold text-[var(--accent)] bg-[var(--surface-2)] decoration-none">
+              <span id="txt-menu-mega">3nm Mega Fab (3,000)</span>
+              <span class="text-[9px] font-mono px-1 py-0.5 rounded bg-[var(--accent)] text-white">Active</span>
+            </a>
+            <a href="twin.html" class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition">
+              <span id="txt-menu-pilot">300mm Pilot Fab (121)</span>
+              <span class="text-[9px] font-mono text-[var(--ink-3)]">FEOL</span>
+            </a>
+            <a href="twin-osat.html" class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition">
+              <span id="txt-menu-osat">OSAT Packaging (86)</span>
+              <span class="text-[9px] font-mono text-[var(--ink-3)]">Back-End</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center: Camera Presets (Compact Segmented Navigation) -->
+      <div class="flex items-center gap-1 bg-[var(--surface-2)] p-0.5 rounded-lg border border-[var(--line)] shrink-0 overflow-x-auto">
+        <button
+          onclick="setCameraView('overview')"
+          id="btn-cam-overview"
+          class="btn-mega-nav active px-2.5 py-1 text-xs font-semibold rounded-md flex items-center gap-1 whitespace-nowrap shrink-0"
+          title="Global Overview of Both Phases (3,000 Tools)"
+        >
+          <i data-lucide="layers" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+          <span id="txt-cam-overview">全景</span>
+        </button>
+        <button
+          onclick="setCameraView('phase1')"
+          id="btn-cam-phase1"
+          class="btn-mega-nav px-2 py-1 text-xs font-medium rounded-md flex items-center gap-1 whitespace-nowrap shrink-0"
+          title="Phase 1 West Hall (25k WSPM / 1,500 Tools)"
+        >
+          <i data-lucide="building" class="w-3.5 h-3.5"></i>
+          <span id="txt-cam-phase1">一期</span>
+        </button>
+        <button
+          onclick="setCameraView('skybridge')"
+          id="btn-cam-skybridge"
+          class="btn-mega-nav px-2 py-1 text-xs font-medium rounded-md flex items-center gap-1 whitespace-nowrap shrink-0"
+          title="Inter-Phase High-Speed AMHS Skybridge Spine"
+        >
+          <i data-lucide="git-merge" class="w-3.5 h-3.5 text-indigo-500"></i>
+          <span id="txt-cam-skybridge">天桥</span>
+        </button>
+        <button
+          onclick="setCameraView('phase2')"
+          id="btn-cam-phase2"
+          class="btn-mega-nav px-2 py-1 text-xs font-medium rounded-md flex items-center gap-1 whitespace-nowrap shrink-0"
+          title="Phase 2 East Hall (25k WSPM Expansion / 1,500 Tools)"
+        >
+          <i data-lucide="building-2" class="w-3.5 h-3.5"></i>
+          <span id="txt-cam-phase2">二期</span>
+        </button>
+        <button
+          onclick="setCameraView('euv')"
+          id="btn-cam-euv"
+          class="btn-mega-nav px-2 py-1 text-xs font-medium rounded-md flex items-center gap-1 text-amber-600 whitespace-nowrap shrink-0"
+          title="EUV 0.33NA & High-NA Mega Bay"
+        >
+          <i data-lucide="zap" class="w-3.5 h-3.5 text-amber-500"></i>
+          <span id="txt-cam-euv">EUV</span>
+        </button>
+        <button
+          onclick="setCameraView('top')"
+          id="btn-cam-top"
+          class="btn-mega-nav px-2 py-1 text-xs font-medium rounded-md flex items-center gap-1 whitespace-nowrap shrink-0"
+          title="Orthographic Top-Down Layout Map"
+        >
+          <i data-lucide="grid" class="w-3.5 h-3.5"></i>
+          <span id="txt-cam-top">顶视</span>
+        </button>
+        <div class="h-3.5 w-px bg-[var(--line)] mx-0.5"></div>
+        <button
+          id="btn-tour-toggle"
+          onclick="toggleMegaTour()"
+          class="px-2.5 py-1 text-xs font-semibold rounded-md bg-emerald-600 text-white hover:bg-emerald-700 transition flex items-center gap-1 shadow-sm whitespace-nowrap shrink-0"
+          title="Automated 3D Cinematic Fab Walkthrough"
+        >
+          <i data-lucide="play" class="w-3 h-3 fill-current"></i>
+          <span id="txt-tour-btn">巡检</span>
+        </button>
+      </div>
+
+      <!-- Right Action Controls (Never Wrap) -->
+      <div class="flex items-center gap-1.5 shrink-0">
+        <!-- Visual Heatmap Mode Selector -->
+        <div class="flex items-center gap-1 bg-[var(--surface-2)] px-2 py-0.5 rounded-lg border border-[var(--line)] text-xs shrink-0">
+          <i data-lucide="palette" class="w-3.5 h-3.5 text-[var(--ink-3)]"></i>
+          <select
+            id="heatmap-select"
+            onchange="setHeatmapMode(this.value)"
+            class="bg-transparent text-xs font-semibold text-[var(--ink)] focus:outline-none cursor-pointer py-0.5 whitespace-nowrap"
+            title="Cleanroom Visual Shading Mode"
+          >
+            <option value="realistic">洁净室原貌</option>
+            <option value="state">SEMI E10 状态</option>
+            <option value="vendor">OEM 厂商</option>
+            <option value="category">工艺大类</option>
+            <option value="power">功率热力</option>
+          </select>
+        </div>
+
+        <!-- Ceiling Structure Toggle -->
+        <button
+          onclick="toggleCeiling()"
+          id="btn-toggle-ceiling"
+          class="p-1.5 rounded-md border border-[var(--line)] bg-[var(--surface)] text-[var(--ink-2)] hover:text-[var(--ink)] hover:bg-[var(--surface-2)] transition shrink-0"
+          title="Toggle Cleanroom Ceiling & FFU Filter Units"
+        >
+          <i data-lucide="box" class="w-4 h-4"></i>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button
+          onclick="toggleTheme()"
+          id="btn-toggle-theme"
+          class="px-2 py-1 rounded-md border border-[var(--line)] bg-[var(--surface)] text-xs font-semibold text-[var(--ink)] hover:bg-[var(--surface-2)] transition flex items-center gap-1 shrink-0 whitespace-nowrap"
+          title="Toggle Day/Dark Theme"
+        >
+          <span id="theme-icon">☀️</span>
+          <span id="theme-label" class="hidden sm:inline">Day</span>
+        </button>
+
+        <!-- Language Toggle -->
+        <button
+          onclick="toggleLanguage()"
+          id="btn-toggle-lang"
+          class="px-2.5 py-1 rounded-md border border-[var(--line)] bg-[var(--surface)] text-xs font-semibold text-[var(--ink)] hover:bg-[var(--surface-2)] transition font-mono shrink-0 whitespace-nowrap min-w-[76px] text-center"
+          title="Switch Language (En/中文)"
+        >
+          En/中文
+        </button>
+
+        <!-- Guide Link (GEMINI.md standard) -->
+        <a
+          href="guide.html"
+          class="flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-md bg-[var(--accent)] text-white hover:opacity-90 transition shadow-sm shrink-0 whitespace-nowrap"
+          title="User Guide & Cleanroom Handbook"
+        >
+          <i data-lucide="book-open" class="w-3.5 h-3.5"></i>
+          <span>Guide</span>
+        </a>
+      </div>
+    </header>
+
+    <!-- 2. REAL-TIME MEGA FAB KPI STATUS STRIP -->
+    <div class="h-[var(--kpi-height)] bg-[var(--surface-2)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-20 text-xs overflow-x-auto font-mono">
+      <div class="flex items-center gap-4 shrink-0">
+        <div class="flex items-center gap-1.5">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-beacon"></span>
+          <span class="text-[var(--ink-3)] font-medium" id="kpi-lbl-tools">Total Tools:</span>
+          <span class="font-bold text-[var(--ink)]" id="kpi-val-tools">3,000</span>
+          <span class="text-[10px] text-[var(--ink-3)]">(P1: 1,500 · P2: 1,500)</span>
+        </div>
+        <div class="h-3 w-px bg-[var(--line)]"></div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-node">Node:</span>
+          <span class="font-bold text-[var(--accent)]">3nm FinFET (Fin-Flex™)</span>
+        </div>
+        <div class="h-3 w-px bg-[var(--line)]"></div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-cap">Capacity:</span>
+          <span class="font-bold text-[var(--ink)]">50,000 WSPM (MegaFab)</span>
+        </div>
+        <div class="h-3 w-px bg-[var(--line)]"></div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-area">Cleanroom Area:</span>
+          <span class="font-bold text-[var(--ink)]">68,600 m² (Class 1)</span>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-4 shrink-0 pl-4">
+        <div class="flex items-center gap-1.5">
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-amhs">AMHS Fleet:</span>
+          <span id="kpi-val-amhs" class="font-semibold text-emerald-600">86 OHT Loops Active</span>
+        </div>
+        <div class="h-3 w-px bg-[var(--line)]"></div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-capex">Est. Capex:</span>
+          <span class="font-semibold text-[var(--ink)]">$28.4 Billion</span>
+        </div>
+        <div class="h-3 w-px bg-[var(--line)]"></div>
+        <div class="flex items-center gap-1.5">
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-oee">Fab OEE:</span>
+          <span class="font-semibold text-emerald-600">88.4%</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. PROCESS CATEGORY & LIVE FILTER BAR -->
+    <div class="h-[var(--cat-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-20 text-xs gap-3">
+      <!-- Category Filter Pills -->
+      <div class="flex items-center gap-1 overflow-x-auto shrink-0 py-1">
+        <button onclick="filterCategory('all')" class="cat-pill active px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="all">
+          <span id="cat-all">全部 (3,000)</span>
+        </button>
+        <button onclick="filterCategory('litho')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="litho">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #f59e0b;"></span>
+          <span id="cat-litho">EUV/DUV光刻 (600)</span>
+        </button>
+        <button onclick="filterCategory('etch')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="etch">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #ec4899;"></span>
+          <span id="cat-etch">等离子刻蚀 (600)</span>
+        </button>
+        <button onclick="filterCategory('thinfilm')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="thinfilm">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #3b82f6;"></span>
+          <span id="cat-thinfilm">薄膜沉积 ALD/CVD/PVD (900)</span>
+        </button>
+        <button onclick="filterCategory('cmp')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="cmp">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #06b6d4;"></span>
+          <span id="cat-cmp">化学机械平坦化 CMP (300)</span>
+        </button>
+        <button onclick="filterCategory('thermal')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="thermal">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #f97316;"></span>
+          <span id="cat-thermal">离子注入与热退火 (300)</span>
+        </button>
+        <button onclick="filterCategory('wet')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="wet">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #10b981;"></span>
+          <span id="cat-wet">湿法清洗 (148)</span>
+        </button>
+        <button onclick="filterCategory('metrology')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="metrology">
+          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #8b5cf6;"></span>
+          <span id="cat-metrology">量测与缺陷检测 (152)</span>
+        </button>
+      </div>
+
+      <!-- Live Search Box -->
+      <div class="relative flex items-center min-w-[200px] max-w-[280px] w-full">
+        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2 text-[var(--ink-3)]"></i>
+        <input
+          type="text"
+          id="tool-search-input"
+          oninput="handleSearch(this.value)"
+          placeholder="搜索型号/厂商/工艺/Bay..."
+          class="w-full pl-7 pr-7 py-1 text-xs bg-[var(--surface-2)] border border-[var(--line)] rounded-md text-[var(--ink)] placeholder-[var(--ink-3)] focus:outline-none focus:border-[var(--accent)] font-medium transition"
+        />
+        <button
+          onclick="clearSearch()"
+          id="btn-clear-search"
+          class="hidden absolute right-2 text-[var(--ink-3)] hover:text-[var(--ink)]"
+        >
+          <i data-lucide="x" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 4. 3D WEBGL VIEWPORT CONTAINER -->
+    <main class="relative flex-1 overflow-hidden" id="viewport-container">
+      <div id="three-canvas"></div>
+
+      <!-- Conceptual Model Floating Badge -->
+      <div class="absolute top-3 left-3 bg-[var(--surface)]/90 backdrop-blur-md border border-[var(--line)] px-2.5 py-1 rounded-md text-[11px] font-mono flex items-center gap-2 shadow-xs pointer-events-none z-10">
+        <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+        <span class="font-bold text-[var(--ink)]" id="lbl-viewport-concept">Conceptual Layout Model</span>
+        <span class="text-[var(--ink-3)]">·</span>
+        <span class="text-[var(--accent)]" id="lbl-viewport-scale">3,000 Tools Scale Simulation</span>
+      </div>
+
+      <!-- Hover Tooltip -->
+      <div id="tool-tooltip"></div>
+
+      <!-- 2D Radar Minimap -->
+      <div id="minimap-container">
+        <div class="flex items-center justify-between px-2 py-1 bg-[var(--surface-2)] border-b border-[var(--line)] text-[10px] font-mono font-semibold">
+          <span id="lbl-radar-title">MEGA FAB RADAR · 570M</span>
+          <span class="text-[var(--accent)]" id="lbl-radar-phase">Concept · 50k WSPM</span>
+        </div>
+        <canvas id="minimap-canvas" width="220" height="98" class="block cursor-crosshair"></canvas>
+      </div>
+
+      <!-- Tour Subtitle Banner (when tour is running) -->
+      <div
+        id="tour-banner"
+        class="hidden absolute bottom-5 left-1/2 -translate-x-1/2 bg-[rgba(28,33,38,0.92)] text-white px-5 py-2.5 rounded-full shadow-xl border border-white/20 backdrop-blur-md flex items-center gap-3 z-20 pointer-events-none"
+      >
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <div class="flex flex-col">
+          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400" id="tour-step-tag">Phase 1 West Cleanroom</span>
+          <span class="text-sm font-medium" id="tour-step-desc">Inspecting high-density FEOL 3nm FinFET plasma etch cluster bays.</span>
+        </div>
+      </div>
+
+      <!-- Machine Inspector Slide-out Drawer -->
+      <div id="tool-drawer">
+        <div class="p-3 bg-[var(--surface-2)] border-b border-[var(--line)] flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full" id="drawer-dot"></span>
+            <div>
+              <h3 class="text-xs font-bold leading-none text-[var(--ink)]" id="drawer-tool-id">P1-BAY01-ASML-001</h3>
+              <span class="text-[10px] text-[var(--ink-3)] font-mono" id="drawer-tool-loc">Phase 1 · Bay 01 · Row North</span>
+            </div>
+          </div>
+          <button onclick="closeDrawer()" class="p-1 rounded text-[var(--ink-3)] hover:text-[var(--ink)] hover:bg-[var(--line)]">
+            <i data-lucide="x" class="w-4 h-4"></i>
+          </button>
+        </div>
+
+        <div class="p-3 space-y-3 text-xs">
+          <!-- Main identity -->
+          <div>
+            <div class="text-[10px] font-mono text-[var(--ink-3)] uppercase font-semibold" id="lbl-drawer-model">OEM & Model</div>
+            <div class="text-sm font-extrabold text-[var(--ink)] mt-0.5" id="drawer-model">ASML Twinscan NXE:3800E</div>
+            <div class="text-[11px] text-[var(--accent)] font-semibold mt-0.5" id="drawer-category">0.33 NA High-Productivity EUV Scanner</div>
+          </div>
+
+          <!-- Status Pill -->
+          <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--surface-2)] border border-[var(--line)]">
+            <div class="flex flex-col">
+              <span class="text-[10px] font-mono text-[var(--ink-3)]" id="lbl-drawer-state">SEMI E10 State</span>
+              <span class="text-xs font-bold mt-0.5" id="drawer-state-text">Productive (生产加工中)</span>
+            </div>
+            <span class="px-2 py-0.5 text-[10px] font-bold font-mono rounded" id="drawer-state-badge">RUNNING</span>
+          </div>
+
+          <!-- Process application -->
+          <div>
+            <div class="text-[10px] font-mono text-[var(--ink-3)] uppercase font-semibold" id="lbl-drawer-process">Process Application (3nm FinFET)</div>
+            <p class="text-xs text-[var(--ink-2)] mt-1 leading-relaxed bg-[var(--surface-2)] p-2 rounded border border-[var(--line)] font-medium" id="drawer-process-desc">
+              Critical 3nm FinFET pitch patterning (Fin Pitch ~24nm, CPP ~45nm), FinFlex cell architecture (3-2, 2-2, 2-1), and EUV multi-patterning at 13.5nm wavelength.
+            </p>
+          </div>
+
+          <!-- Live telemetry & specs table -->
+          <div class="border border-[var(--line)] rounded-lg overflow-hidden text-[11px]">
+            <div class="grid grid-cols-2 bg-[var(--surface-2)] px-2.5 py-1.5 border-b border-[var(--line)] font-semibold">
+              <span id="lbl-param">Parameter</span>
+              <span id="lbl-live-val">Live Telemetry</span>
+            </div>
+            <div class="divide-y divide-[var(--line)]">
+              <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
+                <span>Power Draw</span>
+                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-power">1,180 kW</span>
+              </div>
+              <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
+                <span>Chamber Vacuum</span>
+                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-vacuum">1.2 × 10⁻⁷ Torr</span>
+              </div>
+              <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
+                <span>UPW Flow</span>
+                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-upw">42 L/min</span>
+              </div>
+              <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
+                <span>Exhaust CFM</span>
+                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-exhaust">850 CFM</span>
+              </div>
+              <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
+                <span>Active Wafer Lot</span>
+                <span class="font-mono font-semibold text-emerald-600" id="drawer-val-lot">LOT-3N-8902 (#18/25)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="flex items-center gap-2 pt-1">
+            <button
+              onclick="focusSelectedTool()"
+              class="flex-1 py-1.5 text-xs font-semibold rounded bg-[var(--surface-2)] border border-[var(--line)] text-[var(--ink)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition flex items-center justify-center gap-1.5"
+            >
+              <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+              <span id="btn-focus-cam">镜头聚焦 Focus</span>
+            </button>
+            <a
+              id="btn-goto-catalog"
+              href="catalog-demo.html"
+              target="_blank"
+              class="flex-1 py-1.5 text-xs font-semibold rounded bg-[var(--accent)] text-white hover:opacity-90 transition flex items-center justify-center gap-1.5 decoration-none"
+            >
+              <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+              <span id="btn-open-catalog">在设备库查看 Catalog</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- 5. THREE.JS ENGINE & MEGA FAB LOGIC SCRIPT -->
+    <script>
+      /* =========================================================================
+       * SemiconFab.org - 3nm Dual-Phase Mega Fab (3,000 Tools) Digital Twin Engine
+       * High-Performance Instanced WebGL Architecture · Rock-solid 60 FPS
+       * ========================================================================= */
+
+      // Global State
+      let scene, camera, renderer, controls;
+      let instancedGroups = []; // Array of { mesh, archetype, basePositions, tools }
+      let toolsDatabase = [];   // Exactly 3,000 tool records
+      let ohtVehicles = [];     // Dynamic Overhead Hoist Transport vehicles
+      let ceilingGroup = null;
+      let showCeiling = false;
+      let activeHeatmapMode = "realistic"; // realistic | state | vendor | category | power
+      let activeCategoryFilter = "all";
+      let activeSearchTerm = "";
+      let selectedToolIndex = -1;
+      let hoveredInstance = null; // { mesh, instanceId, toolIndex }
+
+      let raycaster = new THREE.Raycaster();
+      let mouse = new THREE.Vector2(-9999, -9999);
+      let highlightBox = null;
+
+      let isTourActive = false;
+      let tourTimer = null;
+      let tourStepIndex = 0;
+
+      let currentLang = (localStorage.getItem("semicon_lang") || "zh").startsWith("zh") ? "zh" : "en";
+      let currentTheme = localStorage.getItem("semicon_theme") || "light";
+
+      // Archetype Definitions for the 10 core leading-edge tool classes
+      // In Cleanroom Realistic Mode: Authentic off-white / light platinum / technical slate industrial materials
+      const ARCHETYPES = {
+        euv_scanner: {
+          name: "EUV Scanner (ASML NXE:3800E)",
+          w: 4.2, d: 8.2, h: 3.5,
+          color: 0xe2e8f0, // Cleanroom Light Platinum
+          trimColor: 0x0284c7
+        },
+        track_coater: {
+          name: "Track Coater/Dev (TEL LITHIUS Pro Z)",
+          w: 2.2, d: 6.8, h: 2.6,
+          color: 0xeef2f6, // Cleanroom Eggshell
+          trimColor: 0x475569
+        },
+        etch_cluster: {
+          name: "Plasma Etch Cluster (Lam Sense.i / AMAT Centris)",
+          w: 3.4, d: 5.2, h: 2.6,
+          color: 0xedf2f7, // Cleanroom Off-White
+          trimColor: 0x831843
+        },
+        dep_cluster: {
+          name: "Thin Film CVD/ALD (AMAT Producer / ASM Pulsar)",
+          w: 3.2, d: 5.4, h: 2.7,
+          color: 0xf1f5f9, // Cleanroom Bright White
+          trimColor: 0x1e3a8a
+        },
+        pvd_cluster: {
+          name: "PVD Metallization (AMAT Endura)",
+          w: 3.8, d: 5.6, h: 2.8,
+          color: 0xe2e8f0, // Cleanroom Silver-White
+          trimColor: 0x0891b2
+        },
+        cmp_tool: {
+          name: "Chemical Mechanical Polishing (AMAT Reflexion / Ebara)",
+          w: 2.8, d: 4.8, h: 2.4,
+          color: 0xf8fafc, // Pure Cleanroom White
+          trimColor: 0x059669
+        },
+        thermal_furnace: {
+          name: "Vertical Furnace / RTA (TELINDY / SCREEN)",
+          w: 2.2, d: 3.6, h: 3.6,
+          color: 0x334155, // Technical Charcoal Thermal Tower
+          trimColor: 0xd97706
+        },
+        implanter: {
+          name: "Ion Implantation (Axcelis Purion)",
+          w: 3.2, d: 5.8, h: 2.8,
+          color: 0xe2e8f0, // Cleanroom White
+          trimColor: 0xea580c
+        },
+        wet_bench: {
+          name: "Single-Wafer Wet Clean (SCREEN SU-3300)",
+          w: 2.5, d: 4.6, h: 2.5,
+          color: 0xf0fdfa, // Cleanroom Mint-White
+          trimColor: 0x0d9488
+        },
+        metrology: {
+          name: "In-line Metrology & OCD (KLA 2935 / PROVision)",
+          w: 2.2, d: 3.2, h: 2.6,
+          color: 0x384152, // Dark Vibration-Isolated Column
+          trimColor: 0x7c3aed
+        }
+      };
+
+      // Bay Mapping Specification across the 10 parallel cleanroom bays
+      const BAY_TEMPLATES = [
+        {
+          bayNum: "01",
+          zhName: "EUV 超高精度光刻与纳米涂胶显影湾 (3nm Fin 与 M0/M1 关键层)",
+          enName: "EUV 0.33NA Critical Patterning & Track Bay (3nm Fin Pitch ~24nm & M0/M1)",
+          category: "litho",
+          isAmberLight: true,
+          toolMix: [
+            { archetype: "euv_scanner", vendor: "ASML", model: "Twinscan NXE:3800E", spec: "0.33NA EUV (13.5nm), ~220 wph, 3nm FinFET Fin & M0/M1 Critical Pitch Lithography", power: 1180 },
+            { archetype: "track_coater", vendor: "Tokyo Electron", model: "CLEAN TRACK LITHIUS Pro Z", spec: "Direct-coupled EUV track with extreme CD uniformity & chemical dispense", power: 75 }
+          ]
+        },
+        {
+          bayNum: "02",
+          zhName: "DUV 浸没式光刻与中后道金属层光刻湾",
+          enName: "DUV ArFi Immersion Lithography & Track Bay (Mid & Back-End Layers)",
+          category: "litho",
+          isAmberLight: true,
+          toolMix: [
+            { archetype: "euv_scanner", vendor: "ASML", model: "Twinscan NXT:2100i", spec: "193nm ArF Immersion scanner for Middle-of-Line interconnects & routing layers", power: 210 },
+            { archetype: "track_coater", vendor: "Tokyo Electron", model: "CLEAN TRACK LITHIUS Pro V", spec: "High-throughput DUV immersion resist coater/developer with bevel rinse", power: 65 }
+          ]
+        },
+        {
+          bayNum: "03",
+          zhName: "FEOL 3nm FinFET 鳍线成形与高深宽比关键栅极刻蚀湾",
+          enName: "FEOL 3nm FinFET High-Aspect-Ratio Fin Formation & Gate Etch Bay",
+          category: "etch",
+          toolMix: [
+            { archetype: "etch_cluster", vendor: "Lam Research", model: "Sense.i G-Series ALE", spec: "Atomic Layer Etch (ALE) of 3nm FinFET fins (~24nm pitch) and dummy poly gate RMG removal", power: 48 },
+            { archetype: "etch_cluster", vendor: "Tokyo Electron", model: "Episode 300mm", spec: "Cryogenic high-aspect-ratio plasma etch for sub-3nm contact trenches", power: 52 }
+          ]
+        },
+        {
+          bayNum: "04",
+          zhName: "MEOL 有源区栅极上触点 (COAG) 与 BEOL 双大马士革低介电刻蚀湾",
+          enName: "MEOL Contact Over Active Gate (COAG) & BEOL Dual-Damascene Low-k Etch Bay",
+          category: "etch",
+          toolMix: [
+            { archetype: "etch_cluster", vendor: "Applied Materials", model: "Centris Sym3 Y", spec: "Cobalt/Tungsten plug contact and BEOL dual-damascene copper trench plasma etch", power: 45 },
+            { archetype: "etch_cluster", vendor: "Lam Research", model: "Kiyo FX Conductor Etch", spec: "Metal gate cut and spacer plasma dry etch platform with zero CD damage", power: 42 }
+          ]
+        },
+        {
+          bayNum: "05",
+          zhName: "原子层沉积 (ALD) 高介电常数栅介质与源漏选择性 SiP/SiGe 外延湾",
+          enName: "ALD High-k Gate Dielectric (HfO2/ZrO2) & Selective Epitaxy (SiP/SiGe) Bay",
+          category: "thinfilm",
+          toolMix: [
+            { archetype: "dep_cluster", vendor: "ASM International", model: "Pulsar 3000 ALD", spec: "HfO2/ZrO2 high-k gate dielectric ALD with single atomic layer precision and interfacial tuning", power: 38 },
+            { archetype: "dep_cluster", vendor: "Applied Materials", model: "Centura Epi", spec: "Ultra-clean SiP/SiGe source/drain selective strain heteroepitaxy", power: 85 }
+          ]
+        },
+        {
+          bayNum: "06",
+          zhName: "化学气相沉积 (PECVD/SACVD) 极低介电常数 (Low-k) 薄膜湾",
+          enName: "Chemical Vapor Deposition (PECVD/SACVD Low-k Dielectric) Bay",
+          category: "thinfilm",
+          toolMix: [
+            { archetype: "dep_cluster", vendor: "Applied Materials", model: "Producer XP Precision", spec: "Flowable CVD and ultra low-k (k<2.2) porous dielectric films with UV cure", power: 65 },
+            { archetype: "dep_cluster", vendor: "Lam Research", model: "Vector Excel PECVD", spec: "Stress-relieved silicon nitride and oxide barrier film deposition", power: 58 }
+          ]
+        },
+        {
+          bayNum: "07",
+          zhName: "物理气相沉积 (PVD) 铜阻挡层、种子层与钌衬垫金属化湾",
+          enName: "PVD Copper Barrier/Seed, Cobalt Liner & Ruthenium Metallization Bay",
+          category: "thinfilm",
+          toolMix: [
+            { archetype: "pvd_cluster", vendor: "Applied Materials", model: "Endura CuBS / Clover", spec: "Self-ionized plasma PVD for 3nm M0/M1 copper barrier/seed & Ru liner with zero voiding", power: 72 },
+            { archetype: "pvd_cluster", vendor: "Canon Anelva", model: "NC7900 PVD", spec: "Magnetic tunneling junction & specialized refractory metal PVD", power: 55 }
+          ]
+        },
+        {
+          bayNum: "08",
+          zhName: "化学机械平坦化 (CMP) 铜/钨/介质多抛盘平整研磨湾",
+          enName: "Chemical Mechanical Planarization (CMP) Cu/W/Oxide Multi-Platen Bay",
+          category: "cmp",
+          toolMix: [
+            { archetype: "cmp_tool", vendor: "Applied Materials", model: "Reflexion LK Prime", spec: "Multi-zone closed-loop CMP with real-time optical endpoint profiling and integrated cleaner", power: 42 },
+            { archetype: "cmp_tool", vendor: "Ebara", model: "FREX 300X", spec: "Precision 4-head chemical polishing with ultra-low dishing & erosion", power: 39 }
+          ]
+        },
+        {
+          bayNum: "09",
+          zhName: "超高能量离子注入与激光/闪光快速热退火湾",
+          enName: "Ion Implantation & Laser Spike/Flash Thermal Anneal Bay",
+          category: "thermal",
+          toolMix: [
+            { archetype: "implanter", vendor: "Axcelis", model: "Purion H High-Current", spec: "High-dose shallow junction source/drain implant with zero particle adder", power: 120 },
+            { archetype: "thermal_furnace", vendor: "Tokyo Electron", model: "TELINDY Plus Furnace", spec: "300mm ultra-thin gate oxidation and batch nitrogen drive-in furnace", power: 95 }
+          ]
+        },
+        {
+          bayNum: "10",
+          zhName: "先进制程缺陷扫描、CD-SEM 关键尺寸量测与单晶圆清洗湾",
+          enName: "In-line Metrology, CD-SEM, Overlay, Defect Review & Wet Clean Bay",
+          category: "metrology",
+          toolMix: [
+            { archetype: "metrology", vendor: "KLA", model: "2935 Broadband Plasma", spec: "Sub-10nm optical darkfield defect discovery & nanometrology review", power: 35 },
+            { archetype: "wet_bench", vendor: "SCREEN", model: "SU-3300 Single Wafer", spec: "Supercritical CO2 drying and nano-bubble defect-free wet cleaning", power: 32 }
+          ]
+        }
+      ];
+
+      // =========================================================================
+      // 1. DATA GENERATION: Synthesize 3,000 High-Fidelity Production Tools
+      // =========================================================================
+      function generateMegaFabDataset() {
+        toolsDatabase = [];
+        const phases = [
+          { id: "P1", nameZh: "第一期 (西厂区 25k 主产线)", nameEn: "Phase 1 (West Hall - 25k Line)", xOffset: -135 },
+          { id: "P2", nameZh: "第二期 (东厂区 25k 扩产线)", nameEn: "Phase 2 (East Hall - 25k Expansion)", xOffset: 135 }
+        ];
+
+        let globalCounter = 0;
+
+        phases.forEach((phase) => {
+          BAY_TEMPLATES.forEach((bayDef, bayIdx) => {
+            // Z center for this bay (-54 to +54 in 12m increments)
+            const zCenter = -54 + bayIdx * 12;
+
+            // Inside each bay, there are 2 facing rows: North row (Z - 3.2m) and South row (Z + 3.2m)
+            const rows = [
+              { name: "North", z: zCenter - 3.2, rotY: 0 },
+              { name: "South", z: zCenter + 3.2, rotY: Math.PI }
+            ];
+
+            // 75 tools per row -> 25 equipment cells of 3 tools each with 3.3m service chase gaps
+            const toolsPerRow = 75;
+
+            rows.forEach((row) => {
+              for (let i = 0; i < toolsPerRow; i++) {
+                const clusterIdx = Math.floor(i / 3);
+                const posInCluster = i % 3; // 0, 1, 2
+                const clusterCenterX = -96 + clusterIdx * 8.0;
+                const localX = clusterCenterX + (posInCluster - 1) * 2.35;
+                const worldX = phase.xOffset + localX;
+                const worldZ = row.z;
+
+                // Alternate tool types from template mix
+                const toolTemplate = bayDef.toolMix[i % bayDef.toolMix.length];
+                
+                // Deterministic SEMI E10 state distribution
+                // ~82% Productive, ~10% Standby, ~5% Engineering, ~3% Unscheduled Down
+                const stateRand = ((globalCounter * 9301 + 49297) % 233280) / 233280;
+                let semiState = "productive";
+                if (stateRand > 0.97) semiState = "unscheduled_down";
+                else if (stateRand > 0.92) semiState = "engineering";
+                else if (stateRand > 0.82) semiState = "standby";
+
+                const toolRecord = {
+                  index: globalCounter,
+                  toolId: `${phase.id}-B${bayDef.bayNum}-${toolTemplate.vendor.replace(/\s+/g, "").toUpperCase()}-${String(i + 1).padStart(3, "0")}`,
+                  phaseId: phase.id,
+                  phaseNameZh: phase.nameZh,
+                  phaseNameEn: phase.nameEn,
+                  bayNum: bayDef.bayNum,
+                  bayNameZh: bayDef.zhName,
+                  bayNameEn: bayDef.enName,
+                  rowName: row.name,
+                  category: toolTemplate.archetype === "wet_bench" ? "wet" : bayDef.category,
+                  archetype: toolTemplate.archetype,
+                  vendor: toolTemplate.vendor,
+                  model: toolTemplate.model,
+                  specZh: toolTemplate.spec,
+                  specEn: toolTemplate.spec,
+                  powerKw: toolTemplate.power + (i % 7) * 2,
+                  semiState: semiState,
+                  pos: { x: worldX, y: 0, z: worldZ },
+                  rotY: row.rotY,
+                  lotId: `LOT-3N-${(1000 + (globalCounter % 8999))}`
+                };
+
+                toolsDatabase.push(toolRecord);
+                globalCounter++;
+              }
+            });
+          });
+        });
+
+        console.log(`Generated ${toolsDatabase.length} Mega Fab tool records.`);
+      }
+
+      // =========================================================================
+      // 2. THREE.JS INITIALIZATION & SCENE GRAPH SETUP
+      // =========================================================================
+      function initThree() {
+        const container = document.getElementById("three-canvas");
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+
+        scene = new THREE.Scene();
+        updateSceneThemeBackground();
+
+        camera = new THREE.PerspectiveCamera(45, width / height, 0.5, 1600);
+        // Default Overview position: dramatic, closer cinematic perspective
+        camera.position.set(-20, 85, 160);
+
+        renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer.setSize(width, height);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.toneMapping = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.15;
+        container.appendChild(renderer.domElement);
+
+        controls = new THREE.OrbitControls(camera, renderer.domElement);
+        controls.enableDamping = true;
+        controls.dampingFactor = 0.06;
+        controls.maxPolarAngle = Math.PI / 2 - 0.04; // Don't flip below cleanroom floor
+        controls.minDistance = 6;
+        controls.maxDistance = 750;
+        controls.target.set(0, 3, 0);
+
+        // Lighting System
+        setupLighting();
+
+        // Build Cleanroom Structural Envelope
+        buildCleanroomArchitecture();
+
+        // Build 3,000 Tools via InstancedMesh for 60 FPS performance
+        buildInstancedMegaTools();
+
+        // Build AMHS Overhead Hoist Transport (OHT) Rail & Vehicle System
+        buildAmhsSystem();
+
+        // Interaction Listeners
+        window.addEventListener("resize", onWindowResize);
+        renderer.domElement.addEventListener("mousemove", onMouseMove);
+        renderer.domElement.addEventListener("click", onCanvasClick);
+
+        // Render Loop
+        animate();
+
+        // Initialize Minimap Radar
+        initMinimap();
+      }
+
+      function updateSceneThemeBackground() {
+        const isDark = currentTheme === "dark";
+        const bgHex = isDark ? 0x12161a : 0xf2f1ec;
+        scene.background = new THREE.Color(bgHex);
+        scene.fog = new THREE.Fog(bgHex, 450, 1600);
+      }
+
+      function setupLighting() {
+        const isDark = currentTheme === "dark";
+        const ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 0.75 : 0.95);
+        scene.add(ambientLight);
+
+        const mainDirLight = new THREE.DirectionalLight(0xfffef9, isDark ? 0.9 : 1.25);
+        mainDirLight.position.set(60, 120, 80);
+        scene.add(mainDirLight);
+
+        // Secondary soft fill light
+        const fillLight = new THREE.DirectionalLight(0xcfd8dc, isDark ? 0.5 : 0.65);
+        fillLight.position.set(-60, 80, -80);
+        scene.add(fillLight);
+
+        // Amber Photolithography Cleanroom Glow for Bay 01 & 02
+        const amberLightP1 = new THREE.PointLight(0xffb703, 1.8, 90);
+        amberLightP1.position.set(-135, 12, -48);
+        scene.add(amberLightP1);
+
+        const amberLightP2 = new THREE.PointLight(0xffb703, 1.8, 90);
+        amberLightP2.position.set(135, 12, -48);
+        scene.add(amberLightP2);
+      }
+
+      // =========================================================================
+      // 3. ARCHITECTURE: Cleanroom Floors, Walls, Skybridge, & FFU Ceiling
+      // =========================================================================
+      function buildCleanroomArchitecture() {
+        const isDark = currentTheme === "dark";
+
+        // 1. Raised Access Floor with Perforated Tile Grid Texture
+        const floorCanvas = document.createElement("canvas");
+        floorCanvas.width = 512;
+        floorCanvas.height = 512;
+        const ctx = floorCanvas.getContext("2d");
+        ctx.fillStyle = isDark ? "#1a2128" : "#f7f6f2";
+        ctx.fillRect(0, 0, 512, 512);
+
+        // Grid lines (600mm cleanroom raised floor tiles)
+        ctx.strokeStyle = isDark ? "#283440" : "#dedad0";
+        ctx.lineWidth = 2;
+        for (let i = 0; i <= 512; i += 64) {
+          ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 512); ctx.stroke();
+          ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(512, i); ctx.stroke();
+        }
+        // Central aisle demarcation strip
+        ctx.fillStyle = isDark ? "#243240" : "#ebe8de";
+        ctx.fillRect(0, 236, 512, 40);
+
+        const floorTexture = new THREE.CanvasTexture(floorCanvas);
+        floorTexture.wrapS = THREE.RepeatWrapping;
+        floorTexture.wrapT = THREE.RepeatWrapping;
+        floorTexture.repeat.set(120, 36);
+
+        const floorMat = new THREE.MeshStandardMaterial({
+          map: floorTexture,
+          roughness: 0.35,
+          metalness: 0.15
+        });
+
+        // Giant cleanroom ground plate (580m × 150m)
+        const floorGeo = new THREE.PlaneGeometry(580, 150);
+        const floorMesh = new THREE.Mesh(floorGeo, floorMat);
+        floorMesh.rotation.x = -Math.PI / 2;
+        floorMesh.position.y = -0.05;
+        floorMesh.receiveShadow = true;
+        scene.add(floorMesh);
+
+        // 2. Phase 1 & Phase 2 Enclosure Curtains / Perimeter Glass Panels
+        const wallMat = new THREE.MeshStandardMaterial({
+          color: isDark ? 0x222c36 : 0xe5e2d8,
+          roughness: 0.5,
+          metalness: 0.2
+        });
+
+        // Phase 1 Hall Shell outline (West)
+        const p1Shell = new THREE.BoxGeometry(226, 8, 134);
+        const p1Edges = new THREE.EdgesGeometry(p1Shell);
+        const p1Outline = new THREE.LineSegments(p1Edges, new THREE.LineBasicMaterial({ color: 0x0e6e6b, opacity: 0.45, transparent: true }));
+        p1Outline.position.set(-135, 4, 0);
+        scene.add(p1Outline);
+
+        // Phase 2 Hall Shell outline (East)
+        const p2Shell = new THREE.BoxGeometry(226, 8, 134);
+        const p2Edges = new THREE.EdgesGeometry(p2Shell);
+        const p2Outline = new THREE.LineSegments(p2Edges, new THREE.LineBasicMaterial({ color: 0x0e6e6b, opacity: 0.45, transparent: true }));
+        p2Outline.position.set(135, 4, 0);
+        scene.add(p2Outline);
+
+        // 3. Central Inter-Phase Skybridge Gallery (Connects X = -22 to X = +22)
+        const skybridgeGroup = new THREE.Group();
+
+        // Skybridge Glass Walls & Elevated Deck
+        const bridgeFloorGeo = new THREE.BoxGeometry(46, 0.4, 28);
+        const bridgeFloorMat = new THREE.MeshStandardMaterial({
+          color: isDark ? 0x1f2730 : 0xebe8de,
+          roughness: 0.3,
+          metalness: 0.4
+        });
+        const bridgeFloor = new THREE.Mesh(bridgeFloorGeo, bridgeFloorMat);
+        bridgeFloor.position.set(0, 0.1, 0);
+        skybridgeGroup.add(bridgeFloor);
+
+        // Skybridge Floor-to-Ceiling High-Tech Cleanroom Glass (North & South)
+        const glassMat = new THREE.MeshPhysicalMaterial({
+          color: 0x88ccff,
+          transparent: true,
+          opacity: 0.28,
+          roughness: 0.1,
+          metalness: 0.1,
+          transmission: 0.85,
+          ior: 1.5
+        });
+
+        const northGlass = new THREE.Mesh(new THREE.BoxGeometry(46, 6.5, 0.3), glassMat);
+        northGlass.position.set(0, 3.25, 14);
+        skybridgeGroup.add(northGlass);
+
+        const southGlass = new THREE.Mesh(new THREE.BoxGeometry(46, 6.5, 0.3), glassMat);
+        southGlass.position.set(0, 3.25, -14);
+        skybridgeGroup.add(southGlass);
+
+        // Structural Truss Beams along the Skybridge
+        const trussMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8, roughness: 0.3 });
+        for (let bx = -20; bx <= 20; bx += 10) {
+          const colN = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 6.5), trussMat);
+          colN.position.set(bx, 3.25, 14);
+          skybridgeGroup.add(colN);
+
+          const colS = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 6.5), trussMat);
+          colS.position.set(bx, 3.25, -14);
+          skybridgeGroup.add(colS);
+        }
+
+        scene.add(skybridgeGroup);
+
+        // 1. Equipment Cell Plinths (Segmented pedestals for 25 cells of 3 tools each)
+        const plinthMat = new THREE.MeshStandardMaterial({
+          color: isDark ? 0x1e2732 : 0xd8d4c8,
+          roughness: 0.45,
+          metalness: 0.25
+        });
+        const amberPlinthMat = new THREE.MeshStandardMaterial({
+          color: isDark ? 0x3d2c16 : 0xfef08a,
+          roughness: 0.45,
+          metalness: 0.25
+        });
+        const colMat = new THREE.MeshStandardMaterial({
+          color: isDark ? 0x334155 : 0xf1f5f9,
+          roughness: 0.3,
+          metalness: 0.2
+        });
+        const colBaseMat = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          roughness: 0.5,
+          metalness: 0.7
+        });
+
+        const plinthBoxGeo = new THREE.BoxGeometry(6.8, 0.12, 4.4);
+        const colCylGeo = new THREE.CylinderGeometry(0.22, 0.22, 6.5, 12);
+        const colBaseGeo = new THREE.CylinderGeometry(0.32, 0.35, 0.3, 12);
+
+        [-135, 135].forEach((phaseX) => {
+          for (let b = 0; b < 10; b++) {
+            const zC = -54 + b * 12;
+            const useAmber = (b === 0 || b === 1);
+            const curPlinthMat = useAmber ? amberPlinthMat : plinthMat;
+
+            // 25 clusters of 3 tools along X
+            for (let c = 0; c < 25; c++) {
+              const clusterCenterX = -96 + c * 8.0;
+              const posX = phaseX + clusterCenterX;
+
+              // North Row Plinth (3 tools)
+              const pN = new THREE.Mesh(plinthBoxGeo, curPlinthMat);
+              pN.position.set(posX, 0.06, zC - 3.2);
+              scene.add(pN);
+
+              // South Row Plinth (3 tools)
+              const pS = new THREE.Mesh(plinthBoxGeo, curPlinthMat);
+              pS.position.set(posX, 0.06, zC + 3.2);
+              scene.add(pS);
+
+              // Cleanroom Column & Utility Chase in the gap between clusters
+              if (c < 24) {
+                const gapX = posX + 4.0;
+                // Column along the back chase of North row
+                const cN = new THREE.Mesh(colCylGeo, colMat);
+                cN.position.set(gapX, 3.25, zC - 5.6);
+                scene.add(cN);
+                const bN = new THREE.Mesh(colBaseGeo, colBaseMat);
+                bN.position.set(gapX, 0.15, zC - 5.6);
+                scene.add(bN);
+
+                // Column along the back chase of South row
+                const cS = new THREE.Mesh(colCylGeo, colMat);
+                cS.position.set(gapX, 3.25, zC + 5.6);
+                scene.add(cS);
+                const bS = new THREE.Mesh(colBaseGeo, colBaseMat);
+                bS.position.set(gapX, 0.15, zC + 5.6);
+                scene.add(bS);
+              }
+            }
+
+            // Green Antistatic Cleanroom Walkway Strip along center aisle
+            const walkGeo = new THREE.BoxGeometry(198, 0.02, 1.8);
+            const walkMat = new THREE.MeshStandardMaterial({
+              color: isDark ? 0x064e3b : 0x10b981,
+              roughness: 0.6
+            });
+            const walkStrip = new THREE.Mesh(walkGeo, walkMat);
+            walkStrip.position.set(phaseX, 0.02, zC);
+            scene.add(walkStrip);
+
+            // Yellow Aisle Hazard Safety Lines
+            const lineMat = new THREE.MeshBasicMaterial({ color: useAmber ? 0xf59e0b : 0xeab308 });
+            const lineN = new THREE.Mesh(new THREE.BoxGeometry(198, 0.02, 0.12), lineMat);
+            lineN.position.set(phaseX, 0.03, zC - 1.1);
+            scene.add(lineN);
+
+            const lineS = new THREE.Mesh(new THREE.BoxGeometry(198, 0.02, 0.12), lineMat);
+            lineS.position.set(phaseX, 0.03, zC + 1.1);
+            scene.add(lineS);
+          }
+        });
+
+        // 4. Ceiling & Structural Roof Truss Grid (Off by default, open truss so tools are never hidden)
+        ceilingGroup = new THREE.Group();
+        ceilingGroup.visible = false;
+
+        const ceilingTrussMat = new THREE.MeshBasicMaterial({
+          color: isDark ? 0x334155 : 0xa1a1aa,
+          wireframe: true
+        });
+        const trussMesh = new THREE.Mesh(new THREE.BoxGeometry(570, 0.4, 140, 24, 1, 12), ceilingTrussMat);
+        trussMesh.position.y = 7.5;
+        ceilingGroup.add(trussMesh);
+
+        // Cleanroom Troffer LED Light Strips
+        const lightStripGeo = new THREE.BoxGeometry(220, 0.15, 0.4);
+        const lightStripMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        const amberLightMat = new THREE.MeshBasicMaterial({ color: 0xffb703 });
+
+        [-135, 135].forEach((phaseX) => {
+          for (let b = 0; b < 10; b++) {
+            const zC = -54 + b * 12;
+            const strip = new THREE.Mesh(lightStripGeo, b < 2 ? amberLightMat : lightStripMat);
+            strip.position.set(phaseX, 7.42, zC);
+            ceilingGroup.add(strip);
+          }
+        });
+
+        scene.add(ceilingGroup);
+
+        // Highlight Wireframe Box for Selected Tool
+        const boxGeo = new THREE.BoxGeometry(4.4, 3.8, 8.0);
+        const boxMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true });
+        highlightBox = new THREE.Mesh(boxGeo, boxMat);
+        highlightBox.visible = false;
+        scene.add(highlightBox);
+      }
+
+      // =========================================================================
+      // 4. 3,000 TOOLS: InstancedMesh Rendering for 60 FPS
+      // =========================================================================
+      function buildInstancedMegaTools() {
+        instancedGroups = [];
+
+        // Partition 3,000 tools by archetype
+        const toolsByArchetype = {};
+        Object.keys(ARCHETYPES).forEach((k) => (toolsByArchetype[k] = []));
+
+        toolsDatabase.forEach((t) => {
+          toolsByArchetype[t.archetype].push(t);
+        });
+
+        // Reusable Dummy Object for Matrix Computation
+        const dummy = new THREE.Object3D();
+
+        // Build an InstancedMesh for each archetype
+        Object.keys(ARCHETYPES).forEach((archKey) => {
+          const archDef = ARCHETYPES[archKey];
+          const toolList = toolsByArchetype[archKey];
+          const count = toolList.length;
+          if (count === 0) return;
+
+          // Build High-Fidelity Compound Tool Geometry for this Archetype
+          const compoundGeo = createArchetypeGeometry(archKey, archDef);
+          const toolMaterial = new THREE.MeshStandardMaterial({
+            roughness: 0.35,
+            metalness: 0.4
+          });
+
+          const instMesh = new THREE.InstancedMesh(compoundGeo, toolMaterial, count);
+          instMesh.userData = { archetype: archKey, toolList: toolList };
+
+          // Set transformation and initial color for every instance
+          const baseColor = new THREE.Color(archDef.color);
+
+          for (let i = 0; i < count; i++) {
+            const tool = toolList[i];
+            dummy.position.set(tool.pos.x, 0.06, tool.pos.z);
+            dummy.rotation.y = tool.rotY;
+            dummy.scale.set(1, 1, 1);
+            dummy.updateMatrix();
+
+            instMesh.setMatrixAt(i, dummy.matrix);
+            instMesh.setColorAt(i, baseColor);
+          }
+
+          instMesh.instanceMatrix.needsUpdate = true;
+          if (instMesh.instanceColor) instMesh.instanceColor.needsUpdate = true;
+
+          scene.add(instMesh);
+          instancedGroups.push(instMesh);
+        });
+
+        // Apply initial heatmap coloring
+        applyHeatmapColors();
+      }
+
+      // Procedural Compound Geometry Builder for Leading-Edge Semiconductor Tools
+      function createArchetypeGeometry(archKey, arch) {
+        const root = new THREE.Group();
+
+        // 1. Equipment Skid Base (dark industrial pedestal)
+        const skid = new THREE.Mesh(new THREE.BoxGeometry(arch.w, 0.12, arch.d));
+        skid.position.set(0, 0.06, 0);
+        skid.updateMatrix();
+        root.add(skid);
+
+        // 2. Main Equipment Body
+        const bodyH = arch.h - 0.12;
+        const body = new THREE.Mesh(new THREE.BoxGeometry(arch.w * 0.96, bodyH, arch.d * 0.88));
+        body.position.set(0, 0.12 + bodyH / 2, 0.1);
+        body.updateMatrix();
+        root.add(body);
+
+        // 3. Front EFEM Module with dark smoked glass FOUP ports (facing -Z towards aisle)
+        const efemW = arch.w * 0.92;
+        const efemH = Math.min(1.4, arch.h * 0.45);
+        const efem = new THREE.Mesh(new THREE.BoxGeometry(efemW, efemH, 0.65));
+        efem.position.set(0, 0.12 + efemH / 2, -arch.d / 2 - 0.28);
+        efem.updateMatrix();
+        root.add(efem);
+
+        // 4. Distinct Silhouette Feature by Archetype
+        if (archKey === "euv_scanner") {
+          // High EUV projection optics column
+          const col = new THREE.Mesh(new THREE.BoxGeometry(arch.w * 0.6, 0.9, arch.d * 0.45));
+          col.position.set(0, arch.h + 0.45, -0.4);
+          col.updateMatrix();
+          root.add(col);
+        } else if (archKey === "etch_cluster" || archKey === "pvd_cluster") {
+          // Cylindrical vacuum process chamber pods extending radially
+          const ch1 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.7, 8));
+          ch1.position.set(-arch.w * 0.46, arch.h * 0.6, 0.4);
+          ch1.updateMatrix();
+          root.add(ch1);
+
+          const ch2 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.7, 8));
+          ch2.position.set(arch.w * 0.46, arch.h * 0.6, 0.4);
+          ch2.updateMatrix();
+          root.add(ch2);
+        } else if (archKey === "thermal_furnace") {
+          // Dual vertical quartz furnace tube covers
+          const t1 = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 1.2, 8));
+          t1.position.set(-0.45, arch.h + 0.6, 0.2);
+          t1.updateMatrix();
+          root.add(t1);
+
+          const t2 = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 1.2, 8));
+          t2.position.set(0.45, arch.h + 0.6, 0.2);
+          t2.updateMatrix();
+          root.add(t2);
+        } else {
+          // Top exhaust plenum / gas delivery box
+          const duct = new THREE.Mesh(new THREE.BoxGeometry(arch.w * 0.5, 0.35, arch.d * 0.5));
+          duct.position.set(0, arch.h + 0.18, 0.2);
+          duct.updateMatrix();
+          root.add(duct);
+        }
+
+        // 5. SEMI E10 4-tier Signal Light Tower (Top-Front Corner)
+        const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.75, 8));
+        tower.position.set(arch.w / 2 - 0.22, arch.h + 0.38, -arch.d / 2 + 0.25);
+        tower.updateMatrix();
+        root.add(tower);
+
+        const geometries = [];
+        root.children.forEach((child) => {
+          child.updateMatrix();
+          const cloneGeo = child.geometry.clone();
+          cloneGeo.applyMatrix4(child.matrix);
+          geometries.push(cloneGeo);
+        });
+
+        let mergedGeo;
+        if (THREE.BufferGeometryUtils && THREE.BufferGeometryUtils.mergeBufferGeometries) {
+          mergedGeo = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
+        } else {
+          mergedGeo = body.geometry;
+        }
+
+        return mergedGeo;
+      }
+
+      // =========================================================================
+      // 5. AMHS OVERHEAD HOIST TRANSPORT (OHT) SIMULATION SYSTEM
+      // Authentic Closed-Loop Unidirectional Continuous Monorail Network
+      // =========================================================================
+      function buildAmhsSystem() {
+        ohtVehicles = [];
+        const amhsRailGroup = new THREE.Group();
+        amhsRailGroup.name = "AMHS_Monorail_Network";
+
+        const railHeight = 5.6;
+
+        // Loop factory: creates a closed rounded-rectangular racetrack loop in the XZ plane
+        function createAmhsLoop(xMin, xMax, zMin, zMax, r, id, name) {
+          const actualR = Math.min(r, (xMax - xMin) / 2, (zMax - zMin) / 2);
+          const Lx = (xMax - xMin) - 2 * actualR;
+          const Lz = (zMax - zMin) - 2 * actualR;
+          const Lc = 0.5 * Math.PI * actualR;
+          const totalLength = 2 * Lx + 2 * Lz + 4 * Lc;
+
+          function getPose(dist) {
+            let s = ((dist % totalLength) + totalLength) % totalLength;
+            // Seg 1: Top straight (+X)
+            if (s < Lx) return { x: (xMin + actualR) + s, z: zMin, yaw: 0 };
+            s -= Lx;
+            // Seg 2: Top-Right corner (turns from 0 to +PI/2)
+            if (s < Lc) {
+              const u = s / Lc;
+              const th = -Math.PI / 2 + u * (Math.PI / 2);
+              return {
+                x: (xMax - actualR) + actualR * Math.cos(th),
+                z: (zMin + actualR) + actualR * Math.sin(th),
+                yaw: u * (Math.PI / 2)
+              };
+            }
+            s -= Lc;
+            // Seg 3: Right straight (+Z)
+            if (s < Lz) return { x: xMax, z: (zMin + actualR) + s, yaw: Math.PI / 2 };
+            s -= Lz;
+            // Seg 4: Bottom-Right corner (turns from +PI/2 to +PI)
+            if (s < Lc) {
+              const u = s / Lc;
+              const th = u * (Math.PI / 2);
+              return {
+                x: (xMax - actualR) + actualR * Math.cos(th),
+                z: (zMax - actualR) + actualR * Math.sin(th),
+                yaw: Math.PI / 2 + u * (Math.PI / 2)
+              };
+            }
+            s -= Lc;
+            // Seg 5: Bottom straight (-X)
+            if (s < Lx) return { x: (xMax - actualR) - s, z: zMax, yaw: Math.PI };
+            s -= Lx;
+            // Seg 6: Bottom-Left corner (turns from +PI to +3PI/2)
+            if (s < Lc) {
+              const u = s / Lc;
+              const th = Math.PI / 2 + u * (Math.PI / 2);
+              return {
+                x: (xMin + actualR) + actualR * Math.cos(th),
+                z: (zMax - actualR) + actualR * Math.sin(th),
+                yaw: Math.PI + u * (Math.PI / 2)
+              };
+            }
+            s -= Lc;
+            // Seg 7: Left straight (-Z)
+            if (s < Lz) return { x: xMin, z: (zMax - actualR) - s, yaw: -Math.PI / 2 };
+            s -= Lz;
+            // Seg 8: Top-Left corner (turns from -PI/2 to 0)
+            const u = Math.min(1, s / Lc);
+            const th = Math.PI + u * (Math.PI / 2);
+            return {
+              x: (xMin + actualR) + actualR * Math.cos(th),
+              z: (zMin + actualR) + actualR * Math.sin(th),
+              yaw: -Math.PI / 2 + u * (Math.PI / 2)
+            };
+          }
+
+          return { id, name, xMin, xMax, zMin, zMax, r: actualR, Lx, Lz, Lc, totalLength, getPose };
+        }
+
+        const loops = [];
+
+        // 1. Grand Inter-Phase Skybridge Highway Loop (circulating between Phase 1 and Phase 2)
+        loops.push(createAmhsLoop(-230, 230, -8, 8, 8, "LOOP-SKYBRIDGE-EXPRESS", "Grand Skybridge Highway"));
+
+        // 2. Cleanroom Perimeter Ring Loops (circulating around each phase hall)
+        loops.push(createAmhsLoop(-242, -28, -60, 60, 6, "LOOP-P1-PERIMETER", "Phase 1 Perimeter Loop"));
+        loops.push(createAmhsLoop(28, 242, -60, 60, 6, "LOOP-P2-PERIMETER", "Phase 2 Perimeter Loop"));
+
+        // 3. Phase 1 Process Bay Loops (Connecting pairs of adjacent bays)
+        for (let b = 0; b < 10; b += 2) {
+          const z1 = -54 + b * 12;
+          const z2 = -54 + (b + 1) * 12;
+          loops.push(createAmhsLoop(-236, -34, z1, z2, 6, `LOOP-P1-BAY${b+1}_${b+2}`, `Phase 1 Bay ${b+1}-${b+2}`));
+        }
+
+        // 4. Phase 2 Process Bay Loops (Connecting pairs of adjacent bays)
+        for (let b = 0; b < 10; b += 2) {
+          const z1 = -54 + b * 12;
+          const z2 = -54 + (b + 1) * 12;
+          loops.push(createAmhsLoop(34, 236, z1, z2, 6, `LOOP-P2-BAY${b+1}_${b+2}`, `Phase 2 Bay ${b+1}-${b+2}`));
+        }
+
+        // --- Build 3D Physical Monorails for all Loops ---
+        const railMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.85, roughness: 0.25 });
+        const hangerMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.7, roughness: 0.35 });
+
+        const railGeometries = [];
+        const hangerGeometries = [];
+
+        function addStraightRail(x, y, z, lenX, lenZ) {
+          const w = lenX > 0 ? lenX : 0.16;
+          const d = lenZ > 0 ? lenZ : 0.16;
+          const geo = new THREE.BoxGeometry(w, 0.1, d);
+          geo.translate(x, y, z);
+          railGeometries.push(geo);
+        }
+
+        function addArcRail(cx, cz, r, aStart, aEnd, segs = 6) {
+          for (let k = 0; k < segs; k++) {
+            const a1 = aStart + (k / segs) * (aEnd - aStart);
+            const a2 = aStart + ((k + 1) / segs) * (aEnd - aStart);
+            const p1x = cx + r * Math.cos(a1);
+            const p1z = cz + r * Math.sin(a1);
+            const p2x = cx + r * Math.cos(a2);
+            const p2z = cz + r * Math.sin(a2);
+            const dx = p2x - p1x;
+            const dz = p2z - p1z;
+            const len = Math.hypot(dx, dz);
+            const midX = (p1x + p2x) / 2;
+            const midZ = (p1z + p2z) / 2;
+            const yaw = Math.atan2(dz, dx);
+
+            const geo = new THREE.BoxGeometry(len, 0.1, 0.16);
+            geo.rotateY(-yaw);
+            geo.translate(midX, railHeight, midZ);
+            railGeometries.push(geo);
+          }
+        }
+
+        function addHangerRod(x, z) {
+          const rodH = 7.4 - railHeight;
+          const geo = new THREE.CylinderGeometry(0.025, 0.025, rodH, 6);
+          geo.translate(x, railHeight + rodH / 2, z);
+          hangerGeometries.push(geo);
+        }
+
+        loops.forEach((lp) => {
+          const { xMin, xMax, zMin, zMax, r, Lx, Lz } = lp;
+
+          // Top straight rail (+X)
+          if (Lx > 0) {
+            addStraightRail((xMin + xMax) / 2, railHeight, zMin, Lx, 0);
+            for (let hx = xMin + r + 15; hx < xMax - r; hx += 30) {
+              addHangerRod(hx, zMin);
+            }
+          }
+          // Bottom straight rail (-X)
+          if (Lx > 0) {
+            addStraightRail((xMin + xMax) / 2, railHeight, zMax, Lx, 0);
+            for (let hx = xMin + r + 15; hx < xMax - r; hx += 30) {
+              addHangerRod(hx, zMax);
+            }
+          }
+          // Right straight rail (+Z)
+          if (Lz > 0) {
+            addStraightRail(xMax, railHeight, (zMin + zMax) / 2, 0, Lz);
+            for (let hz = zMin + r + 15; hz < zMax - r; hz += 30) {
+              addHangerRod(xMax, hz);
+            }
+          }
+          // Left straight rail (-Z)
+          if (Lz > 0) {
+            addStraightRail(xMin, railHeight, (zMin + zMax) / 2, 0, Lz);
+            for (let hz = zMin + r + 15; hz < zMax - r; hz += 30) {
+              addHangerRod(xMin, hz);
+            }
+          }
+
+          // 4 Corner Arcs
+          addArcRail(xMax - r, zMin + r, r, -Math.PI / 2, 0, 6);
+          addArcRail(xMax - r, zMax - r, r, 0, Math.PI / 2, 6);
+          addArcRail(xMin + r, zMax - r, r, Math.PI / 2, Math.PI, 6);
+          addArcRail(xMin + r, zMin + r, r, Math.PI, (3 * Math.PI) / 2, 6);
+        });
+
+        // Merge rails for ultra-fast single draw call
+        if (THREE.BufferGeometryUtils && THREE.BufferGeometryUtils.mergeBufferGeometries && railGeometries.length > 0) {
+          const mergedRails = THREE.BufferGeometryUtils.mergeBufferGeometries(railGeometries);
+          const railMesh = new THREE.Mesh(mergedRails, railMat);
+          amhsRailGroup.add(railMesh);
+
+          if (hangerGeometries.length > 0) {
+            const mergedHangers = THREE.BufferGeometryUtils.mergeBufferGeometries(hangerGeometries);
+            const hangerMesh = new THREE.Mesh(mergedHangers, hangerMat);
+            amhsRailGroup.add(hangerMesh);
+          }
+        } else {
+          railGeometries.forEach((g) => amhsRailGroup.add(new THREE.Mesh(g, railMat)));
+          hangerGeometries.forEach((g) => amhsRailGroup.add(new THREE.Mesh(g, hangerMat)));
+        }
+
+        scene.add(amhsRailGroup);
+
+        // --- Instantiate 86 Active OHT Pod Carrier Vehicles ---
+        const ohtBodyGeo = new THREE.BoxGeometry(0.85, 0.38, 0.65);
+        const ohtGuideGeo = new THREE.BoxGeometry(0.35, 0.12, 0.2);
+        const foupGeo = new THREE.BoxGeometry(0.48, 0.42, 0.44);
+        const foupDoorGeo = new THREE.BoxGeometry(0.04, 0.36, 0.38);
+        const ledFrontGeo = new THREE.BoxGeometry(0.1, 0.08, 0.08);
+        const ledRearGeo = new THREE.BoxGeometry(0.06, 0.08, 0.08);
+
+        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.6, roughness: 0.3 });
+        const guideMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
+        const foupMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4 });
+        const foupDoorTeal = new THREE.MeshBasicMaterial({ color: 0x00f5d4 });
+        const foupDoorAmber = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
+        const ledFrontMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+        const ledRearMat = new THREE.MeshBasicMaterial({ color: 0xf43f5e });
+
+        function createOhtMesh(carrierIdx) {
+          const root = new THREE.Group();
+
+          // Main Carriage
+          const body = new THREE.Mesh(ohtBodyGeo, bodyMat);
+          root.add(body);
+
+          // Top rail guide
+          const guide = new THREE.Mesh(ohtGuideGeo, guideMat);
+          guide.position.set(0, 0.24, 0);
+          root.add(guide);
+
+          // Front Headlight (Cyan)
+          const ledFront = new THREE.Mesh(ledFrontGeo, ledFrontMat);
+          ledFront.position.set(0.44, 0, 0);
+          root.add(ledFront);
+
+          // Rear Taillight (Red)
+          const ledRear = new THREE.Mesh(ledRearGeo, ledRearMat);
+          ledRear.position.set(-0.44, 0, 0);
+          root.add(ledRear);
+
+          // FOUP cargo pod (~85% have FOUP, ~15% returning empty)
+          const hasFoup = (carrierIdx % 7) !== 0;
+          if (hasFoup) {
+            const isHotLot = (carrierIdx % 5) === 0;
+            const foup = new THREE.Mesh(foupGeo, foupMat);
+            foup.position.set(0, -0.48, 0);
+
+            const door = new THREE.Mesh(foupDoorGeo, isHotLot ? foupDoorAmber : foupDoorTeal);
+            door.position.set(0.23, 0, 0);
+            foup.add(door);
+
+            root.add(foup);
+          }
+
+          return root;
+        }
+
+        // Fleet allocation across 13 closed loops:
+        const loopAllocations = [
+          { loopIdx: 0, count: 20, baseSpeed: 5.4 }, // Grand Skybridge Highway
+          { loopIdx: 1, count: 8,  baseSpeed: 4.6 }, // P1 Perimeter Loop
+          { loopIdx: 2, count: 8,  baseSpeed: 4.6 }, // P2 Perimeter Loop
+          // 5 Phase 1 Bay Loops
+          { loopIdx: 3, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 4, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 5, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 6, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 7, count: 5,  baseSpeed: 4.0 },
+          // 5 Phase 2 Bay Loops
+          { loopIdx: 8, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 9, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 10, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 11, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 12, count: 5, baseSpeed: 4.0 }
+        ];
+
+        let globalCarrierIdx = 0;
+        loopAllocations.forEach((alloc) => {
+          const lp = loops[alloc.loopIdx];
+          const spacing = lp.totalLength / alloc.count;
+
+          for (let k = 0; k < alloc.count; k++) {
+            const mesh = createOhtMesh(globalCarrierIdx);
+            const initialS = (k * spacing + (alloc.loopIdx * 17)) % lp.totalLength;
+            const pose = lp.getPose(initialS);
+
+            mesh.position.set(pose.x, railHeight - 0.25, pose.z);
+            mesh.rotation.y = -pose.yaw;
+            scene.add(mesh);
+
+            ohtVehicles.push({
+              group: mesh,
+              loop: lp,
+              s: initialS,
+              speed: alloc.baseSpeed + ((k % 3) - 1) * 0.15
+            });
+
+            globalCarrierIdx++;
+          }
+        });
+
+        console.log(`Initialized AMHS Network: ${loops.length} closed loops, ${ohtVehicles.length} active OHT vehicles.`);
+      }
+
+      // =========================================================================
+      // 6. HEATMAP COLORS & FILTERING ENGINE
+      // =========================================================================
+      function setHeatmapMode(mode) {
+        activeHeatmapMode = mode;
+        applyHeatmapColors();
+      }
+
+      function applyHeatmapColors() {
+        const dummyColor = new THREE.Color();
+
+        instancedGroups.forEach((instMesh) => {
+          const toolList = instMesh.userData.toolList;
+          const archKey = instMesh.userData.archetype;
+          const count = toolList.length;
+
+          for (let i = 0; i < count; i++) {
+            const tool = toolList[i];
+
+            // If filtered out, make dark/translucent gray
+            const isMatch = checkToolMatchesFilter(tool);
+
+            if (!isMatch) {
+              dummyColor.setHex(0x181c22);
+            } else if (activeHeatmapMode === "state") {
+              // SEMI E10 State Colors
+              if (tool.semiState === "productive") dummyColor.setHex(0x10b981);       // Green
+              else if (tool.semiState === "standby") dummyColor.setHex(0xf59e0b);     // Amber
+              else if (tool.semiState === "engineering") dummyColor.setHex(0x3b82f6); // Blue
+              else dummyColor.setHex(0xef4444);                                       // Red
+            } else if (activeHeatmapMode === "vendor") {
+              // OEM Manufacturer Spectrum
+              if (tool.vendor === "ASML") dummyColor.setHex(0x06b6d4);
+              else if (tool.vendor === "Lam Research") dummyColor.setHex(0xd946ef);
+              else if (tool.vendor === "Applied Materials") dummyColor.setHex(0x3b82f6);
+              else if (tool.vendor === "Tokyo Electron") dummyColor.setHex(0xf43f5e);
+              else if (tool.vendor === "KLA") dummyColor.setHex(0xf59e0b);
+              else if (tool.vendor === "SCREEN") dummyColor.setHex(0x10b981);
+              else if (tool.vendor === "Axcelis") dummyColor.setHex(0xf97316);
+              else dummyColor.setHex(0x8b5cf6);
+            } else if (activeHeatmapMode === "category") {
+              // Process Category Distribution
+              if (tool.category === "litho") dummyColor.setHex(0xf59e0b);
+              else if (tool.category === "etch") dummyColor.setHex(0xec4899);
+              else if (tool.category === "thinfilm") dummyColor.setHex(0x3b82f6);
+              else if (tool.category === "cmp") dummyColor.setHex(0x06b6d4);
+              else if (tool.category === "thermal") dummyColor.setHex(0xf97316);
+              else if (tool.category === "wet") dummyColor.setHex(0x10b981);
+              else dummyColor.setHex(0x8b5cf6);
+            } else if (activeHeatmapMode === "power") {
+              // Thermal & Power Load Heatmap (Red high, Blue low)
+              const pNorm = Math.min(1, tool.powerKw / 800);
+              dummyColor.setHSL(0.66 * (1 - pNorm), 0.95, 0.45);
+            } else {
+              // Realistic Cleanroom High-Tech Finish
+              dummyColor.setHex(ARCHETYPES[archKey].color);
+            }
+
+            instMesh.setColorAt(i, dummyColor);
+          }
+
+          if (instMesh.instanceColor) instMesh.instanceColor.needsUpdate = true;
+        });
+
+        renderMinimap();
+      }
+
+      function checkToolMatchesFilter(tool) {
+        // 1. Category Filter
+        if (activeCategoryFilter !== "all" && tool.category !== activeCategoryFilter) {
+          return false;
+        }
+        // 2. Search Term Filter
+        if (activeSearchTerm.trim() !== "") {
+          const q = activeSearchTerm.toLowerCase();
+          const targetStr = `${tool.toolId} ${tool.vendor} ${tool.model} ${tool.bayNameZh} ${tool.bayNameEn} ${tool.specZh}`.toLowerCase();
+          if (!targetStr.includes(q)) return false;
+        }
+        return true;
+      }
+
+      function filterCategory(cat) {
+        activeCategoryFilter = cat;
+        document.querySelectorAll(".cat-pill").forEach((btn) => {
+          if (btn.getAttribute("data-cat") === cat) btn.classList.add("active");
+          else btn.classList.remove("active");
+        });
+        applyHeatmapColors();
+      }
+
+      function handleSearch(val) {
+        activeSearchTerm = val;
+        const btnClear = document.getElementById("btn-clear-search");
+        if (val) btnClear.classList.remove("hidden");
+        else btnClear.classList.add("hidden");
+        applyHeatmapColors();
+      }
+
+      function clearSearch() {
+        const inp = document.getElementById("tool-search-input");
+        inp.value = "";
+        handleSearch("");
+      }
+
+      // =========================================================================
+      // 7. RAYCASTING, TOOLTIP & INSPECTOR DRAWER
+      // =========================================================================
+      function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(instancedGroups);
+
+        const tooltip = document.getElementById("tool-tooltip");
+
+        if (intersects.length > 0) {
+          const hit = intersects[0];
+          const mesh = hit.object;
+          const instId = hit.instanceId;
+          const toolList = mesh.userData.toolList;
+          const tool = toolList[instId];
+
+          if (tool) {
+            hoveredInstance = { mesh, instId, tool };
+            document.body.style.cursor = "pointer";
+
+            tooltip.style.display = "block";
+            tooltip.style.left = `${event.clientX}px`;
+            tooltip.style.top = `${event.clientY}px`;
+            tooltip.innerHTML = `
+              <div class="font-bold flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full ${tool.semiState === 'productive' ? 'bg-emerald-400' : 'bg-amber-400'}"></span>
+                <span>${tool.model}</span>
+                <span class="text-xs text-sky-300 font-mono">(${tool.vendor})</span>
+              </div>
+              <div class="text-[10px] text-gray-300 mt-0.5 font-mono">${tool.toolId} · ${currentLang === 'zh' ? tool.phaseNameZh : tool.phaseNameEn}</div>
+            `;
+            return;
+          }
+        }
+
+        hoveredInstance = null;
+        document.body.style.cursor = "default";
+        tooltip.style.display = "none";
+      }
+
+      function onCanvasClick() {
+        if (!hoveredInstance) return;
+        const tool = hoveredInstance.tool;
+        openToolDrawer(tool);
+      }
+
+      function openToolDrawer(tool) {
+        selectedToolIndex = tool.index;
+        const drawer = document.getElementById("tool-drawer");
+
+        // Position highlight wireframe box around selected machine
+        const arch = ARCHETYPES[tool.archetype];
+        highlightBox.scale.set(arch.w * 1.08, arch.h * 1.08, arch.d * 1.08);
+        highlightBox.position.set(tool.pos.x, arch.h / 2, tool.pos.z);
+        highlightBox.rotation.y = tool.rotY;
+        highlightBox.visible = true;
+
+        // Populate drawer metadata
+        document.getElementById("drawer-tool-id").textContent = tool.toolId;
+        document.getElementById("drawer-tool-loc").textContent = `${currentLang === 'zh' ? tool.phaseNameZh : tool.phaseNameEn} · Bay ${tool.bayNum} · Row ${tool.rowName}`;
+        document.getElementById("drawer-model").textContent = `${tool.vendor} · ${tool.model}`;
+        document.getElementById("drawer-category").textContent = currentLang === 'zh' ? tool.bayNameZh : tool.bayNameEn;
+
+        const stateBadge = document.getElementById("drawer-state-badge");
+        const stateText = document.getElementById("drawer-state-text");
+        const dot = document.getElementById("drawer-dot");
+
+        stateBadge.className = "px-2 py-0.5 text-[10px] font-bold font-mono rounded " + `state-${tool.semiState}`;
+        stateBadge.textContent = tool.semiState.toUpperCase();
+
+        if (tool.semiState === "productive") {
+          stateText.textContent = currentLang === "zh" ? "Productive (正在进行批量晶圆加工)" : "Productive (Production Lot Processing)";
+          dot.style.backgroundColor = "#10b981";
+        } else if (tool.semiState === "standby") {
+          stateText.textContent = currentLang === "zh" ? "Standby (就绪待机中 · 等待OHT来料)" : "Standby (Idle · Awaiting FOUP)";
+          dot.style.backgroundColor = "#f59e0b";
+        } else if (tool.semiState === "engineering") {
+          stateText.textContent = currentLang === "zh" ? "Engineering (工程师配方校准与微调)" : "Engineering (Recipe Tuning / Calibration)";
+          dot.style.backgroundColor = "#3b82f6";
+        } else {
+          stateText.textContent = currentLang === "zh" ? "Unscheduled Down (警报停机维修维护)" : "Unscheduled Down (Maintenance / Alarm)";
+          dot.style.backgroundColor = "#ef4444";
+        }
+
+        document.getElementById("drawer-process-desc").textContent = currentLang === "zh" ? tool.specZh : tool.specEn;
+        document.getElementById("drawer-val-power").textContent = `${tool.powerKw} kW`;
+        document.getElementById("drawer-val-vacuum").textContent = tool.archetype.includes("euv") ? "8.5 × 10⁻⁸ Torr" : "1.2 × 10⁻⁷ Torr";
+        document.getElementById("drawer-val-lot").textContent = `${tool.lotId} (#18/25)`;
+
+        // URL link to catalog
+        const catBtn = document.getElementById("btn-goto-catalog");
+        catBtn.href = `catalog-demo.html?search=${encodeURIComponent(tool.model)}`;
+
+        drawer.classList.add("open");
+        renderMinimap();
+      }
+
+      function closeDrawer() {
+        document.getElementById("tool-drawer").classList.remove("open");
+        if (highlightBox) highlightBox.visible = false;
+        selectedToolIndex = -1;
+        renderMinimap();
+      }
+
+      function focusSelectedTool() {
+        if (selectedToolIndex < 0) return;
+        const tool = toolsDatabase[selectedToolIndex];
+        if (!tool) return;
+
+        smoothCameraTo(
+          tool.pos.x + (tool.rotY === 0 ? 0 : 0),
+          12,
+          tool.pos.z + (tool.rotY === 0 ? -16 : 16),
+          tool.pos.x,
+          2.5,
+          tool.pos.z,
+          1200
+        );
+      }
+
+      // =========================================================================
+      // 8. CAMERA PRESETS & CINEMATIC MEGA TOUR
+      // =========================================================================
+      function setCameraView(preset) {
+        if (isTourActive) toggleMegaTour();
+
+        document.querySelectorAll(".btn-mega-nav").forEach((b) => b.classList.remove("active"));
+        const activeBtn = document.getElementById(`btn-cam-${preset}`);
+        if (activeBtn) activeBtn.classList.add("active");
+
+        if (preset === "overview") {
+          smoothCameraTo(-20, 85, 160, 0, 3, 0, 1400);
+        } else if (preset === "phase1") {
+          smoothCameraTo(-135, 42, 70, -135, 3, 0, 1200);
+        } else if (preset === "skybridge") {
+          smoothCameraTo(0, 10, 32, 0, 4, 0, 1200);
+        } else if (preset === "phase2") {
+          smoothCameraTo(135, 42, 70, 135, 3, 0, 1200);
+        } else if (preset === "euv") {
+          smoothCameraTo(-135, 14, -28, -135, 3, -54, 1200);
+        } else if (preset === "top") {
+          smoothCameraTo(0, 240, 0.1, 0, 0, 0, 1400);
+        }
+      }
+
+      function smoothCameraTo(endX, endY, endZ, targetX, targetY, targetZ, durationMs) {
+        const startPos = camera.position.clone();
+        const startTarget = controls.target.clone();
+        const endPos = new THREE.Vector3(endX, endY, endZ);
+        const endTarget = new THREE.Vector3(targetX, targetY, targetZ);
+        const startTime = performance.now();
+
+        function step(now) {
+          const elapsed = now - startTime;
+          const progress = Math.min(1, elapsed / durationMs);
+          // Ease-in-out cubic
+          const ease = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+          camera.position.lerpVectors(startPos, endPos, ease);
+          controls.target.lerpVectors(startTarget, endTarget, ease);
+          controls.update();
+
+          if (progress < 1) {
+            requestAnimationFrame(step);
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      // Cinematic Mega Tour across Phase 1, Skybridge, and Phase 2
+      const TOUR_WAYPOINTS = [
+        {
+          cam: [-20, 85, 160], target: [0, 3, 0],
+          tagZh: "3nm 概念超级晶圆厂全景 (Conceptual Model)", tagEn: "3nm Mega Fab Concept (Conceptual Layout Model)",
+          descZh: "3nm FinFET 先进制程概念布局推演示意模型，宏观展现 50,000 WSPM 双期超级晶圆厂与 3,000 台超高密度机台集群规模。",
+          descEn: "Conceptual layout model demonstrating a 3nm FinFET 50k WSPM dual-phase Mega Fab housing 3,000 production tools."
+        },
+        {
+          cam: [-135, 32, -32], target: [-135, 3, -54],
+          tagZh: "第一期 · EUV 关键光刻湾", tagEn: "Phase 1 · EUV Critical Patterning Bay",
+          descZh: "ASML Twinscan NXE:3800E 与 High-NA 试验线，工作在 580nm 纯黄光安全环境下。",
+          descEn: "ASML NXE:3800E and High-NA test lines operating under amber safe-light filtration."
+        },
+        {
+          cam: [-135, 26, 42], target: [-135, 3, 10],
+          tagZh: "第一期 · 3nm FinFET 鳍线成形与高深宽比刻蚀大厅", tagEn: "Phase 1 · 3nm FinFET Fin Formation & Gate Etch",
+          descZh: "Lam Research Sense.i 与 TEL Episode 集群，执行原子级精度的 3nm FinFET 鳍线成形与高深宽比刻蚀。",
+          descEn: "Lam Sense.i & TEL Episode clusters executing atomic layer precision 3nm FinFET fin patterning & gate etch."
+        },
+        {
+          cam: [0, 8.5, 26], target: [0, 4.2, 0],
+          tagZh: "双厂空中高速物料长廊 (Skybridge)", tagEn: "Inter-Phase AMHS Skybridge Spine",
+          descZh: "双向全闭环天车主干环线横跨 50 米连廊，实现第一期与第二期间晶圆盒 (FOUP) 闭环高速循环流转。",
+          descEn: "Continuous closed-loop AMHS highway transferring FOUP pods between Phase 1 and Phase 2 in seconds."
+        },
+        {
+          cam: [135, 30, 24], target: [135, 3, -12],
+          tagZh: "第二期 · 东厂区 25k 扩产洁净大厅", tagEn: "Phase 2 · East Hall 25k Expansion",
+          descZh: "第二期具备完全对称的 1,500 台全流程产线配置，通过中央高速天桥实现两期机台共享与负载均衡。",
+          descEn: "Phase 2 features a symmetrical 1,500-tool full-flow cleanroom enabling cross-hall load balancing via Skybridge."
+        }
+      ];
+
+      function toggleMegaTour() {
+        isTourActive = !isTourActive;
+        const btn = document.getElementById("btn-tour-toggle");
+        const banner = document.getElementById("tour-banner");
+
+        if (isTourActive) {
+          btn.innerHTML = `<i data-lucide="square" class="w-3 h-3 fill-current"></i><span>${currentLang === 'zh' ? '停止' : 'Stop'}</span>`;
+          btn.classList.replace("bg-emerald-600", "bg-rose-600");
+          btn.classList.replace("hover:bg-emerald-700", "hover:bg-rose-700");
+          banner.classList.remove("hidden");
+          tourStepIndex = 0;
+          runTourStep();
+        } else {
+          btn.innerHTML = `<i data-lucide="play" class="w-3 h-3 fill-current"></i><span id="txt-tour-btn">${currentLang === 'zh' ? '巡检' : 'Tour'}</span>`;
+          btn.classList.replace("bg-rose-600", "bg-emerald-600");
+          btn.classList.replace("hover:bg-rose-700", "hover:bg-emerald-700");
+          banner.classList.add("hidden");
+          clearTimeout(tourTimer);
+        }
+        lucide.createIcons();
+      }
+
+      function runTourStep() {
+        if (!isTourActive) return;
+        const wp = TOUR_WAYPOINTS[tourStepIndex % TOUR_WAYPOINTS.length];
+
+        document.getElementById("tour-step-tag").textContent = currentLang === "zh" ? wp.tagZh : wp.tagEn;
+        document.getElementById("tour-step-desc").textContent = currentLang === "zh" ? wp.descZh : wp.descEn;
+
+        smoothCameraTo(wp.cam[0], wp.cam[1], wp.cam[2], wp.target[0], wp.target[1], wp.target[2], 2600);
+
+        tourStepIndex++;
+        tourTimer = setTimeout(runTourStep, 7500);
+      }
+
+      // =========================================================================
+      // 9. RADAR MINIMAP ENGINE
+      // =========================================================================
+      let minimapCanvas, minimapCtx;
+
+      function initMinimap() {
+        minimapCanvas = document.getElementById("minimap-canvas");
+        minimapCtx = minimapCanvas.getContext("2d");
+
+        minimapCanvas.addEventListener("click", (e) => {
+          const rect = minimapCanvas.getBoundingClientRect();
+          const mx = e.clientX - rect.left;
+          const my = e.clientY - rect.top;
+
+          // Map canvas coords (0..220, 0..98) to fab world coords (X: -260..+260, Z: -75..+75)
+          const worldX = (mx / 220) * 520 - 260;
+          const worldZ = (my / 98) * 150 - 75;
+
+          smoothCameraTo(worldX, 55, worldZ + 60, worldX, 2, worldZ, 1200);
+        });
+
+        renderMinimap();
+      }
+
+      function renderMinimap() {
+        if (!minimapCtx) return;
+        const w = 220;
+        const h = 98;
+        const isDark = currentTheme === "dark";
+
+        minimapCtx.clearRect(0, 0, w, h);
+        minimapCtx.fillStyle = isDark ? "#12161a" : "#f2f1ec";
+        minimapCtx.fillRect(0, 0, w, h);
+
+        // Phase 1 Box (West)
+        minimapCtx.fillStyle = isDark ? "#1a222a" : "#e4e1d7";
+        minimapCtx.strokeStyle = "#0e6e6b";
+        minimapCtx.lineWidth = 1;
+        const p1X = ((-245 + 260) / 520) * w;
+        const p1W = (220 / 520) * w;
+        const p1Y = ((-65 + 75) / 150) * h;
+        const p1H = (130 / 150) * h;
+        minimapCtx.fillRect(p1X, p1Y, p1W, p1H);
+        minimapCtx.strokeRect(p1X, p1Y, p1W, p1H);
+
+        // Phase 2 Box (East)
+        const p2X = ((25 + 260) / 520) * w;
+        const p2W = (220 / 520) * w;
+        minimapCtx.fillRect(p2X, p1Y, p2W, p1H);
+        minimapCtx.strokeRect(p2X, p1Y, p2W, p1H);
+
+        // Central Skybridge (Connecting)
+        const sbX = ((-25 + 260) / 520) * w;
+        const sbW = (50 / 520) * w;
+        const sbY = ((-20 + 75) / 150) * h;
+        const sbH = (40 / 150) * h;
+        minimapCtx.fillStyle = isDark ? "#283542" : "#d8d3c5";
+        minimapCtx.fillRect(sbX, sbY, sbW, sbH);
+        minimapCtx.strokeRect(sbX, sbY, sbW, sbH);
+
+        // Labels
+        minimapCtx.fillStyle = isDark ? "#aeb7bf" : "#7a838d";
+        minimapCtx.font = "8px 'IBM Plex Mono'";
+        minimapCtx.fillText("PHASE 1", p1X + 6, p1Y + 12);
+        minimapCtx.fillText("PHASE 2", p2X + 6, p1Y + 12);
+        minimapCtx.fillText("BRIDGE", sbX + 4, sbY + 22);
+
+        // Draw Active AMHS OHT Pods on Minimap Radar
+        minimapCtx.fillStyle = isDark ? "#34d399" : "#059669";
+        ohtVehicles.forEach((v) => {
+          const vx = ((v.group.position.x + 260) / 520) * w;
+          const vz = ((v.group.position.z + 75) / 150) * h;
+          minimapCtx.fillRect(vx - 0.75, vz - 0.75, 1.5, 1.5);
+        });
+
+        // Draw Selected Tool Marker if any
+        if (selectedToolIndex >= 0) {
+          const sTool = toolsDatabase[selectedToolIndex];
+          const stX = ((sTool.pos.x + 260) / 520) * w;
+          const stY = ((sTool.pos.z + 75) / 150) * h;
+          minimapCtx.fillStyle = "#ef4444";
+          minimapCtx.beginPath();
+          minimapCtx.arc(stX, stY, 3.5, 0, Math.PI * 2);
+          minimapCtx.fill();
+        }
+
+        // Draw Camera FOV cone
+        const camX = ((camera.position.x + 260) / 520) * w;
+        const camZ = ((camera.position.z + 75) / 150) * h;
+        const tgtX = ((controls.target.x + 260) / 520) * w;
+        const tgtZ = ((controls.target.z + 75) / 150) * h;
+
+        minimapCtx.strokeStyle = "#0e6e6b";
+        minimapCtx.lineWidth = 1.5;
+        minimapCtx.beginPath();
+        minimapCtx.moveTo(camX, camZ);
+        minimapCtx.lineTo(tgtX, tgtZ);
+        minimapCtx.stroke();
+
+        minimapCtx.fillStyle = "#0e6e6b";
+        minimapCtx.beginPath();
+        minimapCtx.arc(camX, camZ, 2.5, 0, Math.PI * 2);
+        minimapCtx.fill();
+      }
+
+      // =========================================================================
+      // 10. ANIMATION LOOP & RESIZE HANDLERS
+      // =========================================================================
+      let clock = new THREE.Clock();
+
+      function animate() {
+        requestAnimationFrame(animate);
+
+        const delta = clock.getDelta();
+
+        // Animate AMHS OHT Pod Carrier Vehicles along closed loops
+        ohtVehicles.forEach((v) => {
+          v.s = (v.s + v.speed * delta) % v.loop.totalLength;
+          const pose = v.loop.getPose(v.s);
+          v.group.position.set(pose.x, 5.35, pose.z);
+          v.group.rotation.y = -pose.yaw;
+        });
+
+        controls.update();
+        renderer.render(scene, camera);
+
+        // Update minimap camera indicator every few frames
+        renderMinimap();
+      }
+
+      function onWindowResize() {
+        const container = document.getElementById("three-canvas");
+        if (!container || !renderer) return;
+        const width = container.clientWidth;
+        const height = container.clientHeight;
+        camera.aspect = width / height;
+        camera.updateProjectionMatrix();
+        renderer.setSize(width, height);
+      }
+
+      // =========================================================================
+      // 11. UI CONTROLS, THEME & BILINGUAL ENGINE
+      // =========================================================================
+      function toggleCeiling() {
+        showCeiling = !showCeiling;
+        if (ceilingGroup) ceilingGroup.visible = showCeiling;
+        const btn = document.getElementById("btn-toggle-ceiling");
+        btn.classList.toggle("bg-[var(--accent)]", showCeiling);
+        btn.classList.toggle("text-white", showCeiling);
+      }
+
+      function toggleTheme() {
+        currentTheme = currentTheme === "light" ? "dark" : "light";
+        localStorage.setItem("semicon_theme", currentTheme);
+        document.documentElement.setAttribute("data-theme", currentTheme);
+
+        const icon = document.getElementById("theme-icon");
+        const label = document.getElementById("theme-label");
+
+        if (currentTheme === "dark") {
+          icon.textContent = "🌙";
+          label.textContent = "Dark";
+        } else {
+          icon.textContent = "☀️";
+          label.textContent = "Day";
+        }
+
+        updateSceneThemeBackground();
+        applyHeatmapColors();
+      }
+
+      function toggleLanguage() {
+        currentLang = currentLang === "zh" ? "en" : "zh";
+        localStorage.setItem("semicon_lang", currentLang);
+        applyLanguageStrings();
+      }
+
+      function applyLanguageStrings() {
+        const isZh = currentLang === "zh";
+
+        const subTitleEl = document.getElementById("header-subtitle");
+        if (subTitleEl) {
+          subTitleEl.textContent = isZh
+            ? "3nm 概念超级晶圆厂 (3,000机台) · 概念布局推演示意模型"
+            : "3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout Model";
+        }
+        const badgeConcept = document.getElementById("badge-concept");
+        if (badgeConcept) {
+          badgeConcept.textContent = isZh ? "概念示意模型" : "Conceptual Model";
+        }
+
+        const lblVpConcept = document.getElementById("lbl-viewport-concept");
+        if (lblVpConcept) {
+          lblVpConcept.textContent = isZh ? "概念布局推演示意模型" : "Conceptual Layout Model";
+        }
+        const lblVpScale = document.getElementById("lbl-viewport-scale");
+        if (lblVpScale) {
+          lblVpScale.textContent = isZh ? "3,000台先进制程机台宏观演示" : "3,000 Tools Scale Simulation";
+        }
+
+        const twinsMenu = document.getElementById("txt-twins-menu");
+        if (twinsMenu) twinsMenu.textContent = isZh ? "孪生切场 (3)" : "3D Twins (3)";
+        const twinsHdr = document.getElementById("txt-twins-menu-hdr");
+        if (twinsHdr) twinsHdr.textContent = isZh ? "数字孪生工厂" : "Digital Twins";
+        const menuMega = document.getElementById("txt-menu-mega");
+        if (menuMega) menuMega.textContent = isZh ? "3nm 概念超级晶圆厂 (3,000)" : "3nm Mega Fab Concept (3,000)";
+        const menuPilot = document.getElementById("txt-menu-pilot");
+        if (menuPilot) menuPilot.textContent = isZh ? "300mm 试验线 (121)" : "300mm Pilot Fab (121)";
+        const menuOsat = document.getElementById("txt-menu-osat");
+        if (menuOsat) menuOsat.textContent = isZh ? "封测后道工厂 (86)" : "OSAT Packaging (86)";
+
+        document.getElementById("txt-cam-overview").textContent = isZh ? "全景" : "Overview";
+        document.getElementById("txt-cam-phase1").textContent = isZh ? "一期" : "Phase 1";
+        document.getElementById("txt-cam-skybridge").textContent = isZh ? "天桥" : "Skybridge";
+        document.getElementById("txt-cam-phase2").textContent = isZh ? "二期" : "Phase 2";
+        document.getElementById("txt-cam-euv").textContent = isZh ? "EUV" : "EUV";
+        document.getElementById("txt-cam-top").textContent = isZh ? "顶视" : "Top";
+        document.getElementById("txt-tour-btn").textContent = isZh ? "巡检" : "Tour";
+
+        document.getElementById("kpi-lbl-tools").textContent = isZh ? "机台总数:" : "Total Tools:";
+        document.getElementById("kpi-lbl-node").textContent = isZh ? "工艺制程:" : "Node:";
+        document.getElementById("kpi-lbl-cap").textContent = isZh ? "月度产能:" : "Capacity:";
+        document.getElementById("kpi-lbl-area").textContent = isZh ? "洁净室面积:" : "Cleanroom Area:";
+        document.getElementById("kpi-lbl-amhs").textContent = isZh ? "AMHS 闭环运力:" : "AMHS Loops:";
+        const kpiValAmhs = document.getElementById("kpi-val-amhs");
+        if (kpiValAmhs) kpiValAmhs.textContent = isZh ? "86 辆天车全闭环巡航" : "86 OHT Pods in Closed Loops";
+        document.getElementById("kpi-lbl-capex").textContent = isZh ? "总投资估算:" : "Est. Capex:";
+        document.getElementById("kpi-lbl-oee").textContent = isZh ? "稼动率 OEE:" : "Fab OEE:";
+
+        document.getElementById("cat-all").textContent = isZh ? "全部 (3,000)" : "All (3,000)";
+        document.getElementById("cat-litho").textContent = isZh ? "EUV/DUV光刻 (600)" : "Litho/EUV (600)";
+        document.getElementById("cat-etch").textContent = isZh ? "等离子刻蚀 (600)" : "Dry Etch (600)";
+        document.getElementById("cat-thinfilm").textContent = isZh ? "薄膜沉积 ALD/CVD/PVD (900)" : "Thin Films (900)";
+        document.getElementById("cat-cmp").textContent = isZh ? "平坦化 CMP (300)" : "CMP (300)";
+        document.getElementById("cat-thermal").textContent = isZh ? "注入与热退火 (300)" : "Implant & Anneal (300)";
+        document.getElementById("cat-wet").textContent = isZh ? "湿法清洗 (148)" : "Wet Clean (148)";
+        document.getElementById("cat-metrology").textContent = isZh ? "量测与检测 (152)" : "Metrology (152)";
+
+        document.getElementById("tool-search-input").placeholder = isZh ? "搜索型号/厂商/工艺/Bay..." : "Search model, vendor, bay...";
+        document.getElementById("lbl-radar-title").textContent = isZh ? "双期晶圆厂雷达 · 570米" : "MEGA FAB RADAR · 570M";
+        document.getElementById("lbl-radar-phase").textContent = isZh ? "概念示意 · 50k WSPM" : "Concept · 50k WSPM";
+
+        document.getElementById("lbl-drawer-model").textContent = isZh ? "设备厂商与型号" : "OEM Vendor & Model";
+        document.getElementById("lbl-drawer-state").textContent = isZh ? "SEMI E10 稼动状态" : "SEMI E10 State";
+        document.getElementById("lbl-drawer-process").textContent = isZh ? "3nm FinFET 先进工艺作用" : "3nm FinFET Process Application";
+        document.getElementById("lbl-param").textContent = isZh ? "运行参数" : "Parameter";
+        document.getElementById("lbl-live-val").textContent = isZh ? "实时遥测" : "Live Telemetry";
+        document.getElementById("btn-focus-cam").textContent = isZh ? "镜头聚焦 Focus" : "Focus Tool";
+        document.getElementById("btn-open-catalog").textContent = isZh ? "在设备库查看 Catalog" : "View in Catalog";
+
+        const sel = document.getElementById("heatmap-select");
+        if (sel) {
+          sel.options[0].text = isZh ? "洁净室原貌" : "Cleanroom";
+          sel.options[1].text = isZh ? "SEMI E10 状态" : "E10 Status";
+          sel.options[2].text = isZh ? "OEM 厂商" : "OEM Vendors";
+          sel.options[3].text = isZh ? "工艺分区" : "Process";
+          sel.options[4].text = isZh ? "功率热力" : "Power Heatmap";
+        }
+
+        if (selectedToolIndex >= 0) {
+          openToolDrawer(toolsDatabase[selectedToolIndex]);
+        }
+      }
+
+      // =========================================================================
+      // 12. BOOTSTRAP EXECUTION
+      // =========================================================================
+      window.addEventListener("DOMContentLoaded", () => {
+        // Apply theme from storage
+        document.documentElement.setAttribute("data-theme", currentTheme);
+        const icon = document.getElementById("theme-icon");
+        const label = document.getElementById("theme-label");
+        if (currentTheme === "dark") {
+          icon.textContent = "🌙";
+          label.textContent = "Dark";
+        } else {
+          icon.textContent = "☀️";
+          label.textContent = "Day";
+        }
+
+        // 1. Generate 3,000 Tools Database
+        generateMegaFabDataset();
+
+        // 2. Initialize Three.js Engine
+        initThree();
+
+        // 3. Lucide Icons
+        if (window.lucide) {
+          lucide.createIcons();
+        }
+
+        // 4. Set Language Strings
+        applyLanguageStrings();
+      });
+    </script>
+  </body>
+</html>

@@ -739,7 +739,7 @@
         <div class="lang-en">
           <p style="font-size: 1rem; color: var(--ink); margin-bottom: 14px;">
             SemiconFab is a semiconductor factory digital twin that opens in your browser:
-            walk into a 3D cleanroom of a 300mm wafer fab and an OSAT packaging plant,
+            walk into a 3D cleanroom of a 300mm wafer fab, an OSAT packaging plant, and an interactive 3,000-tool 3nm Mega Fab conceptual layout model;
             browse an open catalog of 253 real OEM tools, compare specs and price evidence,
             estimate what it costs to build a fab, and download an open benchmark for
             fab-scheduling research. It is a teaching- and research-grade tool —
@@ -759,7 +759,7 @@
         <div class="lang-zh">
           <p style="font-size: 1rem; color: var(--ink); margin-bottom: 14px;">
             SemiconFab 是一个在浏览器里打开的半导体工厂数字孪生：你可以走进一座 300mm
-            晶圆厂的 3D 洁净室和一座封测厂，查阅 253 台真实 OEM 设备的开放目录，
+            晶圆厂的 3D 洁净室、一座封测厂，以及容纳 3,000 台机台的 3nm 概念超级晶圆厂布局模型；查阅 253 款真实 OEM 设备的开放目录，
             对比参数与价格依据，估算建一座晶圆厂要花多少钱，还可以下载调度研究用的
             公开基准测试。它是教学与研究级的工具——数据诚实标注来源等级，
             不冒充工业级精度。
@@ -826,7 +826,7 @@
                 <tr>
                   <td><span class="guide-role-badge role-planner">A fab planner</span></td>
                   <td>
-                    Read the <a href="fab-cost.html" class="guide-link-btn">Construction Cost Report →</a> first, then run your scenario in the <a href="fab-capex.html" class="guide-link-btn">Capex Estimator →</a>
+                    Read the <a href="fab-cost.html" class="guide-link-btn">Construction Cost Report →</a> first, run your scenario in the <a href="fab-capex.html" class="guide-link-btn">Capex Estimator →</a>, and explore the <a href="twin-mega.html" class="guide-link-btn">3nm Mega Fab Concept →</a> to visualize 50k WSPM dual-phase cleanroom spatial layout
                   </td>
                 </tr>
                 <tr>
@@ -878,7 +878,7 @@
                 <tr>
                   <td><span class="guide-role-badge role-planner">建厂规划者</span></td>
                   <td>
-                    先看 <a href="fab-cost.html" class="guide-link-btn">建设成本报告 →</a>（研究报告），再用 <a href="fab-capex.html" class="guide-link-btn">总投资测算器 →</a> 算你的方案
+                    先看 <a href="fab-cost.html" class="guide-link-btn">建设成本报告 →</a>（研究报告），再用 <a href="fab-capex.html" class="guide-link-btn">总投资测算器 →</a> 算你的方案，并进入 <a href="twin-mega.html" class="guide-link-btn">3nm 概念超级晶圆厂 →</a> 直观感受 50k WSPM 双期厂房的宏观排布
                   </td>
                 </tr>
                 <tr>
@@ -984,6 +984,56 @@
                 <a href="twin.html" class="guide-action-btn">
                   <span class="lang-en">Launch 300mm Twin →</span>
                   <span class="lang-zh">进入 300mm 孪生 →</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- 3nm Mega Fab Concept (Conceptual Layout Model) -->
+            <div class="guide-item-card">
+              <div class="guide-item-top">
+                <div class="guide-item-title-row">
+                  <h4 class="guide-item-title">
+                    <span class="lang-en">3nm Mega Fab Concept</span>
+                    <span class="lang-zh">3nm 概念超级晶圆厂</span>
+                  </h4>
+                  <a href="twin-mega.html" class="guide-item-file">twin-mega.html</a>
+                </div>
+                <div class="guide-item-subtitle">
+                  <span class="lang-en">Conceptual Layout Model (50,000 WSPM · 3,000 Tools)</span>
+                  <span class="lang-zh">概念布局推演示意模型（50,000 WSPM · 3,000 台机台）</span>
+                </div>
+                <p class="guide-item-desc">
+                  <span class="lang-en">
+                    A macro-scale 3D conceptual layout model illustrating an advanced 3nm FinFET dual-phase Mega Fab (Phase 1 West Hall 25k WSPM + Phase 2 East Hall 25k WSPM expansion, connected by a central automated AMHS Skybridge).<br /><br />
+                    <strong style="color: var(--amber);">Important Engineering Note</strong>: This model is strictly a <strong>Conceptual Layout Model</strong>, not an exact 1:1 physical digital twin. Rendering 3,000 production machines with pipe-level CAD sub-assemblies inside a web browser on everyday office laptops or small screens is physically and computationally impractical. Instead, it employs hardware-accelerated GPU instancing (<code>THREE.InstancedMesh</code>) to macroscopically simulate cleanroom equipment density, 10 process bay distributions, and a continuous 13-closed-loop AMHS monorail logistics network.
+                  </span>
+                  <span class="lang-zh">
+                    宏观尺度的 3D 概念布局推演示意模型，展现一座先进制程 3nm FinFET 双期超级晶圆厂（西厂区一期 25k WSPM + 东厂区二期 25k WSPM 扩产线，中央由高速 AMHS 天桥连廊相通）。<br /><br />
+                    <strong style="color: var(--amber);">重要工程定位说明</strong>：本模型<strong>严格定位为概念示意模型（Conceptual Layout Model）</strong>，而非 1:1 细节复刻的施工级孪生。在常规屏幕与普通电脑浏览器中对 3,000 台机台做高细节 1:1 管线级精细建模既不现实也没有必要。因此采用 GPU 硬件级几何实例化（<code>InstancedMesh</code>）架构，核心用于宏观直观演示 3,000 台超大体量机台的洁净室空间密度、10 大工艺湾分区以及 13 条闭环天车（AMHS OHT）高速物料流向。
+                  </span>
+                </p>
+
+                <!-- English Bullets -->
+                <ul class="guide-item-bullets lang-en">
+                  <li><strong>Dual-phase full-flow lines</strong>: Phase 1 (West Hall) and Phase 2 (East Hall) each house 1,500 tools across 10 identical process bays (EUV/DUV Litho, FinFET Gate Etch, Contact Etch, ALD High-k, Low-k CVD, Copper PVD, CMP, Implant/Anneal, Metrology/Clean). Both are complete 25k WSPM lines.</li>
+                  <li><strong>Inter-phase Skybridge &amp; AMHS loops</strong>: 13 closed-loop monorail tracks with 86 active OHT pods, including a 938m Grand Skybridge Highway transferring FOUPs between Phase 1 and 2 for dynamic load balancing and tool redundancy.</li>
+                  <li><strong>Heatmap modes &amp; live inspection</strong>: Cleanroom realistic, SEMI E10 state, OEM vendor spectrum, process category, and thermal/power density. Clicking any of the 3,000 machines opens live specs, SEMI E10 state, and wafer lot telemetry.</li>
+                  <li><strong>Cinematic tour &amp; radar</strong>: 5-stop guided macro tour plus a live 2D radar minimap tracking all 86 circulating OHT vehicles in real time.</li>
+                </ul>
+
+                <!-- Chinese Bullets -->
+                <ul class="guide-item-bullets lang-zh">
+                  <li><strong>双期全流程产线</strong>：一期（西厂）与二期（东厂）各拥有 1,500 台机台，涵盖 10 个完整工艺湾（EUV/DUV 光刻、鳍线刻蚀、双大马士革、ALD/CVD 薄膜、PVD 铜互连、CMP 研磨、离子注入/退火、清洗量测），均为 25k WSPM 全流程产线。</li>
+                  <li><strong>跨期天桥与全闭环天车物流</strong>：13 条全闭环单向轨道、86 辆在轨巡航 OHT 天车，包含跨越 50 米天桥的 938 米高速主干环线，实现跨厂区负载均衡与机台冗余备份。</li>
+                  <li><strong>热力图模式与机台探查</strong>：支持洁净室原貌、SEMI E10 状态、OEM 厂商谱系、工艺大类与功耗热力 5 种着色；任意点击 3,000 台机台中的任一台均可唤起实时遥测与工件批次（Lot ID）详情。</li>
+                  <li><strong>巡检导览与微型雷达</strong>：5 站宏观巡检导览，右上角雷达动态呈现全厂 86 辆天车流转轨迹。</li>
+                </ul>
+              </div>
+              <div class="guide-item-footer">
+                <span style="font-size: 0.78rem; color: var(--ink-3);">3,000 Tools · Conceptual Model</span>
+                <a href="twin-mega.html" class="guide-action-btn">
+                  <span class="lang-en">Launch Mega Fab Concept →</span>
+                  <span class="lang-zh">进入 3nm 概念模型 →</span>
                 </a>
               </div>
             </div>
@@ -1673,6 +1723,14 @@
               By the site owner's design: the two twins are independent entry points — switch between them from the "3D Twins" menu in the top navigation.
             </p>
           </div>
+
+          <!-- Q6 -->
+          <div class="faq-card">
+            <h3 class="faq-q"><span class="faq-q-mark">Q6.</span> Why is the 3nm Mega Fab labeled as a "Conceptual Layout Model" rather than a full 1:1 physical twin?</h3>
+            <p class="faq-a">
+              A leading-edge 50k WSPM Mega Fab houses ~3,000 production machines and hundreds of kilometers of subfab piping. Building a 1:1 photorealistic physical digital twin with millimeter-level sub-assemblies for 3,000 tools to run smoothly in a web browser on everyday laptops or office screens is technically impractical and visually overwhelming. The Mega Fab page uses GPU instanced rendering (<code>THREE.InstancedMesh</code>) as a <strong>Conceptual Layout Model</strong> to intuitively demonstrate the macroscopic spatial scale, process bay distribution, and automated AMHS closed-loop logistics of a multi-billion-dollar dual-phase manufacturing complex. For micro-level 1:1 equipment inspection and subfab utility details, please explore the dedicated <a href="twin.html">300mm Fab Twin</a> (121 tools) and <a href="twin-osat.html">OSAT Twin</a> (86 tools).
+            </p>
+          </div>
         </div>
 
         <!-- Chinese FAQ -->
@@ -1714,6 +1772,14 @@
             <h3 class="faq-q"><span class="faq-q-mark">Q5.</span> 为什么 Fab Twin 里没有通往 OSAT Twin 的链接？</h3>
             <p class="faq-a">
               站长有意为之：两个双子是独立入口，请从顶部导航「数字孪生」菜单切换。
+            </p>
+          </div>
+
+          <!-- Q6 -->
+          <div class="faq-card">
+            <h3 class="faq-q"><span class="faq-q-mark">Q6.</span> 为什么 3nm Mega Fab 明确标定为“概念布局模型（Conceptual Layout Model）”，而不是做完全 1:1 的精细孪生？</h3>
+            <p class="faq-a">
+              一座月产 50,000 片晶圆的先进制程超级晶圆厂容纳约 3,000 台超大型设备与数百公里动力管网。如果在普通电脑浏览器或小屏幕上对 3,000 台设备全部进行 1:1 施工级精细建模，不仅会造成硬件崩溃，视觉上也极其杂乱繁重，在工程上是不现实的。因此该页面采用硬件级 <code>InstancedMesh</code> 架构定位为<strong>概念布局推演示意模型（Conceptual Layout Model）</strong>，旨在让用户宏观直观感知超级晶圆厂的宏大空间尺度、双期工艺湾分区与 AMHS 闭环天车物流体系。若需要体验 1:1 精细度机台与动力层（Subfab）管网，请进入专门的 <a href="twin.html">300mm 洁净室孪生</a>（121台）与 <a href="twin-osat.html">OSAT 封测厂孪生</a>（86台）。
             </p>
           </div>
         </div>
