@@ -1,0 +1,2278 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title id="fm-page-title" data-i18n="fab_mes_page_title">
+      MES 与派工调度 · MES & Dispatch — SemiconFab.org
+    </title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta
+      name="description"
+      content="What MES actually does in a wafer fab: route, queue, dispatch, execute, track, and hold lots — an interactive teaching model."
+    />
+    <link rel="canonical" href="https://semiconfab.org/fab-mes" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/semicon-theme.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f2f1ec;
+        --surface: #ffffff;
+        --surface-2: #e9e7df;
+        --ink: #1c2126;
+        --ink-2: #4c5560;
+        --ink-3: #7a838d;
+        --line: #d8d4c8;
+        --accent: #0e6e6b;
+        --accent-ink: #0a5451;
+        --amber: #b45309;
+        --amber-bg: #fdf3e3;
+        --red: #a83226;
+        --red-bg: #fdf2f2;
+        --chart-grid: #ddd9cc;
+        --shadow:
+          0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+      }
+
+      html.dark,
+      [data-theme="dark"] {
+        --bg: #12161a;
+        --surface: #1a2026;
+        --surface-2: #232b33;
+        --ink: #e8eaec;
+        --ink-2: #aeb7bf;
+        --ink-3: #7e8891;
+        --line: #333c45;
+        --accent: #3fbdb8;
+        --accent-ink: #7fd8d3;
+        --amber: #e8a04c;
+        --amber-bg: #2c2417;
+        --red: #e0786a;
+        --red-bg: #2c1a18;
+        --chart-grid: #2c343d;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family:
+          "Manrope",
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background-color: var(--bg);
+        color: var(--ink);
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        padding-top: 60px;
+      }
+
+      .fm-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 24px 64px 24px;
+      }
+
+      /* Hero Section */
+      .fm-hero {
+        padding: 48px 0 24px 0;
+      }
+
+      .fm-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        background: var(--surface-2);
+        color: var(--accent);
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+      }
+
+      .fm-title {
+        font-size: 32px;
+        font-weight: 800;
+        line-height: 1.25;
+        color: var(--ink);
+        margin-bottom: 12px;
+        letter-spacing: -0.01em;
+      }
+
+      .fm-subtitle {
+        font-size: 16px;
+        color: var(--ink-2);
+        max-width: 820px;
+        line-height: 1.55;
+      }
+
+      /* Permanent Honest Banner */
+      .fm-honest-banner {
+        margin: 24px 0 36px 0;
+        background: var(--amber-bg);
+        border: 1px solid var(--amber);
+        border-radius: 8px;
+        padding: 14px 18px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .fm-banner-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--amber);
+      }
+
+      .fm-banner-icon {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: var(--amber);
+        flex-shrink: 0;
+      }
+
+      /* Sections & Typography */
+      .fm-section {
+        margin-top: 48px;
+      }
+
+      .fm-section-header {
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 12px;
+      }
+
+      .fm-section-title {
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .fm-section-sub {
+        font-size: 13.5px;
+        color: var(--ink-2);
+        margin-top: 4px;
+      }
+
+      /* What is / What is not Table */
+      .fm-compare-table-wrap {
+        overflow-x: auto;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+      }
+
+      .fm-compare-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+        text-align: left;
+      }
+
+      .fm-compare-table th,
+      .fm-compare-table td {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+
+      .fm-compare-table th {
+        background: var(--surface-2);
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--ink-2);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .fm-tag-is {
+        color: var(--accent);
+        font-weight: 700;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .fm-tag-not {
+        color: var(--red);
+        font-weight: 700;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      /* 8 Core Functions Grid */
+      .fm-grid-4 {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 16px;
+      }
+
+      .fm-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition:
+          transform 0.15s ease,
+          border-color 0.15s ease;
+      }
+
+      .fm-card:hover {
+        border-color: var(--accent);
+      }
+
+      .fm-card-num {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 6px;
+      }
+
+      .fm-card-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 8px;
+      }
+
+      .fm-card-desc {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.5;
+      }
+
+      /* Toy Dispatching Interactive Section */
+      .fm-toy-box {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .fm-rule-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+
+      .fm-rule-btn {
+        background: var(--surface-2);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .fm-rule-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .fm-rule-btn.active {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .fm-toy-summary {
+        background: var(--surface-2);
+        border-left: 4px solid var(--accent);
+        padding: 14px 18px;
+        border-radius: 0 6px 6px 0;
+        margin-bottom: 20px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .fm-toy-rule-desc {
+        font-size: 13.5px;
+        color: var(--ink);
+        flex: 1 1 300px;
+      }
+
+      .fm-toy-kpi {
+        display: flex;
+        gap: 24px;
+      }
+
+      .fm-kpi-block {
+        text-align: right;
+      }
+
+      .fm-kpi-val {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 22px;
+        font-weight: 800;
+        color: var(--accent);
+      }
+
+      .fm-kpi-lbl {
+        font-size: 11px;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      /* Visual Timeline Chart */
+      .fm-timeline-wrap {
+        margin: 20px 0;
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 16px;
+        overflow-x: auto;
+      }
+
+      .fm-timeline-axis {
+        display: flex;
+        height: 38px;
+        position: relative;
+        border-radius: 4px;
+        background: var(--surface-2);
+        overflow: hidden;
+      }
+
+      .fm-timeline-block {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: #ffffff;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+        transition: all 0.3s ease;
+        padding: 0 4px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+
+      .fm-timeline-ticks {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 6px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        color: var(--ink-3);
+      }
+
+      .fm-toy-table-wrap {
+        overflow-x: auto;
+        margin-top: 16px;
+      }
+
+      .fm-toy-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        text-align: left;
+      }
+
+      .fm-toy-table th,
+      .fm-toy-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .fm-toy-table th {
+        background: var(--surface-2);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11.5px;
+        font-weight: 700;
+        color: var(--ink-2);
+      }
+
+      .fm-toy-disclaimer {
+        margin-top: 20px;
+        padding: 12px 16px;
+        background: var(--surface-2);
+        border: 1px dashed var(--line);
+        border-radius: 6px;
+        font-size: 12px;
+        color: var(--ink-2);
+        line-height: 1.5;
+      }
+
+      /* Lot Journey Stepper */
+      .fm-stepper-box {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+      }
+
+      .fm-steps-nav {
+        display: flex;
+        gap: 6px;
+        overflow-x: auto;
+        padding-bottom: 12px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .fm-step-pill {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 6px 12px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--ink-2);
+        cursor: pointer;
+        white-space: nowrap;
+        font-family: "IBM Plex Mono", monospace;
+        transition: all 0.15s ease;
+      }
+
+      .fm-step-pill:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .fm-step-pill.active {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .fm-step-pill.hold-pill {
+        border-color: var(--red);
+        color: var(--red);
+      }
+
+      .fm-step-pill.hold-pill.active {
+        background: var(--red);
+        color: #ffffff;
+      }
+
+      .fm-journey-body {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 768px) {
+        .fm-journey-body {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .fm-journey-visual {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .fm-journey-step-badge {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        font-weight: 800;
+        color: var(--accent);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+      }
+
+      .fm-journey-step-title {
+        font-size: 20px;
+        font-weight: 800;
+        color: var(--ink);
+        margin-bottom: 14px;
+      }
+
+      .fm-journey-details {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .fm-journey-item {
+        background: var(--bg);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 12px 16px;
+      }
+
+      .fm-journey-item-lbl {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 4px;
+      }
+
+      .fm-journey-item-lbl.warn {
+        color: var(--amber);
+      }
+
+      .fm-journey-item-lbl.alert {
+        color: var(--red);
+      }
+
+      .fm-journey-item-txt {
+        font-size: 13px;
+        color: var(--ink);
+        line-height: 1.5;
+      }
+
+      .fm-stepper-ctrls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+        align-items: center;
+      }
+
+      .fm-btn {
+        background: var(--surface-2);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .fm-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .fm-btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: var(--accent);
+      }
+
+      .fm-btn-primary:hover {
+        background: var(--accent-ink);
+        color: #ffffff;
+      }
+
+      .fm-btn-hold {
+        background: var(--red-bg);
+        color: var(--red);
+        border-color: var(--red);
+      }
+
+      .fm-btn-hold:hover {
+        background: var(--red);
+        color: #ffffff;
+      }
+
+      /* Fault Scenarios */
+      .fm-fault-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .fm-fault-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px;
+        box-shadow: var(--shadow);
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .fm-fault-card:hover {
+        border-color: var(--red);
+      }
+
+      .fm-fault-card.active {
+        border-color: var(--red);
+        background: var(--red-bg);
+      }
+
+      .fm-fault-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 8px;
+      }
+
+      .fm-fault-badge {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10.5px;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background: var(--red-bg);
+        color: var(--red);
+        border: 1px solid var(--red);
+      }
+
+      .fm-fault-title {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .fm-fault-desc {
+        font-size: 12.5px;
+        color: var(--ink-2);
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+
+      .fm-fault-resolution {
+        font-size: 12px;
+        color: var(--amber);
+        font-family: "IBM Plex Mono", monospace;
+        border-top: 1px dashed var(--line);
+        padding-top: 8px;
+      }
+
+      /* Quiz Section */
+      .fm-quiz-box {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+        box-shadow: var(--shadow);
+        margin-top: 16px;
+      }
+
+      .fm-quiz-item {
+        margin-bottom: 24px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .fm-quiz-item:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      .fm-quiz-q {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 12px;
+      }
+
+      .fm-quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .fm-quiz-opt {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 13px;
+        color: var(--ink);
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.15s ease;
+      }
+
+      .fm-quiz-opt:hover {
+        border-color: var(--accent);
+      }
+
+      .fm-quiz-opt.correct {
+        background: rgba(14, 110, 107, 0.12);
+        border-color: var(--accent);
+        color: var(--accent-ink);
+        font-weight: 600;
+      }
+
+      .fm-quiz-opt.wrong {
+        background: var(--red-bg);
+        border-color: var(--red);
+        color: var(--red);
+      }
+
+      .fm-quiz-explanation {
+        margin-top: 10px;
+        padding: 10px 14px;
+        background: var(--surface-2);
+        border-left: 3px solid var(--accent);
+        font-size: 12.5px;
+        color: var(--ink-2);
+        display: none;
+      }
+
+      /* Accessible Static Text Edition */
+      .fm-text-edition {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 28px;
+        margin-top: 48px;
+        box-shadow: var(--shadow);
+      }
+
+      .fm-text-edition h3 {
+        font-size: 18px;
+        font-weight: 800;
+        margin: 24px 0 12px 0;
+        color: var(--ink);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 6px;
+      }
+
+      .fm-text-edition h3:first-of-type {
+        margin-top: 0;
+      }
+
+      .fm-text-edition p,
+      .fm-text-edition li {
+        font-size: 13.5px;
+        color: var(--ink-2);
+        line-height: 1.6;
+        margin-bottom: 8px;
+      }
+
+      .fm-text-edition ul,
+      .fm-text-edition ol {
+        margin-left: 20px;
+        margin-bottom: 16px;
+      }
+
+      /* Navigation Footer Bar */
+      .fm-nav-foot {
+        margin-top: 48px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .fm-foot-link {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .fm-foot-link:hover {
+        text-decoration: underline;
+      }
+
+      .fm-meta-line {
+        font-size: 12px;
+        color: var(--ink-3);
+      }
+
+      /* Sponsor Banner (Disabled by default) */
+      .fm-sponsor-banner {
+        display: none; /* Controlled dynamically via data/fab-mes.json */
+        margin: 24px 0;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--accent);
+        padding: 14px 20px;
+        border-radius: 6px;
+      }
+
+      .fm-sponsor-tag {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 700;
+        color: var(--accent);
+        letter-spacing: 0.05em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Unified Header Navigation Mount -->
+    <div id="sc-nav-mount"></div>
+
+    <main class="fm-container" role="main">
+      <!-- Hero Section -->
+      <header class="fm-hero">
+        <span class="fm-badge" data-i18n="fab_mes_hero_badge">
+          TOPIC EXPLAINER · OPERATIONS CORE
+        </span>
+        <h1 class="fm-title" data-i18n="fab_mes_hero_title">
+          MES & Dispatch: How a Wafer Fab Runs
+        </h1>
+        <p class="fm-subtitle" data-i18n="fab_mes_hero_subtitle">
+          What MES actually does: route, queue, dispatch, execute, track, and
+          hold a lot — as a teaching model.
+        </p>
+
+        <!-- Permanent Honest Banner (Non-dismissible) -->
+        <div
+          class="fm-honest-banner"
+          role="region"
+          aria-label="Pedagogical Disclaimer"
+        >
+          <div class="fm-banner-item">
+            <span class="fm-banner-icon"></span>
+            <span data-i18n="fab_mes_banner_1"
+              >教学讲解，非真实 MES · Teaching explainer, not a real MES</span
+            >
+          </div>
+          <div class="fm-banner-item">
+            <span class="fm-banner-icon"></span>
+            <span data-i18n="fab_mes_banner_2"
+              >Lot 与数字均为示意 · Lots and numbers are illustrative</span
+            >
+          </div>
+          <div class="fm-banner-item">
+            <span class="fm-banner-icon"></span>
+            <span data-i18n="fab_mes_banner_3"
+              >未连接任何真实工厂 · No live fab connection</span
+            >
+          </div>
+        </div>
+
+        <!-- Optional Sponsorship Slot (Controlled by config, hidden by default) -->
+        <div id="fm-sponsor-mount" class="fm-sponsor-banner">
+          <span class="fm-sponsor-tag">赞助 Sponsored</span>
+          <div
+            id="fm-sponsor-content"
+            style="margin-top: 4px; font-size: 13px; color: var(--ink)"
+          ></div>
+        </div>
+      </header>
+
+      <!-- Section 1: What MES Is and Is Not -->
+      <section class="fm-section" id="what-is-mes">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_what_title">
+            What MES Is — and What It Is Not
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_what_subtitle">
+            Clear architectural boundaries between shop-floor execution and
+            neighboring enterprise systems.
+          </p>
+        </div>
+
+        <div class="fm-compare-table-wrap">
+          <table
+            class="fm-compare-table"
+            aria-label="MES Scope Comparison Table"
+          >
+            <thead>
+              <tr>
+                <th style="width: 25%">System Domain</th>
+                <th style="width: 35%">What MES Does NOT Do</th>
+                <th style="width: 40%">Architectural Boundary &amp; Handoff</th>
+              </tr>
+            </thead>
+            <tbody id="fm-what-is-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 2: 8 Core Functions of MES -->
+      <section class="fm-section" id="core-functions">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_core_title">
+            The 8 Core Functions of MES
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_core_subtitle">
+            Standard SEMI &amp; ISA-95 manufacturing execution capabilities
+            governing wafer production.
+          </p>
+        </div>
+
+        <div class="fm-grid-4" id="fm-functions-grid">
+          <!-- Rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Section 3: Toy Dispatching Interactive Demo -->
+      <section class="fm-section" id="toy-dispatch">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_toy_title">
+            Toy Dispatching Demo: How Rules Shape Cycle Time
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_toy_subtitle">
+            Compare 4 fundamental dispatching heuristics on 5 illustrative lots
+            to develop queuing intuition.
+          </p>
+        </div>
+
+        <div class="fm-toy-box">
+          <div
+            class="fm-rule-selector"
+            role="tablist"
+            aria-label="Dispatching Rules"
+          >
+            <button type="button" class="fm-rule-btn active" data-rule="FIFO">
+              1. FIFO (First-In, First-Out)
+            </button>
+            <button type="button" class="fm-rule-btn" data-rule="SPT">
+              2. SPT (Shortest Processing Time)
+            </button>
+            <button type="button" class="fm-rule-btn" data-rule="EDD">
+              3. EDD (Earliest Due Date)
+            </button>
+            <button type="button" class="fm-rule-btn" data-rule="CR">
+              4. CR (Critical Ratio)
+            </button>
+          </div>
+
+          <div class="fm-toy-summary">
+            <div class="fm-toy-rule-desc" id="fm-rule-desc">
+              <!-- Dynamic description -->
+            </div>
+            <div class="fm-toy-kpi">
+              <div class="fm-kpi-block">
+                <div class="fm-kpi-val" id="fm-kpi-order">
+                  Lot A → Lot B → Lot C → Lot D → Lot E
+                </div>
+                <div class="fm-kpi-lbl">Dispatch Sequence · 派工次序</div>
+              </div>
+              <div class="fm-kpi-block">
+                <div class="fm-kpi-val" id="fm-kpi-avgct">11.40</div>
+                <div class="fm-kpi-lbl">Mean Cycle Time · 平均周期</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Gantt / Timeline visualization -->
+          <div class="fm-timeline-wrap">
+            <div
+              style="
+                font-family: &quot;IBM Plex Mono&quot;, monospace;
+                font-size: 11px;
+                color: var(--ink-2);
+                margin-bottom: 6px;
+              "
+            >
+              Single Tool Chamber Schedule (t=0 to t=24)
+            </div>
+            <div class="fm-timeline-axis" id="fm-timeline-bars">
+              <!-- Visual bars rendered dynamically -->
+            </div>
+            <div class="fm-timeline-ticks">
+              <span>t=0</span>
+              <span>t=6</span>
+              <span>t=12</span>
+              <span>t=18</span>
+              <span>t=24</span>
+            </div>
+          </div>
+
+          <!-- Lot Table -->
+          <div class="fm-toy-table-wrap">
+            <table
+              class="fm-toy-table"
+              aria-label="Toy Dispatching Lot Schedule Table"
+            >
+              <thead>
+                <tr>
+                  <th>Lot ID</th>
+                  <th>Product Family</th>
+                  <th>Arrive Queue (t)</th>
+                  <th>Process Time (Δt)</th>
+                  <th>Due Date (t)</th>
+                  <th>Start Time (t)</th>
+                  <th>Finish Time (t)</th>
+                  <th>Cycle Time (Finish - Arrive)</th>
+                  <th>Tardiness</th>
+                </tr>
+              </thead>
+              <tbody id="fm-toy-table-body">
+                <!-- Rows rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="fm-toy-disclaimer">
+            <strong>模型与基准边界说明：</strong>
+            <p style="margin-top: 4px" id="fm-toy-model-notes">
+              Toy
+              演示仅用于建立直觉：单工具、顺序加工、无并行、无抢占、无设备故障；真实
+              Fab 的派工远比这复杂。本演示不是 MIMAC-2026
+              benchmark，不代表任何规则在真实工厂更优。
+            </p>
+            <p style="margin-top: 6px">
+              相关基准测试详见：<a href="benchmark.html" class="sc-inline-link"
+                >MIMAC-2026 晶圆厂调度基准</a
+              >（注：MIMAC-2026 调度基准为合成 Fab，与真实目录数据独立）。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: A Lot's Journey Through MES -->
+      <section class="fm-section" id="lot-journey">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_journey_title">
+            Journey of a Wafer Lot Through MES
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_journey_subtitle">
+            Step-by-step progression of a physical FOUP carrier through routing,
+            execution, and release gates.
+          </p>
+        </div>
+
+        <div class="fm-stepper-box">
+          <div class="fm-steps-nav" id="fm-steps-nav" role="tablist">
+            <!-- 9 Step pills rendered dynamically -->
+          </div>
+
+          <div class="fm-journey-body">
+            <div class="fm-journey-visual">
+              <div class="fm-journey-step-badge" id="fm-cur-step-badge">
+                Step 1 of 9
+              </div>
+              <h3 class="fm-journey-step-title" id="fm-cur-step-title">
+                Create Lot &amp; Route
+              </h3>
+              <div
+                id="fm-cur-step-diagram"
+                style="margin-top: 12px; width: 100%; max-width: 340px"
+              >
+                <!-- Step Visual SVG icon/schematic -->
+              </div>
+            </div>
+
+            <div class="fm-journey-details">
+              <div class="fm-journey-item">
+                <div class="fm-journey-item-lbl">
+                  MES 在这一步做什么 (What MES Does)
+                </div>
+                <div class="fm-journey-item-txt" id="fm-cur-mes-does">...</div>
+              </div>
+              <div class="fm-journey-item">
+                <div class="fm-journey-item-lbl warn">
+                  与谁交接 (Handoff To / With)
+                </div>
+                <div class="fm-journey-item-txt" id="fm-cur-handoff">...</div>
+              </div>
+              <div class="fm-journey-item">
+                <div class="fm-journey-item-lbl alert">
+                  若这一步信息缺失会怎样 (Impact If Missing)
+                </div>
+                <div class="fm-journey-item-txt" id="fm-cur-if-missing">
+                  ...
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="fm-stepper-ctrls">
+            <button type="button" class="fm-btn" id="fm-btn-prev">
+              ← 上一步 (Previous)
+            </button>
+            <button
+              type="button"
+              class="fm-btn fm-btn-primary"
+              id="fm-btn-next"
+            >
+              下一步 (Next) →
+            </button>
+            <button type="button" class="fm-btn" id="fm-btn-reset">
+              重置初始步骤 (Reset)
+            </button>
+
+            <!-- Step 8 Special Branch Buttons -->
+            <div
+              id="fm-step8-branches"
+              style="display: none; gap: 8px; margin-left: auto"
+            >
+              <button
+                type="button"
+                class="fm-btn fm-btn-primary"
+                id="fm-branch-pass"
+              >
+                ✓ 量测合格放行 (Pass &amp; Release)
+              </button>
+              <button
+                type="button"
+                class="fm-btn fm-btn-hold"
+                id="fm-branch-hold"
+              >
+                ⚠ 量测超差挂起 (Fail &amp; Hold)
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Real-World Exception Scenarios -->
+      <section class="fm-section" id="fault-scenarios">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_faults_title">
+            Real-World Exceptions: When Things Go Wrong
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_faults_subtitle">
+            How automated interlocks and rule-based safety mechanisms handle
+            mismatch, tool breakdown, and out-of-spec wafers.
+          </p>
+        </div>
+
+        <div class="fm-fault-cards" id="fm-fault-cards">
+          <!-- 3 Scenarios rendered dynamically -->
+        </div>
+
+        <div
+          id="fm-fault-detail-box"
+          style="
+            display: none;
+            margin-top: 16px;
+            background: var(--surface);
+            border: 1px solid var(--red);
+            border-radius: 8px;
+            padding: 20px;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              margin-bottom: 10px;
+            "
+          >
+            <h4
+              id="fm-fault-detail-title"
+              style="color: var(--red); font-size: 16px; font-weight: 800"
+            >
+              Scenario Details
+            </h4>
+            <button type="button" class="fm-btn" id="fm-fault-reset-btn">
+              恢复正常流程 (Clear Exception)
+            </button>
+          </div>
+          <p
+            id="fm-fault-detail-desc"
+            style="font-size: 13.5px; color: var(--ink); margin-bottom: 8px"
+          ></p>
+          <div
+            id="fm-fault-detail-res"
+            style="
+              font-size: 13px;
+              color: var(--amber);
+              font-family: &quot;IBM Plex Mono&quot;, monospace;
+            "
+          ></div>
+        </div>
+      </section>
+
+      <!-- Section 6: MES & Neighboring Systems -->
+      <section class="fm-section" id="neighbor-systems">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_neighbors_title">
+            MES &amp; Neighboring Systems
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_neighbors_subtitle">
+            Clear functional demarcation: who produces orders, who moves
+            physical carriers, and who analyzes root causes.
+          </p>
+        </div>
+
+        <div class="fm-compare-table-wrap">
+          <table
+            class="fm-compare-table"
+            aria-label="MES Neighbor Systems Table"
+          >
+            <thead>
+              <tr>
+                <th style="width: 25%">Neighbor System</th>
+                <th style="width: 35%">Functional Boundary</th>
+                <th style="width: 40%">MES Interaction &amp; Cross-Link</th>
+              </tr>
+            </thead>
+            <tbody id="fm-neighbors-tbody">
+              <!-- Rendered dynamically -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 7: Representative MES Vendors -->
+      <section class="fm-section" id="vendor-landscape">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_vendors_title">
+            Representative MES Vendors
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_vendors_subtitle">
+            Commercial manufacturing software solutions deployed across
+            semiconductor facilities.
+          </p>
+        </div>
+
+        <div
+          style="
+            background: var(--surface-2);
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: var(--ink-2);
+            margin-bottom: 16px;
+          "
+          data-i18n="fab_mes_vendors_disclaimer"
+        >
+          代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative
+          vendors for teaching only, in alphabetical order; not a ranking, not
+          exhaustive, not an endorsement.
+        </div>
+
+        <div
+          class="fm-grid-4"
+          id="fm-vendors-grid"
+          style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))"
+        >
+          <!-- Vendors rendered dynamically in alphabetical order -->
+        </div>
+
+        <div
+          style="
+            margin-top: 14px;
+            font-size: 12.5px;
+            color: var(--ink-3);
+            line-height: 1.5;
+          "
+          data-i18n="fab_mes_vendors_afterword"
+        >
+          大型工厂常在商用 MES
+          基础上做大量定制与自研扩展，商用产品名不等于某家工厂实际在用的系统。Large
+          manufacturers frequently implement extensive proprietary extensions on
+          top of commercial platforms; commercial names do not imply the exact
+          system utilized in any specific facility.
+        </div>
+      </section>
+
+      <!-- Section 8: Glossary -->
+      <section class="fm-section" id="glossary">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_glossary_title">
+            Glossary of MES &amp; Dispatching Terms
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_glossary_subtitle">
+            Essential terminology for semiconductor manufacturing execution and
+            cleanroom logistics.
+          </p>
+        </div>
+
+        <div
+          class="fm-grid-4"
+          id="fm-glossary-grid"
+          style="grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))"
+        >
+          <!-- Glossary terms rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Section 9: Interactive Quiz -->
+      <section class="fm-section" id="quiz">
+        <div class="fm-section-header">
+          <h2 class="fm-section-title" data-i18n="fab_mes_quiz_title">
+            Interactive Knowledge Check
+          </h2>
+          <p class="fm-section-sub" data-i18n="fab_mes_quiz_subtitle">
+            Three conceptual questions to verify your understanding of MES
+            boundaries, dispatch heuristics, and hold gates.
+          </p>
+        </div>
+
+        <div class="fm-quiz-box" id="fm-quiz-container">
+          <!-- 3 Quiz questions rendered dynamically -->
+        </div>
+      </section>
+
+      <!-- Section 10: Complete Accessible Static Text Edition -->
+      <section
+        class="fm-section fm-text-edition"
+        id="accessible-text-edition"
+        aria-label="Accessible Static Text Edition"
+      >
+        <h2
+          style="
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--ink);
+            margin-bottom: 6px;
+          "
+          data-i18n="fab_mes_text_ver_title"
+        >
+          Complete Accessible Text Edition
+        </h2>
+        <p
+          style="font-size: 13px; color: var(--ink-3); margin-bottom: 24px"
+          data-i18n="fab_mes_text_ver_subtitle"
+        >
+          Full static reference of core functions, lot journey, dispatching
+          results, and architecture without animations or interactive
+          JavaScript.
+        </p>
+
+        <div id="fm-static-text-mount">
+          <!-- Static accessible representation rendered for screen-readers and SEO -->
+        </div>
+      </section>
+
+      <!-- Bottom Navigation Footer & Conditional Links -->
+      <footer class="fm-nav-foot">
+        <div style="display: flex; flex-direction: column; gap: 8px">
+          <a
+            href="fab-operations.html"
+            class="fm-foot-link"
+            data-i18n="fab_mes_back_hub"
+          >
+            ← 返回晶圆厂运营总览 (Fab Operations Hub)
+          </a>
+          <div style="font-size: 12px; color: var(--ink-3)">
+            相关模块：
+            <a href="twin.html" class="sc-inline-link">300mm 洁净室数字孪生</a
+            >（相关：twin 里的 MES 面板为教学模拟）·
+            <a href="fab-data-layer.html" class="sc-inline-link"
+              >晶圆厂数据层</a
+            >
+            ·
+            <a href="benchmark.html" class="sc-inline-link"
+              >MIMAC-2026 调度基准</a
+            >（合成 Fab，与真实目录数据独立）
+          </div>
+        </div>
+        <div class="fm-meta-line">
+          Teaching Module · SemiconFab.org Initiative
+        </div>
+      </footer>
+
+      <!-- Unified Footer Mount -->
+      <div id="sc-footer-mount"></div>
+    </main>
+
+    <!-- Dependencies -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/site-nav.js"></script>
+
+    <!-- Page Logic Script -->
+    <script>
+      (function () {
+        "use strict";
+
+        // Fallback default data for resilient local file / offline loading
+        const EMBEDDED_DATA = {
+          sponsorship: {
+            enabled: false,
+            sponsor_name: null,
+            sponsor_url: null,
+          },
+          toy_dispatch: {
+            lots: [
+              {
+                id: "Lot A",
+                arrive: 0,
+                proc_time: 8,
+                due: 30,
+                product_en: "Logic SoC (300mm)",
+                product_zh: "逻辑 SoC (300mm)",
+              },
+              {
+                id: "Lot B",
+                arrive: 2,
+                proc_time: 3,
+                due: 18,
+                product_en: "Analog Mixed-Signal",
+                product_zh: "模拟混合信号",
+              },
+              {
+                id: "Lot C",
+                arrive: 4,
+                proc_time: 6,
+                due: 25,
+                product_en: "Microcontroller (MCU)",
+                product_zh: "微控制器 (MCU)",
+              },
+              {
+                id: "Lot D",
+                arrive: 6,
+                proc_time: 2,
+                due: 12,
+                product_en: "High-Voltage Driver",
+                product_zh: "高压驱动芯片",
+              },
+              {
+                id: "Lot E",
+                arrive: 10,
+                proc_time: 5,
+                due: 28,
+                product_en: "Power MOSFET",
+                product_zh: "功率 MOSFET",
+              },
+            ],
+            benchmark_results: {
+              FIFO: {
+                name_en: "FIFO (First-In, First-Out)",
+                name_zh: "FIFO (先到先服务)",
+                desc_en:
+                  "Lots are scheduled strictly in order of arrival time at the queue.",
+                desc_zh: "严格按照批次到达队列的先后顺序进行加工。",
+                order: ["Lot A", "Lot B", "Lot C", "Lot D", "Lot E"],
+                avg_cycle_time: 11.4,
+                details: [
+                  {
+                    lot: "Lot A",
+                    start: 0,
+                    finish: 8,
+                    cycle_time: 8,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot B",
+                    start: 8,
+                    finish: 11,
+                    cycle_time: 9,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot C",
+                    start: 11,
+                    finish: 17,
+                    cycle_time: 13,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot D",
+                    start: 17,
+                    finish: 19,
+                    cycle_time: 13,
+                    tardiness: 7,
+                  },
+                  {
+                    lot: "Lot E",
+                    start: 19,
+                    finish: 24,
+                    cycle_time: 14,
+                    tardiness: 0,
+                  },
+                ],
+              },
+              SPT: {
+                name_en: "SPT (Shortest Processing Time)",
+                name_zh: "SPT (最短加工时间优先)",
+                desc_en:
+                  "Among available lots in queue, the one with shortest processing time is dispatched first. Minimizes overall mean cycle time.",
+                desc_zh:
+                  "在当前队列候选中，优先派工加工时间最短的批次。在简单排队论中可实现最小平均周期。",
+                order: ["Lot A", "Lot D", "Lot B", "Lot E", "Lot C"],
+                avg_cycle_time: 10.2,
+                details: [
+                  {
+                    lot: "Lot A",
+                    start: 0,
+                    finish: 8,
+                    cycle_time: 8,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot D",
+                    start: 8,
+                    finish: 10,
+                    cycle_time: 4,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot B",
+                    start: 10,
+                    finish: 13,
+                    cycle_time: 11,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot E",
+                    start: 13,
+                    finish: 18,
+                    cycle_time: 8,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot C",
+                    start: 18,
+                    finish: 24,
+                    cycle_time: 20,
+                    tardiness: 0,
+                  },
+                ],
+              },
+              EDD: {
+                name_en: "EDD (Earliest Due Date)",
+                name_zh: "EDD (最早交期优先)",
+                desc_en:
+                  "Lots with earlier promised customer delivery deadlines are prioritized to mitigate tardiness.",
+                desc_zh: "优先派工客户承诺交期最早的批次，旨在降低最大延期量。",
+                order: ["Lot A", "Lot D", "Lot B", "Lot C", "Lot E"],
+                avg_cycle_time: 10.4,
+                details: [
+                  {
+                    lot: "Lot A",
+                    start: 0,
+                    finish: 8,
+                    cycle_time: 8,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot D",
+                    start: 8,
+                    finish: 10,
+                    cycle_time: 4,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot B",
+                    start: 10,
+                    finish: 13,
+                    cycle_time: 11,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot C",
+                    start: 13,
+                    finish: 19,
+                    cycle_time: 15,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot E",
+                    start: 19,
+                    finish: 24,
+                    cycle_time: 14,
+                    tardiness: 0,
+                  },
+                ],
+              },
+              CR: {
+                name_en: "CR (Critical Ratio)",
+                name_zh: "CR (关键比率最小优先)",
+                desc_en:
+                  "Dynamic ratio calculated as (Due Date - Now) / Remaining Proc Time. Lots with lowest ratio are most urgent.",
+                desc_zh:
+                  "在决策时刻计算 (交期 - 当前时间) / 剩余加工时间。比率越小表明越紧迫，优先派工。",
+                order: ["Lot A", "Lot D", "Lot C", "Lot B", "Lot E"],
+                avg_cycle_time: 11.0,
+                details: [
+                  {
+                    lot: "Lot A",
+                    start: 0,
+                    finish: 8,
+                    cycle_time: 8,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot D",
+                    start: 8,
+                    finish: 10,
+                    cycle_time: 4,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot C",
+                    start: 10,
+                    finish: 16,
+                    cycle_time: 12,
+                    tardiness: 0,
+                  },
+                  {
+                    lot: "Lot B",
+                    start: 16,
+                    finish: 19,
+                    cycle_time: 17,
+                    tardiness: 1,
+                  },
+                  {
+                    lot: "Lot E",
+                    start: 19,
+                    finish: 24,
+                    cycle_time: 14,
+                    tardiness: 0,
+                  },
+                ],
+              },
+            },
+          },
+        };
+
+        let pageData = EMBEDDED_DATA;
+        let curRule = "FIFO";
+        let curStepIdx = 0; // 0 to 8
+        let activeFault = null;
+        let currentLang = "en";
+
+        function getLang() {
+          const docLang = document.documentElement.getAttribute("data-lang");
+          if (docLang && docLang.startsWith("zh")) return "zh";
+          const saved =
+            localStorage.getItem("semicon_lang") ||
+            localStorage.getItem("semiconfab_lang");
+          if (saved && saved.startsWith("zh")) return "zh";
+          return "en";
+        }
+
+        async function loadData() {
+          try {
+            const resp = await fetch("data/fab-mes.json");
+            if (resp.ok) {
+              pageData = await resp.json();
+            }
+          } catch (e) {
+            console.warn("Using embedded fallback data for fab-mes.", e);
+          }
+        }
+
+        function renderWhatIsTable(lang) {
+          const tbody = document.getElementById("fm-what-is-tbody");
+          if (!tbody || !pageData.what_is_mes) return;
+
+          const isText =
+            lang === "zh"
+              ? pageData.what_is_mes.is_zh
+              : pageData.what_is_mes.is_en;
+          let html = `
+            <tr>
+              <td><span class="fm-tag-is">MES IS · 制造执行层</span></td>
+              <td colspan="2" style="font-weight: 600; color: var(--accent-ink);">${isText}</td>
+            </tr>
+          `;
+
+          pageData.what_is_mes.is_not.forEach((item) => {
+            const notTxt = lang === "zh" ? item.not_zh : item.not_en;
+            const bndTxt = lang === "zh" ? item.boundary_zh : item.boundary_en;
+            html += `
+              <tr>
+                <td><span class="fm-tag-not">NOT ${item.system}</span></td>
+                <td>${notTxt}</td>
+                <td>${bndTxt}</td>
+              </tr>
+            `;
+          });
+          tbody.innerHTML = html;
+        }
+
+        function renderCoreFunctions(lang) {
+          const grid = document.getElementById("fm-functions-grid");
+          if (!grid || !pageData.core_functions) return;
+
+          grid.innerHTML = pageData.core_functions
+            .map((fn) => {
+              const name = lang === "zh" ? fn.name_zh : fn.name_en;
+              const summary = lang === "zh" ? fn.summary_zh : fn.summary_en;
+              return `
+                <div class="fm-card">
+                  <div>
+                    <div class="fm-card-num">CORE FUNCTION 0${fn.index}</div>
+                    <div class="fm-card-title">${name}</div>
+                    <div class="fm-card-desc">${summary}</div>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        function renderToyDispatch(rule, lang) {
+          if (!pageData.toy_dispatch) return;
+          const res = pageData.toy_dispatch.benchmark_results[rule];
+          if (!res) return;
+
+          // Rule description
+          const descEl = document.getElementById("fm-rule-desc");
+          if (descEl) {
+            descEl.textContent = lang === "zh" ? res.desc_zh : res.desc_en;
+          }
+
+          // KPIs
+          const orderEl = document.getElementById("fm-kpi-order");
+          if (orderEl) {
+            orderEl.textContent = res.order.join(" → ");
+          }
+          const avgctEl = document.getElementById("fm-kpi-avgct");
+          if (avgctEl) {
+            avgctEl.textContent = res.avg_cycle_time.toFixed(2);
+          }
+
+          // Timeline Gantt Bars
+          const barContainer = document.getElementById("fm-timeline-bars");
+          if (barContainer) {
+            const colors = {
+              "Lot A": "#0e6e6b",
+              "Lot B": "#2563eb",
+              "Lot C": "#d97706",
+              "Lot D": "#dc2626",
+              "Lot E": "#7c3aed",
+            };
+
+            barContainer.innerHTML = res.details
+              .map((d) => {
+                const duration = d.finish - d.start;
+                const widthPct = (duration / 24) * 100;
+                return `
+                  <div class="fm-timeline-block" style="width: ${widthPct}%; background: ${colors[d.lot] || "#4c5560"};" title="${d.lot}: [t=${d.start} ~ t=${d.finish}] Duration: ${duration}">
+                    <span>${d.lot}</span>
+                    <span style="font-size: 9.5px; opacity: 0.85;">t=${d.start}~${d.finish}</span>
+                  </div>
+                `;
+              })
+              .join("");
+          }
+
+          // Table Rows
+          const tbody = document.getElementById("fm-toy-table-body");
+          if (tbody) {
+            const lots = pageData.toy_dispatch.lots;
+            tbody.innerHTML = res.details
+              .map((d) => {
+                const lotMeta = lots.find((l) => l.id === d.lot) || {};
+                const product =
+                  lang === "zh" ? lotMeta.product_zh : lotMeta.product_en;
+                const tardinessBadge =
+                  d.tardiness > 0
+                    ? `<span style="color: var(--red); font-weight: 700;">+${d.tardiness} (Late)</span>`
+                    : `<span style="color: var(--accent); font-weight: 600;">0 (On Time)</span>`;
+                return `
+                  <tr>
+                    <td><strong>${d.lot}</strong></td>
+                    <td>${product || "-"}</td>
+                    <td>t = ${lotMeta.arrive}</td>
+                    <td>${lotMeta.proc_time}</td>
+                    <td>t = ${lotMeta.due}</td>
+                    <td>t = ${d.start}</td>
+                    <td>t = ${d.finish}</td>
+                    <td style="font-weight: 700; color: var(--accent);">${d.cycle_time}</td>
+                    <td>${tardinessBadge}</td>
+                  </tr>
+                `;
+              })
+              .join("");
+          }
+        }
+
+        function renderLotJourney(stepIdx, lang) {
+          if (!pageData.lot_journey) return;
+          const steps = pageData.lot_journey;
+          const step = steps[stepIdx];
+          if (!step) return;
+
+          // Render Pills
+          const nav = document.getElementById("fm-steps-nav");
+          if (nav) {
+            nav.innerHTML = steps
+              .map((s, idx) => {
+                const name = lang === "zh" ? s.name_zh : s.name_en;
+                const isActive = idx === stepIdx ? "active" : "";
+                const isHoldPill =
+                  idx === 7 && activeFault === "metrology_out_of_spec"
+                    ? "hold-pill"
+                    : "";
+                return `
+                  <button type="button" class="fm-step-pill ${isActive} ${isHoldPill}" data-step="${idx}">
+                    0${s.step}. ${name}
+                  </button>
+                `;
+              })
+              .join("");
+
+            // Add listener
+            nav.querySelectorAll(".fm-step-pill").forEach((btn) => {
+              btn.addEventListener("click", () => {
+                curStepIdx = parseInt(btn.getAttribute("data-step"), 10);
+                renderLotJourney(curStepIdx, currentLang);
+              });
+            });
+          }
+
+          // Step details
+          const badgeEl = document.getElementById("fm-cur-step-badge");
+          if (badgeEl) badgeEl.textContent = `Step ${step.step} of 9`;
+
+          const titleEl = document.getElementById("fm-cur-step-title");
+          if (titleEl)
+            titleEl.textContent = lang === "zh" ? step.name_zh : step.name_en;
+
+          const doesEl = document.getElementById("fm-cur-mes-does");
+          if (doesEl)
+            doesEl.textContent =
+              lang === "zh" ? step.mes_does_zh : step.mes_does_en;
+
+          const handoffEl = document.getElementById("fm-cur-handoff");
+          if (handoffEl)
+            handoffEl.textContent =
+              lang === "zh" ? step.handoff_zh : step.handoff_en;
+
+          const missingEl = document.getElementById("fm-cur-if-missing");
+          if (missingEl)
+            missingEl.textContent =
+              lang === "zh" ? step.if_missing_zh : step.if_missing_en;
+
+          // Branch buttons for step 8
+          const branchBox = document.getElementById("fm-step8-branches");
+          if (branchBox) {
+            branchBox.style.display = step.step === 8 ? "inline-flex" : "none";
+          }
+
+          // Step Schematic SVG
+          const diagEl = document.getElementById("fm-cur-step-diagram");
+          if (diagEl) {
+            diagEl.innerHTML = renderStepSvg(step.step, activeFault);
+          }
+        }
+
+        function renderStepSvg(stepNum, fault) {
+          const color = fault ? "var(--red)" : "var(--accent)";
+          return `
+            <svg viewBox="0 0 240 120" width="100%" height="90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="15" width="220" height="90" rx="8" fill="var(--surface)" stroke="${color}" stroke-width="1.5" />
+              <circle cx="45" cy="60" r="18" fill="rgba(14, 110, 107, 0.1)" stroke="${color}" stroke-width="1.5" />
+              <text x="45" y="65" text-anchor="middle" fill="${color}" font-family="IBM Plex Mono, monospace" font-size="14" font-weight="700">0${stepNum}</text>
+              <line x1="75" y1="60" x2="140" y2="60" stroke="${color}" stroke-width="2" stroke-dasharray="4 4" />
+              <polygon points="140,56 148,60 140,64" fill="${color}" />
+              <rect x="155" y="42" width="60" height="36" rx="4" fill="var(--surface-2)" stroke="var(--line)" />
+              <text x="185" y="64" text-anchor="middle" fill="var(--ink)" font-family="IBM Plex Mono, monospace" font-size="10" font-weight="600">FOUP #25</text>
+            </svg>
+          `;
+        }
+
+        function renderFaultScenarios(lang) {
+          const container = document.getElementById("fm-fault-cards");
+          if (!container || !pageData.fault_scenarios) return;
+
+          container.innerHTML = pageData.fault_scenarios
+            .map((f) => {
+              const name = lang === "zh" ? f.name_zh : f.name_en;
+              const badge = lang === "zh" ? f.badge_zh : f.badge_en;
+              const desc = lang === "zh" ? f.desc_zh : f.desc_en;
+              const res = lang === "zh" ? f.resolution_zh : f.resolution_en;
+              const isActive = activeFault === f.id ? "active" : "";
+              return `
+                <div class="fm-fault-card ${isActive}" data-fault="${f.id}">
+                  <div class="fm-fault-header">
+                    <span class="fm-fault-title">${name}</span>
+                    <span class="fm-fault-badge">${badge}</span>
+                  </div>
+                  <div class="fm-fault-desc">${desc}</div>
+                  <div class="fm-fault-resolution">▸ ${res}</div>
+                </div>
+              `;
+            })
+            .join("");
+
+          // Event listeners for fault cards
+          container.querySelectorAll(".fm-fault-card").forEach((card) => {
+            card.addEventListener("click", () => {
+              const faultId = card.getAttribute("data-fault");
+              triggerFaultScenario(faultId);
+            });
+          });
+        }
+
+        function triggerFaultScenario(faultId) {
+          activeFault = faultId;
+          const fault = (pageData.fault_scenarios || []).find(
+            (f) => f.id === faultId,
+          );
+          if (!fault) return;
+
+          // Jump stepper to trigger step
+          curStepIdx = fault.trigger_step - 1;
+          renderLotJourney(curStepIdx, currentLang);
+          renderFaultScenarios(currentLang);
+
+          // Show detail box
+          const box = document.getElementById("fm-fault-detail-box");
+          const title = document.getElementById("fm-fault-detail-title");
+          const desc = document.getElementById("fm-fault-detail-desc");
+          const res = document.getElementById("fm-fault-detail-res");
+          if (box && title && desc && res) {
+            box.style.display = "block";
+            title.textContent =
+              currentLang === "zh" ? fault.name_zh : fault.name_en;
+            desc.textContent =
+              currentLang === "zh" ? fault.desc_zh : fault.desc_en;
+            res.textContent =
+              currentLang === "zh"
+                ? `处置方式：${fault.resolution_zh}`
+                : `Resolution: ${fault.resolution_en}`;
+          }
+        }
+
+        function clearFaultScenario() {
+          activeFault = null;
+          const box = document.getElementById("fm-fault-detail-box");
+          if (box) box.style.display = "none";
+          renderFaultScenarios(currentLang);
+          renderLotJourney(curStepIdx, currentLang);
+        }
+
+        function renderNeighbors(lang) {
+          const tbody = document.getElementById("fm-neighbors-tbody");
+          if (!tbody || !pageData.neighbor_systems) return;
+
+          tbody.innerHTML = pageData.neighbor_systems
+            .map((ns) => {
+              const name = lang === "zh" ? `${ns.name_zh}` : `${ns.system}`;
+              const bound = lang === "zh" ? ns.boundary_zh : ns.boundary_en;
+              const hand = lang === "zh" ? ns.handoff_zh : ns.handoff_en;
+              let linkHtml = "";
+              if (ns.link) {
+                linkHtml = `<br><a href="${ns.link}" class="sc-inline-link" style="font-size: 12px; margin-top: 4px; display: inline-block;">深入阅读：晶圆厂数据层 →</a>`;
+              }
+              return `
+                <tr>
+                  <td><strong>${name}</strong></td>
+                  <td>${bound}</td>
+                  <td>${hand} ${linkHtml}</td>
+                </tr>
+              `;
+            })
+            .join("");
+        }
+
+        function renderVendors(lang) {
+          const grid = document.getElementById("fm-vendors-grid");
+          if (!grid || !pageData.vendor_landscape) return;
+
+          grid.innerHTML = pageData.vendor_landscape.vendors
+            .map((v) => {
+              const cat = lang === "zh" ? v.category_zh : v.category_en;
+              const ov = lang === "zh" ? v.overview_zh : v.overview_en;
+              return `
+                <div class="fm-card">
+                  <div>
+                    <div class="fm-card-title">${v.name}</div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px;">${cat}</div>
+                    <div class="fm-card-desc">${ov}</div>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        function renderGlossary(lang) {
+          const grid = document.getElementById("fm-glossary-grid");
+          if (!grid || !pageData.glossary) return;
+
+          grid.innerHTML = pageData.glossary
+            .map((g) => {
+              const full = lang === "zh" ? g.full_zh : g.full_en;
+              const def = lang === "zh" ? g.def_zh : g.def_en;
+              return `
+                <div class="fm-card">
+                  <div>
+                    <div style="font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 800; color: var(--accent);">${g.term}</div>
+                    <div style="font-size: 12px; font-weight: 600; color: var(--ink); margin-bottom: 6px;">${full}</div>
+                    <div class="fm-card-desc">${def}</div>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        function renderQuiz(lang) {
+          const container = document.getElementById("fm-quiz-container");
+          if (!container || !pageData.quiz) return;
+
+          container.innerHTML = pageData.quiz
+            .map((q, qIdx) => {
+              const question = lang === "zh" ? q.question_zh : q.question_en;
+              const options = lang === "zh" ? q.options_zh : q.options_en;
+              const explanation =
+                lang === "zh" ? q.explanation_zh : q.explanation_en;
+
+              const optsHtml = options
+                .map(
+                  (opt, oIdx) => `
+                    <button type="button" class="fm-quiz-opt" data-q="${qIdx}" data-opt="${oIdx}">
+                      ${String.fromCharCode(65 + oIdx)}. ${opt}
+                    </button>
+                  `,
+                )
+                .join("");
+
+              return `
+                <div class="fm-quiz-item" data-qidx="${qIdx}">
+                  <div class="fm-quiz-q">${qIdx + 1}. ${question}</div>
+                  <div class="fm-quiz-options">
+                    ${optsHtml}
+                  </div>
+                  <div class="fm-quiz-explanation" id="fm-quiz-exp-${qIdx}">
+                    <strong>${lang === "zh" ? "解析：" : "Explanation: "}</strong> ${explanation}
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+
+          // Quiz click logic
+          container.querySelectorAll(".fm-quiz-opt").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              const qIdx = parseInt(btn.getAttribute("data-q"), 10);
+              const oIdx = parseInt(btn.getAttribute("data-opt"), 10);
+              const questionObj = pageData.quiz[qIdx];
+              const parent = btn.closest(".fm-quiz-item");
+
+              parent.querySelectorAll(".fm-quiz-opt").forEach((b) => {
+                b.classList.remove("correct", "wrong");
+              });
+
+              if (oIdx === questionObj.correct_index) {
+                btn.classList.add("correct");
+              } else {
+                btn.classList.add("wrong");
+                const correctBtn =
+                  parent.querySelectorAll(".fm-quiz-opt")[
+                    questionObj.correct_index
+                  ];
+                if (correctBtn) correctBtn.classList.add("correct");
+              }
+
+              const expEl = document.getElementById(`fm-quiz-exp-${qIdx}`);
+              if (expEl) expEl.style.display = "block";
+            });
+          });
+        }
+
+        function renderStaticTextEdition(lang) {
+          const mount = document.getElementById("fm-static-text-mount");
+          if (!mount) return;
+
+          const isZh = lang === "zh";
+          let html = `
+            <h3>${isZh ? "一、MES 是什么与不是什么对照" : "1. What MES Is and Is Not"}</h3>
+            <p>${isZh ? "制造执行系统 (MES) 处于半导体晶圆制造的现场执行层，管辖晶圆批次路由、现场派工、配方校验核对、进站出站记账、全生命周期谱系与工程挂起(Hold)。" : "MES acts as the factory shop-floor execution backbone governing routing, dispatching, recipe integrity, track-in/out accounting, genealogy, and hold management."}</p>
+            <ul>
+              <li><strong>${isZh ? "不是 ERP" : "Not ERP"}:</strong> ${isZh ? "ERP 管辖客户订单与财务预算；MES 承接生产工单并回传批次完成实绩。" : "ERP manages business contracts and financial accounts; MES accepts production lots and returns completion metrics."}</li>
+              <li><strong>${isZh ? "不是设备控制器" : "Not Tool Embedded Control"}:</strong> ${isZh ? "设备底层 PLC 控制腔体等离子体与气体流量；MES 与 EAP 连接层核对配方校验码并下发进出站指令。" : "Embedded PLCs govern vacuum valves and mass flow controllers; MES verifies recipe checksums with EAP."}</li>
+              <li><strong>${isZh ? "不是海量数据湖" : "Not Raw Data Lake"}:</strong> ${isZh ? "数据湖存储数 PB 级高频传感器原始波形；MES 记录结构化状态跃迁交易与批次血统。" : "Data lakes archive petabytes of raw high-speed sensor streams; MES records structured state-change transactions and genealogy links."}</li>
+              <li><strong>${isZh ? "不是 AMHS 控制器" : "Not MCS / AMHS Control"}:</strong> ${isZh ? "物料控制系统 (MCS) 驱动天车电机与轨道寻径；MES 发送从工位 A 到 B 的物料搬运需求。" : "MCS coordinates OHT rail routing and vehicle dispatch; MES submits carrier transfer requirements."}</li>
+            </ul>
+
+            <h3>${isZh ? "二、MES 八项核心功能" : "2. Eight Core MES Functions"}</h3>
+            <ol>
+              <li><strong>${isZh ? "产品与路由定义" : "Product & Route Definition"}:</strong> ${isZh ? "定义晶圆经历的数百道工艺序列及工序机台组能力。" : "Defines process flows across hundreds of fabrication steps."}</li>
+              <li><strong>${isZh ? "资源管理" : "Resource Management"}:</strong> ${isZh ? "维护机台状态(PR/SB/UD)、载具(FOUP)、光刻掩模版与消耗品可用性概念。" : "Tracks cleanroom equipment states, FOUP carriers, reticles, and gas consumables."}</li>
+              <li><strong>${isZh ? "详细排程" : "Detailed Scheduling"}:</strong> ${isZh ? "将全厂出片目标转化为按时间轴排序的工序次序与设备分配预案。" : "Translates plant output targets into time-phased operation plans."}</li>
+              <li><strong>${isZh ? "派工调度" : "Dispatching"}:</strong> ${isZh ? "在机台空闲时实时打分评估候选批次并决策进站次序。" : "Evaluates candidate lots in equipment queues in real time to select next load."}</li>
+              <li><strong>${isZh ? "执行管理" : "Execution Management"}:</strong> ${isZh ? "管辖严格的进站(Track-In)、出站(Track-Out)与配方校验码比对。" : "Governs track-in/out accounting and recipe checksum verification."}</li>
+              <li><strong>${isZh ? "数据采集" : "Data Collection"}:</strong> ${isZh ? "通过工业连接层采集批次上下文、腔体工况与关键变量。" : "Captures lot events and equipment context via connectivity layers."}</li>
+              <li><strong>${isZh ? "追踪与谱系" : "Tracking & Genealogy"}:</strong> ${isZh ? "建立晶圆级全生命周期数字档案，支持逆向回溯设备腔体与配方版本。" : "Maintains immutable audit records tracing wafers to exact tool chambers."}</li>
+              <li><strong>${isZh ? "绩效分析" : "Performance Analysis"}:</strong> ${isZh ? "核算周期乘数、WIP 分布、设备综合稼动率(OEE)等指标概念。" : "Computes shop-floor indicators including cycle times, WIP, and tool utilization."}</li>
+            </ol>
+
+            <h3>${isZh ? "三、派工规则 Toy 演示与核算基准" : "3. Toy Dispatching Heuristics & Verification Baseline"}</h3>
+            <p>${isZh ? "在 5 颗具有不同加工时间的示意 Lot（A: proc=8, B: proc=3, C: proc=6, D: proc=2, E: proc=5）上，4 种派工规则输出如下结果：" : "Tested on 5 illustrative lots with distinct processing times (A: 8, B: 3, C: 6, D: 2, E: 5), the 4 dispatching heuristics yield:"}</p>
+            <ul>
+              <li><strong>FIFO:</strong> ${isZh ? "次序 Lot A → B → C → D → E，平均周期 11.40。" : "Order Lot A → B → C → D → E, Mean Cycle Time = 11.40."}</li>
+              <li><strong>SPT:</strong> ${isZh ? "次序 Lot A → D → B → E → C，平均周期 10.20（最短）。" : "Order Lot A → D → B → E → C, Mean Cycle Time = 10.20 (Optimal)."}</li>
+              <li><strong>EDD:</strong> ${isZh ? "次序 Lot A → D → B → C → E，平均周期 10.40。" : "Order Lot A → D → B → C → E, Mean Cycle Time = 10.40."}</li>
+              <li><strong>CR:</strong> ${isZh ? "次序 Lot A → D → C → B → E，平均周期 11.00。" : "Order Lot A → D → C → B → E, Mean Cycle Time = 11.00."}</li>
+            </ul>
+
+            <h3>${isZh ? "四、一颗 Lot 的 9 步生命周期" : "4. Nine-Step Wafer Lot Lifecycle"}</h3>
+            <ol>
+              <li>${isZh ? "建 Lot 与路由：MES 注册批次并绑定工艺流程（交接 ERP；缺失则无法流转）。" : "Create Lot & Route: MES registers physical carrier and binds target route (handoff with ERP)."}</li>
+              <li>${isZh ? "工作中心排队：状态置为 WIP Available 进入候选池（交接 MCS；缺失则导致机台空转）。" : "Queuing at Work Center: Status updated to WIP Available (handoff with MCS)."}</li>
+              <li>${isZh ? "派工调度决策：算法打分选定下一进站批次（交接排程器；缺失则现场依赖盲选）。" : "Dispatching Selection: Heuristic engine scores candidate pool (handoff with scheduling)."}</li>
+              <li>${isZh ? "配方一致性核对：比对机台本地配方与主库校验码（交接 EAP；缺失极易导致 25 片报废）。" : "Recipe Verification: Validates loaded parameters against gold checksum (handoff with EAP)."}</li>
+              <li>${isZh ? "工艺执行：Track-In 进站锁定量产并记录出站（交接 SECS/GEM；缺失导致账实脱节）。" : "Execution: Issues Track-In and logs Track-Out completion (SECS/GEM state events)."}</li>
+              <li>${isZh ? "数据采集与绑定：将工艺参数与批次槽位绑定（交接 APC/FDC；缺失导致数据孤岛）。" : "Data Collection & Context: Binds chamber telemetry to lot slots (handoff with APC/FDC)."}</li>
+              <li>${isZh ? "量测抽检：派发关键尺寸与膜厚检测（交接 SPC 引擎；缺失导致漂移失控）。" : "Metrology Inspection: Samples wafers at CD-SEM/optical tools (handoff with SPC)."}</li>
+              <li>${isZh ? "放行或 Hold 决策：合格放行，超规立即挂起且绝不自动继续（交接 MRB 委员会）。" : "Release or Hold: Passes lot or locks into HOLD state requiring engineering disposition."}</li>
+              <li>${isZh ? "步进至下一道工序：工步推进并激活 Q-Time 倒计时（交接 AMHS 派车取料）。" : "Proceed to Next Step: Increments route pointer and dispatches transport (handoff with AMHS)."}</li>
+            </ol>
+          `;
+          mount.innerHTML = html;
+        }
+
+        function renderSponsorship() {
+          const mount = document.getElementById("fm-sponsor-mount");
+          if (!mount) return;
+
+          const sp = pageData.sponsorship;
+          if (sp && sp.enabled && sp.sponsor_name) {
+            mount.style.display = "block";
+            const content = document.getElementById("fm-sponsor-content");
+            if (content) {
+              content.textContent = `Supported by ${sp.sponsor_name}. Content remains independent and vendor-neutral.`;
+            }
+          } else {
+            mount.style.display = "none";
+          }
+        }
+
+        function bindEvents() {
+          // Rule Buttons
+          document.querySelectorAll(".fm-rule-btn").forEach((btn) => {
+            btn.addEventListener("click", () => {
+              document
+                .querySelectorAll(".fm-rule-btn")
+                .forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+              curRule = btn.getAttribute("data-rule");
+              renderToyDispatch(curRule, currentLang);
+            });
+          });
+
+          // Stepper Controls
+          const prevBtn = document.getElementById("fm-btn-prev");
+          if (prevBtn) {
+            prevBtn.addEventListener("click", () => {
+              if (curStepIdx > 0) {
+                curStepIdx--;
+                renderLotJourney(curStepIdx, currentLang);
+              }
+            });
+          }
+
+          const nextBtn = document.getElementById("fm-btn-next");
+          if (nextBtn) {
+            nextBtn.addEventListener("click", () => {
+              if (curStepIdx < 8) {
+                curStepIdx++;
+                renderLotJourney(curStepIdx, currentLang);
+              }
+            });
+          }
+
+          const resetBtn = document.getElementById("fm-btn-reset");
+          if (resetBtn) {
+            resetBtn.addEventListener("click", () => {
+              curStepIdx = 0;
+              clearFaultScenario();
+            });
+          }
+
+          // Step 8 branches
+          const passBtn = document.getElementById("fm-branch-pass");
+          if (passBtn) {
+            passBtn.addEventListener("click", () => {
+              activeFault = null;
+              curStepIdx = 8; // Advance to step 9
+              renderLotJourney(curStepIdx, currentLang);
+            });
+          }
+
+          const holdBtn = document.getElementById("fm-branch-hold");
+          if (holdBtn) {
+            holdBtn.addEventListener("click", () => {
+              triggerFaultScenario("metrology_out_of_spec");
+            });
+          }
+
+          // Fault reset
+          const faultResetBtn = document.getElementById("fm-fault-reset-btn");
+          if (faultResetBtn) {
+            faultResetBtn.addEventListener("click", () => {
+              clearFaultScenario();
+            });
+          }
+        }
+
+        function renderAllUI() {
+          currentLang = getLang();
+          renderWhatIsTable(currentLang);
+          renderCoreFunctions(currentLang);
+          renderToyDispatch(curRule, currentLang);
+          renderLotJourney(curStepIdx, currentLang);
+          renderFaultScenarios(currentLang);
+          renderNeighbors(currentLang);
+          renderVendors(currentLang);
+          renderGlossary(currentLang);
+          renderQuiz(currentLang);
+          renderStaticTextEdition(currentLang);
+          renderSponsorship();
+        }
+
+        // Global language change hook
+        window.onSemiconLanguageChange = function (newLang) {
+          currentLang = newLang.startsWith("zh") ? "zh" : "en";
+          renderAllUI();
+        };
+
+        window.addEventListener("semiconfab:langChanged", function (e) {
+          const l = (e.detail && e.detail.lang) || getLang();
+          currentLang = l.startsWith("zh") ? "zh" : "en";
+          renderAllUI();
+        });
+
+        // Initialize Page
+        async function initPage() {
+          await loadData();
+          bindEvents();
+          renderAllUI();
+        }
+
+        document.addEventListener("DOMContentLoaded", initPage);
+      })();
+    </script>
+  </body>
+</html>

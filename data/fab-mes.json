@@ -1,0 +1,727 @@
+{
+  "sponsorship": {
+    "enabled": false,
+    "sponsor_name": null,
+    "sponsor_url": null,
+    "note_en": "Sponsorship is disabled by default.",
+    "note_zh": "赞助位默认处于关闭状态。"
+  },
+  "toy_dispatch": {
+    "model_assumptions_en": "Single illustrative tool, sequential processing, no parallel chambers, non-preemptive, no unexpected equipment breakdowns. Lots arrive at designated queue times. Processing times are illustrative and strictly distinct.",
+    "model_assumptions_zh": "单台示意工具、顺序加工、无并行腔体、无抢占、无设备突发故障。Lot 在指定时刻到达队列。加工时间均为示意且严格各不相同。",
+    "cr_definition_en": "Critical Ratio (CR) = (Due Date - Current Time) / Remaining Processing Time. In this single-step toy model, remaining processing time equals the lot's illustrative processing time.",
+    "cr_definition_zh": "关键比率 (CR) = (交期 - 当前时间) / 剩余加工时间。在单步骤教学简化模型中，剩余加工时间即该 lot 的示意加工时间。",
+    "disclaimer_en": "Toy dispatching demo is for intuition only: single tool, sequential, non-preemptive, and failure-free. Real fab dispatching is infinitely more complex with re-entrant loops, batching, and deduping constraints. This demo is NOT the MIMAC-2026 benchmark and does not represent real-world rule superiority.",
+    "disclaimer_zh": "Toy 演示仅用于建立直觉：单工具、顺序加工、无并行、无抢占、无设备故障；真实 Fab 的派工远比这复杂（重入循环、批处理、炉管组批等）。本演示不是 MIMAC-2026 benchmark，不代表任何规则在真实工厂更优。",
+    "lots": [
+      {
+        "id": "Lot A",
+        "arrive": 0,
+        "proc_time": 8,
+        "due": 30,
+        "product_en": "Logic SoC (300mm)",
+        "product_zh": "逻辑 SoC (300mm)",
+        "note_en": "First lot at queue origin (t=0). Longest illustrative process time.",
+        "note_zh": "队列初始批次 (t=0)。示意加工时间最长。"
+      },
+      {
+        "id": "Lot B",
+        "arrive": 2,
+        "proc_time": 3,
+        "due": 18,
+        "product_en": "Analog Mixed-Signal",
+        "product_zh": "模拟混合信号",
+        "note_en": "Arrives at t=2 with standard priority.",
+        "note_zh": "在 t=2 到达，标准优先级。"
+      },
+      {
+        "id": "Lot C",
+        "arrive": 4,
+        "proc_time": 6,
+        "due": 25,
+        "product_en": "Microcontroller (MCU)",
+        "product_zh": "微控制器 (MCU)",
+        "note_en": "Arrives at t=4 with moderate due date.",
+        "note_zh": "在 t=4 到达，中等交期。"
+      },
+      {
+        "id": "Lot D",
+        "arrive": 6,
+        "proc_time": 2,
+        "due": 12,
+        "product_en": "High-Voltage Driver",
+        "product_zh": "高压驱动芯片",
+        "note_en": "Arrives at t=6 with tight due date and shortest processing time.",
+        "note_zh": "在 t=6 到达，交期紧迫且示意加工时间最短。"
+      },
+      {
+        "id": "Lot E",
+        "arrive": 10,
+        "proc_time": 5,
+        "due": 28,
+        "product_en": "Power MOSFET",
+        "product_zh": "功率 MOSFET",
+        "note_en": "Arrives later at t=10 with relaxed due date.",
+        "note_zh": "在 t=10 到达，交期相对充裕。"
+      }
+    ],
+    "benchmark_results": {
+      "FIFO": {
+        "name_en": "FIFO (First-In, First-Out)",
+        "name_zh": "FIFO (先到先服务)",
+        "desc_en": "Lots are scheduled strictly in order of arrival time at the queue.",
+        "desc_zh": "严格按照批次到达队列的先后顺序进行加工。",
+        "order": ["Lot A", "Lot B", "Lot C", "Lot D", "Lot E"],
+        "avg_cycle_time": 11.4,
+        "details": [
+          {
+            "lot": "Lot A",
+            "start": 0,
+            "finish": 8,
+            "cycle_time": 8,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot B",
+            "start": 8,
+            "finish": 11,
+            "cycle_time": 9,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot C",
+            "start": 11,
+            "finish": 17,
+            "cycle_time": 13,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot D",
+            "start": 17,
+            "finish": 19,
+            "cycle_time": 13,
+            "tardiness": 7
+          },
+          {
+            "lot": "Lot E",
+            "start": 19,
+            "finish": 24,
+            "cycle_time": 14,
+            "tardiness": 0
+          }
+        ]
+      },
+      "SPT": {
+        "name_en": "SPT (Shortest Processing Time)",
+        "name_zh": "SPT (最短加工时间优先)",
+        "desc_en": "Among available lots in queue, the one with shortest processing time is dispatched first. Minimizes overall mean cycle time.",
+        "desc_zh": "在当前队列候选中，优先派工加工时间最短的批次。在简单排队论中可实现最小平均周期。",
+        "order": ["Lot A", "Lot D", "Lot B", "Lot E", "Lot C"],
+        "avg_cycle_time": 10.2,
+        "details": [
+          {
+            "lot": "Lot A",
+            "start": 0,
+            "finish": 8,
+            "cycle_time": 8,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot D",
+            "start": 8,
+            "finish": 10,
+            "cycle_time": 4,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot B",
+            "start": 10,
+            "finish": 13,
+            "cycle_time": 11,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot E",
+            "start": 13,
+            "finish": 18,
+            "cycle_time": 8,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot C",
+            "start": 18,
+            "finish": 24,
+            "cycle_time": 20,
+            "tardiness": 0
+          }
+        ]
+      },
+      "EDD": {
+        "name_en": "EDD (Earliest Due Date)",
+        "name_zh": "EDD (最早交期优先)",
+        "desc_en": "Lots with earlier promised customer delivery deadlines are prioritized to mitigate tardiness.",
+        "desc_zh": "优先派工客户承诺交期最早的批次，旨在降低最大延期量。",
+        "order": ["Lot A", "Lot D", "Lot B", "Lot C", "Lot E"],
+        "avg_cycle_time": 10.4,
+        "details": [
+          {
+            "lot": "Lot A",
+            "start": 0,
+            "finish": 8,
+            "cycle_time": 8,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot D",
+            "start": 8,
+            "finish": 10,
+            "cycle_time": 4,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot B",
+            "start": 10,
+            "finish": 13,
+            "cycle_time": 11,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot C",
+            "start": 13,
+            "finish": 19,
+            "cycle_time": 15,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot E",
+            "start": 19,
+            "finish": 24,
+            "cycle_time": 14,
+            "tardiness": 0
+          }
+        ]
+      },
+      "CR": {
+        "name_en": "CR (Critical Ratio)",
+        "name_zh": "CR (关键比率最小优先)",
+        "desc_en": "Dynamic ratio calculated as (Due Date - Now) / Remaining Proc Time. Lots with lowest ratio are most urgent.",
+        "desc_zh": "在决策时刻计算 (交期 - 当前时间) / 剩余加工时间。比率越小表明越紧迫，优先派工。",
+        "order": ["Lot A", "Lot D", "Lot C", "Lot B", "Lot E"],
+        "avg_cycle_time": 11.0,
+        "details": [
+          {
+            "lot": "Lot A",
+            "start": 0,
+            "finish": 8,
+            "cycle_time": 8,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot D",
+            "start": 8,
+            "finish": 10,
+            "cycle_time": 4,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot C",
+            "start": 10,
+            "finish": 16,
+            "cycle_time": 12,
+            "tardiness": 0
+          },
+          {
+            "lot": "Lot B",
+            "start": 16,
+            "finish": 19,
+            "cycle_time": 17,
+            "tardiness": 1
+          },
+          {
+            "lot": "Lot E",
+            "start": 19,
+            "finish": 24,
+            "cycle_time": 14,
+            "tardiness": 0
+          }
+        ]
+      }
+    }
+  },
+  "what_is_mes": {
+    "is_en": "Execution Layer: Governs lot routes, real-time dispatch, recipe validation, track-in/out accounting, genealogy recording, hold conditions, and engineering release.",
+    "is_zh": "制造执行层：管辖晶圆批次路由、现场派工、配方校验核对、进站与出站记账、全生命周期谱系、挂起(Hold)与工程放行。",
+    "is_not": [
+      {
+        "system": "ERP (Enterprise Resource Planning)",
+        "not_en": "Does not plan customer sales contracts, corporate financial ledgers, or global capacity billing.",
+        "not_zh": "不管企业财务结算、销售订单合同签订或跨厂区资金预算。",
+        "boundary_en": "ERP plans orders and materials; MES accepts production orders and returns completed lot accounting.",
+        "boundary_zh": "ERP 制定业务计划与物料需求；MES 接收生产工单并回传批次完成实绩。"
+      },
+      {
+        "system": "Equipment Control / Embedded PLC",
+        "not_en": "Does not control MFC gas mass flows, RF plasma generators, robot arm trajectories, or chamber valves.",
+        "not_zh": "不直接控制腔体射频功率、质量流量计(MFC)进气比、机械手关节位移或真空阀门。",
+        "boundary_en": "Equipment controls the physical chamber; MES handshakes with tool EAP to verify recipe checksums and issue Track-In/Out commands.",
+        "boundary_zh": "设备负责腔体物理工艺执行；MES 通过设备自动化接口(EAP)核对 Recipe 校验码并下发进出站指令。"
+      },
+      {
+        "system": "Data Lake / Enterprise Historian",
+        "not_en": "Does not serve as the raw Petabyte-scale time-series trace repository for multi-sensor high-speed dumps.",
+        "not_zh": "不作为存储高频千赫兹传感器波形、数 PB 级原始时序日志的海量数据湖。",
+        "boundary_en": "Data Lake archives granular raw sensor arrays; MES records structured state-change transactions and genealogy links.",
+        "boundary_zh": "数据湖负责归档海量原始传感器波形；MES 记录结构化状态跃迁交易与批次血统关系。"
+      },
+      {
+        "system": "AMHS / MCS (Material Control System)",
+        "not_en": "Does not direct OHT overhead vehicle motor drives, rail junction routing, or crane elevator motions.",
+        "not_zh": "不直接驱动 OHT 天车转向轮电机、轨道道岔换向或立体高架库(Stocker)提升机升降。",
+        "boundary_en": "MES requests lot transport from Station A to Station B; MCS calculates optimal rail routing and dispatches automated vehicles.",
+        "boundary_zh": "MES 提出由工位 A 搬运至工位 B 的物料传输需求；MCS 负责计算轨道拓扑并调度天车小车。"
+      }
+    ]
+  },
+  "core_functions": [
+    {
+      "index": 1,
+      "id": "product_route_def",
+      "name_en": "Product & Route Definition",
+      "name_zh": "产品与路由定义",
+      "summary_en": "Configures which fabrication steps a lot undergoes, sequencing order, and required tool group capabilities.",
+      "summary_zh": "定义晶圆批次必须经历的上百道工艺步骤序列、前后依赖关系以及每一步所需的设备工序组能力。"
+    },
+    {
+      "index": 2,
+      "id": "resource_mgmt",
+      "name_en": "Resource Management",
+      "name_zh": "资源管理",
+      "summary_en": "Maintains live availability states for cleanroom tools, FOUP carriers, reticles (photomasks), and chemical setups.",
+      "summary_zh": "维护洁净室机台运行状态(PR/SB/UD)、晶圆载具(FOUP)、光刻掩模版(Reticle)以及消耗品配置的可用性概念。"
+    },
+    {
+      "index": 3,
+      "id": "detailed_scheduling",
+      "name_en": "Detailed Scheduling",
+      "name_zh": "详细排程",
+      "summary_en": "Translates high-level factory targets into time-phased operation sequencing across work centers.",
+      "summary_zh": "将宏观出片与交付目标转化为各个工艺工作中心按时间轴排序的工序次序与设备分配预案。"
+    },
+    {
+      "index": 4,
+      "id": "dispatching",
+      "name_en": "Dispatching",
+      "name_zh": "派工调度",
+      "summary_en": "Evaluates candidate lots in equipment queues in real time to decide which lot gets loaded next and why.",
+      "summary_zh": "在机台完成加工变为空闲的瞬间，实时评估待加工队列中的候选批次，决策下一颗进站批次及其规则依据。"
+    },
+    {
+      "index": 5,
+      "id": "execution_mgmt",
+      "name_en": "Execution Management",
+      "name_zh": "执行管理",
+      "summary_en": "Governs formal step start (Track-In), completion (Track-Out), operator logons, and recipe integrity checksums.",
+      "summary_zh": "管辖严格的进站(Track-In)、出站(Track-Out)、人员上岗资格授权以及配方校验码(Recipe Checksum)一致性比对。"
+    },
+    {
+      "index": 6,
+      "id": "data_collection",
+      "name_en": "Data Collection",
+      "name_zh": "数据采集",
+      "summary_en": "Collects structured lot events, chamber process context, and engineering variables via connectivity layers.",
+      "summary_zh": "在工序执行中通过工业连接层采集批次上下文、腔体工况、关键变量与设备事件。"
+    },
+    {
+      "index": 7,
+      "id": "tracking_genealogy",
+      "name_en": "Tracking & Genealogy",
+      "name_zh": "追踪与谱系",
+      "summary_en": "Builds a complete wafer-level audit trail so that yield excursions or reliability failures can be traced back to exact tool chambers.",
+      "summary_zh": "建立完整的晶圆级全生命周期数字档案，确保任何缺陷异常均可向上逆向回溯至具体的设备腔体、气体批号与配方版本。"
+    },
+    {
+      "index": 8,
+      "id": "performance_analysis",
+      "name_en": "Performance Analysis",
+      "name_zh": "绩效分析",
+      "summary_en": "Calculates conceptual shop-floor KPIs including cycle time multipliers, WIP distribution, tool OEE, and on-time delivery metrics.",
+      "summary_zh": "核算车间宏观运营指标概念（周期乘数、在制品分布、设备综合稼动率 OEE 与准时交货率），不给出真实工厂基准值。"
+    }
+  ],
+  "lot_journey": [
+    {
+      "step": 1,
+      "name_en": "Create Lot & Route",
+      "name_zh": "建 Lot 与路由",
+      "mes_does_en": "MES registers the new physical lot ID, assigns the target product route, initializes 25 wafer slots, and sets baseline priority.",
+      "mes_does_zh": "MES 登记新批次物理 ID，绑定目标产品工艺路由，初始化 25 片晶圆槽位图并赋予基础交付优先级。",
+      "handoff_en": "Handoff: Receives factory production release order from ERP / Planning.",
+      "handoff_zh": "交接对象：承接来自 ERP / 生产计划系统的工单投产指令。",
+      "if_missing_en": "If missing: The lot has no designated process flow or legal identity; tools will reject carrier docking.",
+      "if_missing_zh": "若信息缺失：批次缺乏明确工艺序列与系统合法身份，机台将拒绝载具对接装载。"
+    },
+    {
+      "step": 2,
+      "name_en": "Queuing at Work Center",
+      "name_zh": "工作中心排队",
+      "mes_does_en": "MES updates lot status to 'WIP Available', places the carrier in the work center buffer or stocker, and enters the dispatching candidate pool.",
+      "mes_does_zh": "MES 将批次状态更新为「可用在制品 (WIP Available)」，指示载具停靠于工区缓存位或立体库，进入派工候选池。",
+      "handoff_en": "Handoff: Interacts with MCS / AMHS for buffer positioning and carrier arrival notification.",
+      "handoff_zh": "交接对象：与物料控制系统 (MCS / AMHS) 交互确认物料存取位置与到达确认。",
+      "if_missing_en": "If missing: The lot remains invisible to schedulers, causing idle machine time and unmonitored queue time expiration.",
+      "if_missing_zh": "若信息缺失：调度器无法识别该批次存在，导致机台饥饿空转或队列等待时间超期 (Q-Time Expiry)。"
+    },
+    {
+      "step": 3,
+      "name_en": "Dispatching Selection",
+      "name_zh": "派工调度决策",
+      "mes_does_en": "Real-time dispatch engine scores waiting lots according to configured policy (e.g. FIFO, SPT, EDD, CR) and designates the target chamber.",
+      "mes_does_zh": "实时派工算法引擎依据既定策略规则（如 FIFO、SPT、EDD、CR）对待选批次打分，确定下一颗进站批次及目标机台。",
+      "handoff_en": "Handoff: Interacts with Advanced Planning & Scheduling (APS) and tool load port sensors.",
+      "handoff_zh": "交接对象：与排程规划服务及设备装载端口 (Load Port) 状态感知交互。",
+      "if_missing_en": "If missing: Machine operator must manually guess lot sequence, inducing queue bottlenecks and severe WIP buildup.",
+      "if_missing_zh": "若信息缺失：现场必须依赖人工盲选进站次序，引发产线拥堵并导致周期剧烈拉长。"
+    },
+    {
+      "step": 4,
+      "name_en": "Recipe Verification",
+      "name_zh": "配方一致性核对",
+      "mes_does_en": "MES queries the Equipment Automation Program (EAP) to verify the active recipe body, parameter limits, and gold checksum against the route spec.",
+      "mes_does_zh": "MES 协同设备自动化程序 (EAP) 抓取机台装载的配方体、参数边界及校验码 (Checksum)，与路由标准库进行强比对。",
+      "handoff_en": "Handoff: High-speed handshake with EAP and tool SECS/GEM interface (GEM300 E40/E94).",
+      "handoff_zh": "交接对象：通过 SECS/GEM (GEM300 E40/E94) 与设备自动化程序 (EAP) 进行安全握手。",
+      "if_missing_en": "If missing: Risk of massive wafer misprocessing (scrap) caused by operators or tools running incorrect parameters.",
+      "if_missing_zh": "若信息缺失：极易导致机台调用错误配方参数，酿成整批 25 片晶圆报废的严重工程事故。"
+    },
+    {
+      "step": 5,
+      "name_en": "Execution (Track-In / Track-Out)",
+      "name_zh": "工艺执行 (Track-In / Out)",
+      "mes_does_en": "MES issues Track-In transaction, marks machine state as 'Productive (PR)', locks lot WIP, and logs Track-Out when the step completes.",
+      "mes_does_zh": "MES 执行 Track-In 事务将设备置为生产状态 (PR) 并锁定批次；工艺完成时执行 Track-Out 记录实际加工时长与晶圆计数。",
+      "handoff_en": "Handoff: SECS/GEM process state events (S6F11) and Equipment Automation Program (EAP).",
+      "handoff_zh": "交接对象：接收来自 EAP 的设备事件报告 (S6F11 Process State Change)。",
+      "if_missing_en": "If missing: MES loses track of whether wafers are currently inside the chemical chamber or completed.",
+      "if_missing_zh": "若信息缺失：系统丧失对腔体内晶圆实时物理状态的掌控，造成账实脱节与数据撕裂。"
+    },
+    {
+      "step": 6,
+      "name_en": "Data Collection & Context",
+      "name_zh": "数据采集与上下文绑定",
+      "mes_does_en": "MES binds the executed step ID, lot ID, wafer slot matrix, tool chamber ID, and timestamp with process telemetry collected via EAP.",
+      "mes_does_zh": "MES 将当前步骤 ID、批次号、晶圆槽位、腔体物理标识与时间戳打包，与 EAP 采集的工艺数据深度关联。",
+      "handoff_en": "Handoff: Hands off execution context to APC Run-to-Run controller and FDC telemetry store.",
+      "handoff_zh": "交接对象：向 APC 实时控制算法与 FDC 故障侦测系统提供上下文注入。",
+      "if_missing_en": "If missing: Sensor traces cannot be mapped to lots; engineers cannot diagnose which wafers experienced chamber drift.",
+      "if_missing_zh": "若信息缺失：海量传感器波形沦为无主孤岛，工程师无法定位特定批次经历的腔体漂移。"
+    },
+    {
+      "step": 7,
+      "name_en": "Metrology Inspection",
+      "name_zh": "量测与检测抽检",
+      "mes_does_en": "MES dispatches the lot to inspection tools (CD-SEM, ellipsometer, defect scanner) according to dynamic sampling rules.",
+      "mes_does_zh": "MES 按照动态抽检规则，指派批次送往量测机台（CD-SEM 关键尺寸、膜厚仪或明场光学缺陷扫描仪）进行物理量测。",
+      "handoff_en": "Handoff: Metrology tool data interface and Statistical Process Control (SPC) engine.",
+      "handoff_zh": "交接对象：对接量测设备接口并向统计过程控制 (SPC) 引擎传递量测结果。",
+      "if_missing_en": "If missing: Out-of-control process drifts go unnoticed, allowing defective layers to continue down the fabrication line.",
+      "if_missing_zh": "若信息缺失：工艺漂移失控无法被及时阻截，导致缺陷层持续流入下游关键工序。"
+    },
+    {
+      "step": 8,
+      "name_en": "Release or Hold Decision",
+      "name_zh": "放行或 Hold 决策",
+      "mes_does_en": "MES evaluates SPC violation rules and automated disposition gates. If parameters pass, lot is cleared; if breached, lot is placed on HOLD.",
+      "mes_does_zh": "MES 判定 SPC 统计规则与自动化放行卡口。若指标合格则解除门禁放行；若超规触发报警则立即执行 HOLD（挂起）。",
+      "handoff_en": "Handoff: Quality assurance engineering, Material Review Board (MRB), and defect disposition.",
+      "handoff_zh": "交接对象：移交质量工程部 (QE)、物料评审委员会 (MRB) 或工程放行流转系统。",
+      "if_missing_en": "If missing: Defective lots continue automatically to next tool, compounding yield loss and contaminating downstream baths.",
+      "if_missing_zh": "若信息缺失：带病批次自动流入下一工序，导致缺陷级联放大甚至污染下游精密清洗水槽。"
+    },
+    {
+      "step": 9,
+      "name_en": "Proceed to Next Route Step",
+      "name_zh": "步进至下一道工序",
+      "mes_does_en": "MES advances the lot pointer to Step N+1, computes allowable Q-Time expiration windows, and alerts AMHS to initiate FOUP pickup.",
+      "mes_does_zh": "MES 将批次工步指针推进至 Step N+1，计算并激活防氧化/防吸潮 Q-Time 倒计时窗口，通知 AMHS 派车取料。",
+      "handoff_en": "Handoff: AMHS / Material Control System (MCS) for intra-bay or inter-bay track movement.",
+      "handoff_zh": "交接对象：向自动物料搬运系统 (AMHS / MCS) 下发跨跨度或跨区域搬运任务。",
+      "if_missing_en": "If missing: Carrier sits stranded at tool load port, blocking subsequent lots and triggering Q-Time timeout hold.",
+      "if_missing_zh": "若信息缺失：载具滞留机台端口无法下料，堵死后续批次上料并引发工序间 Q-Time 超时报警。"
+    }
+  ],
+  "fault_scenarios": [
+    {
+      "id": "recipe_mismatch",
+      "name_en": "Scenario 1: Recipe Mismatch Hold",
+      "name_zh": "异常场景 1：配方校验不匹配被 Hold",
+      "badge_en": "Integrity Check Failed",
+      "badge_zh": "校验失败",
+      "trigger_step": 4,
+      "desc_en": "MES dispatches Lot B to Etch Tool #3. During recipe checksum handshake, the tool's loaded local recipe hash does not match the active engineering standard in the MES route database. MES immediately halts Track-In and places Lot B on 'Recipe Mismatch Hold'.",
+      "desc_zh": "MES 将 Lot B 派发至刻蚀 3 号机台。在配方校验码握手阶段，机台本地加载的配方哈希值与 MES 路由主数据中的工程有效版本不一致。MES 立即阻断 Track-In 进站并对 Lot B 打上「配方不匹配 Hold」标签。",
+      "resolution_en": "Requires process engineer investigation and approved recipe redeployment before lot can be cleared.",
+      "resolution_zh": "需由工艺工程师介入复核、重新发布合规配方版本后方可解除挂起并重新进站。"
+    },
+    {
+      "id": "tool_down_redispatch",
+      "name_en": "Scenario 2: Tool Breakdown & Re-dispatch",
+      "name_zh": "异常场景 2：机台突发故障改派",
+      "badge_en": "Equipment Down (UD)",
+      "badge_zh": "设备停机",
+      "trigger_step": 3,
+      "desc_en": "While Lot C is queued for Litho Cluster #1, the cluster suddenly reports an unplanned downtime (UD) alarm via SECS/GEM. MES updates cluster state to 'Down', unbinds Lot C, and dynamically re-routes Lot C to an available Litho Cluster #2 in the same qualified tool group.",
+      "desc_zh": "当 Lot C 在光刻 1 号机台前排队等待进站时，该机台通过 SECS/GEM 上报突发真空锁泄漏报警。MES 立即将该机台置为停机状态 (UD)，解除与 Lot C 的预绑定，并将 Lot C 动态改派至同工具组具备相同认证资质的 2 号机台。",
+      "resolution_en": "MES issues an updated transport request to MCS to divert the OHT carrier to the backup tool load port.",
+      "resolution_zh": "MES 自动向 MCS 系统下发天车路径变更指令，将物料箱平滑重定向至备用机台端口。"
+    },
+    {
+      "id": "metrology_out_of_spec",
+      "name_en": "Scenario 3: Metrology Out-of-Spec Hold",
+      "name_zh": "异常场景 3：量测超规被 Hold",
+      "badge_en": "Out of Spec (OOS)",
+      "badge_zh": "量测超差",
+      "trigger_step": 8,
+      "desc_en": "After post-CMP dielectric polish, optical thickness metrology returns an illustrative oxide thickness of 142nm (illustrative specification: 120nm ± 10nm). The automatic SPC rule triggers an Out-of-Spec (OOS) violation. MES sets lot status to 'Engineering Hold'.",
+      "desc_zh": "在介质层 CMP 抛光后，光学膜厚量测仪回传氧化层厚度为 142nm（示意工艺标准为 120nm ± 10nm，数值纯属教学示意）。系统自动化 SPC 规则捕获超差违规，MES 立即将批次置为「工程 Hold」。",
+      "resolution_en": "The lot does NOT proceed automatically. Defect Review Board (MRB) must inspect lot and decide on rework (re-polish) or scrap.",
+      "resolution_zh": "该批次绝不会自动继续流转。必须由晶圆评审委员会 (MRB) 判定是否返工重抛 (Rework) 或是降级报废。"
+    }
+  ],
+  "neighbor_systems": [
+    {
+      "system": "ERP (Enterprise Resource Planning)",
+      "name_zh": "企业资源计划 (ERP)",
+      "boundary_en": "Governs enterprise customer purchase orders, accounting ledgers, raw wafer procurement contracts, and high-level monthly production targets.",
+      "boundary_zh": "管辖企业客户采购订单、财务总账、硅片原料采购合同以及高层月度出片出货目标。",
+      "handoff_en": "ERP releases production orders down to MES; MES returns actual completed wafer quantities, cycle times, and scrap statistics for financial settlement.",
+      "handoff_zh": "ERP 向 MES 下发生产订单；MES 向 ERP 回传实际完成晶圆数量、完工周期及报废统计以供财务结算。",
+      "link": null
+    },
+    {
+      "system": "Connectivity / EAP (Equipment Automation Program)",
+      "name_zh": "设备自动化连接层 (EAP / SECS/GEM)",
+      "boundary_en": "Provides the bidirectional protocol gateway between tool physical electronics and host IT systems via SEMI SECS-II, GEM, and GEM300 standards.",
+      "boundary_zh": "通过 SEMI SECS-II、GEM 以及 GEM300 标准协议栈，构建机台硬件与工厂 IT 系统之间的双向通讯网关。",
+      "handoff_en": "MES sends Track-In/Out commands and recipe checksum checks through EAP; EAP translates these into equipment protocol commands and streams back state events.",
+      "handoff_zh": "MES 通过 EAP 下发进出站指令及配方校验请求；EAP 将其翻译为设备通信原语，并将机台事件向上流转。",
+      "link": "fab-data-layer.html"
+    },
+    {
+      "system": "AMHS / MCS (Material Control System)",
+      "name_zh": "自动物料搬运与控制 (AMHS / MCS)",
+      "boundary_en": "Directs cleanroom automated transport vehicles (OHT, AGV/AMR), stocker elevators, rail track routing, and collision avoidance.",
+      "boundary_zh": "负责洁净室自动化天车(OHT)、地面小车(AMR)、立体库提升机调度、轨道拓扑寻径与防撞控制。",
+      "handoff_en": "MES issues a lot transfer requirement (move Lot X from Tool A port to Tool B port); MCS determines vehicle dispatch, optimal track path, and notifies MES upon dock arrival.",
+      "handoff_zh": "MES 发出批次搬运需求（将批次 X 从机台 A 搬至机台 B）；MCS 自主派发天车、规划轨道并于送达端口时向 MES 回复确认。",
+      "link": null
+    },
+    {
+      "system": "APC / FDC / SPC (Process Control & Fault Detection)",
+      "name_zh": "高级过程控制与故障侦测 (APC / FDC / SPC)",
+      "boundary_en": "Executes Run-to-Run (R2R) parameter adjustment, multi-sensor multivariate anomaly scoring, and statistical control chart rule evaluations.",
+      "boundary_zh": "运行批次间 Run-to-Run 配方微调算法、多传感器多元统计故障侦测以及 SPC 控制图规则判异。",
+      "handoff_en": "MES supplies real-time execution context (lot ID, current recipe, chamber ID); APC feeds dynamic recipe parameter offsets back into MES execution transactions.",
+      "handoff_zh": "MES 提供实时工艺执行上下文（批次号、配方名、腔体编号）；APC 计算微调补偿量并注入 MES 进站配方参数中。",
+      "link": null
+    },
+    {
+      "system": "YMS / Defect Analytics (Yield Management System)",
+      "name_zh": "良率管理与缺陷分析系统 (YMS)",
+      "boundary_en": "Aggregates wafer sort test maps, inline defect scan coordinates, and parametric electrical testing for root-cause excursion analysis.",
+      "boundary_zh": "汇聚晶圆测试 Map 图、在线缺陷光学扫描坐标与晶圆电性参数，用于多维良率归因分析。",
+      "handoff_en": "MES supplies complete multi-step tool and chamber genealogy; YMS overlays defect clusters onto chamber genealogy to pinpoint root-cause process tools.",
+      "handoff_zh": "MES 提供完整的晶圆级设备腔体流转谱系；YMS 将缺陷图谱与腔体谱系进行空间叠图交叉比对以锁定故障源机台。",
+      "link": null
+    }
+  ],
+  "vendor_landscape": {
+    "disclaimer_en": "Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+    "disclaimer_zh": "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。",
+    "vendors": [
+      {
+        "name": "Applied Materials SmartFactory",
+        "category_en": "Semiconductor Fab MES & Operational Software",
+        "category_zh": "半导体晶圆制造 MES 与工厂运行软件",
+        "overview_en": "Integrated manufacturing software suite widely deployed across 300mm wafer fabs, offering unified dispatching, run-to-run control, and tool automation connectors.",
+        "overview_zh": "广泛部署于 300mm 晶圆厂的集成化制造执行软件套件，整合派工调度、Run-to-Run 控制与机台连接组件。"
+      },
+      {
+        "name": "Critical Manufacturing MES",
+        "category_en": "High-Tech & Semiconductor Modular MES",
+        "category_zh": "高科技与半导体模块化 MES",
+        "overview_en": "Modern modular manufacturing execution system built with Industry 4.0 IoT architecture, digital twin interfaces, and comprehensive genealogy tracking for frontend and backend fabs.",
+        "overview_zh": "基于现代工业 4.0 物联网架构打造的模块化 MES 平台，提供数字孪生接口与贯穿前道晶圆及后道封测的全程谱系追踪。"
+      },
+      {
+        "name": "Dassault Systèmes DELMIA Apriso",
+        "category_en": "Enterprise Manufacturing Operations Management",
+        "category_zh": "企业级制造运营管理系统 (MOM)",
+        "overview_en": "Global manufacturing operations platform orchestrating multi-site production operations, quality gates, and shop-floor execution across complex manufacturing environments.",
+        "overview_zh": "跨国多基地制造运营管理平台，协调复杂制造场景中的多工厂生产执行、质量门禁与车间业务流。"
+      },
+      {
+        "name": "Eyelit MES",
+        "category_en": "Specialty Semiconductor & Electronics MES",
+        "category_zh": "特色半导体与电子制造 MES",
+        "overview_en": "Configurable MES solution specialized in compound semiconductors, MEMS, packaging, and aerospace microelectronics with flexible lot routing and asset tracking.",
+        "overview_zh": "专为化合物半导体、MEMS、先进封装及微电子领域定制的高可配置性 MES，支持敏捷路由与资产全生命周期追踪。"
+      },
+      {
+        "name": "Siemens Opcenter Execution Semiconductor",
+        "category_en": "Semiconductor Specific Manufacturing Execution",
+        "category_zh": "半导体专用制造执行系统 (前 Camstar)",
+        "overview_en": "Dedicated semiconductor manufacturing platform with pre-configured SEMI workflows, GEM300 compliance, automated recipe validation, and lot-level genealogy management.",
+        "overview_zh": "面向半导体行业的专用制造管理平台，内置 SEMI GEM300 规范流程、自动化配方校验及晶圆级谱系追溯能力。"
+      }
+    ],
+    "afterword_en": "Large semiconductor manufacturers frequently implement extensive custom proprietary extensions and in-house algorithmic schedulers on top of commercial platforms; commercial names do not imply the exact system utilized in any specific facility.",
+    "afterword_zh": "大型晶圆制造厂商通常会在商业化 MES 平台之上进行大量自研算法调度器与深度定制扩展，商业产品名称并不等同于任何特定晶圆厂实际在用的完整系统架构。"
+  },
+  "glossary": [
+    {
+      "term": "MES",
+      "full_en": "Manufacturing Execution System",
+      "full_zh": "制造执行系统",
+      "def_en": "The shop-floor IT system that tracks, coordinates, and documents the transformation of raw materials into finished semiconductor wafers in real time.",
+      "def_zh": "负责在车间执行层实时跟踪、协调并记录从裸硅片原料转化为合格芯片晶圆全过程的核心管理系统。"
+    },
+    {
+      "term": "Lot",
+      "full_en": "Wafer Lot / Batch",
+      "full_zh": "晶圆批次",
+      "def_en": "The standard manufacturing transfer unit in a 300mm cleanroom, typically consisting of a sealed FOUP containing up to 25 silicon wafers sharing the same process recipe.",
+      "def_zh": "300mm 洁净室的标准物料流转单元，通常为一个密封 FOUP 载具内装运的至多 25 片共享相同工艺配方的晶圆。"
+    },
+    {
+      "term": "Route",
+      "full_en": "Process Route / Flow",
+      "full_zh": "工艺路由 / 流程",
+      "def_en": "The sequential chain of hundreds of manufacturing steps (lithography, etch, implant, CMP, metrology) that a lot must traverse to complete the device.",
+      "def_zh": "一个芯片产品必须按序经历的数百道物理加工与检测步骤构成的工艺序列（包含光刻、刻蚀、离子注入、薄膜与量测等）。"
+    },
+    {
+      "term": "Recipe",
+      "full_en": "Chamber Process Recipe",
+      "full_zh": "设备工艺配方",
+      "def_en": "The specific set of machine parameters (temperatures, gas flows, pressures, RF powers, durations) governing tool processing for a particular step.",
+      "def_zh": "定义具体工艺腔体运行细节的一套物理参数集合（包含温度、气体流速、腔体气压、射频功率及执行时间等）。"
+    },
+    {
+      "term": "Dispatch",
+      "full_en": "Real-Time Dispatching",
+      "full_zh": "实时派工",
+      "def_en": "The algorithm or operational logic that selects the next best lot from a tool's arrival queue to optimize machine utilization and cycle time.",
+      "def_zh": "当机台变为空闲时，依据特定算法规则从等待队列中选取最具优先级批次进站以优化稼动率与周期的动态决策逻辑。"
+    },
+    {
+      "term": "WIP",
+      "full_en": "Work-In-Process",
+      "full_zh": "在制品",
+      "def_en": "The total volume of wafer lots that have entered the fab cleanroom and are actively undergoing or waiting for processing steps.",
+      "def_zh": "已投入洁净室生产线、处于加工或等待加工状态的所有晶圆批次总量。"
+    },
+    {
+      "term": "Genealogy",
+      "full_en": "Lot & Wafer Genealogy",
+      "full_zh": "批次与晶圆谱系",
+      "def_en": "The immutable historical audit record tracing every wafer back to the precise tool chambers, recipe checksums, reticles, and gas batches used.",
+      "def_zh": "记录每片晶圆在历史加工中所经历的所有具体设备腔体、配方哈希、光罩及气体批号的完整溯源数字档案。"
+    },
+    {
+      "term": "Hold",
+      "full_en": "Lot Hold / Quarantine",
+      "full_zh": "批次挂起 / 冻结",
+      "def_en": "An administrative or automated safety interlock preventing a lot from moving forward until an engineering exception or quality excursion is resolved.",
+      "def_zh": "一种行政或系统自动安全互锁机制；当工艺发生异常或超规时阻止批次继续流转，直至工程人员完成调查并放行。"
+    },
+    {
+      "term": "Cycle Time",
+      "full_en": "Manufacturing Cycle Time",
+      "full_zh": "生产周期",
+      "def_en": "The total elapsed duration from when a raw wafer lot is created and released into the line until it finishes all fab fabrication steps.",
+      "def_zh": "一个晶圆批次从建单投产开始，到完成全厂所有工艺步骤出站所经历的整体流转物理时间跨度。"
+    },
+    {
+      "term": "Due Date",
+      "full_en": "Promised Delivery Due Date",
+      "full_zh": "承诺交付日期",
+      "def_en": "The target customer delivery milestone committed by planning, used by dispatching algorithms (e.g. EDD and CR) to prioritize urgent lots.",
+      "def_zh": "计划系统与客户约定的目标出货交期节点，常被 EDD 与 CR 等派工算法作为评估批次紧迫度的核心判据。"
+    },
+    {
+      "term": "CR",
+      "full_en": "Critical Ratio",
+      "full_zh": "关键比率",
+      "def_en": "A dynamic dispatching index calculated as remaining time until due date divided by remaining processing time. CR < 1 indicates a tardy lot.",
+      "def_zh": "一种动态派工指数，计算方式为距离交期的剩余时间除以剩余加工时间；当 CR < 1 时表明该批次已处于延期风险警戒状态。"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question_en": "What is the core functional boundary between ERP and MES in a semiconductor fab?",
+      "question_zh": "在半导体晶圆厂中，ERP 与 MES 的核心职能边界是什么？",
+      "options_en": [
+        "ERP manages commercial contracts, customer orders, and financial ledgers; MES executes shop-floor dispatch, lot tracking, and recipe verification.",
+        "MES directly controls RF plasma power inside tool chambers, while ERP schedules cleanroom HVAC cooling towers.",
+        "ERP replaces the need for equipment automation programs (EAP), while MES stores raw terabyte-scale sensor trace logs.",
+        "There is no boundary; modern ERP systems directly drive the motors of cleanroom OHT overhead transport vehicles."
+      ],
+      "options_zh": [
+        "ERP 负责商业合同、客户订单与财务总账规划；MES 负责车间现场派工、批次进出站追踪与配方合规校验。",
+        "MES 直接控制设备腔体内部的射频等离子体功率，而 ERP 负责排程洁净室暖通冷却塔。",
+        "ERP 完全替代了设备自动化程序 (EAP)，而 MES 负责存储 TB 级的原始高频传感器波形日志。",
+        "两者没有边界；现代 ERP 系统直接控制洁净室天车 (OHT) 小车的转向驱动电机。"
+      ],
+      "correct_index": 0,
+      "explanation_en": "Correct! ERP operates at the enterprise business layer (planning, orders, financials), while MES governs the execution tier (lot tracking, dispatching, genealogy, recipe enforcement). Equipment control and vehicle physics belong to embedded PLCs and MCS.",
+      "explanation_zh": "正确！ERP 处于企业运营层（计划、订单、财务），而 MES 处于车间执行层（批次流转、现场派工、血统追溯、配方门禁）。腔体控制与车辆运动属于设备底层与物料控制系统。"
+    },
+    {
+      "id": "q2",
+      "question_en": "How does switching dispatching rules (e.g. from FIFO to SPT) affect fab line performance in a queuing model?",
+      "question_zh": "在排队模型中，切换派工规则（例如从 FIFO 改为 SPT）会对产线性能产生怎样的影响？",
+      "options_en": [
+        "It changes the candidate selection sequence among waiting lots, altering queue times and average cycle time without changing chamber processing physics.",
+        "It physically speeds up the chemical reaction rate and plasma etch rate inside equipment chambers.",
+        "It permanently eliminates all equipment down alarms and hardware component failures.",
+        "It replaces the need for metrology inspection and defect review."
+      ],
+      "options_zh": [
+        "它改变了排队候选批次之间的进站次序，从而改变等待时间和平均周期，但不会改变工艺腔体本身的物理加工时间。",
+        "它在物理层面上加速了设备腔体内部的化学反应速率与等离子体刻蚀速率。",
+        "它能永久消除所有机台停机报警 (UD) 与硬件元器件物理故障。",
+        "它完全免除了后续工艺中对量测质检与缺陷复检的工程需求。"
+      ],
+      "options_zh": [
+        "它改变了排队候选批次之间的进站次序，从而改变等待时间和平均周期，但不会改变工艺腔体本身的物理加工时间。",
+        "它在物理层面上加速了设备腔体内部的化学反应速率与等离子体刻蚀速率。",
+        "它能永久消除所有机台停机报警 (UD) 与硬件元器件物理故障。",
+        "它完全免除了后续工艺中对量测质检与缺陷复检的工程需求。"
+      ],
+      "correct_index": 0,
+      "explanation_en": "Correct! Dispatching rules only reorder the candidate lot queue in front of tools. SPT minimizes mean cycle time by prioritizing short tasks, but each lot's physical chamber processing time remains identical.",
+      "explanation_zh": "正确！派工规则仅仅改变机台前等待批次的排队先后次序。SPT 优先处理短工序以降低系统平均排队周期，但每颗 lot 腔体内部的物理反应时间完全不受调度规则影响。"
+    },
+    {
+      "id": "q3",
+      "question_en": "When a wafer lot is placed on 'HOLD' due to an SPC metrology out-of-spec violation, what happens next?",
+      "question_zh": "当一个晶圆批次因 SPC 量测超差违规而被置为「HOLD (挂起)」状态后，系统会发生什么？",
+      "options_en": [
+        "The lot remains strictly quarantined and cannot be dispatched or tracked into downstream tools until manual or algorithmic engineering disposition clears it.",
+        "The lot ignores the hold flag and automatically loads into the next lithography tool within 5 minutes.",
+        "The MES automatically scraps all 25 wafers and deletes the lot ID permanently from the database.",
+        "The cleanroom AMHS immediately ejects the FOUP carrier out of the factory building."
+      ],
+      "options_zh": [
+        "该批次处于严格冻结状态，无法被派工或进入下游任何设备，直至工程人员或自动化放行规则完成复核处置。",
+        "该批次忽略挂起标志，并在 5 分钟内自动装载进下一台光刻机继续曝光。",
+        "MES 立即自动将全部 25 片晶圆报废，并从数据库中永久抹除该批次 ID。",
+        "洁净室天车系统立即将该载具直接弹射出晶圆厂大楼之外。"
+      ],
+      "correct_index": 0,
+      "explanation_en": "Correct! A lot hold is an active quality interlock. The lot will not advance automatically until a process engineer or Material Review Board (MRB) investigates root cause and explicitly signs off on release, rework, or scrap.",
+      "explanation_zh": "正确！Hold 是一道刚性质量门禁。被挂起的批次绝对不会自动继续流转，必须由工艺工程师或评审委员会 (MRB) 调查异常根因，并明确签署放行、返工或报废决策后方可解除。"
+    }
+  ]
+}

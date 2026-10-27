@@ -181,6 +181,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/fab-operations" />
   </url>
 
+  <!-- MES & Dispatch: How a Wafer Fab Runs Explainer -->
+  <url>
+    <loc>https://semiconfab.org/fab-mes</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/fab-mes" />
+  </url>
+
   <!-- Open Initiative Vision & 6 Architectural Pillars -->
   <url>
     <loc>https://semiconfab.org/vision</loc>

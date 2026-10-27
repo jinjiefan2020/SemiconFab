@@ -24,10 +24,10 @@
           "id": "mes-scheduling-dispatch",
           "title_en": "MES, Scheduling & Dispatch",
           "title_zh": "MES 与派工调度",
-          "status": "planned",
-          "href": null,
-          "scope_en": "Planned: lot routing, dispatch, recipes, and genealogy concepts.",
-          "scope_zh": "计划中：将覆盖 lot 路由、派工、recipe 与谱系的概念。"
+          "status": "available",
+          "href": "fab-mes.html",
+          "scope_en": "How MES defines routes, queues, dispatches, executes, tracks, and holds lots.",
+          "scope_zh": "MES 到底管什么：一颗 lot 怎么被建路由、排队、派工、执行、追踪、放行或 hold。"
         },
         {
           "id": "amhs-material-handling",
@@ -188,7 +188,13 @@
           "title_zh": "器件工艺库",
           "status": "available",
           "href": "finfet.html",
-          "links": ["finfet.html", "gaa.html", "dram.html", "nand.html", "hbm.html"],
+          "links": [
+            "finfet.html",
+            "gaa.html",
+            "dram.html",
+            "nand.html",
+            "hbm.html"
+          ],
           "scope_en": "Step-by-step process flows for FinFET, GAAFET, DRAM (1T1C), 3D NAND, and HBM stacking.",
           "scope_zh": "涵盖 FinFET、GAAFET、DRAM、3D NAND 与 HBM 堆叠的工序级工艺流程库。"
         },

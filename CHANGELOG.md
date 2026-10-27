@@ -4,6 +4,30 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ## [Unreleased]
 
+### MES & Dispatch (MES 与派工调度) Teaching Explainer (`fab-mes.html`)
+
+- **New Standalone Teaching Topic Page (`fab-mes.html`)**:
+  - Independent interactive explainer explaining what a semiconductor MES does and what it does NOT do (ERP, equipment control, data lake, AMHS).
+  - Permanent bilingual honest banner (non-dismissible): "教学讲解，非真实 MES · Teaching explainer, not a real MES", "Lot 与数字均为示意 · Lots and numbers are illustrative", "未连接任何真实工厂 · No live fab connection".
+  - 8 core MES functions structured strictly according to SEMI / ISA-95 standards.
+  - Interactive Toy Dispatching Simulator featuring 5 illustrative lots (Lot A–E) with strictly distinct processing times (8, 3, 6, 2, 5), allowing comparison of FIFO, SPT, EDD, and CR heuristics. Model assumptions (single tool, sequential, non-preemptive, no breakdown) and critical ratio definition explicitly documented; results independently calculated and verified.
+  - 9-step interactive wafer lot lifecycle stepper (Create lot, Queuing, Dispatching, Recipe verification, Execution, Data collection, Metrology, Release or Hold, Next step) with handoff targets and missing-info impacts, including explicit Release / Hold branching.
+  - 3 real-world exception scenarios (Recipe mismatch hold, tool breakdown re-dispatch, metrology out-of-spec hold) with state changes and reset capability.
+  - MES and neighboring systems comparison table (ERP, EAP, AMHS/MCS, APC/FDC/SPC, YMS).
+  - Representative vendor landscape in strict alphabetical order (Applied Materials SmartFactory, Critical Manufacturing MES, Dassault DELMIA Apriso, Eyelit MES, Siemens Opcenter Semiconductor) preceded by non-endorsement disclaimer and followed by custom extension reality note.
+  - Complete 11-term bilingual glossary and 3-question conceptual quiz (click to reveal answer/explanation, zero tracking).
+  - Complete accessible static text edition ensuring full screen-reader and SEO readability without JavaScript.
+  - Configurable sponsorship component default-disabled with zero empty placeholder.
+- **Dedicated Machine-Readable Data (`data/fab-mes.json`)**:
+  - Structured storage of toy lot parameters, dispatching verification baseline, 9-step journey metadata, exception scenarios, neighbor systems, vendor landscape, glossary, and quiz.
+- **Fab Operations Hub Status Update**:
+  - Updated MES topic status from `planned` to `available` with href `fab-mes.html` in both `data/fab-operations.json` and `fab-operations.html`.
+- **Site-Wide Discoverability & Navigation**:
+  - **`js/site-nav.js`**: Added "MES & Dispatch" / "MES 与派工" under the Learn dropdown and mobile drawer (`fabMes` / `fabMesDesc`), activated for `fab-mes`.
+  - **`js/translations.js`**: Registered bilingual `fab_mes_*` localization dictionary keys.
+  - **`sitemap.xml`**: Added canonical clean URL entry `https://semiconfab.org/fab-mes`.
+  - **`README.md`**: Added single bullet pointing to the new MES topic page.
+
 ### Fab Operations (晶圆厂运营总览) Architecture Hub & Operational Topic Map
 
 - **New Standalone Hub Page (`fab-operations.html`)**:

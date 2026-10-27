@@ -61,6 +61,8 @@
       hbmDesc: "3D TSV Stacking & Packaging",
       dataLayer: "Fab Data Layer",
       dataLayerDesc: "How fab data flows, layer by layer",
+      fabMes: "MES & Dispatch",
+      fabMesDesc: "How MES routes and dispatches lots",
       fabOperations: "Fab Operations",
       fabOperationsDesc: "Map of fab operations topics",
 
@@ -131,6 +133,8 @@
       hbmDesc: "3D TSV 硅通孔微凸块先进封装",
       dataLayer: "晶圆厂数据层",
       dataLayerDesc: "数据如何一层层流动",
+      fabMes: "MES 与派工",
+      fabMesDesc: "MES 如何建路由与派工",
       fabOperations: "晶圆厂运营",
       fabOperationsDesc: "Fab 运营话题地图",
 
@@ -262,6 +266,7 @@
       "nand",
       "hbm",
       "fab-data-layer",
+      "fab-mes",
       "fab-operations",
     ].includes(cur);
     const isResearchActive = ["benchmark", "vision"].includes(cur);
@@ -398,6 +403,10 @@
                 <a href="/fab-data-layer" class="sc-dropdown-item ${cur === "fab-data-layer" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.dataLayer}</span>
                   <span class="sc-dropdown-desc">${t.dataLayerDesc}</span>
+                </a>
+                <a href="/fab-mes" class="sc-dropdown-item ${cur === "fab-mes" ? "active" : ""}">
+                  <span class="sc-dropdown-title">${t.fabMes}</span>
+                  <span class="sc-dropdown-desc">${t.fabMesDesc}</span>
                 </a>
                 <a href="/fab-operations" class="sc-dropdown-item ${cur === "fab-operations" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.fabOperations}</span>
@@ -538,6 +547,9 @@
           </a>
           <a href="/fab-data-layer" class="sc-drawer-link ${cur === "fab-data-layer" ? "active" : ""}">
             <span>${t.dataLayer}</span>
+          </a>
+          <a href="/fab-mes" class="sc-drawer-link ${cur === "fab-mes" ? "active" : ""}">
+            <span>${t.fabMes}</span>
           </a>
           <a href="/fab-operations" class="sc-drawer-link ${cur === "fab-operations" ? "active" : ""}">
             <span>${t.fabOperations}</span>
