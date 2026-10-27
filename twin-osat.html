@@ -11,6 +11,7 @@
       name="description"
       content="Interactive 3D Digital Twin for Post-Fab Semiconductor Assembly & Test (OSAT) Facility. 86 production equipment models across 11 packaging & testing process bays: Dicing, Die Attach, Wire Bonding, Flip Chip, Molding, Singulation, Bumping/RDL, Prober, ATE, Handler, and Inspection."
     />
+    <link rel="canonical" href="https://semiconfab.org/twin-osat" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -96,7 +97,7 @@
     <!-- TOP GLOBAL NAVIGATION BAR -->
     <header class="h-[var(--header-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-30 shadow-sm">
       <div class="flex items-center gap-3">
-        <a href="index.html" class="flex items-center gap-2 group decoration-none">
+        <a href="/" class="flex items-center gap-2 group decoration-none">
           <svg class="w-6 h-6 text-[var(--accent)]" viewBox="0 0 50 50" fill="none">
             <circle cx="25" cy="25" r="21" stroke="currentColor" stroke-width="2.8"/>
             <line x1="12" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="1.4"/>
@@ -115,7 +116,7 @@
 
         <!-- Link to Front-End Fab Twin -->
         <a
-          href="twin.html"
+          href="/twin"
           id="btn-link-fab-twin"
           class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition ml-2"
           title="Switch to 300mm Front-End Fab Cleanroom Twin"
@@ -126,7 +127,7 @@
 
         <!-- Link to 3nm Mega Fab Concept -->
         <a
-          href="twin-mega.html"
+          href="/twin-mega"
           id="btn-link-mega-twin"
           class="hidden md:flex items-center gap-1.5 px-2.5 py-1 text-xs font-semibold rounded-md border border-[var(--accent)] bg-[var(--surface-2)] text-[var(--accent)] hover:bg-[var(--accent)] hover:text-white transition ml-1"
           title="3nm Mega Fab Concept · Conceptual Layout Model (3,000 Tools)"
@@ -293,7 +294,7 @@
             </span>
             <div class="flex items-center gap-1.5">
               <span id="sidebar-count-badge" class="px-1.5 py-0.5 text-[10px] font-mono font-bold rounded bg-[var(--surface)] text-[var(--accent)] border border-[var(--line)]">86</span>
-              <a href="catalog-demo.html?domain=osat" target="_blank" id="sidebar-catalog-link" class="px-1.5 py-0.5 text-[10px] font-medium rounded bg-[var(--surface)] hover:text-[var(--accent)] text-[var(--ink-2)] border border-[var(--line)] transition flex items-center gap-0.5" title="Open in Equipment Catalog">
+              <a href="/catalog-demo?domain=osat" target="_blank" id="sidebar-catalog-link" class="px-1.5 py-0.5 text-[10px] font-medium rounded bg-[var(--surface)] hover:text-[var(--accent)] text-[var(--ink-2)] border border-[var(--line)] transition flex items-center gap-0.5" title="Open in Equipment Catalog">
                 <span>名录</span><i data-lucide="external-link" class="w-2.5 h-2.5"></i>
               </a>
             </div>
@@ -454,7 +455,7 @@
           <!-- 1-Click Contribution CTA -->
           <a
             id="inspect-cta-contribute"
-            href="/add-equipment.html"
+            href="/add-equipment"
             target="_blank"
             class="flex items-center justify-between px-3 py-2 rounded-md bg-[var(--accent)] hover:opacity-90 text-white font-semibold text-xs shadow-sm transition"
           >
@@ -1622,7 +1623,7 @@
 
         // CTA
         const ctaBtn = document.getElementById("inspect-cta-contribute");
-        ctaBtn.href = `/add-equipment.html?vendor=${encodeURIComponent(item.vendor)}&model=${encodeURIComponent(item.model)}`;
+        ctaBtn.href = `/add-equipment?vendor=${encodeURIComponent(item.vendor)}&model=${encodeURIComponent(item.model)}`;
 
         // Highlight Box
         if (slot) {

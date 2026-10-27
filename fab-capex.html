@@ -10,6 +10,7 @@
       name="description"
       content="Parametric cleanroom equipment BOM and total fab construction capital expenditure (Capex) estimator combining 3D digital twin layout tools, verified equipment price estimates, and facility infrastructure models."
     />
+    <link rel="canonical" href="https://semiconfab.org/fab-capex" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="stylesheet" href="fonts.css" />
     <link rel="stylesheet" href="css/semicon-theme.css" />
@@ -723,7 +724,7 @@
           <span style="font-size: 15px;">💡</span>
           <span id="ui-banner-text">This is the interactive estimator. For research report & sources →</span>
         </div>
-        <a href="fab-cost.html" id="ui-banner-link" style="font-weight: 700; color: var(--accent-blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">Construction Cost Report →</a>
+        <a href="/fab-cost" id="ui-banner-link" style="font-weight: 700; color: var(--accent-blue); text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">Construction Cost Report →</a>
       </div>
 
       <!-- Hero -->
@@ -4086,7 +4087,7 @@
                 ${subtotalDisplay}
               </td>
               <td style="text-align: center;">
-                <a href="compare.html?compare=${item.tool_id}" class="btn btn-secondary" style="padding:2px 8px; font-size:0.75rem;">
+                <a href="/compare?compare=${item.tool_id}" class="btn btn-secondary" style="padding:2px 8px; font-size:0.75rem;">
                   ${t.compareBtn}
                 </a>
               </td>

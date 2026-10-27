@@ -13,6 +13,7 @@
       name="description"
       content="Conceptual 3D Layout Model of an advanced 3nm FinFET (Fin-Flex™ · TSMC N3E Class) Dual-Phase Mega Fab with 50,000 WSPM capacity and 3,000 production tools across Phase 1 and Phase 2 halls connected by an automated inter-phase AMHS skybridge."
     />
+    <link rel="canonical" href="https://semiconfab.org/twin-mega" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -198,7 +199,7 @@
       <!-- Left: Brand & 3D Twins Switcher -->
       <div class="flex items-center gap-2.5 shrink-0">
         <a
-          href="index.html"
+          href="/"
           class="flex items-center gap-2 group decoration-none shrink-0"
           title="SemiconFab.org"
         >
@@ -301,7 +302,7 @@
               Digital Twins
             </div>
             <a
-              href="twin-mega.html"
+              href="/twin-mega"
               class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs font-bold text-[var(--accent)] bg-[var(--surface-2)] decoration-none"
             >
               <span id="txt-menu-mega">3nm Mega Fab (3,000)</span>
@@ -311,14 +312,14 @@
               >
             </a>
             <a
-              href="twin.html"
+              href="/twin"
               class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition"
             >
               <span id="txt-menu-pilot">300mm Pilot Fab (121)</span>
               <span class="text-[9px] font-mono text-[var(--ink-3)]">FEOL</span>
             </a>
             <a
-              href="twin-osat.html"
+              href="/twin-osat"
               class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition"
             >
               <span id="txt-menu-osat">OSAT Packaging (86)</span>
@@ -454,7 +455,7 @@
 
         <!-- Guide Link (GEMINI.md standard) -->
         <a
-          href="guide.html"
+          href="/guide"
           class="flex items-center gap-1 px-3 py-1 text-xs font-bold rounded-md bg-[var(--accent)] text-white hover:opacity-90 transition shadow-sm shrink-0 whitespace-nowrap"
           title="User Guide & Cleanroom Handbook"
         >
@@ -857,7 +858,7 @@
             </button>
             <a
               id="btn-goto-catalog"
-              href="catalog-demo.html"
+              href="/catalog-demo"
               target="_blank"
               class="flex-1 py-1.5 text-xs font-semibold rounded bg-[var(--accent)] text-white hover:opacity-90 transition flex items-center justify-center gap-1.5 decoration-none"
             >
@@ -2518,7 +2519,7 @@
 
         // URL link to catalog
         const catBtn = document.getElementById("btn-goto-catalog");
-        catBtn.href = `catalog-demo.html?search=${encodeURIComponent(tool.model)}`;
+        catBtn.href = `/catalog-demo?search=${encodeURIComponent(tool.model)}`;
 
         drawer.classList.add("open");
         renderMinimap();

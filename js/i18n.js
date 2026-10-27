@@ -126,31 +126,25 @@ function setLanguage(langCode) {
   // 5. Update language dropdown active state
   setupLangDropdown();
 
-  // 5.1 Update FinFET, GAA, DRAM & NAND links based on language
-  // Only Simplified Chinese ('zh-CN') links to Chinese version, all other languages link to English version
-  const finfetTarget =
-    langCode === "zh-CN" ? "finfet.html?lang=zh" : "finfet.html?lang=en";
-  const gaaTarget =
-    langCode === "zh-CN" ? "gaa.html?lang=zh" : "gaa.html?lang=en";
-  const dramTarget =
-    langCode === "zh-CN" ? "dram.html?lang=zh" : "dram.html?lang=en";
-  const nandTarget =
-    langCode === "zh-CN" ? "nand.html?lang=zh" : "nand.html?lang=en";
-  const hbmTarget =
-    langCode === "zh-CN" ? "hbm.html?lang=zh" : "hbm.html?lang=en";
-  document.querySelectorAll('a[href*="finfet.html"]').forEach((a) => {
+  // 5.1 Ensure FinFET, GAA, DRAM, NAND & HBM links use canonical clean addresses
+  const finfetTarget = "/finfet";
+  const gaaTarget = "/gaa";
+  const dramTarget = "/dram";
+  const nandTarget = "/nand";
+  const hbmTarget = "/hbm";
+  document.querySelectorAll('a[href*="finfet"]').forEach((a) => {
     a.href = finfetTarget;
   });
-  document.querySelectorAll('a[href*="gaa.html"]').forEach((a) => {
+  document.querySelectorAll('a[href*="gaa"]').forEach((a) => {
     a.href = gaaTarget;
   });
-  document.querySelectorAll('a[href*="dram.html"]').forEach((a) => {
+  document.querySelectorAll('a[href*="dram"]').forEach((a) => {
     a.href = dramTarget;
   });
-  document.querySelectorAll('a[href*="nand.html"]').forEach((a) => {
+  document.querySelectorAll('a[href*="nand"]').forEach((a) => {
     a.href = nandTarget;
   });
-  document.querySelectorAll('a[href*="hbm.html"]').forEach((a) => {
+  document.querySelectorAll('a[href*="hbm"]').forEach((a) => {
     a.href = hbmTarget;
   });
 

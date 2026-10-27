@@ -2,6 +2,17 @@
 
 All notable changes to the SemiconFab source-available repository will be documented in this file.
 
+## [Unreleased]
+
+### SEO & URL Redirection Harmonization (Google Search Console Fix)
+
+- **Canonical URL Standardization**: Standardized all content pages to use clean canonical URLs without `.html` extensions or query parameters. Corrected canonical tags on `finfet`, `gaa`, `dram`, `nand`, `hbm`, and `guide`; added missing canonical tags to `compare`, `add-equipment`, `catalog-demo`, `benchmark`, `data-standard`, `verification`, `fab-capex`, `twin-osat`, and `twin-mega`.
+- **Alternate & hreflang Sanitization**: Removed dirty `?lang=en` and `?lang=zh` alternate links from HTML `<head>` in device process pages (`finfet`, `gaa`, `dram`, `nand`, `hbm`). In `sitemap.xml`, eliminated duplicate localized hreflang alternates pointing to identical URLs, retaining single clean `x-default` per canonical page.
+- **Sitemap.xml Rebuilt**: Reconstructed sitemap with 21 canonical clean URLs. Replaced `.html` entries, added missing `catalog-demo`, and updated `lastmod` to `2026-10-26` strictly for modified/added entries.
+- **Eliminated Multi-Hop Redirect Stubs**: Updated redirect targets in `twin/index.html` (`/twin`), `benchmark/index.html` (`/benchmark`), and `submit-equipment.html` (`/add-equipment`) to directly target clean canonical URLs with query/hash pass-through, preventing 2-hop redirect chains.
+- **Cleanroom Twin URL State Fix (`twin.html`)**: Fixed `switchEntryMode` in `twin.html` to eliminate automatic addition of default `?mode=visitor` parameter to the browser address bar on initial load while preserving interactive state restoration when explicit modes or modals are requested.
+- **Site-Wide Internal Link Hygiene**: Replaced internal `.html` links across all HTML pages, navigation controllers (`js/site-nav.js`), and dynamic scripts (`js/i18n.js`) with clean canonical URLs.
+
 ## [1.9.0] - 2026-10-25
 
 ### Fab Data Layer (晶圆厂数据层) & Architecture Teaching Model

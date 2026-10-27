@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemiconFab Equipment Catalog · Schema v1.0</title>
+    <link rel="canonical" href="https://semiconfab.org/catalog-demo" />
     <!-- Unified Design System Theme -->
     <link rel="stylesheet" href="css/semicon-theme.css" />
     <style>
@@ -22350,7 +22351,7 @@
 
       function goToComparison() {
         if (selectedCompareIds.length >= 2) {
-          window.location.href = `compare.html?compare=${selectedCompareIds.join(",")}`;
+          window.location.href = `/compare?compare=${selectedCompareIds.join(",")}`;
         }
       }
 

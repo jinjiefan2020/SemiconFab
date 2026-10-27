@@ -419,7 +419,7 @@
           >Custom Layout Active</span
         >
         <a
-          href="layout-editor.html"
+          href="/layout-editor"
           data-i18n="btn_edit_in_2d"
           class="text-[11px] text-emerald-400 hover:text-emerald-300 underline font-medium ml-1"
           >Edit in 2D →</a
@@ -753,7 +753,7 @@
               >
             </div>
             <a
-              href="benchmark.html"
+              href="/benchmark"
               target="_blank"
               class="px-2 py-0.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[9.5px] font-bold transition flex items-center gap-1 shadow-sm whitespace-nowrap"
             >
@@ -1512,7 +1512,7 @@
       <div class="flex items-center gap-2.5">
         <!-- Back to Home (Brand Logo) -->
         <a
-          href="index.html"
+          href="/"
           title="Return to Home"
           data-i18n-title="nav_home"
           class="w-6 h-6 rounded-lg bg-white dark:bg-slate-900 border-[1.2px] border-slate-900 dark:border-slate-300 shadow-sm flex items-center justify-center shrink-0 hover:scale-105 transition"
@@ -1571,7 +1571,7 @@
         </div>
         <!-- Link to 3nm Mega Fab Concept -->
         <a
-          href="twin-mega.html"
+          href="/twin-mega"
           title="3nm Mega Fab Concept · Conceptual Layout Model (3,000 Tools)"
           class="hidden sm:flex items-center gap-1 px-2 h-[26px] rounded-md border border-[var(--sc-accent-cyan,#0e6e6b)] bg-emerald-50 dark:bg-emerald-950/60 text-[var(--sc-accent-cyan,#0e6e6b)] font-bold text-[10px] hover:bg-[var(--sc-accent-cyan,#0e6e6b)] hover:text-white transition shadow-sm shrink-0"
         >
@@ -2293,7 +2293,7 @@
           <!-- Prefill Contribution CTA Button (Above the Fold - Mandatory P2) -->
           <a
             id="inspect-draft-prefill-cta"
-            href="add-equipment.html"
+            href="/add-equipment"
             target="_blank"
             class="hidden mt-2 flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[9.5px] shadow-sm transition"
           >
@@ -2787,7 +2787,7 @@
         </div>
 
         <!-- Fab Data Layer Entry Link -->
-        <a id="inspect-data-layer-link" href="fab-data-layer.html" target="_blank" class="w-full flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-[8.5px] font-semibold transition shadow-xs text-center" data-i18n="twin_data_layer_link">See how this tool's data flows to the fab → Fab Data Layer</a>
+        <a id="inspect-data-layer-link" href="/fab-data-layer" target="_blank" class="w-full flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-300 text-[8.5px] font-semibold transition shadow-xs text-center" data-i18n="twin_data_layer_link">See how this tool's data flows to the fab → Fab Data Layer</a>
 
         <!-- If OEM model is deployed in Fab, Jump to Fab Button -->
         <div id="inspect-infab-container" class="hidden">
@@ -2838,7 +2838,7 @@
         <!-- 2D Floor Plan Layout Editor Entry Button -->
         <a
           id="btn-edit-layout"
-          href="layout-editor.html"
+          href="/layout-editor"
           title="Edit Fab Floor Plan in 2D"
           data-i18n-title="btn_edit_layout_title"
           class="flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-[9.5px] shadow-sm transition whitespace-nowrap shrink-0 cursor-pointer hover:scale-105 active:scale-95"
@@ -14002,7 +14002,7 @@
         // Above-the-fold Pre-fill CTA link & button (P2)
         const prefillUrl =
           item.prefill_url ||
-          `/add-equipment.html?vendor=${encodeURIComponent(item.vendor || "")}&model=${encodeURIComponent(item.model || "")}`;
+          `/add-equipment?vendor=${encodeURIComponent(item.vendor || "")}&model=${encodeURIComponent(item.model || "")}`;
         const prefillBtn = document.getElementById("inspect-draft-prefill-cta");
         if (prefillBtn) {
           prefillBtn.classList.remove("hidden");
@@ -14012,7 +14012,7 @@
         // Catalog link
         let catLink = document.getElementById("inspect-catalog-link");
         if (catLink) {
-          catLink.href = `/catalog-demo.html#${encodeURIComponent(item.model || "")}`;
+          catLink.href = `/catalog-demo#${encodeURIComponent(item.model || "")}`;
           catLink.innerHTML = `<i data-lucide="external-link" class="w-3 h-3"></i><span>${isZh ? "查看编目卡片 →" : "View in Equipment Catalog →"}</span>`;
         }
 
@@ -14461,8 +14461,14 @@
 
         try {
           const url = new URL(window.location);
-          url.searchParams.set("mode", mode);
-          window.history.replaceState({}, "", url);
+          if (mode === "visitor") {
+            url.searchParams.delete("mode");
+          } else {
+            url.searchParams.set("mode", mode);
+          }
+          const search = url.searchParams.toString();
+          const newPath = url.pathname + (search ? `?${search}` : "") + url.hash;
+          window.history.replaceState({}, "", newPath);
         } catch (e) {}
 
         if (mode === "visitor") {
@@ -20662,7 +20668,7 @@
           if (inspectHeader) inspectHeader.appendChild(catLink);
         }
         if (catLink) {
-          catLink.href = `/catalog-demo.html#${encodeURIComponent(eq.model || "")}`;
+          catLink.href = `/catalog-demo#${encodeURIComponent(eq.model || "")}`;
           catLink.innerHTML = `<i data-lucide="external-link" class="w-3 h-3"></i><span>${isZh ? "查看编目卡片 →" : "View in Equipment Catalog →"}</span>`;
           if (window.lucide) lucide.createIcons();
         }
@@ -24408,7 +24414,7 @@
           </div>
           <div class="flex items-center gap-2">
             <a
-              href="vision.html"
+              href="/vision"
               target="_blank"
               class="px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 text-xs font-semibold flex items-center gap-1.5 transition shadow-sm"
             >

@@ -223,10 +223,14 @@
   applyTheme(getTheme());
 
   function getCurrentPath() {
-    const pathname = window.location.pathname;
-    const filename =
-      pathname.substring(pathname.lastIndexOf("/") + 1) || "index.html";
-    return filename;
+    let pathname = window.location.pathname;
+    if (pathname.endsWith("/") && pathname.length > 1) {
+      pathname = pathname.slice(0, -1);
+    }
+    let segment = pathname.substring(pathname.lastIndexOf("/") + 1);
+    if (!segment || segment === "index.html") return "index";
+    if (segment.endsWith(".html")) segment = segment.slice(0, -5);
+    return segment;
   }
 
   function renderNavbar(lang, theme) {
@@ -234,33 +238,34 @@
     const cur = getCurrentPath();
 
     const isTwinActive = [
-      "twin.html",
-      "twin-osat.html",
-      "layout-editor.html",
+      "twin",
+      "twin-mega",
+      "twin-osat",
+      "layout-editor",
     ].includes(cur);
     const isEquipActive = [
-      "catalog-demo.html",
-      "compare.html",
-      "add-equipment.html",
-      "data-standard.html",
-      "verification.html",
+      "catalog-demo",
+      "compare",
+      "add-equipment",
+      "data-standard",
+      "verification",
     ].includes(cur);
-    const isCostActive = ["fab-cost.html", "fab-capex.html"].includes(cur);
+    const isCostActive = ["fab-cost", "fab-capex"].includes(cur);
     const isLearnActive = [
-      "finfet.html",
-      "gaa.html",
-      "dram.html",
-      "nand.html",
-      "hbm.html",
-      "fab-data-layer.html",
+      "finfet",
+      "gaa",
+      "dram",
+      "nand",
+      "hbm",
+      "fab-data-layer",
     ].includes(cur);
-    const isResearchActive = ["benchmark.html", "vision.html"].includes(cur);
+    const isResearchActive = ["benchmark", "vision"].includes(cur);
 
     return `
       <header class="sc-header" role="banner">
         <div class="sc-header-inner">
           <!-- Logo & Brand -->
-          <a href="index.html" class="sc-brand">
+          <a href="/" class="sc-brand">
             <div class="sc-brand-icon">
               <svg width="20" height="20" viewBox="0 0 48 48" fill="none">
                 <path d="M24 4C13.2 4 4.4 12.6 4 23.3C3.6 34.3 12.3 43.4 23.3 43.98C23.6 44 23.8 43.6 23.8 43.3C23.8 42.2 24.2 41.6 24.9 41.6C25.6 41.6 26 42.2 26 43.3C26 43.6 26.2 44 26.5 43.98C37.5 43.4 46.2 34.3 45.8 23.3C45.4 12.6 36.6 4 25.8 4H24Z" stroke="currentColor" stroke-width="2.8" stroke-linejoin="round"/>
@@ -288,19 +293,19 @@
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
-                <a href="twin.html" class="sc-dropdown-item ${cur === "twin.html" ? "active" : ""}">
+                <a href="/twin" class="sc-dropdown-item ${cur === "twin" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.twinFab}</span>
                   <span class="sc-dropdown-desc">${t.twinFabDesc}</span>
                 </a>
-                <a href="twin-mega.html" class="sc-dropdown-item ${cur === "twin-mega.html" ? "active" : ""}">
+                <a href="/twin-mega" class="sc-dropdown-item ${cur === "twin-mega" ? "active" : ""}">
                   <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan); font-weight:700;">${t.twinMega}</span>
                   <span class="sc-dropdown-desc">${t.twinMegaDesc}</span>
                 </a>
-                <a href="twin-osat.html" class="sc-dropdown-item ${cur === "twin-osat.html" ? "active" : ""}">
+                <a href="/twin-osat" class="sc-dropdown-item ${cur === "twin-osat" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.twinOsat}</span>
                   <span class="sc-dropdown-desc">${t.twinOsatDesc}</span>
                 </a>
-                <a href="layout-editor.html" class="sc-dropdown-item ${cur === "layout-editor.html" ? "active" : ""}">
+                <a href="/layout-editor" class="sc-dropdown-item ${cur === "layout-editor" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.layoutEditor}</span>
                   <span class="sc-dropdown-desc">${t.layoutEditorDesc}</span>
                 </a>
@@ -314,23 +319,23 @@
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
-                <a href="catalog-demo.html" class="sc-dropdown-item ${cur === "catalog-demo.html" ? "active" : ""}">
+                <a href="/catalog-demo" class="sc-dropdown-item ${cur === "catalog-demo" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.catalog}</span>
                   <span class="sc-dropdown-desc">${t.catalogDesc}</span>
                 </a>
-                <a href="compare.html" class="sc-dropdown-item ${cur === "compare.html" ? "active" : ""}">
+                <a href="/compare" class="sc-dropdown-item ${cur === "compare" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.compare}</span>
                   <span class="sc-dropdown-desc">${t.compareDesc}</span>
                 </a>
-                <a href="add-equipment.html" class="sc-dropdown-item ${cur === "add-equipment.html" ? "active" : ""}">
+                <a href="/add-equipment" class="sc-dropdown-item ${cur === "add-equipment" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.addEquip}</span>
                   <span class="sc-dropdown-desc">${t.addEquipDesc}</span>
                 </a>
-                <a href="data-standard.html" class="sc-dropdown-item ${cur === "data-standard.html" ? "active" : ""}">
+                <a href="/data-standard" class="sc-dropdown-item ${cur === "data-standard" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.dataStandard}</span>
                   <span class="sc-dropdown-desc">${t.dataStandardDesc}</span>
                 </a>
-                <a href="verification.html" class="sc-dropdown-item ${cur === "verification.html" ? "active" : ""}">
+                <a href="/verification" class="sc-dropdown-item ${cur === "verification" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.verification}</span>
                   <span class="sc-dropdown-desc">${t.verificationDesc}</span>
                 </a>
@@ -344,11 +349,11 @@
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
-                <a href="fab-cost.html" class="sc-dropdown-item ${cur === "fab-cost.html" ? "active" : ""}">
+                <a href="/fab-cost" class="sc-dropdown-item ${cur === "fab-cost" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.fabCost}</span>
                   <span class="sc-dropdown-desc">${t.fabCostDesc}</span>
                 </a>
-                <a href="fab-capex.html" class="sc-dropdown-item ${cur === "fab-capex.html" ? "active" : ""}">
+                <a href="/fab-capex" class="sc-dropdown-item ${cur === "fab-capex" ? "active" : ""}">
                   <span class="sc-dropdown-title" style="color:var(--sc-accent-cyan)">${t.fabCapex}</span>
                   <span class="sc-dropdown-desc">${t.fabCapexDesc}</span>
                 </a>
@@ -365,27 +370,27 @@
                 <div class="sc-dropdown-header" style="padding: 6px 12px; font-size: 11px; font-weight: 700; color: var(--sc-text-dim); text-transform: uppercase; letter-spacing: 0.05em;">
                   ${t.deviceLibrary}
                 </div>
-                <a href="finfet.html" class="sc-dropdown-item ${cur === "finfet.html" ? "active" : ""}">
+                <a href="/finfet" class="sc-dropdown-item ${cur === "finfet" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.finfet}</span>
                   <span class="sc-dropdown-desc">${t.finfetDesc}</span>
                 </a>
-                <a href="gaa.html" class="sc-dropdown-item ${cur === "gaa.html" ? "active" : ""}">
+                <a href="/gaa" class="sc-dropdown-item ${cur === "gaa" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.gaafet}</span>
                   <span class="sc-dropdown-desc">${t.gaafetDesc}</span>
                 </a>
-                <a href="dram.html" class="sc-dropdown-item ${cur === "dram.html" ? "active" : ""}">
+                <a href="/dram" class="sc-dropdown-item ${cur === "dram" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.dram}</span>
                   <span class="sc-dropdown-desc">${t.dramDesc}</span>
                 </a>
-                <a href="nand.html" class="sc-dropdown-item ${cur === "nand.html" ? "active" : ""}">
+                <a href="/nand" class="sc-dropdown-item ${cur === "nand" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.nand}</span>
                   <span class="sc-dropdown-desc">${t.nandDesc}</span>
                 </a>
-                <a href="hbm.html" class="sc-dropdown-item ${cur === "hbm.html" ? "active" : ""}">
+                <a href="/hbm" class="sc-dropdown-item ${cur === "hbm" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.hbm}</span>
                   <span class="sc-dropdown-desc">${t.hbmDesc}</span>
                 </a>
-                <a href="fab-data-layer.html" class="sc-dropdown-item ${cur === "fab-data-layer.html" ? "active" : ""}">
+                <a href="/fab-data-layer" class="sc-dropdown-item ${cur === "fab-data-layer" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.dataLayer}</span>
                   <span class="sc-dropdown-desc">${t.dataLayerDesc}</span>
                 </a>
@@ -399,11 +404,11 @@
                 <svg class="sc-nav-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="sc-dropdown-panel">
-                <a href="benchmark.html" class="sc-dropdown-item ${cur === "benchmark.html" ? "active" : ""}">
+                <a href="/benchmark" class="sc-dropdown-item ${cur === "benchmark" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.benchmark}</span>
                   <span class="sc-dropdown-desc">${t.benchmarkDesc}</span>
                 </a>
-                <a href="vision.html" class="sc-dropdown-item ${cur === "vision.html" ? "active" : ""}">
+                <a href="/vision" class="sc-dropdown-item ${cur === "vision" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.vision}</span>
                   <span class="sc-dropdown-desc">${t.visionDesc}</span>
                 </a>
@@ -414,7 +419,7 @@
           <!-- Right Action Controls -->
           <div class="sc-header-actions">
             <!-- Guide Button -->
-            <a href="guide.html" class="sc-btn-guide ${cur === "guide.html" ? "active" : ""}" title="${t.navGuideTitle || "User Guide"}">
+            <a href="/guide" class="sc-btn-guide ${cur === "guide" ? "active" : ""}" title="${t.navGuideTitle || "User Guide"}">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                 <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
@@ -453,19 +458,19 @@
         <!-- 1. 3D Twins -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${t.navTwins}</div>
-          <a href="twin.html" class="sc-drawer-link ${cur === "twin.html" ? "active" : ""}">
+          <a href="/twin" class="sc-drawer-link ${cur === "twin" ? "active" : ""}">
             <span>${t.twinFab}</span>
             <span class="sc-drawer-badge">121</span>
           </a>
-          <a href="twin-mega.html" class="sc-drawer-link ${cur === "twin-mega.html" ? "active" : ""}">
+          <a href="/twin-mega" class="sc-drawer-link ${cur === "twin-mega" ? "active" : ""}">
             <span style="font-weight:700; color:var(--sc-accent-cyan)">${t.twinMega}</span>
             <span class="sc-drawer-badge" style="background-color:var(--sc-accent-cyan); color:#fff">3,000</span>
           </a>
-          <a href="twin-osat.html" class="sc-drawer-link ${cur === "twin-osat.html" ? "active" : ""}">
+          <a href="/twin-osat" class="sc-drawer-link ${cur === "twin-osat" ? "active" : ""}">
             <span>${t.twinOsat}</span>
             <span class="sc-drawer-badge">86</span>
           </a>
-          <a href="layout-editor.html" class="sc-drawer-link ${cur === "layout-editor.html" ? "active" : ""}">
+          <a href="/layout-editor" class="sc-drawer-link ${cur === "layout-editor" ? "active" : ""}">
             <span>${t.layoutEditor}</span>
           </a>
         </div>
@@ -473,20 +478,20 @@
         <!-- 2. Equipment -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${t.navEquipment}</div>
-          <a href="catalog-demo.html" class="sc-drawer-link ${cur === "catalog-demo.html" ? "active" : ""}">
+          <a href="/catalog-demo" class="sc-drawer-link ${cur === "catalog-demo" ? "active" : ""}">
             <span>${t.catalog}</span>
             <span class="sc-drawer-badge">253</span>
           </a>
-          <a href="compare.html" class="sc-drawer-link ${cur === "compare.html" ? "active" : ""}">
+          <a href="/compare" class="sc-drawer-link ${cur === "compare" ? "active" : ""}">
             <span>${t.compare}</span>
           </a>
-          <a href="add-equipment.html" class="sc-drawer-link ${cur === "add-equipment.html" ? "active" : ""}">
+          <a href="/add-equipment" class="sc-drawer-link ${cur === "add-equipment" ? "active" : ""}">
             <span>${t.addEquip}</span>
           </a>
-          <a href="data-standard.html" class="sc-drawer-link ${cur === "data-standard.html" ? "active" : ""}">
+          <a href="/data-standard" class="sc-drawer-link ${cur === "data-standard" ? "active" : ""}">
             <span>${t.dataStandard}</span>
           </a>
-          <a href="verification.html" class="sc-drawer-link ${cur === "verification.html" ? "active" : ""}">
+          <a href="/verification" class="sc-drawer-link ${cur === "verification" ? "active" : ""}">
             <span>${t.verification}</span>
           </a>
         </div>
@@ -494,11 +499,11 @@
         <!-- 3. Cost -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${t.navCost}</div>
-          <a href="fab-cost.html" class="sc-drawer-link ${cur === "fab-cost.html" ? "active" : ""}">
+          <a href="/fab-cost" class="sc-drawer-link ${cur === "fab-cost" ? "active" : ""}">
             <span>${t.fabCost}</span>
             <span class="sc-drawer-badge">Report</span>
           </a>
-          <a href="fab-capex.html" class="sc-drawer-link ${cur === "fab-capex.html" ? "active" : ""}">
+          <a href="/fab-capex" class="sc-drawer-link ${cur === "fab-capex" ? "active" : ""}">
             <span style="color:var(--sc-accent-cyan)">${t.fabCapex}</span>
             <span class="sc-drawer-badge">BOM</span>
           </a>
@@ -507,22 +512,22 @@
         <!-- 4. Learn -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${t.navLearn}</div>
-          <a href="finfet.html" class="sc-drawer-link ${cur === "finfet.html" ? "active" : ""}">
+          <a href="/finfet" class="sc-drawer-link ${cur === "finfet" ? "active" : ""}">
             <span>${t.finfet}</span>
           </a>
-          <a href="gaa.html" class="sc-drawer-link ${cur === "gaa.html" ? "active" : ""}">
+          <a href="/gaa" class="sc-drawer-link ${cur === "gaa" ? "active" : ""}">
             <span>${t.gaafet}</span>
           </a>
-          <a href="dram.html" class="sc-drawer-link ${cur === "dram.html" ? "active" : ""}">
+          <a href="/dram" class="sc-drawer-link ${cur === "dram" ? "active" : ""}">
             <span>${t.dram}</span>
           </a>
-          <a href="nand.html" class="sc-drawer-link ${cur === "nand.html" ? "active" : ""}">
+          <a href="/nand" class="sc-drawer-link ${cur === "nand" ? "active" : ""}">
             <span>${t.nand}</span>
           </a>
-          <a href="hbm.html" class="sc-drawer-link ${cur === "hbm.html" ? "active" : ""}">
+          <a href="/hbm" class="sc-drawer-link ${cur === "hbm" ? "active" : ""}">
             <span>${t.hbm}</span>
           </a>
-          <a href="fab-data-layer.html" class="sc-drawer-link ${cur === "fab-data-layer.html" ? "active" : ""}">
+          <a href="/fab-data-layer" class="sc-drawer-link ${cur === "fab-data-layer" ? "active" : ""}">
             <span>${t.dataLayer}</span>
           </a>
         </div>
@@ -530,10 +535,10 @@
         <!-- 5. Research -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${t.navResearch}</div>
-          <a href="benchmark.html" class="sc-drawer-link ${cur === "benchmark.html" ? "active" : ""}">
+          <a href="/benchmark" class="sc-drawer-link ${cur === "benchmark" ? "active" : ""}">
             <span>${t.benchmark}</span>
           </a>
-          <a href="vision.html" class="sc-drawer-link ${cur === "vision.html" ? "active" : ""}">
+          <a href="/vision" class="sc-drawer-link ${cur === "vision" ? "active" : ""}">
             <span>${t.vision}</span>
           </a>
         </div>
@@ -541,7 +546,7 @@
         <!-- 6. Guide -->
         <div class="sc-drawer-section">
           <div class="sc-drawer-heading">${lang === "zh" ? "使用指南" : "Documentation"}</div>
-          <a href="guide.html" class="sc-drawer-link ${cur === "guide.html" ? "active" : ""}">
+          <a href="/guide" class="sc-drawer-link ${cur === "guide" ? "active" : ""}">
             <span style="font-weight: 700; color: var(--sc-accent-cyan);">${lang === "zh" ? "使用指南 (Guide)" : "User Guide"}</span>
             <span class="sc-drawer-badge">v1.9</span>
           </a>
@@ -574,34 +579,34 @@
           <div class="sc-footer-col">
             <h5>${t.footerQuickLinks}</h5>
             <ul>
-              <li><a href="guide.html" style="font-weight: 700; color: var(--sc-accent-cyan);">${lang === "zh" ? "使用指南 (Guide)" : "User Guide"}</a></li>
-              <li><a href="twin.html">${t.twinFab}</a></li>
-              <li><a href="twin-mega.html" style="font-weight: 700; color: var(--sc-accent-cyan);">${t.twinMega} (3,000)</a></li>
-              <li><a href="twin-osat.html">${t.twinOsat}</a></li>
-              <li><a href="layout-editor.html">${t.layoutEditor}</a></li>
-              <li><a href="catalog-demo.html">${t.catalog}</a></li>
-              <li><a href="compare.html">${t.compare}</a></li>
-              <li><a href="fab-cost.html">${t.fabCost}</a></li>
-              <li><a href="fab-capex.html">${t.fabCapex}</a></li>
+              <li><a href="/guide" style="font-weight: 700; color: var(--sc-accent-cyan);">${lang === "zh" ? "使用指南 (Guide)" : "User Guide"}</a></li>
+              <li><a href="/twin">${t.twinFab}</a></li>
+              <li><a href="/twin-mega" style="font-weight: 700; color: var(--sc-accent-cyan);">${t.twinMega} (3,000)</a></li>
+              <li><a href="/twin-osat">${t.twinOsat}</a></li>
+              <li><a href="/layout-editor">${t.layoutEditor}</a></li>
+              <li><a href="/catalog-demo">${t.catalog}</a></li>
+              <li><a href="/compare">${t.compare}</a></li>
+              <li><a href="/fab-cost">${t.fabCost}</a></li>
+              <li><a href="/fab-capex">${t.fabCapex}</a></li>
             </ul>
           </div>
           <div class="sc-footer-col">
             <h5>${t.footerModels}</h5>
             <ul>
-              <li><a href="finfet.html">${t.finfet}</a></li>
-              <li><a href="gaa.html">${t.gaafet}</a></li>
-              <li><a href="dram.html">${t.dram}</a></li>
-              <li><a href="nand.html">${t.nand}</a></li>
-              <li><a href="hbm.html">${t.hbm}</a></li>
+              <li><a href="/finfet">${t.finfet}</a></li>
+              <li><a href="/gaa">${t.gaafet}</a></li>
+              <li><a href="/dram">${t.dram}</a></li>
+              <li><a href="/nand">${t.nand}</a></li>
+              <li><a href="/hbm">${t.hbm}</a></li>
             </ul>
           </div>
           <div class="sc-footer-col">
             <h5>${t.footerLegal}</h5>
             <ul>
-              <li><a href="benchmark.html">${t.benchmark}</a></li>
-              <li><a href="vision.html">${t.vision}</a></li>
-              <li><a href="data-standard.html">${t.dataStandard}</a></li>
-              <li><a href="verification.html">${t.verification}</a></li>
+              <li><a href="/benchmark">${t.benchmark}</a></li>
+              <li><a href="/vision">${t.vision}</a></li>
+              <li><a href="/data-standard">${t.dataStandard}</a></li>
+              <li><a href="/verification">${t.verification}</a></li>
             </ul>
           </div>
         </div>

@@ -806,7 +806,7 @@
         </div>
         <a
           id="fd-return-twin-btn"
-          href="twin.html"
+          href="/twin"
           class="fd-banner-backlink"
           title="Return to 3D Twin"
         >
@@ -2532,9 +2532,9 @@
           const returnBtn = document.getElementById("fd-return-twin-btn");
           if (currentToolQuery) {
             returnBtn.href =
-              "twin.html?tool=" + encodeURIComponent(currentToolQuery);
+              "/twin?tool=" + encodeURIComponent(currentToolQuery);
           } else {
-            returnBtn.href = "twin.html";
+            returnBtn.href = "/twin";
           }
 
           // 2. Sponsorship Banner (Strictly default off)

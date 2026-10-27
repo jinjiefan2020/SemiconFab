@@ -23,22 +23,12 @@
     <meta name="author" content="SemiconFab.org Initiative" />
     <meta name="theme-color" content="#090d16" />
 
-    <!-- Canonical & Multilingual Alternates -->
-    <link rel="canonical" href="https://semiconfab.org/hbm.html" />
+    <!-- Canonical & Alternate -->
+    <link rel="canonical" href="https://semiconfab.org/hbm" />
     <link
       rel="alternate"
       hreflang="x-default"
-      href="https://semiconfab.org/hbm.html"
-    />
-    <link
-      rel="alternate"
-      hreflang="en"
-      href="https://semiconfab.org/hbm.html?lang=en"
-    />
-    <link
-      rel="alternate"
-      hreflang="zh-CN"
-      href="https://semiconfab.org/hbm.html?lang=zh"
+      href="https://semiconfab.org/hbm"
     />
 
     <!-- Open Graph / Facebook -->
@@ -52,7 +42,7 @@
       property="og:description"
       content="Interactive 3D step-by-step engineering model of HBM High Bandwidth Memory: Logic Base Die, Through-Silicon Vias (TSV), dense Microbumps, temporary wafer bonding, extreme thinning (~30μm), TSV reveal, laser debonding, 8/12/16-Hi vertical stacking, MR-MUF molding, and 2.5D CoWoS integration."
     />
-    <meta property="og:url" content="https://semiconfab.org/hbm.html" />
+    <meta property="og:url" content="https://semiconfab.org/hbm" />
     <meta property="og:image" content="https://semiconfab.org/favicon.png" />
 
     <!-- Twitter Cards -->
@@ -74,12 +64,12 @@
         "@graph": [
           {
             "@type": "TechArticle",
-            "@id": "https://semiconfab.org/hbm.html#article",
+            "@id": "https://semiconfab.org/hbm#article",
             "headline": "HBM High Bandwidth Memory 3D Stacking & Advanced Packaging: Complete 10-Step Fabrication Guide",
             "alternativeHeadline": "HBM3E / HBM4 高带宽内存 3D 垂直堆叠与先进封装制造全流程工业模型",
             "description": "Comprehensive engineering breakdown and 3D simulation of HBM (High Bandwidth Memory) manufacturing across 10 sequential fabrication steps, from Logic Base Die and TSV formation to 16-Hi multi-die stacking, MR-MUF molding, and 2.5D CoWoS GPU heterogeneous integration.",
             "inLanguage": ["en", "zh-CN"],
-            "url": "https://semiconfab.org/hbm.html",
+            "url": "https://semiconfab.org/hbm",
             "author": {
               "@type": "Organization",
               "name": "SemiconFab.org Initiative",
@@ -112,9 +102,9 @@
           },
           {
             "@type": "WebApplication",
-            "@id": "https://semiconfab.org/hbm.html#application",
+            "@id": "https://semiconfab.org/hbm#application",
             "name": "HBM 3D Memory Stacking Digital Twin",
-            "url": "https://semiconfab.org/hbm.html",
+            "url": "https://semiconfab.org/hbm",
             "applicationCategory": "EngineeringApplication",
             "operatingSystem": "All modern browsers with WebGL 2.0",
             "browserRequirements": "Requires WebGL support",
@@ -130,7 +120,7 @@
           },
           {
             "@type": "BreadcrumbList",
-            "@id": "https://semiconfab.org/hbm.html#breadcrumbs",
+            "@id": "https://semiconfab.org/hbm#breadcrumbs",
             "itemListElement": [
               {
                 "@type": "ListItem",
@@ -142,13 +132,13 @@
                 "@type": "ListItem",
                 "position": 2,
                 "name": "HBM High Bandwidth Memory",
-                "item": "https://semiconfab.org/hbm.html"
+                "item": "https://semiconfab.org/hbm"
               }
             ]
           },
           {
             "@type": "HowTo",
-            "@id": "https://semiconfab.org/hbm.html#howto",
+            "@id": "https://semiconfab.org/hbm#howto",
             "name": "How HBM High Bandwidth Memory is Manufactured",
             "description": "Sequential 10-step industrial fabrication sequence for manufacturing high-bandwidth 3D stacked memory cubes with TSV, microbumps, MR-MUF molding, and 2.5D CoWoS integration.",
             "step": [
@@ -216,7 +206,7 @@
           },
           {
             "@type": "FAQPage",
-            "@id": "https://semiconfab.org/hbm.html#faq",
+            "@id": "https://semiconfab.org/hbm#faq",
             "mainEntity": [
               {
                 "@type": "Question",
@@ -385,35 +375,35 @@
         class="hidden lg:flex items-center gap-4 text-xs font-medium text-slate-400"
       >
         <a
-          href="finfet.html"
+          href="/finfet"
           class="hover:text-cyan-400 transition flex items-center gap-1.5"
         >
           <i data-lucide="cpu" class="w-3.5 h-3.5 text-cyan-400"></i>
           <span>FinFET 3D</span>
         </a>
         <a
-          href="gaa.html"
+          href="/gaa"
           class="hover:text-purple-400 transition flex items-center gap-1.5"
         >
           <i data-lucide="layers-3" class="w-3.5 h-3.5 text-purple-400"></i>
           <span>GAA 3D</span>
         </a>
         <a
-          href="dram.html"
+          href="/dram"
           class="hover:text-amber-400 transition flex items-center gap-1.5"
         >
           <i data-lucide="database" class="w-3.5 h-3.5 text-amber-400"></i>
           <span>DRAM 3D</span>
         </a>
         <a
-          href="nand.html"
+          href="/nand"
           class="hover:text-emerald-400 transition flex items-center gap-1.5"
         >
           <i data-lucide="layers" class="w-3.5 h-3.5 text-emerald-400"></i>
           <span>NAND 3D</span>
         </a>
         <a
-          href="twin.html"
+          href="/twin"
           class="hover:text-rose-400 transition flex items-center gap-1.5"
         >
           <i data-lucide="network" class="w-3.5 h-3.5"></i>
@@ -2608,21 +2598,15 @@
           }
         }
 
-        // Update navbar links with lang parameter
-        const finfetLink = document.querySelector('a[href*="finfet.html"]');
-        if (finfetLink)
-          finfetLink.href = isEnglish
-            ? "finfet.html?lang=en"
-            : "finfet.html?lang=zh";
-        const gaaLink = document.querySelector('a[href*="gaa.html"]');
-        if (gaaLink)
-          gaaLink.href = isEnglish ? "gaa.html?lang=en" : "gaa.html?lang=zh";
-        const dramLink = document.querySelector('a[href*="dram.html"]');
-        if (dramLink)
-          dramLink.href = isEnglish ? "dram.html?lang=en" : "dram.html?lang=zh";
-        const nandLink = document.querySelector('a[href*="nand.html"]');
-        if (nandLink)
-          nandLink.href = isEnglish ? "nand.html?lang=en" : "nand.html?lang=zh";
+        // Update navbar links with clean URLs
+        const finfetLink = document.querySelector('a[href*="/finfet"]');
+        if (finfetLink) finfetLink.href = "/finfet";
+        const gaaLink = document.querySelector('a[href*="/gaa"]');
+        if (gaaLink) gaaLink.href = "/gaa";
+        const dramLink = document.querySelector('a[href*="/dram"]');
+        if (dramLink) dramLink.href = "/dram";
+        const nandLink = document.querySelector('a[href*="/nand"]');
+        if (nandLink) nandLink.href = "/nand";
 
         updateInspectorUI(currentStepIndex);
         renderMaterialLegend();

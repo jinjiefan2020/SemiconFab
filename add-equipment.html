@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SemiconFab Equipment Submission Form</title>
+    <link rel="canonical" href="https://semiconfab.org/add-equipment" />
     <!-- Unified Design System Theme -->
     <link rel="stylesheet" href="css/semicon-theme.css" />
     <style>
@@ -616,7 +617,7 @@
           <strong id="banner-strong-names"></strong>
         </div>
         <a
-          href="/catalog-demo.html"
+          href="/catalog-demo"
           class="context-banner-link"
           id="banner-catalog-link"
         >
@@ -741,7 +742,7 @@
             Submit Another Record
           </button>
           <a
-            href="/catalog-demo.html"
+            href="/catalog-demo"
             class="btn btn-secondary"
             id="btn-back-catalog"
           >
@@ -956,7 +957,7 @@
         org: "jinjiefan2020", // e.g. "semiconfab"
         repo: "SemiconFab", // e.g. "equipment-catalog"
         contactEmail: "info@semiconfab.org", // e.g. "catalog@semiconfab.org"
-        catalogUrl: "/catalog-demo.html",
+        catalogUrl: "/catalog-demo",
       };
 
       /**
@@ -1623,7 +1624,7 @@
         const strongNames = document.getElementById("banner-strong-names");
         const catalogLink = document.getElementById("banner-catalog-link");
 
-        const catUrl = SUBMISSION_CONFIG.catalogUrl || "/catalog-demo.html";
+        const catUrl = SUBMISSION_CONFIG.catalogUrl || "/catalog-demo";
         if (catalogLink) {
           catalogLink.href = catUrl;
           const sBackLink = document.getElementById("btn-back-catalog");

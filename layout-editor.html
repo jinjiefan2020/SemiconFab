@@ -62,7 +62,7 @@
       <!-- Left: Brand & Title -->
       <div class="flex items-center gap-3">
         <a
-          href="twin.html"
+          href="/twin"
           class="flex items-center gap-2 text-slate-300 hover:text-white transition group"
           title="Back to 3D Digital Twin"
         >
@@ -2188,8 +2188,8 @@
       function openIn3D() {
         // Save current layout to localStorage under key "semiconfab_custom_layout"
         autosaveLayout();
-        // Open twin.html?layout=local in a new window/tab
-        window.open("twin.html?layout=local", "_blank");
+        // Open /twin?layout=local in a new window/tab
+        window.open("/twin?layout=local", "_blank");
       }
 
       function exportLayoutJSON() {
