@@ -1,0 +1,340 @@
+{
+  "version": "1.9.0",
+  "disclaimer_en": "Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+  "disclaimer_zh": "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。",
+  "permanent_banner": {
+    "en": [
+      "Data Flow Illustrative",
+      "Teaching model, not real fab data",
+      "No live equipment connection"
+    ],
+    "zh": ["数据流为示意", "教学级模型，非真实工厂数据", "未连接任何真实设备"]
+  },
+  "sponsorship": {
+    "enabled": false,
+    "sponsor_name": "",
+    "badge_en": "Sponsored",
+    "badge_zh": "赞助",
+    "content_en": "",
+    "content_zh": ""
+  },
+  "layers": [
+    {
+      "id": "equipment",
+      "name_en": "Equipment",
+      "name_zh": "设备层",
+      "title_en": "Layer 1: Equipment",
+      "title_zh": "第 1 层：设备层",
+      "function_en": "Generates process data.",
+      "function_zh": "产生工艺数据。",
+      "data_types_en": [
+        "Events & execution states",
+        "Machine alarms",
+        "Chamber sensor trace telemetry",
+        "Metrology & inspection results"
+      ],
+      "data_types_zh": [
+        "事件与运行状态",
+        "设备机台报警",
+        "高频腔体传感器 Trace 数据",
+        "量测与检测结果"
+      ],
+      "protocols_en": [
+        "Proprietary tool controllers",
+        "RS-232 / HSMS physical ports",
+        "Internal sensor buses"
+      ],
+      "protocols_zh": [
+        "专有设备控制器接口",
+        "RS-232 / HSMS 物理端口",
+        "内部传感器总线"
+      ],
+      "vendors": [
+        "Applied Materials",
+        "ASML",
+        "KLA",
+        "Lam Research",
+        "Tokyo Electron"
+      ],
+      "note_en": "Each vendor utilizes native internal data structures. Without standardization, fab hosts cannot ingest these heterogeneous signals directly. Teaching example only; not a ranking.",
+      "note_zh": "各家原始格式不同，底层信号高度私有化。未经标准化转换，工厂系统无法直接识别和消费。仅为教学示例，非排名。"
+    },
+    {
+      "id": "connectivity",
+      "name_en": "Connectivity",
+      "name_zh": "连接层",
+      "title_en": "Layer 2: Connectivity",
+      "title_zh": "第 2 层：连接层",
+      "function_en": "Translates heterogeneous equipment signals into standardized factory communication.",
+      "function_zh": "把各家信号翻译成工厂能懂的标准语言。",
+      "data_types_en": [
+        "SECS-II message streams (S1F13, S6F11)",
+        "GEM300 carrier & process job state events",
+        "EDA / Interface A metadata & high-speed trace buffers"
+      ],
+      "data_types_zh": [
+        "SECS-II 消息流 (S1F13, S6F11)",
+        "GEM300 晶圆盒与加工任务事件",
+        "EDA / Interface A 元数据与高速 Trace 缓冲"
+      ],
+      "protocols_en": [
+        "SEMI E4 / E5 / E30 (SECS/GEM)",
+        "SEMI E39, E87, E90, E94 (GEM300)",
+        "SEMI E120, E125, E132, E134 (EDA / Interface A)"
+      ],
+      "protocols_zh": [
+        "SEMI E4 / E5 / E30 (SECS/GEM)",
+        "SEMI E39, E87, E90, E94 (GEM300)",
+        "SEMI E120, E125, E132, E134 (EDA / Interface A)"
+      ],
+      "vendors": ["Cimetrix", "PEER Group", "In-house Fab / OEM EAP"],
+      "note_en": "Connectivity software does not replace MES. It sits between MES/Factory Host and equipment, handling translation, message formatting, and bi-directional communication channels (MES / Factory Host → EAP / Connectivity → Equipment). Teaching example only; not a ranking.",
+      "note_zh": "连接软件不替代 MES，它夹在 MES 与设备之间，负责翻译、消息格式化与通信通道（对应关系：MES / Factory Host → EAP / Connectivity → Equipment）。仅为教学示例，非排名。"
+    },
+    {
+      "id": "execution",
+      "name_en": "Execution (MES)",
+      "name_zh": "执行层",
+      "title_en": "Layer 3: Execution (MES)",
+      "title_zh": "第 3 层：执行层 (MES)",
+      "function_en": "Determines where lots go, in what sequence, and with what recipe.",
+      "function_zh": "决定 lot 去哪、按什么顺序做。",
+      "data_types_en": [
+        "Lot routing states",
+        "Dispatch priorities & tool assignments",
+        "Recipe management & parameter validation",
+        "Lot genealogy & split/merge tracking"
+      ],
+      "data_types_zh": [
+        "Lot 工艺路径状态",
+        "派工优先级与机台分配",
+        "配方管理与参数校验",
+        "晶圆批次谱系与拆批/合批追踪"
+      ],
+      "protocols_en": [
+        "EAP host interface protocols",
+        "Transactional database APIs",
+        "AMHS transport command integration"
+      ],
+      "protocols_zh": [
+        "EAP 主机接口协议",
+        "事务型数据库 API",
+        "AMHS 天车搬送调度接口"
+      ],
+      "vendors": [
+        "Applied Materials SmartFactory",
+        "Critical Manufacturing MES",
+        "Dassault DELMIA Apriso",
+        "Siemens Opcenter Semiconductor"
+      ],
+      "note_en": "MES is the operational backbone maintaining single-source-of-truth WIP state, enforcing compliance with defined process flow specs. Teaching example only; not a ranking.",
+      "note_zh": "MES 是制造执行核心，维护全厂 WIP 真实状态与工单路线，严防越步或错误配方进站。仅为教学示例，非排名。"
+    },
+    {
+      "id": "analytics",
+      "name_en": "Analytics & Control",
+      "name_zh": "分析与控制层",
+      "title_en": "Layer 4: Analytics & Control",
+      "title_zh": "第 4 层：分析与控制层",
+      "function_en": "Detects process drift and executes real-time adjustments.",
+      "function_zh": "判断工艺有没有偏，并做调整。",
+      "data_types_en": [
+        "Run-to-run (R2R) controller offsets",
+        "Chamber health & Fault Detection (FDC) scores",
+        "Statistical Process Control (SPC) rule violations",
+        "Defect density & parametric yield correlation"
+      ],
+      "data_types_zh": [
+        "批次间 (R2R) 控制器补偿偏置量",
+        "腔体健康度与故障检测 (FDC) 评分",
+        "统计过程控制 (SPC) 判异准则报警",
+        "缺陷密度与电性参数良率关联分析"
+      ],
+      "protocols_en": [
+        "High-throughput message brokers (Kafka, MQTT)",
+        "Time-series telemetry ingestion",
+        "EDA Freeze-frame data delivery"
+      ],
+      "protocols_zh": [
+        "高吞吐消息总线 (Kafka, MQTT)",
+        "时序遥测数据管道",
+        "EDA 冻结帧高速交付"
+      ],
+      "vendors": [
+        "Applied Materials APC",
+        "BISTel",
+        "KLA Klarity",
+        "PDF Solutions Exensio"
+      ],
+      "note_en": "Analytics consumes high-frequency trace and events from Connectivity, calculating run-to-run parameter adjustments (feedback/feedforward) pushed back to execution and equipment. Teaching example only; not a ranking.",
+      "note_zh": "分析层消费连接层送上的高频 trace 与量测事件，计算批次间配方修正量（前馈与反馈），回灌给执行层和设备。仅为教学示例，非排名。"
+    },
+    {
+      "id": "twin",
+      "name_en": "Planning, Simulation & Twin",
+      "name_zh": "决策与孪生层",
+      "title_en": "Layer 5: Planning, Simulation & Twin",
+      "title_zh": "第 5 层：决策与孪生层",
+      "function_en": "Offline simulation, capacity evaluation, and scenario planning.",
+      "function_zh": "事前仿真与产能决策。",
+      "data_types_en": [
+        "Factory layout & dispatch simulation runs",
+        "Bottleneck & tool utilization forecasts",
+        "What-if scenario evaluations",
+        "WIP cycle-time curves & AMHS capacity loads"
+      ],
+      "data_types_zh": [
+        "全厂布局与排程仿真运行",
+        "瓶颈设备与机台利用率预测",
+        "What-if 场景预演评估",
+        "WIP 生产周期曲线与 AMHS 运力负载"
+      ],
+      "protocols_en": [
+        "Discrete event simulation engines",
+        "Semantic fab layout schema JSON",
+        "Historical log replay (MIMAC format)"
+      ],
+      "protocols_zh": [
+        "离散事件仿真引擎",
+        "语义化晶圆厂布局 JSON",
+        "历史日志回放 (MIMAC 格式)"
+      ],
+      "vendors_commercial": [
+        "AppliedTwin",
+        "Critical Manufacturing fabLIVE",
+        "Dassault DELMIA",
+        "Siemens (Calibre Fab Insights / Tecnomatix)"
+      ],
+      "vendors_teaching_en": ["SemiconFab (Teaching-grade simulation)"],
+      "vendors_teaching_zh": ["SemiconFab (教学级 · Teaching-grade)"],
+      "note_en": "This page and twin.html are teaching-grade simulations, not live production digital twins. Commercial twin solutions run closed-loop factory operations, whereas open teaching models demystify semiconductor systems. Teaching example only; not a ranking.",
+      "note_zh": "本页与 twin.html 均为教学级仿真，不是生产实时孪生；商业生产孪生产品用于实际生产闭环控制，与教学级仿真沙盒须分行标注，不可混淆。仅为教学示例，非排名。"
+    }
+  ],
+  "lot_journey": [
+    {
+      "step": 1,
+      "bay": "Bay 01 · Photolithography",
+      "bay_zh": "Bay 01 · 光刻区",
+      "category_en": "Lithography",
+      "category_zh": "光刻",
+      "icon": "sun",
+      "data_en": "Scanner exposure energy, focus offsets, dose recipe ID, and reticle alignment calibration trace.",
+      "data_zh": "光刻机曝光能量、焦面偏置、剂量配方编号及掩模版对准校准 Trace 数据（示意）。",
+      "protocol_en": "SECS/GEM S6F11 event stream and high-speed EDA Interface A focus-exposure matrix trace.",
+      "protocol_zh": "经连接层上送：SECS/GEM S6F11 站内事件流与 EDA Interface A 曝光聚焦矩阵 Trace（示意）。",
+      "consumer_en": "MES records process step completion; APC Litho-R2R controller ingests focus offsets for next lot calculation.",
+      "consumer_zh": "MES 执行层记录进出站与工单扣减；分析层 APC 消费焦面数据用于下一批次前馈计算（示意）。",
+      "if_missing_en": "The next step cannot be dispatched with confidence; litho CD drift cannot be compensated in real-time.",
+      "if_missing_zh": "下一步无法有把握地派工；光刻关键尺寸 (CD) 漂移无法被前馈补偿，可能引发整批线宽超差（示意）。"
+    },
+    {
+      "step": 2,
+      "bay": "Bay 02 · Plasma Etch",
+      "bay_zh": "Bay 02 · 等离子刻蚀区",
+      "category_en": "Etch",
+      "category_zh": "刻蚀",
+      "icon": "zap",
+      "data_en": "RF forward/reflected power, endpoint detection (EPD) optical spectrum, chamber pressure, and gas flow rates.",
+      "data_zh": "射频正向/反射功率、终点检测 (EPD) 光学光谱信号、腔体真空度与反应气体流量（示意）。",
+      "protocol_en": "High-frequency EDA Interface A trace logging at 10 Hz and SECS-II alarm notification S5F1.",
+      "protocol_zh": "经连接层上送：10 Hz 高频 EDA 遥测 Trace 及 SECS-II S5F1 异常报警报文（示意）。",
+      "consumer_en": "FDC (Fault Detection & Classification) detects chamber micro-arcing; MES tracks wafer lot recipe step.",
+      "consumer_zh": "分析层 FDC 实时分析腔体微拉弧与终点过刻蚀；MES 校验刻蚀总时长与腔体寿命计数（示意）。",
+      "if_missing_en": "Chamber health degradation goes undetected; over-etching risks destroying critical gate structures.",
+      "if_missing_zh": "腔体异常磨损无法被侦测；可能发生过刻蚀破坏栅极微观结构，导致晶圆报废（示意）。"
+    },
+    {
+      "step": 3,
+      "bay": "Bay 03 · Thin Film Deposition",
+      "bay_zh": "Bay 03 · 薄膜沉积区",
+      "category_en": "Deposition",
+      "category_zh": "沉积",
+      "icon": "layers",
+      "data_en": "Precursor bubbler temperatures, deposition time, heater pedestal thermocouple readings, and plasma strike state.",
+      "data_zh": "前驱体源瓶温度、沉积生长时间、加热静电吸盘多点热电偶读数与等离子体起辉状态（示意）。",
+      "protocol_en": "GEM300 carrier tracking (SEMI E87) and SECS/GEM S6F1 trace collection via fab EAP.",
+      "protocol_zh": "经连接层上送：GEM300 晶圆载具跟踪 (SEMI E87) 及 EAP 汇总的 SECS/GEM S6F1 Trace 数据（示意）。",
+      "consumer_en": "MES updates wafer state to deposited; SPC monitors chamber temperature uniformity across lots.",
+      "consumer_zh": "MES 更新批次工单为已沉积状态；分析层 SPC 监控腔体加热均匀度与漂移趋势（示意）。",
+      "if_missing_en": "Film thickness variance goes unmonitored; recipe parameter deviations cannot be linked to yield loss.",
+      "if_missing_zh": "薄膜厚度偏差失去监控；后续良率分析无法归因到本腔体的温场漂移（示意）。"
+    },
+    {
+      "step": 4,
+      "bay": "Bay 04 · Chemical Mechanical Planarization",
+      "bay_zh": "Bay 04 · 化学机械平坦化区",
+      "category_en": "CMP",
+      "category_zh": "平坦化",
+      "icon": "disc",
+      "data_en": "Platen motor torque, slurry dispensing flow rate, conditioning disk downforce, and pad temperature profiles.",
+      "data_zh": "研磨盘电机转矩、研磨液注入流量、修整盘下压力与研磨垫红外温度分布（示意）。",
+      "protocol_en": "SECS/GEM process job events (SEMI E94) and EAP automated endpoint signaling.",
+      "protocol_zh": "经连接层上送：SEMI E94 加工任务事件及 EAP 研磨终点检测自动握手信号（示意）。",
+      "consumer_en": "MES registers polish completion; APC Run-to-Run dynamically updates polish time for subsequent lots.",
+      "consumer_zh": "MES 接收出站完成信号；APC 批次控制器根据研磨盘磨损动态微调后续批次研磨时长（示意）。",
+      "if_missing_en": "Pad wear remains uncompensated; under-polish leaves residual metal or over-polish causes dishing.",
+      "if_missing_zh": "研磨垫磨损无法动态补偿；平坦化不足留下金属残留，过度研磨引发蝶形凹陷（示意）。"
+    },
+    {
+      "step": 5,
+      "bay": "Bay 05 · Metrology & Inspection",
+      "bay_zh": "Bay 05 · 膜厚与缺陷量测区",
+      "category_en": "Metrology",
+      "category_zh": "量测",
+      "icon": "microscope",
+      "data_en": "Optical critical dimension (OCD) profile, film thickness ellipsometry maps, and defect classification coordinates.",
+      "data_zh": "光学关键尺寸 (OCD) 形貌轮廓、椭偏仪全片膜厚分布图及光学检测缺陷分类坐标（示意）。",
+      "protocol_en": "SEMI G84 STDF / KLARF defect file upload over factory network and SECS-II S6F11 measurement ready event.",
+      "protocol_zh": "经连接层上送：KLARF 缺陷文件高速传输及 SECS-II S6F11 量测就绪事件通知（示意）。",
+      "consumer_en": "YMS (Yield Management System) wafer map overlay; MES updates disposition status; APC receives closed-loop feedback.",
+      "consumer_zh": "YMS 良率管理系统生成晶圆缺陷图谱；MES 进行自动放行/Hold判决；APC 获得闭环反馈（示意）。",
+      "if_missing_en": "Defect excursions spread unchecked across subsequent lots; MES cannot clear lots for further processing.",
+      "if_missing_zh": "工艺缺陷突发扩散无法被及时阻截；MES 无法放行晶圆批次，整条产线面临停滞风险（示意）。"
+    }
+  ],
+  "fault_scenarios": [
+    {
+      "id": "connectivity_cut",
+      "name_en": "1. Connectivity Severed",
+      "name_zh": "1. 连接层断开",
+      "short_en": "Physical or network link dropped between tool and EAP",
+      "short_zh": "设备与 EAP 之间的物理通信或协议栈中断",
+      "diagram_effect": "tool_offline",
+      "impact_en": "Tool data ceases transmitting. Execution layer (MES) cannot receive processing events; WIP accumulates in front of the bay waiting for status confirmation. The tool is halted in an idle/fault state.",
+      "impact_zh": "设备数据停止上送，执行层看不到新事件。晶圆加工完毕但无法上报出站，WIP 在该 Bay 前积压等待确认，机台被迫置灰停止排产（示意）。",
+      "alarm_layer_en": "Connectivity Layer (EAP / SECS-II Driver)",
+      "alarm_layer_zh": "连接层 (EAP / SECS-II 驱动层)",
+      "alarm_explanation_en": "The Connectivity Layer alarms first because the SECS/GEM HSMS link layer fails to receive TCP keep-alive or heartbeat reply packets within the T3/T6 timeout window, immediately raising a link-down alarm before the upper MES detects a lost transaction.",
+      "alarm_explanation_zh": "现实中连接层（EAP）最先报警：SECS/GEM HSMS 链路层在 T3/T6 超时窗口内未收到 TCP 心跳应答，驱动层瞬间判定链路断开，比上层 MES 业务超时告警快数秒至数十秒（教学解释，不承诺真实工厂行为）。"
+    },
+    {
+      "id": "data_throttled",
+      "name_en": "2. Data Ingestion Throttled / Delayed",
+      "name_zh": "2. 数据延迟 / 节流",
+      "short_en": "EDA Interface A client throttled, high-frequency buffer delayed",
+      "short_zh": "高频 EDA 遥测流被限流或缓存积压，分析层接收滞后",
+      "diagram_effect": "data_lag",
+      "impact_en": "Trace buffers accumulate or drop frames. Analytics layer (APC / FDC) operates on stale data from minutes ago, leading to delayed or inaccurate run-to-run recipe trim offsets. Process drift propagates unnoticed.",
+      "impact_zh": "EDA 采集被节流或延迟，分析层（APC / FDC）看到的是数分钟前的滞后数据。工艺控制反馈迟滞，腔体微小漂移无法及时被配方修正，带来潜在良率损失（示意）。",
+      "alarm_layer_en": "EDA Collection Client / Ingestion Queue Buffer",
+      "alarm_layer_zh": "EDA 采集客户端 / 数据接入队列缓冲区",
+      "alarm_explanation_en": "The ingestion buffer queue threshold triggers an alarm first (buffer utilization exceeding 85% or latency SLA breach) before the analytics models realize they are receiving lagged trace frames.",
+      "alarm_explanation_zh": "现实中数据采集队列或接入网关最先报警：当高频遥测缓冲占用率超过阈值或数据交付时延违反 SLA 时，消息中间件即刻触发队列积压警报，而上层算法模型初期只能感应到计算延迟（教学解释，不承诺真实工厂行为）。"
+    },
+    {
+      "id": "dispatch_delayed",
+      "name_en": "3. MES Dispatch Delayed",
+      "name_zh": "3. 执行层派工延迟",
+      "short_en": "MES dispatch engine lag or routing service timeout",
+      "short_zh": "MES 派工服务调度延迟，设备就绪后空转等待工单",
+      "diagram_effect": "tool_idle_wait",
+      "impact_en": "Tool is ready and idle, but no carrier job or dispatch command arrives from MES. AMHS does not receive move orders, tool OEE drops precipitously, and the entire lot journey stalls.",
+      "impact_zh": "设备处于空闲等待 (Standby / Idle)，但 MES 派工指令迟迟未下发。机台空转等待，天车不来搬送，设备综合利用率 (OEE) 急剧下跌，lot 旅程停滞（示意）。",
+      "alarm_layer_en": "Equipment Station / Operator Station",
+      "alarm_layer_zh": "设备端机台报警 / 操作员工作站",
+      "alarm_explanation_en": "The equipment station triggers a SEMI E10 Standby / Dispatch Timeout alarm first: the tool finished recipe processing and signalled wafer-ready, but exceeded the configured wait threshold for carrier clamp and host dispatch instructions.",
+      "alarm_explanation_zh": "现实中设备端或机台工作站最先发出 SEMI E10 空闲超时告警：机台已完成工艺并握手就绪，但在设定时间内未收到 MES 下发的装载工单或配方指令，计时器超时触发等待报警（教学解释，不承诺真实工厂行为）。"
+    }
+  ]
+}

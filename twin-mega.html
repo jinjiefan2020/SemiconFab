@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN" data-theme="light">
   <head>
     <meta charset="UTF-8" />
@@ -6,7 +6,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout Model | SemiconFab</title>
+    <title>
+      3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout Model | SemiconFab
+    </title>
     <meta
       name="description"
       content="Conceptual 3D Layout Model of an advanced 3nm FinFET (Fin-Flex™ · TSMC N3E Class) Dual-Phase Mega Fab with 50,000 WSPM capacity and 3,000 production tools across Phase 1 and Phase 2 halls connected by an automated inter-phase AMHS skybridge."
@@ -110,7 +112,9 @@
       /* Floating Inspector Drawer */
       #tool-drawer {
         position: absolute;
-        top: calc(var(--header-height) + var(--kpi-height) + var(--cat-height) + 12px);
+        top: calc(
+          var(--header-height) + var(--kpi-height) + var(--cat-height) + 12px
+        );
         right: 16px;
         width: 360px;
         max-height: calc(100vh - 160px);
@@ -168,9 +172,18 @@
 
       /* Subtle pulse indicator */
       @keyframes pulse-dot {
-        0% { transform: scale(0.95); opacity: 0.8; }
-        50% { transform: scale(1.15); opacity: 1; }
-        100% { transform: scale(0.95); opacity: 0.8; }
+        0% {
+          transform: scale(0.95);
+          opacity: 0.8;
+        }
+        50% {
+          transform: scale(1.15);
+          opacity: 1;
+        }
+        100% {
+          transform: scale(0.95);
+          opacity: 0.8;
+        }
       }
       .pulse-beacon {
         animation: pulse-dot 2s infinite ease-in-out;
@@ -179,58 +192,148 @@
   </head>
   <body class="flex flex-col h-screen select-none">
     <!-- 1. TOP GLOBAL NAVIGATION BAR (Optimized Clean Architecture) -->
-    <header class="h-[var(--header-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-30 shadow-sm gap-2">
+    <header
+      class="h-[var(--header-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-30 shadow-sm gap-2"
+    >
       <!-- Left: Brand & 3D Twins Switcher -->
       <div class="flex items-center gap-2.5 shrink-0">
-        <a href="index.html" class="flex items-center gap-2 group decoration-none shrink-0" title="SemiconFab.org">
-          <svg class="w-6 h-6 text-[var(--accent)] shrink-0" viewBox="0 0 50 50" fill="none">
-            <circle cx="25" cy="25" r="21" stroke="currentColor" stroke-width="2.8"/>
-            <line x1="12" y1="18" x2="38" y2="18" stroke="currentColor" stroke-width="1.4"/>
-            <line x1="9" y1="25" x2="41" y2="25" stroke="currentColor" stroke-width="1.4"/>
-            <line x1="12" y1="32" x2="38" y2="32" stroke="currentColor" stroke-width="1.4"/>
-            <rect x="23" y="21" width="8" height="8" rx="1.5" fill="var(--accent)"/>
+        <a
+          href="index.html"
+          class="flex items-center gap-2 group decoration-none shrink-0"
+          title="SemiconFab.org"
+        >
+          <svg
+            class="w-6 h-6 text-[var(--accent)] shrink-0"
+            viewBox="0 0 50 50"
+            fill="none"
+          >
+            <circle
+              cx="25"
+              cy="25"
+              r="21"
+              stroke="currentColor"
+              stroke-width="2.8"
+            />
+            <line
+              x1="12"
+              y1="18"
+              x2="38"
+              y2="18"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+            <line
+              x1="9"
+              y1="25"
+              x2="41"
+              y2="25"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+            <line
+              x1="12"
+              y1="32"
+              x2="38"
+              y2="32"
+              stroke="currentColor"
+              stroke-width="1.4"
+            />
+            <rect
+              x="23"
+              y="21"
+              width="8"
+              height="8"
+              rx="1.5"
+              fill="var(--accent)"
+            />
           </svg>
           <div class="flex flex-col">
             <div class="flex items-center gap-1.5 leading-none">
-              <span class="text-sm font-bold tracking-tight text-[var(--ink)] whitespace-nowrap">SemiconFab<span class="text-[var(--accent)]">.org</span></span>
-              <span class="px-1.5 py-0.5 text-[9px] font-mono font-semibold rounded bg-[var(--surface-2)] text-[var(--ink-2)] shrink-0">v1.8.0</span>
-              <span class="px-1.5 py-0.5 text-[9px] font-mono font-bold rounded bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 whitespace-nowrap shrink-0" id="badge-concept">Conceptual Model</span>
+              <span
+                class="text-sm font-bold tracking-tight text-[var(--ink)] whitespace-nowrap"
+                >SemiconFab<span class="text-[var(--accent)]">.org</span></span
+              >
+              <span
+                class="px-1.5 py-0.5 text-[9px] font-mono font-semibold rounded bg-[var(--surface-2)] text-[var(--ink-2)] shrink-0"
+                >v1.9.0</span
+              >
+              <span
+                class="px-1.5 py-0.5 text-[9px] font-mono font-bold rounded bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 whitespace-nowrap shrink-0"
+                id="badge-concept"
+                >Conceptual Model</span
+              >
             </div>
-            <span class="hidden xl:inline text-[10px] text-[var(--ink-3)] font-medium leading-tight mt-0.5 whitespace-nowrap" id="header-subtitle">3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout Model</span>
+            <span
+              class="hidden xl:inline text-[10px] text-[var(--ink-3)] font-medium leading-tight mt-0.5 whitespace-nowrap"
+              id="header-subtitle"
+              >3nm Mega Fab Concept (3,000 Tools) · Conceptual Layout
+              Model</span
+            >
           </div>
         </a>
 
         <!-- Sibling Twins Switcher Dropdown (Replaces crowded dual buttons) -->
-        <div class="relative group border-l border-[var(--line)] pl-2.5 shrink-0">
+        <div
+          class="relative group border-l border-[var(--line)] pl-2.5 shrink-0"
+        >
           <button
             type="button"
             class="flex items-center gap-1.5 px-2 py-1 text-xs font-semibold rounded border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)] hover:border-[var(--accent)] hover:text-[var(--accent)] transition whitespace-nowrap shadow-xs"
             title="Switch 3D Twin Environment"
           >
-            <i data-lucide="layers" class="w-3.5 h-3.5 text-[var(--accent)]"></i>
+            <i
+              data-lucide="layers"
+              class="w-3.5 h-3.5 text-[var(--accent)]"
+            ></i>
             <span id="txt-twins-menu">3D Twins (3)</span>
-            <i data-lucide="chevron-down" class="w-3 h-3 text-[var(--ink-3)] opacity-70"></i>
+            <i
+              data-lucide="chevron-down"
+              class="w-3 h-3 text-[var(--ink-3)] opacity-70"
+            ></i>
           </button>
-          <div class="hidden group-hover:block group-focus-within:block absolute top-full left-2.5 mt-1 w-52 bg-[var(--surface)] border border-[var(--line)] rounded-lg shadow-xl p-1 z-50">
-            <div class="px-2.5 py-1 text-[10px] font-mono font-bold text-[var(--ink-3)] uppercase tracking-wider" id="txt-twins-menu-hdr">Digital Twins</div>
-            <a href="twin-mega.html" class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs font-bold text-[var(--accent)] bg-[var(--surface-2)] decoration-none">
+          <div
+            class="hidden group-hover:block group-focus-within:block absolute top-full left-2.5 mt-1 w-52 bg-[var(--surface)] border border-[var(--line)] rounded-lg shadow-xl p-1 z-50"
+          >
+            <div
+              class="px-2.5 py-1 text-[10px] font-mono font-bold text-[var(--ink-3)] uppercase tracking-wider"
+              id="txt-twins-menu-hdr"
+            >
+              Digital Twins
+            </div>
+            <a
+              href="twin-mega.html"
+              class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs font-bold text-[var(--accent)] bg-[var(--surface-2)] decoration-none"
+            >
               <span id="txt-menu-mega">3nm Mega Fab (3,000)</span>
-              <span class="text-[9px] font-mono px-1 py-0.5 rounded bg-[var(--accent)] text-white">Active</span>
+              <span
+                class="text-[9px] font-mono px-1 py-0.5 rounded bg-[var(--accent)] text-white"
+                >Active</span
+              >
             </a>
-            <a href="twin.html" class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition">
+            <a
+              href="twin.html"
+              class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition"
+            >
               <span id="txt-menu-pilot">300mm Pilot Fab (121)</span>
               <span class="text-[9px] font-mono text-[var(--ink-3)]">FEOL</span>
             </a>
-            <a href="twin-osat.html" class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition">
+            <a
+              href="twin-osat.html"
+              class="flex items-center justify-between px-2.5 py-1.5 rounded text-xs text-[var(--ink-2)] hover:bg-[var(--surface-2)] hover:text-[var(--ink)] decoration-none transition"
+            >
               <span id="txt-menu-osat">OSAT Packaging (86)</span>
-              <span class="text-[9px] font-mono text-[var(--ink-3)]">Back-End</span>
+              <span class="text-[9px] font-mono text-[var(--ink-3)]"
+                >Back-End</span
+              >
             </a>
           </div>
         </div>
       </div>
 
       <!-- Center: Camera Presets (Compact Segmented Navigation) -->
-      <div class="flex items-center gap-1 bg-[var(--surface-2)] p-0.5 rounded-lg border border-[var(--line)] shrink-0 overflow-x-auto">
+      <div
+        class="flex items-center gap-1 bg-[var(--surface-2)] p-0.5 rounded-lg border border-[var(--line)] shrink-0 overflow-x-auto"
+      >
         <button
           onclick="setCameraView('overview')"
           id="btn-cam-overview"
@@ -300,7 +403,9 @@
       <!-- Right Action Controls (Never Wrap) -->
       <div class="flex items-center gap-1.5 shrink-0">
         <!-- Visual Heatmap Mode Selector -->
-        <div class="flex items-center gap-1 bg-[var(--surface-2)] px-2 py-0.5 rounded-lg border border-[var(--line)] text-xs shrink-0">
+        <div
+          class="flex items-center gap-1 bg-[var(--surface-2)] px-2 py-0.5 rounded-lg border border-[var(--line)] text-xs shrink-0"
+        >
           <i data-lucide="palette" class="w-3.5 h-3.5 text-[var(--ink-3)]"></i>
           <select
             id="heatmap-select"
@@ -360,18 +465,28 @@
     </header>
 
     <!-- 2. REAL-TIME MEGA FAB KPI STATUS STRIP -->
-    <div class="h-[var(--kpi-height)] bg-[var(--surface-2)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-20 text-xs overflow-x-auto font-mono">
+    <div
+      class="h-[var(--kpi-height)] bg-[var(--surface-2)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-20 text-xs overflow-x-auto font-mono"
+    >
       <div class="flex items-center gap-4 shrink-0">
         <div class="flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-beacon"></span>
-          <span class="text-[var(--ink-3)] font-medium" id="kpi-lbl-tools">Total Tools:</span>
-          <span class="font-bold text-[var(--ink)]" id="kpi-val-tools">3,000</span>
-          <span class="text-[10px] text-[var(--ink-3)]">(P1: 1,500 · P2: 1,500)</span>
+          <span class="text-[var(--ink-3)] font-medium" id="kpi-lbl-tools"
+            >Total Tools:</span
+          >
+          <span class="font-bold text-[var(--ink)]" id="kpi-val-tools"
+            >3,000</span
+          >
+          <span class="text-[10px] text-[var(--ink-3)]"
+            >(P1: 1,500 · P2: 1,500)</span
+          >
         </div>
         <div class="h-3 w-px bg-[var(--line)]"></div>
         <div class="flex items-center gap-1.5">
           <span class="text-[var(--ink-3)]" id="kpi-lbl-node">Node:</span>
-          <span class="font-bold text-[var(--accent)]">3nm FinFET (Fin-Flex™)</span>
+          <span class="font-bold text-[var(--accent)]"
+            >3nm FinFET (Fin-Flex™)</span
+          >
         </div>
         <div class="h-3 w-px bg-[var(--line)]"></div>
         <div class="flex items-center gap-1.5">
@@ -380,7 +495,9 @@
         </div>
         <div class="h-3 w-px bg-[var(--line)]"></div>
         <div class="flex items-center gap-1.5">
-          <span class="text-[var(--ink-3)]" id="kpi-lbl-area">Cleanroom Area:</span>
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-area"
+            >Cleanroom Area:</span
+          >
           <span class="font-bold text-[var(--ink)]">68,600 m² (Class 1)</span>
         </div>
       </div>
@@ -388,11 +505,15 @@
       <div class="flex items-center gap-4 shrink-0 pl-4">
         <div class="flex items-center gap-1.5">
           <span class="text-[var(--ink-3)]" id="kpi-lbl-amhs">AMHS Fleet:</span>
-          <span id="kpi-val-amhs" class="font-semibold text-emerald-600">86 OHT Loops Active</span>
+          <span id="kpi-val-amhs" class="font-semibold text-emerald-600"
+            >86 OHT Loops Active</span
+          >
         </div>
         <div class="h-3 w-px bg-[var(--line)]"></div>
         <div class="flex items-center gap-1.5">
-          <span class="text-[var(--ink-3)]" id="kpi-lbl-capex">Est. Capex:</span>
+          <span class="text-[var(--ink-3)]" id="kpi-lbl-capex"
+            >Est. Capex:</span
+          >
           <span class="font-semibold text-[var(--ink)]">$28.4 Billion</span>
         </div>
         <div class="h-3 w-px bg-[var(--line)]"></div>
@@ -404,45 +525,105 @@
     </div>
 
     <!-- 3. PROCESS CATEGORY & LIVE FILTER BAR -->
-    <div class="h-[var(--cat-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-20 text-xs gap-3">
+    <div
+      class="h-[var(--cat-height)] bg-[var(--surface)] border-b border-[var(--line)] px-3 flex items-center justify-between shrink-0 z-20 text-xs gap-3"
+    >
       <!-- Category Filter Pills -->
       <div class="flex items-center gap-1 overflow-x-auto shrink-0 py-1">
-        <button onclick="filterCategory('all')" class="cat-pill active px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="all">
+        <button
+          onclick="filterCategory('all')"
+          class="cat-pill active px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="all"
+        >
           <span id="cat-all">全部 (3,000)</span>
         </button>
-        <button onclick="filterCategory('litho')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="litho">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #f59e0b;"></span>
+        <button
+          onclick="filterCategory('litho')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="litho"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #f59e0b"
+          ></span>
           <span id="cat-litho">EUV/DUV光刻 (600)</span>
         </button>
-        <button onclick="filterCategory('etch')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="etch">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #ec4899;"></span>
+        <button
+          onclick="filterCategory('etch')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="etch"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #ec4899"
+          ></span>
           <span id="cat-etch">等离子刻蚀 (600)</span>
         </button>
-        <button onclick="filterCategory('thinfilm')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="thinfilm">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #3b82f6;"></span>
+        <button
+          onclick="filterCategory('thinfilm')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="thinfilm"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #3b82f6"
+          ></span>
           <span id="cat-thinfilm">薄膜沉积 ALD/CVD/PVD (900)</span>
         </button>
-        <button onclick="filterCategory('cmp')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="cmp">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #06b6d4;"></span>
+        <button
+          onclick="filterCategory('cmp')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="cmp"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #06b6d4"
+          ></span>
           <span id="cat-cmp">化学机械平坦化 CMP (300)</span>
         </button>
-        <button onclick="filterCategory('thermal')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="thermal">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #f97316;"></span>
+        <button
+          onclick="filterCategory('thermal')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="thermal"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #f97316"
+          ></span>
           <span id="cat-thermal">离子注入与热退火 (300)</span>
         </button>
-        <button onclick="filterCategory('wet')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="wet">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #10b981;"></span>
+        <button
+          onclick="filterCategory('wet')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="wet"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #10b981"
+          ></span>
           <span id="cat-wet">湿法清洗 (148)</span>
         </button>
-        <button onclick="filterCategory('metrology')" class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]" data-cat="metrology">
-          <span class="inline-block w-2 h-2 rounded-full mr-1" style="background-color: #8b5cf6;"></span>
+        <button
+          onclick="filterCategory('metrology')"
+          class="cat-pill px-2.5 py-0.5 rounded text-[11px] font-semibold border border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-2)]"
+          data-cat="metrology"
+        >
+          <span
+            class="inline-block w-2 h-2 rounded-full mr-1"
+            style="background-color: #8b5cf6"
+          ></span>
           <span id="cat-metrology">量测与缺陷检测 (152)</span>
         </button>
       </div>
 
       <!-- Live Search Box -->
-      <div class="relative flex items-center min-w-[200px] max-w-[280px] w-full">
-        <i data-lucide="search" class="w-3.5 h-3.5 absolute left-2 text-[var(--ink-3)]"></i>
+      <div
+        class="relative flex items-center min-w-[200px] max-w-[280px] w-full"
+      >
+        <i
+          data-lucide="search"
+          class="w-3.5 h-3.5 absolute left-2 text-[var(--ink-3)]"
+        ></i>
         <input
           type="text"
           id="tool-search-input"
@@ -465,11 +646,17 @@
       <div id="three-canvas"></div>
 
       <!-- Conceptual Model Floating Badge -->
-      <div class="absolute top-3 left-3 bg-[var(--surface)]/90 backdrop-blur-md border border-[var(--line)] px-2.5 py-1 rounded-md text-[11px] font-mono flex items-center gap-2 shadow-xs pointer-events-none z-10">
+      <div
+        class="absolute top-3 left-3 bg-[var(--surface)]/90 backdrop-blur-md border border-[var(--line)] px-2.5 py-1 rounded-md text-[11px] font-mono flex items-center gap-2 shadow-xs pointer-events-none z-10"
+      >
         <span class="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
-        <span class="font-bold text-[var(--ink)]" id="lbl-viewport-concept">Conceptual Layout Model</span>
+        <span class="font-bold text-[var(--ink)]" id="lbl-viewport-concept"
+          >Conceptual Layout Model</span
+        >
         <span class="text-[var(--ink-3)]">·</span>
-        <span class="text-[var(--accent)]" id="lbl-viewport-scale">3,000 Tools Scale Simulation</span>
+        <span class="text-[var(--accent)]" id="lbl-viewport-scale"
+          >3,000 Tools Scale Simulation</span
+        >
       </div>
 
       <!-- Hover Tooltip -->
@@ -477,11 +664,20 @@
 
       <!-- 2D Radar Minimap -->
       <div id="minimap-container">
-        <div class="flex items-center justify-between px-2 py-1 bg-[var(--surface-2)] border-b border-[var(--line)] text-[10px] font-mono font-semibold">
+        <div
+          class="flex items-center justify-between px-2 py-1 bg-[var(--surface-2)] border-b border-[var(--line)] text-[10px] font-mono font-semibold"
+        >
           <span id="lbl-radar-title">MEGA FAB RADAR · 570M</span>
-          <span class="text-[var(--accent)]" id="lbl-radar-phase">Concept · 50k WSPM</span>
+          <span class="text-[var(--accent)]" id="lbl-radar-phase"
+            >Concept · 50k WSPM</span
+          >
         </div>
-        <canvas id="minimap-canvas" width="220" height="98" class="block cursor-crosshair"></canvas>
+        <canvas
+          id="minimap-canvas"
+          width="220"
+          height="98"
+          class="block cursor-crosshair"
+        ></canvas>
       </div>
 
       <!-- Tour Subtitle Banner (when tour is running) -->
@@ -489,24 +685,47 @@
         id="tour-banner"
         class="hidden absolute bottom-5 left-1/2 -translate-x-1/2 bg-[rgba(28,33,38,0.92)] text-white px-5 py-2.5 rounded-full shadow-xl border border-white/20 backdrop-blur-md flex items-center gap-3 z-20 pointer-events-none"
       >
-        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+        <span
+          class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"
+        ></span>
         <div class="flex flex-col">
-          <span class="text-xs font-bold uppercase tracking-wider text-emerald-400" id="tour-step-tag">Phase 1 West Cleanroom</span>
-          <span class="text-sm font-medium" id="tour-step-desc">Inspecting high-density FEOL 3nm FinFET plasma etch cluster bays.</span>
+          <span
+            class="text-xs font-bold uppercase tracking-wider text-emerald-400"
+            id="tour-step-tag"
+            >Phase 1 West Cleanroom</span
+          >
+          <span class="text-sm font-medium" id="tour-step-desc"
+            >Inspecting high-density FEOL 3nm FinFET plasma etch cluster
+            bays.</span
+          >
         </div>
       </div>
 
       <!-- Machine Inspector Slide-out Drawer -->
       <div id="tool-drawer">
-        <div class="p-3 bg-[var(--surface-2)] border-b border-[var(--line)] flex items-center justify-between">
+        <div
+          class="p-3 bg-[var(--surface-2)] border-b border-[var(--line)] flex items-center justify-between"
+        >
           <div class="flex items-center gap-2">
             <span class="w-2.5 h-2.5 rounded-full" id="drawer-dot"></span>
             <div>
-              <h3 class="text-xs font-bold leading-none text-[var(--ink)]" id="drawer-tool-id">P1-BAY01-ASML-001</h3>
-              <span class="text-[10px] text-[var(--ink-3)] font-mono" id="drawer-tool-loc">Phase 1 · Bay 01 · Row North</span>
+              <h3
+                class="text-xs font-bold leading-none text-[var(--ink)]"
+                id="drawer-tool-id"
+              >
+                P1-BAY01-ASML-001
+              </h3>
+              <span
+                class="text-[10px] text-[var(--ink-3)] font-mono"
+                id="drawer-tool-loc"
+                >Phase 1 · Bay 01 · Row North</span
+              >
             </div>
           </div>
-          <button onclick="closeDrawer()" class="p-1 rounded text-[var(--ink-3)] hover:text-[var(--ink)] hover:bg-[var(--line)]">
+          <button
+            onclick="closeDrawer()"
+            class="p-1 rounded text-[var(--ink-3)] hover:text-[var(--ink)] hover:bg-[var(--line)]"
+          >
             <i data-lucide="x" class="w-4 h-4"></i>
           </button>
         </div>
@@ -514,54 +733,115 @@
         <div class="p-3 space-y-3 text-xs">
           <!-- Main identity -->
           <div>
-            <div class="text-[10px] font-mono text-[var(--ink-3)] uppercase font-semibold" id="lbl-drawer-model">OEM & Model</div>
-            <div class="text-sm font-extrabold text-[var(--ink)] mt-0.5" id="drawer-model">ASML Twinscan NXE:3800E</div>
-            <div class="text-[11px] text-[var(--accent)] font-semibold mt-0.5" id="drawer-category">0.33 NA High-Productivity EUV Scanner</div>
+            <div
+              class="text-[10px] font-mono text-[var(--ink-3)] uppercase font-semibold"
+              id="lbl-drawer-model"
+            >
+              OEM & Model
+            </div>
+            <div
+              class="text-sm font-extrabold text-[var(--ink)] mt-0.5"
+              id="drawer-model"
+            >
+              ASML Twinscan NXE:3800E
+            </div>
+            <div
+              class="text-[11px] text-[var(--accent)] font-semibold mt-0.5"
+              id="drawer-category"
+            >
+              0.33 NA High-Productivity EUV Scanner
+            </div>
           </div>
 
           <!-- Status Pill -->
-          <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--surface-2)] border border-[var(--line)]">
+          <div
+            class="flex items-center justify-between p-2 rounded-lg bg-[var(--surface-2)] border border-[var(--line)]"
+          >
             <div class="flex flex-col">
-              <span class="text-[10px] font-mono text-[var(--ink-3)]" id="lbl-drawer-state">SEMI E10 State</span>
-              <span class="text-xs font-bold mt-0.5" id="drawer-state-text">Productive (生产加工中)</span>
+              <span
+                class="text-[10px] font-mono text-[var(--ink-3)]"
+                id="lbl-drawer-state"
+                >SEMI E10 State</span
+              >
+              <span class="text-xs font-bold mt-0.5" id="drawer-state-text"
+                >Productive (生产加工中)</span
+              >
             </div>
-            <span class="px-2 py-0.5 text-[10px] font-bold font-mono rounded" id="drawer-state-badge">RUNNING</span>
+            <span
+              class="px-2 py-0.5 text-[10px] font-bold font-mono rounded"
+              id="drawer-state-badge"
+              >RUNNING</span
+            >
           </div>
 
           <!-- Process application -->
           <div>
-            <div class="text-[10px] font-mono text-[var(--ink-3)] uppercase font-semibold" id="lbl-drawer-process">Process Application (3nm FinFET)</div>
-            <p class="text-xs text-[var(--ink-2)] mt-1 leading-relaxed bg-[var(--surface-2)] p-2 rounded border border-[var(--line)] font-medium" id="drawer-process-desc">
-              Critical 3nm FinFET pitch patterning (Fin Pitch ~24nm, CPP ~45nm), FinFlex cell architecture (3-2, 2-2, 2-1), and EUV multi-patterning at 13.5nm wavelength.
+            <div
+              class="text-[10px] font-mono text-[var(--ink-3)] uppercase font-semibold"
+              id="lbl-drawer-process"
+            >
+              Process Application (3nm FinFET)
+            </div>
+            <p
+              class="text-xs text-[var(--ink-2)] mt-1 leading-relaxed bg-[var(--surface-2)] p-2 rounded border border-[var(--line)] font-medium"
+              id="drawer-process-desc"
+            >
+              Critical 3nm FinFET pitch patterning (Fin Pitch ~24nm, CPP ~45nm),
+              FinFlex cell architecture (3-2, 2-2, 2-1), and EUV
+              multi-patterning at 13.5nm wavelength.
             </p>
           </div>
 
           <!-- Live telemetry & specs table -->
-          <div class="border border-[var(--line)] rounded-lg overflow-hidden text-[11px]">
-            <div class="grid grid-cols-2 bg-[var(--surface-2)] px-2.5 py-1.5 border-b border-[var(--line)] font-semibold">
+          <div
+            class="border border-[var(--line)] rounded-lg overflow-hidden text-[11px]"
+          >
+            <div
+              class="grid grid-cols-2 bg-[var(--surface-2)] px-2.5 py-1.5 border-b border-[var(--line)] font-semibold"
+            >
               <span id="lbl-param">Parameter</span>
               <span id="lbl-live-val">Live Telemetry</span>
             </div>
             <div class="divide-y divide-[var(--line)]">
               <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
                 <span>Power Draw</span>
-                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-power">1,180 kW</span>
+                <span
+                  class="font-mono font-semibold text-[var(--ink)]"
+                  id="drawer-val-power"
+                  >1,180 kW</span
+                >
               </div>
               <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
                 <span>Chamber Vacuum</span>
-                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-vacuum">1.2 × 10⁻⁷ Torr</span>
+                <span
+                  class="font-mono font-semibold text-[var(--ink)]"
+                  id="drawer-val-vacuum"
+                  >1.2 × 10⁻⁷ Torr</span
+                >
               </div>
               <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
                 <span>UPW Flow</span>
-                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-upw">42 L/min</span>
+                <span
+                  class="font-mono font-semibold text-[var(--ink)]"
+                  id="drawer-val-upw"
+                  >42 L/min</span
+                >
               </div>
               <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
                 <span>Exhaust CFM</span>
-                <span class="font-mono font-semibold text-[var(--ink)]" id="drawer-val-exhaust">850 CFM</span>
+                <span
+                  class="font-mono font-semibold text-[var(--ink)]"
+                  id="drawer-val-exhaust"
+                  >850 CFM</span
+                >
               </div>
               <div class="grid grid-cols-2 px-2.5 py-1 text-[var(--ink-2)]">
                 <span>Active Wafer Lot</span>
-                <span class="font-mono font-semibold text-emerald-600" id="drawer-val-lot">LOT-3N-8902 (#18/25)</span>
+                <span
+                  class="font-mono font-semibold text-emerald-600"
+                  id="drawer-val-lot"
+                  >LOT-3N-8902 (#18/25)</span
+                >
               </div>
             </div>
           </div>
@@ -599,8 +879,8 @@
       // Global State
       let scene, camera, renderer, controls;
       let instancedGroups = []; // Array of { mesh, archetype, basePositions, tools }
-      let toolsDatabase = [];   // Exactly 3,000 tool records
-      let ohtVehicles = [];     // Dynamic Overhead Hoist Transport vehicles
+      let toolsDatabase = []; // Exactly 3,000 tool records
+      let ohtVehicles = []; // Dynamic Overhead Hoist Transport vehicles
       let ceilingGroup = null;
       let showCeiling = false;
       let activeHeatmapMode = "realistic"; // realistic | state | vendor | category | power
@@ -617,7 +897,11 @@
       let tourTimer = null;
       let tourStepIndex = 0;
 
-      let currentLang = (localStorage.getItem("semicon_lang") || "zh").startsWith("zh") ? "zh" : "en";
+      let currentLang = (
+        localStorage.getItem("semicon_lang") || "zh"
+      ).startsWith("zh")
+        ? "zh"
+        : "en";
       let currentTheme = localStorage.getItem("semicon_theme") || "light";
 
       // Archetype Definitions for the 10 core leading-edge tool classes
@@ -625,64 +909,84 @@
       const ARCHETYPES = {
         euv_scanner: {
           name: "EUV Scanner (ASML NXE:3800E)",
-          w: 4.2, d: 8.2, h: 3.5,
+          w: 4.2,
+          d: 8.2,
+          h: 3.5,
           color: 0xe2e8f0, // Cleanroom Light Platinum
-          trimColor: 0x0284c7
+          trimColor: 0x0284c7,
         },
         track_coater: {
           name: "Track Coater/Dev (TEL LITHIUS Pro Z)",
-          w: 2.2, d: 6.8, h: 2.6,
+          w: 2.2,
+          d: 6.8,
+          h: 2.6,
           color: 0xeef2f6, // Cleanroom Eggshell
-          trimColor: 0x475569
+          trimColor: 0x475569,
         },
         etch_cluster: {
           name: "Plasma Etch Cluster (Lam Sense.i / AMAT Centris)",
-          w: 3.4, d: 5.2, h: 2.6,
+          w: 3.4,
+          d: 5.2,
+          h: 2.6,
           color: 0xedf2f7, // Cleanroom Off-White
-          trimColor: 0x831843
+          trimColor: 0x831843,
         },
         dep_cluster: {
           name: "Thin Film CVD/ALD (AMAT Producer / ASM Pulsar)",
-          w: 3.2, d: 5.4, h: 2.7,
+          w: 3.2,
+          d: 5.4,
+          h: 2.7,
           color: 0xf1f5f9, // Cleanroom Bright White
-          trimColor: 0x1e3a8a
+          trimColor: 0x1e3a8a,
         },
         pvd_cluster: {
           name: "PVD Metallization (AMAT Endura)",
-          w: 3.8, d: 5.6, h: 2.8,
+          w: 3.8,
+          d: 5.6,
+          h: 2.8,
           color: 0xe2e8f0, // Cleanroom Silver-White
-          trimColor: 0x0891b2
+          trimColor: 0x0891b2,
         },
         cmp_tool: {
           name: "Chemical Mechanical Polishing (AMAT Reflexion / Ebara)",
-          w: 2.8, d: 4.8, h: 2.4,
+          w: 2.8,
+          d: 4.8,
+          h: 2.4,
           color: 0xf8fafc, // Pure Cleanroom White
-          trimColor: 0x059669
+          trimColor: 0x059669,
         },
         thermal_furnace: {
           name: "Vertical Furnace / RTA (TELINDY / SCREEN)",
-          w: 2.2, d: 3.6, h: 3.6,
+          w: 2.2,
+          d: 3.6,
+          h: 3.6,
           color: 0x334155, // Technical Charcoal Thermal Tower
-          trimColor: 0xd97706
+          trimColor: 0xd97706,
         },
         implanter: {
           name: "Ion Implantation (Axcelis Purion)",
-          w: 3.2, d: 5.8, h: 2.8,
+          w: 3.2,
+          d: 5.8,
+          h: 2.8,
           color: 0xe2e8f0, // Cleanroom White
-          trimColor: 0xea580c
+          trimColor: 0xea580c,
         },
         wet_bench: {
           name: "Single-Wafer Wet Clean (SCREEN SU-3300)",
-          w: 2.5, d: 4.6, h: 2.5,
+          w: 2.5,
+          d: 4.6,
+          h: 2.5,
           color: 0xf0fdfa, // Cleanroom Mint-White
-          trimColor: 0x0d9488
+          trimColor: 0x0d9488,
         },
         metrology: {
           name: "In-line Metrology & OCD (KLA 2935 / PROVision)",
-          w: 2.2, d: 3.2, h: 2.6,
+          w: 2.2,
+          d: 3.2,
+          h: 2.6,
           color: 0x384152, // Dark Vibration-Isolated Column
-          trimColor: 0x7c3aed
-        }
+          trimColor: 0x7c3aed,
+        },
       };
 
       // Bay Mapping Specification across the 10 parallel cleanroom bays
@@ -690,84 +994,189 @@
         {
           bayNum: "01",
           zhName: "EUV 超高精度光刻与纳米涂胶显影湾 (3nm Fin 与 M0/M1 关键层)",
-          enName: "EUV 0.33NA Critical Patterning & Track Bay (3nm Fin Pitch ~24nm & M0/M1)",
+          enName:
+            "EUV 0.33NA Critical Patterning & Track Bay (3nm Fin Pitch ~24nm & M0/M1)",
           category: "litho",
           isAmberLight: true,
           toolMix: [
-            { archetype: "euv_scanner", vendor: "ASML", model: "Twinscan NXE:3800E", spec: "0.33NA EUV (13.5nm), ~220 wph, 3nm FinFET Fin & M0/M1 Critical Pitch Lithography", power: 1180 },
-            { archetype: "track_coater", vendor: "Tokyo Electron", model: "CLEAN TRACK LITHIUS Pro Z", spec: "Direct-coupled EUV track with extreme CD uniformity & chemical dispense", power: 75 }
-          ]
+            {
+              archetype: "euv_scanner",
+              vendor: "ASML",
+              model: "Twinscan NXE:3800E",
+              spec: "0.33NA EUV (13.5nm), ~220 wph, 3nm FinFET Fin & M0/M1 Critical Pitch Lithography",
+              power: 1180,
+            },
+            {
+              archetype: "track_coater",
+              vendor: "Tokyo Electron",
+              model: "CLEAN TRACK LITHIUS Pro Z",
+              spec: "Direct-coupled EUV track with extreme CD uniformity & chemical dispense",
+              power: 75,
+            },
+          ],
         },
         {
           bayNum: "02",
           zhName: "DUV 浸没式光刻与中后道金属层光刻湾",
-          enName: "DUV ArFi Immersion Lithography & Track Bay (Mid & Back-End Layers)",
+          enName:
+            "DUV ArFi Immersion Lithography & Track Bay (Mid & Back-End Layers)",
           category: "litho",
           isAmberLight: true,
           toolMix: [
-            { archetype: "euv_scanner", vendor: "ASML", model: "Twinscan NXT:2100i", spec: "193nm ArF Immersion scanner for Middle-of-Line interconnects & routing layers", power: 210 },
-            { archetype: "track_coater", vendor: "Tokyo Electron", model: "CLEAN TRACK LITHIUS Pro V", spec: "High-throughput DUV immersion resist coater/developer with bevel rinse", power: 65 }
-          ]
+            {
+              archetype: "euv_scanner",
+              vendor: "ASML",
+              model: "Twinscan NXT:2100i",
+              spec: "193nm ArF Immersion scanner for Middle-of-Line interconnects & routing layers",
+              power: 210,
+            },
+            {
+              archetype: "track_coater",
+              vendor: "Tokyo Electron",
+              model: "CLEAN TRACK LITHIUS Pro V",
+              spec: "High-throughput DUV immersion resist coater/developer with bevel rinse",
+              power: 65,
+            },
+          ],
         },
         {
           bayNum: "03",
           zhName: "FEOL 3nm FinFET 鳍线成形与高深宽比关键栅极刻蚀湾",
-          enName: "FEOL 3nm FinFET High-Aspect-Ratio Fin Formation & Gate Etch Bay",
+          enName:
+            "FEOL 3nm FinFET High-Aspect-Ratio Fin Formation & Gate Etch Bay",
           category: "etch",
           toolMix: [
-            { archetype: "etch_cluster", vendor: "Lam Research", model: "Sense.i G-Series ALE", spec: "Atomic Layer Etch (ALE) of 3nm FinFET fins (~24nm pitch) and dummy poly gate RMG removal", power: 48 },
-            { archetype: "etch_cluster", vendor: "Tokyo Electron", model: "Episode 300mm", spec: "Cryogenic high-aspect-ratio plasma etch for sub-3nm contact trenches", power: 52 }
-          ]
+            {
+              archetype: "etch_cluster",
+              vendor: "Lam Research",
+              model: "Sense.i G-Series ALE",
+              spec: "Atomic Layer Etch (ALE) of 3nm FinFET fins (~24nm pitch) and dummy poly gate RMG removal",
+              power: 48,
+            },
+            {
+              archetype: "etch_cluster",
+              vendor: "Tokyo Electron",
+              model: "Episode 300mm",
+              spec: "Cryogenic high-aspect-ratio plasma etch for sub-3nm contact trenches",
+              power: 52,
+            },
+          ],
         },
         {
           bayNum: "04",
           zhName: "MEOL 有源区栅极上触点 (COAG) 与 BEOL 双大马士革低介电刻蚀湾",
-          enName: "MEOL Contact Over Active Gate (COAG) & BEOL Dual-Damascene Low-k Etch Bay",
+          enName:
+            "MEOL Contact Over Active Gate (COAG) & BEOL Dual-Damascene Low-k Etch Bay",
           category: "etch",
           toolMix: [
-            { archetype: "etch_cluster", vendor: "Applied Materials", model: "Centris Sym3 Y", spec: "Cobalt/Tungsten plug contact and BEOL dual-damascene copper trench plasma etch", power: 45 },
-            { archetype: "etch_cluster", vendor: "Lam Research", model: "Kiyo FX Conductor Etch", spec: "Metal gate cut and spacer plasma dry etch platform with zero CD damage", power: 42 }
-          ]
+            {
+              archetype: "etch_cluster",
+              vendor: "Applied Materials",
+              model: "Centris Sym3 Y",
+              spec: "Cobalt/Tungsten plug contact and BEOL dual-damascene copper trench plasma etch",
+              power: 45,
+            },
+            {
+              archetype: "etch_cluster",
+              vendor: "Lam Research",
+              model: "Kiyo FX Conductor Etch",
+              spec: "Metal gate cut and spacer plasma dry etch platform with zero CD damage",
+              power: 42,
+            },
+          ],
         },
         {
           bayNum: "05",
-          zhName: "原子层沉积 (ALD) 高介电常数栅介质与源漏选择性 SiP/SiGe 外延湾",
-          enName: "ALD High-k Gate Dielectric (HfO2/ZrO2) & Selective Epitaxy (SiP/SiGe) Bay",
+          zhName:
+            "原子层沉积 (ALD) 高介电常数栅介质与源漏选择性 SiP/SiGe 外延湾",
+          enName:
+            "ALD High-k Gate Dielectric (HfO2/ZrO2) & Selective Epitaxy (SiP/SiGe) Bay",
           category: "thinfilm",
           toolMix: [
-            { archetype: "dep_cluster", vendor: "ASM International", model: "Pulsar 3000 ALD", spec: "HfO2/ZrO2 high-k gate dielectric ALD with single atomic layer precision and interfacial tuning", power: 38 },
-            { archetype: "dep_cluster", vendor: "Applied Materials", model: "Centura Epi", spec: "Ultra-clean SiP/SiGe source/drain selective strain heteroepitaxy", power: 85 }
-          ]
+            {
+              archetype: "dep_cluster",
+              vendor: "ASM International",
+              model: "Pulsar 3000 ALD",
+              spec: "HfO2/ZrO2 high-k gate dielectric ALD with single atomic layer precision and interfacial tuning",
+              power: 38,
+            },
+            {
+              archetype: "dep_cluster",
+              vendor: "Applied Materials",
+              model: "Centura Epi",
+              spec: "Ultra-clean SiP/SiGe source/drain selective strain heteroepitaxy",
+              power: 85,
+            },
+          ],
         },
         {
           bayNum: "06",
           zhName: "化学气相沉积 (PECVD/SACVD) 极低介电常数 (Low-k) 薄膜湾",
-          enName: "Chemical Vapor Deposition (PECVD/SACVD Low-k Dielectric) Bay",
+          enName:
+            "Chemical Vapor Deposition (PECVD/SACVD Low-k Dielectric) Bay",
           category: "thinfilm",
           toolMix: [
-            { archetype: "dep_cluster", vendor: "Applied Materials", model: "Producer XP Precision", spec: "Flowable CVD and ultra low-k (k<2.2) porous dielectric films with UV cure", power: 65 },
-            { archetype: "dep_cluster", vendor: "Lam Research", model: "Vector Excel PECVD", spec: "Stress-relieved silicon nitride and oxide barrier film deposition", power: 58 }
-          ]
+            {
+              archetype: "dep_cluster",
+              vendor: "Applied Materials",
+              model: "Producer XP Precision",
+              spec: "Flowable CVD and ultra low-k (k<2.2) porous dielectric films with UV cure",
+              power: 65,
+            },
+            {
+              archetype: "dep_cluster",
+              vendor: "Lam Research",
+              model: "Vector Excel PECVD",
+              spec: "Stress-relieved silicon nitride and oxide barrier film deposition",
+              power: 58,
+            },
+          ],
         },
         {
           bayNum: "07",
           zhName: "物理气相沉积 (PVD) 铜阻挡层、种子层与钌衬垫金属化湾",
-          enName: "PVD Copper Barrier/Seed, Cobalt Liner & Ruthenium Metallization Bay",
+          enName:
+            "PVD Copper Barrier/Seed, Cobalt Liner & Ruthenium Metallization Bay",
           category: "thinfilm",
           toolMix: [
-            { archetype: "pvd_cluster", vendor: "Applied Materials", model: "Endura CuBS / Clover", spec: "Self-ionized plasma PVD for 3nm M0/M1 copper barrier/seed & Ru liner with zero voiding", power: 72 },
-            { archetype: "pvd_cluster", vendor: "Canon Anelva", model: "NC7900 PVD", spec: "Magnetic tunneling junction & specialized refractory metal PVD", power: 55 }
-          ]
+            {
+              archetype: "pvd_cluster",
+              vendor: "Applied Materials",
+              model: "Endura CuBS / Clover",
+              spec: "Self-ionized plasma PVD for 3nm M0/M1 copper barrier/seed & Ru liner with zero voiding",
+              power: 72,
+            },
+            {
+              archetype: "pvd_cluster",
+              vendor: "Canon Anelva",
+              model: "NC7900 PVD",
+              spec: "Magnetic tunneling junction & specialized refractory metal PVD",
+              power: 55,
+            },
+          ],
         },
         {
           bayNum: "08",
           zhName: "化学机械平坦化 (CMP) 铜/钨/介质多抛盘平整研磨湾",
-          enName: "Chemical Mechanical Planarization (CMP) Cu/W/Oxide Multi-Platen Bay",
+          enName:
+            "Chemical Mechanical Planarization (CMP) Cu/W/Oxide Multi-Platen Bay",
           category: "cmp",
           toolMix: [
-            { archetype: "cmp_tool", vendor: "Applied Materials", model: "Reflexion LK Prime", spec: "Multi-zone closed-loop CMP with real-time optical endpoint profiling and integrated cleaner", power: 42 },
-            { archetype: "cmp_tool", vendor: "Ebara", model: "FREX 300X", spec: "Precision 4-head chemical polishing with ultra-low dishing & erosion", power: 39 }
-          ]
+            {
+              archetype: "cmp_tool",
+              vendor: "Applied Materials",
+              model: "Reflexion LK Prime",
+              spec: "Multi-zone closed-loop CMP with real-time optical endpoint profiling and integrated cleaner",
+              power: 42,
+            },
+            {
+              archetype: "cmp_tool",
+              vendor: "Ebara",
+              model: "FREX 300X",
+              spec: "Precision 4-head chemical polishing with ultra-low dishing & erosion",
+              power: 39,
+            },
+          ],
         },
         {
           bayNum: "09",
@@ -775,20 +1184,45 @@
           enName: "Ion Implantation & Laser Spike/Flash Thermal Anneal Bay",
           category: "thermal",
           toolMix: [
-            { archetype: "implanter", vendor: "Axcelis", model: "Purion H High-Current", spec: "High-dose shallow junction source/drain implant with zero particle adder", power: 120 },
-            { archetype: "thermal_furnace", vendor: "Tokyo Electron", model: "TELINDY Plus Furnace", spec: "300mm ultra-thin gate oxidation and batch nitrogen drive-in furnace", power: 95 }
-          ]
+            {
+              archetype: "implanter",
+              vendor: "Axcelis",
+              model: "Purion H High-Current",
+              spec: "High-dose shallow junction source/drain implant with zero particle adder",
+              power: 120,
+            },
+            {
+              archetype: "thermal_furnace",
+              vendor: "Tokyo Electron",
+              model: "TELINDY Plus Furnace",
+              spec: "300mm ultra-thin gate oxidation and batch nitrogen drive-in furnace",
+              power: 95,
+            },
+          ],
         },
         {
           bayNum: "10",
           zhName: "先进制程缺陷扫描、CD-SEM 关键尺寸量测与单晶圆清洗湾",
-          enName: "In-line Metrology, CD-SEM, Overlay, Defect Review & Wet Clean Bay",
+          enName:
+            "In-line Metrology, CD-SEM, Overlay, Defect Review & Wet Clean Bay",
           category: "metrology",
           toolMix: [
-            { archetype: "metrology", vendor: "KLA", model: "2935 Broadband Plasma", spec: "Sub-10nm optical darkfield defect discovery & nanometrology review", power: 35 },
-            { archetype: "wet_bench", vendor: "SCREEN", model: "SU-3300 Single Wafer", spec: "Supercritical CO2 drying and nano-bubble defect-free wet cleaning", power: 32 }
-          ]
-        }
+            {
+              archetype: "metrology",
+              vendor: "KLA",
+              model: "2935 Broadband Plasma",
+              spec: "Sub-10nm optical darkfield defect discovery & nanometrology review",
+              power: 35,
+            },
+            {
+              archetype: "wet_bench",
+              vendor: "SCREEN",
+              model: "SU-3300 Single Wafer",
+              spec: "Supercritical CO2 drying and nano-bubble defect-free wet cleaning",
+              power: 32,
+            },
+          ],
+        },
       ];
 
       // =========================================================================
@@ -797,8 +1231,18 @@
       function generateMegaFabDataset() {
         toolsDatabase = [];
         const phases = [
-          { id: "P1", nameZh: "第一期 (西厂区 25k 主产线)", nameEn: "Phase 1 (West Hall - 25k Line)", xOffset: -135 },
-          { id: "P2", nameZh: "第二期 (东厂区 25k 扩产线)", nameEn: "Phase 2 (East Hall - 25k Expansion)", xOffset: 135 }
+          {
+            id: "P1",
+            nameZh: "第一期 (西厂区 25k 主产线)",
+            nameEn: "Phase 1 (West Hall - 25k Line)",
+            xOffset: -135,
+          },
+          {
+            id: "P2",
+            nameZh: "第二期 (东厂区 25k 扩产线)",
+            nameEn: "Phase 2 (East Hall - 25k Expansion)",
+            xOffset: 135,
+          },
         ];
 
         let globalCounter = 0;
@@ -811,7 +1255,7 @@
             // Inside each bay, there are 2 facing rows: North row (Z - 3.2m) and South row (Z + 3.2m)
             const rows = [
               { name: "North", z: zCenter - 3.2, rotY: 0 },
-              { name: "South", z: zCenter + 3.2, rotY: Math.PI }
+              { name: "South", z: zCenter + 3.2, rotY: Math.PI },
             ];
 
             // 75 tools per row -> 25 equipment cells of 3 tools each with 3.3m service chase gaps
@@ -828,10 +1272,11 @@
 
                 // Alternate tool types from template mix
                 const toolTemplate = bayDef.toolMix[i % bayDef.toolMix.length];
-                
+
                 // Deterministic SEMI E10 state distribution
                 // ~82% Productive, ~10% Standby, ~5% Engineering, ~3% Unscheduled Down
-                const stateRand = ((globalCounter * 9301 + 49297) % 233280) / 233280;
+                const stateRand =
+                  ((globalCounter * 9301 + 49297) % 233280) / 233280;
                 let semiState = "productive";
                 if (stateRand > 0.97) semiState = "unscheduled_down";
                 else if (stateRand > 0.92) semiState = "engineering";
@@ -847,7 +1292,10 @@
                   bayNameZh: bayDef.zhName,
                   bayNameEn: bayDef.enName,
                   rowName: row.name,
-                  category: toolTemplate.archetype === "wet_bench" ? "wet" : bayDef.category,
+                  category:
+                    toolTemplate.archetype === "wet_bench"
+                      ? "wet"
+                      : bayDef.category,
                   archetype: toolTemplate.archetype,
                   vendor: toolTemplate.vendor,
                   model: toolTemplate.model,
@@ -857,7 +1305,7 @@
                   semiState: semiState,
                   pos: { x: worldX, y: 0, z: worldZ },
                   rotY: row.rotY,
-                  lotId: `LOT-3N-${(1000 + (globalCounter % 8999))}`
+                  lotId: `LOT-3N-${1000 + (globalCounter % 8999)}`,
                 };
 
                 toolsDatabase.push(toolRecord);
@@ -885,7 +1333,10 @@
         // Default Overview position: dramatic, closer cinematic perspective
         camera.position.set(-20, 85, 160);
 
-        renderer = new THREE.WebGLRenderer({ antialias: true, powerPreference: "high-performance" });
+        renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          powerPreference: "high-performance",
+        });
         renderer.setSize(width, height);
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -933,15 +1384,24 @@
 
       function setupLighting() {
         const isDark = currentTheme === "dark";
-        const ambientLight = new THREE.AmbientLight(0xffffff, isDark ? 0.75 : 0.95);
+        const ambientLight = new THREE.AmbientLight(
+          0xffffff,
+          isDark ? 0.75 : 0.95,
+        );
         scene.add(ambientLight);
 
-        const mainDirLight = new THREE.DirectionalLight(0xfffef9, isDark ? 0.9 : 1.25);
+        const mainDirLight = new THREE.DirectionalLight(
+          0xfffef9,
+          isDark ? 0.9 : 1.25,
+        );
         mainDirLight.position.set(60, 120, 80);
         scene.add(mainDirLight);
 
         // Secondary soft fill light
-        const fillLight = new THREE.DirectionalLight(0xcfd8dc, isDark ? 0.5 : 0.65);
+        const fillLight = new THREE.DirectionalLight(
+          0xcfd8dc,
+          isDark ? 0.5 : 0.65,
+        );
         fillLight.position.set(-60, 80, -80);
         scene.add(fillLight);
 
@@ -973,8 +1433,14 @@
         ctx.strokeStyle = isDark ? "#283440" : "#dedad0";
         ctx.lineWidth = 2;
         for (let i = 0; i <= 512; i += 64) {
-          ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, 512); ctx.stroke();
-          ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(512, i); ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(i, 0);
+          ctx.lineTo(i, 512);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(0, i);
+          ctx.lineTo(512, i);
+          ctx.stroke();
         }
         // Central aisle demarcation strip
         ctx.fillStyle = isDark ? "#243240" : "#ebe8de";
@@ -988,7 +1454,7 @@
         const floorMat = new THREE.MeshStandardMaterial({
           map: floorTexture,
           roughness: 0.35,
-          metalness: 0.15
+          metalness: 0.15,
         });
 
         // Giant cleanroom ground plate (580m × 150m)
@@ -1003,20 +1469,34 @@
         const wallMat = new THREE.MeshStandardMaterial({
           color: isDark ? 0x222c36 : 0xe5e2d8,
           roughness: 0.5,
-          metalness: 0.2
+          metalness: 0.2,
         });
 
         // Phase 1 Hall Shell outline (West)
         const p1Shell = new THREE.BoxGeometry(226, 8, 134);
         const p1Edges = new THREE.EdgesGeometry(p1Shell);
-        const p1Outline = new THREE.LineSegments(p1Edges, new THREE.LineBasicMaterial({ color: 0x0e6e6b, opacity: 0.45, transparent: true }));
+        const p1Outline = new THREE.LineSegments(
+          p1Edges,
+          new THREE.LineBasicMaterial({
+            color: 0x0e6e6b,
+            opacity: 0.45,
+            transparent: true,
+          }),
+        );
         p1Outline.position.set(-135, 4, 0);
         scene.add(p1Outline);
 
         // Phase 2 Hall Shell outline (East)
         const p2Shell = new THREE.BoxGeometry(226, 8, 134);
         const p2Edges = new THREE.EdgesGeometry(p2Shell);
-        const p2Outline = new THREE.LineSegments(p2Edges, new THREE.LineBasicMaterial({ color: 0x0e6e6b, opacity: 0.45, transparent: true }));
+        const p2Outline = new THREE.LineSegments(
+          p2Edges,
+          new THREE.LineBasicMaterial({
+            color: 0x0e6e6b,
+            opacity: 0.45,
+            transparent: true,
+          }),
+        );
         p2Outline.position.set(135, 4, 0);
         scene.add(p2Outline);
 
@@ -1028,7 +1508,7 @@
         const bridgeFloorMat = new THREE.MeshStandardMaterial({
           color: isDark ? 0x1f2730 : 0xebe8de,
           roughness: 0.3,
-          metalness: 0.4
+          metalness: 0.4,
         });
         const bridgeFloor = new THREE.Mesh(bridgeFloorGeo, bridgeFloorMat);
         bridgeFloor.position.set(0, 0.1, 0);
@@ -1042,25 +1522,41 @@
           roughness: 0.1,
           metalness: 0.1,
           transmission: 0.85,
-          ior: 1.5
+          ior: 1.5,
         });
 
-        const northGlass = new THREE.Mesh(new THREE.BoxGeometry(46, 6.5, 0.3), glassMat);
+        const northGlass = new THREE.Mesh(
+          new THREE.BoxGeometry(46, 6.5, 0.3),
+          glassMat,
+        );
         northGlass.position.set(0, 3.25, 14);
         skybridgeGroup.add(northGlass);
 
-        const southGlass = new THREE.Mesh(new THREE.BoxGeometry(46, 6.5, 0.3), glassMat);
+        const southGlass = new THREE.Mesh(
+          new THREE.BoxGeometry(46, 6.5, 0.3),
+          glassMat,
+        );
         southGlass.position.set(0, 3.25, -14);
         skybridgeGroup.add(southGlass);
 
         // Structural Truss Beams along the Skybridge
-        const trussMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8, roughness: 0.3 });
+        const trussMat = new THREE.MeshStandardMaterial({
+          color: 0x475569,
+          metalness: 0.8,
+          roughness: 0.3,
+        });
         for (let bx = -20; bx <= 20; bx += 10) {
-          const colN = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 6.5), trussMat);
+          const colN = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.25, 0.25, 6.5),
+            trussMat,
+          );
           colN.position.set(bx, 3.25, 14);
           skybridgeGroup.add(colN);
 
-          const colS = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 6.5), trussMat);
+          const colS = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.25, 0.25, 6.5),
+            trussMat,
+          );
           colS.position.set(bx, 3.25, -14);
           skybridgeGroup.add(colS);
         }
@@ -1071,22 +1567,22 @@
         const plinthMat = new THREE.MeshStandardMaterial({
           color: isDark ? 0x1e2732 : 0xd8d4c8,
           roughness: 0.45,
-          metalness: 0.25
+          metalness: 0.25,
         });
         const amberPlinthMat = new THREE.MeshStandardMaterial({
           color: isDark ? 0x3d2c16 : 0xfef08a,
           roughness: 0.45,
-          metalness: 0.25
+          metalness: 0.25,
         });
         const colMat = new THREE.MeshStandardMaterial({
           color: isDark ? 0x334155 : 0xf1f5f9,
           roughness: 0.3,
-          metalness: 0.2
+          metalness: 0.2,
         });
         const colBaseMat = new THREE.MeshStandardMaterial({
           color: 0x1e293b,
           roughness: 0.5,
-          metalness: 0.7
+          metalness: 0.7,
         });
 
         const plinthBoxGeo = new THREE.BoxGeometry(6.8, 0.12, 4.4);
@@ -1096,7 +1592,7 @@
         [-135, 135].forEach((phaseX) => {
           for (let b = 0; b < 10; b++) {
             const zC = -54 + b * 12;
-            const useAmber = (b === 0 || b === 1);
+            const useAmber = b === 0 || b === 1;
             const curPlinthMat = useAmber ? amberPlinthMat : plinthMat;
 
             // 25 clusters of 3 tools along X
@@ -1139,19 +1635,27 @@
             const walkGeo = new THREE.BoxGeometry(198, 0.02, 1.8);
             const walkMat = new THREE.MeshStandardMaterial({
               color: isDark ? 0x064e3b : 0x10b981,
-              roughness: 0.6
+              roughness: 0.6,
             });
             const walkStrip = new THREE.Mesh(walkGeo, walkMat);
             walkStrip.position.set(phaseX, 0.02, zC);
             scene.add(walkStrip);
 
             // Yellow Aisle Hazard Safety Lines
-            const lineMat = new THREE.MeshBasicMaterial({ color: useAmber ? 0xf59e0b : 0xeab308 });
-            const lineN = new THREE.Mesh(new THREE.BoxGeometry(198, 0.02, 0.12), lineMat);
+            const lineMat = new THREE.MeshBasicMaterial({
+              color: useAmber ? 0xf59e0b : 0xeab308,
+            });
+            const lineN = new THREE.Mesh(
+              new THREE.BoxGeometry(198, 0.02, 0.12),
+              lineMat,
+            );
             lineN.position.set(phaseX, 0.03, zC - 1.1);
             scene.add(lineN);
 
-            const lineS = new THREE.Mesh(new THREE.BoxGeometry(198, 0.02, 0.12), lineMat);
+            const lineS = new THREE.Mesh(
+              new THREE.BoxGeometry(198, 0.02, 0.12),
+              lineMat,
+            );
             lineS.position.set(phaseX, 0.03, zC + 1.1);
             scene.add(lineS);
           }
@@ -1163,9 +1667,12 @@
 
         const ceilingTrussMat = new THREE.MeshBasicMaterial({
           color: isDark ? 0x334155 : 0xa1a1aa,
-          wireframe: true
+          wireframe: true,
         });
-        const trussMesh = new THREE.Mesh(new THREE.BoxGeometry(570, 0.4, 140, 24, 1, 12), ceilingTrussMat);
+        const trussMesh = new THREE.Mesh(
+          new THREE.BoxGeometry(570, 0.4, 140, 24, 1, 12),
+          ceilingTrussMat,
+        );
         trussMesh.position.y = 7.5;
         ceilingGroup.add(trussMesh);
 
@@ -1177,7 +1684,10 @@
         [-135, 135].forEach((phaseX) => {
           for (let b = 0; b < 10; b++) {
             const zC = -54 + b * 12;
-            const strip = new THREE.Mesh(lightStripGeo, b < 2 ? amberLightMat : lightStripMat);
+            const strip = new THREE.Mesh(
+              lightStripGeo,
+              b < 2 ? amberLightMat : lightStripMat,
+            );
             strip.position.set(phaseX, 7.42, zC);
             ceilingGroup.add(strip);
           }
@@ -1187,7 +1697,10 @@
 
         // Highlight Wireframe Box for Selected Tool
         const boxGeo = new THREE.BoxGeometry(4.4, 3.8, 8.0);
-        const boxMat = new THREE.MeshBasicMaterial({ color: 0x00f0ff, wireframe: true });
+        const boxMat = new THREE.MeshBasicMaterial({
+          color: 0x00f0ff,
+          wireframe: true,
+        });
         highlightBox = new THREE.Mesh(boxGeo, boxMat);
         highlightBox.visible = false;
         scene.add(highlightBox);
@@ -1221,10 +1734,14 @@
           const compoundGeo = createArchetypeGeometry(archKey, archDef);
           const toolMaterial = new THREE.MeshStandardMaterial({
             roughness: 0.35,
-            metalness: 0.4
+            metalness: 0.4,
           });
 
-          const instMesh = new THREE.InstancedMesh(compoundGeo, toolMaterial, count);
+          const instMesh = new THREE.InstancedMesh(
+            compoundGeo,
+            toolMaterial,
+            count,
+          );
           instMesh.userData = { archetype: archKey, toolList: toolList };
 
           // Set transformation and initial color for every instance
@@ -1257,14 +1774,18 @@
         const root = new THREE.Group();
 
         // 1. Equipment Skid Base (dark industrial pedestal)
-        const skid = new THREE.Mesh(new THREE.BoxGeometry(arch.w, 0.12, arch.d));
+        const skid = new THREE.Mesh(
+          new THREE.BoxGeometry(arch.w, 0.12, arch.d),
+        );
         skid.position.set(0, 0.06, 0);
         skid.updateMatrix();
         root.add(skid);
 
         // 2. Main Equipment Body
         const bodyH = arch.h - 0.12;
-        const body = new THREE.Mesh(new THREE.BoxGeometry(arch.w * 0.96, bodyH, arch.d * 0.88));
+        const body = new THREE.Mesh(
+          new THREE.BoxGeometry(arch.w * 0.96, bodyH, arch.d * 0.88),
+        );
         body.position.set(0, 0.12 + bodyH / 2, 0.1);
         body.updateMatrix();
         root.add(body);
@@ -1280,43 +1801,61 @@
         // 4. Distinct Silhouette Feature by Archetype
         if (archKey === "euv_scanner") {
           // High EUV projection optics column
-          const col = new THREE.Mesh(new THREE.BoxGeometry(arch.w * 0.6, 0.9, arch.d * 0.45));
+          const col = new THREE.Mesh(
+            new THREE.BoxGeometry(arch.w * 0.6, 0.9, arch.d * 0.45),
+          );
           col.position.set(0, arch.h + 0.45, -0.4);
           col.updateMatrix();
           root.add(col);
         } else if (archKey === "etch_cluster" || archKey === "pvd_cluster") {
           // Cylindrical vacuum process chamber pods extending radially
-          const ch1 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.7, 8));
+          const ch1 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.55, 0.55, 0.7, 8),
+          );
           ch1.position.set(-arch.w * 0.46, arch.h * 0.6, 0.4);
           ch1.updateMatrix();
           root.add(ch1);
 
-          const ch2 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.7, 8));
+          const ch2 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.55, 0.55, 0.7, 8),
+          );
           ch2.position.set(arch.w * 0.46, arch.h * 0.6, 0.4);
           ch2.updateMatrix();
           root.add(ch2);
         } else if (archKey === "thermal_furnace") {
           // Dual vertical quartz furnace tube covers
-          const t1 = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 1.2, 8));
+          const t1 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.4, 0.4, 1.2, 8),
+          );
           t1.position.set(-0.45, arch.h + 0.6, 0.2);
           t1.updateMatrix();
           root.add(t1);
 
-          const t2 = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.4, 1.2, 8));
+          const t2 = new THREE.Mesh(
+            new THREE.CylinderGeometry(0.4, 0.4, 1.2, 8),
+          );
           t2.position.set(0.45, arch.h + 0.6, 0.2);
           t2.updateMatrix();
           root.add(t2);
         } else {
           // Top exhaust plenum / gas delivery box
-          const duct = new THREE.Mesh(new THREE.BoxGeometry(arch.w * 0.5, 0.35, arch.d * 0.5));
+          const duct = new THREE.Mesh(
+            new THREE.BoxGeometry(arch.w * 0.5, 0.35, arch.d * 0.5),
+          );
           duct.position.set(0, arch.h + 0.18, 0.2);
           duct.updateMatrix();
           root.add(duct);
         }
 
         // 5. SEMI E10 4-tier Signal Light Tower (Top-Front Corner)
-        const tower = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 0.75, 8));
-        tower.position.set(arch.w / 2 - 0.22, arch.h + 0.38, -arch.d / 2 + 0.25);
+        const tower = new THREE.Mesh(
+          new THREE.CylinderGeometry(0.08, 0.08, 0.75, 8),
+        );
+        tower.position.set(
+          arch.w / 2 - 0.22,
+          arch.h + 0.38,
+          -arch.d / 2 + 0.25,
+        );
         tower.updateMatrix();
         root.add(tower);
 
@@ -1329,8 +1868,12 @@
         });
 
         let mergedGeo;
-        if (THREE.BufferGeometryUtils && THREE.BufferGeometryUtils.mergeBufferGeometries) {
-          mergedGeo = THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
+        if (
+          THREE.BufferGeometryUtils &&
+          THREE.BufferGeometryUtils.mergeBufferGeometries
+        ) {
+          mergedGeo =
+            THREE.BufferGeometryUtils.mergeBufferGeometries(geometries);
         } else {
           mergedGeo = body.geometry;
         }
@@ -1352,97 +1895,170 @@
         // Loop factory: creates a closed rounded-rectangular racetrack loop in the XZ plane
         function createAmhsLoop(xMin, xMax, zMin, zMax, r, id, name) {
           const actualR = Math.min(r, (xMax - xMin) / 2, (zMax - zMin) / 2);
-          const Lx = (xMax - xMin) - 2 * actualR;
-          const Lz = (zMax - zMin) - 2 * actualR;
+          const Lx = xMax - xMin - 2 * actualR;
+          const Lz = zMax - zMin - 2 * actualR;
           const Lc = 0.5 * Math.PI * actualR;
           const totalLength = 2 * Lx + 2 * Lz + 4 * Lc;
 
           function getPose(dist) {
             let s = ((dist % totalLength) + totalLength) % totalLength;
             // Seg 1: Top straight (+X)
-            if (s < Lx) return { x: (xMin + actualR) + s, z: zMin, yaw: 0 };
+            if (s < Lx) return { x: xMin + actualR + s, z: zMin, yaw: 0 };
             s -= Lx;
             // Seg 2: Top-Right corner (turns from 0 to +PI/2)
             if (s < Lc) {
               const u = s / Lc;
               const th = -Math.PI / 2 + u * (Math.PI / 2);
               return {
-                x: (xMax - actualR) + actualR * Math.cos(th),
-                z: (zMin + actualR) + actualR * Math.sin(th),
-                yaw: u * (Math.PI / 2)
+                x: xMax - actualR + actualR * Math.cos(th),
+                z: zMin + actualR + actualR * Math.sin(th),
+                yaw: u * (Math.PI / 2),
               };
             }
             s -= Lc;
             // Seg 3: Right straight (+Z)
-            if (s < Lz) return { x: xMax, z: (zMin + actualR) + s, yaw: Math.PI / 2 };
+            if (s < Lz)
+              return { x: xMax, z: zMin + actualR + s, yaw: Math.PI / 2 };
             s -= Lz;
             // Seg 4: Bottom-Right corner (turns from +PI/2 to +PI)
             if (s < Lc) {
               const u = s / Lc;
               const th = u * (Math.PI / 2);
               return {
-                x: (xMax - actualR) + actualR * Math.cos(th),
-                z: (zMax - actualR) + actualR * Math.sin(th),
-                yaw: Math.PI / 2 + u * (Math.PI / 2)
+                x: xMax - actualR + actualR * Math.cos(th),
+                z: zMax - actualR + actualR * Math.sin(th),
+                yaw: Math.PI / 2 + u * (Math.PI / 2),
               };
             }
             s -= Lc;
             // Seg 5: Bottom straight (-X)
-            if (s < Lx) return { x: (xMax - actualR) - s, z: zMax, yaw: Math.PI };
+            if (s < Lx) return { x: xMax - actualR - s, z: zMax, yaw: Math.PI };
             s -= Lx;
             // Seg 6: Bottom-Left corner (turns from +PI to +3PI/2)
             if (s < Lc) {
               const u = s / Lc;
               const th = Math.PI / 2 + u * (Math.PI / 2);
               return {
-                x: (xMin + actualR) + actualR * Math.cos(th),
-                z: (zMax - actualR) + actualR * Math.sin(th),
-                yaw: Math.PI + u * (Math.PI / 2)
+                x: xMin + actualR + actualR * Math.cos(th),
+                z: zMax - actualR + actualR * Math.sin(th),
+                yaw: Math.PI + u * (Math.PI / 2),
               };
             }
             s -= Lc;
             // Seg 7: Left straight (-Z)
-            if (s < Lz) return { x: xMin, z: (zMax - actualR) - s, yaw: -Math.PI / 2 };
+            if (s < Lz)
+              return { x: xMin, z: zMax - actualR - s, yaw: -Math.PI / 2 };
             s -= Lz;
             // Seg 8: Top-Left corner (turns from -PI/2 to 0)
             const u = Math.min(1, s / Lc);
             const th = Math.PI + u * (Math.PI / 2);
             return {
-              x: (xMin + actualR) + actualR * Math.cos(th),
-              z: (zMin + actualR) + actualR * Math.sin(th),
-              yaw: -Math.PI / 2 + u * (Math.PI / 2)
+              x: xMin + actualR + actualR * Math.cos(th),
+              z: zMin + actualR + actualR * Math.sin(th),
+              yaw: -Math.PI / 2 + u * (Math.PI / 2),
             };
           }
 
-          return { id, name, xMin, xMax, zMin, zMax, r: actualR, Lx, Lz, Lc, totalLength, getPose };
+          return {
+            id,
+            name,
+            xMin,
+            xMax,
+            zMin,
+            zMax,
+            r: actualR,
+            Lx,
+            Lz,
+            Lc,
+            totalLength,
+            getPose,
+          };
         }
 
         const loops = [];
 
         // 1. Grand Inter-Phase Skybridge Highway Loop (circulating between Phase 1 and Phase 2)
-        loops.push(createAmhsLoop(-230, 230, -8, 8, 8, "LOOP-SKYBRIDGE-EXPRESS", "Grand Skybridge Highway"));
+        loops.push(
+          createAmhsLoop(
+            -230,
+            230,
+            -8,
+            8,
+            8,
+            "LOOP-SKYBRIDGE-EXPRESS",
+            "Grand Skybridge Highway",
+          ),
+        );
 
         // 2. Cleanroom Perimeter Ring Loops (circulating around each phase hall)
-        loops.push(createAmhsLoop(-242, -28, -60, 60, 6, "LOOP-P1-PERIMETER", "Phase 1 Perimeter Loop"));
-        loops.push(createAmhsLoop(28, 242, -60, 60, 6, "LOOP-P2-PERIMETER", "Phase 2 Perimeter Loop"));
+        loops.push(
+          createAmhsLoop(
+            -242,
+            -28,
+            -60,
+            60,
+            6,
+            "LOOP-P1-PERIMETER",
+            "Phase 1 Perimeter Loop",
+          ),
+        );
+        loops.push(
+          createAmhsLoop(
+            28,
+            242,
+            -60,
+            60,
+            6,
+            "LOOP-P2-PERIMETER",
+            "Phase 2 Perimeter Loop",
+          ),
+        );
 
         // 3. Phase 1 Process Bay Loops (Connecting pairs of adjacent bays)
         for (let b = 0; b < 10; b += 2) {
           const z1 = -54 + b * 12;
           const z2 = -54 + (b + 1) * 12;
-          loops.push(createAmhsLoop(-236, -34, z1, z2, 6, `LOOP-P1-BAY${b+1}_${b+2}`, `Phase 1 Bay ${b+1}-${b+2}`));
+          loops.push(
+            createAmhsLoop(
+              -236,
+              -34,
+              z1,
+              z2,
+              6,
+              `LOOP-P1-BAY${b + 1}_${b + 2}`,
+              `Phase 1 Bay ${b + 1}-${b + 2}`,
+            ),
+          );
         }
 
         // 4. Phase 2 Process Bay Loops (Connecting pairs of adjacent bays)
         for (let b = 0; b < 10; b += 2) {
           const z1 = -54 + b * 12;
           const z2 = -54 + (b + 1) * 12;
-          loops.push(createAmhsLoop(34, 236, z1, z2, 6, `LOOP-P2-BAY${b+1}_${b+2}`, `Phase 2 Bay ${b+1}-${b+2}`));
+          loops.push(
+            createAmhsLoop(
+              34,
+              236,
+              z1,
+              z2,
+              6,
+              `LOOP-P2-BAY${b + 1}_${b + 2}`,
+              `Phase 2 Bay ${b + 1}-${b + 2}`,
+            ),
+          );
         }
 
         // --- Build 3D Physical Monorails for all Loops ---
-        const railMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.85, roughness: 0.25 });
-        const hangerMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.7, roughness: 0.35 });
+        const railMat = new THREE.MeshStandardMaterial({
+          color: 0x94a3b8,
+          metalness: 0.85,
+          roughness: 0.25,
+        });
+        const hangerMat = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          metalness: 0.7,
+          roughness: 0.35,
+        });
 
         const railGeometries = [];
         const hangerGeometries = [];
@@ -1524,19 +2140,29 @@
         });
 
         // Merge rails for ultra-fast single draw call
-        if (THREE.BufferGeometryUtils && THREE.BufferGeometryUtils.mergeBufferGeometries && railGeometries.length > 0) {
-          const mergedRails = THREE.BufferGeometryUtils.mergeBufferGeometries(railGeometries);
+        if (
+          THREE.BufferGeometryUtils &&
+          THREE.BufferGeometryUtils.mergeBufferGeometries &&
+          railGeometries.length > 0
+        ) {
+          const mergedRails =
+            THREE.BufferGeometryUtils.mergeBufferGeometries(railGeometries);
           const railMesh = new THREE.Mesh(mergedRails, railMat);
           amhsRailGroup.add(railMesh);
 
           if (hangerGeometries.length > 0) {
-            const mergedHangers = THREE.BufferGeometryUtils.mergeBufferGeometries(hangerGeometries);
+            const mergedHangers =
+              THREE.BufferGeometryUtils.mergeBufferGeometries(hangerGeometries);
             const hangerMesh = new THREE.Mesh(mergedHangers, hangerMat);
             amhsRailGroup.add(hangerMesh);
           }
         } else {
-          railGeometries.forEach((g) => amhsRailGroup.add(new THREE.Mesh(g, railMat)));
-          hangerGeometries.forEach((g) => amhsRailGroup.add(new THREE.Mesh(g, hangerMat)));
+          railGeometries.forEach((g) =>
+            amhsRailGroup.add(new THREE.Mesh(g, railMat)),
+          );
+          hangerGeometries.forEach((g) =>
+            amhsRailGroup.add(new THREE.Mesh(g, hangerMat)),
+          );
         }
 
         scene.add(amhsRailGroup);
@@ -1549,9 +2175,19 @@
         const ledFrontGeo = new THREE.BoxGeometry(0.1, 0.08, 0.08);
         const ledRearGeo = new THREE.BoxGeometry(0.06, 0.08, 0.08);
 
-        const bodyMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.6, roughness: 0.3 });
-        const guideMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
-        const foupMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, roughness: 0.4 });
+        const bodyMat = new THREE.MeshStandardMaterial({
+          color: 0x334155,
+          metalness: 0.6,
+          roughness: 0.3,
+        });
+        const guideMat = new THREE.MeshStandardMaterial({
+          color: 0x64748b,
+          metalness: 0.8,
+        });
+        const foupMat = new THREE.MeshStandardMaterial({
+          color: 0x1e293b,
+          roughness: 0.4,
+        });
         const foupDoorTeal = new THREE.MeshBasicMaterial({ color: 0x00f5d4 });
         const foupDoorAmber = new THREE.MeshBasicMaterial({ color: 0xf59e0b });
         const ledFrontMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
@@ -1580,13 +2216,16 @@
           root.add(ledRear);
 
           // FOUP cargo pod (~85% have FOUP, ~15% returning empty)
-          const hasFoup = (carrierIdx % 7) !== 0;
+          const hasFoup = carrierIdx % 7 !== 0;
           if (hasFoup) {
-            const isHotLot = (carrierIdx % 5) === 0;
+            const isHotLot = carrierIdx % 5 === 0;
             const foup = new THREE.Mesh(foupGeo, foupMat);
             foup.position.set(0, -0.48, 0);
 
-            const door = new THREE.Mesh(foupDoorGeo, isHotLot ? foupDoorAmber : foupDoorTeal);
+            const door = new THREE.Mesh(
+              foupDoorGeo,
+              isHotLot ? foupDoorAmber : foupDoorTeal,
+            );
             door.position.set(0.23, 0, 0);
             foup.add(door);
 
@@ -1599,20 +2238,20 @@
         // Fleet allocation across 13 closed loops:
         const loopAllocations = [
           { loopIdx: 0, count: 20, baseSpeed: 5.4 }, // Grand Skybridge Highway
-          { loopIdx: 1, count: 8,  baseSpeed: 4.6 }, // P1 Perimeter Loop
-          { loopIdx: 2, count: 8,  baseSpeed: 4.6 }, // P2 Perimeter Loop
+          { loopIdx: 1, count: 8, baseSpeed: 4.6 }, // P1 Perimeter Loop
+          { loopIdx: 2, count: 8, baseSpeed: 4.6 }, // P2 Perimeter Loop
           // 5 Phase 1 Bay Loops
-          { loopIdx: 3, count: 5,  baseSpeed: 4.0 },
-          { loopIdx: 4, count: 5,  baseSpeed: 4.0 },
-          { loopIdx: 5, count: 5,  baseSpeed: 4.0 },
-          { loopIdx: 6, count: 5,  baseSpeed: 4.0 },
-          { loopIdx: 7, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 3, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 4, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 5, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 6, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 7, count: 5, baseSpeed: 4.0 },
           // 5 Phase 2 Bay Loops
-          { loopIdx: 8, count: 5,  baseSpeed: 4.0 },
-          { loopIdx: 9, count: 5,  baseSpeed: 4.0 },
+          { loopIdx: 8, count: 5, baseSpeed: 4.0 },
+          { loopIdx: 9, count: 5, baseSpeed: 4.0 },
           { loopIdx: 10, count: 5, baseSpeed: 4.0 },
           { loopIdx: 11, count: 5, baseSpeed: 4.0 },
-          { loopIdx: 12, count: 5, baseSpeed: 4.0 }
+          { loopIdx: 12, count: 5, baseSpeed: 4.0 },
         ];
 
         let globalCarrierIdx = 0;
@@ -1622,7 +2261,8 @@
 
           for (let k = 0; k < alloc.count; k++) {
             const mesh = createOhtMesh(globalCarrierIdx);
-            const initialS = (k * spacing + (alloc.loopIdx * 17)) % lp.totalLength;
+            const initialS =
+              (k * spacing + alloc.loopIdx * 17) % lp.totalLength;
             const pose = lp.getPose(initialS);
 
             mesh.position.set(pose.x, railHeight - 0.25, pose.z);
@@ -1633,14 +2273,16 @@
               group: mesh,
               loop: lp,
               s: initialS,
-              speed: alloc.baseSpeed + ((k % 3) - 1) * 0.15
+              speed: alloc.baseSpeed + ((k % 3) - 1) * 0.15,
             });
 
             globalCarrierIdx++;
           }
         });
 
-        console.log(`Initialized AMHS Network: ${loops.length} closed loops, ${ohtVehicles.length} active OHT vehicles.`);
+        console.log(
+          `Initialized AMHS Network: ${loops.length} closed loops, ${ohtVehicles.length} active OHT vehicles.`,
+        );
       }
 
       // =========================================================================
@@ -1669,16 +2311,22 @@
               dummyColor.setHex(0x181c22);
             } else if (activeHeatmapMode === "state") {
               // SEMI E10 State Colors
-              if (tool.semiState === "productive") dummyColor.setHex(0x10b981);       // Green
-              else if (tool.semiState === "standby") dummyColor.setHex(0xf59e0b);     // Amber
-              else if (tool.semiState === "engineering") dummyColor.setHex(0x3b82f6); // Blue
-              else dummyColor.setHex(0xef4444);                                       // Red
+              if (tool.semiState === "productive")
+                dummyColor.setHex(0x10b981); // Green
+              else if (tool.semiState === "standby")
+                dummyColor.setHex(0xf59e0b); // Amber
+              else if (tool.semiState === "engineering")
+                dummyColor.setHex(0x3b82f6); // Blue
+              else dummyColor.setHex(0xef4444); // Red
             } else if (activeHeatmapMode === "vendor") {
               // OEM Manufacturer Spectrum
               if (tool.vendor === "ASML") dummyColor.setHex(0x06b6d4);
-              else if (tool.vendor === "Lam Research") dummyColor.setHex(0xd946ef);
-              else if (tool.vendor === "Applied Materials") dummyColor.setHex(0x3b82f6);
-              else if (tool.vendor === "Tokyo Electron") dummyColor.setHex(0xf43f5e);
+              else if (tool.vendor === "Lam Research")
+                dummyColor.setHex(0xd946ef);
+              else if (tool.vendor === "Applied Materials")
+                dummyColor.setHex(0x3b82f6);
+              else if (tool.vendor === "Tokyo Electron")
+                dummyColor.setHex(0xf43f5e);
               else if (tool.vendor === "KLA") dummyColor.setHex(0xf59e0b);
               else if (tool.vendor === "SCREEN") dummyColor.setHex(0x10b981);
               else if (tool.vendor === "Axcelis") dummyColor.setHex(0xf97316);
@@ -1687,7 +2335,8 @@
               // Process Category Distribution
               if (tool.category === "litho") dummyColor.setHex(0xf59e0b);
               else if (tool.category === "etch") dummyColor.setHex(0xec4899);
-              else if (tool.category === "thinfilm") dummyColor.setHex(0x3b82f6);
+              else if (tool.category === "thinfilm")
+                dummyColor.setHex(0x3b82f6);
               else if (tool.category === "cmp") dummyColor.setHex(0x06b6d4);
               else if (tool.category === "thermal") dummyColor.setHex(0xf97316);
               else if (tool.category === "wet") dummyColor.setHex(0x10b981);
@@ -1712,13 +2361,17 @@
 
       function checkToolMatchesFilter(tool) {
         // 1. Category Filter
-        if (activeCategoryFilter !== "all" && tool.category !== activeCategoryFilter) {
+        if (
+          activeCategoryFilter !== "all" &&
+          tool.category !== activeCategoryFilter
+        ) {
           return false;
         }
         // 2. Search Term Filter
         if (activeSearchTerm.trim() !== "") {
           const q = activeSearchTerm.toLowerCase();
-          const targetStr = `${tool.toolId} ${tool.vendor} ${tool.model} ${tool.bayNameZh} ${tool.bayNameEn} ${tool.specZh}`.toLowerCase();
+          const targetStr =
+            `${tool.toolId} ${tool.vendor} ${tool.model} ${tool.bayNameZh} ${tool.bayNameEn} ${tool.specZh}`.toLowerCase();
           if (!targetStr.includes(q)) return false;
         }
         return true;
@@ -1776,11 +2429,11 @@
             tooltip.style.top = `${event.clientY}px`;
             tooltip.innerHTML = `
               <div class="font-bold flex items-center gap-1.5">
-                <span class="w-2 h-2 rounded-full ${tool.semiState === 'productive' ? 'bg-emerald-400' : 'bg-amber-400'}"></span>
+                <span class="w-2 h-2 rounded-full ${tool.semiState === "productive" ? "bg-emerald-400" : "bg-amber-400"}"></span>
                 <span>${tool.model}</span>
                 <span class="text-xs text-sky-300 font-mono">(${tool.vendor})</span>
               </div>
-              <div class="text-[10px] text-gray-300 mt-0.5 font-mono">${tool.toolId} · ${currentLang === 'zh' ? tool.phaseNameZh : tool.phaseNameEn}</div>
+              <div class="text-[10px] text-gray-300 mt-0.5 font-mono">${tool.toolId} · ${currentLang === "zh" ? tool.phaseNameZh : tool.phaseNameEn}</div>
             `;
             return;
           }
@@ -1810,35 +2463,58 @@
 
         // Populate drawer metadata
         document.getElementById("drawer-tool-id").textContent = tool.toolId;
-        document.getElementById("drawer-tool-loc").textContent = `${currentLang === 'zh' ? tool.phaseNameZh : tool.phaseNameEn} · Bay ${tool.bayNum} · Row ${tool.rowName}`;
-        document.getElementById("drawer-model").textContent = `${tool.vendor} · ${tool.model}`;
-        document.getElementById("drawer-category").textContent = currentLang === 'zh' ? tool.bayNameZh : tool.bayNameEn;
+        document.getElementById("drawer-tool-loc").textContent =
+          `${currentLang === "zh" ? tool.phaseNameZh : tool.phaseNameEn} · Bay ${tool.bayNum} · Row ${tool.rowName}`;
+        document.getElementById("drawer-model").textContent =
+          `${tool.vendor} · ${tool.model}`;
+        document.getElementById("drawer-category").textContent =
+          currentLang === "zh" ? tool.bayNameZh : tool.bayNameEn;
 
         const stateBadge = document.getElementById("drawer-state-badge");
         const stateText = document.getElementById("drawer-state-text");
         const dot = document.getElementById("drawer-dot");
 
-        stateBadge.className = "px-2 py-0.5 text-[10px] font-bold font-mono rounded " + `state-${tool.semiState}`;
+        stateBadge.className =
+          "px-2 py-0.5 text-[10px] font-bold font-mono rounded " +
+          `state-${tool.semiState}`;
         stateBadge.textContent = tool.semiState.toUpperCase();
 
         if (tool.semiState === "productive") {
-          stateText.textContent = currentLang === "zh" ? "Productive (正在进行批量晶圆加工)" : "Productive (Production Lot Processing)";
+          stateText.textContent =
+            currentLang === "zh"
+              ? "Productive (正在进行批量晶圆加工)"
+              : "Productive (Production Lot Processing)";
           dot.style.backgroundColor = "#10b981";
         } else if (tool.semiState === "standby") {
-          stateText.textContent = currentLang === "zh" ? "Standby (就绪待机中 · 等待OHT来料)" : "Standby (Idle · Awaiting FOUP)";
+          stateText.textContent =
+            currentLang === "zh"
+              ? "Standby (就绪待机中 · 等待OHT来料)"
+              : "Standby (Idle · Awaiting FOUP)";
           dot.style.backgroundColor = "#f59e0b";
         } else if (tool.semiState === "engineering") {
-          stateText.textContent = currentLang === "zh" ? "Engineering (工程师配方校准与微调)" : "Engineering (Recipe Tuning / Calibration)";
+          stateText.textContent =
+            currentLang === "zh"
+              ? "Engineering (工程师配方校准与微调)"
+              : "Engineering (Recipe Tuning / Calibration)";
           dot.style.backgroundColor = "#3b82f6";
         } else {
-          stateText.textContent = currentLang === "zh" ? "Unscheduled Down (警报停机维修维护)" : "Unscheduled Down (Maintenance / Alarm)";
+          stateText.textContent =
+            currentLang === "zh"
+              ? "Unscheduled Down (警报停机维修维护)"
+              : "Unscheduled Down (Maintenance / Alarm)";
           dot.style.backgroundColor = "#ef4444";
         }
 
-        document.getElementById("drawer-process-desc").textContent = currentLang === "zh" ? tool.specZh : tool.specEn;
-        document.getElementById("drawer-val-power").textContent = `${tool.powerKw} kW`;
-        document.getElementById("drawer-val-vacuum").textContent = tool.archetype.includes("euv") ? "8.5 × 10⁻⁸ Torr" : "1.2 × 10⁻⁷ Torr";
-        document.getElementById("drawer-val-lot").textContent = `${tool.lotId} (#18/25)`;
+        document.getElementById("drawer-process-desc").textContent =
+          currentLang === "zh" ? tool.specZh : tool.specEn;
+        document.getElementById("drawer-val-power").textContent =
+          `${tool.powerKw} kW`;
+        document.getElementById("drawer-val-vacuum").textContent =
+          tool.archetype.includes("euv")
+            ? "8.5 × 10⁻⁸ Torr"
+            : "1.2 × 10⁻⁷ Torr";
+        document.getElementById("drawer-val-lot").textContent =
+          `${tool.lotId} (#18/25)`;
 
         // URL link to catalog
         const catBtn = document.getElementById("btn-goto-catalog");
@@ -1867,7 +2543,7 @@
           tool.pos.x,
           2.5,
           tool.pos.z,
-          1200
+          1200,
         );
       }
 
@@ -1877,7 +2553,9 @@
       function setCameraView(preset) {
         if (isTourActive) toggleMegaTour();
 
-        document.querySelectorAll(".btn-mega-nav").forEach((b) => b.classList.remove("active"));
+        document
+          .querySelectorAll(".btn-mega-nav")
+          .forEach((b) => b.classList.remove("active"));
         const activeBtn = document.getElementById(`btn-cam-${preset}`);
         if (activeBtn) activeBtn.classList.add("active");
 
@@ -1896,7 +2574,15 @@
         }
       }
 
-      function smoothCameraTo(endX, endY, endZ, targetX, targetY, targetZ, durationMs) {
+      function smoothCameraTo(
+        endX,
+        endY,
+        endZ,
+        targetX,
+        targetY,
+        targetZ,
+        durationMs,
+      ) {
         const startPos = camera.position.clone();
         const startTarget = controls.target.clone();
         const endPos = new THREE.Vector3(endX, endY, endZ);
@@ -1907,7 +2593,10 @@
           const elapsed = now - startTime;
           const progress = Math.min(1, elapsed / durationMs);
           // Ease-in-out cubic
-          const ease = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+          const ease =
+            progress < 0.5
+              ? 4 * progress * progress * progress
+              : 1 - Math.pow(-2 * progress + 2, 3) / 2;
 
           camera.position.lerpVectors(startPos, endPos, ease);
           controls.target.lerpVectors(startTarget, endTarget, ease);
@@ -1923,35 +2612,55 @@
       // Cinematic Mega Tour across Phase 1, Skybridge, and Phase 2
       const TOUR_WAYPOINTS = [
         {
-          cam: [-20, 85, 160], target: [0, 3, 0],
-          tagZh: "3nm 概念超级晶圆厂全景 (Conceptual Model)", tagEn: "3nm Mega Fab Concept (Conceptual Layout Model)",
-          descZh: "3nm FinFET 先进制程概念布局推演示意模型，宏观展现 50,000 WSPM 双期超级晶圆厂与 3,000 台超高密度机台集群规模。",
-          descEn: "Conceptual layout model demonstrating a 3nm FinFET 50k WSPM dual-phase Mega Fab housing 3,000 production tools."
+          cam: [-20, 85, 160],
+          target: [0, 3, 0],
+          tagZh: "3nm 概念超级晶圆厂全景 (Conceptual Model)",
+          tagEn: "3nm Mega Fab Concept (Conceptual Layout Model)",
+          descZh:
+            "3nm FinFET 先进制程概念布局推演示意模型，宏观展现 50,000 WSPM 双期超级晶圆厂与 3,000 台超高密度机台集群规模。",
+          descEn:
+            "Conceptual layout model demonstrating a 3nm FinFET 50k WSPM dual-phase Mega Fab housing 3,000 production tools.",
         },
         {
-          cam: [-135, 32, -32], target: [-135, 3, -54],
-          tagZh: "第一期 · EUV 关键光刻湾", tagEn: "Phase 1 · EUV Critical Patterning Bay",
-          descZh: "ASML Twinscan NXE:3800E 与 High-NA 试验线，工作在 580nm 纯黄光安全环境下。",
-          descEn: "ASML NXE:3800E and High-NA test lines operating under amber safe-light filtration."
+          cam: [-135, 32, -32],
+          target: [-135, 3, -54],
+          tagZh: "第一期 · EUV 关键光刻湾",
+          tagEn: "Phase 1 · EUV Critical Patterning Bay",
+          descZh:
+            "ASML Twinscan NXE:3800E 与 High-NA 试验线，工作在 580nm 纯黄光安全环境下。",
+          descEn:
+            "ASML NXE:3800E and High-NA test lines operating under amber safe-light filtration.",
         },
         {
-          cam: [-135, 26, 42], target: [-135, 3, 10],
-          tagZh: "第一期 · 3nm FinFET 鳍线成形与高深宽比刻蚀大厅", tagEn: "Phase 1 · 3nm FinFET Fin Formation & Gate Etch",
-          descZh: "Lam Research Sense.i 与 TEL Episode 集群，执行原子级精度的 3nm FinFET 鳍线成形与高深宽比刻蚀。",
-          descEn: "Lam Sense.i & TEL Episode clusters executing atomic layer precision 3nm FinFET fin patterning & gate etch."
+          cam: [-135, 26, 42],
+          target: [-135, 3, 10],
+          tagZh: "第一期 · 3nm FinFET 鳍线成形与高深宽比刻蚀大厅",
+          tagEn: "Phase 1 · 3nm FinFET Fin Formation & Gate Etch",
+          descZh:
+            "Lam Research Sense.i 与 TEL Episode 集群，执行原子级精度的 3nm FinFET 鳍线成形与高深宽比刻蚀。",
+          descEn:
+            "Lam Sense.i & TEL Episode clusters executing atomic layer precision 3nm FinFET fin patterning & gate etch.",
         },
         {
-          cam: [0, 8.5, 26], target: [0, 4.2, 0],
-          tagZh: "双厂空中高速物料长廊 (Skybridge)", tagEn: "Inter-Phase AMHS Skybridge Spine",
-          descZh: "双向全闭环天车主干环线横跨 50 米连廊，实现第一期与第二期间晶圆盒 (FOUP) 闭环高速循环流转。",
-          descEn: "Continuous closed-loop AMHS highway transferring FOUP pods between Phase 1 and Phase 2 in seconds."
+          cam: [0, 8.5, 26],
+          target: [0, 4.2, 0],
+          tagZh: "双厂空中高速物料长廊 (Skybridge)",
+          tagEn: "Inter-Phase AMHS Skybridge Spine",
+          descZh:
+            "双向全闭环天车主干环线横跨 50 米连廊，实现第一期与第二期间晶圆盒 (FOUP) 闭环高速循环流转。",
+          descEn:
+            "Continuous closed-loop AMHS highway transferring FOUP pods between Phase 1 and Phase 2 in seconds.",
         },
         {
-          cam: [135, 30, 24], target: [135, 3, -12],
-          tagZh: "第二期 · 东厂区 25k 扩产洁净大厅", tagEn: "Phase 2 · East Hall 25k Expansion",
-          descZh: "第二期具备完全对称的 1,500 台全流程产线配置，通过中央高速天桥实现两期机台共享与负载均衡。",
-          descEn: "Phase 2 features a symmetrical 1,500-tool full-flow cleanroom enabling cross-hall load balancing via Skybridge."
-        }
+          cam: [135, 30, 24],
+          target: [135, 3, -12],
+          tagZh: "第二期 · 东厂区 25k 扩产洁净大厅",
+          tagEn: "Phase 2 · East Hall 25k Expansion",
+          descZh:
+            "第二期具备完全对称的 1,500 台全流程产线配置，通过中央高速天桥实现两期机台共享与负载均衡。",
+          descEn:
+            "Phase 2 features a symmetrical 1,500-tool full-flow cleanroom enabling cross-hall load balancing via Skybridge.",
+        },
       ];
 
       function toggleMegaTour() {
@@ -1960,14 +2669,14 @@
         const banner = document.getElementById("tour-banner");
 
         if (isTourActive) {
-          btn.innerHTML = `<i data-lucide="square" class="w-3 h-3 fill-current"></i><span>${currentLang === 'zh' ? '停止' : 'Stop'}</span>`;
+          btn.innerHTML = `<i data-lucide="square" class="w-3 h-3 fill-current"></i><span>${currentLang === "zh" ? "停止" : "Stop"}</span>`;
           btn.classList.replace("bg-emerald-600", "bg-rose-600");
           btn.classList.replace("hover:bg-emerald-700", "hover:bg-rose-700");
           banner.classList.remove("hidden");
           tourStepIndex = 0;
           runTourStep();
         } else {
-          btn.innerHTML = `<i data-lucide="play" class="w-3 h-3 fill-current"></i><span id="txt-tour-btn">${currentLang === 'zh' ? '巡检' : 'Tour'}</span>`;
+          btn.innerHTML = `<i data-lucide="play" class="w-3 h-3 fill-current"></i><span id="txt-tour-btn">${currentLang === "zh" ? "巡检" : "Tour"}</span>`;
           btn.classList.replace("bg-rose-600", "bg-emerald-600");
           btn.classList.replace("hover:bg-rose-700", "hover:bg-emerald-700");
           banner.classList.add("hidden");
@@ -1980,10 +2689,20 @@
         if (!isTourActive) return;
         const wp = TOUR_WAYPOINTS[tourStepIndex % TOUR_WAYPOINTS.length];
 
-        document.getElementById("tour-step-tag").textContent = currentLang === "zh" ? wp.tagZh : wp.tagEn;
-        document.getElementById("tour-step-desc").textContent = currentLang === "zh" ? wp.descZh : wp.descEn;
+        document.getElementById("tour-step-tag").textContent =
+          currentLang === "zh" ? wp.tagZh : wp.tagEn;
+        document.getElementById("tour-step-desc").textContent =
+          currentLang === "zh" ? wp.descZh : wp.descEn;
 
-        smoothCameraTo(wp.cam[0], wp.cam[1], wp.cam[2], wp.target[0], wp.target[1], wp.target[2], 2600);
+        smoothCameraTo(
+          wp.cam[0],
+          wp.cam[1],
+          wp.cam[2],
+          wp.target[0],
+          wp.target[1],
+          wp.target[2],
+          2600,
+        );
 
         tourStepIndex++;
         tourTimer = setTimeout(runTourStep, 7500);
@@ -2182,62 +2901,144 @@
 
         const lblVpConcept = document.getElementById("lbl-viewport-concept");
         if (lblVpConcept) {
-          lblVpConcept.textContent = isZh ? "概念布局推演示意模型" : "Conceptual Layout Model";
+          lblVpConcept.textContent = isZh
+            ? "概念布局推演示意模型"
+            : "Conceptual Layout Model";
         }
         const lblVpScale = document.getElementById("lbl-viewport-scale");
         if (lblVpScale) {
-          lblVpScale.textContent = isZh ? "3,000台先进制程机台宏观演示" : "3,000 Tools Scale Simulation";
+          lblVpScale.textContent = isZh
+            ? "3,000台先进制程机台宏观演示"
+            : "3,000 Tools Scale Simulation";
         }
 
         const twinsMenu = document.getElementById("txt-twins-menu");
-        if (twinsMenu) twinsMenu.textContent = isZh ? "孪生切场 (3)" : "3D Twins (3)";
+        if (twinsMenu)
+          twinsMenu.textContent = isZh ? "孪生切场 (3)" : "3D Twins (3)";
         const twinsHdr = document.getElementById("txt-twins-menu-hdr");
-        if (twinsHdr) twinsHdr.textContent = isZh ? "数字孪生工厂" : "Digital Twins";
+        if (twinsHdr)
+          twinsHdr.textContent = isZh ? "数字孪生工厂" : "Digital Twins";
         const menuMega = document.getElementById("txt-menu-mega");
-        if (menuMega) menuMega.textContent = isZh ? "3nm 概念超级晶圆厂 (3,000)" : "3nm Mega Fab Concept (3,000)";
+        if (menuMega)
+          menuMega.textContent = isZh
+            ? "3nm 概念超级晶圆厂 (3,000)"
+            : "3nm Mega Fab Concept (3,000)";
         const menuPilot = document.getElementById("txt-menu-pilot");
-        if (menuPilot) menuPilot.textContent = isZh ? "300mm 试验线 (121)" : "300mm Pilot Fab (121)";
+        if (menuPilot)
+          menuPilot.textContent = isZh
+            ? "300mm 试验线 (121)"
+            : "300mm Pilot Fab (121)";
         const menuOsat = document.getElementById("txt-menu-osat");
-        if (menuOsat) menuOsat.textContent = isZh ? "封测后道工厂 (86)" : "OSAT Packaging (86)";
+        if (menuOsat)
+          menuOsat.textContent = isZh
+            ? "封测后道工厂 (86)"
+            : "OSAT Packaging (86)";
 
-        document.getElementById("txt-cam-overview").textContent = isZh ? "全景" : "Overview";
-        document.getElementById("txt-cam-phase1").textContent = isZh ? "一期" : "Phase 1";
-        document.getElementById("txt-cam-skybridge").textContent = isZh ? "天桥" : "Skybridge";
-        document.getElementById("txt-cam-phase2").textContent = isZh ? "二期" : "Phase 2";
-        document.getElementById("txt-cam-euv").textContent = isZh ? "EUV" : "EUV";
-        document.getElementById("txt-cam-top").textContent = isZh ? "顶视" : "Top";
-        document.getElementById("txt-tour-btn").textContent = isZh ? "巡检" : "Tour";
+        document.getElementById("txt-cam-overview").textContent = isZh
+          ? "全景"
+          : "Overview";
+        document.getElementById("txt-cam-phase1").textContent = isZh
+          ? "一期"
+          : "Phase 1";
+        document.getElementById("txt-cam-skybridge").textContent = isZh
+          ? "天桥"
+          : "Skybridge";
+        document.getElementById("txt-cam-phase2").textContent = isZh
+          ? "二期"
+          : "Phase 2";
+        document.getElementById("txt-cam-euv").textContent = isZh
+          ? "EUV"
+          : "EUV";
+        document.getElementById("txt-cam-top").textContent = isZh
+          ? "顶视"
+          : "Top";
+        document.getElementById("txt-tour-btn").textContent = isZh
+          ? "巡检"
+          : "Tour";
 
-        document.getElementById("kpi-lbl-tools").textContent = isZh ? "机台总数:" : "Total Tools:";
-        document.getElementById("kpi-lbl-node").textContent = isZh ? "工艺制程:" : "Node:";
-        document.getElementById("kpi-lbl-cap").textContent = isZh ? "月度产能:" : "Capacity:";
-        document.getElementById("kpi-lbl-area").textContent = isZh ? "洁净室面积:" : "Cleanroom Area:";
-        document.getElementById("kpi-lbl-amhs").textContent = isZh ? "AMHS 闭环运力:" : "AMHS Loops:";
+        document.getElementById("kpi-lbl-tools").textContent = isZh
+          ? "机台总数:"
+          : "Total Tools:";
+        document.getElementById("kpi-lbl-node").textContent = isZh
+          ? "工艺制程:"
+          : "Node:";
+        document.getElementById("kpi-lbl-cap").textContent = isZh
+          ? "月度产能:"
+          : "Capacity:";
+        document.getElementById("kpi-lbl-area").textContent = isZh
+          ? "洁净室面积:"
+          : "Cleanroom Area:";
+        document.getElementById("kpi-lbl-amhs").textContent = isZh
+          ? "AMHS 闭环运力:"
+          : "AMHS Loops:";
         const kpiValAmhs = document.getElementById("kpi-val-amhs");
-        if (kpiValAmhs) kpiValAmhs.textContent = isZh ? "86 辆天车全闭环巡航" : "86 OHT Pods in Closed Loops";
-        document.getElementById("kpi-lbl-capex").textContent = isZh ? "总投资估算:" : "Est. Capex:";
-        document.getElementById("kpi-lbl-oee").textContent = isZh ? "稼动率 OEE:" : "Fab OEE:";
+        if (kpiValAmhs)
+          kpiValAmhs.textContent = isZh
+            ? "86 辆天车全闭环巡航"
+            : "86 OHT Pods in Closed Loops";
+        document.getElementById("kpi-lbl-capex").textContent = isZh
+          ? "总投资估算:"
+          : "Est. Capex:";
+        document.getElementById("kpi-lbl-oee").textContent = isZh
+          ? "稼动率 OEE:"
+          : "Fab OEE:";
 
-        document.getElementById("cat-all").textContent = isZh ? "全部 (3,000)" : "All (3,000)";
-        document.getElementById("cat-litho").textContent = isZh ? "EUV/DUV光刻 (600)" : "Litho/EUV (600)";
-        document.getElementById("cat-etch").textContent = isZh ? "等离子刻蚀 (600)" : "Dry Etch (600)";
-        document.getElementById("cat-thinfilm").textContent = isZh ? "薄膜沉积 ALD/CVD/PVD (900)" : "Thin Films (900)";
-        document.getElementById("cat-cmp").textContent = isZh ? "平坦化 CMP (300)" : "CMP (300)";
-        document.getElementById("cat-thermal").textContent = isZh ? "注入与热退火 (300)" : "Implant & Anneal (300)";
-        document.getElementById("cat-wet").textContent = isZh ? "湿法清洗 (148)" : "Wet Clean (148)";
-        document.getElementById("cat-metrology").textContent = isZh ? "量测与检测 (152)" : "Metrology (152)";
+        document.getElementById("cat-all").textContent = isZh
+          ? "全部 (3,000)"
+          : "All (3,000)";
+        document.getElementById("cat-litho").textContent = isZh
+          ? "EUV/DUV光刻 (600)"
+          : "Litho/EUV (600)";
+        document.getElementById("cat-etch").textContent = isZh
+          ? "等离子刻蚀 (600)"
+          : "Dry Etch (600)";
+        document.getElementById("cat-thinfilm").textContent = isZh
+          ? "薄膜沉积 ALD/CVD/PVD (900)"
+          : "Thin Films (900)";
+        document.getElementById("cat-cmp").textContent = isZh
+          ? "平坦化 CMP (300)"
+          : "CMP (300)";
+        document.getElementById("cat-thermal").textContent = isZh
+          ? "注入与热退火 (300)"
+          : "Implant & Anneal (300)";
+        document.getElementById("cat-wet").textContent = isZh
+          ? "湿法清洗 (148)"
+          : "Wet Clean (148)";
+        document.getElementById("cat-metrology").textContent = isZh
+          ? "量测与检测 (152)"
+          : "Metrology (152)";
 
-        document.getElementById("tool-search-input").placeholder = isZh ? "搜索型号/厂商/工艺/Bay..." : "Search model, vendor, bay...";
-        document.getElementById("lbl-radar-title").textContent = isZh ? "双期晶圆厂雷达 · 570米" : "MEGA FAB RADAR · 570M";
-        document.getElementById("lbl-radar-phase").textContent = isZh ? "概念示意 · 50k WSPM" : "Concept · 50k WSPM";
+        document.getElementById("tool-search-input").placeholder = isZh
+          ? "搜索型号/厂商/工艺/Bay..."
+          : "Search model, vendor, bay...";
+        document.getElementById("lbl-radar-title").textContent = isZh
+          ? "双期晶圆厂雷达 · 570米"
+          : "MEGA FAB RADAR · 570M";
+        document.getElementById("lbl-radar-phase").textContent = isZh
+          ? "概念示意 · 50k WSPM"
+          : "Concept · 50k WSPM";
 
-        document.getElementById("lbl-drawer-model").textContent = isZh ? "设备厂商与型号" : "OEM Vendor & Model";
-        document.getElementById("lbl-drawer-state").textContent = isZh ? "SEMI E10 稼动状态" : "SEMI E10 State";
-        document.getElementById("lbl-drawer-process").textContent = isZh ? "3nm FinFET 先进工艺作用" : "3nm FinFET Process Application";
-        document.getElementById("lbl-param").textContent = isZh ? "运行参数" : "Parameter";
-        document.getElementById("lbl-live-val").textContent = isZh ? "实时遥测" : "Live Telemetry";
-        document.getElementById("btn-focus-cam").textContent = isZh ? "镜头聚焦 Focus" : "Focus Tool";
-        document.getElementById("btn-open-catalog").textContent = isZh ? "在设备库查看 Catalog" : "View in Catalog";
+        document.getElementById("lbl-drawer-model").textContent = isZh
+          ? "设备厂商与型号"
+          : "OEM Vendor & Model";
+        document.getElementById("lbl-drawer-state").textContent = isZh
+          ? "SEMI E10 稼动状态"
+          : "SEMI E10 State";
+        document.getElementById("lbl-drawer-process").textContent = isZh
+          ? "3nm FinFET 先进工艺作用"
+          : "3nm FinFET Process Application";
+        document.getElementById("lbl-param").textContent = isZh
+          ? "运行参数"
+          : "Parameter";
+        document.getElementById("lbl-live-val").textContent = isZh
+          ? "实时遥测"
+          : "Live Telemetry";
+        document.getElementById("btn-focus-cam").textContent = isZh
+          ? "镜头聚焦 Focus"
+          : "Focus Tool";
+        document.getElementById("btn-open-catalog").textContent = isZh
+          ? "在设备库查看 Catalog"
+          : "View in Catalog";
 
         const sel = document.getElementById("heatmap-select");
         if (sel) {

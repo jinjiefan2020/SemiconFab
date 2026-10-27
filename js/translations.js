@@ -162,6 +162,17 @@ const I18N_DICTIONARY = {
     odr_fabcost_feat1: "Parametric Estimator (Node × WSPM)",
     odr_fabcost_feat2: "10 Reference Projects · 27 Sources",
     odr_fabcost_cta: "Explore Fab Cost Breakdown →",
+    odr_fabdata_badge: "DATA FLOW · TEACHING MODEL",
+    odr_fabdata_title: "Fab Data Layer",
+    odr_fabdata_desc:
+      "How data flows from a tool through connectivity, MES, analytics, and the twin — layer by layer, as a teaching model.",
+    odr_fabdata_stat1_lbl: "Architecture",
+    odr_fabdata_stat2_lbl: "Lot Journey",
+    odr_fabdata_feat1: "SECS/GEM · GEM300 · EDA / Interface A",
+    odr_fabdata_feat2: "3 Fault Scenarios · Teaching Sandbox",
+    odr_fabdata_cta: "Explore the Data Layer →",
+    twin_data_layer_link:
+      "See how this tool's data flows to the fab → Fab Data Layer",
 
     // Fab Cost Breakdown Report Keys
     fab_cost_page_title:
@@ -777,11 +788,15 @@ const I18N_DICTIONARY = {
     cat_osat_inspection: "OSAT Inspection",
     osat_building_title: "OSAT Back-End · 封测工厂",
     osat_building_subtitle: "从硅片到芯片出货 · From Wafer to Shipment",
-    osat_building_desc: "Dedicated standalone facility covering the complete back-end process flow: Dicing → Die Attach → Wire Bonding → Flip Chip → Molding → Singulation → Bumping/RDL → Prober → ATE → Test Handler → Inspection.",
+    osat_building_desc:
+      "Dedicated standalone facility covering the complete back-end process flow: Dicing → Die Attach → Wire Bonding → Flip Chip → Molding → Singulation → Bumping/RDL → Prober → ATE → Test Handler → Inspection.",
     osat_badge_draft: "Draft Shell · Dimensions Pending Verification",
-    osat_banner_honesty: "Dimensions pending verification · 3D scene displays a procedural category placeholder shell without physical CAD measurements.",
-    osat_cta_contribute: "+ Contribute Verified Equipment Specs (Add Equipment) →",
-    osat_gap_towa: "TOWA officially discloses process technologies and technical features without publishing specific model numbers — model unverified, cataloged as gap row.",
+    osat_banner_honesty:
+      "Dimensions pending verification · 3D scene displays a procedural category placeholder shell without physical CAD measurements.",
+    osat_cta_contribute:
+      "+ Contribute Verified Equipment Specs (Add Equipment) →",
+    osat_gap_towa:
+      "TOWA officially discloses process technologies and technical features without publishing specific model numbers — model unverified, cataloged as gap row.",
     state_running: "Running",
     state_idle: "Idle",
     state_down: "Down",
@@ -1188,6 +1203,17 @@ const I18N_DICTIONARY = {
     odr_fabcost_feat1: "参数化估算器 (制程 × 产能)",
     odr_fabcost_feat2: "10 个参考项目 · 27 处公开来源",
     odr_fabcost_cta: "探索 Fab 建设成本构成 →",
+    odr_fabdata_badge: "数据流 · 教学模型",
+    odr_fabdata_title: "晶圆厂数据层",
+    odr_fabdata_desc:
+      "数据如何从一台设备出发，经过连接层、MES、分析层到达孪生——一层层讲清楚的教学模型。",
+    odr_fabdata_stat1_lbl: "架构分层",
+    odr_fabdata_stat2_lbl: "工序旅程",
+    odr_fabdata_feat1: "SECS/GEM · GEM300 · EDA / Interface A",
+    odr_fabdata_feat2: "3 组断链实验 · 教学仿真沙盒",
+    odr_fabdata_cta: "进入数据层 →",
+    twin_data_layer_link:
+      "看看这台设备的数据是怎么流向工厂系统的 → 晶圆厂数据层",
 
     // Fab Cost Breakdown Report Keys
     fab_cost_page_title: "Fab 建设成本：设备之外的构成 — SemiconFab.org",
@@ -1772,11 +1798,14 @@ const I18N_DICTIONARY = {
     cat_osat_inspection: "出厂检测",
     osat_building_title: "OSAT Back-End · 封测工厂",
     osat_building_subtitle: "从硅片到芯片出货 · From Wafer to Shipment",
-    osat_building_desc: "后道封测专属独立厂房，覆盖完整后道流程：划片 → 贴片 → 键合 → 倒装 → 塑封 → 分离 → 凸块/RDL → 探针 → ATE → 分选 → 检测。",
+    osat_building_desc:
+      "后道封测专属独立厂房，覆盖完整后道流程：划片 → 贴片 → 键合 → 倒装 → 塑封 → 分离 → 凸块/RDL → 探针 → ATE → 分选 → 检测。",
     osat_badge_draft: "Draft Shell · 尺寸待实测",
-    osat_banner_honesty: "尺寸待实测 · 3D 场景展示为类别通用概念占位外形，物理包络尺寸未经实测核实。",
+    osat_banner_honesty:
+      "尺寸待实测 · 3D 场景展示为类别通用概念占位外形，物理包络尺寸未经实测核实。",
     osat_cta_contribute: "+ 补充实测机台参数 (Add Equipment) →",
-    osat_gap_towa: "TOWA 官网只公开技术说明、不公开型号命名——型号无法核实，本行即缺口标注。",
+    osat_gap_towa:
+      "TOWA 官网只公开技术说明、不公开型号命名——型号无法核实，本行即缺口标注。",
     state_running: "Running",
     state_idle: "Idle",
     state_down: "Down",
@@ -2268,11 +2297,14 @@ const I18N_DICTIONARY = {
     cat_osat_inspection: "出廠檢測",
     osat_building_title: "OSAT Back-End · 封測工廠",
     osat_building_subtitle: "從矽片到晶片出貨 · From Wafer to Shipment",
-    osat_building_desc: "後段封測專屬獨立廠房，覆蓋完整後段流程：劃片 → 貼片 → 鍵合 → 覆晶 → 模壓 → 分離 → 凸塊/RDL → 探針 → ATE → 分選 → 檢測。",
+    osat_building_desc:
+      "後段封測專屬獨立廠房，覆蓋完整後段流程：劃片 → 貼片 → 鍵合 → 覆晶 → 模壓 → 分離 → 凸塊/RDL → 探針 → ATE → 分選 → 檢測。",
     osat_badge_draft: "Draft Shell · 尺寸待實測",
-    osat_banner_honesty: "尺寸待實測 · 3D 場景展示為類別通用概念占位外形，物理包絡尺寸未經實測核實。",
+    osat_banner_honesty:
+      "尺寸待實測 · 3D 場景展示為類別通用概念占位外形，物理包絡尺寸未經實測核實。",
     osat_cta_contribute: "+ 補充實測機台參數 (Add Equipment) →",
-    osat_gap_towa: "TOWA 官網只公開技術說明、不公開型號命名——型號無法核實，本行即缺口標註。",
+    osat_gap_towa:
+      "TOWA 官網只公開技術說明、不公開型號命名——型號無法核實，本行即缺口標註。",
     state_running: "Running",
     state_idle: "Idle",
     state_down: "Down",

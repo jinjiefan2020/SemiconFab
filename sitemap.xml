@@ -205,6 +205,17 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://semiconfab.org/fab-cost" />
   </url>
 
+  <!-- Fab Data Layer: How Data Flows Across Fab Layers -->
+  <url>
+    <loc>https://semiconfab.org/fab-data-layer</loc>
+    <lastmod>2026-10-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/fab-data-layer" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://semiconfab.org/fab-data-layer" />
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://semiconfab.org/fab-data-layer" />
+  </url>
+
   <!-- Semiconductor Equipment Side-by-Side Comparison -->
   <url>
     <loc>https://semiconfab.org/compare.html</loc>

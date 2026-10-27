@@ -34,6 +34,8 @@ SemiconFab is a source-available 300mm logic semiconductor wafer fabrication dig
 └────────────────────────────────┴───────────────────────────────────────┘
 ```
 
+- **Fab Data Layer (`/fab-data-layer`, `fab-data-layer.html`)**: 5-layer fab data flow architecture and shop-floor signal propagation teaching model.
+
 > **Cleanroom Digital Twin Sandbox Scope**:  
 > 本洁净室为 SemiconFab 概念验证与全谱系设备编目孪生沙盒，集成了前道与后道代表性设备，但机台数量显著少于实际先进制程Fab。_(This cleanroom serves as a SemiconFab proof-of-concept and full-spectrum equipment catalog digital twin sandbox, integrating representative front-end and back-end equipment, with machine counts significantly lower than an actual high-volume advanced node semiconductor fab.)_
 

@@ -1,0 +1,3584 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title id="fd-page-title" data-i18n="fab_data_layer_page_title">
+      晶圆厂数据层 · Fab Data Layer — SemiconFab.org
+    </title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta
+      name="description"
+      content="How fab data flows: from a tool, through connectivity (SECS/GEM, EDA), to MES, analytics, and the digital twin — an interactive teaching model."
+    />
+    <link rel="canonical" href="https://semiconfab.org/fab-data-layer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/semicon-theme.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f2f1ec;
+        --surface: #ffffff;
+        --surface-2: #e9e7df;
+        --ink: #1c2126;
+        --ink-2: #4c5560;
+        --ink-3: #7a838d;
+        --line: #d8d4c8;
+        --accent: #0e6e6b;
+        --accent-ink: #0a5451;
+        --amber: #b45309;
+        --amber-bg: #fdf3e3;
+        --red: #a83226;
+        --red-bg: #fdf2f2;
+        --chart-grid: #ddd9cc;
+        --shadow:
+          0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+      }
+
+      html.dark,
+      [data-theme="dark"] {
+        --bg: #12161a;
+        --surface: #1a2026;
+        --surface-2: #232b33;
+        --ink: #e8eaec;
+        --ink-2: #aeb7bf;
+        --ink-3: #7e8891;
+        --line: #333c45;
+        --accent: #3fbdb8;
+        --accent-ink: #7fd8d3;
+        --amber: #e8a04c;
+        --amber-bg: #2c2417;
+        --red: #e0786a;
+        --red-bg: #2c1a18;
+        --chart-grid: #2c343d;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Manrope",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .mono {
+        font-family:
+          "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco,
+          Consolas, monospace;
+      }
+
+      .fd-container {
+        max-width: 1240px;
+        margin: 0 auto;
+        padding: 24px 20px 80px;
+      }
+
+      /* Permanent Honest Banner */
+      .fd-honest-banner {
+        background-color: var(--surface);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--amber);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .fd-banner-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .fd-banner-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .fd-banner-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--amber);
+        display: inline-block;
+      }
+
+      .fd-banner-backlink {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--accent);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background-color: var(--surface-2);
+        transition: all 0.2s ease;
+      }
+      .fd-banner-backlink:hover {
+        background-color: var(--accent);
+        color: #ffffff;
+      }
+
+      /* Hero Section */
+      .fd-hero {
+        margin-bottom: 28px;
+      }
+
+      .fd-hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: var(--surface-2);
+        color: var(--accent-ink);
+        border: 1px solid var(--line);
+        margin-bottom: 12px;
+      }
+
+      .fd-hero h1 {
+        font-size: clamp(26px, 3.2vw, 38px);
+        font-weight: 800;
+        line-height: 1.2;
+        margin: 0 0 10px;
+        color: var(--ink);
+        letter-spacing: -0.02em;
+      }
+
+      .fd-hero p {
+        font-size: clamp(14px, 1.4vw, 16px);
+        color: var(--ink-2);
+        max-width: 920px;
+        margin: 0;
+        line-height: 1.6;
+      }
+
+      /* Tool Inspection Banner (if ?tool=...) */
+      .fd-tool-callout {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 14px 18px;
+        margin-bottom: 24px;
+        box-shadow: var(--shadow);
+      }
+      .fd-tool-callout-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+      }
+      .fd-tool-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+      .fd-tag {
+        font-size: 11px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: var(--surface-2);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+      .fd-tool-notice {
+        font-size: 12.5px;
+        color: var(--amber);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* 5-Layer Filter Tabs */
+      .fd-layer-tabs {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 24px;
+        background: var(--surface-2);
+        padding: 6px;
+        border-radius: 12px;
+        border: 1px solid var(--line);
+      }
+
+      .fd-layer-btn {
+        flex: 1 1 180px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        background: transparent;
+        color: var(--ink-2);
+        cursor: pointer;
+        text-align: left;
+        transition: all 0.2s ease;
+        font-family: inherit;
+      }
+      .fd-layer-btn:hover {
+        background: var(--surface);
+        color: var(--ink);
+      }
+      .fd-layer-btn.active {
+        background: var(--surface);
+        color: var(--accent-ink);
+        border-color: var(--line);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      }
+      .fd-layer-btn-idx {
+        font-size: 10.5px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 700;
+        color: var(--ink-3);
+      }
+      .fd-layer-btn.active .fd-layer-btn-idx {
+        color: var(--accent);
+      }
+      .fd-layer-btn-title {
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      /* Main Interactive Layout Grid */
+      .fd-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+        gap: 24px;
+        margin-bottom: 36px;
+        align-items: start;
+      }
+      @media (max-width: 960px) {
+        .fd-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      /* Schematic Cleanroom & Animation Card */
+      .fd-schematic-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .fd-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+        gap: 12px;
+      }
+      .fd-card-title {
+        font-size: 16px;
+        font-weight: 700;
+        margin: 0;
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .fd-anim-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .fd-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--line);
+        background: var(--surface-2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+      }
+      .fd-btn:hover {
+        background: var(--surface);
+        border-color: var(--accent);
+        color: var(--accent-ink);
+      }
+      .fd-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #ffffff;
+      }
+
+      /* SVG Diagram Stage */
+      .fd-svg-stage {
+        width: 100%;
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .fd-svg-stage svg {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      /* SVG Interactive elements & pulse animation */
+      .svg-layer-box {
+        transition:
+          stroke 0.3s ease,
+          fill 0.3s ease,
+          filter 0.3s ease;
+        cursor: pointer;
+      }
+      .svg-layer-box.highlight {
+        stroke: var(--accent) !important;
+        stroke-width: 2.5px !important;
+      }
+
+      /* Stepper & Controls */
+      .fd-stepper-box {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .fd-stepper-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .fd-step-badge {
+        font-size: 11px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 700;
+        padding: 3px 8px;
+        border-radius: 4px;
+        background: var(--accent);
+        color: #ffffff;
+      }
+      .fd-step-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+      .fd-stepper-actions {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* Sidebar Details Card */
+      .fd-sidebar-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      .fd-detail-panel {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px;
+      }
+
+      .fd-detail-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 8px;
+      }
+      .fd-detail-layer-id {
+        font-size: 11px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+      }
+      .fd-detail-title {
+        font-size: 17px;
+        font-weight: 800;
+        margin: 0 0 6px;
+        color: var(--ink);
+      }
+      .fd-detail-func {
+        font-size: 13.5px;
+        color: var(--ink-2);
+        margin: 0 0 12px;
+        font-weight: 500;
+      }
+
+      .fd-spec-group {
+        margin-bottom: 12px;
+      }
+      .fd-spec-label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--ink-3);
+        margin-bottom: 4px;
+        letter-spacing: 0.04em;
+      }
+      .fd-spec-pill-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+      }
+      .fd-pill {
+        font-size: 11.5px;
+        font-family: "IBM Plex Mono", monospace;
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: var(--surface);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      /* Step Journey 4-Item Grid */
+      .fd-journey-box {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px;
+        margin-top: 14px;
+      }
+      .fd-journey-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+      @media (max-width: 640px) {
+        .fd-journey-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+      .fd-journey-item {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 0;
+      }
+      .fd-jlabel {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent-ink);
+        margin-bottom: 2px;
+      }
+      .fd-jval {
+        font-size: 12.5px;
+        color: var(--ink);
+        line-height: 1.45;
+      }
+      .fd-jval-danger {
+        color: var(--red);
+        font-weight: 500;
+      }
+
+      /* Fault Experiment Section */
+      .fd-fault-section {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 20px;
+        margin-bottom: 36px;
+        box-shadow: var(--shadow);
+      }
+      .fd-fault-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 16px;
+      }
+      .fd-fault-btn {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 8px 14px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+        background: var(--surface-2);
+        color: var(--ink);
+        cursor: pointer;
+        transition: all 0.2s ease;
+        font-family: inherit;
+      }
+      .fd-fault-btn:hover {
+        background: var(--surface);
+        border-color: var(--amber);
+      }
+      .fd-fault-btn.active {
+        background: var(--amber-bg);
+        border-color: var(--amber);
+        color: var(--amber);
+        font-weight: 700;
+      }
+
+      .fd-fault-card {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--amber);
+        border-radius: 8px;
+        padding: 16px;
+      }
+      .fd-fault-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0 0 6px;
+      }
+      .fd-fault-desc {
+        font-size: 13px;
+        color: var(--ink-2);
+        margin: 0 0 12px;
+        line-height: 1.5;
+      }
+      .fd-alarm-box {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 12px;
+        font-size: 12.5px;
+      }
+      .fd-alarm-badge {
+        font-size: 10.5px;
+        font-weight: 700;
+        font-family: "IBM Plex Mono", monospace;
+        color: var(--red);
+        text-transform: uppercase;
+        margin-bottom: 4px;
+      }
+
+      /* Layer Details & Vendor Accordion */
+      .fd-layers-accordion {
+        margin-bottom: 36px;
+      }
+      .fd-accordion-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+      .fd-accordion-head {
+        padding: 16px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+        background: var(--surface);
+        user-select: none;
+      }
+      .fd-accordion-head:hover {
+        background: var(--surface-2);
+      }
+      .fd-acc-title-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .fd-acc-tag {
+        font-size: 11px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 700;
+        color: var(--accent);
+        padding: 2px 8px;
+        border-radius: 4px;
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+      }
+      .fd-acc-title {
+        font-size: 15px;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0;
+      }
+      .fd-accordion-body {
+        padding: 0 20px 20px;
+        border-top: 1px solid var(--line);
+        display: none;
+        background: var(--surface);
+      }
+      .fd-accordion-card.open .fd-accordion-body {
+        display: block;
+      }
+      .fd-vendor-disclaimer {
+        font-size: 12px;
+        color: var(--ink-3);
+        font-style: italic;
+        margin: 12px 0 8px;
+        line-height: 1.45;
+        border-left: 2px solid var(--line);
+        padding-left: 10px;
+      }
+      .fd-vendor-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 8px;
+      }
+      .fd-vendor-item {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: var(--surface-2);
+        color: var(--ink);
+        border: 1px solid var(--line);
+      }
+
+      /* Pure Text Version Section */
+      .fd-text-version {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 24px;
+        margin-bottom: 36px;
+        box-shadow: var(--shadow);
+      }
+      .fd-text-version h2 {
+        font-size: 18px;
+        font-weight: 800;
+        margin: 0 0 12px;
+        color: var(--ink);
+      }
+      .fd-text-version h3 {
+        font-size: 14px;
+        font-weight: 700;
+        margin: 18px 0 6px;
+        color: var(--accent-ink);
+      }
+      .fd-text-version p,
+      .fd-text-version li {
+        font-size: 13px;
+        color: var(--ink-2);
+        line-height: 1.7;
+      }
+      .fd-text-version h4 {
+        font-size: 13.5px;
+        font-weight: 700;
+        margin: 14px 0 6px;
+        color: var(--ink);
+      }
+      .fd-tv-card {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      .fd-tv-card-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .fd-tv-badge {
+        font-size: 11px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 700;
+        color: var(--accent);
+        background: var(--surface);
+        padding: 2px 8px;
+        border-radius: 4px;
+        border: 1px solid var(--line);
+      }
+      .fd-tv-card-title {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: var(--ink);
+        margin: 0;
+      }
+      .fd-tv-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin: 8px 0;
+      }
+      .fd-tv-pill {
+        font-size: 11px;
+        font-family: "IBM Plex Mono", monospace;
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: var(--surface);
+        border: 1px solid var(--line);
+        color: var(--ink-2);
+      }
+
+      /* Sponsorship banner (only if enabled) */
+      .fd-sponsor-container {
+        display: none;
+        margin-bottom: 24px;
+        background: var(--surface);
+        border: 1px solid var(--accent);
+        border-radius: 8px;
+        padding: 12px 16px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .fd-pulse {
+          animation: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Unified Header Mount -->
+    <div id="sc-header-mount"></div>
+
+    <main class="fd-container" role="main">
+      <!-- Permanent Honest Banner -->
+      <aside class="fd-honest-banner" aria-label="Honesty & Methodology Notice">
+        <div class="fd-banner-items">
+          <span class="fd-banner-item">
+            <span class="fd-banner-dot"></span>
+            <span id="banner-text-1"
+              >数据流为示意 · Data Flow Illustrative</span
+            >
+          </span>
+          <span class="fd-banner-item">
+            <span class="fd-banner-dot"></span>
+            <span id="banner-text-2"
+              >教学级模型，非真实工厂数据 · Teaching model, not real fab
+              data</span
+            >
+          </span>
+          <span class="fd-banner-item">
+            <span class="fd-banner-dot"></span>
+            <span id="banner-text-3"
+              >未连接任何真实设备 · No live equipment connection</span
+            >
+          </span>
+        </div>
+        <a
+          id="fd-return-twin-btn"
+          href="twin.html"
+          class="fd-banner-backlink"
+          title="Return to 3D Twin"
+        >
+          <span>←</span>
+          <span id="banner-return-text">返回 3D 孪生 · Return to Twin</span>
+        </a>
+      </aside>
+
+      <!-- Sponsorship Banner (Default Off - Only rendered if config enabled) -->
+      <section
+        id="fd-sponsorship-banner"
+        class="fd-sponsor-container"
+        aria-label="Sponsorship Notice"
+      ></section>
+
+      <!-- Tool Context Header (Conditional if ?tool=...) -->
+      <div id="fd-tool-callout" class="fd-tool-callout" style="display: none">
+        <div class="fd-tool-callout-header">
+          <div class="fd-tool-tags">
+            <span class="fd-tag" id="fd-tool-vendor">OEM</span>
+            <span class="fd-tag mono" id="fd-tool-model">Model</span>
+            <span class="fd-tag" id="fd-tool-category">Category</span>
+            <span class="fd-tag mono" id="fd-tool-conformance">L1</span>
+          </div>
+          <div class="fd-tool-notice">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+            <span id="fd-tool-protocol-notice"
+              >该记录未包含连接协议信息 · No connectivity info in this
+              record</span
+            >
+          </div>
+        </div>
+        <div
+          id="fd-tool-summary-text"
+          style="font-size: 12px; color: var(--ink-2)"
+        ></div>
+      </div>
+
+      <!-- Hero Header -->
+      <header class="fd-hero">
+        <div class="fd-hero-badge">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+          >
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+          </svg>
+          <span id="hero-badge-text">DATA FLOW ARCHITECTURE · 教学模型</span>
+        </div>
+        <h1 id="hero-title-text">晶圆厂数据层 · Fab Data Layer</h1>
+        <p id="hero-subtitle-text">
+          一台设备的数据是怎么流动的：从设备出发，经过连接层，到
+          MES、分析层，再到孪生——这是一个教学模型。
+        </p>
+      </header>
+
+      <!-- 5-Layer Switch Bar -->
+      <nav class="fd-layer-tabs" aria-label="Fab Architecture Layers">
+        <button
+          type="button"
+          class="fd-layer-btn active"
+          data-layer-id="equipment"
+          onclick="switchLayer('equipment')"
+        >
+          <span class="fd-layer-btn-idx">LAYER 1</span>
+          <span class="fd-layer-btn-title" id="btn-title-equipment"
+            >设备层 Equipment</span
+          >
+        </button>
+        <button
+          type="button"
+          class="fd-layer-btn"
+          data-layer-id="connectivity"
+          onclick="switchLayer('connectivity')"
+        >
+          <span class="fd-layer-btn-idx">LAYER 2</span>
+          <span class="fd-layer-btn-title" id="btn-title-connectivity"
+            >连接层 Connectivity</span
+          >
+        </button>
+        <button
+          type="button"
+          class="fd-layer-btn"
+          data-layer-id="execution"
+          onclick="switchLayer('execution')"
+        >
+          <span class="fd-layer-btn-idx">LAYER 3</span>
+          <span class="fd-layer-btn-title" id="btn-title-execution"
+            >执行层 Execution (MES)</span
+          >
+        </button>
+        <button
+          type="button"
+          class="fd-layer-btn"
+          data-layer-id="analytics"
+          onclick="switchLayer('analytics')"
+        >
+          <span class="fd-layer-btn-idx">LAYER 4</span>
+          <span class="fd-layer-btn-title" id="btn-title-analytics"
+            >分析与控制层 Analytics</span
+          >
+        </button>
+        <button
+          type="button"
+          class="fd-layer-btn"
+          data-layer-id="twin"
+          onclick="switchLayer('twin')"
+        >
+          <span class="fd-layer-btn-idx">LAYER 5</span>
+          <span class="fd-layer-btn-title" id="btn-title-twin"
+            >决策与孪生层 Twin</span
+          >
+        </button>
+      </nav>
+
+      <!-- Interactive Grid: Schematic Cleanroom Diagram (Left) + Layer / Lot Details (Right) -->
+      <section class="fd-grid">
+        <!-- Left: SVG Schematic Architecture Diagram -->
+        <div class="fd-schematic-card">
+          <div class="fd-card-header">
+            <h2 class="fd-card-title">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="var(--accent)"
+                stroke-width="2"
+              >
+                <rect x="3" y="3" width="18" height="18" rx="2" />
+                <path d="M3 9h18" />
+                <path d="M9 21V9" />
+              </svg>
+              <span id="diagram-title-text">整厂五层数据流示意架构</span>
+            </h2>
+            <div class="fd-anim-controls">
+              <button
+                type="button"
+                id="fd-anim-toggle-btn"
+                class="fd-btn"
+                onclick="toggleAnimation()"
+              >
+                <span id="anim-btn-icon">⏸</span>
+                <span id="anim-btn-label">暂停动画</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- SVG Visual Representation -->
+          <div class="fd-svg-stage">
+            <svg
+              id="fd-data-svg"
+              viewBox="0 0 680 470"
+              xmlns="http://www.w3.org/2000/svg"
+              role="img"
+              aria-label="Semiconductor Fab 5-Layer Data Flow Architecture"
+            >
+              <!-- Layer 5: Planning & Twin -->
+              <g
+                id="svg-layer-twin"
+                class="svg-layer-box"
+                onclick="switchLayer('twin')"
+              >
+                <rect
+                  x="30"
+                  y="20"
+                  width="620"
+                  height="54"
+                  rx="8"
+                  fill="var(--surface)"
+                  stroke="var(--line)"
+                  stroke-width="1.5"
+                />
+                <text
+                  id="svg-txt-l5-title"
+                  x="45"
+                  y="44"
+                  font-family="Manrope, sans-serif"
+                  font-weight="800"
+                  font-size="13"
+                  fill="var(--ink)"
+                >
+                  5. 决策与孪生层 (Planning, Simulation &amp; Twin)
+                </text>
+                <text
+                  id="svg-txt-l5-sub"
+                  x="45"
+                  y="62"
+                  font-family="Manrope, sans-serif"
+                  font-size="11"
+                  fill="var(--ink-2)"
+                >
+                  全厂排程仿真 · 产能推演 · What-If 决策 · SemiconFab 教学沙盒
+                </text>
+                <rect
+                  x="535"
+                  y="32"
+                  width="100"
+                  height="28"
+                  rx="4"
+                  fill="var(--surface-2)"
+                  stroke="var(--line)"
+                />
+                <text
+                  x="585"
+                  y="50"
+                  font-family="IBM Plex Mono, monospace"
+                  font-size="10"
+                  font-weight="600"
+                  fill="var(--accent-ink)"
+                  text-anchor="middle"
+                >
+                  OFFLINE SIM
+                </text>
+              </g>
+
+              <!-- Layer 4: Analytics & Control -->
+              <g
+                id="svg-layer-analytics"
+                class="svg-layer-box"
+                onclick="switchLayer('analytics')"
+              >
+                <rect
+                  x="30"
+                  y="94"
+                  width="620"
+                  height="54"
+                  rx="8"
+                  fill="var(--surface)"
+                  stroke="var(--line)"
+                  stroke-width="1.5"
+                />
+                <text
+                  id="svg-txt-l4-title"
+                  x="45"
+                  y="118"
+                  font-family="Manrope, sans-serif"
+                  font-weight="800"
+                  font-size="13"
+                  fill="var(--ink)"
+                >
+                  4. 分析与控制层 (Analytics &amp; Control)
+                </text>
+                <text
+                  id="svg-txt-l4-sub"
+                  x="45"
+                  y="136"
+                  font-family="Manrope, sans-serif"
+                  font-size="11"
+                  fill="var(--ink-2)"
+                >
+                  APC (Run-to-Run 闭环补偿) · FDC (腔体故障分类) · SPC
+                  (统计过程控制) · YMS
+                </text>
+                <rect
+                  x="535"
+                  y="106"
+                  width="100"
+                  height="28"
+                  rx="4"
+                  fill="var(--surface-2)"
+                  stroke="var(--line)"
+                />
+                <text
+                  x="585"
+                  y="124"
+                  font-family="IBM Plex Mono, monospace"
+                  font-size="10"
+                  font-weight="600"
+                  fill="var(--accent-ink)"
+                  text-anchor="middle"
+                >
+                  APC / FDC
+                </text>
+              </g>
+
+              <!-- Layer 3: Execution (MES) -->
+              <g
+                id="svg-layer-execution"
+                class="svg-layer-box"
+                onclick="switchLayer('execution')"
+              >
+                <rect
+                  x="30"
+                  y="168"
+                  width="620"
+                  height="54"
+                  rx="8"
+                  fill="var(--surface)"
+                  stroke="var(--line)"
+                  stroke-width="1.5"
+                />
+                <text
+                  id="svg-txt-l3-title"
+                  x="45"
+                  y="192"
+                  font-family="Manrope, sans-serif"
+                  font-weight="800"
+                  font-size="13"
+                  fill="var(--ink)"
+                >
+                  3. 制造执行层 (Execution / MES)
+                </text>
+                <text
+                  id="svg-txt-l3-sub"
+                  x="45"
+                  y="210"
+                  font-family="Manrope, sans-serif"
+                  font-size="11"
+                  fill="var(--ink-2)"
+                >
+                  工单路径 (Routing) · 派工调度 (Dispatch) · 配方核验 (Recipe
+                  Integrity) · WIP 状态
+                </text>
+                <rect
+                  x="535"
+                  y="180"
+                  width="100"
+                  height="28"
+                  rx="4"
+                  fill="var(--surface-2)"
+                  stroke="var(--line)"
+                />
+                <text
+                  x="585"
+                  y="198"
+                  font-family="IBM Plex Mono, monospace"
+                  font-size="10"
+                  font-weight="600"
+                  fill="var(--accent-ink)"
+                  text-anchor="middle"
+                >
+                  MES CORE
+                </text>
+              </g>
+
+              <!-- Layer 2: Connectivity (EAP & Standard Protocols) -->
+              <g
+                id="svg-layer-connectivity"
+                class="svg-layer-box"
+                onclick="switchLayer('connectivity')"
+              >
+                <rect
+                  x="30"
+                  y="242"
+                  width="620"
+                  height="58"
+                  rx="8"
+                  fill="var(--surface)"
+                  stroke="var(--line)"
+                  stroke-width="1.5"
+                />
+                <text
+                  id="svg-txt-l2-title"
+                  x="45"
+                  y="266"
+                  font-family="Manrope, sans-serif"
+                  font-weight="800"
+                  font-size="13"
+                  fill="var(--ink)"
+                >
+                  2. 连接层 (Connectivity / EAP Gateway)
+                </text>
+                <text
+                  id="svg-txt-l2-sub"
+                  x="45"
+                  y="284"
+                  font-family="Manrope, sans-serif"
+                  font-size="11"
+                  fill="var(--ink-2)"
+                >
+                  SECS/GEM (E4/E5/E30) · GEM300 (E39/E87/E90/E94) · EDA /
+                  Interface A (E120-E134)
+                </text>
+                <rect
+                  x="535"
+                  y="254"
+                  width="100"
+                  height="28"
+                  rx="4"
+                  fill="var(--surface-2)"
+                  stroke="var(--line)"
+                />
+                <text
+                  x="585"
+                  y="272"
+                  font-family="IBM Plex Mono, monospace"
+                  font-size="10"
+                  font-weight="600"
+                  fill="var(--accent-ink)"
+                  text-anchor="middle"
+                >
+                  EAP / SECS
+                </text>
+              </g>
+
+              <!-- Layer 1: Equipment Cleanroom Bays -->
+              <g
+                id="svg-layer-equipment"
+                class="svg-layer-box"
+                onclick="switchLayer('equipment')"
+              >
+                <rect
+                  x="30"
+                  y="320"
+                  width="620"
+                  height="135"
+                  rx="10"
+                  fill="var(--surface)"
+                  stroke="var(--line)"
+                  stroke-width="1.5"
+                />
+                <text
+                  id="svg-txt-l1-title"
+                  x="45"
+                  y="342"
+                  font-family="Manrope, sans-serif"
+                  font-weight="800"
+                  font-size="13"
+                  fill="var(--ink)"
+                >
+                  1. 设备层 (Layer 1: Cleanroom Equipment Floor)
+                </text>
+                <text
+                  id="svg-txt-l1-sub"
+                  x="45"
+                  y="357"
+                  font-family="Manrope, sans-serif"
+                  font-size="10.5"
+                  fill="var(--ink-3)"
+                >
+                  五大典型工艺区 (5 Representative Cleanroom Bays) ·
+                  产生原始事件、报警与高频传感器 Trace
+                </text>
+
+                <!-- Bay 1: Litho -->
+                <g
+                  id="bay-node-1"
+                  class="bay-box"
+                  onclick="
+                    setLotStep(1);
+                    event.stopPropagation();
+                  "
+                >
+                  <rect
+                    x="42"
+                    y="367"
+                    width="112"
+                    height="76"
+                    rx="6"
+                    fill="var(--surface-2)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="98"
+                    y="385"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="10"
+                    font-weight="700"
+                    fill="var(--accent-ink)"
+                    text-anchor="middle"
+                  >
+                    BAY 01
+                  </text>
+                  <text
+                    id="svg-txt-bay-1"
+                    x="98"
+                    y="401"
+                    font-family="Manrope, sans-serif"
+                    font-size="11"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    光刻 Litho
+                  </text>
+                  <circle
+                    cx="98"
+                    cy="422"
+                    r="10"
+                    fill="var(--surface)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="98"
+                    y="426"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="9"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    EXP
+                  </text>
+                </g>
+
+                <!-- Bay 2: Etch -->
+                <g
+                  id="bay-node-2"
+                  class="bay-box"
+                  onclick="
+                    setLotStep(2);
+                    event.stopPropagation();
+                  "
+                >
+                  <rect
+                    x="166"
+                    y="367"
+                    width="112"
+                    height="76"
+                    rx="6"
+                    fill="var(--surface-2)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="222"
+                    y="385"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="10"
+                    font-weight="700"
+                    fill="var(--accent-ink)"
+                    text-anchor="middle"
+                  >
+                    BAY 02
+                  </text>
+                  <text
+                    id="svg-txt-bay-2"
+                    x="222"
+                    y="401"
+                    font-family="Manrope, sans-serif"
+                    font-size="11"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    刻蚀 Etch
+                  </text>
+                  <circle
+                    cx="222"
+                    cy="422"
+                    r="10"
+                    fill="var(--surface)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="222"
+                    y="426"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="9"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    ICP
+                  </text>
+                </g>
+
+                <!-- Bay 3: Deposition -->
+                <g
+                  id="bay-node-3"
+                  class="bay-box"
+                  onclick="
+                    setLotStep(3);
+                    event.stopPropagation();
+                  "
+                >
+                  <rect
+                    x="290"
+                    y="367"
+                    width="112"
+                    height="76"
+                    rx="6"
+                    fill="var(--surface-2)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="346"
+                    y="385"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="10"
+                    font-weight="700"
+                    fill="var(--accent-ink)"
+                    text-anchor="middle"
+                  >
+                    BAY 03
+                  </text>
+                  <text
+                    id="svg-txt-bay-3"
+                    x="346"
+                    y="401"
+                    font-family="Manrope, sans-serif"
+                    font-size="11"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    沉积 Depo
+                  </text>
+                  <circle
+                    cx="346"
+                    cy="422"
+                    r="10"
+                    fill="var(--surface)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="346"
+                    y="426"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="9"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    CVD
+                  </text>
+                </g>
+
+                <!-- Bay 4: CMP -->
+                <g
+                  id="bay-node-4"
+                  class="bay-box"
+                  onclick="
+                    setLotStep(4);
+                    event.stopPropagation();
+                  "
+                >
+                  <rect
+                    x="414"
+                    y="367"
+                    width="112"
+                    height="76"
+                    rx="6"
+                    fill="var(--surface-2)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="470"
+                    y="385"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="10"
+                    font-weight="700"
+                    fill="var(--accent-ink)"
+                    text-anchor="middle"
+                  >
+                    BAY 04
+                  </text>
+                  <text
+                    id="svg-txt-bay-4"
+                    x="470"
+                    y="401"
+                    font-family="Manrope, sans-serif"
+                    font-size="11"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    平坦化 CMP
+                  </text>
+                  <circle
+                    cx="470"
+                    cy="422"
+                    r="10"
+                    fill="var(--surface)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="470"
+                    y="426"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="9"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    POL
+                  </text>
+                </g>
+
+                <!-- Bay 5: Metrology -->
+                <g
+                  id="bay-node-5"
+                  class="bay-box"
+                  onclick="
+                    setLotStep(5);
+                    event.stopPropagation();
+                  "
+                >
+                  <rect
+                    x="538"
+                    y="367"
+                    width="102"
+                    height="76"
+                    rx="6"
+                    fill="var(--surface-2)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="589"
+                    y="385"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="10"
+                    font-weight="700"
+                    fill="var(--accent-ink)"
+                    text-anchor="middle"
+                  >
+                    BAY 05
+                  </text>
+                  <text
+                    id="svg-txt-bay-5"
+                    x="589"
+                    y="401"
+                    font-family="Manrope, sans-serif"
+                    font-size="11"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    量测 Met
+                  </text>
+                  <circle
+                    cx="589"
+                    cy="422"
+                    r="10"
+                    fill="var(--surface)"
+                    stroke="var(--line)"
+                  />
+                  <text
+                    x="589"
+                    y="426"
+                    font-family="IBM Plex Mono, monospace"
+                    font-size="9"
+                    font-weight="700"
+                    fill="var(--ink)"
+                    text-anchor="middle"
+                  >
+                    OCD
+                  </text>
+                </g>
+              </g>
+
+              <!-- Dynamic Data Flow Lines with animated traveling pulses -->
+              <g
+                id="svg-flow-lines"
+                stroke="var(--accent)"
+                stroke-width="1.8"
+                fill="none"
+                opacity="0.85"
+              >
+                <line
+                  x1="200"
+                  y1="242"
+                  x2="200"
+                  y2="222"
+                  stroke-dasharray="3,3"
+                />
+                <line
+                  x1="340"
+                  y1="242"
+                  x2="340"
+                  y2="222"
+                  stroke-dasharray="3,3"
+                />
+                <line
+                  x1="480"
+                  y1="242"
+                  x2="480"
+                  y2="222"
+                  stroke-dasharray="3,3"
+                />
+
+                <line
+                  x1="260"
+                  y1="168"
+                  x2="260"
+                  y2="148"
+                  stroke-dasharray="3,3"
+                />
+                <line
+                  x1="420"
+                  y1="168"
+                  x2="420"
+                  y2="148"
+                  stroke-dasharray="3,3"
+                />
+
+                <line
+                  x1="340"
+                  y1="94"
+                  x2="340"
+                  y2="74"
+                  stroke-dasharray="3,3"
+                />
+
+                <path
+                  id="flow-path-1"
+                  d="M98,367 L98,300"
+                  stroke-dasharray="3,3"
+                />
+                <path
+                  id="flow-path-2"
+                  d="M222,367 L222,300"
+                  stroke-dasharray="3,3"
+                />
+                <path
+                  id="flow-path-3"
+                  d="M346,367 L346,300"
+                  stroke-dasharray="3,3"
+                />
+                <path
+                  id="flow-path-4"
+                  d="M470,367 L470,300"
+                  stroke-dasharray="3,3"
+                />
+                <path
+                  id="flow-path-5"
+                  d="M589,367 L589,300"
+                  stroke-dasharray="3,3"
+                />
+              </g>
+
+              <!-- Animated Traveling Data Particles -->
+              <g id="svg-anim-particles">
+                <circle
+                  id="pulse-1"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+                <circle
+                  id="pulse-2"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+                <circle
+                  id="pulse-3"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+                <circle
+                  id="pulse-4"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+                <circle
+                  id="pulse-5"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+                <circle
+                  id="pulse-up1"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+                <circle
+                  id="pulse-up2"
+                  r="3.5"
+                  fill="var(--accent)"
+                  opacity="0.9"
+                />
+              </g>
+            </svg>
+          </div>
+
+          <!-- Stepper: Lot Journey through Fab -->
+          <div class="fd-stepper-box">
+            <div class="fd-stepper-info">
+              <span class="fd-step-badge" id="step-counter-badge"
+                >STEP 1 / 5</span
+              >
+              <span class="fd-step-name" id="step-name-display"
+                >光刻 Lithography (Bay 01)</span
+              >
+            </div>
+            <div class="fd-stepper-actions">
+              <button
+                type="button"
+                class="fd-btn"
+                id="btn-step-prev"
+                onclick="changeLotStep(-1)"
+              >
+                <span id="btn-step-prev-txt">← 上一步 Prev</span>
+              </button>
+              <button
+                type="button"
+                class="fd-btn"
+                id="btn-step-next"
+                onclick="changeLotStep(1)"
+              >
+                <span id="btn-step-next-txt">下一步 Next →</span>
+              </button>
+              <button
+                type="button"
+                class="fd-btn"
+                id="btn-step-reset"
+                onclick="setLotStep(1)"
+              >
+                <span id="btn-step-reset-txt">重置 Reset</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Lot Step 4-Item Details -->
+          <div class="fd-journey-box">
+            <div
+              style="
+                font-size: 13px;
+                font-weight: 700;
+                color: var(--ink);
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+              "
+            >
+              <span id="journey-box-title"
+                >当前步数据流向 · Lot Step Data Breakdown</span
+              >
+              <span
+                class="mono"
+                style="font-size: 11px; color: var(--accent)"
+                id="journey-bay-tag"
+                >Bay 01</span
+              >
+            </div>
+
+            <div class="fd-journey-grid">
+              <div class="fd-journey-item">
+                <div class="fd-jlabel" id="jlbl-data">
+                  1. 本步产生什么数据 / Data Generated
+                </div>
+                <div class="fd-jval" id="jval-data">
+                  光刻机曝光能量、焦面偏置、剂量配方编号及掩模版对准校准 Trace
+                  数据（示意）。
+                </div>
+              </div>
+
+              <div class="fd-journey-item">
+                <div class="fd-jlabel" id="jlbl-protocol">
+                  2. 本步走什么协议 / Protocol &amp; Ingestion
+                </div>
+                <div class="fd-jval" id="jval-protocol">
+                  经连接层上送：SECS/GEM S6F11 站内事件流与 EDA Interface A
+                  曝光聚焦矩阵 Trace（示意）。
+                </div>
+              </div>
+
+              <div class="fd-journey-item">
+                <div class="fd-jlabel" id="jlbl-consumer">
+                  3. 本步数据被谁消费 / Data Consumer
+                </div>
+                <div class="fd-jval" id="jval-consumer">
+                  MES 执行层记录进出站与工单扣减；分析层 APC
+                  消费焦面数据用于下一批次前馈计算（示意）。
+                </div>
+              </div>
+
+              <div class="fd-journey-item">
+                <div class="fd-jlabel" id="jlbl-missing">
+                  4. 本步若数据缺失会怎样 / If Data Missing
+                </div>
+                <div class="fd-jval fd-jval-danger" id="jval-missing">
+                  下一步无法有把握地派工；光刻关键尺寸 (CD)
+                  漂移无法被前馈补偿，可能引发整批线宽超差（示意）。
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Layer Dynamic Sidebar -->
+        <div class="fd-sidebar-card">
+          <!-- Active Layer Detail Box -->
+          <div class="fd-detail-panel" id="fd-layer-panel">
+            <div class="fd-detail-head">
+              <span class="fd-detail-layer-id" id="sb-layer-id">LAYER 1</span>
+              <span
+                class="mono"
+                style="font-size: 11px; color: var(--ink-3)"
+                id="sb-layer-status"
+                >ACTIVE VIEW</span
+              >
+            </div>
+            <h3 class="fd-detail-title" id="sb-layer-title">
+              设备层 Equipment
+            </h3>
+            <p class="fd-detail-func" id="sb-layer-function">产生工艺数据。</p>
+
+            <div class="fd-spec-group">
+              <div class="fd-spec-label" id="lbl-data-types">
+                数据类型 / Data Types
+              </div>
+              <div class="fd-spec-pill-list" id="sb-layer-datatypes"></div>
+            </div>
+
+            <div class="fd-spec-group">
+              <div class="fd-spec-label" id="lbl-protocols">
+                协议与接口 / Protocols
+              </div>
+              <div class="fd-spec-pill-list" id="sb-layer-protocols"></div>
+            </div>
+
+            <div
+              style="
+                font-size: 12px;
+                color: var(--ink-2);
+                line-height: 1.5;
+                border-top: 1px dashed var(--line);
+                padding-top: 10px;
+              "
+              id="sb-layer-note"
+            ></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Fault Experiment Section: 3 Scenarios with Reset -->
+      <section class="fd-fault-section" aria-label="Fault Injection Scenarios">
+        <div class="fd-card-header">
+          <h2 class="fd-card-title">
+            <svg
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="var(--amber)"
+              stroke-width="2"
+            >
+              <path
+                d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+              />
+              <line x1="12" y1="9" x2="12" y2="13" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            <span id="fault-section-title"
+              >断链实验：若某一层发生异常会怎样？</span
+            >
+          </h2>
+          <button type="button" class="fd-btn" onclick="resetFaultScenario()">
+            <span id="btn-fault-reset-text">恢复正常状态 · Normal State</span>
+          </button>
+        </div>
+
+        <div class="fd-fault-nav">
+          <button
+            type="button"
+            class="fd-fault-btn"
+            id="fbtn-connectivity_cut"
+            onclick="triggerFaultScenario('connectivity_cut')"
+          >
+            <span id="fbtn-title-1">场景 1: 连接层断开</span>
+          </button>
+          <button
+            type="button"
+            class="fd-fault-btn"
+            id="fbtn-data_throttled"
+            onclick="triggerFaultScenario('data_throttled')"
+          >
+            <span id="fbtn-title-2">场景 2: 数据延迟 / 节流</span>
+          </button>
+          <button
+            type="button"
+            class="fd-fault-btn"
+            id="fbtn-dispatch_delayed"
+            onclick="triggerFaultScenario('dispatch_delayed')"
+          >
+            <span id="fbtn-title-3">场景 3: 执行层派工延迟</span>
+          </button>
+        </div>
+
+        <div class="fd-fault-card" id="fd-fault-card">
+          <h3 class="fd-fault-title" id="fault-card-title">
+            当前处于正常生产运行状态 (Normal Operation)
+          </h3>
+          <p class="fd-fault-desc" id="fault-card-desc">
+            全厂连接层与 MES 通信正常，高频遥测数据流正常汇聚。点击上方 3
+            个异常注入按钮，可观察数据流中断或滞后时示意图的状态变化与逐层告警顺序。
+          </p>
+          <div class="fd-alarm-box" id="fault-alarm-box" style="display: none">
+            <div class="fd-alarm-badge" id="fault-alarm-badge">
+              Root Cause & Alarm Hierarchy
+            </div>
+            <div id="fault-alarm-text" style="color: var(--ink)"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 Layer Details & Representative Vendors Accordion -->
+      <section
+        class="fd-layers-accordion"
+        aria-label="Layer Specifications and Vendor Catalog"
+      >
+        <h2
+          style="
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--ink);
+            margin: 0 0 16px;
+          "
+          id="acc-section-heading"
+        >
+          五层详细架构与代表厂商 (Architectural Detail &amp; Representative
+          Vendors)
+        </h2>
+        <div id="fd-accordion-container"></div>
+      </section>
+
+      <!-- Pure Text Version Section (Mandatory P0) -->
+      <section
+        class="fd-text-version"
+        id="text-version"
+        aria-label="Accessible Full Text Version"
+      >
+        <h2 id="tv-heading">纯文字版讲解 · Complete Pure Text Architecture</h2>
+        <p
+          style="color: var(--ink-3); font-size: 12px; margin-bottom: 20px"
+          id="tv-subheading"
+        >
+          本节为示意图与动画的完整纯文字等价说明，确保在无动画环境、读屏软件及搜索引擎检索下内容完整准确。
+        </p>
+
+        <div id="tv-layers-content"></div>
+        <div
+          id="tv-journey-content"
+          style="
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+          "
+        ></div>
+        <div
+          id="tv-deepdive-content"
+          style="
+            margin-top: 24px;
+            padding-top: 18px;
+            border-top: 1px solid var(--line);
+          "
+        ></div>
+      </section>
+
+      <!-- Unified Footer Mount -->
+      <div id="sc-footer-mount"></div>
+    </main>
+
+    <!-- Dependencies -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/site-nav.js"></script>
+
+    <!-- Page Logic Script -->
+    <script>
+      (function () {
+        "use strict";
+
+        // Embedded Default Teaching Data for offline / local file protocol resilience
+        const DEFAULT_FAB_DATA = {
+          version: "1.9.0",
+          disclaimer_en:
+            "Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+          disclaimer_zh:
+            "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。",
+          permanent_banner: {
+            en: [
+              "Data Flow Illustrative",
+              "Teaching model, not real fab data",
+              "No live equipment connection",
+            ],
+            zh: [
+              "数据流为示意",
+              "教学级模型，非真实工厂数据",
+              "未连接任何真实设备",
+            ],
+          },
+          sponsorship: {
+            enabled: false,
+            sponsor_name: "",
+            badge_en: "Sponsored",
+            badge_zh: "赞助",
+            content_en: "",
+            content_zh: "",
+          },
+          layers: [
+            {
+              id: "equipment",
+              name_en: "Equipment",
+              name_zh: "设备层",
+              title_en: "Layer 1: Equipment",
+              title_zh: "第 1 层：设备层",
+              function_en: "Generates process data.",
+              function_zh: "产生工艺数据。",
+              data_types_en: [
+                "Events & execution states",
+                "Machine alarms",
+                "Chamber sensor trace telemetry",
+                "Metrology & inspection results",
+              ],
+              data_types_zh: [
+                "事件与运行状态",
+                "设备机台报警",
+                "高频腔体传感器 Trace 数据",
+                "量测与检测结果",
+              ],
+              protocols_en: [
+                "Proprietary tool controllers",
+                "RS-232 / HSMS physical ports",
+                "Internal sensor buses",
+              ],
+              protocols_zh: [
+                "专有设备控制器接口",
+                "RS-232 / HSMS 物理端口",
+                "内部传感器总线",
+              ],
+              vendors: [
+                "Applied Materials",
+                "ASML",
+                "KLA",
+                "Lam Research",
+                "Tokyo Electron",
+              ],
+              note_en:
+                "Each vendor utilizes native internal data structures. Without standardization, fab hosts cannot ingest these heterogeneous signals directly. Teaching example only; not a ranking.",
+              note_zh:
+                "各家原始格式不同，底层信号高度私有化。未经标准化转换，工厂系统无法直接识别和消费。仅为教学示例，非排名。",
+            },
+            {
+              id: "connectivity",
+              name_en: "Connectivity",
+              name_zh: "连接层",
+              title_en: "Layer 2: Connectivity",
+              title_zh: "第 2 层：连接层",
+              function_en:
+                "Translates heterogeneous equipment signals into standardized factory communication.",
+              function_zh: "把各家信号翻译成工厂能懂的标准语言。",
+              data_types_en: [
+                "SECS-II message streams (S1F13, S6F11)",
+                "GEM300 carrier & process job state events",
+                "EDA / Interface A metadata & high-speed trace buffers",
+              ],
+              data_types_zh: [
+                "SECS-II 消息流 (S1F13, S6F11)",
+                "GEM300 晶圆盒与加工任务事件",
+                "EDA / Interface A 元数据与高速 Trace 缓冲",
+              ],
+              protocols_en: [
+                "SEMI E4 / E5 / E30 (SECS/GEM)",
+                "SEMI E39, E87, E90, E94 (GEM300)",
+                "SEMI E120, E125, E132, E134 (EDA / Interface A)",
+              ],
+              protocols_zh: [
+                "SEMI E4 / E5 / E30 (SECS/GEM)",
+                "SEMI E39, E87, E90, E94 (GEM300)",
+                "SEMI E120, E125, E132, E134 (EDA / Interface A)",
+              ],
+              vendors: ["Cimetrix", "PEER Group", "In-house Fab / OEM EAP"],
+              note_en:
+                "Connectivity software does not replace MES. It sits between MES/Factory Host and equipment, handling translation, message formatting, and bi-directional communication channels (MES / Factory Host → EAP / Connectivity → Equipment). Teaching example only; not a ranking.",
+              note_zh:
+                "连接软件不替代 MES，它夹在 MES 与设备之间，负责翻译、消息格式化与通信通道（对应关系：MES / Factory Host → EAP / Connectivity → Equipment）。仅为教学示例，非排名。",
+            },
+            {
+              id: "execution",
+              name_en: "Execution (MES)",
+              name_zh: "执行层",
+              title_en: "Layer 3: Execution (MES)",
+              title_zh: "第 3 层：执行层 (MES)",
+              function_en:
+                "Determines where lots go, in what sequence, and with what recipe.",
+              function_zh: "决定 lot 去哪、按什么顺序做。",
+              data_types_en: [
+                "Lot routing states",
+                "Dispatch priorities & tool assignments",
+                "Recipe management & parameter validation",
+                "Lot genealogy & split/merge tracking",
+              ],
+              data_types_zh: [
+                "Lot 工艺路径状态",
+                "派工优先级与机台分配",
+                "配方管理与参数校验",
+                "晶圆批次谱系与拆批/合批追踪",
+              ],
+              protocols_en: [
+                "EAP host interface protocols",
+                "Transactional database APIs",
+                "AMHS transport command integration",
+              ],
+              protocols_zh: [
+                "EAP 主机接口协议",
+                "事务型数据库 API",
+                "AMHS 天车搬送调度接口",
+              ],
+              vendors: [
+                "Applied Materials SmartFactory",
+                "Critical Manufacturing MES",
+                "Dassault DELMIA Apriso",
+                "Siemens Opcenter Semiconductor",
+              ],
+              note_en:
+                "MES is the operational backbone maintaining single-source-of-truth WIP state, enforcing compliance with defined process flow specs. Teaching example only; not a ranking.",
+              note_zh:
+                "MES 是制造执行核心，维护全厂 WIP 真实状态与工单路线，严防越步或错误配方进站。仅为教学示例，非排名。",
+            },
+            {
+              id: "analytics",
+              name_en: "Analytics & Control",
+              name_zh: "分析与控制层",
+              title_en: "Layer 4: Analytics & Control",
+              title_zh: "第 4 层：分析与控制层",
+              function_en:
+                "Detects process drift and executes real-time adjustments.",
+              function_zh: "判断工艺有没有偏，并做调整。",
+              data_types_en: [
+                "Run-to-run (R2R) controller offsets",
+                "Chamber health & Fault Detection (FDC) scores",
+                "Statistical Process Control (SPC) rule violations",
+                "Defect density & parametric yield correlation",
+              ],
+              data_types_zh: [
+                "批次间 (R2R) 控制器补偿偏置量",
+                "腔体健康度与故障检测 (FDC) 评分",
+                "统计过程控制 (SPC) 判异准则报警",
+                "缺陷密度与电性参数良率关联分析",
+              ],
+              protocols_en: [
+                "High-throughput message brokers (Kafka, MQTT)",
+                "Time-series telemetry ingestion",
+                "EDA Freeze-frame data delivery",
+              ],
+              protocols_zh: [
+                "高吞吐消息总线 (Kafka, MQTT)",
+                "时序遥测数据管道",
+                "EDA 冻结帧高速交付",
+              ],
+              vendors: [
+                "Applied Materials APC",
+                "BISTel",
+                "KLA Klarity",
+                "PDF Solutions Exensio",
+              ],
+              note_en:
+                "Analytics consumes high-frequency trace and events from Connectivity, calculating run-to-run parameter adjustments (feedback/feedforward) pushed back to execution and equipment. Teaching example only; not a ranking.",
+              note_zh:
+                "分析层消费连接层送上的高频 trace 与量测事件，计算批次间配方修正量（前馈与反馈），回灌给执行层和设备。仅为教学示例，非排名。",
+            },
+            {
+              id: "twin",
+              name_en: "Planning, Simulation & Twin",
+              name_zh: "决策与孪生层",
+              title_en: "Layer 5: Planning, Simulation & Twin",
+              title_zh: "第 5 层：决策与孪生层",
+              function_en:
+                "Offline simulation, capacity evaluation, and scenario planning.",
+              function_zh: "事前仿真与产能决策。",
+              data_types_en: [
+                "Factory layout & dispatch simulation runs",
+                "Bottleneck & tool utilization forecasts",
+                "What-if scenario evaluations",
+                "WIP cycle-time curves & AMHS capacity loads",
+              ],
+              data_types_zh: [
+                "全厂布局与排程仿真运行",
+                "瓶颈设备与机台利用率预测",
+                "What-if 场景预演评估",
+                "WIP 生产周期曲线与 AMHS 运力负载",
+              ],
+              protocols_en: [
+                "Discrete event simulation engines",
+                "Semantic fab layout schema JSON",
+                "Historical log replay (MIMAC format)",
+              ],
+              protocols_zh: [
+                "离散事件仿真引擎",
+                "语义化晶圆厂布局 JSON",
+                "历史日志回放 (MIMAC 格式)",
+              ],
+              vendors_commercial: [
+                "AppliedTwin",
+                "Critical Manufacturing fabLIVE",
+                "Dassault DELMIA",
+                "Siemens (Calibre Fab Insights / Tecnomatix)",
+              ],
+              vendors_teaching_en: ["SemiconFab (Teaching-grade simulation)"],
+              vendors_teaching_zh: ["SemiconFab (教学级 · Teaching-grade)"],
+              note_en:
+                "This page and twin.html are teaching-grade simulations, not live production digital twins. Commercial twin solutions run closed-loop factory operations, whereas open teaching models demystify semiconductor systems. Teaching example only; not a ranking.",
+              note_zh:
+                "本页与 twin.html 均为教学级仿真，不是生产实时孪生；商业生产孪生产品用于实际生产闭环控制，与教学级仿真沙盒须分行标注，不可混淆。仅为教学示例，非排名。",
+            },
+          ],
+          lot_journey: [
+            {
+              step: 1,
+              bay: "Bay 01 · Photolithography",
+              bay_zh: "Bay 01 · 光刻区",
+              category_en: "Lithography",
+              category_zh: "光刻",
+              icon: "sun",
+              data_en:
+                "Scanner exposure energy, focus offsets, dose recipe ID, and reticle alignment calibration trace.",
+              data_zh:
+                "光刻机曝光能量、焦面偏置、剂量配方编号及掩模版对准校准 Trace 数据（示意）。",
+              protocol_en:
+                "SECS/GEM S6F11 event stream and high-speed EDA Interface A focus-exposure matrix trace.",
+              protocol_zh:
+                "经连接层上送：SECS/GEM S6F11 站内事件流与 EDA Interface A 曝光聚焦矩阵 Trace（示意）。",
+              consumer_en:
+                "MES records process step completion; APC Litho-R2R controller ingests focus offsets for next lot calculation.",
+              consumer_zh:
+                "MES 执行层记录进出站与工单扣减；分析层 APC 消费焦面数据用于下一批次前馈计算（示意）。",
+              if_missing_en:
+                "The next step cannot be dispatched with confidence; litho CD drift cannot be compensated in real-time.",
+              if_missing_zh:
+                "下一步无法有把握地派工；光刻关键尺寸 (CD) 漂移无法被前馈补偿，可能引发整批线宽超差（示意）。",
+            },
+            {
+              step: 2,
+              bay: "Bay 02 · Plasma Etch",
+              bay_zh: "Bay 02 · 等离子刻蚀区",
+              category_en: "Etch",
+              category_zh: "刻蚀",
+              icon: "zap",
+              data_en:
+                "RF forward/reflected power, endpoint detection (EPD) optical spectrum, chamber pressure, and gas flow rates.",
+              data_zh:
+                "射频正向/反射功率、终点检测 (EPD) 光学光谱信号、腔体真空度与反应气体流量（示意）。",
+              protocol_en:
+                "High-frequency EDA Interface A trace logging at 10 Hz and SECS-II alarm notification S5F1.",
+              protocol_zh:
+                "经连接层上送：10 Hz 高频 EDA 遥测 Trace 及 SECS-II S5F1 异常报警报文（示意）。",
+              consumer_en:
+                "FDC (Fault Detection & Classification) detects chamber micro-arcing; MES tracks wafer lot recipe step.",
+              consumer_zh:
+                "分析层 FDC 实时分析腔体微拉弧与终点过刻蚀；MES 校验刻蚀总时长与腔体寿命计数（示意）。",
+              if_missing_en:
+                "Chamber health degradation goes undetected; over-etching risks destroying critical gate structures.",
+              if_missing_zh:
+                "腔体异常磨损无法被侦测；可能发生过刻蚀破坏栅极微观结构，导致晶圆报废（示意）。",
+            },
+            {
+              step: 3,
+              bay: "Bay 03 · Thin Film Deposition",
+              bay_zh: "Bay 03 · 薄膜沉积区",
+              category_en: "Deposition",
+              category_zh: "沉积",
+              icon: "layers",
+              data_en:
+                "Precursor bubbler temperatures, deposition time, heater pedestal thermocouple readings, and plasma strike state.",
+              data_zh:
+                "前驱体源瓶温度、沉积生长时间、加热静电吸盘多点热电偶读数与等离子体起辉状态（示意）。",
+              protocol_en:
+                "GEM300 carrier tracking (SEMI E87) and SECS/GEM S6F1 trace collection via fab EAP.",
+              protocol_zh:
+                "经连接层上送：GEM300 晶圆载具跟踪 (SEMI E87) 及 EAP 汇总的 SECS/GEM S6F1 Trace 数据（示意）。",
+              consumer_en:
+                "MES updates wafer state to deposited; SPC monitors chamber temperature uniformity across lots.",
+              consumer_zh:
+                "MES 更新批次工单为已沉积状态；分析层 SPC 监控腔体加热均匀度与漂移趋势（示意）。",
+              if_missing_en:
+                "Film thickness variance goes unmonitored; recipe parameter deviations cannot be linked to yield loss.",
+              if_missing_zh:
+                "薄膜厚度偏差失去监控；后续良率分析无法归因到本腔体的温场漂移（示意）。",
+            },
+            {
+              step: 4,
+              bay: "Bay 04 · Chemical Mechanical Planarization",
+              bay_zh: "Bay 04 · 化学机械平坦化区",
+              category_en: "CMP",
+              category_zh: "平坦化",
+              icon: "disc",
+              data_en:
+                "Platen motor torque, slurry dispensing flow rate, conditioning disk downforce, and pad temperature profiles.",
+              data_zh:
+                "研磨盘电机转矩、研磨液注入流量、修整盘下压力与研磨垫红外温度分布（示意）。",
+              protocol_en:
+                "SECS/GEM process job events (SEMI E94) and EAP automated endpoint signaling.",
+              protocol_zh:
+                "经连接层上送：SEMI E94 加工任务事件及 EAP 研磨终点检测自动握手信号（示意）。",
+              consumer_en:
+                "MES registers polish completion; APC Run-to-Run dynamically updates polish time for subsequent lots.",
+              consumer_zh:
+                "MES 接收出站完成信号；APC 批次控制器根据研磨盘磨损动态微调后续批次研磨时长（示意）。",
+              if_missing_en:
+                "Pad wear remains uncompensated; under-polish leaves residual metal or over-polish causes dishing.",
+              if_missing_zh:
+                "研磨垫磨损无法动态补偿；平坦化不足留下金属残留，过度研磨引发蝶形凹陷（示意）。",
+            },
+            {
+              step: 5,
+              bay: "Bay 05 · Metrology & Inspection",
+              bay_zh: "Bay 05 · 膜厚与缺陷量测区",
+              category_en: "Metrology",
+              category_zh: "量测",
+              icon: "microscope",
+              data_en:
+                "Optical critical dimension (OCD) profile, film thickness ellipsometry maps, and defect classification coordinates.",
+              data_zh:
+                "光学关键尺寸 (OCD) 形貌轮廓、椭偏仪全片膜厚分布图及光学检测缺陷分类坐标（示意）。",
+              protocol_en:
+                "SEMI G84 STDF / KLARF defect file upload over factory network and SECS-II S6F11 measurement ready event.",
+              protocol_zh:
+                "经连接层上送：KLARF 缺陷文件高速传输及 SECS-II S6F11 量测就绪事件通知（示意）。",
+              consumer_en:
+                "YMS (Yield Management System) wafer map overlay; MES updates disposition status; APC receives closed-loop feedback.",
+              consumer_zh:
+                "YMS 良率管理系统生成晶圆缺陷图谱；MES 进行自动放行/Hold判决；APC 获得闭环反馈（示意）。",
+              if_missing_en:
+                "Defect excursions spread unchecked across subsequent lots; MES cannot clear lots for further processing.",
+              if_missing_zh:
+                "工艺缺陷突发扩散无法被及时阻截；MES 无法放行晶圆批次，整条产线面临停滞风险（示意）。",
+            },
+          ],
+          fault_scenarios: [
+            {
+              id: "connectivity_cut",
+              name_en: "1. Connectivity Severed",
+              name_zh: "1. 连接层断开",
+              short_en: "Physical or network link dropped between tool and EAP",
+              short_zh: "设备与 EAP 之间的物理通信或协议栈中断",
+              diagram_effect: "tool_offline",
+              impact_en:
+                "Tool data ceases transmitting. Execution layer (MES) cannot receive processing events; WIP accumulates in front of the bay waiting for status confirmation. The tool is halted in an idle/fault state.",
+              impact_zh:
+                "设备数据停止上送，执行层看不到新事件。晶圆加工完毕但无法上报出站，WIP 在该 Bay 前积压等待确认，机台被迫置灰停止排产（示意）。",
+              alarm_layer_en: "Connectivity Layer (EAP / SECS-II Driver)",
+              alarm_layer_zh: "连接层 (EAP / SECS-II 驱动层)",
+              alarm_explanation_en:
+                "The Connectivity Layer alarms first because the SECS/GEM HSMS link layer fails to receive TCP keep-alive or heartbeat reply packets within the T3/T6 timeout window, immediately raising a link-down alarm before the upper MES detects a lost transaction.",
+              alarm_explanation_zh:
+                "现实中连接层（EAP）最先报警：SECS/GEM HSMS 链路层在 T3/T6 超时窗口内未收到 TCP 心跳应答，驱动层瞬间判定链路断开，比上层 MES 业务超时告警快数秒至数十秒（教学解释，不承诺真实工厂行为）。",
+            },
+            {
+              id: "data_throttled",
+              name_en: "2. Data Ingestion Throttled / Delayed",
+              name_zh: "2. 数据延迟 / 节流",
+              short_en:
+                "EDA Interface A client throttled, high-frequency buffer delayed",
+              short_zh: "高频 EDA 遥测流被限流或缓存积压，分析层接收滞后",
+              diagram_effect: "data_lag",
+              impact_en:
+                "Trace buffers accumulate or drop frames. Analytics layer (APC / FDC) operates on stale data from minutes ago, leading to delayed or inaccurate run-to-run recipe trim offsets. Process drift propagates unnoticed.",
+              impact_zh:
+                "EDA 采集被节流或延迟，分析层（APC / FDC）看到的是数分钟前的滞后数据。工艺控制反馈迟滞，腔体微小漂移无法及时被配方修正，带来潜在良率损失（示意）。",
+              alarm_layer_en: "EDA Collection Client / Ingestion Queue Buffer",
+              alarm_layer_zh: "EDA 采集客户端 / 数据接入队列缓冲区",
+              alarm_explanation_en:
+                "The ingestion buffer queue threshold triggers an alarm first (buffer utilization exceeding 85% or latency SLA breach) before the analytics models realize they are receiving lagged trace frames.",
+              alarm_explanation_zh:
+                "现实中数据采集队列或接入网关最先报警：当高频遥测缓冲占用率超过阈值或数据交付时延违反 SLA 时，消息中间件即刻触发队列积压警报，而上层算法模型初期只能感应到计算延迟（教学解释，不承诺真实工厂行为）。",
+            },
+            {
+              id: "dispatch_delayed",
+              name_en: "3. MES Dispatch Delayed",
+              name_zh: "3. 执行层派工延迟",
+              short_en: "MES dispatch engine lag or routing service timeout",
+              short_zh: "MES 派工服务调度延迟，设备就绪后空转等待工单",
+              diagram_effect: "tool_idle_wait",
+              impact_en:
+                "Tool is ready and idle, but no carrier job or dispatch command arrives from MES. AMHS does not receive move orders, tool OEE drops precipitously, and the entire lot journey stalls.",
+              impact_zh:
+                "设备处于空闲等待 (Standby / Idle)，但 MES 派工指令迟迟未下发。机台空转等待，天车不来搬送，设备综合利用率 (OEE) 急剧下跌，lot 旅程停滞（示意）。",
+              alarm_layer_en: "Equipment Station / Operator Station",
+              alarm_layer_zh: "设备端机台报警 / 操作员工作站",
+              alarm_explanation_en:
+                "The equipment station triggers a SEMI E10 Standby / Dispatch Timeout alarm first: the tool finished recipe processing and signalled wafer-ready, but exceeded the configured wait threshold for carrier clamp and host dispatch instructions.",
+              alarm_explanation_zh:
+                "现实中设备端或机台工作站最先发出 SEMI E10 空闲超时告警：机台已完成工艺并握手就绪，但在设定时间内未收到 MES 下发的装载工单或配方指令，计时器超时触发等待报警（教学解释，不承诺真实工厂行为）。",
+            },
+          ],
+        };
+
+        // Global State
+        let fabData = DEFAULT_FAB_DATA;
+        let catalogData = [];
+        let currentLayer = "equipment";
+        let currentStep = 1;
+        let currentFault = null;
+        let isAnimPlaying = true;
+        let animFrameId = null;
+        let animProgress = 0;
+        let currentToolQuery = null;
+
+        let currentActiveLang = null;
+
+        // Detect current language from URL, storage, or attribute
+        // Default to Chinese mode ("zh"), which supports dual-language view per user request
+        function getPageLang() {
+          if (currentActiveLang === "en" || currentActiveLang === "zh")
+            return currentActiveLang;
+
+          const params = new URLSearchParams(window.location.search);
+          const langParam = params.get("lang");
+          if (langParam === "en") return "en";
+          if (
+            langParam === "zh" ||
+            langParam === "zh-CN" ||
+            langParam === "zh-TW"
+          )
+            return "zh";
+
+          const saved =
+            localStorage.getItem("semicon_lang") ||
+            localStorage.getItem("semiconfab_lang");
+          if (saved === "en") return "en";
+          if (saved === "zh" || saved === "zh-CN" || saved === "zh-TW")
+            return "zh";
+
+          const docLang = document.documentElement.getAttribute("data-lang");
+          if (docLang === "en") return "en";
+          if (docLang === "zh" || docLang === "zh-CN" || docLang === "zh-TW")
+            return "zh";
+
+          return "zh";
+        }
+
+        // Initialize Page
+        async function initPage() {
+          // Check prefers-reduced-motion
+          if (
+            window.matchMedia &&
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ) {
+            isAnimPlaying = false;
+          }
+
+          // Parse URL parameters
+          const params = new URLSearchParams(window.location.search);
+          const layerParam = params.get("layer");
+          const toolParam = params.get("tool");
+
+          if (toolParam) {
+            currentToolQuery = toolParam;
+          }
+
+          // Fetch Teaching Data (enhances embedded default if online / HTTP)
+          try {
+            const resp = await fetch("data/fab-data-layer.json");
+            if (resp.ok) {
+              const fetched = await resp.json();
+              if (fetched && fetched.layers) {
+                fabData = fetched;
+              }
+            }
+          } catch (e) {
+            // file:// or offline fallback is already active via DEFAULT_FAB_DATA
+            console.info("Using embedded fab data layer definition.");
+          }
+
+          // Fetch Catalog if tool parameter passed
+          if (currentToolQuery) {
+            try {
+              const catResp = await fetch("catalog.json");
+              catalogData = await catResp.json();
+            } catch (e) {
+              console.warn("Failed to load catalog.json", e);
+            }
+          }
+
+          // Validate layer param
+          if (
+            layerParam &&
+            [
+              "equipment",
+              "connectivity",
+              "execution",
+              "analytics",
+              "twin",
+            ].includes(layerParam)
+          ) {
+            currentLayer = layerParam;
+          }
+
+          renderUI();
+          setupAnimation();
+        }
+
+        // Render UI with current language and states
+        // In Chinese mode ("zh"): allows Chinese + English bilingual pairings
+        // In English mode ("en"): STRICT PURE ENGLISH with ZERO Chinese characters
+        function renderUI() {
+          if (!fabData) fabData = DEFAULT_FAB_DATA;
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+
+          // 0. Page Title
+          document.title = isZh
+            ? "晶圆厂数据层 · Fab Data Layer — SemiconFab.org"
+            : "Fab Data Layer · Data Flow Architecture — SemiconFab.org";
+
+          // 1. Permanent Banner Text
+          document.getElementById("banner-text-1").textContent = isZh
+            ? "数据流为示意 · Data Flow Illustrative"
+            : "Data Flow Illustrative";
+          document.getElementById("banner-text-2").textContent = isZh
+            ? "教学级模型，非真实工厂数据 · Teaching model, not real fab data"
+            : "Teaching model, not real fab data";
+          document.getElementById("banner-text-3").textContent = isZh
+            ? "未连接任何真实设备 · No live equipment connection"
+            : "No live equipment connection";
+          document.getElementById("banner-return-text").textContent = isZh
+            ? "返回 3D 孪生 · Return to Twin"
+            : "Return to 3D Twin";
+
+          // Update return link to preserve tool param if present
+          const returnBtn = document.getElementById("fd-return-twin-btn");
+          if (currentToolQuery) {
+            returnBtn.href =
+              "twin.html?tool=" + encodeURIComponent(currentToolQuery);
+          } else {
+            returnBtn.href = "twin.html";
+          }
+
+          // 2. Sponsorship Banner (Strictly default off)
+          const sponsorContainer = document.getElementById(
+            "fd-sponsorship-banner",
+          );
+          if (fabData.sponsorship && fabData.sponsorship.enabled) {
+            sponsorContainer.style.display = "block";
+            sponsorContainer.innerHTML = `
+              <div style="font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-bottom: 4px;">
+                ${isZh ? fabData.sponsorship.badge_zh : fabData.sponsorship.badge_en}
+              </div>
+              <div style="font-size: 13px; color: var(--ink);">
+                ${isZh ? fabData.sponsorship.content_zh : fabData.sponsorship.content_en}
+              </div>
+            `;
+          } else {
+            sponsorContainer.style.display = "none";
+            sponsorContainer.innerHTML = "";
+          }
+
+          // 3. Tool Query Callout
+          const toolCallout = document.getElementById("fd-tool-callout");
+          const noticeEl = document.getElementById("fd-tool-protocol-notice");
+          if (noticeEl) {
+            noticeEl.textContent = isZh
+              ? "该记录未包含连接协议信息 · No connectivity info in this record"
+              : "No connectivity info in this record";
+          }
+          if (currentToolQuery) {
+            toolCallout.style.display = "block";
+            const normalized = currentToolQuery.toLowerCase();
+            let matched = catalogData.find((item) => {
+              const full = `${item.vendor}-${item.model}`.toLowerCase();
+              return (
+                full === normalized ||
+                (item.record_id && item.record_id.toLowerCase() === normalized)
+              );
+            });
+
+            if (matched) {
+              document.getElementById("fd-tool-vendor").textContent =
+                matched.vendor || "OEM";
+              document.getElementById("fd-tool-model").textContent =
+                matched.model || currentToolQuery;
+              document.getElementById("fd-tool-category").textContent =
+                matched.category || "Equipment";
+              document.getElementById("fd-tool-conformance").textContent =
+                matched.conformance_level || "L1";
+
+              let tierStr = "";
+              if (matched.tier_summary) {
+                const keys = Object.keys(matched.tier_summary);
+                tierStr =
+                  "Provenance: " +
+                  keys
+                    .map((k) => `${k}: ${matched.tier_summary[k]}`)
+                    .join(", ");
+              }
+              document.getElementById("fd-tool-summary-text").textContent = isZh
+                ? `已匹配目录设备记录：${matched.vendor} ${matched.model}（类别：${matched.category}）。${tierStr ? tierStr + "。" : ""}本数据层展示通用工业信号流向。`
+                : `Matched catalog record: ${matched.vendor} ${matched.model} (Category: ${matched.category}). ${tierStr ? tierStr + ". " : ""}Displaying general architectural data flow.`;
+            } else {
+              document.getElementById("fd-tool-vendor").textContent =
+                "Generic Tool";
+              document.getElementById("fd-tool-model").textContent =
+                currentToolQuery;
+              document.getElementById("fd-tool-category").textContent = "N/A";
+              document.getElementById("fd-tool-conformance").textContent =
+                "Draft";
+              document.getElementById("fd-tool-summary-text").textContent = isZh
+                ? "未在目录中匹配到该型号的具体记录，展示标准通用晶圆厂层级讲解。"
+                : "Tool model not matched in catalog; displaying general architectural overview.";
+            }
+          } else {
+            toolCallout.style.display = "none";
+          }
+
+          // 4. Hero Texts
+          document.getElementById("hero-badge-text").textContent = isZh
+            ? "DATA FLOW ARCHITECTURE · 教学模型"
+            : "DATA FLOW ARCHITECTURE · TEACHING MODEL";
+          document.getElementById("hero-title-text").textContent = isZh
+            ? "晶圆厂数据层 · Fab Data Layer"
+            : "Fab Data Layer · Shop-Floor Data Flow";
+          document.getElementById("hero-subtitle-text").textContent = isZh
+            ? "一台设备的数据是怎么流动的：从设备出发，经过连接层，到 MES、分析层，再到孪生——这是一个教学模型。"
+            : "How fab data flows: from a tool, through connectivity, to MES, analytics, and the twin — as a teaching model.";
+
+          // 5. Layer Switch Buttons
+          const enLayerButtonNames = {
+            equipment: "Equipment",
+            connectivity: "Connectivity",
+            execution: "Execution (MES)",
+            analytics: "Analytics & Control",
+            twin: "Simulation & Twin",
+          };
+          fabData.layers.forEach((layer) => {
+            const titleEl = document.getElementById("btn-title-" + layer.id);
+            if (titleEl) {
+              titleEl.textContent = isZh
+                ? `${layer.name_zh} ${layer.name_en}`
+                : enLayerButtonNames[layer.id] || layer.name_en;
+            }
+          });
+          document.querySelectorAll(".fd-layer-btn").forEach((btn) => {
+            btn.classList.toggle(
+              "active",
+              btn.getAttribute("data-layer-id") === currentLayer,
+            );
+          });
+
+          // 6. SVG Schematic Text Localization
+          document.getElementById("diagram-title-text").textContent = isZh
+            ? "整厂五层数据流示意架构"
+            : "5-Layer Fab Data Flow Architecture";
+
+          const animBtnLabel = document.getElementById("anim-btn-label");
+          if (animBtnLabel) {
+            animBtnLabel.textContent = isAnimPlaying
+              ? isZh
+                ? "暂停动画"
+                : "Pause"
+              : isZh
+                ? "播放动画"
+                : "Play";
+          }
+
+          document.getElementById("svg-txt-l5-title").textContent = isZh
+            ? "5. 决策与孪生层 (Planning, Simulation & Twin)"
+            : "5. Planning, Simulation & Digital Twin";
+          document.getElementById("svg-txt-l5-sub").textContent = isZh
+            ? "全厂排程仿真 · 产能推演 · What-If 决策 · SemiconFab 教学沙盒"
+            : "Fab scheduling simulation · Capacity evaluation · What-If planning";
+
+          document.getElementById("svg-txt-l4-title").textContent = isZh
+            ? "4. 分析与控制层 (Analytics & Control)"
+            : "4. Analytics & Process Control";
+          document.getElementById("svg-txt-l4-sub").textContent = isZh
+            ? "APC (Run-to-Run 闭环补偿) · FDC (腔体故障分类) · SPC (统计过程控制) · YMS"
+            : "APC (Run-to-Run compensation) · FDC (Chamber fault detection) · SPC · YMS";
+
+          document.getElementById("svg-txt-l3-title").textContent = isZh
+            ? "3. 制造执行层 (Execution / MES)"
+            : "3. Manufacturing Execution System (MES)";
+          document.getElementById("svg-txt-l3-sub").textContent = isZh
+            ? "工单路径 (Routing) · 派工调度 (Dispatch) · 配方核验 (Recipe Integrity) · WIP 状态"
+            : "Routing enforcement · Dispatch scheduling · Recipe integrity · Real-time WIP";
+
+          document.getElementById("svg-txt-l2-title").textContent = isZh
+            ? "2. 连接层 (Connectivity / EAP Gateway)"
+            : "2. Connectivity Layer (EAP Gateway & SEMI Protocols)";
+          document.getElementById("svg-txt-l2-sub").textContent = isZh
+            ? "SECS/GEM (E4/E5/E30) · GEM300 (E39/E87/E90/E94) · EDA / Interface A (E120-E134)"
+            : "SECS/GEM (E4/E5/E30) · GEM300 (E39/E87/E90/E94) · EDA / Interface A (E120-E134)";
+
+          document.getElementById("svg-txt-l1-title").textContent = isZh
+            ? "1. 设备层 (Layer 1: Cleanroom Equipment Floor)"
+            : "1. Equipment Layer (Cleanroom Equipment Floor)";
+          document.getElementById("svg-txt-l1-sub").textContent = isZh
+            ? "五大典型工艺区 (5 Representative Cleanroom Bays) · 产生原始事件、报警与高频传感器 Trace"
+            : "5 Representative Cleanroom Bays · Generates events, alarms, and trace telemetry";
+
+          document.getElementById("svg-txt-bay-1").textContent = isZh
+            ? "光刻 Litho"
+            : "Lithography";
+          document.getElementById("svg-txt-bay-2").textContent = isZh
+            ? "刻蚀 Etch"
+            : "Plasma Etch";
+          document.getElementById("svg-txt-bay-3").textContent = isZh
+            ? "沉积 Depo"
+            : "Deposition";
+          document.getElementById("svg-txt-bay-4").textContent = isZh
+            ? "平坦化 CMP"
+            : "CMP Planar";
+          document.getElementById("svg-txt-bay-5").textContent = isZh
+            ? "量测 Met"
+            : "Metrology";
+
+          // Stepper Buttons
+          document.getElementById("btn-step-prev-txt").textContent = isZh
+            ? "← 上一步 Prev"
+            : "← Prev Step";
+          document.getElementById("btn-step-next-txt").textContent = isZh
+            ? "下一步 Next →"
+            : "Next Step →";
+          document.getElementById("btn-step-reset-txt").textContent = isZh
+            ? "重置 Reset"
+            : "Reset";
+
+          // 7. Sidebar active layer update
+          updateSidebarLayer();
+
+          // 8. Lot journey step update
+          updateLotStepDisplay();
+
+          // 9. Fault Experiment Controls Localization
+          document.getElementById("fault-section-title").textContent = isZh
+            ? "断链实验：若某一层发生异常会怎样？"
+            : "Fault Experiments: What Happens When a Layer Fails?";
+          document.getElementById("btn-fault-reset-text").textContent = isZh
+            ? "恢复正常状态 · Normal State"
+            : "Reset to Normal State";
+          document.getElementById("fbtn-title-1").textContent = isZh
+            ? "场景 1: 连接层断开"
+            : "Scenario 1: Connectivity Severed";
+          document.getElementById("fbtn-title-2").textContent = isZh
+            ? "场景 2: 数据延迟 / 节流"
+            : "Scenario 2: Data Ingestion Throttled";
+          document.getElementById("fbtn-title-3").textContent = isZh
+            ? "场景 3: 执行层派工延迟"
+            : "Scenario 3: MES Dispatch Delayed";
+
+          if (currentFault) {
+            triggerFaultScenario(currentFault);
+          } else {
+            document.getElementById("fault-card-title").textContent = isZh
+              ? "当前处于正常生产运行状态 (Normal Operation)"
+              : "Normal Production Operation";
+            document.getElementById("fault-card-desc").textContent = isZh
+              ? "全厂连接层与 MES 通信正常，高频遥测数据流正常汇聚。点击上方 3 个异常注入按钮，可观察数据流中断或滞后时示意图的状态变化与逐层告警顺序。"
+              : "All equipment interfaces and MES communication online. High-frequency telemetry flows continuously. Click the 3 scenario buttons above to simulate communication failures, latency, and dispatch bottlenecks.";
+            document.getElementById("fault-alarm-badge").textContent = isZh
+              ? "现实告警顺序与原理"
+              : "Root Cause & Alarm Hierarchy";
+            document.getElementById("fault-alarm-badge").textContent = isZh
+              ? "现实告警顺序与原理"
+              : "Root Cause & Alarm Hierarchy";
+            document.getElementById("fault-alarm-box").style.display = "none";
+          }
+
+          // 10. Accordion layers update
+          document.getElementById("acc-section-heading").textContent = isZh
+            ? "五层详细架构与代表厂商 (Architectural Detail & Representative Vendors)"
+            : "Detailed Layer Architecture & Representative Vendors";
+          renderAccordion();
+
+          // 11. Pure text version
+          document.getElementById("tv-heading").textContent = isZh
+            ? "纯文字版讲解 · Complete Pure Text Architecture"
+            : "Complete Pure Text Architecture Guide";
+          document.getElementById("tv-subheading").textContent = isZh
+            ? "本节为示意图与动画的完整纯文字等价说明，确保在无动画环境、读屏软件及搜索引擎检索下内容完整准确。"
+            : "Complete text equivalent of all architectural layers and lot journey steps for screen readers, accessibility, and offline viewing.";
+          renderPureTextVersion();
+
+          // Update SVG Highlights
+          updateSvgLayerHighlights();
+        }
+
+        // Layer Switch Handler
+        window.switchLayer = function (layerId) {
+          currentLayer = layerId;
+          document.querySelectorAll(".fd-layer-btn").forEach((btn) => {
+            btn.classList.toggle(
+              "active",
+              btn.getAttribute("data-layer-id") === layerId,
+            );
+          });
+
+          // Update URL without reload
+          const url = new URL(window.location);
+          url.searchParams.set("layer", layerId);
+          window.history.replaceState({}, "", url);
+
+          updateSidebarLayer();
+          updateSvgLayerHighlights();
+        };
+
+        function updateSidebarLayer() {
+          if (!fabData) fabData = DEFAULT_FAB_DATA;
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+          const layerObj =
+            fabData.layers.find((l) => l.id === currentLayer) ||
+            fabData.layers[0];
+
+          document.getElementById("sb-layer-id").textContent = isZh
+            ? layerObj.title_zh
+            : layerObj.title_en;
+          document.getElementById("sb-layer-status").textContent = isZh
+            ? "当前激活视图"
+            : "ACTIVE VIEW";
+          document.getElementById("sb-layer-title").textContent = isZh
+            ? `${layerObj.name_zh} (${layerObj.name_en})`
+            : layerObj.name_en;
+          document.getElementById("sb-layer-function").textContent = isZh
+            ? layerObj.function_zh
+            : layerObj.function_en;
+          document.getElementById("sb-layer-note").textContent = isZh
+            ? layerObj.note_zh
+            : layerObj.note_en;
+
+          document.getElementById("lbl-data-types").textContent = isZh
+            ? "数据类型 / Data Types"
+            : "Data Types";
+          document.getElementById("lbl-protocols").textContent = isZh
+            ? "协议与接口 / Protocols"
+            : "Protocols & Interfaces";
+
+          // Data types pills
+          const dtList = isZh ? layerObj.data_types_zh : layerObj.data_types_en;
+          const dtContainer = document.getElementById("sb-layer-datatypes");
+          dtContainer.innerHTML = dtList
+            .map((item) => `<span class="fd-pill">${item}</span>`)
+            .join("");
+
+          // Protocols pills
+          const protoList = isZh
+            ? layerObj.protocols_zh
+            : layerObj.protocols_en;
+          const protoContainer = document.getElementById("sb-layer-protocols");
+          protoContainer.innerHTML = protoList
+            .map((item) => `<span class="fd-pill">${item}</span>`)
+            .join("");
+        }
+
+        // Update SVG Layer Visuals
+        function updateSvgLayerHighlights() {
+          const layerIds = [
+            "equipment",
+            "connectivity",
+            "execution",
+            "analytics",
+            "twin",
+          ];
+          layerIds.forEach((id) => {
+            const el = document.getElementById("svg-layer-" + id);
+            if (el) {
+              const rect = el.querySelector("rect");
+              if (rect) {
+                if (id === currentLayer) {
+                  rect.setAttribute("stroke", "var(--accent)");
+                  rect.setAttribute("stroke-width", "2.5");
+                } else {
+                  rect.setAttribute("stroke", "var(--line)");
+                  rect.setAttribute("stroke-width", "1.5");
+                }
+              }
+            }
+          });
+
+          // Highlight Active Bay in SVG
+          for (let i = 1; i <= 5; i++) {
+            const bayNode = document.getElementById("bay-node-" + i);
+            if (bayNode) {
+              const bgRect = bayNode.querySelector("rect");
+              if (i === currentStep) {
+                bgRect.setAttribute("stroke", "var(--accent)");
+                bgRect.setAttribute("stroke-width", "2");
+                bgRect.setAttribute("fill", "var(--surface)");
+              } else {
+                bgRect.setAttribute("stroke", "var(--line)");
+                bgRect.setAttribute("stroke-width", "1");
+                bgRect.setAttribute("fill", "var(--surface-2)");
+              }
+            }
+          }
+        }
+
+        // Lot Stepper Controls
+        window.changeLotStep = function (delta) {
+          let next = currentStep + delta;
+          if (next > 5) next = 1;
+          if (next < 1) next = 5;
+          setLotStep(next);
+        };
+
+        window.setLotStep = function (stepIdx) {
+          currentStep = stepIdx;
+          updateLotStepDisplay();
+          updateSvgLayerHighlights();
+        };
+
+        function updateLotStepDisplay() {
+          if (!fabData) fabData = DEFAULT_FAB_DATA;
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+          const stepObj =
+            fabData.lot_journey.find((s) => s.step === currentStep) ||
+            fabData.lot_journey[0];
+
+          document.getElementById("step-counter-badge").textContent =
+            `STEP ${stepObj.step} / 5`;
+          document.getElementById("step-name-display").textContent = isZh
+            ? `${stepObj.category_zh} ${stepObj.category_en} (${stepObj.bay_zh})`
+            : `${stepObj.category_en} (${stepObj.bay})`;
+          document.getElementById("journey-bay-tag").textContent =
+            `Bay 0${stepObj.step}`;
+
+          document.getElementById("journey-box-title").textContent = isZh
+            ? "当前步数据流向 · Lot Step Data Breakdown"
+            : "Current Lot Step Data Breakdown";
+
+          document.getElementById("jlbl-data").textContent = isZh
+            ? "1. 本步产生什么数据 / Data Generated"
+            : "1. Data Generated in this Step";
+          document.getElementById("jlbl-protocol").textContent = isZh
+            ? "2. 本步走什么协议 / Protocol & Ingestion"
+            : "2. Communication Protocol & Ingestion";
+          document.getElementById("jlbl-consumer").textContent = isZh
+            ? "3. 本步数据被谁消费 / Data Consumer"
+            : "3. Downstream Data Consumers";
+          document.getElementById("jlbl-missing").textContent = isZh
+            ? "4. 本步若数据缺失会怎样 / If Data Missing"
+            : "4. Risk & Consequence if Missing";
+
+          document.getElementById("jval-data").textContent = isZh
+            ? stepObj.data_zh
+            : stepObj.data_en;
+          document.getElementById("jval-protocol").textContent = isZh
+            ? stepObj.protocol_zh
+            : stepObj.protocol_en;
+          document.getElementById("jval-consumer").textContent = isZh
+            ? stepObj.consumer_zh
+            : stepObj.consumer_en;
+          document.getElementById("jval-missing").textContent = isZh
+            ? stepObj.if_missing_zh
+            : stepObj.if_missing_en;
+        }
+
+        // Fault Injection Scenarios
+        window.triggerFaultScenario = function (scenarioId) {
+          currentFault = scenarioId;
+          document.querySelectorAll(".fd-fault-btn").forEach((btn) => {
+            btn.classList.toggle("active", btn.id === "fbtn-" + scenarioId);
+          });
+
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+          if (!fabData) fabData = DEFAULT_FAB_DATA;
+          const sc = fabData.fault_scenarios.find((s) => s.id === scenarioId);
+          if (!sc) return;
+
+          document.getElementById("fault-card-title").textContent = isZh
+            ? sc.name_zh
+            : sc.name_en;
+          document.getElementById("fault-card-desc").textContent = isZh
+            ? sc.impact_zh
+            : sc.impact_en;
+
+          const alarmBox = document.getElementById("fault-alarm-box");
+          alarmBox.style.display = "block";
+          document.getElementById("fault-alarm-badge").textContent = isZh
+            ? `现实首报警层：${sc.alarm_layer_zh}`
+            : `First Alarming Layer in Reality: ${sc.alarm_layer_en}`;
+          document.getElementById("fault-alarm-text").textContent = isZh
+            ? sc.alarm_explanation_zh
+            : sc.alarm_explanation_en;
+
+          applySvgFaultStyles(scenarioId);
+        };
+
+        window.resetFaultScenario = function () {
+          currentFault = null;
+          document
+            .querySelectorAll(".fd-fault-btn")
+            .forEach((btn) => btn.classList.remove("active"));
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+
+          document.getElementById("fault-card-title").textContent = isZh
+            ? "当前处于正常生产运行状态 (Normal Operation)"
+            : "Normal Production Operation";
+          document.getElementById("fault-card-desc").textContent = isZh
+            ? "全厂连接层与 MES 通信正常，高频遥测数据流正常汇聚。点击上方 3 个异常注入按钮，可观察数据流中断或滞后时示意图的状态变化与逐层告警顺序。"
+            : "All equipment interfaces and MES communication online. High-frequency telemetry flows continuously. Click the 3 scenario buttons above to simulate communication failures, latency, and dispatch bottlenecks.";
+          document.getElementById("fault-alarm-badge").textContent = isZh
+            ? "现实告警顺序与原理"
+            : "Root Cause & Alarm Hierarchy";
+          document.getElementById("fault-alarm-box").style.display = "none";
+
+          applySvgFaultStyles(null);
+        };
+
+        function applySvgFaultStyles(faultId) {
+          const flowLines = document.getElementById("svg-flow-lines");
+          const execLayer = document.getElementById("svg-layer-execution");
+
+          // Reset all lines
+          flowLines.setAttribute("stroke", "var(--accent)");
+          flowLines.setAttribute("opacity", "0.85");
+
+          if (faultId === "connectivity_cut") {
+            const p1 = document.getElementById("flow-path-1");
+            if (p1) p1.setAttribute("stroke", "var(--red)");
+            flowLines.setAttribute("opacity", "0.4");
+          } else if (faultId === "data_throttled") {
+            flowLines.setAttribute("stroke", "var(--amber)");
+          } else if (faultId === "dispatch_delayed") {
+            if (execLayer) {
+              const rect = execLayer.querySelector("rect");
+              if (rect) rect.setAttribute("stroke", "var(--amber)");
+            }
+          }
+        }
+
+        // Animation Loop
+        window.toggleAnimation = function () {
+          isAnimPlaying = !isAnimPlaying;
+          const label = document.getElementById("anim-btn-label");
+          const icon = document.getElementById("anim-btn-icon");
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+
+          if (isAnimPlaying) {
+            icon.textContent = "⏸";
+            label.textContent = isZh ? "暂停动画" : "Pause";
+          } else {
+            icon.textContent = "▶";
+            label.textContent = isZh ? "播放动画" : "Play";
+          }
+        };
+
+        function setupAnimation() {
+          const bayX = [98, 222, 346, 470, 589];
+          const yStart = 370;
+          const yEnd = 270;
+
+          function tick() {
+            if (isAnimPlaying) {
+              animProgress += 0.012;
+              if (animProgress > 1) animProgress = 0;
+
+              for (let i = 0; i < 5; i++) {
+                const pulse = document.getElementById("pulse-" + (i + 1));
+                if (pulse) {
+                  if (currentFault === "connectivity_cut" && i === 0) {
+                    pulse.setAttribute("cx", bayX[i]);
+                    pulse.setAttribute("cy", yStart);
+                    pulse.setAttribute("fill", "var(--red)");
+                  } else {
+                    const y = yStart - (yStart - yEnd) * animProgress;
+                    pulse.setAttribute("cx", bayX[i]);
+                    pulse.setAttribute("cy", y);
+                    pulse.setAttribute(
+                      "fill",
+                      currentFault === "data_throttled"
+                        ? "var(--amber)"
+                        : "var(--accent)",
+                    );
+                  }
+                }
+              }
+
+              const up1 = document.getElementById("pulse-up1");
+              const up2 = document.getElementById("pulse-up2");
+              if (up1) {
+                up1.setAttribute("cx", 340);
+                up1.setAttribute("cy", 240 - 70 * animProgress);
+              }
+              if (up2) {
+                up2.setAttribute("cx", 340);
+                up2.setAttribute("cy", 168 - 74 * animProgress);
+              }
+            }
+            animFrameId = requestAnimationFrame(tick);
+          }
+          tick();
+        }
+
+        // Accordion Details & Representative Vendors
+        function renderAccordion() {
+          if (!fabData) fabData = DEFAULT_FAB_DATA;
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+          const container = document.getElementById("fd-accordion-container");
+          if (!container) return;
+
+          container.innerHTML = fabData.layers
+            .map((layer, idx) => {
+              const title = isZh
+                ? `${layer.name_zh} (${layer.name_en})`
+                : layer.name_en;
+              const func = isZh ? layer.function_zh : layer.function_en;
+              const note = isZh ? layer.note_zh : layer.note_en;
+              const isOpen = idx === 0 ? "open" : "";
+
+              let vendorsMarkup = "";
+              if (layer.vendors_commercial) {
+                vendorsMarkup = `
+                <div style="font-size: 11px; font-weight: 700; color: var(--ink-3); text-transform: uppercase; margin-top: 10px;">
+                  ${isZh ? "商业生产仿真与孪生 (Commercial Simulation & Twin)" : "Commercial Production Simulation & Twin"}
+                </div>
+                <div class="fd-vendor-list">
+                  ${layer.vendors_commercial.map((v) => `<span class="fd-vendor-item">${v}</span>`).join("")}
+                </div>
+                <div style="font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; margin-top: 12px;">
+                  ${isZh ? "开源 / 教学级仿真 (Teaching Grade)" : "Open-Access Teaching-Grade Simulation"}
+                </div>
+                <div class="fd-vendor-list">
+                  ${((isZh ? layer.vendors_teaching_zh : layer.vendors_teaching_en) || layer.vendors_teaching || []).map((v) => `<span class="fd-vendor-item" style="border-color: var(--accent);">${v}</span>`).join("")}
+                </div>
+              `;
+              } else if (layer.vendors) {
+                vendorsMarkup = `
+                <div class="fd-vendor-list">
+                  ${layer.vendors.map((v) => `<span class="fd-vendor-item">${v}</span>`).join("")}
+                </div>
+              `;
+              }
+
+              return `
+              <div class="fd-accordion-card ${isOpen}" id="acc-card-${layer.id}">
+                <div class="fd-accordion-head" onclick="toggleAccordion('acc-card-${layer.id}')">
+                  <div class="fd-acc-title-group">
+                    <span class="fd-acc-tag">LAYER ${idx + 1}</span>
+                    <h3 class="fd-acc-title">${title}</h3>
+                  </div>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                </div>
+                <div class="fd-accordion-body">
+                  <p style="font-size: 13.5px; font-weight: 600; color: var(--ink); margin: 12px 0 6px;">${func}</p>
+                  <p style="font-size: 12.5px; color: var(--ink-2); margin: 0 0 10px; line-height: 1.5;">${note}</p>
+                  
+                  <div class="fd-vendor-disclaimer">
+                    ${isZh ? fabData.disclaimer_zh : fabData.disclaimer_en}
+                  </div>
+                  ${vendorsMarkup}
+                </div>
+              </div>
+            `;
+            })
+            .join("");
+        }
+
+        window.toggleAccordion = function (cardId) {
+          const card = document.getElementById(cardId);
+          if (card) {
+            card.classList.toggle("open");
+          }
+        };
+
+        // Render Pure Text Version (Mandatory P0 - Expanded Deep-Dive)
+        function renderPureTextVersion() {
+          if (!fabData) fabData = DEFAULT_FAB_DATA;
+          const lang = getPageLang();
+          const isZh = lang === "zh";
+
+          // Module 1: 5 Layers Architectural Deep-Dive
+          const layersBox = document.getElementById("tv-layers-content");
+          if (isZh) {
+            layersBox.innerHTML = `
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
+                一、晶圆制造全厂五层数据流纵深架构解析
+              </h3>
+              <p style="margin-bottom: 16px; color: var(--ink-2);">
+                现代先进制程 12 英寸（300mm）晶圆制造厂是人类工业史上数据密度最高、自动化程度最严密的制造体系之一。整厂数据流自下而上跨越五大核心层级，构成了从微秒级机台物理量遥测，到事务级派工、再到工厂级排程决策的完整闭环。
+              </p>
+
+              <!-- Layer 1 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 1</span>
+                  <h4 class="fd-tv-card-title">设备与物理传感器层 (Equipment Floor & In-Situ Sensor Tier)</h4>
+                </div>
+                <p><strong>层级核心职能：</strong>产生并承载所有微观物理工艺发生的原始数据，是整厂数据金字塔的物理源头。</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">RF Forward/Reflected Power</span>
+                  <span class="fd-tv-pill">Capacitance Manometer</span>
+                  <span class="fd-tv-pill">Mass Flow Controller (MFC)</span>
+                  <span class="fd-tv-pill">Backside Helium Leak</span>
+                  <span class="fd-tv-pill">EPD Optical Emission</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>离散状态与事件（Events & States）：</strong>由机台 PLC 与工控机周期性上报，包含在线/离线、空闲（Idle）、加工（Run）、维护（PM）、故障报警（Alarm）及装载互锁（Interlock）状态。</li>
+                  <li><strong>机台硬件告警（Alarms）：</strong>气体输送压力下限、射频阻抗自动匹配失败、冷却回路过热、机械手臂取放片真空吸附丢片等关键安全事件。</li>
+                  <li><strong>高频时间序列 Trace 遥测（High-Frequency Telemetry）：</strong>以 10Hz 至 100Hz 甚至更高的采样率采集射频正向/反射功率、直流自偏压（Vdc）、腔体真空度、静电吸盘（ESC）各分区温度及背部氦气气压，捕获微秒级的物理抖动。</li>
+                  <li><strong>原位量测与检测结果（In-line Metrology Results）：</strong>光刻对准残差、刻蚀终点光学发射光谱（EPD）、化学机械平坦化（CMP）电机转矩终点突变，以及随后的光学膜厚、关键尺寸（CD）与缺陷图谱（Defect Map）。</li>
+                </ul>
+              </div>
+
+              <!-- Layer 2 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 2</span>
+                  <h4 class="fd-tv-card-title">工业互联通信网关与 SEMI 国际标准体系 (Connectivity & SEMI Protocols Tier)</h4>
+                </div>
+                <p><strong>层级核心职能：</strong>将数百台来自全球不同 OEM 供应商的异构机台统一抽象为标准消息模型，解耦控制通道与分析通道。</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">SECS-I (E4)</span>
+                  <span class="fd-tv-pill">HSMS (E37)</span>
+                  <span class="fd-tv-pill">SECS-II (E5)</span>
+                  <span class="fd-tv-pill">GEM (E30)</span>
+                  <span class="fd-tv-pill">GEM300 (E39/E40/E87/E90/E94)</span>
+                  <span class="fd-tv-pill">EDA / Interface A (E120-E134)</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>SECS/GEM 与 HSMS 协议簇：</strong>SEMI E37 HSMS 在 TCP/IP（通常为端口 5000）上建立点对点通信会话，配备 T3（响应超时）、T6（控制事务超时）、T7（连接断开判定）等严格硬件级定时器；SEMI E5 SECS-II 规范了以 Stream/Function（如 S1F13 建立握手、S6F11 站内事件收集、S5F1 报警）为代表的标准工业报文结构；SEMI E30 GEM 规定了全球设备通用的在线/离线行为模型。</li>
+                  <li><strong>GEM300 晶圆全自动化标准套件：</strong>12 英寸全自动车间核心基础设施。包含 E39（对象命名体系）、E40（Process Job，单片/批次晶圆工艺作业实体）、E87（Carrier Management，自动化晶圆载具 FOUP 在装载口的锁定与安全开门）、E90（Substrate Tracking，高精度追踪 25 片晶圆在机械手与各工艺腔室内的移动轨迹）、E94（Control Job，顶层派工容器）。</li>
+                  <li><strong>EDA / Interface A 大数据专用接口：</strong>SEMI E120/E125/E132/E134 标准套件。采用基于 SOAP/XML 或 gRPC/Protobuf 的独立通道，与 MES 控制通道物理隔离，配备独立身份鉴权。支持上百种机台传感器 Trace 数据以 50Hz 采样高速传输，确保高频分析永不阻塞 MES 生产控制网络。</li>
+                  <li><strong>EAP 网关（Equipment Automation Program）：</strong>负责机台与上层系统的协议转译、指令格式验证、配方完整性比对（Golden Recipe Check），并在网络中断时提供本地存储转发（Store-and-Forward）数据缓冲。</li>
+                </ul>
+              </div>
+
+              <!-- Layer 3 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 3</span>
+                  <h4 class="fd-tv-card-title">制造执行系统与物料调度层 (Execution: MES, Dispatch & AMHS Tier)</h4>
+                </div>
+                <p><strong>层级核心职能：</strong>晶圆厂生产运行的神经中枢，严格掌管全厂在制品（WIP）轨迹、配方校验与自动化物流派工。</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">Lot Routing Enforcement</span>
+                  <span class="fd-tv-pill">Track-In / Track-Out</span>
+                  <span class="fd-tv-pill">Golden Recipe Integrity</span>
+                  <span class="fd-tv-pill">RTD Dispatching</span>
+                  <span class="fd-tv-pill">OHT / AMHS Automation</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>800~1200 道 Routing 工步防错：</strong>现代高端芯片需历经千余道工步，MES 系统执行不可逾越的路径锁死，晶圆批次必须顺序经过指定工步，严防跳步、倒序或漏步。</li>
+                  <li><strong>批次生命周期状态流转：</strong>涵盖 Track-In（机台进站扣减与启动使能）、Track-Out（完工出站过账并更新工艺履历档案）、Hold（超差时自动锁批）、Release（工程师审核放行）、Split/Merge（拆批进行工程试验或并批生产）。</li>
+                  <li><strong>配方完整性核验（Recipe Integrity）：</strong>通过 EAP 在机台开始加工前比对机台本地配方体（Recipe Body）与 MES 主数据库的哈希指纹，防止误调参数引发数十万美元整批报废。</li>
+                  <li><strong>实时动态派工（RTD）与天车搬送（AMHS/OHT）：</strong>针对 EUV/DUV 光刻机等核心瓶颈机台，结合天车搬运时间、掩模版（Reticle）位置、产品交付期约束，毫秒级下发全自动搬送与投产指令。</li>
+                </ul>
+              </div>
+
+              <!-- Layer 4 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 4</span>
+                  <h4 class="fd-tv-card-title">高级工艺分析与良率闭环控制层 (Analytics & Process Control: APC, FDC, SPC, YMS)</h4>
+                </div>
+                <p><strong>层级核心职能：</strong>将原始传感器数据转化为亚纳米级加工精度的闭环补偿指令与腔体健康模型。</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">APC / Run-to-Run (R2R)</span>
+                  <span class="fd-tv-pill">FDC Fault Classification</span>
+                  <span class="fd-tv-pill">SPC Nelson Rules</span>
+                  <span class="fd-tv-pill">YMS Defect Clustering</span>
+                  <span class="fd-tv-pill">EWMA Feedback / Feedforward</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>APC / R2R (Run-to-Run) 闭环控制：</strong>前馈控制（Feedforward）提取前道实际膜厚，动态调整本道加工时间（如根据实测沉积厚度微调 CMP 抛光用时）；反馈控制（Feedback）利用本道量测偏差，反向微调下一批次的曝光剂量（Dose）与对焦偏置（Focus Offset）。</li>
+                  <li><strong>FDC 腔体微观故障侦测：</strong>对机台 Trace 遥测构建 PCA 主成分分析模型与 Hotelling's T² / SPE 统计残差矩阵，在发生腔体打火、MFC 气体微小抖动或真空泄漏时，秒级触发警报并阻止后续批次投产。</li>
+                  <li><strong>SPC 统计过程控制：</strong>实时计算均值与极差在管理控制线（UCL/LCL）内的分布，结合 Nelson / Western Electric 准则，捕获工艺系统性漂移。</li>
+                  <li><strong>YMS 良率管理系统：</strong>将最终电学晶圆测试（CP/WAT）图谱与前道在线光学缺陷（Klarf）进行空间重叠与聚类，快速锁定光刻掩模版缺陷或刻蚀环形边界衰退的物理根因。</li>
+                </ul>
+              </div>
+
+              <!-- Layer 5 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 5</span>
+                  <h4 class="fd-tv-card-title">全厂排程推演、数字孪生与决策支持层 (Planning, Simulation & Twin Sandbox)</h4>
+                </div>
+                <p><strong>层级核心职能：</strong>全厂离散事件推演，评估突发故障的连锁反应，辅助厂长与工艺主管进行 What-If 决策。</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">Discrete Event Simulation (DES)</span>
+                  <span class="fd-tv-pill">What-If Scenario Sandbox</span>
+                  <span class="fd-tv-pill">Bottleneck Drift Prediction</span>
+                  <span class="fd-tv-pill">PM Maintenance Planning</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>全厂离散事件仿真（DES）：</strong>基于全厂机台平均无故障时间（MTBF）、平均修复时间（MTTR）、换批调整时间建立全局推演模型，预测未来 24~72 小时的产出达成率（Wafer Moves）与瓶颈漂移。</li>
+                  <li><strong>What-If 情景沙盒决策：</strong>模拟核心机台非计划停机（Unscheduled Down）或高优先级研发急件插入对全厂 WIP 积压和交付瓶颈的连锁冲击，提前选定最优调度预案。</li>
+                  <li><strong>仿真边界说明：</strong>工业级商业生产孪生须直接连入产线 SCADA 实现物理闭环；本站提供的 SemiconFab 教学沙盒专注于揭示拓扑原理，杜绝任何将教学沙盒与量产控制混淆的情况。</li>
+                </ul>
+              </div>
+            `;
+          } else {
+            layersBox.innerHTML = `
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
+                1. Comprehensive 5-Layer Wafer Fab Data Architecture
+              </h3>
+              <p style="margin-bottom: 16px; color: var(--ink-2);">
+                A modern 300mm advanced semiconductor fab is among the most sophisticated automated systems in human engineering. Plant-wide data flows from shop-floor physical sensors up to factory-level dispatch engines, spanning five architectural tiers that ensure nanoscale precision and high-volume yields.
+              </p>
+
+              <!-- Layer 1 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 1</span>
+                  <h4 class="fd-tv-card-title">Equipment Floor & In-Situ Physical Sensors</h4>
+                </div>
+                <p><strong>Core Responsibility:</strong> Houses cleanroom equipment, micro-actuators, and vacuum sensors, generating all physical signal telemetry.</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">RF Forward/Reflected Power</span>
+                  <span class="fd-tv-pill">Capacitance Manometer</span>
+                  <span class="fd-tv-pill">Mass Flow Controller (MFC)</span>
+                  <span class="fd-tv-pill">Backside Helium Leak</span>
+                  <span class="fd-tv-pill">EPD Optical Emission</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>Discrete Machine States & Events:</strong> Periodic telemetry on control modes (Offline, Local, Remote), process states (Idle, Run, Pause, PM, Down), and vacuum interlocks.</li>
+                  <li><strong>Hardware Alarms:</strong> Gas line delivery thresholds, RF impedance match tuning failures, thermal chiller drift, and substrate chucking loss.</li>
+                  <li><strong>High-Frequency Sensor Trace Telemetry:</strong> Sampled at 10Hz to 100Hz or above, capturing RF forward/reflected power, DC bias, chamber pressure, electrostatic chuck (ESC) zone temperatures, and backside helium flow rates.</li>
+                  <li><strong>In-Line Metrology & Inspection:</strong> Optical critical dimension (OCD) scatterometry, film thickness ellipsometry, alignment overlay residuals, and optical surface defect maps (Klarf).</li>
+                </ul>
+              </div>
+
+              <!-- Layer 2 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 2</span>
+                  <h4 class="fd-tv-card-title">Connectivity, SEMI Standards & EAP Gateway Tier</h4>
+                </div>
+                <p><strong>Core Responsibility:</strong> Normalizes hundreds of heterogeneous multi-vendor cleanroom tools into standardized messaging formats, isolating control networks from heavy telemetry.</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">SECS-I (E4)</span>
+                  <span class="fd-tv-pill">HSMS (E37)</span>
+                  <span class="fd-tv-pill">SECS-II (E5)</span>
+                  <span class="fd-tv-pill">GEM (E30)</span>
+                  <span class="fd-tv-pill">GEM300 (E39/E40/E87/E90/E94)</span>
+                  <span class="fd-tv-pill">EDA / Interface A (E120-E134)</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>SECS/GEM & HSMS Framework:</strong> SEMI E37 HSMS establishes point-to-point sessions over TCP/IP (typically port 5000) with sub-second T3/T6/T7 timers. SEMI E5 SECS-II formalizes structured messages (Stream/Function), while SEMI E30 GEM enforces standard tool state models.</li>
+                  <li><strong>GEM300 Full-Automation Standards Suite:</strong> The core foundation for 300mm automated fabs: E39 (Object Naming), E40 (Process Job execution), E87 (Carrier Management and FOUP load port clamping/opening), E90 (Substrate Tracking through robot arms, loadlocks, and process chambers), and E94 (Control Job dispatch).</li>
+                  <li><strong>EDA / Interface A Telemetry Interface:</strong> SEMI E120/E125/E132/E134 standards specify dedicated read-only SOAP/XML or Protobuf/gRPC streams, isolated from MES control paths to ensure 50Hz sensor traces never clog factory dispatch networks.</li>
+                  <li><strong>Equipment Automation Program (EAP):</strong> Functions as a shop-floor gateway performing protocol translation, recipe checksum validation, interlock rules, and local store-and-forward data buffering during network interruptions.</li>
+                </ul>
+              </div>
+
+              <!-- Layer 3 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 3</span>
+                  <h4 class="fd-tv-card-title">Manufacturing Execution System (MES), Dispatch & Material Flow</h4>
+                </div>
+                <p><strong>Core Responsibility:</strong> Central nervous system enforcing wafer lot routing, recipe integrity, and automated OHT dispatch.</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">Lot Routing Enforcement</span>
+                  <span class="fd-tv-pill">Track-In / Track-Out</span>
+                  <span class="fd-tv-pill">Golden Recipe Integrity</span>
+                  <span class="fd-tv-pill">RTD Dispatching</span>
+                  <span class="fd-tv-pill">OHT / AMHS Automation</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>Routing Sequence Enforcement:</strong> Advanced nodes require 800 to 1200+ micro-steps. MES strictly guarantees step order, preventing skip, reversal, or wrong-step operations.</li>
+                  <li><strong>Lot Lifecycle Operations:</strong> Manages Track-In (reservation and process start authorization), Track-Out (accounting and history logging), Hold (automatic lock on excursions), Release (engineering sign-off), and Split/Merge.</li>
+                  <li><strong>Recipe Integrity Verification:</strong> Matches recipe parameters against golden baselines prior to process execution, preventing scrap events that could cost hundreds of thousands of dollars per lot.</li>
+                  <li><strong>Real-Time Dispatching (RTD) & OHT Material Handling:</strong> Dynamically optimizes wafer move schedules around bottleneck tools (e.g. EUV/DUV scanners), factoring in reticle pod locations and queue-time limits.</li>
+                </ul>
+              </div>
+
+              <!-- Layer 4 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 4</span>
+                  <h4 class="fd-tv-card-title">Advanced Process Control & Analytics (APC, FDC, SPC, YMS)</h4>
+                </div>
+                <p><strong>Core Responsibility:</strong> Transforms raw sensor traces into closed-loop recipe trimming offsets and sub-second anomaly detection.</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">APC / Run-to-Run (R2R)</span>
+                  <span class="fd-tv-pill">FDC Fault Classification</span>
+                  <span class="fd-tv-pill">SPC Nelson Rules</span>
+                  <span class="fd-tv-pill">YMS Defect Clustering</span>
+                  <span class="fd-tv-pill">EWMA Feedback / Feedforward</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>APC / Run-to-Run (R2R) Closed Loop:</strong> Feedforward compensation takes measured upstream film thickness to trim CMP polish times; feedback loops analyze metrology residuals to update lithography exposure dose and focus offsets via EWMA algorithms.</li>
+                  <li><strong>Fault Detection and Classification (FDC):</strong> Runs multivariate PCA models, Hotelling's T-squared, and Squared Prediction Error (SPE) metrics on sensor traces to catch plasma arcing, MFC flow spikes, or vacuum leaks within seconds.</li>
+                  <li><strong>Statistical Process Control (SPC):</strong> Monitors process metrics against UCL/LCL control limits, applying Nelson or Western Electric rules to flag drift before wafers breach specification.</li>
+                  <li><strong>Yield Management System (YMS):</strong> Correlates electrical wafer sort (CP/WAT) bin maps with inline optical defect maps (Klarf), running spatial clustering to isolate reticle defects or chamber hardware wear.</li>
+                </ul>
+              </div>
+
+              <!-- Layer 5 -->
+              <div class="fd-tv-card">
+                <div class="fd-tv-card-head">
+                  <span class="fd-tv-badge">LAYER 5</span>
+                  <h4 class="fd-tv-card-title">Factory Simulation, Digital Twin & What-If Planning</h4>
+                </div>
+                <p><strong>Core Responsibility:</strong> Plant-wide discrete-event simulation and What-If scenario evaluations for capacity and bottleneck management.</p>
+                <div class="fd-tv-pills">
+                  <span class="fd-tv-pill">Discrete Event Simulation (DES)</span>
+                  <span class="fd-tv-pill">What-If Scenario Sandbox</span>
+                  <span class="fd-tv-pill">Bottleneck Drift Prediction</span>
+                  <span class="fd-tv-pill">PM Maintenance Planning</span>
+                </div>
+                <ul style="padding-left: 20px; margin: 8px 0;">
+                  <li><strong>Plant-Wide Discrete Event Simulation (DES):</strong> Models tool MTBF, MTTR, and setup durations to forecast wafer moves and bottleneck drifts over the next 24 to 72 hours.</li>
+                  <li><strong>What-If Scenario Evaluation:</strong> Simulates the ripple effects of unscheduled tool downs or hot-lot insertions to select the optimal re-routing or maintenance plan.</li>
+                  <li><strong>Educational vs Industrial Scope:</strong> Commercial digital twins interface with live SCADA and MES backbones; this SemiconFab page serves as an open-access educational model to clarify architectural principles.</li>
+                </ul>
+              </div>
+            `;
+          }
+
+          // Module 2: Lot Journey Breakdown
+          const journeyBox = document.getElementById("tv-journey-content");
+          if (isZh) {
+            journeyBox.innerHTML = `
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
+                二、单批晶圆 (Lot) 五步闭环数据旅程深度解构
+              </h3>
+              <p style="margin-bottom: 16px; color: var(--ink-2);">
+                以包含 25 片 300mm 晶圆的 FOUP 为例，跟踪该批次在五大典型工艺区之间的流转。每一道工步不仅是物质形态的微观构建，更是数据在设备、网关、MES 与分析系统间的完整交互闭环。
+              </p>
+              ${fabData.lot_journey
+                .map(
+                  (step) => `
+                <div class="fd-tv-card" style="margin-bottom: 14px;">
+                  <div class="fd-tv-card-head">
+                    <span class="fd-tv-badge">STEP ${step.step}</span>
+                    <h4 class="fd-tv-card-title">${step.category_zh} (${step.bay_zh})</h4>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--ink-2); line-height: 1.6;">
+                    <div style="margin-bottom: 4px;">• <strong>现场产生数据：</strong>${step.data_zh}</div>
+                    <div style="margin-bottom: 4px;">• <strong>工业通信协议：</strong>${step.protocol_zh}</div>
+                    <div style="margin-bottom: 4px;">• <strong>下游数据消费者：</strong>${step.consumer_zh}</div>
+                    <div>• <strong>数据断链风险：</strong><span style="color: var(--red); font-weight: 600;">${step.if_missing_zh}</span></div>
+                  </div>
+                </div>
+              `,
+                )
+                .join("")}
+            `;
+          } else {
+            journeyBox.innerHTML = `
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
+                2. Wafer Lot 5-Step End-to-End Data Journey Breakdown
+              </h3>
+              <p style="margin-bottom: 16px; color: var(--ink-2);">
+                Tracing a 25-wafer 300mm FOUP through five representative cleanroom bays. Every physical process step represents an accompanying digital lifecycle of events, telemetry ingestion, recipe interlocks, and downstream analytics.
+              </p>
+              ${fabData.lot_journey
+                .map(
+                  (step) => `
+                <div class="fd-tv-card" style="margin-bottom: 14px;">
+                  <div class="fd-tv-card-head">
+                    <span class="fd-tv-badge">STEP ${step.step}</span>
+                    <h4 class="fd-tv-card-title">${step.category_en} (${step.bay})</h4>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--ink-2); line-height: 1.6;">
+                    <div style="margin-bottom: 4px;">• <strong>Data Generated:</strong> ${step.data_en}</div>
+                    <div style="margin-bottom: 4px;">• <strong>Communication Protocol:</strong> ${step.protocol_en}</div>
+                    <div style="margin-bottom: 4px;">• <strong>Downstream Consumer:</strong> ${step.consumer_en}</div>
+                    <div>• <strong>Consequence if Missing:</strong> <span style="color: var(--red); font-weight: 600;">${step.if_missing_en}</span></div>
+                  </div>
+                </div>
+              `,
+                )
+                .join("")}
+            `;
+          }
+
+          // Module 3: QoS, Latency Tiers & Technical Summary
+          const deepdiveBox = document.getElementById("tv-deepdive-content");
+          if (isZh) {
+            deepdiveBox.innerHTML = `
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
+                三、半导体工厂数据时延分级与可靠性要求 (Data QoS & Latency Tiers)
+              </h3>
+              <p style="margin-bottom: 16px; color: var(--ink-2);">
+                晶圆厂数据体系根据严苛程度划分为 5 个延迟保障等级，从硬件物理保护到全局排程决策逐层放宽时延，确保既能实现微秒级的安全联锁，又能承载 GB 级的高频分析流。
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--red); border-color: var(--red);">Tier 0 · 硬件硬实时 (&lt;1ms)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">机台内部真空互锁、射频打火快速关断、晶圆静电吸盘脱附传感器。纯硬件/现场总线闭环，不依赖上层网络。</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--amber); border-color: var(--amber);">Tier 1 · 近实时控制 (10ms~100ms)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">SECS/GEM HSMS 握手、机台状态事件通知（S6F11）、EDA 采集缓冲区。毫秒级保障机台与 EAP 网关的同步。</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--accent); border-color: var(--accent);">Tier 2 · 制造事务级 (1s~5s)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">MES 进出站过账（Track-In/Out）、OHT 天车派工指令、黄金配方校验。强一致性数据库事务，杜绝错账。</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--ink); border-color: var(--line);">Tier 3 · 批次级工艺闭环 (10s~1min)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">APC Run-to-Run 前馈/反馈计算、FDC 腔体多变量打分、SPC 控制图更新。批次与批次之间动态微调。</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--ink-3); border-color: var(--line);">Tier 4 · 全厂宏观决策 (分钟~小时级)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">全厂调度推演（RTD）、良率缺陷聚类（YMS）、数字孪生 What-If 决策沙盒。支撑工厂产能与供应链规划。</p>
+                </div>
+              </div>
+
+              <div style="background: var(--surface-2); border-left: 3px solid var(--accent); padding: 14px 16px; border-radius: 4px; font-size: 12.5px; color: var(--ink-2); line-height: 1.6;">
+                <strong>学术与教学规范说明：</strong>本纯文字版与图解旨在对齐 SEMI 国际标准体系，通过解构复杂的工业黑盒，为半导体工程技术人员、工业软件开发者及高校师生提供规范、系统且中立的晶圆制造数据体系全景指南。
+              </div>
+            `;
+          } else {
+            deepdiveBox.innerHTML = `
+              <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
+                3. Fab Data QoS, Latency Tiers & Technical Summary
+              </h3>
+              <p style="margin-bottom: 16px; color: var(--ink-2);">
+                Semiconductor manufacturing architecture segregates telemetry and transaction streams into five latency and reliability classes, reconciling microsecond hardware protection with multi-gigabyte analytical data flows.
+              </p>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; margin-bottom: 20px;">
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--red); border-color: var(--red);">Tier 0 · Hard Real-Time (&lt;1ms)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">Vacuum interlocks, RF arc shutoff, and wafer de-chuck monitoring. Local hardware/fieldbus loops independent of external networks.</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--amber); border-color: var(--amber);">Tier 1 · Near Real-Time (10ms~100ms)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">SECS/GEM HSMS handshakes, tool state notifications (S6F11), and EDA circular buffers. Guarantees tight EAP synchronization.</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--accent); border-color: var(--accent);">Tier 2 · Transactional (1s~5s)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">MES Track-In/Out accounting, automated OHT move dispatches, and recipe body checksum validation. ACID database guarantees.</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--ink); border-color: var(--line);">Tier 3 · Lot-Level Process Control (10s~1min)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">APC Run-to-Run trim calculations, FDC multivariate scoring, and SPC control charts. Injected between successive wafer runs.</p>
+                </div>
+                <div class="fd-tv-card" style="margin: 0;">
+                  <span class="fd-tv-badge" style="color: var(--ink-3); border-color: var(--line);">Tier 4 · Plant-Wide Strategic (Minutes~Hours)</span>
+                  <p style="margin-top: 8px; font-size: 12.5px;">RTD dispatch scheduling, YMS defect clustering, and Digital Twin What-If evaluations supporting plant capacity planning.</p>
+                </div>
+              </div>
+
+              <div style="background: var(--surface-2); border-left: 3px solid var(--accent); padding: 14px 16px; border-radius: 4px; font-size: 12.5px; color: var(--ink-2); line-height: 1.6;">
+                <strong>Educational Governance & Standard Alignment:</strong> This complete text architecture reflects open SEMI international standards to demystify shop-floor semiconductor systems for engineers, researchers, and students worldwide.
+              </div>
+            `;
+          }
+        }
+
+        // Language Switch Callback from site-nav / i18n
+        window.onSemiconLanguageChange = function (newLang) {
+          if (newLang === "en" || newLang === "zh") {
+            currentActiveLang = newLang;
+            try {
+              localStorage.setItem("semicon_lang", newLang);
+              document.documentElement.setAttribute("data-lang", newLang);
+            } catch (e) {}
+          }
+          renderUI();
+        };
+
+        window.addEventListener("semiconfab:langChanged", function () {
+          renderUI();
+        });
+
+        // Watch for data-lang attribute change on <html>
+        const langObserver = new MutationObserver(function (mutations) {
+          for (let m of mutations) {
+            if (m.attributeName === "data-lang") {
+              renderUI();
+              break;
+            }
+          }
+        });
+        langObserver.observe(document.documentElement, { attributes: true });
+
+        // Window load
+        document.addEventListener("DOMContentLoaded", () => {
+          initPage();
+        });
+      })();
+    </script>
+  </body>
+</html>

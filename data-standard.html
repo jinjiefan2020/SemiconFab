@@ -234,16 +234,52 @@
 
     <div class="container">
       <!-- Standard Hero Banner -->
-      <div class="card" style="border-left: 4px solid var(--primary); margin-top: 10px; margin-bottom: 24px;">
-        <div style="font-size: 0.6875rem; font-weight: 800; letter-spacing: 0.05em; color: var(--primary); text-transform: uppercase; margin-bottom: 6px;">
+      <div
+        class="card"
+        style="
+          border-left: 4px solid var(--primary);
+          margin-top: 10px;
+          margin-bottom: 24px;
+        "
+      >
+        <div
+          style="
+            font-size: 0.6875rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 6px;
+          "
+        >
           Open Specification · Schema v1.0
         </div>
-        <h1 style="font-size: 1.5rem; font-weight: 800; color: var(--text-main); margin-bottom: 8px;">
+        <h1
+          style="
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 8px;
+          "
+        >
           SemiconFab Equipment Schema v1.0
         </h1>
-        <p class="en-pair" style="color: var(--text-muted); font-size: 0.875rem; margin-bottom: 0;">
-          <span class="en-only">Open, machine-readable semiconductor equipment specification standard with 7-layer architecture and 3 conformance levels.</span>
-          <span class="zh-only">半导体制造设备开放数据标准 · 七层架构规范、3 级合规验证体系与字段级数据溯源机制。</span>
+        <p
+          class="en-pair"
+          style="
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: 0;
+          "
+        >
+          <span class="en-only"
+            >Open, machine-readable semiconductor equipment specification
+            standard with 7-layer architecture and 3 conformance levels.</span
+          >
+          <span class="zh-only"
+            >半导体制造设备开放数据标准 · 七层架构规范、3
+            级合规验证体系与字段级数据溯源机制。</span
+          >
         </p>
       </div>
 
@@ -266,6 +302,31 @@
         <p class="zh">
           SemiconFab 设备数据标准 v1.0
           是一个开放、机器可读的数据交换规范，旨在统一描述半导体前道晶圆制造与后道封装测试的各类制造设备。本标准为半导体设备制造商、晶圆厂规划工程师、工业工程团队以及学术研究人员建立了一套结构化的数据描述体系，用于收录设备物理占地、厂务二次配管配线需求、工艺能力及设备可靠性指标，同时严格避开厂商专有工艺配方与商业机密价格。
+        </p>
+        <p
+          style="
+            margin-top: 14px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+            font-size: 0.875rem;
+          "
+        >
+          <span class="en-only"
+            >Looking for equipment signal and shop-floor data flow? Explore the
+            <a
+              href="fab-data-layer.html"
+              style="color: var(--primary); font-weight: 600"
+              >Fab Data Layer (Teaching Model) &rarr;</a
+            ></span
+          >
+          <span class="zh-only"
+            >想了解设备信号与工厂车间数据如何流动？参见
+            <a
+              href="fab-data-layer.html"
+              style="color: var(--primary); font-weight: 600"
+              >晶圆厂数据层（教学模型） &rarr;</a
+            ></span
+          >
         </p>
       </section>
 
@@ -976,7 +1037,9 @@
       };
 
       document.addEventListener("DOMContentLoaded", () => {
-        const initial = window.semiconGetLang ? window.semiconGetLang() : getInitialLanguage();
+        const initial = window.semiconGetLang
+          ? window.semiconGetLang()
+          : getInitialLanguage();
         setLanguage(initial);
       });
     </script>

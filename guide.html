@@ -2,9 +2,14 @@
 <html lang="en" data-lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
     <meta name="color-scheme" content="light dark" />
-    <title>SemiconFab User Guide · Platform Walkthrough & Reference — SemiconFab.org</title>
+    <title>
+      SemiconFab User Guide · Platform Walkthrough & Reference — SemiconFab.org
+    </title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <meta
       name="description"
@@ -33,7 +38,13 @@
         padding: 0;
         background-color: var(--bg);
         color: var(--ink);
-        font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        font-family:
+          "Manrope",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
         line-height: 1.65;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
@@ -64,7 +75,12 @@
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, var(--accent) 0%, #3fbdb8 50%, var(--amber) 100%);
+        background: linear-gradient(
+          90deg,
+          var(--accent) 0%,
+          #3fbdb8 50%,
+          var(--amber) 100%
+        );
       }
 
       .guide-hero-top {
@@ -341,10 +357,18 @@
         color: #059669;
       }
 
-      html.dark .role-student { color: #60a5fa; }
-      html.dark .role-planner { color: #a78bfa; }
-      html.dark .role-researcher { color: #f472b6; }
-      html.dark .role-contributor { color: #34d399; }
+      html.dark .role-student {
+        color: #60a5fa;
+      }
+      html.dark .role-planner {
+        color: #a78bfa;
+      }
+      html.dark .role-researcher {
+        color: #f472b6;
+      }
+      html.dark .role-contributor {
+        color: #34d399;
+      }
 
       .guide-link-btn {
         display: inline-flex;
@@ -547,8 +571,12 @@
         border: 1px solid var(--line);
       }
 
-      html.dark .tier-1 { color: #34d399; }
-      html.dark .tier-3 { color: #818cf8; }
+      html.dark .tier-1 {
+        color: #34d399;
+      }
+      html.dark .tier-3 {
+        color: #818cf8;
+      }
 
       /* FAQ Accordion Cards */
       .faq-card {
@@ -649,8 +677,10 @@
       <section class="guide-hero">
         <div class="guide-hero-top">
           <div class="guide-hero-badge-group">
-            <span class="guide-badge-release">v1.8.0</span>
-            <span class="guide-badge-sub lang-en">Source-Available Platform</span>
+            <span class="guide-badge-release">v1.9.0</span>
+            <span class="guide-badge-sub lang-en"
+              >Source-Available Platform</span
+            >
             <span class="guide-badge-sub lang-zh">源码公开平台</span>
           </div>
 
@@ -679,7 +709,10 @@
         <div class="lang-en">
           <h1 class="guide-title">SemiconFab User Guide</h1>
           <div class="guide-quote">
-            <p><strong>SemiconFab.org</strong> — a source-available semiconductor fab digital twin platform (v1.8.0)</p>
+            <p>
+              <strong>SemiconFab.org</strong> — a source-available semiconductor
+              fab digital twin platform (v1.9.0)
+            </p>
             <p>Everything runs in your browser. No account, no install.</p>
           </div>
         </div>
@@ -688,7 +721,10 @@
         <div class="lang-zh">
           <h1 class="guide-title">SemiconFab 使用指南</h1>
           <div class="guide-quote">
-            <p><strong>SemiconFab.org</strong> — 源码公开的半导体晶圆厂数字孪生平台（v1.8.0）</p>
+            <p>
+              <strong>SemiconFab.org</strong> —
+              源码公开的半导体晶圆厂数字孪生平台（v1.9.0）
+            </p>
             <p>全部功能在浏览器内运行，无需注册、无需安装。</p>
           </div>
         </div>
@@ -697,20 +733,40 @@
       <!-- ================= QUICK JUMP TOC BAR ================= -->
       <nav class="guide-toc-nav" aria-label="Table of Contents">
         <!-- English TOC -->
-        <div class="lang-en" style="display: contents;">
-          <a href="#section-intro" class="guide-toc-item"><span class="guide-toc-num">01</span> What is this?</a>
-          <a href="#section-quickstart" class="guide-toc-item"><span class="guide-toc-num">02</span> Quick Start</a>
-          <a href="#section-features" class="guide-toc-item"><span class="guide-toc-num">03</span> Feature Guide</a>
-          <a href="#section-trust" class="guide-toc-item"><span class="guide-toc-num">04</span> Data Trust</a>
-          <a href="#section-faq" class="guide-toc-item"><span class="guide-toc-num">05</span> FAQ</a>
+        <div class="lang-en" style="display: contents">
+          <a href="#section-intro" class="guide-toc-item"
+            ><span class="guide-toc-num">01</span> What is this?</a
+          >
+          <a href="#section-quickstart" class="guide-toc-item"
+            ><span class="guide-toc-num">02</span> Quick Start</a
+          >
+          <a href="#section-features" class="guide-toc-item"
+            ><span class="guide-toc-num">03</span> Feature Guide</a
+          >
+          <a href="#section-trust" class="guide-toc-item"
+            ><span class="guide-toc-num">04</span> Data Trust</a
+          >
+          <a href="#section-faq" class="guide-toc-item"
+            ><span class="guide-toc-num">05</span> FAQ</a
+          >
         </div>
         <!-- Chinese TOC -->
-        <div class="lang-zh" style="display: contents;">
-          <a href="#section-intro" class="guide-toc-item"><span class="guide-toc-num">01</span> 这是什么</a>
-          <a href="#section-quickstart" class="guide-toc-item"><span class="guide-toc-num">02</span> 快速上手</a>
-          <a href="#section-features" class="guide-toc-item"><span class="guide-toc-num">03</span> 功能详解</a>
-          <a href="#section-trust" class="guide-toc-item"><span class="guide-toc-num">04</span> 数据可信度</a>
-          <a href="#section-faq" class="guide-toc-item"><span class="guide-toc-num">05</span> 常见问题</a>
+        <div class="lang-zh" style="display: contents">
+          <a href="#section-intro" class="guide-toc-item"
+            ><span class="guide-toc-num">01</span> 这是什么</a
+          >
+          <a href="#section-quickstart" class="guide-toc-item"
+            ><span class="guide-toc-num">02</span> 快速上手</a
+          >
+          <a href="#section-features" class="guide-toc-item"
+            ><span class="guide-toc-num">03</span> 功能详解</a
+          >
+          <a href="#section-trust" class="guide-toc-item"
+            ><span class="guide-toc-num">04</span> 数据可信度</a
+          >
+          <a href="#section-faq" class="guide-toc-item"
+            ><span class="guide-toc-num">05</span> 常见问题</a
+          >
         </div>
       </nav>
 
@@ -723,7 +779,9 @@
               <span class="guide-section-num">01</span>
               What is this?
             </h2>
-            <p class="guide-section-desc">Introduction and core project scope</p>
+            <p class="guide-section-desc">
+              Introduction and core project scope
+            </p>
           </div>
           <!-- Chinese Title -->
           <div class="lang-zh">
@@ -737,29 +795,33 @@
 
         <!-- English Content -->
         <div class="lang-en">
-          <p style="font-size: 1rem; color: var(--ink); margin-bottom: 14px;">
-            SemiconFab is a semiconductor factory digital twin that opens in your browser:
-            walk into a 3D cleanroom of a 300mm wafer fab, an OSAT packaging plant, and an interactive 3,000-tool 3nm Mega Fab conceptual layout model;
-            browse an open catalog of 253 real OEM tools, compare specs and price evidence,
-            estimate what it costs to build a fab, and download an open benchmark for
-            fab-scheduling research. It is a teaching- and research-grade tool —
-            every data point carries an honest provenance label, and nothing pretends
-            to be industrial-grade precision.
+          <p style="font-size: 1rem; color: var(--ink); margin-bottom: 14px">
+            SemiconFab is a semiconductor factory digital twin that opens in
+            your browser: walk into a 3D cleanroom of a 300mm wafer fab, an OSAT
+            packaging plant, and an interactive 3,000-tool 3nm Mega Fab
+            conceptual layout model; browse an open catalog of 253 real OEM
+            tools, compare specs and price evidence, estimate what it costs to
+            build a fab, and download an open benchmark for fab-scheduling
+            research. It is a teaching- and research-grade tool — every data
+            point carries an honest provenance label, and nothing pretends to be
+            industrial-grade precision.
           </p>
           <div class="guide-callout">
             <div class="guide-callout-icon">🌐</div>
             <div>
-              <strong>Languages</strong>: the homepage supports 9 languages; all other pages are
-              English / 中文 bilingual (toggle in the top-right corner).
+              <strong>Languages</strong>: the homepage supports 9 languages; all
+              other pages are English / 中文 bilingual (toggle in the top-right
+              corner).
             </div>
           </div>
         </div>
 
         <!-- Chinese Content -->
         <div class="lang-zh">
-          <p style="font-size: 1rem; color: var(--ink); margin-bottom: 14px;">
-            SemiconFab 是一个在浏览器里打开的半导体工厂数字孪生：你可以走进一座 300mm
-            晶圆厂的 3D 洁净室、一座封测厂，以及容纳 3,000 台机台的 3nm 概念超级晶圆厂布局模型；查阅 253 款真实 OEM 设备的开放目录，
+          <p style="font-size: 1rem; color: var(--ink); margin-bottom: 14px">
+            SemiconFab 是一个在浏览器里打开的半导体工厂数字孪生：你可以走进一座
+            300mm 晶圆厂的 3D 洁净室、一座封测厂，以及容纳 3,000 台机台的 3nm
+            概念超级晶圆厂布局模型；查阅 253 款真实 OEM 设备的开放目录，
             对比参数与价格依据，估算建一座晶圆厂要花多少钱，还可以下载调度研究用的
             公开基准测试。它是教学与研究级的工具——数据诚实标注来源等级，
             不冒充工业级精度。
@@ -767,7 +829,8 @@
           <div class="guide-callout">
             <div class="guide-callout-icon">🌐</div>
             <div>
-              <strong>语言</strong>：首页支持 9 种语言；其余页面为 English / 中文双语（右上角切换）。
+              <strong>语言</strong>：首页支持 9 种语言；其余页面为 English /
+              中文双语（右上角切换）。
             </div>
           </div>
         </div>
@@ -782,7 +845,10 @@
               <span class="guide-section-num">02</span>
               Quick start by who you are
             </h2>
-            <p class="guide-section-desc">Tailored exploration paths for students, engineers, planners, and researchers</p>
+            <p class="guide-section-desc">
+              Tailored exploration paths for students, engineers, planners, and
+              researchers
+            </p>
           </div>
           <!-- Chinese Title -->
           <div class="lang-zh">
@@ -790,7 +856,9 @@
               <span class="guide-section-num">02</span>
               按身份快速上手
             </h2>
-            <p class="guide-section-desc">为学生、工程师、建厂规划者与研究者定制的推荐路径</p>
+            <p class="guide-section-desc">
+              为学生、工程师、建厂规划者与研究者定制的推荐路径
+            </p>
           </div>
         </header>
 
@@ -800,45 +868,101 @@
             <table class="guide-table">
               <thead>
                 <tr>
-                  <th style="width: 28%;">You are</th>
+                  <th style="width: 28%">You are</th>
                   <th>Recommended path</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="guide-role-badge role-visitor">A curious visitor</span></td>
                   <td>
-                    Homepage → <a href="twin.html" class="guide-link-btn">300mm Fab Twin →</a> click <strong>Tour</strong> and ride the guided tour
+                    <span class="guide-role-badge role-visitor"
+                      >A curious visitor</span
+                    >
+                  </td>
+                  <td>
+                    Homepage →
+                    <a href="twin.html" class="guide-link-btn"
+                      >300mm Fab Twin →</a
+                    >
+                    click <strong>Tour</strong> and ride the guided tour
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-student">A student / beginner</span></td>
                   <td>
-                    "Learn" menu → <a href="finfet.html" class="guide-link-btn">3D Device Library →</a> one 10-step fabrication walkthrough at a time
+                    <span class="guide-role-badge role-student"
+                      >A student / beginner</span
+                    >
+                  </td>
+                  <td>
+                    "Learn" menu →
+                    <a href="finfet.html" class="guide-link-btn"
+                      >3D Device Library →</a
+                    >
+                    one 10-step fabrication walkthrough at a time
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-engineer">A process / equipment engineer</span></td>
                   <td>
-                    "Equipment" menu → <a href="catalog-demo.html" class="guide-link-btn">Equipment Catalog →</a> filter the catalog → check tools to compare → inspect provenance tiers and price evidence
+                    <span class="guide-role-badge role-engineer"
+                      >A process / equipment engineer</span
+                    >
+                  </td>
+                  <td>
+                    "Equipment" menu →
+                    <a href="catalog-demo.html" class="guide-link-btn"
+                      >Equipment Catalog →</a
+                    >
+                    filter the catalog → check tools to compare → inspect
+                    provenance tiers and price evidence
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-planner">A fab planner</span></td>
                   <td>
-                    Read the <a href="fab-cost.html" class="guide-link-btn">Construction Cost Report →</a> first, run your scenario in the <a href="fab-capex.html" class="guide-link-btn">Capex Estimator →</a>, and explore the <a href="twin-mega.html" class="guide-link-btn">3nm Mega Fab Concept →</a> to visualize 50k WSPM dual-phase cleanroom spatial layout
+                    <span class="guide-role-badge role-planner"
+                      >A fab planner</span
+                    >
+                  </td>
+                  <td>
+                    Read the
+                    <a href="fab-cost.html" class="guide-link-btn"
+                      >Construction Cost Report →</a
+                    >
+                    first, run your scenario in the
+                    <a href="fab-capex.html" class="guide-link-btn"
+                      >Capex Estimator →</a
+                    >, and explore the
+                    <a href="twin-mega.html" class="guide-link-btn"
+                      >3nm Mega Fab Concept →</a
+                    >
+                    to visualize 50k WSPM dual-phase cleanroom spatial layout
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-researcher">A scheduling / AI researcher</span></td>
                   <td>
-                    "Research" menu → <a href="benchmark.html" class="guide-link-btn">MIMAC-2026 Benchmark →</a> try it in-browser or download the simulator
+                    <span class="guide-role-badge role-researcher"
+                      >A scheduling / AI researcher</span
+                    >
+                  </td>
+                  <td>
+                    "Research" menu →
+                    <a href="benchmark.html" class="guide-link-btn"
+                      >MIMAC-2026 Benchmark →</a
+                    >
+                    try it in-browser or download the simulator
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-contributor">A data contributor</span></td>
                   <td>
-                    "Equipment" menu → <a href="add-equipment.html" class="guide-link-btn">Add Equipment →</a> fill the form and submit
+                    <span class="guide-role-badge role-contributor"
+                      >A data contributor</span
+                    >
+                  </td>
+                  <td>
+                    "Equipment" menu →
+                    <a href="add-equipment.html" class="guide-link-btn"
+                      >Add Equipment →</a
+                    >
+                    fill the form and submit
                   </td>
                 </tr>
               </tbody>
@@ -852,45 +976,100 @@
             <table class="guide-table">
               <thead>
                 <tr>
-                  <th style="width: 28%;">你是谁</th>
+                  <th style="width: 28%">你是谁</th>
                   <th>推荐路径</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="guide-role-badge role-visitor">好奇的访客</span></td>
                   <td>
-                    首页 → <a href="twin.html" class="guide-link-btn">300mm Fab Twin →</a> 点 <strong>Tour</strong> 跟着导览走一圈
+                    <span class="guide-role-badge role-visitor"
+                      >好奇的访客</span
+                    >
+                  </td>
+                  <td>
+                    首页 →
+                    <a href="twin.html" class="guide-link-btn"
+                      >300mm Fab Twin →</a
+                    >
+                    点 <strong>Tour</strong> 跟着导览走一圈
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-student">学生 / 初学者</span></td>
                   <td>
-                    「学习」菜单 → <a href="finfet.html" class="guide-link-btn">器件工艺库 →</a> 逐个看 10 步 3D 制造过程
+                    <span class="guide-role-badge role-student"
+                      >学生 / 初学者</span
+                    >
+                  </td>
+                  <td>
+                    「学习」菜单 →
+                    <a href="finfet.html" class="guide-link-btn"
+                      >器件工艺库 →</a
+                    >
+                    逐个看 10 步 3D 制造过程
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-engineer">工艺 / 设备工程师</span></td>
                   <td>
-                    「设备」菜单 → <a href="catalog-demo.html" class="guide-link-btn">设备名录筛选 →</a> 勾选对比 → 看来源等级与价格依据
+                    <span class="guide-role-badge role-engineer"
+                      >工艺 / 设备工程师</span
+                    >
+                  </td>
+                  <td>
+                    「设备」菜单 →
+                    <a href="catalog-demo.html" class="guide-link-btn"
+                      >设备名录筛选 →</a
+                    >
+                    勾选对比 → 看来源等级与价格依据
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-planner">建厂规划者</span></td>
                   <td>
-                    先看 <a href="fab-cost.html" class="guide-link-btn">建设成本报告 →</a>（研究报告），再用 <a href="fab-capex.html" class="guide-link-btn">总投资测算器 →</a> 算你的方案，并进入 <a href="twin-mega.html" class="guide-link-btn">3nm 概念超级晶圆厂 →</a> 直观感受 50k WSPM 双期厂房的宏观排布
+                    <span class="guide-role-badge role-planner"
+                      >建厂规划者</span
+                    >
+                  </td>
+                  <td>
+                    先看
+                    <a href="fab-cost.html" class="guide-link-btn"
+                      >建设成本报告 →</a
+                    >（研究报告），再用
+                    <a href="fab-capex.html" class="guide-link-btn"
+                      >总投资测算器 →</a
+                    >
+                    算你的方案，并进入
+                    <a href="twin-mega.html" class="guide-link-btn"
+                      >3nm 概念超级晶圆厂 →</a
+                    >
+                    直观感受 50k WSPM 双期厂房的宏观排布
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-researcher">调度 / AI 研究者</span></td>
                   <td>
-                    「研究」菜单 → <a href="benchmark.html" class="guide-link-btn">MIMAC-2026 基准 →</a> 在线试跑或下载模拟器
+                    <span class="guide-role-badge role-researcher"
+                      >调度 / AI 研究者</span
+                    >
+                  </td>
+                  <td>
+                    「研究」菜单 →
+                    <a href="benchmark.html" class="guide-link-btn"
+                      >MIMAC-2026 基准 →</a
+                    >
+                    在线试跑或下载模拟器
                   </td>
                 </tr>
                 <tr>
-                  <td><span class="guide-role-badge role-contributor">想贡献数据的人</span></td>
                   <td>
-                    「设备」菜单 → <a href="add-equipment.html" class="guide-link-btn">Add Equipment →</a> 填表提交
+                    <span class="guide-role-badge role-contributor"
+                      >想贡献数据的人</span
+                    >
+                  </td>
+                  <td>
+                    「设备」菜单 →
+                    <a href="add-equipment.html" class="guide-link-btn"
+                      >Add Equipment →</a
+                    >
+                    填表提交
                   </td>
                 </tr>
               </tbody>
@@ -908,7 +1087,10 @@
               <span class="guide-section-num">03</span>
               Feature guide
             </h2>
-            <p class="guide-section-desc">The site navigation has five categories: 3D Twins / Equipment / Cost / Learn / Research</p>
+            <p class="guide-section-desc">
+              The site navigation has five categories: 3D Twins / Equipment /
+              Cost / Learn / Research
+            </p>
           </div>
           <!-- Chinese Title -->
           <div class="lang-zh">
@@ -916,7 +1098,9 @@
               <span class="guide-section-num">03</span>
               功能详解
             </h2>
-            <p class="guide-section-desc">全站导航分为 5 大类：数字孪生 / 设备 / 成本 / 学习 / 研究</p>
+            <p class="guide-section-desc">
+              全站导航分为 5 大类：数字孪生 / 设备 / 成本 / 学习 / 研究
+            </p>
           </div>
         </header>
 
@@ -954,33 +1138,92 @@
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    A 3D twin of an advanced 300mm fab: the L1 process cleanroom (lithography, etch, thin film, Cu, implant, diffusion, CMP &amp; clean, metrology bays) plus the B1 subfab below it (vacuum pumps, gas manifolds, UPW piping), running a live operations simulation (yield waterfall, tool OEE, AMHS logistics, MES / SECS-GEM telemetry).
+                    A 3D twin of an advanced 300mm fab: the L1 process cleanroom
+                    (lithography, etch, thin film, Cu, implant, diffusion, CMP
+                    &amp; clean, metrology bays) plus the B1 subfab below it
+                    (vacuum pumps, gas manifolds, UPW piping), running a live
+                    operations simulation (yield waterfall, tool OEE, AMHS
+                    logistics, MES / SECS-GEM telemetry).
                   </span>
                   <span class="lang-zh">
-                    一座 300mm 先进晶圆厂的 3D 双子：L1 工艺洁净室（光刻、刻蚀、薄膜、铜、注入、扩散、CMP、量测等 bay）+ B1 地下 subfab（真空泵、气体、超纯水管网），并带实时运行仿真（良率瀑布、设备 OEE、AMHS 物流、MES/SECS-GEM 遥测）。
+                    一座 300mm 先进晶圆厂的 3D 双子：L1
+                    工艺洁净室（光刻、刻蚀、薄膜、铜、注入、扩散、CMP、量测等
+                    bay）+ B1 地下
+                    subfab（真空泵、气体、超纯水管网），并带实时运行仿真（良率瀑布、设备
+                    OEE、AMHS 物流、MES/SECS-GEM 遥测）。
                   </span>
                 </p>
 
                 <!-- English Bullets -->
                 <ul class="guide-item-bullets lang-en">
-                  <li><strong>Guided tour</strong>: click <strong>Tour</strong> in the top bar for a 5-stop cinematic tour (macro fab → litho bay → etch bay → AMHS → B1 subfab). Previous / Next / Skip work throughout; the tour stops after one full round. A 3-step onboarding bubble appears on first visit.</li>
-                  <li><strong>Camera &amp; layers</strong>: presets L1 / B1 / Dual / Explode; layer toggles AMHS / FFU / Airflow / Heatmap / X-Ray (X-Ray opens an MEP piping see-through view, filterable by medium).</li>
-                  <li><strong>Inspect a tool</strong>: click a tool in the left list or in the 3D scene. The inspector shows its footprint (SEMI E72), weight, SECS/GEM telemetry, OEE, and SPC/Cpk; you can override its state (Running / Idle / Down / PM) and run MES Track-In / Track-Out.</li>
-                  <li><strong>Modes &amp; scenarios</strong>: Visitor / Engineer / Research modes; six simulation scenarios (Baseline, Overlay Drift, Etch RF Down, Scheduled PM, Cascade Fail, AI-APC).</li>
-                  <li><strong>More</strong>: Follow a Wafer tracks one wafer's journey; YMS Wafer Map shows defect patterns; Roof shows the rooftop HVAC; Section cuts the building.</li>
+                  <li>
+                    <strong>Guided tour</strong>: click <strong>Tour</strong> in
+                    the top bar for a 5-stop cinematic tour (macro fab → litho
+                    bay → etch bay → AMHS → B1 subfab). Previous / Next / Skip
+                    work throughout; the tour stops after one full round. A
+                    3-step onboarding bubble appears on first visit.
+                  </li>
+                  <li>
+                    <strong>Camera &amp; layers</strong>: presets L1 / B1 / Dual
+                    / Explode; layer toggles AMHS / FFU / Airflow / Heatmap /
+                    X-Ray (X-Ray opens an MEP piping see-through view,
+                    filterable by medium).
+                  </li>
+                  <li>
+                    <strong>Inspect a tool</strong>: click a tool in the left
+                    list or in the 3D scene. The inspector shows its footprint
+                    (SEMI E72), weight, SECS/GEM telemetry, OEE, and SPC/Cpk;
+                    you can override its state (Running / Idle / Down / PM) and
+                    run MES Track-In / Track-Out.
+                  </li>
+                  <li>
+                    <strong>Modes &amp; scenarios</strong>: Visitor / Engineer /
+                    Research modes; six simulation scenarios (Baseline, Overlay
+                    Drift, Etch RF Down, Scheduled PM, Cascade Fail, AI-APC).
+                  </li>
+                  <li>
+                    <strong>More</strong>: Follow a Wafer tracks one wafer's
+                    journey; YMS Wafer Map shows defect patterns; Roof shows the
+                    rooftop HVAC; Section cuts the building.
+                  </li>
                 </ul>
 
                 <!-- Chinese Bullets -->
                 <ul class="guide-item-bullets lang-zh">
-                  <li><strong>导览</strong>：点顶部 <strong>Tour</strong> 按钮开始 5 站电影式导览（宏观 → 光刻 → 刻蚀 → AMHS → B1），可 Previous / Next / Skip，播完一轮自动停止；首次访问有 3 步新手气泡引导。</li>
-                  <li><strong>视角</strong>：相机预设 L1 / B1 / Dual / Explode；图层开关 AMHS / FFU / Airflow / Heatmap / X-Ray（X-Ray 可看 MEP 管网透视图，按介质过滤）。</li>
-                  <li><strong>看设备</strong>：点左侧设备列表或 3D 场景中的机台，右侧 inspector 显示尺寸（SEMI E72）、重量、SECS/GEM 遥测、OEE、SPC/Cpk；还可以手动切换设备状态（Running / Idle / Down / PM）和 MES Track-In/Track-Out。</li>
-                  <li><strong>模式与场景</strong>：Visitor / Engineer / Research 三种模式；6 个仿真场景（Baseline、Overlay Drift、Etch RF Down、Scheduled PM、Cascade Fail、AI-APC）。</li>
-                  <li><strong>其他</strong>：Follow a wafer 跟踪一片晶圆的旅程；YMS Wafer Map 看缺陷分布；Roof 看屋顶 HVAC；Section 剖切建筑。</li>
+                  <li>
+                    <strong>导览</strong>：点顶部 <strong>Tour</strong> 按钮开始
+                    5 站电影式导览（宏观 → 光刻 → 刻蚀 → AMHS → B1），可
+                    Previous / Next / Skip，播完一轮自动停止；首次访问有 3
+                    步新手气泡引导。
+                  </li>
+                  <li>
+                    <strong>视角</strong>：相机预设 L1 / B1 / Dual /
+                    Explode；图层开关 AMHS / FFU / Airflow / Heatmap /
+                    X-Ray（X-Ray 可看 MEP 管网透视图，按介质过滤）。
+                  </li>
+                  <li>
+                    <strong>看设备</strong>：点左侧设备列表或 3D
+                    场景中的机台，右侧 inspector 显示尺寸（SEMI
+                    E72）、重量、SECS/GEM
+                    遥测、OEE、SPC/Cpk；还可以手动切换设备状态（Running / Idle /
+                    Down / PM）和 MES Track-In/Track-Out。
+                  </li>
+                  <li>
+                    <strong>模式与场景</strong>：Visitor / Engineer / Research
+                    三种模式；6 个仿真场景（Baseline、Overlay Drift、Etch RF
+                    Down、Scheduled PM、Cascade Fail、AI-APC）。
+                  </li>
+                  <li>
+                    <strong>其他</strong>：Follow a wafer
+                    跟踪一片晶圆的旅程；YMS Wafer Map 看缺陷分布；Roof 看屋顶
+                    HVAC；Section 剖切建筑。
+                  </li>
                 </ul>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">Interactive WebGL 3D</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >Interactive WebGL 3D</span
+                >
                 <a href="twin.html" class="guide-action-btn">
                   <span class="lang-en">Launch 300mm Twin →</span>
                   <span class="lang-zh">进入 300mm 孪生 →</span>
@@ -996,41 +1239,117 @@
                     <span class="lang-en">3nm Mega Fab Concept</span>
                     <span class="lang-zh">3nm 概念超级晶圆厂</span>
                   </h4>
-                  <a href="twin-mega.html" class="guide-item-file">twin-mega.html</a>
+                  <a href="twin-mega.html" class="guide-item-file"
+                    >twin-mega.html</a
+                  >
                 </div>
                 <div class="guide-item-subtitle">
-                  <span class="lang-en">Conceptual Layout Model (50,000 WSPM · 3,000 Tools)</span>
-                  <span class="lang-zh">概念布局推演示意模型（50,000 WSPM · 3,000 台机台）</span>
+                  <span class="lang-en"
+                    >Conceptual Layout Model (50,000 WSPM · 3,000 Tools)</span
+                  >
+                  <span class="lang-zh"
+                    >概念布局推演示意模型（50,000 WSPM · 3,000 台机台）</span
+                  >
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    A macro-scale 3D conceptual layout model illustrating an advanced 3nm FinFET dual-phase Mega Fab (Phase 1 West Hall 25k WSPM + Phase 2 East Hall 25k WSPM expansion, connected by a central automated AMHS Skybridge).<br /><br />
-                    <strong style="color: var(--amber);">Important Engineering Note</strong>: This model is strictly a <strong>Conceptual Layout Model</strong>, not an exact 1:1 physical digital twin. Rendering 3,000 production machines with pipe-level CAD sub-assemblies inside a web browser on everyday office laptops or small screens is physically and computationally impractical. Instead, it employs hardware-accelerated GPU instancing (<code>THREE.InstancedMesh</code>) to macroscopically simulate cleanroom equipment density, 10 process bay distributions, and a continuous 13-closed-loop AMHS monorail logistics network.
+                    A macro-scale 3D conceptual layout model illustrating an
+                    advanced 3nm FinFET dual-phase Mega Fab (Phase 1 West Hall
+                    25k WSPM + Phase 2 East Hall 25k WSPM expansion, connected
+                    by a central automated AMHS Skybridge).<br /><br />
+                    <strong style="color: var(--amber)"
+                      >Important Engineering Note</strong
+                    >: This model is strictly a
+                    <strong>Conceptual Layout Model</strong>, not an exact 1:1
+                    physical digital twin. Rendering 3,000 production machines
+                    with pipe-level CAD sub-assemblies inside a web browser on
+                    everyday office laptops or small screens is physically and
+                    computationally impractical. Instead, it employs
+                    hardware-accelerated GPU instancing
+                    (<code>THREE.InstancedMesh</code>) to macroscopically
+                    simulate cleanroom equipment density, 10 process bay
+                    distributions, and a continuous 13-closed-loop AMHS monorail
+                    logistics network.
                   </span>
                   <span class="lang-zh">
-                    宏观尺度的 3D 概念布局推演示意模型，展现一座先进制程 3nm FinFET 双期超级晶圆厂（西厂区一期 25k WSPM + 东厂区二期 25k WSPM 扩产线，中央由高速 AMHS 天桥连廊相通）。<br /><br />
-                    <strong style="color: var(--amber);">重要工程定位说明</strong>：本模型<strong>严格定位为概念示意模型（Conceptual Layout Model）</strong>，而非 1:1 细节复刻的施工级孪生。在常规屏幕与普通电脑浏览器中对 3,000 台机台做高细节 1:1 管线级精细建模既不现实也没有必要。因此采用 GPU 硬件级几何实例化（<code>InstancedMesh</code>）架构，核心用于宏观直观演示 3,000 台超大体量机台的洁净室空间密度、10 大工艺湾分区以及 13 条闭环天车（AMHS OHT）高速物料流向。
+                    宏观尺度的 3D 概念布局推演示意模型，展现一座先进制程 3nm
+                    FinFET 双期超级晶圆厂（西厂区一期 25k WSPM + 东厂区二期 25k
+                    WSPM 扩产线，中央由高速 AMHS 天桥连廊相通）。<br /><br />
+                    <strong style="color: var(--amber)">重要工程定位说明</strong
+                    >：本模型<strong
+                      >严格定位为概念示意模型（Conceptual Layout Model）</strong
+                    >，而非 1:1
+                    细节复刻的施工级孪生。在常规屏幕与普通电脑浏览器中对 3,000
+                    台机台做高细节 1:1
+                    管线级精细建模既不现实也没有必要。因此采用 GPU
+                    硬件级几何实例化（<code>InstancedMesh</code>）架构，核心用于宏观直观演示
+                    3,000 台超大体量机台的洁净室空间密度、10 大工艺湾分区以及 13
+                    条闭环天车（AMHS OHT）高速物料流向。
                   </span>
                 </p>
 
                 <!-- English Bullets -->
                 <ul class="guide-item-bullets lang-en">
-                  <li><strong>Dual-phase full-flow lines</strong>: Phase 1 (West Hall) and Phase 2 (East Hall) each house 1,500 tools across 10 identical process bays (EUV/DUV Litho, FinFET Gate Etch, Contact Etch, ALD High-k, Low-k CVD, Copper PVD, CMP, Implant/Anneal, Metrology/Clean). Both are complete 25k WSPM lines.</li>
-                  <li><strong>Inter-phase Skybridge &amp; AMHS loops</strong>: 13 closed-loop monorail tracks with 86 active OHT pods, including a 938m Grand Skybridge Highway transferring FOUPs between Phase 1 and 2 for dynamic load balancing and tool redundancy.</li>
-                  <li><strong>Heatmap modes &amp; live inspection</strong>: Cleanroom realistic, SEMI E10 state, OEM vendor spectrum, process category, and thermal/power density. Clicking any of the 3,000 machines opens live specs, SEMI E10 state, and wafer lot telemetry.</li>
-                  <li><strong>Cinematic tour &amp; radar</strong>: 5-stop guided macro tour plus a live 2D radar minimap tracking all 86 circulating OHT vehicles in real time.</li>
+                  <li>
+                    <strong>Dual-phase full-flow lines</strong>: Phase 1 (West
+                    Hall) and Phase 2 (East Hall) each house 1,500 tools across
+                    10 identical process bays (EUV/DUV Litho, FinFET Gate Etch,
+                    Contact Etch, ALD High-k, Low-k CVD, Copper PVD, CMP,
+                    Implant/Anneal, Metrology/Clean). Both are complete 25k WSPM
+                    lines.
+                  </li>
+                  <li>
+                    <strong>Inter-phase Skybridge &amp; AMHS loops</strong>: 13
+                    closed-loop monorail tracks with 86 active OHT pods,
+                    including a 938m Grand Skybridge Highway transferring FOUPs
+                    between Phase 1 and 2 for dynamic load balancing and tool
+                    redundancy.
+                  </li>
+                  <li>
+                    <strong>Heatmap modes &amp; live inspection</strong>:
+                    Cleanroom realistic, SEMI E10 state, OEM vendor spectrum,
+                    process category, and thermal/power density. Clicking any of
+                    the 3,000 machines opens live specs, SEMI E10 state, and
+                    wafer lot telemetry.
+                  </li>
+                  <li>
+                    <strong>Cinematic tour &amp; radar</strong>: 5-stop guided
+                    macro tour plus a live 2D radar minimap tracking all 86
+                    circulating OHT vehicles in real time.
+                  </li>
                 </ul>
 
                 <!-- Chinese Bullets -->
                 <ul class="guide-item-bullets lang-zh">
-                  <li><strong>双期全流程产线</strong>：一期（西厂）与二期（东厂）各拥有 1,500 台机台，涵盖 10 个完整工艺湾（EUV/DUV 光刻、鳍线刻蚀、双大马士革、ALD/CVD 薄膜、PVD 铜互连、CMP 研磨、离子注入/退火、清洗量测），均为 25k WSPM 全流程产线。</li>
-                  <li><strong>跨期天桥与全闭环天车物流</strong>：13 条全闭环单向轨道、86 辆在轨巡航 OHT 天车，包含跨越 50 米天桥的 938 米高速主干环线，实现跨厂区负载均衡与机台冗余备份。</li>
-                  <li><strong>热力图模式与机台探查</strong>：支持洁净室原貌、SEMI E10 状态、OEM 厂商谱系、工艺大类与功耗热力 5 种着色；任意点击 3,000 台机台中的任一台均可唤起实时遥测与工件批次（Lot ID）详情。</li>
-                  <li><strong>巡检导览与微型雷达</strong>：5 站宏观巡检导览，右上角雷达动态呈现全厂 86 辆天车流转轨迹。</li>
+                  <li>
+                    <strong>双期全流程产线</strong
+                    >：一期（西厂）与二期（东厂）各拥有 1,500 台机台，涵盖 10
+                    个完整工艺湾（EUV/DUV 光刻、鳍线刻蚀、双大马士革、ALD/CVD
+                    薄膜、PVD 铜互连、CMP 研磨、离子注入/退火、清洗量测），均为
+                    25k WSPM 全流程产线。
+                  </li>
+                  <li>
+                    <strong>跨期天桥与全闭环天车物流</strong>：13
+                    条全闭环单向轨道、86 辆在轨巡航 OHT 天车，包含跨越 50
+                    米天桥的 938
+                    米高速主干环线，实现跨厂区负载均衡与机台冗余备份。
+                  </li>
+                  <li>
+                    <strong>热力图模式与机台探查</strong>：支持洁净室原貌、SEMI
+                    E10 状态、OEM 厂商谱系、工艺大类与功耗热力 5
+                    种着色；任意点击 3,000
+                    台机台中的任一台均可唤起实时遥测与工件批次（Lot ID）详情。
+                  </li>
+                  <li>
+                    <strong>巡检导览与微型雷达</strong>：5
+                    站宏观巡检导览，右上角雷达动态呈现全厂 86 辆天车流转轨迹。
+                  </li>
                 </ul>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">3,000 Tools · Conceptual Model</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >3,000 Tools · Conceptual Model</span
+                >
                 <a href="twin-mega.html" class="guide-action-btn">
                   <span class="lang-en">Launch Mega Fab Concept →</span>
                   <span class="lang-zh">进入 3nm 概念模型 →</span>
@@ -1046,39 +1365,87 @@
                     <span class="lang-en">OSAT Packaging &amp; Test Twin</span>
                     <span class="lang-zh">OSAT 封测厂 Twin</span>
                   </h4>
-                  <a href="twin-osat.html" class="guide-item-file">twin-osat.html</a>
+                  <a href="twin-osat.html" class="guide-item-file"
+                    >twin-osat.html</a
+                  >
                 </div>
                 <div class="guide-item-subtitle">
-                  <span class="lang-en">The back-end packaging &amp; test plant</span>
+                  <span class="lang-en"
+                    >The back-end packaging &amp; test plant</span
+                  >
                   <span class="lang-zh">后道封装测试厂</span>
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    "From wafer to shipment": a dual-hall facility (west ISO 7–8 Assembly hall + east Final Test hall) with 86 tools across an 11-step flow — dicing → die attach → wire bond → flip chip → molding → singulation → bumping/RDL → wafer probe → ATE test → test handler → AOI inspection.
+                    "From wafer to shipment": a dual-hall facility (west ISO 7–8
+                    Assembly hall + east Final Test hall) with 86 tools across
+                    an 11-step flow — dicing → die attach → wire bond → flip
+                    chip → molding → singulation → bumping/RDL → wafer probe →
+                    ATE test → test handler → AOI inspection.
                   </span>
                   <span class="lang-zh">
-                    "从晶圆到出货"：双大厅厂房（西侧 ISO 7–8 组装厅 + 东侧终测厅），86 台设备、11 个工艺步：切割 → 贴片 → 键合 → 倒装 → 塑封 → 切筋 → 凸块/RDL → 探针测试 → ATE 测试 → 测试分选 → AOI 检测。
+                    "从晶圆到出货"：双大厅厂房（西侧 ISO 7–8 组装厅 +
+                    东侧终测厅），86 台设备、11 个工艺步：切割 → 贴片 → 键合 →
+                    倒装 → 塑封 → 切筋 → 凸块/RDL → 探针测试 → ATE 测试 →
+                    测试分选 → AOI 检测。
                   </span>
                 </p>
 
                 <!-- English Bullets -->
                 <ul class="guide-item-bullets lang-en">
-                  <li><strong>Process tour</strong>: click <strong>Tour</strong> and the camera walks the 11 steps in order; the FLOW bar (1–11) at the bottom also jumps directly.</li>
-                  <li><strong>Filtering</strong>: the bottom chips filter tools by process step (scrollable on small screens); the left directory searches by vendor, model, or process.</li>
-                  <li><strong>Inspect a tool</strong>: clicking a card opens the inspector — note its honesty labels: most tools' 3D shapes are procedural category placeholder shells, the panel states "Dimensions pending verification" explicitly, and gives the data source with a citation link.</li>
-                  <li><strong>Logistics simulation</strong>: 4 AMRs and 2 technician trolleys move through the plant, labeled "Logistics Illustrative" — a parametric animation, not a true scheduling simulation.</li>
+                  <li>
+                    <strong>Process tour</strong>: click
+                    <strong>Tour</strong> and the camera walks the 11 steps in
+                    order; the FLOW bar (1–11) at the bottom also jumps
+                    directly.
+                  </li>
+                  <li>
+                    <strong>Filtering</strong>: the bottom chips filter tools by
+                    process step (scrollable on small screens); the left
+                    directory searches by vendor, model, or process.
+                  </li>
+                  <li>
+                    <strong>Inspect a tool</strong>: clicking a card opens the
+                    inspector — note its honesty labels: most tools' 3D shapes
+                    are procedural category placeholder shells, the panel states
+                    "Dimensions pending verification" explicitly, and gives the
+                    data source with a citation link.
+                  </li>
+                  <li>
+                    <strong>Logistics simulation</strong>: 4 AMRs and 2
+                    technician trolleys move through the plant, labeled
+                    "Logistics Illustrative" — a parametric animation, not a
+                    true scheduling simulation.
+                  </li>
                 </ul>
 
                 <!-- Chinese Bullets -->
                 <ul class="guide-item-bullets lang-zh">
-                  <li><strong>工艺流程导览</strong>：点 <strong>Tour</strong>，镜头按 11 步顺序走完整个封测流程；底部 FLOW 条（1–11）也可以直接点跳。</li>
-                  <li><strong>筛选</strong>：底部 chips 按工艺步筛选设备（小屏幕可横滑）；左侧目录可搜索厂商/型号/工艺。</li>
-                  <li><strong>看设备</strong>：点设备卡打开 inspector——注意它的诚实标注：大多数设备的 3D 外形是"程序化类别占位壳"，面板会明确写 Dimensions pending verification（尺寸待核实），并给出数据来源与引用链接。</li>
-                  <li><strong>物流仿真</strong>：厂内有 4 台 AMR + 2 台人工推车在跑动画，标注为"物流仿真为示意"——是参数化示意，不是真实调度仿真。</li>
+                  <li>
+                    <strong>工艺流程导览</strong>：点
+                    <strong>Tour</strong>，镜头按 11
+                    步顺序走完整个封测流程；底部 FLOW 条（1–11）也可以直接点跳。
+                  </li>
+                  <li>
+                    <strong>筛选</strong>：底部 chips
+                    按工艺步筛选设备（小屏幕可横滑）；左侧目录可搜索厂商/型号/工艺。
+                  </li>
+                  <li>
+                    <strong>看设备</strong>：点设备卡打开
+                    inspector——注意它的诚实标注：大多数设备的 3D
+                    外形是"程序化类别占位壳"，面板会明确写 Dimensions pending
+                    verification（尺寸待核实），并给出数据来源与引用链接。
+                  </li>
+                  <li>
+                    <strong>物流仿真</strong>：厂内有 4 台 AMR + 2
+                    台人工推车在跑动画，标注为"物流仿真为示意"——是参数化示意，不是真实调度仿真。
+                  </li>
                 </ul>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">86 Tools · 11-Step Flow</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >86 Tools · 11-Step Flow</span
+                >
                 <a href="twin-osat.html" class="guide-action-btn">
                   <span class="lang-en">Launch OSAT Twin →</span>
                   <span class="lang-zh">进入封测厂 Twin →</span>
@@ -1094,7 +1461,9 @@
                     <span class="lang-en">2D Layout Editor</span>
                     <span class="lang-zh">2D Layout Editor</span>
                   </h4>
-                  <a href="layout-editor.html" class="guide-item-file">layout-editor.html</a>
+                  <a href="layout-editor.html" class="guide-item-file"
+                    >layout-editor.html</a
+                  >
                 </div>
                 <div class="guide-item-subtitle">
                   <span class="lang-en">Floor-plan sandbox</span>
@@ -1102,15 +1471,27 @@
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    Arrange the 121-tool cleanroom layout on a 2D canvas: pick tools from the palette (searchable, by category), drag them into place, zoom with the scroll wheel. Live validation flags out-of-bounds or clearance problems; export/import layouts as JSON, preview them in the 3D twin, or submit a layout via GitHub or email. Note: this is a proof-of-concept sandbox — machine counts are calibrated for teaching, below a real megafab.
+                    Arrange the 121-tool cleanroom layout on a 2D canvas: pick
+                    tools from the palette (searchable, by category), drag them
+                    into place, zoom with the scroll wheel. Live validation
+                    flags out-of-bounds or clearance problems; export/import
+                    layouts as JSON, preview them in the 3D twin, or submit a
+                    layout via GitHub or email. Note: this is a proof-of-concept
+                    sandbox — machine counts are calibrated for teaching, below
+                    a real megafab.
                   </span>
                   <span class="lang-zh">
-                    在 2D 画布上拖拽排布 121 台设备的洁净室平面图：从左侧设备面板选机台（可搜索、按分类），拖动摆放，滚轮缩放；实时合法性校验会告诉你有没有越界或间距问题；可导出/导入 JSON 布局，一键在 3D 双子中预览，也可通过 GitHub 或邮件提交你的布局。注意：这是概念验证沙盒，机台数量按教学规模校准，小于真实量产厂。
+                    在 2D 画布上拖拽排布 121
+                    台设备的洁净室平面图：从左侧设备面板选机台（可搜索、按分类），拖动摆放，滚轮缩放；实时合法性校验会告诉你有没有越界或间距问题；可导出/导入
+                    JSON 布局，一键在 3D 双子中预览，也可通过 GitHub
+                    或邮件提交你的布局。注意：这是概念验证沙盒，机台数量按教学规模校准，小于真实量产厂。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">121-Tool Cleanroom Canvas</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >121-Tool Cleanroom Canvas</span
+                >
                 <a href="layout-editor.html" class="guide-action-btn">
                   <span class="lang-en">Open Layout Editor →</span>
                   <span class="lang-zh">打开布局编辑器 →</span>
@@ -1120,7 +1501,13 @@
           </div>
         </div>
 
-        <hr style="border: none; border-top: 1px dashed var(--line); margin: 30px 0;" />
+        <hr
+          style="
+            border: none;
+            border-top: 1px dashed var(--line);
+            margin: 30px 0;
+          "
+        />
 
         <!-- CATEGORY 2: EQUIPMENT -->
         <div class="guide-feature-group">
@@ -1148,19 +1535,30 @@
                     <span class="lang-en">Equipment Catalog</span>
                     <span class="lang-zh">设备目录</span>
                   </h4>
-                  <a href="catalog-demo.html" class="guide-item-file">catalog-demo.html</a>
+                  <a href="catalog-demo.html" class="guide-item-file"
+                    >catalog-demo.html</a
+                  >
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    An open catalog of 253 OEM tools (167 front-end fab + 86 OSAT). Three domain tabs (All / FAB / OSAT), search, filter, and view field-level provenance with completeness percentages. Every card features a Compare checkbox. "Load catalog.json" lets you browse offline.
+                    An open catalog of 253 OEM tools (167 front-end fab + 86
+                    OSAT). Three domain tabs (All / FAB / OSAT), search, filter,
+                    and view field-level provenance with completeness
+                    percentages. Every card features a Compare checkbox. "Load
+                    catalog.json" lets you browse offline.
                   </span>
                   <span class="lang-zh">
-                    253 台 OEM 设备的开放目录（167 台前道 + 86 台封测）。顶部三个页签切换：全部 / 前道 / 封测；按分类筛选、按厂商/型号搜索。点开看每个字段的来源等级与完整度。每张卡片可勾选 Compare 并排比对。
+                    253 台 OEM 设备的开放目录（167 台前道 + 86
+                    台封测）。顶部三个页签切换：全部 / 前道 /
+                    封测；按分类筛选、按厂商/型号搜索。点开看每个字段的来源等级与完整度。每张卡片可勾选
+                    Compare 并排比对。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">253 OEM Models</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >253 OEM Models</span
+                >
                 <a href="catalog-demo.html" class="guide-action-btn">
                   <span class="lang-en">Open Catalog →</span>
                   <span class="lang-zh">查阅名录 →</span>
@@ -1176,19 +1574,29 @@
                     <span class="lang-en">Compare Tools</span>
                     <span class="lang-zh">设备对比</span>
                   </h4>
-                  <a href="compare.html" class="guide-item-file">compare.html</a>
+                  <a href="compare.html" class="guide-item-file"
+                    >compare.html</a
+                  >
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    Side-by-side comparison of 2–4 tools: estimated price (with provenance badge and source citation), footprint, weight, wafer sizes, target node, key capabilities, provenance breakdown, and data completeness. Share button copies a link that encodes your selection.
+                    Side-by-side comparison of 2–4 tools: estimated price (with
+                    provenance badge and source citation), footprint, weight,
+                    wafer sizes, target node, key capabilities, provenance
+                    breakdown, and data completeness. Share button copies a link
+                    that encodes your selection.
                   </span>
                   <span class="lang-zh">
-                    2–4 台设备并排比：预估价格（带来源徽章和引用链接）、占地尺寸、重量、晶圆尺寸、目标节点、关键能力、来源等级构成、数据完整度。页内 "+ Add Tool" 也能搜索添加；支持 Share 链接直接分享。
+                    2–4
+                    台设备并排比：预估价格（带来源徽章和引用链接）、占地尺寸、重量、晶圆尺寸、目标节点、关键能力、来源等级构成、数据完整度。页内
+                    "+ Add Tool" 也能搜索添加；支持 Share 链接直接分享。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">2–4 Tools Matrix</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >2–4 Tools Matrix</span
+                >
                 <a href="compare.html" class="guide-action-btn">
                   <span class="lang-en">Compare Matrix →</span>
                   <span class="lang-zh">机台对比 →</span>
@@ -1204,19 +1612,29 @@
                     <span class="lang-en">Add Equipment</span>
                     <span class="lang-zh">新增设备</span>
                   </h4>
-                  <a href="add-equipment.html" class="guide-item-file">add-equipment.html</a>
+                  <a href="add-equipment.html" class="guide-item-file"
+                    >add-equipment.html</a
+                  >
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    The contribution form for a new catalog record. It follows the 7-layer data structure (identity, physical, facilities, process, reliability, commercial, notes); every field requires a provenance tier and a source URL. A live panel tracks L1/L2/L3 conformance progress.
+                    The contribution form for a new catalog record. It follows
+                    the 7-layer data structure (identity, physical, facilities,
+                    process, reliability, commercial, notes); every field
+                    requires a provenance tier and a source URL. A live panel
+                    tracks L1/L2/L3 conformance progress.
                   </span>
                   <span class="lang-zh">
-                    向目录贡献设备记录的表单：按 7 层数据结构填写（身份、物理、设施、工艺、可靠性、商业、备注），每个字段都要选来源等级并附来源链接；右侧实时显示 L1/L2/L3 一致性进度，填完可导出 JSON 或提交审核。
+                    向目录贡献设备记录的表单：按 7
+                    层数据结构填写（身份、物理、设施、工艺、可靠性、商业、备注），每个字段都要选来源等级并附来源链接；右侧实时显示
+                    L1/L2/L3 一致性进度，填完可导出 JSON 或提交审核。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">7-Layer Generator</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >7-Layer Generator</span
+                >
                 <a href="add-equipment.html" class="guide-action-btn">
                   <span class="lang-en">Add Tool Form →</span>
                   <span class="lang-zh">录入设备 →</span>
@@ -1229,24 +1647,46 @@
               <div class="guide-item-top">
                 <div class="guide-item-title-row">
                   <h4 class="guide-item-title">
-                    <span class="lang-en">Data Standard &amp; Verification</span>
+                    <span class="lang-en"
+                      >Data Standard &amp; Verification</span
+                    >
                     <span class="lang-zh">数据标准与验证</span>
                   </h4>
-                  <a href="data-standard.html" class="guide-item-file">data-standard.html</a>
+                  <a href="data-standard.html" class="guide-item-file"
+                    >data-standard.html</a
+                  >
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    <strong>Data Standard</strong>: open 7-layer schema, three conformance levels (L1/L2/L3), and five provenance tiers.<br />
-                    <strong>Verification</strong> (<a href="verification.html" class="guide-link-btn">verification.html</a>): data-trust policy, upgrade paths, and corrections channel (<a href="mailto:corrections@semiconfab.org">corrections@semiconfab.org</a>).
+                    <strong>Data Standard</strong>: open 7-layer schema, three
+                    conformance levels (L1/L2/L3), and five provenance tiers.<br />
+                    <strong>Verification</strong> (<a
+                      href="verification.html"
+                      class="guide-link-btn"
+                      >verification.html</a
+                    >): data-trust policy, upgrade paths, and corrections
+                    channel (<a href="mailto:corrections@semiconfab.org"
+                      >corrections@semiconfab.org</a
+                    >).
                   </span>
                   <span class="lang-zh">
-                    <strong>数据标准</strong>：7 层开放 schema、L1/L2/L3 三档一致性等级与 5 档来源等级定义。<br />
-                    <strong>验证</strong>（<a href="verification.html" class="guide-link-btn">verification.html</a>）：来源等级授予规则、人工审核流程与纠错通道（<a href="mailto:corrections@semiconfab.org">corrections@semiconfab.org</a>）。
+                    <strong>数据标准</strong>：7 层开放 schema、L1/L2/L3
+                    三档一致性等级与 5 档来源等级定义。<br />
+                    <strong>验证</strong>（<a
+                      href="verification.html"
+                      class="guide-link-btn"
+                      >verification.html</a
+                    >）：来源等级授予规则、人工审核流程与纠错通道（<a
+                      href="mailto:corrections@semiconfab.org"
+                      >corrections@semiconfab.org</a
+                    >）。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">Schema v1.0 &amp; Policy</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >Schema v1.0 &amp; Policy</span
+                >
                 <a href="data-standard.html" class="guide-action-btn">
                   <span class="lang-en">Data Standard →</span>
                   <span class="lang-zh">标准规范 →</span>
@@ -1256,7 +1696,13 @@
           </div>
         </div>
 
-        <hr style="border: none; border-top: 1px dashed var(--line); margin: 30px 0;" />
+        <hr
+          style="
+            border: none;
+            border-top: 1px dashed var(--line);
+            margin: 30px 0;
+          "
+        />
 
         <!-- CATEGORY 3: COST -->
         <div class="guide-feature-group">
@@ -1266,8 +1712,15 @@
               <span class="guide-category-tag">Category 3</span>
               Cost
             </h3>
-            <p style="font-size: 0.88rem; color: var(--ink-2); margin: 0 0 14px 0;">
-              Two pages with similar names and opposite methods — the nav subtitles say which is which:
+            <p
+              style="
+                font-size: 0.88rem;
+                color: var(--ink-2);
+                margin: 0 0 14px 0;
+              "
+            >
+              Two pages with similar names and opposite methods — the nav
+              subtitles say which is which:
             </p>
           </div>
           <!-- Chinese Heading -->
@@ -1276,7 +1729,13 @@
               <span class="guide-category-tag">分类三</span>
               成本（Cost）
             </h3>
-            <p style="font-size: 0.88rem; color: var(--ink-2); margin: 0 0 14px 0;">
+            <p
+              style="
+                font-size: 0.88rem;
+                color: var(--ink-2);
+                margin: 0 0 14px 0;
+              "
+            >
               两个页面名字像、方法相反，导航副标题已明确标明：
             </p>
           </div>
@@ -1290,7 +1749,9 @@
                     <span class="lang-en">Construction Cost Report</span>
                     <span class="lang-zh">建设成本报告</span>
                   </h4>
-                  <a href="fab-cost.html" class="guide-item-file">fab-cost.html</a>
+                  <a href="fab-cost.html" class="guide-item-file"
+                    >fab-cost.html</a
+                  >
                 </div>
                 <div class="guide-item-subtitle">
                   <span class="lang-en">Top-down research report</span>
@@ -1298,15 +1759,26 @@
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    Answers "beyond the equipment, what else does building a fab cost?": the building, cleanroom, UPW, power, specialty gases, wastewater, AMHS, land and design take roughly 20–30% of total investment. Sourced research with interactive parametric estimator (capacity, node, region, facility ratio), node scaling table, and an explicit "Gaps in Public Data" list.
+                    Answers "beyond the equipment, what else does building a fab
+                    cost?": the building, cleanroom, UPW, power, specialty
+                    gases, wastewater, AMHS, land and design take roughly 20–30%
+                    of total investment. Sourced research with interactive
+                    parametric estimator (capacity, node, region, facility
+                    ratio), node scaling table, and an explicit "Gaps in Public
+                    Data" list.
                   </span>
                   <span class="lang-zh">
-                    回答"设备之外，建厂还要花多少钱"：厂房、洁净室、超纯水、电力、特气、废水、AMHS、土地与设计约占总投资的 20–30%。带完整来源的研究报告（如三星 Taylor 厂 60 亿建筑 / 110 亿设备），附参数化估算器与"公开数据缺口"清单——无数据处明确留空，不盲目编造。
+                    回答"设备之外，建厂还要花多少钱"：厂房、洁净室、超纯水、电力、特气、废水、AMHS、土地与设计约占总投资的
+                    20–30%。带完整来源的研究报告（如三星 Taylor 厂 60 亿建筑 /
+                    110
+                    亿设备），附参数化估算器与"公开数据缺口"清单——无数据处明确留空，不盲目编造。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">Macro Facility Capex</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >Macro Facility Capex</span
+                >
                 <a href="fab-cost.html" class="guide-action-btn">
                   <span class="lang-en">Read Report →</span>
                   <span class="lang-zh">查看报告 →</span>
@@ -1322,23 +1794,40 @@
                     <span class="lang-en">Capex Estimator</span>
                     <span class="lang-zh">总投资测算器</span>
                   </h4>
-                  <a href="fab-capex.html" class="guide-item-file">fab-capex.html</a>
+                  <a href="fab-capex.html" class="guide-item-file"
+                    >fab-capex.html</a
+                  >
                 </div>
                 <div class="guide-item-subtitle">
-                  <span class="lang-en">Bottom-up interactive estimator (Alpha)</span>
+                  <span class="lang-en"
+                    >Bottom-up interactive estimator (Alpha)</span
+                  >
                   <span class="lang-zh">自底向上交互测算器（Alpha）</span>
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    Prices the actual 121-tool bill of materials from the Fab Twin tool by tool (each with low/median/high prices tagged REPORTED or ESTIMATE), sums it into equipment (WFE) cost, then grosses up by a facility share into total investment. Controls: production scale (1× pilot line to 80× gigafab campus), facility-share slider, region factor, and full BOM table.
+                    Prices the actual 121-tool bill of materials from the Fab
+                    Twin tool by tool (each with low/median/high prices tagged
+                    REPORTED or ESTIMATE), sums it into equipment (WFE) cost,
+                    then grosses up by a facility share into total investment.
+                    Controls: production scale (1× pilot line to 80× gigafab
+                    campus), facility-share slider, region factor, and full BOM
+                    table.
                   </span>
                   <span class="lang-zh">
-                    把 Fab Twin 里那 121 台设备的清单逐台计价（每台有低/中/高三档价格，标注 REPORTED 或 ESTIMATE），加总得设备投资，再按厂务占比放大成总投资。可调：产能倍数（1× 试验线到 80× 超级工厂）、厂务占比滑杆、地区系数；输出完整 BOM 清单与 bay 投资拆解。
+                    把 Fab Twin 里那 121
+                    台设备的清单逐台计价（每台有低/中/高三档价格，标注 REPORTED
+                    或
+                    ESTIMATE），加总得设备投资，再按厂务占比放大成总投资。可调：产能倍数（1×
+                    试验线到 80× 超级工厂）、厂务占比滑杆、地区系数；输出完整
+                    BOM 清单与 bay 投资拆解。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">121-Tool BOM Model</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >121-Tool BOM Model</span
+                >
                 <a href="fab-capex.html" class="guide-action-btn">
                   <span class="lang-en">Run Estimator →</span>
                   <span class="lang-zh">开始测算 →</span>
@@ -1348,7 +1837,13 @@
           </div>
         </div>
 
-        <hr style="border: none; border-top: 1px dashed var(--line); margin: 30px 0;" />
+        <hr
+          style="
+            border: none;
+            border-top: 1px dashed var(--line);
+            margin: 30px 0;
+          "
+        />
 
         <!-- CATEGORY 4: LEARN -->
         <div class="guide-feature-group">
@@ -1358,8 +1853,18 @@
               <span class="guide-category-tag">Category 4</span>
               Learn — the 3D Device Library
             </h3>
-            <p style="font-size: 0.88rem; color: var(--ink-2); margin: 0 0 14px 0;">
-              Five device pages, each a "10-Step 3D Fabrication Walkthrough": an interactive 3D viewer (step navigator 01–10, multiple camera views, cross-section / X-ray / nanometer-grid toggles) plus a written engineering breakdown of every step — naming the real equipment used — and an FAQ.
+            <p
+              style="
+                font-size: 0.88rem;
+                color: var(--ink-2);
+                margin: 0 0 14px 0;
+              "
+            >
+              Five device pages, each a "10-Step 3D Fabrication Walkthrough": an
+              interactive 3D viewer (step navigator 01–10, multiple camera
+              views, cross-section / X-ray / nanometer-grid toggles) plus a
+              written engineering breakdown of every step — naming the real
+              equipment used — and an FAQ.
             </p>
           </div>
           <!-- Chinese Heading -->
@@ -1368,8 +1873,16 @@
               <span class="guide-category-tag">分类四</span>
               学习（Learn）— 3D 器件工艺库
             </h3>
-            <p style="font-size: 0.88rem; color: var(--ink-2); margin: 0 0 14px 0;">
-              5 个器件页，每个都是"10 步 3D 制造工艺剖析"：交互 3D 查看器（步骤导航 01–10、多种视角、剖切 / X-Ray / 纳米网格开关）+ 每一步的工艺文字讲解（点名该步用到的真实设备）+ FAQ。
+            <p
+              style="
+                font-size: 0.88rem;
+                color: var(--ink-2);
+                margin: 0 0 14px 0;
+              "
+            >
+              5 个器件页，每个都是"10 步 3D 制造工艺剖析"：交互 3D
+              查看器（步骤导航 01–10、多种视角、剖切 / X-Ray / 纳米网格开关）+
+              每一步的工艺文字讲解（点名该步用到的真实设备）+ FAQ。
             </p>
           </div>
 
@@ -1377,59 +1890,94 @@
             <table class="guide-table">
               <thead>
                 <tr>
-                  <th style="width: 20%;">Device</th>
+                  <th style="width: 20%">Device</th>
                   <th>Key Technology &amp; Architecture Flow</th>
-                  <th style="width: 15%; text-align: right;">Action</th>
+                  <th style="width: 15%; text-align: right">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><strong>FinFET</strong></td>
                   <td>
-                    <span class="lang-en">14/7nm tri-gate transistor, RMG (Replacement Metal Gate) gate-last flow, SADP fin splitting, SiGe epitaxy</span>
-                    <span class="lang-zh">14/7nm 三栅晶体管，RMG 后栅工艺，SADP 鳍节距自对准双重曝光，SiGe 源漏外延</span>
+                    <span class="lang-en"
+                      >14/7nm tri-gate transistor, RMG (Replacement Metal Gate)
+                      gate-last flow, SADP fin splitting, SiGe epitaxy</span
+                    >
+                    <span class="lang-zh"
+                      >14/7nm 三栅晶体管，RMG 后栅工艺，SADP
+                      鳍节距自对准双重曝光，SiGe 源漏外延</span
+                    >
                   </td>
-                  <td style="text-align: right;">
-                    <a href="finfet.html" class="guide-action-btn">FinFET 3D →</a>
+                  <td style="text-align: right">
+                    <a href="finfet.html" class="guide-action-btn"
+                      >FinFET 3D →</a
+                    >
                   </td>
                 </tr>
                 <tr>
                   <td><strong>GAAFET</strong></td>
                   <td>
-                    <span class="lang-en">3/2nm nanosheet gate-all-around, Si/SiGe superlattice epitaxy, nanosheet release, inner spacer formation</span>
-                    <span class="lang-zh">3/2nm 纳米片全环绕栅，Si/SiGe 超晶格多层外延，纳米片释放刻蚀，内部侧墙形成</span>
+                    <span class="lang-en"
+                      >3/2nm nanosheet gate-all-around, Si/SiGe superlattice
+                      epitaxy, nanosheet release, inner spacer formation</span
+                    >
+                    <span class="lang-zh"
+                      >3/2nm 纳米片全环绕栅，Si/SiGe
+                      超晶格多层外延，纳米片释放刻蚀，内部侧墙形成</span
+                    >
                   </td>
-                  <td style="text-align: right;">
+                  <td style="text-align: right">
                     <a href="gaa.html" class="guide-action-btn">GAAFET 3D →</a>
                   </td>
                 </tr>
                 <tr>
                   <td><strong>DRAM</strong></td>
                   <td>
-                    <span class="lang-en">1T1C memory cell (6F², buried wordline, honeycomb pillar capacitor, High-k dielectric MIM stack)</span>
-                    <span class="lang-zh">1T1C 存储单元（6F² 蜂窝布局、埋入式字线、高深宽比圆柱电容、High-k 介质 MIM 堆叠）</span>
+                    <span class="lang-en"
+                      >1T1C memory cell (6F², buried wordline, honeycomb pillar
+                      capacitor, High-k dielectric MIM stack)</span
+                    >
+                    <span class="lang-zh"
+                      >1T1C 存储单元（6F²
+                      蜂窝布局、埋入式字线、高深宽比圆柱电容、High-k 介质 MIM
+                      堆叠）</span
+                    >
                   </td>
-                  <td style="text-align: right;">
+                  <td style="text-align: right">
                     <a href="dram.html" class="guide-action-btn">DRAM 3D →</a>
                   </td>
                 </tr>
                 <tr>
                   <td><strong>3D NAND</strong></td>
                   <td>
-                    <span class="lang-en">Charge-trap vertical-string flash, 128+ oxide/nitride wordline word stack, HAR channel hole etch, replacement tungsten gate</span>
-                    <span class="lang-zh">电荷俘获型垂直串闪存，128+ 层氧化硅/氮化硅多层堆叠，超高深宽比通道孔刻蚀，钨替代栅工艺</span>
+                    <span class="lang-en"
+                      >Charge-trap vertical-string flash, 128+ oxide/nitride
+                      wordline word stack, HAR channel hole etch, replacement
+                      tungsten gate</span
+                    >
+                    <span class="lang-zh"
+                      >电荷俘获型垂直串闪存，128+
+                      层氧化硅/氮化硅多层堆叠，超高深宽比通道孔刻蚀，钨替代栅工艺</span
+                    >
                   </td>
-                  <td style="text-align: right;">
+                  <td style="text-align: right">
                     <a href="nand.html" class="guide-action-btn">3D NAND →</a>
                   </td>
                 </tr>
                 <tr>
                   <td><strong>HBM</strong></td>
                   <td>
-                    <span class="lang-en">HBM3E/HBM4 TSV stacking, Cu-Cu hybrid bonding / micro-bumps, 2.5D CoWoS silicon interposer integration</span>
-                    <span class="lang-zh">HBM3E/HBM4 的 TSV 硅通孔微凸块堆叠，铜-铜混合键合，2.5D CoWoS 硅中介层先进封装集成</span>
+                    <span class="lang-en"
+                      >HBM3E/HBM4 TSV stacking, Cu-Cu hybrid bonding /
+                      micro-bumps, 2.5D CoWoS silicon interposer
+                      integration</span
+                    >
+                    <span class="lang-zh"
+                      >HBM3E/HBM4 的 TSV 硅通孔微凸块堆叠，铜-铜混合键合，2.5D
+                      CoWoS 硅中介层先进封装集成</span
+                    >
                   </td>
-                  <td style="text-align: right;">
+                  <td style="text-align: right">
                     <a href="hbm.html" class="guide-action-btn">HBM 3D →</a>
                   </td>
                 </tr>
@@ -1437,18 +1985,27 @@
             </table>
           </div>
 
-          <div class="guide-callout" style="margin-top: 14px;">
+          <div class="guide-callout" style="margin-top: 14px">
             <div class="guide-callout-icon">💡</div>
             <div class="lang-en">
-              For students and engineers filling in device-process knowledge: learn "how a chip is made" here, then go to the Fab Twin for "how a fab runs."
+              For students and engineers filling in device-process knowledge:
+              learn "how a chip is made" here, then go to the Fab Twin for "how
+              a fab runs."
             </div>
             <div class="lang-zh">
-              适合学生和想补器件工艺的工程师：先在这里理解"芯片是怎么造出来的"，再去 Fab Twin 看"工厂是怎么运转的"。
+              适合学生和想补器件工艺的工程师：先在这里理解"芯片是怎么造出来的"，再去
+              Fab Twin 看"工厂是怎么运转的"。
             </div>
           </div>
         </div>
 
-        <hr style="border: none; border-top: 1px dashed var(--line); margin: 30px 0;" />
+        <hr
+          style="
+            border: none;
+            border-top: 1px dashed var(--line);
+            margin: 30px 0;
+          "
+        />
 
         <!-- CATEGORY 5: RESEARCH -->
         <div class="guide-feature-group">
@@ -1476,7 +2033,9 @@
                     <span class="lang-en">MIMAC-2026 Benchmark</span>
                     <span class="lang-zh">MIMAC-2026 基准</span>
                   </h4>
-                  <a href="benchmark.html" class="guide-item-file">benchmark.html</a>
+                  <a href="benchmark.html" class="guide-item-file"
+                    >benchmark.html</a
+                  >
                 </div>
                 <div class="guide-item-subtitle">
                   <span class="lang-en">Fab scheduling benchmark</span>
@@ -1484,25 +2043,50 @@
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    An open benchmark for fab-scheduling research: a synthetic logic fab (18 tool groups, 217 machines, 3 products, full process routes) with three benchmark tasks — T1 dynamic lot dispatching, T2 AMHS routing, T3 opportunistic preventive maintenance.
+                    An open benchmark for fab-scheduling research: a synthetic
+                    logic fab (18 tool groups, 217 machines, 3 products, full
+                    process routes) with three benchmark tasks — T1 dynamic lot
+                    dispatching, T2 AMHS routing, T3 opportunistic preventive
+                    maintenance.
                   </span>
                   <span class="lang-zh">
-                    面向晶圆厂调度研究的开放基准：一座合成逻辑厂（18 个工具组、217 台机台、3 个产品、完整工艺路线），三个基准任务——T1 动态派工、T2 AMHS 路径、T3 机会性预防维护。
+                    面向晶圆厂调度研究的开放基准：一座合成逻辑厂（18
+                    个工具组、217 台机台、3
+                    个产品、完整工艺路线），三个基准任务——T1 动态派工、T2 AMHS
+                    路径、T3 机会性预防维护。
                   </span>
                 </p>
                 <ul class="guide-item-bullets">
                   <li>
-                    <span class="lang-en"><strong>Try it in-browser</strong>: in-page Pyodide (WebAssembly) runs dispatching policies (FIFO / SPT / EDD / CR) with random seeds.</span>
-                    <span class="lang-zh"><strong>在线试跑</strong>：页面内的 Pyodide (WebAssembly) 演示可选派工策略（FIFO / SPT / EDD / CR）并记录对比。</span>
+                    <span class="lang-en"
+                      ><strong>Try it in-browser</strong>: in-page Pyodide
+                      (WebAssembly) runs dispatching policies (FIFO / SPT / EDD
+                      / CR) with random seeds.</span
+                    >
+                    <span class="lang-zh"
+                      ><strong>在线试跑</strong>：页面内的 Pyodide (WebAssembly)
+                      演示可选派工策略（FIFO / SPT / EDD /
+                      CR）并记录对比。</span
+                    >
                   </li>
                   <li>
-                    <span class="lang-en"><strong>Run it yourself</strong>: download the Python + SimPy simulator package, routes.json, and reproduce baselines; BibTeX citation provided.</span>
-                    <span class="lang-zh"><strong>自己跑</strong>：可下载模拟器包（Python + SimPy）、routes.json，按评估协议复现基线结果，页面提供 BibTeX。</span>
+                    <span class="lang-en"
+                      ><strong>Run it yourself</strong>: download the Python +
+                      SimPy simulator package, routes.json, and reproduce
+                      baselines; BibTeX citation provided.</span
+                    >
+                    <span class="lang-zh"
+                      ><strong>自己跑</strong>：可下载模拟器包（Python +
+                      SimPy）、routes.json，按评估协议复现基线结果，页面提供
+                      BibTeX。</span
+                    >
                   </li>
                 </ul>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">Pyodide WASM + SimPy</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >Pyodide WASM + SimPy</span
+                >
                 <a href="benchmark.html" class="guide-action-btn">
                   <span class="lang-en">Run Benchmark →</span>
                   <span class="lang-zh">运行基准 →</span>
@@ -1526,15 +2110,26 @@
                 </div>
                 <p class="guide-item-desc">
                   <span class="lang-en">
-                    The project manifesto: why an open fab digital twin should exist, the four design principles (open knowledge, honesty over precision, source-available, a healthier equipment ecosystem), the six technical pillars, the four-phase roadmap, and the v1.0.0–v1.8.0 release milestones. Read this if you want the project's position — or are considering collaboration or citation.
+                    The project manifesto: why an open fab digital twin should
+                    exist, the four design principles (open knowledge, honesty
+                    over precision, source-available, a healthier equipment
+                    ecosystem), the six technical pillars, the four-phase
+                    roadmap, and the v1.0.0–v1.8.0 release milestones. Read this
+                    if you want the project's position — or are considering
+                    collaboration or citation.
                   </span>
                   <span class="lang-zh">
-                    项目宣言：为什么要做开放的晶圆厂数字孪生、4 条设计原则（开放知识、诚实优于精度、源码公开、更健康的设备生态）、6 大技术支柱、四阶段路线图与 v1.0.0–v1.8.0 发布里程碑。想了解项目立场、或考虑合作/引用，先读这一页。
+                    项目宣言：为什么要做开放的晶圆厂数字孪生、4
+                    条设计原则（开放知识、诚实优于精度、源码公开、更健康的设备生态）、6
+                    大技术支柱、四阶段路线图与 v1.0.0–v1.8.0
+                    发布里程碑。想了解项目立场、或考虑合作/引用，先读这一页。
                   </span>
                 </p>
               </div>
               <div class="guide-item-footer">
-                <span style="font-size: 0.78rem; color: var(--ink-3);">Manifesto &amp; Roadmap</span>
+                <span style="font-size: 0.78rem; color: var(--ink-3)"
+                  >Manifesto &amp; Roadmap</span
+                >
                 <a href="vision.html" class="guide-action-btn">
                   <span class="lang-en">Read Vision →</span>
                   <span class="lang-zh">查看愿景 →</span>
@@ -1554,7 +2149,10 @@
               <span class="guide-section-num">04</span>
               How to judge whether data is trustworthy
             </h2>
-            <p class="guide-section-desc">SemiconFab's core discipline: every data point carries a provenance tier</p>
+            <p class="guide-section-desc">
+              SemiconFab's core discipline: every data point carries a
+              provenance tier
+            </p>
           </div>
           <!-- Chinese Title -->
           <div class="lang-zh">
@@ -1562,44 +2160,72 @@
               <span class="guide-section-num">04</span>
               怎么看数据可不可信
             </h2>
-            <p class="guide-section-desc">SemiconFab 的核心纪律是每个数据都标来源等级，不盲目追求虚假精度</p>
+            <p class="guide-section-desc">
+              SemiconFab 的核心纪律是每个数据都标来源等级，不盲目追求虚假精度
+            </p>
           </div>
         </header>
 
         <!-- English Content -->
         <div class="lang-en">
-          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 16px;">
-            SemiconFab's core discipline: <strong>every data point carries a provenance tier</strong>. There are five:
+          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 16px">
+            SemiconFab's core discipline:
+            <strong>every data point carries a provenance tier</strong>. There
+            are five:
           </p>
 
           <div class="guide-table-wrap">
             <table class="guide-table">
               <thead>
                 <tr>
-                  <th style="width: 32%;">Tier</th>
+                  <th style="width: 32%">Tier</th>
                   <th>Meaning &amp; Evidentiary Standard</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="tier-badge tier-1">Vendor Confirmed</span></td>
-                  <td>From the OEM's official datasheet, product manual, or direct vendor specification.</td>
+                  <td>
+                    <span class="tier-badge tier-1">Vendor Confirmed</span>
+                  </td>
+                  <td>
+                    From the OEM's official datasheet, product manual, or direct
+                    vendor specification.
+                  </td>
                 </tr>
                 <tr>
-                  <td><span class="tier-badge tier-2">Independent Verified</span></td>
-                  <td>Cross-checked and corroborated against independent third-party sources (technical papers, fab reports, patents).</td>
+                  <td>
+                    <span class="tier-badge tier-2">Independent Verified</span>
+                  </td>
+                  <td>
+                    Cross-checked and corroborated against independent
+                    third-party sources (technical papers, fab reports,
+                    patents).
+                  </td>
                 </tr>
                 <tr>
-                  <td><span class="tier-badge tier-3">Community Corroborated</span></td>
-                  <td>Multiple community submissions that agree and corroborate one another.</td>
+                  <td>
+                    <span class="tier-badge tier-3"
+                      >Community Corroborated</span
+                    >
+                  </td>
+                  <td>
+                    Multiple community submissions that agree and corroborate
+                    one another.
+                  </td>
                 </tr>
                 <tr>
                   <td><span class="tier-badge tier-4">Inferred</span></td>
-                  <td>Inferred from trade press, used-equipment market listings, fab photos, and other indirect sources.</td>
+                  <td>
+                    Inferred from trade press, used-equipment market listings,
+                    fab photos, and other indirect sources.
+                  </td>
                 </tr>
                 <tr>
                   <td><span class="tier-badge tier-5">Synthetic</span></td>
-                  <td>Placeholder or simulated data (e.g. the MIMAC-2026 benchmark's synthetic fab).</td>
+                  <td>
+                    Placeholder or simulated data (e.g. the MIMAC-2026
+                    benchmark's synthetic fab).
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1608,45 +2234,69 @@
           <div class="guide-callout">
             <div class="guide-callout-icon">🔍</div>
             <div>
-              Tier badges appear throughout the catalog, the compare page, and both twins' inspectors. If a tool is marked <strong>Draft / Dimensions pending</strong>, its 3D shape is only a category placeholder shell — trust the panel's text and source links, not measurements taken off the model.
+              Tier badges appear throughout the catalog, the compare page, and
+              both twins' inspectors. If a tool is marked
+              <strong>Draft / Dimensions pending</strong>, its 3D shape is only
+              a category placeholder shell — trust the panel's text and source
+              links, not measurements taken off the model.
             </div>
           </div>
         </div>
 
         <!-- Chinese Content -->
         <div class="lang-zh">
-          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 16px;">
-            SemiconFab 的核心纪律是<strong>每个数据都标来源等级</strong>，共 5 档：
+          <p style="font-size: 0.95rem; color: var(--ink); margin-bottom: 16px">
+            SemiconFab 的核心纪律是<strong>每个数据都标来源等级</strong>，共 5
+            档：
           </p>
 
           <div class="guide-table-wrap">
             <table class="guide-table">
               <thead>
                 <tr>
-                  <th style="width: 35%;">等级 (Tier)</th>
+                  <th style="width: 35%">等级 (Tier)</th>
                   <th>含义与证据标准</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><span class="tier-badge tier-1">Vendor Confirmed 厂商确认</span></td>
+                  <td>
+                    <span class="tier-badge tier-1"
+                      >Vendor Confirmed 厂商确认</span
+                    >
+                  </td>
                   <td>来自 OEM 官方规格书、产品手册或直接厂商授权规格。</td>
                 </tr>
                 <tr>
-                  <td><span class="tier-badge tier-2">Independent Verified 独立核实</span></td>
-                  <td>经第三方独立来源（技术文献、晶圆厂建设纪要、专利档案）交叉验证。</td>
+                  <td>
+                    <span class="tier-badge tier-2"
+                      >Independent Verified 独立核实</span
+                    >
+                  </td>
+                  <td>
+                    经第三方独立来源（技术文献、晶圆厂建设纪要、专利档案）交叉验证。
+                  </td>
                 </tr>
                 <tr>
-                  <td><span class="tier-badge tier-3">Community Corroborated 社区佐证</span></td>
+                  <td>
+                    <span class="tier-badge tier-3"
+                      >Community Corroborated 社区佐证</span
+                    >
+                  </td>
                   <td>社区多方提交并相互印证的数据。</td>
                 </tr>
                 <tr>
                   <td><span class="tier-badge tier-4">Inferred 推断</span></td>
-                  <td>由半导体行业贸易媒体、二手设备市场挂牌信息、现场照片等间接来源推断。</td>
+                  <td>
+                    由半导体行业贸易媒体、二手设备市场挂牌信息、现场照片等间接来源推断。
+                  </td>
                 </tr>
                 <tr>
                   <td><span class="tier-badge tier-5">Synthetic 合成</span></td>
-                  <td>占位或模拟生成数据（例如 MIMAC-2026 调度基准中的合成逻辑晶圆厂）。</td>
+                  <td>
+                    占位或模拟生成数据（例如 MIMAC-2026
+                    调度基准中的合成逻辑晶圆厂）。
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -1655,7 +2305,9 @@
           <div class="guide-callout">
             <div class="guide-callout-icon">🔍</div>
             <div>
-              在目录、对比页和双子的 inspector 里，等级徽章无处不在。看到 <strong>Draft / Dimensions pending</strong> 的设备，说明它的 3D 外形只是类别占位壳——参数以面板里的文字与来源链接为准，不要量图当真。
+              在目录、对比页和双子的 inspector 里，等级徽章无处不在。看到
+              <strong>Draft / Dimensions pending</strong> 的设备，说明它的 3D
+              外形只是类别占位壳——参数以面板里的文字与来源链接为准，不要量图当真。
             </div>
           </div>
         </div>
@@ -1670,7 +2322,10 @@
               <span class="guide-section-num">05</span>
               Frequently Asked Questions (FAQ)
             </h2>
-            <p class="guide-section-desc">Licensing, system requirements, data accuracy, bulk access, and navigation</p>
+            <p class="guide-section-desc">
+              Licensing, system requirements, data accuracy, bulk access, and
+              navigation
+            </p>
           </div>
           <!-- Chinese Title -->
           <div class="lang-zh">
@@ -1678,7 +2333,9 @@
               <span class="guide-section-num">05</span>
               常见问题（FAQ）
             </h2>
-            <p class="guide-section-desc">开源协议、配置要求、数据准确性、批量使用与导航说明</p>
+            <p class="guide-section-desc">
+              开源协议、配置要求、数据准确性、批量使用与导航说明
+            </p>
           </div>
         </header>
 
@@ -1686,49 +2343,101 @@
         <div class="lang-en">
           <!-- Q1 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q1.</span> Do I need an account or payment?</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q1.</span> Do I need an account or
+              payment?
+            </h3>
             <p class="faq-a">
-              No. Everything runs in the browser. The project is licensed under PolyForm Noncommercial: the source is available, free for education, academic research, and personal use; commercial use requires a license (<a href="mailto:info@semiconfab.org">info@semiconfab.org</a>).
+              No. Everything runs in the browser. The project is licensed under
+              PolyForm Noncommercial: the source is available, free for
+              education, academic research, and personal use; commercial use
+              requires a license (<a href="mailto:info@semiconfab.org"
+                >info@semiconfab.org</a
+              >).
             </p>
           </div>
 
           <!-- Q2 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q2.</span> What do I need to run it?</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q2.</span> What do I need to run it?
+            </h3>
             <p class="faq-a">
-              A modern desktop browser (Chrome / Edge / Firefox / Safari) with WebGL. The 3D twin pages are heavy; on older hardware, turn off layers such as Heatmap / X-Ray first.
+              A modern desktop browser (Chrome / Edge / Firefox / Safari) with
+              WebGL. The 3D twin pages are heavy; on older hardware, turn off
+              layers such as Heatmap / X-Ray first.
             </p>
           </div>
 
           <!-- Q3 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q3.</span> What if data is incomplete or wrong?</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q3.</span> What if data is incomplete or
+              wrong?
+            </h3>
             <p class="faq-a">
-              Of the 253 catalog records, 9 are fully L1-verified today; the rest are drafts of varying completeness — deliberately, and labeled as such. Contribute via the <a href="add-equipment.html">Add Equipment</a> form, or report errors to <a href="mailto:corrections@semiconfab.org">corrections@semiconfab.org</a>.
+              Of the 253 catalog records, 9 are fully L1-verified today; the
+              rest are drafts of varying completeness — deliberately, and
+              labeled as such. Contribute via the
+              <a href="add-equipment.html">Add Equipment</a> form, or report
+              errors to
+              <a href="mailto:corrections@semiconfab.org"
+                >corrections@semiconfab.org</a
+              >.
             </p>
           </div>
 
           <!-- Q4 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q4.</span> Can I use the equipment data in bulk?</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q4.</span> Can I use the equipment data
+              in bulk?
+            </h3>
             <p class="faq-a">
-              The catalog lives in the GitHub repository (<code>jinjiefan2020/SemiconFab</code>) as <code>catalog.json</code>; its structure is documented on the <a href="data-standard.html">Data Standard</a> page. Please respect the license and carry the provenance tiers with the data.
+              The catalog lives in the GitHub repository
+              (<code>jinjiefan2020/SemiconFab</code>) as
+              <code>catalog.json</code>; its structure is documented on the
+              <a href="data-standard.html">Data Standard</a> page. Please
+              respect the license and carry the provenance tiers with the data.
             </p>
           </div>
 
           <!-- Q5 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q5.</span> Why is there no link from the Fab Twin to the OSAT Twin?</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q5.</span> Why is there no link from the
+              Fab Twin to the OSAT Twin?
+            </h3>
             <p class="faq-a">
-              By the site owner's design: the two twins are independent entry points — switch between them from the "3D Twins" menu in the top navigation.
+              By the site owner's design: the two twins are independent entry
+              points — switch between them from the "3D Twins" menu in the top
+              navigation.
             </p>
           </div>
 
           <!-- Q6 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q6.</span> Why is the 3nm Mega Fab labeled as a "Conceptual Layout Model" rather than a full 1:1 physical twin?</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q6.</span> Why is the 3nm Mega Fab
+              labeled as a "Conceptual Layout Model" rather than a full 1:1
+              physical twin?
+            </h3>
             <p class="faq-a">
-              A leading-edge 50k WSPM Mega Fab houses ~3,000 production machines and hundreds of kilometers of subfab piping. Building a 1:1 photorealistic physical digital twin with millimeter-level sub-assemblies for 3,000 tools to run smoothly in a web browser on everyday laptops or office screens is technically impractical and visually overwhelming. The Mega Fab page uses GPU instanced rendering (<code>THREE.InstancedMesh</code>) as a <strong>Conceptual Layout Model</strong> to intuitively demonstrate the macroscopic spatial scale, process bay distribution, and automated AMHS closed-loop logistics of a multi-billion-dollar dual-phase manufacturing complex. For micro-level 1:1 equipment inspection and subfab utility details, please explore the dedicated <a href="twin.html">300mm Fab Twin</a> (121 tools) and <a href="twin-osat.html">OSAT Twin</a> (86 tools).
+              A leading-edge 50k WSPM Mega Fab houses ~3,000 production machines
+              and hundreds of kilometers of subfab piping. Building a 1:1
+              photorealistic physical digital twin with millimeter-level
+              sub-assemblies for 3,000 tools to run smoothly in a web browser on
+              everyday laptops or office screens is technically impractical and
+              visually overwhelming. The Mega Fab page uses GPU instanced
+              rendering (<code>THREE.InstancedMesh</code>) as a
+              <strong>Conceptual Layout Model</strong> to intuitively
+              demonstrate the macroscopic spatial scale, process bay
+              distribution, and automated AMHS closed-loop logistics of a
+              multi-billion-dollar dual-phase manufacturing complex. For
+              micro-level 1:1 equipment inspection and subfab utility details,
+              please explore the dedicated
+              <a href="twin.html">300mm Fab Twin</a> (121 tools) and
+              <a href="twin-osat.html">OSAT Twin</a> (86 tools).
             </p>
           </div>
         </div>
@@ -1737,39 +2446,64 @@
         <div class="lang-zh">
           <!-- Q1 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q1.</span> 需要注册或付费吗？</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q1.</span> 需要注册或付费吗？
+            </h3>
             <p class="faq-a">
-              不需要。全部功能在浏览器内运行。项目采用 PolyForm Noncommercial 许可证：源码公开，免费用于教育、学术研究与个人用途；商业使用需联系授权（<a href="mailto:info@semiconfab.org">info@semiconfab.org</a>）。
+              不需要。全部功能在浏览器内运行。项目采用 PolyForm Noncommercial
+              许可证：源码公开，免费用于教育、学术研究与个人用途；商业使用需联系授权（<a
+                href="mailto:info@semiconfab.org"
+                >info@semiconfab.org</a
+              >）。
             </p>
           </div>
 
           <!-- Q2 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q2.</span> 对电脑/浏览器有什么要求？</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q2.</span> 对电脑/浏览器有什么要求？
+            </h3>
             <p class="faq-a">
-              现代桌面浏览器（Chrome / Edge / Firefox / Safari）+ WebGL 即可。3D 双子页面较重，老设备上可先关掉 Heatmap / X-Ray 等图层。
+              现代桌面浏览器（Chrome / Edge / Firefox / Safari）+ WebGL 即可。3D
+              双子页面较重，老设备上可先关掉 Heatmap / X-Ray 等图层。
             </p>
           </div>
 
           <!-- Q3 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q3.</span> 数据不全/有错怎么办？</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q3.</span> 数据不全/有错怎么办？
+            </h3>
             <p class="faq-a">
-              目录 253 条里目前 9 条是 L1 完整核实，其余为不同程度的草稿——这是有意为之的诚实状态。用 <a href="add-equipment.html">Add Equipment</a> 表单补充，或通过 <a href="mailto:corrections@semiconfab.org">corrections@semiconfab.org</a> 纠错。
+              目录 253 条里目前 9 条是 L1
+              完整核实，其余为不同程度的草稿——这是有意为之的诚实状态。用
+              <a href="add-equipment.html">Add Equipment</a> 表单补充，或通过
+              <a href="mailto:corrections@semiconfab.org"
+                >corrections@semiconfab.org</a
+              >
+              纠错。
             </p>
           </div>
 
           <!-- Q4 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q4.</span> 我想批量使用设备数据。</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q4.</span> 我想批量使用设备数据。
+            </h3>
             <p class="faq-a">
-              目录数据在 GitHub 仓库（<code>jinjiefan2020/SemiconFab</code>）的 <code>catalog.json</code> 中，结构见「<a href="data-standard.html">数据标准</a>」页；引用时请遵守许可证并注明来源等级。
+              目录数据在 GitHub 仓库（<code>jinjiefan2020/SemiconFab</code>）的
+              <code>catalog.json</code> 中，结构见「<a href="data-standard.html"
+                >数据标准</a
+              >」页；引用时请遵守许可证并注明来源等级。
             </p>
           </div>
 
           <!-- Q5 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q5.</span> 为什么 Fab Twin 里没有通往 OSAT Twin 的链接？</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q5.</span> 为什么 Fab Twin 里没有通往
+              OSAT Twin 的链接？
+            </h3>
             <p class="faq-a">
               站长有意为之：两个双子是独立入口，请从顶部导航「数字孪生」菜单切换。
             </p>
@@ -1777,9 +2511,23 @@
 
           <!-- Q6 -->
           <div class="faq-card">
-            <h3 class="faq-q"><span class="faq-q-mark">Q6.</span> 为什么 3nm Mega Fab 明确标定为“概念布局模型（Conceptual Layout Model）”，而不是做完全 1:1 的精细孪生？</h3>
+            <h3 class="faq-q">
+              <span class="faq-q-mark">Q6.</span> 为什么 3nm Mega Fab
+              明确标定为“概念布局模型（Conceptual Layout Model）”，而不是做完全
+              1:1 的精细孪生？
+            </h3>
             <p class="faq-a">
-              一座月产 50,000 片晶圆的先进制程超级晶圆厂容纳约 3,000 台超大型设备与数百公里动力管网。如果在普通电脑浏览器或小屏幕上对 3,000 台设备全部进行 1:1 施工级精细建模，不仅会造成硬件崩溃，视觉上也极其杂乱繁重，在工程上是不现实的。因此该页面采用硬件级 <code>InstancedMesh</code> 架构定位为<strong>概念布局推演示意模型（Conceptual Layout Model）</strong>，旨在让用户宏观直观感知超级晶圆厂的宏大空间尺度、双期工艺湾分区与 AMHS 闭环天车物流体系。若需要体验 1:1 精细度机台与动力层（Subfab）管网，请进入专门的 <a href="twin.html">300mm 洁净室孪生</a>（121台）与 <a href="twin-osat.html">OSAT 封测厂孪生</a>（86台）。
+              一座月产 50,000 片晶圆的先进制程超级晶圆厂容纳约 3,000
+              台超大型设备与数百公里动力管网。如果在普通电脑浏览器或小屏幕上对
+              3,000 台设备全部进行 1:1
+              施工级精细建模，不仅会造成硬件崩溃，视觉上也极其杂乱繁重，在工程上是不现实的。因此该页面采用硬件级
+              <code>InstancedMesh</code> 架构定位为<strong
+                >概念布局推演示意模型（Conceptual Layout Model）</strong
+              >，旨在让用户宏观直观感知超级晶圆厂的宏大空间尺度、双期工艺湾分区与
+              AMHS 闭环天车物流体系。若需要体验 1:1
+              精细度机台与动力层（Subfab）管网，请进入专门的
+              <a href="twin.html">300mm 洁净室孪生</a>（121台）与
+              <a href="twin-osat.html">OSAT 封测厂孪生</a>（86台）。
             </p>
           </div>
         </div>
@@ -1795,11 +2543,17 @@
       // Guide Bilingual View Controller
       function updateGuideLanguage(lang) {
         document.documentElement.setAttribute("data-lang", lang);
-        document.documentElement.setAttribute("lang", lang === "zh" ? "zh-CN" : "en");
+        document.documentElement.setAttribute(
+          "lang",
+          lang === "zh" ? "zh-CN" : "en",
+        );
 
         // Update hero buttons active state
         document.querySelectorAll(".guide-lang-btn").forEach((btn) => {
-          btn.classList.toggle("active", btn.getAttribute("data-lang-btn") === lang);
+          btn.classList.toggle(
+            "active",
+            btn.getAttribute("data-lang-btn") === lang,
+          );
         });
 
         // Dynamic Document Title
@@ -1810,11 +2564,17 @@
       }
 
       function setGuideLang(lang) {
-        if (window.SemiconSiteNav && typeof window.SemiconSiteNav.setLang === "function") {
+        if (
+          window.SemiconSiteNav &&
+          typeof window.SemiconSiteNav.setLang === "function"
+        ) {
           window.SemiconSiteNav.setLang(lang);
         } else {
           localStorage.setItem("semicon_lang", lang);
-          localStorage.setItem("semiconfab_lang", lang === "zh" ? "zh-CN" : "en");
+          localStorage.setItem(
+            "semiconfab_lang",
+            lang === "zh" ? "zh-CN" : "en",
+          );
           updateGuideLanguage(lang);
         }
       }
@@ -1829,7 +2589,9 @@
         const initialLang =
           (window.SemiconSiteNav && window.SemiconSiteNav.getLang()) ||
           localStorage.getItem("semicon_lang") ||
-          (navigator.language && navigator.language.startsWith("zh") ? "zh" : "en");
+          (navigator.language && navigator.language.startsWith("zh")
+            ? "zh"
+            : "en");
         updateGuideLanguage(initialLang);
       });
     </script>

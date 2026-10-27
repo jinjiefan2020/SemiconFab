@@ -2,6 +2,37 @@
 
 All notable changes to the SemiconFab source-available repository will be documented in this file.
 
+## [1.9.0] - 2026-10-25
+
+### Fab Data Layer (晶圆厂数据层) & Architecture Teaching Model
+
+- **New Standalone Teaching Page (`fab-data-layer.html`)**:
+  - Educational, interactive visualization explaining how wafer fab data flows layer-by-layer: from equipment to connectivity, MES, analytics, and planning/twin.
+  - Zero 3D/Three.js dependencies: built entirely with responsive SVG and vanilla JavaScript aligned with Nature/FT editorial design tokens.
+  - Permanent bilingual honest banner: "数据流为示意 · Data Flow Illustrative", "教学级模型，非真实工厂数据 · Teaching model, not real fab data", "未连接任何真实设备 · No live equipment connection".
+  - 5 decoupled architectural layers: Equipment, Connectivity (EAP & SECS/GEM/EDA), Execution (MES), Analytics & Control (APC/FDC/SPC), and Planning, Simulation & Twin.
+  - Interactive SVG cleanroom schematic with animated upward data pulses and play/pause controls, fully respecting `prefers-reduced-motion`.
+  - 5-step wafer lot journey stepper (Litho → Etch → Deposition → CMP → Metrology) detailing 4 mandatory data breakdown items per step (data produced, protocol, consumer, if-missing impact).
+  - 3 fault injection experiments (Connectivity Severed, Data Throttled/Delayed, MES Dispatch Delayed) demonstrating visual state changes, WIP accumulation, and explaining which layer alarms first in reality.
+  - Expanded comprehensive pure text architecture covering 5-layer deep dive (SECS/GEM, GEM300, EDA Interface A, APC R2R, FDC, MES, YMS, DES simulation), 5-step wafer lot data journey, and latency QoS tiering.
+  - Ergonomic layout refactor: moved the 4-item Lot Step Data Breakdown directly beneath the stepper controller in a 2x2 dashboard grid, eliminating dead space and unifying controller and breakdown view.
+  - Configurable sponsorship slot (`sponsorship.enabled` in `data/fab-data-layer.json`, strictly default `false` with zero rendering or placeholders).
+  - Deep-link support: `?layer=<id>` and `?tool=<vendor>-<model>` with runtime lookup against `catalog.json` (explicitly stating absence of connectivity protocol assumptions).
+- **Dedicated Teaching Data Repository (`data/fab-data-layer.json`)**:
+  - Independent structured JSON maintaining layer specifications, lot journey steps, fault scenarios, quiz definitions, and sponsorship configuration without bloating `catalog.json`.
+- **Site-Wide Entry Points & Discoverability**:
+  - **`twin.html`**: Added deep-link anchor in the equipment inspector drawer (`#inspector-panel`) pointing to `fab-data-layer.html`.
+  - **`js/site-nav.js`**: Added "Fab Data Layer" (`dataLayer` / `dataLayerDesc`) under the **Learn (学习)** menu dropdown and mobile drawer with bilingual en/zh support.
+  - **`data-standard.html`**: Added contextual callout link bridging equipment specification schema with shop-floor operational data flow.
+  - **`index.html`**: Added new `glass-card` in the primary capability grid placed directly after the Fab Construction Cost card, fully localized with `odr_fabdata_*` i18n keys.
+  - **`sitemap.xml`**: Added canonical URL entry `https://semiconfab.org/fab-data-layer`.
+- **Strict Baseline Protection & Release Management**:
+  - Zero diff on `twin-osat.html` (untouched).
+  - Minimal 1-link diff on `twin.html` (zero changes to 3D scene, controls, or tour logic).
+  - Upgraded project release version to **1.9.0** in `package.json`, `js/site-nav.js`, `guide.html`, `twin-mega.html`, and `vision.html`.
+
+---
+
 ## [1.8.0] - 2026-10-19
 
 ### Site-Wide Information Architecture (IA) Refactoring & Navigation Unification
