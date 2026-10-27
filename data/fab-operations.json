@@ -1,0 +1,271 @@
+{
+  "$schema": "../schema.json",
+  "version": "1.0.0",
+  "title": "SemiconFab Operations Topic Map Index",
+  "description": "Machine-readable topic map index for fab operations overview, tracking available modules and planned topics.",
+  "groups": [
+    {
+      "id": "operations-core",
+      "title_en": "Operations Core",
+      "title_zh": "运营核心",
+      "description_en": "Core execution, data, scheduling, and control systems governing wafer fab production.",
+      "description_zh": "调度、执行、数据与良率控制等驱动晶圆厂运转的核心运营系统。",
+      "topics": [
+        {
+          "id": "fab-data-layer",
+          "title_en": "Fab Data Layer",
+          "title_zh": "晶圆厂数据层",
+          "status": "available",
+          "href": "fab-data-layer.html",
+          "scope_en": "How data flows from a tool through connectivity, MES, analytics, and the twin.",
+          "scope_zh": "数据如何从一台设备出发，经过连接层、MES、分析层到达孪生。"
+        },
+        {
+          "id": "mes-scheduling-dispatch",
+          "title_en": "MES, Scheduling & Dispatch",
+          "title_zh": "MES 与派工调度",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: lot routing, dispatch, recipes, and genealogy concepts.",
+          "scope_zh": "计划中：将覆盖 lot 路由、派工、recipe 与谱系的概念。"
+        },
+        {
+          "id": "amhs-material-handling",
+          "title_en": "AMHS & Material Handling (MCS)",
+          "title_zh": "自动物料搬运与控制",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: FOUP handling, stockers, and vehicle dispatch concepts. (Twin material flow is conceptual only.)",
+          "scope_zh": "计划中：将覆盖 FOUP 搬运、stocker、车辆派发的概念。（Twin 物流仅为示意，非 AMHS 独立内容。）"
+        },
+        {
+          "id": "apc-fdc-spc-yield",
+          "title_en": "APC, FDC, SPC & Yield",
+          "title_zh": "先进控制、故障检测与良率",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: run-to-run control, fault detection, statistical process control, and yield analytics concepts.",
+          "scope_zh": "计划中：将覆盖 run-to-run、故障检测、统计控制与良率分析的概念。"
+        },
+        {
+          "id": "metrology-defect-analysis",
+          "title_en": "Metrology & Defect Analysis",
+          "title_zh": "量测与缺陷分析",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: inline metrology, defect classification, and root-cause tracing concepts.",
+          "scope_zh": "计划中：将覆盖量测、缺陷分类与溯源的概念。"
+        },
+        {
+          "id": "scheduling-benchmark",
+          "title_en": "MIMAC-2026 Scheduling Benchmark",
+          "title_zh": "MIMAC-2026 调度基准",
+          "status": "available",
+          "href": "benchmark.html",
+          "scope_en": "Fab scheduling benchmark on a synthetic dataset, independent of catalog tools.",
+          "scope_zh": "基于合成（synthetic）晶圆厂数据集的调度基准，与设备目录数据相互独立。"
+        }
+      ]
+    },
+    {
+      "id": "facility-environment",
+      "title_en": "Facility & Environment",
+      "title_zh": "厂务与环境",
+      "description_en": "Cleanroom envelope, ultra-pure media, environmental stability, and subfab utility supply. (Note: 3D Twin subfab/MEP view is conceptual geometry.)",
+      "description_zh": "洁净室围护、超纯介质、环境稳定性与次层动力系统公用工程。（注：3D Twin 次层与 MEP 管线为几何空间示意，非厂务话题页。）",
+      "topics": [
+        {
+          "id": "subfab-utilities",
+          "title_en": "Subfab Utilities Overview",
+          "title_zh": "次层公用工程总览",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: how UPW, specialty gases, bulk power, vacuum, and exhaust together sustain the cleanroom.",
+          "scope_zh": "计划中：将覆盖 UPW、气体、电力、真空、排气等如何共同支撑洁净室。"
+        },
+        {
+          "id": "upw",
+          "title_en": "UPW · Ultra-Pure Water",
+          "title_zh": "UPW · 超纯水",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: production, looped distribution, and quality monitoring of ultra-pure water.",
+          "scope_zh": "计划中：将覆盖超纯水的生产、循环分配与水质控制概念。"
+        },
+        {
+          "id": "specialty-gases-chemicals",
+          "title_en": "Specialty Gases & Chemicals",
+          "title_zh": "特气与化学品",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: bulk and specialty gas supply, chemical delivery, valve manifolds, and safety scrubbers.",
+          "scope_zh": "计划中：将覆盖大宗与特种气体供应、化学品输送、阀门箱与安全尾气处理概念。"
+        },
+        {
+          "id": "power-hvac-cleanroom",
+          "title_en": "Power, HVAC & Cleanroom",
+          "title_zh": "电力、暖通与洁净室",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: electrical substations, FFU recirculation, static pressure cascade, and airborne molecular contamination (AMC).",
+          "scope_zh": "计划中：将覆盖电力负荷、FFU循环风机、压差阶梯与气态分子污染物(AMC)洁净度概念。"
+        },
+        {
+          "id": "vacuum-exhaust-waste",
+          "title_en": "Vacuum, Exhaust & Waste Treatment",
+          "title_zh": "真空、排气与废处理",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: dry pumps, point-of-use abatement, acid/alkali/toxic exhaust, and industrial effluent recycling.",
+          "scope_zh": "计划中：将覆盖干泵真空、本地尾气吸附、酸碱特气排气与工业废水回收处理概念。"
+        },
+        {
+          "id": "safety-sustainability",
+          "title_en": "Safety & Sustainability",
+          "title_zh": "安全与可持续",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: life safety systems (TGMS, fire interlocks), electrical power efficiency (PUE), water recycling, and scope 1/2 decarbonization.",
+          "scope_zh": "计划中：将覆盖气体生命安全系统(TGMS)、用电效能(PUE)、水回收与碳减排可持续性概念。"
+        }
+      ]
+    },
+    {
+      "id": "process-equipment",
+      "title_en": "Process & Equipment",
+      "title_zh": "工艺与设备",
+      "description_en": "Manufacturing equipment catalog, 3D twins, 2D architectural planner, and device transistor process flows.",
+      "description_zh": "制造设备数据库、3D数字孪生模型、2D厂房规划器与晶体管制造工序库。",
+      "topics": [
+        {
+          "id": "equipment-catalog",
+          "title_en": "Equipment Catalog",
+          "title_zh": "设备目录",
+          "status": "available",
+          "href": "catalog-demo.html",
+          "scope_en": "OEM equipment database covering 300mm frontend and OSAT backend machines.",
+          "scope_zh": "涵盖 300mm 前道制造与 OSAT 先进封测机台的 OEM 设备数据库。"
+        },
+        {
+          "id": "compare-tools",
+          "title_en": "Compare Tools",
+          "title_zh": "机台对比",
+          "status": "available",
+          "href": "compare.html",
+          "scope_en": "Side-by-side technical parameters, footprint, utility requirements, and estimated price ranges.",
+          "scope_zh": "多机台核心参数、占地尺寸、动力公用工程配给与估算价格横向对比。"
+        },
+        {
+          "id": "fab-twin",
+          "title_en": "300mm Fab Twin",
+          "title_zh": "300mm 晶圆厂孪生",
+          "status": "available",
+          "href": "twin.html",
+          "scope_en": "Educational 3D model of ISO Class 1 cleanroom and subfab layout with equipment footprints (teaching simulation).",
+          "scope_zh": "教学级 3D 仿真：ISO 1 级洁净室、次层空间与机台几何布局示意。"
+        },
+        {
+          "id": "osat-twin",
+          "title_en": "OSAT Twin",
+          "title_zh": "封测孪生",
+          "status": "available",
+          "href": "twin-osat.html",
+          "scope_en": "Educational 3D twin of advanced packaging, wire bonding, molding, and high-speed ATE testing hall (teaching simulation).",
+          "scope_zh": "教学级 3D 仿真：先进封装、贴片键合、模塑与 ATE 终测厂房布局示意。"
+        },
+        {
+          "id": "layout-editor",
+          "title_en": "2D Layout Editor",
+          "title_zh": "二维布局编辑器",
+          "status": "available",
+          "href": "layout-editor.html",
+          "scope_en": "Interactive 2D architectural cleanroom bay planner with equipment snap grid and clearance checking.",
+          "scope_zh": "交互式二维洁净室 Bay 区与机台布局编辑器，支持对齐网格与间距校验。"
+        },
+        {
+          "id": "device-process-library",
+          "title_en": "Device Process Library",
+          "title_zh": "器件工艺库",
+          "status": "available",
+          "href": "finfet.html",
+          "links": ["finfet.html", "gaa.html", "dram.html", "nand.html", "hbm.html"],
+          "scope_en": "Step-by-step process flows for FinFET, GAAFET, DRAM (1T1C), 3D NAND, and HBM stacking.",
+          "scope_zh": "涵盖 FinFET、GAAFET、DRAM、3D NAND 与 HBM 堆叠的工序级工艺流程库。"
+        },
+        {
+          "id": "process-windows-maintenance",
+          "title_en": "Process Windows, Failure Modes & Maintenance",
+          "title_zh": "工艺窗口、失效模式与维护",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: process margin concepts, common tool failure mechanisms, preventive maintenance (PM) cycles, and recipe tuning concepts.",
+          "scope_zh": "计划中：将覆盖工艺窗口边界、常见设备失效机理、预防性维护(PM)周期与配方调校概念。"
+        }
+      ]
+    },
+    {
+      "id": "business-cost-people",
+      "title_en": "Business, Cost & People",
+      "title_zh": "经营、成本与人",
+      "description_en": "Capital expenditure economics, fab construction metrics, capacity scaling, supply chain, and engineering governance.",
+      "description_zh": "资本支出经济学、晶圆厂建设造价、产能节拍、供应链备件与工程管理。",
+      "topics": [
+        {
+          "id": "construction-cost-report",
+          "title_en": "Construction Cost Report",
+          "title_zh": "建设成本报告",
+          "status": "available",
+          "href": "fab-cost.html",
+          "scope_en": "Top-down research report on 300mm cleanroom and facilities infrastructure buildout costs.",
+          "scope_zh": "聚焦洁净室土建与厂务动力基础设施投入的自顶向下建设成本研究报告。"
+        },
+        {
+          "id": "capex-estimator",
+          "title_en": "Capex Estimator",
+          "title_zh": "总投资测算器",
+          "status": "available",
+          "href": "fab-capex.html",
+          "scope_en": "Bottom-up interactive tool capex model based on technology node, capacity (WSPM), and equipment BOM.",
+          "scope_zh": "基于工艺节点、月产能 (WSPM) 与设备配置清单的自底向上交互式资本支出测算器。"
+        },
+        {
+          "id": "capacity-planning-cost",
+          "title_en": "Capacity Planning & Cost per Wafer",
+          "title_zh": "产能规划与单片成本",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: throughput bottleneck analysis, cycle time calculations, and wafer unit cost decomposition concepts.",
+          "scope_zh": "计划中：将覆盖瓶颈工序节拍、晶圆周期时间 (Cycle Time) 与单片全生命周期成本核算概念。"
+        },
+        {
+          "id": "supply-chain-spares",
+          "title_en": "Supply Chain, Spares & Maintenance Management",
+          "title_zh": "供应链、备件与维护管理",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: consumable inventories (targets, slurries, precursors), high-wear spare parts, and SLA logistics concepts.",
+          "scope_zh": "计划中：将覆盖高耗耗材（靶材、研磨液、前驱体）、高频备件库存周转与服务保障概念。"
+        },
+        {
+          "id": "quality-training-workforce",
+          "title_en": "Quality Systems, Training & Workforce",
+          "title_zh": "质量体系、培训与人员",
+          "status": "planned",
+          "href": null,
+          "scope_en": "Planned: ISO/IATF automotive grade compliance, cleanroom gowning/SOP protocols, and technician role training.",
+          "scope_zh": "计划中：将覆盖汽车级质量体系、洁净室行为规范 SOP 与关键工艺人员培养机制。"
+        },
+        {
+          "id": "data-standard-verification",
+          "title_en": "Data Standard & Verification",
+          "title_zh": "数据标准与验证",
+          "status": "available",
+          "href": "data-standard.html",
+          "links": ["data-standard.html", "verification.html"],
+          "scope_en": "Open JSON Schema v1.0 specifications and multi-source engineering data provenance policies.",
+          "scope_zh": "开放 JSON Schema 设备规范标准与多源工程数据溯源可信度核验准则。"
+        }
+      ]
+    }
+  ]
+}

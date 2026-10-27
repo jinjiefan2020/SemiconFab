@@ -61,6 +61,8 @@
       hbmDesc: "3D TSV Stacking & Packaging",
       dataLayer: "Fab Data Layer",
       dataLayerDesc: "How fab data flows, layer by layer",
+      fabOperations: "Fab Operations",
+      fabOperationsDesc: "Map of fab operations topics",
 
       benchmark: "MIMAC-2026 Benchmark",
       benchmarkDesc: "Fab scheduling benchmark",
@@ -129,6 +131,8 @@
       hbmDesc: "3D TSV 硅通孔微凸块先进封装",
       dataLayer: "晶圆厂数据层",
       dataLayerDesc: "数据如何一层层流动",
+      fabOperations: "晶圆厂运营",
+      fabOperationsDesc: "Fab 运营话题地图",
 
       benchmark: "MIMAC-2026 调度基准",
       benchmarkDesc: "晶圆厂调度基准",
@@ -258,6 +262,7 @@
       "nand",
       "hbm",
       "fab-data-layer",
+      "fab-operations",
     ].includes(cur);
     const isResearchActive = ["benchmark", "vision"].includes(cur);
 
@@ -394,6 +399,10 @@
                   <span class="sc-dropdown-title">${t.dataLayer}</span>
                   <span class="sc-dropdown-desc">${t.dataLayerDesc}</span>
                 </a>
+                <a href="/fab-operations" class="sc-dropdown-item ${cur === "fab-operations" ? "active" : ""}">
+                  <span class="sc-dropdown-title">${t.fabOperations}</span>
+                  <span class="sc-dropdown-desc">${t.fabOperationsDesc}</span>
+                </a>
               </div>
             </div>
 
@@ -529,6 +538,9 @@
           </a>
           <a href="/fab-data-layer" class="sc-drawer-link ${cur === "fab-data-layer" ? "active" : ""}">
             <span>${t.dataLayer}</span>
+          </a>
+          <a href="/fab-operations" class="sc-drawer-link ${cur === "fab-operations" ? "active" : ""}">
+            <span>${t.fabOperations}</span>
           </a>
         </div>
 

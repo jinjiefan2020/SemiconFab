@@ -4,6 +4,25 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ## [Unreleased]
 
+### Fab Operations (晶圆厂运营总览) Architecture Hub & Operational Topic Map
+
+- **New Standalone Hub Page (`fab-operations.html`)**:
+  - Independent overview hub organizing existing SemiconFab modules and planned operational domains into one unified visual map.
+  - Zero 3D/Three.js dependencies: pure vanilla JS and responsive SVG styled strictly with Nature/FT editorial design tokens (`css/semicon-theme.css`).
+  - Permanent bilingual honest banner (non-dismissible): "教学总览，非真实工厂 · Teaching overview, not a real fab", "已上线与计划中严格区分 · Available and Planned are strictly separated", "未连接任何真实设备 · No live equipment connection".
+  - Three navigation perspectives with in-page smooth anchor jumps: By Wafer Journey (`#view-journey`), By Architecture & Layers (`#view-layers`), and By Engineering Role (`#view-roles`).
+  - High-level architecture map (SVG schematic) depicting physical wafer processing flow (Wafer In → Litho/Etch/Dep/CMP/Metrology loop → OSAT → Out) supported by 4 architectural tiers, complete with an accessible full text node inventory.
+  - 4 Topic Groups (Operations Core, Facility & Environment, Process & Equipment, Business & People) with strict binary status badges (Available linking to real verified files / Planned non-clickable cards with `#contribute` jump).
+  - Cross-flow synthesis explaining Material, Data, and Decision flows, contextualizing shop-floor connectivity without claiming live integration.
+  - Educator & Contributor section (`#contribute`) and 5-point bilingual FAQ clarifying pedagogical scope, Planned topic rationale, zero-sponsorship stance, classroom application, and data provenance.
+- **Dedicated Machine-Readable Index (`data/fab-operations.json`)**:
+  - Structured index maintaining 4 topic groups, bilingual titles, strict binary status flags, real verified href targets, and scope descriptions.
+- **Site-Wide Discoverability & Navigation**:
+  - **`js/site-nav.js`**: Added "Fab Operations" under the Learn dropdown and mobile drawer with bilingual en/zh support (`fabOperations` / `fabOperationsDesc`).
+  - **`index.html`**: Added dedicated `glass-card` in the primary capability grid placed after the Fab Data Layer card with `odr_fabops_*` localization keys.
+  - **`sitemap.xml`**: Added canonical URL entry `https://semiconfab.org/fab-operations`.
+  - **`README.md`**: Added single bullet pointing to the new operations overview.
+
 ### SEO & URL Redirection Harmonization (Google Search Console Fix)
 
 - **Canonical URL Standardization**: Standardized all content pages to use clean canonical URLs without `.html` extensions or query parameters. Corrected canonical tags on `finfet`, `gaa`, `dram`, `nand`, `hbm`, and `guide`; added missing canonical tags to `compare`, `add-equipment`, `catalog-demo`, `benchmark`, `data-standard`, `verification`, `fab-capex`, `twin-osat`, and `twin-mega`.
