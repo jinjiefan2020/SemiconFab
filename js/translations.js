@@ -182,99 +182,211 @@ const I18N_DICTIONARY = {
     odr_fabops_cta: "Explore the Map →",
 
     // Fab Operations Overview Hub Keys (fab-operations.html)
-    fab_operations_page_title: "Fab Operations · Operational Topic Map — SemiconFab.org",
+    fab_operations_page_title:
+      "Fab Operations · Operational Topic Map — SemiconFab.org",
     fab_operations_hero_badge: "TOPIC MAP · TEACHING OVERVIEW",
     fab_operations_hero_title: "Fab Operations Overview",
-    fab_operations_hero_subtitle: "One map for fab operations: what exists, what is planned, and where to start — as a teaching overview.",
+    fab_operations_hero_subtitle:
+      "One map for fab operations: what exists, what is planned, and where to start — as a teaching overview.",
     fab_operations_banner_1: "Teaching overview, not a real fab",
     fab_operations_banner_2: "Available and Planned are strictly separated",
     fab_operations_banner_3: "No live equipment connection",
     fab_operations_usage_title: "How to Use This Map",
-    fab_operations_usage_subtitle: "Navigate fab operations through three different lenses based on your focus and engineering background.",
+    fab_operations_usage_subtitle:
+      "Navigate fab operations through three different lenses based on your focus and engineering background.",
     fab_operations_btn_journey: "By Wafer Journey",
     fab_operations_btn_layers: "By Architecture & Layers",
     fab_operations_btn_roles: "By Engineering Role",
     fab_operations_journey_title: "Perspective 1: By Wafer Journey",
-    fab_operations_journey_desc: "Follow the sequential physical journey of silicon: from raw wafer arrival at docking, through hundreds of cyclic frontend processing loops, to OSAT packaging, testing, and final module shipment.",
+    fab_operations_journey_desc:
+      "Follow the sequential physical journey of silicon: from raw wafer arrival at docking, through hundreds of cyclic frontend processing loops, to OSAT packaging, testing, and final module shipment.",
     fab_operations_layers_title: "Perspective 2: By Architecture & Layers",
-    fab_operations_layers_desc: "Inspect operations by functional architectural tiers: Operations Core (execution, data, scheduling), Facility & Utilities, Process & Equipment, and Business & People.",
+    fab_operations_layers_desc:
+      "Inspect operations by functional architectural tiers: Operations Core (execution, data, scheduling), Facility & Utilities, Process & Equipment, and Business & People.",
     fab_operations_roles_title: "Perspective 3: By Engineering Role",
-    fab_operations_roles_desc: "Recommended entry points tailored by user role:",
-    fab_operations_role_student: "Student: Start with 300mm Fab Twin and Device Process Library.",
-    fab_operations_role_engineer: "Engineer: Check Fab Data Layer and MIMAC-2026 Scheduling Benchmark.",
-    fab_operations_role_educator: "Educator: Use the visual architecture map and material/data/decision flows for classroom lectures.",
-    fab_operations_role_planner: "Planner: Start with the Construction Cost Report and Capex Estimator.",
+    fab_operations_roles_desc:
+      "Recommended entry points tailored by user role:",
+    fab_operations_role_student:
+      "Student: Start with 300mm Fab Twin and Device Process Library.",
+    fab_operations_role_engineer:
+      "Engineer: Check Fab Data Layer and MIMAC-2026 Scheduling Benchmark.",
+    fab_operations_role_educator:
+      "Educator: Use the visual architecture map and material/data/decision flows for classroom lectures.",
+    fab_operations_role_planner:
+      "Planner: Start with the Construction Cost Report and Capex Estimator.",
     fab_operations_map_title: "Fab Operations Architecture Map",
-    fab_operations_map_subtitle: "A high-level synthesis of physical wafer progression and multi-tier supporting operational infrastructure.",
-    fab_operations_map_text_title: "Map Node Text Inventory (Accessible Alternative)",
+    fab_operations_map_subtitle:
+      "A high-level synthesis of physical wafer progression and multi-tier supporting operational infrastructure.",
+    fab_operations_map_text_title:
+      "Map Node Text Inventory (Accessible Alternative)",
     fab_operations_group_a_title: "Operations Core",
-    fab_operations_group_a_desc: "Core execution, data, scheduling, and control systems governing wafer fab production.",
+    fab_operations_group_a_desc:
+      "Core execution, data, scheduling, and control systems governing wafer fab production.",
     fab_operations_group_b_title: "Facility & Environment",
-    fab_operations_group_b_desc: "Cleanroom envelope, ultra-pure media, environmental stability, and subfab utility supply. (Note: 3D Twin subfab/MEP view is conceptual geometry.)",
+    fab_operations_group_b_desc:
+      "Cleanroom envelope, ultra-pure media, environmental stability, and subfab utility supply. (Note: 3D Twin subfab/MEP view is conceptual geometry.)",
     fab_operations_group_c_title: "Process & Equipment",
-    fab_operations_group_c_desc: "Manufacturing equipment catalog, 3D twins, 2D architectural planner, and device transistor process flows.",
+    fab_operations_group_c_desc:
+      "Manufacturing equipment catalog, 3D twins, 2D architectural planner, and device transistor process flows.",
     fab_operations_group_d_title: "Business, Cost & People",
-    fab_operations_group_d_desc: "Capital expenditure economics, fab construction metrics, capacity scaling, supply chain, and engineering governance.",
+    fab_operations_group_d_desc:
+      "Capital expenditure economics, fab construction metrics, capacity scaling, supply chain, and engineering governance.",
     fab_operations_badge_available: "Available",
     fab_operations_badge_planned: "Planned",
     fab_operations_btn_explore: "Explore Module →",
     fab_operations_btn_propose: "Propose this topic →",
     fab_operations_conn_title: "How Operations Topics Connect",
-    fab_operations_conn_subtitle: "Understanding the shop floor requires looking across three concurrent lifelines: materials, data, and decisions.",
-    fab_operations_flow_material_title: "1. Material Flow (Physical Wafer & FOUP Handling)",
-    fab_operations_flow_material_desc: "Bare silicon wafers enter docking bays, are sealed inside Front Opening Unified Pods (FOUPs), and transfer via Automated Material Handling Systems (AMHS / OHT overhead hoists) across cleanroom bays. Batches undergo hundreds of repetitive deposition, lithography, etch, and CMP passes before passing to OSAT dicing, packaging, and final testing. (Teaching overview; material flows in the 3D twin are illustrative.)",
-    fab_operations_flow_data_title: "2. Data Flow (Tool Telemetry, Connectivity & MES)",
-    fab_operations_flow_data_desc: "Each processing tool produces millions of real-time sensor parameters, state triggers, and metrology points. Standardized SEMI SECS/GEM, GEM300, and EDA/Interface A pipelines stream these signals through Equipment Automation Programs (EAP) into MES and yield management systems. For a detailed breakdown, see the dedicated <a href=\"fab-data-layer.html\" class=\"sc-inline-link\">Fab Data Layer</a>.",
-    fab_operations_flow_decision_title: "3. Decision Flow (Dispatching, Control & Economics)",
-    fab_operations_flow_decision_desc: "Real-time dispatching and scheduling engines balance WIP queues against machine availability, preventive maintenance windows, and customer priority constraints. Run-to-run (APC) algorithms calculate recipe feedback corrections, while planners evaluate total tool capex and cycle time. For scheduling simulation algorithms, explore the <a href=\"benchmark.html\" class=\"sc-inline-link\">MIMAC-2026 Scheduling Benchmark</a>.",
-    fab_operations_flow_disclaimer: "Disclaimer: In this teaching overview, material, data, and decision flows are explained conceptually. There is no live equipment connection or production synchronization.",
+    fab_operations_conn_subtitle:
+      "Understanding the shop floor requires looking across three concurrent lifelines: materials, data, and decisions.",
+    fab_operations_flow_material_title:
+      "1. Material Flow (Physical Wafer & FOUP Handling)",
+    fab_operations_flow_material_desc:
+      "Bare silicon wafers enter docking bays, are sealed inside Front Opening Unified Pods (FOUPs), and transfer via Automated Material Handling Systems (AMHS / OHT overhead hoists) across cleanroom bays. Batches undergo hundreds of repetitive deposition, lithography, etch, and CMP passes before passing to OSAT dicing, packaging, and final testing. (Teaching overview; material flows in the 3D twin are illustrative.)",
+    fab_operations_flow_data_title:
+      "2. Data Flow (Tool Telemetry, Connectivity & MES)",
+    fab_operations_flow_data_desc:
+      'Each processing tool produces millions of real-time sensor parameters, state triggers, and metrology points. Standardized SEMI SECS/GEM, GEM300, and EDA/Interface A pipelines stream these signals through Equipment Automation Programs (EAP) into MES and yield management systems. For a detailed breakdown, see the dedicated <a href="fab-data-layer.html" class="sc-inline-link">Fab Data Layer</a>.',
+    fab_operations_flow_decision_title:
+      "3. Decision Flow (Dispatching, Control & Economics)",
+    fab_operations_flow_decision_desc:
+      'Real-time dispatching and scheduling engines balance WIP queues against machine availability, preventive maintenance windows, and customer priority constraints. Run-to-run (APC) algorithms calculate recipe feedback corrections, while planners evaluate total tool capex and cycle time. For scheduling simulation algorithms, explore the <a href="benchmark.html" class="sc-inline-link">MIMAC-2026 Scheduling Benchmark</a>.',
+    fab_operations_flow_disclaimer:
+      "Disclaimer: In this teaching overview, material, data, and decision flows are explained conceptually. There is no live equipment connection or production synchronization.",
     fab_operations_contribute_title: "For Educators & Community Contributors",
-    fab_operations_contribute_desc: "SemiconFab is an open, source-available initiative created for education and research. No registration, no tracking, and zero commercial subscriptions required.",
-    fab_operations_contribute_edu: "Educators: You are welcome to use this hub directly on projectors as a curriculum guide and system engineering map.",
-    fab_operations_contribute_prop: "Proposing Topics or Corrections: Submit issues or Pull Requests via our GitHub repository, or email info@semiconfab.org. Submissions are reviewed manually by maintainers with no timeline commitments. No external form or backend service is used.",
+    fab_operations_contribute_desc:
+      "SemiconFab is an open, source-available initiative created for education and research. No registration, no tracking, and zero commercial subscriptions required.",
+    fab_operations_contribute_edu:
+      "Educators: You are welcome to use this hub directly on projectors as a curriculum guide and system engineering map.",
+    fab_operations_contribute_prop:
+      "Proposing Topics or Corrections: Submit issues or Pull Requests via our GitHub repository, or email info@semiconfab.org. Submissions are reviewed manually by maintainers with no timeline commitments. No external form or backend service is used.",
     fab_operations_faq_title: "Frequently Asked Questions",
     fab_operations_faq_q1: "Is this a digital twin of an actual operating fab?",
-    fab_operations_faq_a1: "No. This is an educational synthesis model created by the SemiconFab initiative. It illustrates the holistic structure of wafer manufacturing and facility engineering, but has no live connection to any commercial fab and does not represent proprietary fab operating data.",
+    fab_operations_faq_a1:
+      "No. This is an educational synthesis model created by the SemiconFab initiative. It illustrates the holistic structure of wafer manufacturing and facility engineering, but has no live connection to any commercial fab and does not represent proprietary fab operating data.",
     fab_operations_faq_q2: "Why are some topics marked as Planned?",
-    fab_operations_faq_a2: "To prevent dead links and fabricated content. SemiconFab strictly distinguishes between what has already been built and what is currently planned. Planned topics only define their intended engineering scope without pretending to have live content or pointing to non-existent pages.",
-    fab_operations_faq_q3: "Will commercial sponsorships affect topic ranking or objectivity?",
-    fab_operations_faq_a3: "No. This hub page permanently contains no sponsor banners, no vendor logos, and no commercial endorsements. If future dedicated technical topics receive non-commercial sponsorship, it will follow explicit disclosure guidelines without altering topic hierarchy, ranking, or objectivity.",
-    fab_operations_faq_q4: "How can university instructors use this page in class?",
-    fab_operations_faq_a4: "Instructors can use this page as a structured syllabus companion for semiconductor manufacturing, industrial engineering, or microelectronics courses. Walk students through the Wafer Journey, dive into Facility & Utility systems, explore the Data Layer, or assign scheduling experiments on the benchmark fab.",
-    fab_operations_faq_q5: "Where can data sources and technical credibility be verified?",
-    fab_operations_faq_a5: "SemiconFab operates under explicit engineering standards and open data policies. Please review our <a href=\"data-standard.html\" class=\"sc-inline-link\">Data Standard</a> for open JSON schemas and our <a href=\"verification.html\" class=\"sc-inline-link\">Verification Policy</a> for multi-source provenance grading criteria.",
+    fab_operations_faq_a2:
+      "To prevent dead links and fabricated content. SemiconFab strictly distinguishes between what has already been built and what is currently planned. Planned topics only define their intended engineering scope without pretending to have live content or pointing to non-existent pages.",
+    fab_operations_faq_q3:
+      "Will commercial sponsorships affect topic ranking or objectivity?",
+    fab_operations_faq_a3:
+      "No. This hub page permanently contains no sponsor banners, no vendor logos, and no commercial endorsements. If future dedicated technical topics receive non-commercial sponsorship, it will follow explicit disclosure guidelines without altering topic hierarchy, ranking, or objectivity.",
+    fab_operations_faq_q4:
+      "How can university instructors use this page in class?",
+    fab_operations_faq_a4:
+      "Instructors can use this page as a structured syllabus companion for semiconductor manufacturing, industrial engineering, or microelectronics courses. Walk students through the Wafer Journey, dive into Facility & Utility systems, explore the Data Layer, or assign scheduling experiments on the benchmark fab.",
+    fab_operations_faq_q5:
+      "Where can data sources and technical credibility be verified?",
+    fab_operations_faq_a5:
+      'SemiconFab operates under explicit engineering standards and open data policies. Please review our <a href="data-standard.html" class="sc-inline-link">Data Standard</a> for open JSON schemas and our <a href="verification.html" class="sc-inline-link">Verification Policy</a> for multi-source provenance grading criteria.',
 
     // MES & Dispatch Topic Explainer Keys (fab-mes.html)
     fab_mes_page_title: "MES 与派工调度 · MES & Dispatch — SemiconFab.org",
     fab_mes_hero_badge: "TOPIC EXPLAINER · OPERATIONS CORE",
     fab_mes_hero_title: "MES & Dispatch: How a Wafer Fab Runs",
-    fab_mes_hero_subtitle: "What MES actually does: route, queue, dispatch, execute, track, and hold a lot — as a teaching model.",
-    fab_mes_banner_1: "教学讲解，非真实 MES · Teaching explainer, not a real MES",
+    fab_mes_hero_subtitle:
+      "What MES actually does: route, queue, dispatch, execute, track, and hold a lot — as a teaching model.",
+    fab_mes_banner_1:
+      "教学讲解，非真实 MES · Teaching explainer, not a real MES",
     fab_mes_banner_2: "Lot 与数字均为示意 · Lots and numbers are illustrative",
     fab_mes_banner_3: "未连接任何真实工厂 · No live fab connection",
     fab_mes_what_title: "What MES Is — and What It Is Not",
-    fab_mes_what_subtitle: "Clear architectural boundaries between shop-floor execution and neighboring enterprise systems.",
+    fab_mes_what_subtitle:
+      "Clear architectural boundaries between shop-floor execution and neighboring enterprise systems.",
     fab_mes_core_title: "The 8 Core Functions of MES",
-    fab_mes_core_subtitle: "Standard SEMI & ISA-95 manufacturing execution capabilities governing wafer production.",
+    fab_mes_core_subtitle:
+      "Standard SEMI & ISA-95 manufacturing execution capabilities governing wafer production.",
     fab_mes_toy_title: "Toy Dispatching Demo: How Rules Shape Cycle Time",
-    fab_mes_toy_subtitle: "Compare 4 fundamental dispatching heuristics on 5 illustrative lots to develop queuing intuition.",
+    fab_mes_toy_subtitle:
+      "Compare 4 fundamental dispatching heuristics on 5 illustrative lots to develop queuing intuition.",
     fab_mes_journey_title: "Journey of a Wafer Lot Through MES",
-    fab_mes_journey_subtitle: "Step-by-step progression of a physical FOUP carrier through routing, execution, and release gates.",
+    fab_mes_journey_subtitle:
+      "Step-by-step progression of a physical FOUP carrier through routing, execution, and release gates.",
     fab_mes_faults_title: "Real-World Exceptions: When Things Go Wrong",
-    fab_mes_faults_subtitle: "How automated interlocks and rule-based safety mechanisms handle mismatch, tool breakdown, and out-of-spec wafers.",
+    fab_mes_faults_subtitle:
+      "How automated interlocks and rule-based safety mechanisms handle mismatch, tool breakdown, and out-of-spec wafers.",
     fab_mes_neighbors_title: "MES & Neighboring Systems",
-    fab_mes_neighbors_subtitle: "Clear functional demarcation: who produces orders, who moves physical carriers, and who analyzes root causes.",
+    fab_mes_neighbors_subtitle:
+      "Clear functional demarcation: who produces orders, who moves physical carriers, and who analyzes root causes.",
     fab_mes_vendors_title: "Representative MES Vendors",
-    fab_mes_vendors_subtitle: "Commercial manufacturing software solutions deployed across semiconductor facilities.",
-    fab_mes_vendors_disclaimer: "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
-    fab_mes_vendors_afterword: "大型工厂常在商用 MES 基础上做大量定制与自研扩展，商用产品名不等于某家工厂实际在用的系统。Large manufacturers frequently implement extensive proprietary extensions on top of commercial platforms; commercial names do not imply the exact system utilized in any specific facility.",
+    fab_mes_vendors_subtitle:
+      "Commercial manufacturing software solutions deployed across semiconductor facilities.",
+    fab_mes_vendors_disclaimer:
+      "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+    fab_mes_vendors_afterword:
+      "大型工厂常在商用 MES 基础上做大量定制与自研扩展，商用产品名不等于某家工厂实际在用的系统。Large manufacturers frequently implement extensive proprietary extensions on top of commercial platforms; commercial names do not imply the exact system utilized in any specific facility.",
     fab_mes_glossary_title: "Glossary of MES & Dispatching Terms",
-    fab_mes_glossary_subtitle: "Essential terminology for semiconductor manufacturing execution and cleanroom logistics.",
+    fab_mes_glossary_subtitle:
+      "Essential terminology for semiconductor manufacturing execution and cleanroom logistics.",
     fab_mes_text_ver_title: "Complete Accessible Text Edition",
-    fab_mes_text_ver_subtitle: "Full static reference of core functions, lot journey, dispatching results, and architecture without animations or interactive JavaScript.",
+    fab_mes_text_ver_subtitle:
+      "Full static reference of core functions, lot journey, dispatching results, and architecture without animations or interactive JavaScript.",
     fab_mes_quiz_title: "Interactive Knowledge Check",
-    fab_mes_quiz_subtitle: "Three conceptual questions to verify your understanding of MES boundaries, dispatch heuristics, and hold gates.",
+    fab_mes_quiz_subtitle:
+      "Three conceptual questions to verify your understanding of MES boundaries, dispatch heuristics, and hold gates.",
     fab_mes_back_hub: "← Back to Fab Operations Hub",
+
+    // APC, FDC, SPC, Metrology & Yield Explainer Keys
+    fab_apc_page_title:
+      "APC / FDC / SPC 与良率、量测与缺陷分析 · APC, Yield & Metrology — SemiconFab.org",
+    fab_apc_hero_badge: "TOPIC EXPLAINER · OPERATIONS CORE",
+    fab_apc_hero_title: "APC, Yield & Metrology: The Fab Control Loop",
+    fab_apc_hero_subtitle:
+      "How a fab watches, controls, measures, and explains yield: SPC, FDC, APC, metrology, and defect analysis — as a teaching model.",
+    fab_apc_banner_1:
+      "教学讲解，非真实 APC / 良率系统 · Teaching explainer, not a real APC / yield system",
+    fab_apc_banner_2:
+      "数据、Trace、缺陷计数均为示意 · Data, traces, and defect counts are illustrative",
+    fab_apc_banner_3: "未连接任何真实工厂 · No live fab connection",
+    fab_apc_concepts_title:
+      "Six Core Concepts: Distinguishing Roles & Boundaries",
+    fab_apc_concepts_subtitle:
+      "Clear demarcation between statistical monitoring, equipment fault detection, run-to-run parameter tuning, dimensional verification, defect attribution, and yield aggregation.",
+    fab_apc_loop_title:
+      "The Engineering Closed Loop: From Tool Execution to Yield Analytics",
+    fab_apc_loop_subtitle:
+      "Step-by-step causal flow: sensor telemetry through FDC/SPC, APC recipe adjustments, metrology verification, defect Pareto analysis, and MES lot disposition.",
+    fab_apc_spc_title:
+      "Interactive SPC: Baseline Calculation, Drift & Nelson Rules",
+    fab_apc_spc_subtitle:
+      "Observe how control limits are strictly derived from the stable baseline segment (Mean ± 3σ), and verify how trend drifts and single-point outliers trigger simplified Nelson rules.",
+    fab_apc_fdc_title:
+      "Interactive FDC: In-Situ Sensor Deviation & Alarm Interlock",
+    fab_apc_fdc_subtitle:
+      "Compare nominal chamber pressure traces against faulty deviations to understand how consecutive-point persistence triggers tool health alarms.",
+    fab_apc_r2r_title:
+      "Interactive APC Run-to-Run: Proportional Recipe Feedback",
+    fab_apc_r2r_subtitle:
+      "Adjust post-etch critical dimension (CD) measurements to observe how proportional feedback updates the recipe setpoint for the next incoming lot.",
+    fab_apc_metrology_title:
+      "Inline Metrology & Inspection Types: Scope & Trade-offs",
+    fab_apc_metrology_subtitle:
+      "What each technique physically measures, when it is scheduled in the process flow, and its physical/throughput constraints.",
+    fab_apc_pareto_title: "Defect Pareto & Wafer Map: Directional Signatures",
+    fab_apc_pareto_subtitle:
+      "Explore the 80/20 distribution of defect categories and click to inspect corresponding wafer surface signature patterns.",
+    fab_apc_yield_title: "Yield Waterfall Structure: Additive Loss Accounting",
+    fab_apc_yield_subtitle:
+      "An illustrative arithmetic walkthrough showing how wafer starts progress through process scrap, defect losses, and hold rejections to final output.",
+    fab_apc_neighbors_title: "Neighboring Fab Systems: Handshakes & Boundaries",
+    fab_apc_neighbors_subtitle:
+      "How APC, FDC, and metrology integrate with MES, connectivity conduits, equipment PLCs, and enterprise yield management.",
+    fab_apc_vendors_title: "Representative Vendor Landscape",
+    fab_apc_vendors_subtitle:
+      "Commercial process control software platforms and inline metrology equipment manufacturers.",
+    fab_apc_vendors_disclaimer:
+      "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+    fab_apc_vendors_afterword:
+      "厂商名不等于某家工厂实际在用的系统，同一厂商可横跨多个类别。Vendor names do not imply actual deployment in any specific fab; individual vendors often span multiple functional categories.",
+    fab_apc_glossary_title: "Glossary of APC, Yield & Metrology Terms",
+    fab_apc_glossary_subtitle:
+      "Essential terminology for process control, equipment health monitoring, and defect analysis.",
+    fab_apc_text_ver_title: "Complete Accessible Text Edition",
+    fab_apc_text_ver_subtitle:
+      "Full static reference of the closed loop, SPC baseline values, FDC rules, APC worked example, Pareto counts, and yield waterfall without JavaScript.",
+    fab_apc_quiz_title: "Interactive Knowledge Check",
+    fab_apc_quiz_subtitle:
+      "Three conceptual questions to verify your understanding of SPC vs FDC, APC feedback/feedforward, and wafer map interpretation.",
+    fab_apc_back_hub: "← Back to Fab Operations Hub",
     twin_data_layer_link:
       "See how this tool's data flows to the fab → Fab Data Layer",
 
@@ -1327,99 +1439,201 @@ const I18N_DICTIONARY = {
     odr_fabops_cta: "进入总览 →",
 
     // Fab Operations Overview Hub Keys (fab-operations.html)
-    fab_operations_page_title: "晶圆厂运营总览 · Fab Operations — SemiconFab.org",
+    fab_operations_page_title:
+      "晶圆厂运营总览 · Fab Operations — SemiconFab.org",
     fab_operations_hero_badge: "话题地图 · 教学总览",
     fab_operations_hero_title: "晶圆厂运营总览",
-    fab_operations_hero_subtitle: "一张晶圆厂运营的地图：哪些已经可以看，哪些还在计划中，从哪里开始——这是一个教学总览。",
-    fab_operations_banner_1: "教学总览，非真实工厂 · Teaching overview, not a real fab",
-    fab_operations_banner_2: "已上线与计划中严格区分 · Available and Planned are strictly separated",
-    fab_operations_banner_3: "未连接任何真实设备 · No live equipment connection",
+    fab_operations_hero_subtitle:
+      "一张晶圆厂运营的地图：哪些已经可以看，哪些还在计划中，从哪里开始——这是一个教学总览。",
+    fab_operations_banner_1:
+      "教学总览，非真实工厂 · Teaching overview, not a real fab",
+    fab_operations_banner_2:
+      "已上线与计划中严格区分 · Available and Planned are strictly separated",
+    fab_operations_banner_3:
+      "未连接任何真实设备 · No live equipment connection",
     fab_operations_usage_title: "本页的三种用法",
-    fab_operations_usage_subtitle: "根据您的专业背景与探索重点，选择不同视角浏览晶圆厂运营体系。",
+    fab_operations_usage_subtitle:
+      "根据您的专业背景与探索重点，选择不同视角浏览晶圆厂运营体系。",
     fab_operations_btn_journey: "按晶圆旅程看",
     fab_operations_btn_layers: "按层查",
     fab_operations_btn_roles: "按角色用",
     fab_operations_journey_title: "视角一：按晶圆物理旅程浏览",
-    fab_operations_journey_desc: "跟随硅片的物理时序流动：从裸硅片进厂接收，经过数百道循环往复的前道工艺加工（光刻、刻蚀、沉积、CMP、量测），到后道 OSAT 封测厂房与成品芯片出厂。",
+    fab_operations_journey_desc:
+      "跟随硅片的物理时序流动：从裸硅片进厂接收，经过数百道循环往复的前道工艺加工（光刻、刻蚀、沉积、CMP、量测），到后道 OSAT 封测厂房与成品芯片出厂。",
     fab_operations_layers_title: "视角二：按系统工程层级检视",
-    fab_operations_layers_desc: "按四大多维工程支撑带分解：运营核心（调度、执行与控制）、厂务与环境公用工程、工艺与制造设备、经营成本与人员治理。",
+    fab_operations_layers_desc:
+      "按四大多维工程支撑带分解：运营核心（调度、执行与控制）、厂务与环境公用工程、工艺与制造设备、经营成本与人员治理。",
     fab_operations_roles_title: "视角三：按工程专业角色进入",
     fab_operations_roles_desc: "面向不同专业背景的建议学习入口：",
-    fab_operations_role_student: "学生：推荐先看 300mm 晶圆厂孪生与器件工艺库，直观建立制造认知。",
-    fab_operations_role_engineer: "工程师：推荐先看晶圆厂数据层与 MIMAC-2026 调度基准，理解底层协议与算法。",
-    fab_operations_role_educator: "教师：直接利用总图与物料/数据/决策三条流开展课堂教学与课程设计。",
-    fab_operations_role_planner: "规划者：推荐先看建设成本报告与总投资测算器，掌握资本支出构成。",
+    fab_operations_role_student:
+      "学生：推荐先看 300mm 晶圆厂孪生与器件工艺库，直观建立制造认知。",
+    fab_operations_role_engineer:
+      "工程师：推荐先看晶圆厂数据层与 MIMAC-2026 调度基准，理解底层协议与算法。",
+    fab_operations_role_educator:
+      "教师：直接利用总图与物料/数据/决策三条流开展课堂教学与课程设计。",
+    fab_operations_role_planner:
+      "规划者：推荐先看建设成本报告与总投资测算器，掌握资本支出构成。",
     fab_operations_map_title: "晶圆厂运营全景图",
-    fab_operations_map_subtitle: "物理制造主线与多维运营支撑体系的顶层架构示意。",
+    fab_operations_map_subtitle:
+      "物理制造主线与多维运营支撑体系的顶层架构示意。",
     fab_operations_map_text_title: "全景图文字版节点清单（无障碍完整呈现）",
     fab_operations_group_a_title: "运营核心 Operations Core",
-    fab_operations_group_a_desc: "调度、执行、数据与良率控制等驱动晶圆厂运转的核心运营系统。",
+    fab_operations_group_a_desc:
+      "调度、执行、数据与良率控制等驱动晶圆厂运转的核心运营系统。",
     fab_operations_group_b_title: "厂务与环境 Facility & Environment",
-    fab_operations_group_b_desc: "洁净室围护、超纯介质、环境稳定性与次层动力系统公用工程。（注：3D Twin 次层与 MEP 管线为几何空间示意，非厂务话题页。）",
+    fab_operations_group_b_desc:
+      "洁净室围护、超纯介质、环境稳定性与次层动力系统公用工程。（注：3D Twin 次层与 MEP 管线为几何空间示意，非厂务话题页。）",
     fab_operations_group_c_title: "工艺与设备 Process & Equipment",
-    fab_operations_group_c_desc: "制造设备数据库、3D数字孪生模型、2D厂房规划器与晶体管制造工序库。",
+    fab_operations_group_c_desc:
+      "制造设备数据库、3D数字孪生模型、2D厂房规划器与晶体管制造工序库。",
     fab_operations_group_d_title: "经营、成本与人 Business, Cost & People",
-    fab_operations_group_d_desc: "资本支出经济学、晶圆厂建设造价、产能节拍、供应链备件与工程管理。",
+    fab_operations_group_d_desc:
+      "资本支出经济学、晶圆厂建设造价、产能节拍、供应链备件与工程管理。",
     fab_operations_badge_available: "可用",
     fab_operations_badge_planned: "计划中",
     fab_operations_btn_explore: "进入模块 →",
     fab_operations_btn_propose: "提议此话题 →",
     fab_operations_conn_title: "运营话题之间如何贯通",
-    fab_operations_conn_subtitle: "理解晶圆厂运营需要统揽三条并行的生命线：物料流、数据流与决策流。",
+    fab_operations_conn_subtitle:
+      "理解晶圆厂运营需要统揽三条并行的生命线：物料流、数据流与决策流。",
     fab_operations_flow_material_title: "1. 物料流（物理晶圆与晶圆盒搬运）",
-    fab_operations_flow_material_desc: "裸硅片入库拆包后装入前开门晶圆盒（FOUP），由空中天车搬运系统（AMHS / OHT）在洁净室各 Bay 区工步机台间高效周转。批次历经数百次薄膜沉积、光刻曝光、等离子刻蚀和化学机械平坦化，最后进入 OSAT 封装测试。（教学总览示意；3D 孪生中的搬运为动态几何演示。）",
+    fab_operations_flow_material_desc:
+      "裸硅片入库拆包后装入前开门晶圆盒（FOUP），由空中天车搬运系统（AMHS / OHT）在洁净室各 Bay 区工步机台间高效周转。批次历经数百次薄膜沉积、光刻曝光、等离子刻蚀和化学机械平坦化，最后进入 OSAT 封装测试。（教学总览示意；3D 孪生中的搬运为动态几何演示。）",
     fab_operations_flow_data_title: "2. 数据流（机台遥测、工业互联与 MES）",
-    fab_operations_flow_data_desc: "每台工艺机台配备数百个高频传感器。符合 SEMI SECS/GEM、GEM300 与 EDA/Interface A 标准的接口将状态数据与参数采集至机台自动化程序（EAP），并向制造执行系统（MES）实时记账。详细工序数据流向请参阅已上线的 <a href=\"fab-data-layer.html\" class=\"sc-inline-link\">晶圆厂数据层</a>。",
-    fab_operations_flow_decision_title: "3. 决策流（派工排产、闭环控制与经营核算）",
-    fab_operations_flow_decision_desc: "车间实时排产调度引擎根据各机台排队深度、维护计划和产品订单动态调整派工指令。高级过程控制（APC / R2R）在批次间下发工艺配方微调补偿，工厂管理者同时根据机台综合利用率（OEE）与单片成本优化排产。调度模拟算法请参阅 <a href=\"benchmark.html\" class=\"sc-inline-link\">MIMAC-2026 调度基准</a>。",
-    fab_operations_flow_disclaimer: "提示：本教学总览中的物料、数据与决策流均为原理与工程逻辑说明，未连接真实生产设备，与商业工厂无实时同步。",
+    fab_operations_flow_data_desc:
+      '每台工艺机台配备数百个高频传感器。符合 SEMI SECS/GEM、GEM300 与 EDA/Interface A 标准的接口将状态数据与参数采集至机台自动化程序（EAP），并向制造执行系统（MES）实时记账。详细工序数据流向请参阅已上线的 <a href="fab-data-layer.html" class="sc-inline-link">晶圆厂数据层</a>。',
+    fab_operations_flow_decision_title:
+      "3. 决策流（派工排产、闭环控制与经营核算）",
+    fab_operations_flow_decision_desc:
+      '车间实时排产调度引擎根据各机台排队深度、维护计划和产品订单动态调整派工指令。高级过程控制（APC / R2R）在批次间下发工艺配方微调补偿，工厂管理者同时根据机台综合利用率（OEE）与单片成本优化排产。调度模拟算法请参阅 <a href="benchmark.html" class="sc-inline-link">MIMAC-2026 调度基准</a>。',
+    fab_operations_flow_disclaimer:
+      "提示：本教学总览中的物料、数据与决策流均为原理与工程逻辑说明，未连接真实生产设备，与商业工厂无实时同步。",
     fab_operations_contribute_title: "给教师与社区贡献者",
-    fab_operations_contribute_desc: "SemiconFab 是一项旨在促进工程教育与学术研究的开放数字孪生倡议。全站免注册、无追踪、无需商业订阅。",
-    fab_operations_contribute_edu: "教师教学：非常欢迎大学教师与培训讲师在投影大屏上直接将本页作为教学导航地图或研讨课大纲。",
-    fab_operations_contribute_prop: "提议话题与修正：欢迎通过 GitHub 仓库提交 Issue / Pull Request，或发送邮件至 info@semiconfab.org。所有提议均由维护团队人工工程复核，不承诺采纳或处理时限。全站不设动态表单或后端服务。",
+    fab_operations_contribute_desc:
+      "SemiconFab 是一项旨在促进工程教育与学术研究的开放数字孪生倡议。全站免注册、无追踪、无需商业订阅。",
+    fab_operations_contribute_edu:
+      "教师教学：非常欢迎大学教师与培训讲师在投影大屏上直接将本页作为教学导航地图或研讨课大纲。",
+    fab_operations_contribute_prop:
+      "提议话题与修正：欢迎通过 GitHub 仓库提交 Issue / Pull Request，或发送邮件至 info@semiconfab.org。所有提议均由维护团队人工工程复核，不承诺采纳或处理时限。全站不设动态表单或后端服务。",
     fab_operations_faq_title: "常见问题解答 (FAQ)",
     fab_operations_faq_q1: "这是真实工厂的数字孪生吗？",
-    fab_operations_faq_a1: "不是。这是一个教学级全景总览模型，由 SemiconFab 倡议维护。它的目的是帮助学习者建立半导体制造工厂的全局工程认知，未连接任何真实工厂，亦不反映任何商业代工厂的专有运营数据。",
+    fab_operations_faq_a1:
+      "不是。这是一个教学级全景总览模型，由 SemiconFab 倡议维护。它的目的是帮助学习者建立半导体制造工厂的全局工程认知，未连接任何真实工厂，亦不反映任何商业代工厂的专有运营数据。",
     fab_operations_faq_q2: "为什么有些话题是“计划中 (Planned)”？",
-    fab_operations_faq_a2: "为了避免死链和编造内容。SemiconFab 严格区分已上线内容与计划中内容。计划中的话题仅给出一句话工程探讨范围，绝不伪装成已上线模块，亦不放置任何无效占位链接。",
+    fab_operations_faq_a2:
+      "为了避免死链和编造内容。SemiconFab 严格区分已上线内容与计划中内容。计划中的话题仅给出一句话工程探讨范围，绝不伪装成已上线模块，亦不放置任何无效占位链接。",
     fab_operations_faq_q3: "商业赞助会不会影响话题排序与内容？",
-    fab_operations_faq_a3: "不会。本枢纽页永久无任何商业赞助横幅、厂商 Logo 或产品推荐。未来个别具体技术话题页若接受非营利性赞助支持，将严格遵循明确披露规范，且绝不影响枢纽页的架构分类、中立排序与学术客观性。",
+    fab_operations_faq_a3:
+      "不会。本枢纽页永久无任何商业赞助横幅、厂商 Logo 或产品推荐。未来个别具体技术话题页若接受非营利性赞助支持，将严格遵循明确披露规范，且绝不影响枢纽页的架构分类、中立排序与学术客观性。",
     fab_operations_faq_q4: "教师在课堂上怎么使用本页？",
-    fab_operations_faq_a4: "教师可将本页作为《半导体制造工程》《集成电路制造技术》或《现代工业工程》的导览框架。按“晶圆旅程”讲解制造步骤，按“层次架构”剖析公用工程、工业软件与调度算法，并结合 300mm 孪生模型与基准测试集展开实操。",
+    fab_operations_faq_a4:
+      "教师可将本页作为《半导体制造工程》《集成电路制造技术》或《现代工业工程》的导览框架。按“晶圆旅程”讲解制造步骤，按“层次架构”剖析公用工程、工业软件与调度算法，并结合 300mm 孪生模型与基准测试集展开实操。",
     fab_operations_faq_q5: "数据来源与可信度在哪里查验？",
-    fab_operations_faq_a5: "SemiconFab 遵循公开透明的数据标准。请查阅 <a href=\"data-standard.html\" class=\"sc-inline-link\">数据交换标准 (Data Standard)</a> 了解 Schema 规范，以及阅读 <a href=\"verification.html\" class=\"sc-inline-link\">来源验证政策 (Verification Policy)</a> 查验数据评级与溯源准则。",
+    fab_operations_faq_a5:
+      'SemiconFab 遵循公开透明的数据标准。请查阅 <a href="data-standard.html" class="sc-inline-link">数据交换标准 (Data Standard)</a> 了解 Schema 规范，以及阅读 <a href="verification.html" class="sc-inline-link">来源验证政策 (Verification Policy)</a> 查验数据评级与溯源准则。',
 
     // MES & Dispatch Topic Explainer Keys (fab-mes.html)
     fab_mes_page_title: "MES 与派工调度 · MES & Dispatch — SemiconFab.org",
     fab_mes_hero_badge: "教学话题 · 晶圆厂运营核心",
     fab_mes_hero_title: "MES 与派工调度：晶圆厂如何运转",
-    fab_mes_hero_subtitle: "MES 到底管什么：一颗 lot 怎么被建路由、排队、派工、执行、追踪、放行或 hold——这是一个教学模型。",
-    fab_mes_banner_1: "教学讲解，非真实 MES · Teaching explainer, not a real MES",
+    fab_mes_hero_subtitle:
+      "MES 到底管什么：一颗 lot 怎么被建路由、排队、派工、执行、追踪、放行或 hold——这是一个教学模型。",
+    fab_mes_banner_1:
+      "教学讲解，非真实 MES · Teaching explainer, not a real MES",
     fab_mes_banner_2: "Lot 与数字均为示意 · Lots and numbers are illustrative",
     fab_mes_banner_3: "未连接任何真实工厂 · No live fab connection",
     fab_mes_what_title: "MES 是什么、不是什么",
-    fab_mes_what_subtitle: "车间制造执行层与周边系统之间的清晰架构边界与职责划分。",
+    fab_mes_what_subtitle:
+      "车间制造执行层与周边系统之间的清晰架构边界与职责划分。",
     fab_mes_core_title: "MES 的八项核心功能",
-    fab_mes_core_subtitle: "遵循 SEMI 与 ISA-95 标准的半导体制造执行核心功能规范。",
+    fab_mes_core_subtitle:
+      "遵循 SEMI 与 ISA-95 标准的半导体制造执行核心功能规范。",
     fab_mes_toy_title: "派工规则 Toy 演示：规则如何改变周期与交期",
-    fab_mes_toy_subtitle: "在 5 颗示意批次上对比 4 种基础派工规则，直观理解排队论与调度机制。",
+    fab_mes_toy_subtitle:
+      "在 5 颗示意批次上对比 4 种基础派工规则，直观理解排队论与调度机制。",
     fab_mes_journey_title: "一颗 Lot 的 MES 旅程",
-    fab_mes_journey_subtitle: "一个物理晶圆载具从建单分配路由、执行工艺到质量放行门禁的全生命周期推进。",
+    fab_mes_journey_subtitle:
+      "一个物理晶圆载具从建单分配路由、执行工艺到质量放行门禁的全生命周期推进。",
     fab_mes_faults_title: "异常场景：当生产偏离正常路径时",
-    fab_mes_faults_subtitle: "系统自动化互锁与安全规则如何处置配方不符、设备停机与量测超差。",
+    fab_mes_faults_subtitle:
+      "系统自动化互锁与安全规则如何处置配方不符、设备停机与量测超差。",
     fab_mes_neighbors_title: "MES 与邻居系统",
-    fab_mes_neighbors_subtitle: "清晰边界说明：谁负责制定订单、谁调度搬运小车、谁分析缺陷根因。",
+    fab_mes_neighbors_subtitle:
+      "清晰边界说明：谁负责制定订单、谁调度搬运小车、谁分析缺陷根因。",
     fab_mes_vendors_title: "代表厂商全景",
-    fab_mes_vendors_subtitle: "半导体晶圆制造领域常见商业化制造执行系统解决方案。",
-    fab_mes_vendors_disclaimer: "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
-    fab_mes_vendors_afterword: "大型工厂常在商用 MES 基础上做大量定制与自研扩展，商用产品名不等于某家工厂实际在用的系统。Large manufacturers frequently implement extensive proprietary extensions on top of commercial platforms; commercial names do not imply the exact system utilized in any specific facility.",
+    fab_mes_vendors_subtitle:
+      "半导体晶圆制造领域常见商业化制造执行系统解决方案。",
+    fab_mes_vendors_disclaimer:
+      "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+    fab_mes_vendors_afterword:
+      "大型工厂常在商用 MES 基础上做大量定制与自研扩展，商用产品名不等于某家工厂实际在用的系统。Large manufacturers frequently implement extensive proprietary extensions on top of commercial platforms; commercial names do not imply the exact system utilized in any specific facility.",
     fab_mes_glossary_title: "MES 与调度常用术语表",
-    fab_mes_glossary_subtitle: "理解半导体制造执行与洁净室物流的核心专业术语速查。",
+    fab_mes_glossary_subtitle:
+      "理解半导体制造执行与洁净室物流的核心专业术语速查。",
     fab_mes_text_ver_title: "完整静态文字版 (可访问性保障)",
-    fab_mes_text_ver_subtitle: "包含全部八项核心功能、批次流转九步、派工四种核对结果与架构对照的纯文字版，无需 JavaScript 交互即可完整阅读。",
+    fab_mes_text_ver_subtitle:
+      "包含全部八项核心功能、批次流转九步、派工四种核对结果与架构对照的纯文字版，无需 JavaScript 交互即可完整阅读。",
     fab_mes_quiz_title: "概念理解自测",
-    fab_mes_quiz_subtitle: "三道启发式选择题，巩固关于 MES 边界、派工启发式规则与挂起门禁的理解。",
+    fab_mes_quiz_subtitle:
+      "三道启发式选择题，巩固关于 MES 边界、派工启发式规则与挂起门禁的理解。",
     fab_mes_back_hub: "← 返回晶圆厂运营总览",
+
+    // APC, FDC, SPC, Metrology & Yield Explainer Keys
+    fab_apc_page_title:
+      "APC / FDC / SPC 与良率、量测与缺陷分析 · APC, Yield & Metrology — SemiconFab.org",
+    fab_apc_hero_badge: "教学话题 · 晶圆厂运营核心",
+    fab_apc_hero_title: "APC、良率与量测：晶圆厂控制闭环",
+    fab_apc_hero_subtitle:
+      "晶圆厂怎么监测、控制、量测并解释良率：SPC、FDC、APC、量测与缺陷分析——这是一个教学模型。",
+    fab_apc_banner_1:
+      "教学讲解，非真实 APC / 良率系统 · Teaching explainer, not a real APC / yield system",
+    fab_apc_banner_2:
+      "数据、Trace、缺陷计数均为示意 · Data, traces, and defect counts are illustrative",
+    fab_apc_banner_3: "未连接任何真实工厂 · No live fab connection",
+    fab_apc_concepts_title: "六个核心概念先分清：职责与边界对照",
+    fab_apc_concepts_subtitle:
+      "统计监测、设备故障检测、批次间参数调节、物理几何验证、空间缺陷归因与最终良率核算之间的清晰分工。",
+    fab_apc_loop_title: "工程闭环总图：从机台执行到良率核算",
+    fab_apc_loop_subtitle:
+      "工序遥测数据如何流经 FDC/SPC、触发 APC 调节、经由量测验证、汇总良率并反馈至 MES 生产处置的完整闭环。",
+    fab_apc_spc_title: "SPC 控制图互动：基线计算、趋势漂移与判定规则",
+    fab_apc_spc_subtitle:
+      "观察控制限如何严格基于稳定基线段计算（均值 ± 3σ），并直观验证趋势漂移与单点离群值如何触发 Nelson 规则子集。",
+    fab_apc_fdc_title: "FDC 传感器 Trace 对比：原位偏离与报警互锁",
+    fab_apc_fdc_subtitle:
+      "对比正常腔体压力曲线与异常偏离曲线，理解连续多点超出阈值如何触发机台健康报警与生产互锁。",
+    fab_apc_r2r_title: "APC Run-to-Run 互动：配方反馈与前馈微调",
+    fab_apc_r2r_subtitle:
+      "拖动实测量测滑杆，实时观察比例线性模型如何根据误差重算下一 lot 的机台 recipe 设定值。",
+    fab_apc_metrology_title: "在线量测与检测类型：量测对象、场景与局限性",
+    fab_apc_metrology_subtitle:
+      "全面解析各项在线量测技术量什么、何时在工序路线中调用，以及其固有的抽样速度与物理局限。",
+    fab_apc_pareto_title: "缺陷 Pareto 与 Wafer Map 空间分布：排查方向启发",
+    fab_apc_pareto_subtitle:
+      "探索缺陷类别的 80/20 分布，点击各缺陷类型联动查看晶圆表面特征分布形状与排查方向。",
+    fab_apc_yield_title: "良率 Waterfall 示例：加法损耗结构拆解",
+    fab_apc_yield_subtitle:
+      "展示投产晶圆如何经由工艺损失、缺陷损失与量测 Hold 报废逐层扣减，得出最终产出良率的算术加法结构。",
+    fab_apc_neighbors_title: "与邻居系统关系：接口交接与职责边界",
+    fab_apc_neighbors_subtitle:
+      "APC、FDC 与量测系统如何与 MES、数据连接层、机台底层硬件和企业级 YMS 协同交接。",
+    fab_apc_vendors_title: "代表厂商全景",
+    fab_apc_vendors_subtitle:
+      "半导体制造领域常见的工业过程控制软件平台与在线量测检测设备主要供应商。",
+    fab_apc_vendors_disclaimer:
+      "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+    fab_apc_vendors_afterword:
+      "厂商名不等于某家工厂实际在用的系统，同一厂商可横跨多个类别。Vendor names do not imply actual deployment in any specific fab; individual vendors often span multiple functional categories.",
+    fab_apc_glossary_title: "APC、良率与量测常用术语表",
+    fab_apc_glossary_subtitle:
+      "过程控制、机台健康诊断与缺陷分类核心专业术语速查。",
+    fab_apc_text_ver_title: "完整静态文字版 (无障碍与索引保障)",
+    fab_apc_text_ver_subtitle:
+      "包含工程闭环步骤、SPC 基线数值与规则判定、FDC 报警判定、APC 算例、Pareto 80-20 数据与良率加法算术的纯文字版本，无需 JS 交互即可完整阅读。",
+    fab_apc_quiz_title: "概念理解自测",
+    fab_apc_quiz_subtitle:
+      "三道启发式选择题，巩固对 SPC/FDC 分工、APC 前馈与反馈区别，以及晶圆图图案非确诊特性的理解。",
+    fab_apc_back_hub: "← 返回晶圆厂运营总览",
     twin_data_layer_link:
       "看看这台设备的数据是怎么流向工厂系统的 → 晶圆厂数据层",
 

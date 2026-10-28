@@ -190,6 +190,15 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/fab-mes" />
   </url>
 
+  <!-- APC, Yield & Metrology: The Fab Control Loop Explainer -->
+  <url>
+    <loc>https://semiconfab.org/fab-apc-yield-metrology</loc>
+    <lastmod>2026-10-27</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://semiconfab.org/fab-apc-yield-metrology" />
+  </url>
+
   <!-- Open Initiative Vision & 6 Architectural Pillars -->
   <url>
     <loc>https://semiconfab.org/vision</loc>

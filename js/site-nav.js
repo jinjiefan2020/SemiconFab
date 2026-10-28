@@ -63,6 +63,8 @@
       dataLayerDesc: "How fab data flows, layer by layer",
       fabMes: "MES & Dispatch",
       fabMesDesc: "How MES routes and dispatches lots",
+      fabApcYield: "APC, Yield & Metrology",
+      fabApcYieldDesc: "How fabs control, measure, and explain yield",
       fabOperations: "Fab Operations",
       fabOperationsDesc: "Map of fab operations topics",
 
@@ -135,6 +137,8 @@
       dataLayerDesc: "数据如何一层层流动",
       fabMes: "MES 与派工",
       fabMesDesc: "MES 如何建路由与派工",
+      fabApcYield: "APC 与良率量测",
+      fabApcYieldDesc: "晶圆厂如何控制、量测并解释良率",
       fabOperations: "晶圆厂运营",
       fabOperationsDesc: "Fab 运营话题地图",
 
@@ -267,6 +271,7 @@
       "hbm",
       "fab-data-layer",
       "fab-mes",
+      "fab-apc-yield-metrology",
       "fab-operations",
     ].includes(cur);
     const isResearchActive = ["benchmark", "vision"].includes(cur);
@@ -407,6 +412,10 @@
                 <a href="/fab-mes" class="sc-dropdown-item ${cur === "fab-mes" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.fabMes}</span>
                   <span class="sc-dropdown-desc">${t.fabMesDesc}</span>
+                </a>
+                <a href="/fab-apc-yield-metrology" class="sc-dropdown-item ${cur === "fab-apc-yield-metrology" ? "active" : ""}">
+                  <span class="sc-dropdown-title">${t.fabApcYield}</span>
+                  <span class="sc-dropdown-desc">${t.fabApcYieldDesc}</span>
                 </a>
                 <a href="/fab-operations" class="sc-dropdown-item ${cur === "fab-operations" ? "active" : ""}">
                   <span class="sc-dropdown-title">${t.fabOperations}</span>
@@ -550,6 +559,9 @@
           </a>
           <a href="/fab-mes" class="sc-drawer-link ${cur === "fab-mes" ? "active" : ""}">
             <span>${t.fabMes}</span>
+          </a>
+          <a href="/fab-apc-yield-metrology" class="sc-drawer-link ${cur === "fab-apc-yield-metrology" ? "active" : ""}">
+            <span>${t.fabApcYield}</span>
           </a>
           <a href="/fab-operations" class="sc-drawer-link ${cur === "fab-operations" ? "active" : ""}">
             <span>${t.fabOperations}</span>

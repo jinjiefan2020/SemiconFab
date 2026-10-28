@@ -37,6 +37,7 @@ SemiconFab is a source-available 300mm logic semiconductor wafer fabrication dig
 - **Fab Data Layer (`/fab-data-layer`, `fab-data-layer.html`)**: 5-layer fab data flow architecture and shop-floor signal propagation teaching model.
 - **Fab Operations (`/fab-operations`, `fab-operations.html`)**: Unified map of semiconductor fab operational domains, available modules, and planned topics.
 - **MES & Dispatch (`/fab-mes`, `fab-mes.html`)**: Interactive teaching explainer on how MES routes, queues, dispatches, executes, tracks, and holds wafer lots.
+- **APC, Yield & Metrology (`/fab-apc-yield-metrology`, `fab-apc-yield-metrology.html`)**: Interactive teaching model explaining SPC control charts, FDC trace fault detection, run-to-run recipe feedback, inline metrology, defect Pareto signatures, and yield waterfall accounting.
 
 > **Cleanroom Digital Twin Sandbox Scope**:  
 > 本洁净室为 SemiconFab 概念验证与全谱系设备编目孪生沙盒，集成了前道与后道代表性设备，但机台数量显著少于实际先进制程Fab。_(This cleanroom serves as a SemiconFab proof-of-concept and full-spectrum equipment catalog digital twin sandbox, integrating representative front-end and back-end equipment, with machine counts significantly lower than an actual high-volume advanced node semiconductor fab.)_

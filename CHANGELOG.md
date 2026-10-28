@@ -4,6 +4,34 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ## [Unreleased]
 
+### APC, FDC, SPC, Metrology & Yield (APC / FDC / SPC 与良率、量测与缺陷分析) Teaching Explainer (`fab-apc-yield-metrology.html`)
+
+- **New Standalone Teaching Topic Page (`fab-apc-yield-metrology.html`)**:
+  - Independent interactive explainer illustrating the closed-loop fab control cycle: how tool telemetry is monitored by FDC/SPC, how run-to-run recipe adjustments are computed, how inline metrology verifies dimensions, how defect distributions are analyzed on wafer maps, and how overall fab yield is aggregated.
+  - Permanent bilingual honest banner (non-dismissible): "教学讲解，非真实 APC / 良率系统 · Teaching explainer, not a real APC / yield system", "数据、Trace、缺陷计数均为示意 · Data, traces, and defect counts are illustrative", "未连接任何真实工厂 · No live fab connection".
+  - Six core concepts comparison table clearly separating definitions and scopes of SPC, FDC, APC, Metrology, Defect Analysis, and Yield without architectural conflation.
+  - 10-step closed-loop causal architecture flow diagram (responsive SVG) and accessible text inventory sequence.
+  - Interactive SPC Control Chart with strictly computed baseline control limits (Lots 1–10, Mean = 50.000, Sample StDev = 0.200, UCL = 50.600, LCL = 49.400), drift segment (Lots 11–18), and outlier point (Lot 19 = 51.200) triggering simplified Nelson Rule 1, Rule 2, and Rule 3 with full baseline/full-series toggles.
+  - Interactive FDC Sensor Trace comparing nominal chamber pressure (25.0 mTorr) against a 10-point faulty deviation window (27.6–29.1 mTorr), triggering FDC ALARM at exactly t=19s (5 consecutive points exceeding threshold 27.0 mTorr) with good/faulty/overlay views.
+  - Interactive APC Run-to-Run Proportional Feedback widget with worked example (Target 50.0, Measured 52.0, Adjustment -1.0, Next Setting 99.0) and live recalculation slider, accompanied by an explicit Feedback vs. Feedforward comparison.
+  - Inline Metrology & Inspection scope table covering CD-SEM, Overlay, Film Thickness, Defect Inspection, and Electrical Test (WAT/PCM) with specific limitations and zero proprietary factory claims.
+  - Defect Pareto & Wafer Map interaction using fixed counts (Particle 35, Scratch 20, Pattern defect 18, Contamination 15, Other 12; Total 100) with 4 signature wafer map patterns (Center cluster, Edge ring, Scratch line, Random) and mandatory non-diagnostic disclaimer captions.
+  - Yield Waterfall Additive Loss Breakdown walkthrough using fixed arithmetic (1000 starts, -30 process scrap, -40 defect loss, -10 hold/scrap, 920 output, 92.0% yield) with explicit illustrative-only notice.
+  - Neighboring systems comparison (MES, Connectivity Layer, Equipment, YMS) with live links to existing files.
+  - Representative vendor landscape in two groups (APC/FDC/Yield and Metrology/Inspection) in strict alphabetical order preceded by disclaimer and followed by deployment qualifier.
+  - Bilingual 10-term glossary (APC, FDC, SPC, R2R, CD, Overlay, Pareto, Wafer Map, Yield, Hold) and 3-question conceptual quiz (zero tracking).
+  - Complete accessible static text edition ensuring full screen-reader and SEO readability without JavaScript.
+  - Configurable sponsorship component default-disabled (`enabled: false`) with zero DOM footprint.
+- **Dedicated Machine-Readable Data (`data/fab-apc-yield-metrology.json`)**:
+  - Structured storage of SPC baseline numbers and Nelson rule triggers, FDC sensor traces, APC worked example parameters, Pareto counts, wafer map patterns, metrology types, neighbor boundaries, vendor landscape, glossary, and quiz.
+- **Fab Operations Hub Status Updates (Both Topics Synchronized)**:
+  - Updated both `apc-fdc-spc-yield` and `metrology-defect-analysis` from `planned` to `available` linking to `fab-apc-yield-metrology.html` in both `data/fab-operations.json` and `fab-operations.html`.
+- **Site-Wide Discoverability & Navigation**:
+  - **`js/site-nav.js`**: Added "APC, Yield & Metrology" / "APC 与良率量测" under the Learn dropdown and mobile drawer (`fabApcYield` / `fabApcYieldDesc`), activated for `fab-apc-yield-metrology`.
+  - **`js/translations.js`**: Registered bilingual `fab_apc_*` localization dictionary keys for English and Chinese.
+  - **`sitemap.xml`**: Added canonical clean URL entry `https://semiconfab.org/fab-apc-yield-metrology`.
+  - **`README.md`**: Added single bullet pointing to the new APC, Yield & Metrology topic page.
+
 ### MES & Dispatch (MES 与派工调度) Teaching Explainer (`fab-mes.html`)
 
 - **New Standalone Teaching Topic Page (`fab-mes.html`)**:

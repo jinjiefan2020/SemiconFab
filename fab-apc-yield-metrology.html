@@ -1,0 +1,2574 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <meta name="color-scheme" content="light dark" />
+    <title id="faym-page-title" data-i18n="fab_apc_page_title">
+      APC / FDC / SPC 与良率、量测与缺陷分析 · APC, Yield & Metrology —
+      SemiconFab.org
+    </title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta
+      name="description"
+      content="How a fab watches, controls, measures, and explains yield: SPC, FDC, APC, metrology, and defect analysis — an interactive teaching model."
+    />
+    <link
+      rel="canonical"
+      href="https://semiconfab.org/fab-apc-yield-metrology"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/semicon-theme.css" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #f2f1ec;
+        --surface: #ffffff;
+        --surface-2: #e9e7df;
+        --ink: #1c2126;
+        --ink-2: #4c5560;
+        --ink-3: #7a838d;
+        --line: #d8d4c8;
+        --accent: #0e6e6b;
+        --accent-ink: #0a5451;
+        --amber: #b45309;
+        --amber-bg: #fdf3e3;
+        --red: #a83226;
+        --red-bg: #fdf2f2;
+        --chart-grid: #ddd9cc;
+        --shadow:
+          0 1px 2px rgba(28, 33, 38, 0.06), 0 8px 24px rgba(28, 33, 38, 0.06);
+      }
+
+      html.dark,
+      [data-theme="dark"] {
+        --bg: #12161a;
+        --surface: #1a2026;
+        --surface-2: #232b33;
+        --ink: #e8eaec;
+        --ink-2: #aeb7bf;
+        --ink-3: #7e8891;
+        --line: #333c45;
+        --accent: #3fbdb8;
+        --accent-ink: #7fd8d3;
+        --amber: #e8a04c;
+        --amber-bg: #2c2417;
+        --red: #e0786a;
+        --red-bg: #2c1a18;
+        --chart-grid: #2c343d;
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family:
+          "Manrope",
+          -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Container */
+      .faym-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 32px 24px 80px;
+      }
+
+      /* Permanent Honest Banner */
+      .faym-honest-banner {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-left: 4px solid var(--amber);
+        border-radius: 8px;
+        padding: 14px 20px;
+        margin-bottom: 32px;
+        box-shadow: var(--shadow);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px 24px;
+        align-items: center;
+      }
+
+      .faym-honest-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .faym-honest-bullet {
+        color: var(--amber);
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      /* Hero Header */
+      .faym-hero {
+        margin-bottom: 40px;
+      }
+
+      .faym-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: var(--surface-2);
+        color: var(--accent);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 4px 10px;
+        border-radius: 4px;
+        margin-bottom: 12px;
+        border: 1px solid var(--line);
+      }
+
+      .faym-hero h1 {
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0 0 12px;
+        color: var(--ink);
+        line-height: 1.25;
+      }
+
+      .faym-hero p.faym-lead {
+        font-size: 16px;
+        color: var(--ink-2);
+        max-width: 920px;
+        margin: 0 0 20px;
+        line-height: 1.6;
+      }
+
+      /* Section Common */
+      .faym-section {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 32px;
+        margin-bottom: 36px;
+        box-shadow: var(--shadow);
+      }
+
+      .faym-sec-header {
+        margin-bottom: 24px;
+      }
+
+      .faym-sec-tag {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--accent);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 6px;
+      }
+
+      .faym-sec-title {
+        font-size: 22px;
+        font-weight: 800;
+        margin: 0 0 8px;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+
+      .faym-sec-desc {
+        font-size: 14px;
+        color: var(--ink-2);
+        margin: 0;
+        max-width: 860px;
+        line-height: 1.55;
+      }
+
+      /* Interactive UI Controls */
+      .faym-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 20px;
+        background: var(--surface-2);
+        padding: 12px 16px;
+        border-radius: 8px;
+        border: 1px solid var(--line);
+      }
+
+      .faym-btn {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        color: var(--ink);
+        font-family: "Manrope", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .faym-btn:hover {
+        border-color: var(--accent);
+        color: var(--accent);
+      }
+
+      .faym-btn.active {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #ffffff;
+      }
+
+      /* Tables */
+      .faym-table-wrap {
+        overflow-x: auto;
+        border: 1px solid var(--line);
+        border-radius: 8px;
+      }
+
+      .faym-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        text-align: left;
+      }
+
+      .faym-table th {
+        background: var(--surface-2);
+        color: var(--ink);
+        font-weight: 700;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .faym-table td {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--line);
+        color: var(--ink-2);
+        vertical-align: top;
+      }
+
+      .faym-table tr:last-child td {
+        border-bottom: none;
+      }
+
+      .faym-table td strong {
+        color: var(--ink);
+      }
+
+      /* SPC Chart Container */
+      .faym-chart-card {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 16px;
+      }
+
+      .faym-chart-svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      /* KPI Stat Grid */
+      .faym-kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin-top: 16px;
+      }
+
+      .faym-kpi-card {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 14px 16px;
+      }
+
+      .faym-kpi-label {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--ink-3);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 4px;
+      }
+
+      .faym-kpi-value {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--ink);
+      }
+
+      .faym-kpi-desc {
+        font-size: 11px;
+        color: var(--ink-2);
+        margin-top: 4px;
+      }
+
+      /* Status Alert Pills */
+      .faym-status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 12px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 700;
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      .faym-status-normal {
+        background: #e6f4ea;
+        color: #137333;
+        border: 1px solid #ceead6;
+      }
+
+      html.dark .faym-status-normal,
+      [data-theme="dark"] .faym-status-normal {
+        background: #133824;
+        color: #81c995;
+        border-color: #1e5a38;
+      }
+
+      .faym-status-alarm {
+        background: var(--red-bg);
+        color: var(--red);
+        border: 1px solid var(--red);
+      }
+
+      /* APC Slider Card */
+      .faym-slider-card {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+        margin-bottom: 20px;
+      }
+
+      .faym-slider-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 16px;
+      }
+
+      .faym-slider-input {
+        flex: 1;
+        min-width: 200px;
+        height: 6px;
+        accent-color: var(--accent);
+        cursor: pointer;
+      }
+
+      .faym-worked-example {
+        background: var(--surface);
+        border-left: 4px solid var(--accent);
+        padding: 16px 20px;
+        border-radius: 0 8px 8px 0;
+        margin-top: 16px;
+        font-size: 13px;
+      }
+
+      /* Pareto & Wafer Map Grid */
+      .faym-pareto-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+
+      @media (max-width: 860px) {
+        .faym-pareto-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .faym-interactive-bar {
+        cursor: pointer;
+        transition: opacity 0.15s ease;
+      }
+
+      .faym-interactive-bar:hover {
+        opacity: 0.85;
+      }
+
+      /* Waterfall Visual Bar */
+      .faym-wf-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 10px;
+        font-size: 13px;
+      }
+
+      .faym-wf-label {
+        width: 180px;
+        font-weight: 600;
+        color: var(--ink);
+      }
+
+      .faym-wf-bar-wrap {
+        flex: 1;
+        height: 24px;
+        background: var(--surface-2);
+        border-radius: 4px;
+        overflow: hidden;
+        display: flex;
+      }
+
+      .faym-wf-val {
+        width: 140px;
+        font-family: "IBM Plex Mono", monospace;
+        font-weight: 600;
+        text-align: right;
+        color: var(--ink);
+      }
+
+      /* Accessible Static Text Edition */
+      .faym-static-text {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 24px;
+        margin-top: 24px;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .faym-static-text h4 {
+        margin: 16px 0 6px;
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .faym-static-text p,
+      .faym-static-text ol,
+      .faym-static-text ul {
+        margin: 0 0 10px;
+        color: var(--ink-2);
+      }
+
+      /* Quiz */
+      .faym-quiz-item {
+        background: var(--surface-2);
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 18px 20px;
+        margin-bottom: 16px;
+      }
+
+      .faym-quiz-q {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--ink);
+        margin-bottom: 12px;
+      }
+
+      .faym-quiz-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .faym-quiz-opt {
+        background: var(--surface);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-size: 13px;
+        cursor: pointer;
+        text-align: left;
+        color: var(--ink);
+        transition: border-color 0.15s ease;
+      }
+
+      .faym-quiz-opt:hover {
+        border-color: var(--accent);
+      }
+
+      .faym-quiz-exp {
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 6px;
+        font-size: 12px;
+        line-height: 1.55;
+        display: none;
+      }
+
+      .faym-quiz-exp.show {
+        display: block;
+      }
+
+      .faym-quiz-exp.correct {
+        background: #e6f4ea;
+        color: #137333;
+        border: 1px solid #ceead6;
+      }
+
+      html.dark .faym-quiz-exp.correct,
+      [data-theme="dark"] .faym-quiz-exp.correct {
+        background: #133824;
+        color: #81c995;
+        border-color: #1e5a38;
+      }
+
+      .faym-quiz-exp.incorrect {
+        background: var(--red-bg);
+        color: var(--red);
+        border: 1px solid var(--red);
+      }
+
+      /* Footer Hub Link */
+      .faym-hub-footer {
+        margin-top: 48px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-top: 24px;
+        border-top: 1px solid var(--line);
+      }
+
+      .faym-hub-link {
+        color: var(--accent);
+        font-weight: 700;
+        text-decoration: none;
+        font-size: 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .faym-hub-link:hover {
+        text-decoration: underline;
+      }
+
+      /* Inline Links */
+      a.faym-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      a.faym-link:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Site Navigation Mount -->
+    <div id="site-nav-container"></div>
+
+    <main class="faym-container">
+      <!-- Permanent Bilingual Honest Banner (§4.1) -->
+      <aside class="faym-honest-banner" role="note">
+        <div class="faym-honest-item">
+          <span class="faym-honest-bullet">·</span>
+          <span data-i18n="fab_apc_banner_1"
+            >教学讲解，非真实 APC / 良率系统 · Teaching explainer, not a real
+            APC / yield system</span
+          >
+        </div>
+        <div class="faym-honest-item">
+          <span class="faym-honest-bullet">·</span>
+          <span data-i18n="fab_apc_banner_2"
+            >数据、Trace、缺陷计数均为示意 · Data, traces, and defect counts are
+            illustrative</span
+          >
+        </div>
+        <div class="faym-honest-item">
+          <span class="faym-honest-bullet">·</span>
+          <span data-i18n="fab_apc_banner_3"
+            >未连接任何真实工厂 · No live fab connection</span
+          >
+        </div>
+      </aside>
+
+      <!-- Hero Header (§4.1) -->
+      <header class="faym-hero">
+        <div class="faym-badge" data-i18n="fab_apc_hero_badge">
+          TOPIC EXPLAINER · OPERATIONS CORE
+        </div>
+        <h1 data-i18n="fab_apc_hero_title">
+          APC, Yield &amp; Metrology: The Fab Control Loop
+        </h1>
+        <p class="faym-lead" data-i18n="fab_apc_hero_subtitle">
+          How a fab watches, controls, measures, and explains yield: SPC, FDC,
+          APC, metrology, and defect analysis — as a teaching model.
+        </p>
+      </header>
+
+      <!-- Section 1: Six Core Concepts Comparison (§4.2) -->
+      <section class="faym-section" id="concepts">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Foundational Demarcation</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_concepts_title">
+            Six Core Concepts: Distinguishing Roles &amp; Boundaries
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_concepts_subtitle">
+            Clear demarcation between statistical monitoring, equipment fault
+            detection, run-to-run parameter tuning, dimensional verification,
+            defect attribution, and yield aggregation.
+          </p>
+        </div>
+
+        <div class="faym-table-wrap">
+          <table class="faym-table">
+            <thead>
+              <tr>
+                <th style="width: 16%">Concept · 概念</th>
+                <th style="width: 32%">Formal Definition · 核心定义</th>
+                <th style="width: 26%">Key Mechanism · 核心机制</th>
+                <th style="width: 26%">Division of Scope · 职责与边界</th>
+              </tr>
+            </thead>
+            <tbody id="faym-concepts-tbody">
+              <!-- Dynamically populated from JS with full bilingual support -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 2: Closed-Loop Total Architecture Flow (§4.3) -->
+      <section class="faym-section" id="closed-loop">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">End-to-End Architecture</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_loop_title">
+            The Engineering Closed Loop: From Tool Execution to Yield Analytics
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_loop_subtitle">
+            Step-by-step causal flow: sensor telemetry through FDC/SPC, APC
+            recipe adjustments, metrology verification, defect Pareto analysis,
+            and MES lot disposition.
+          </p>
+        </div>
+
+        <!-- Responsive SVG Closed Loop Diagram -->
+        <div class="faym-chart-card" style="padding: 16px; overflow-x: auto">
+          <svg
+            id="faym-loop-svg"
+            viewBox="0 0 1100 240"
+            style="width: 100%; min-width: 800px; height: auto"
+          >
+            <!-- SVG rendered via renderClosedLoopSvg() -->
+          </svg>
+        </div>
+
+        <!-- Accessible Full-Text Sequential Step Inventory (§4.3) -->
+        <div class="faym-static-text" style="margin-top: 16px">
+          <h4 style="margin-top: 0">
+            Closed-Loop Process Step Inventory · 闭环因果流程清单
+          </h4>
+          <ol
+            id="faym-loop-steps-list"
+            style="padding-left: 20px; line-height: 1.8"
+          >
+            <!-- Rendered by JS -->
+          </ol>
+        </div>
+      </section>
+
+      <!-- Section 3: Interactive SPC Control Chart (§4.4) -->
+      <section class="faym-section" id="spc-demo">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Statistical Process Control</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_spc_title">
+            Interactive SPC: Baseline Calculation, Drift &amp; Nelson Rules
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_spc_subtitle">
+            Observe how control limits are strictly derived from the stable
+            baseline segment (Mean ± 3σ), and verify how trend drifts and
+            single-point outliers trigger simplified Nelson rules.
+          </p>
+        </div>
+
+        <div class="faym-toolbar">
+          <span style="font-weight: 700; font-size: 13px">View Mode:</span>
+          <button
+            type="button"
+            class="faym-btn active"
+            id="faym-spc-btn-full"
+            onclick="setSpcView('full')"
+          >
+            Full Series (Lots 1–20) · 全序列
+          </button>
+          <button
+            type="button"
+            class="faym-btn"
+            id="faym-spc-btn-base"
+            onclick="setSpcView('baseline')"
+          >
+            Baseline Segment (Lots 1–10) · 基线段
+          </button>
+          <div style="flex: 1"></div>
+          <label style="font-size: 13px; font-weight: 600; cursor: pointer">
+            <input
+              type="checkbox"
+              id="faym-spc-rule1-chk"
+              checked
+              onchange="toggleSpcRuleHighlight()"
+            />
+            Highlight Rule 1 Trigger (Lot 19)
+          </label>
+        </div>
+
+        <!-- SPC SVG Chart -->
+        <div class="faym-chart-card">
+          <svg
+            id="faym-spc-svg"
+            viewBox="0 0 960 320"
+            class="faym-chart-svg"
+          ></svg>
+        </div>
+
+        <!-- Baseline Stats & Rule Trigger KPI Cards -->
+        <div class="faym-kpi-grid">
+          <div class="faym-kpi-card">
+            <div class="faym-kpi-label">Baseline Mean (x̄)</div>
+            <div class="faym-kpi-value" id="faym-spc-kpi-mean">50.000</div>
+            <div class="faym-kpi-desc">Calculated over Lots 1–10</div>
+          </div>
+          <div class="faym-kpi-card">
+            <div class="faym-kpi-label">Sample StDev (s)</div>
+            <div class="faym-kpi-value" id="faym-spc-kpi-std">0.200</div>
+            <div class="faym-kpi-desc">ddof=1, N=10</div>
+          </div>
+          <div class="faym-kpi-card">
+            <div class="faym-kpi-label">Control Limits (UCL / LCL)</div>
+            <div
+              class="faym-kpi-value"
+              style="color: var(--accent)"
+              id="faym-spc-kpi-limits"
+            >
+              50.600 / 49.400
+            </div>
+            <div class="faym-kpi-desc">Mean ± 3 × Sample StDev</div>
+          </div>
+          <div class="faym-kpi-card">
+            <div class="faym-kpi-label">Rule 1 Trigger Status</div>
+            <div class="faym-kpi-value" style="color: var(--red)">
+              Triggered (Lot 19)
+            </div>
+            <div class="faym-kpi-desc">Value 51.200 &gt; UCL 50.600</div>
+          </div>
+        </div>
+
+        <!-- Nelson Rule Disclaimer Callout -->
+        <div
+          style="
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: var(--surface-2);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--ink-2);
+            border-left: 3px solid var(--amber);
+          "
+        >
+          <strong>Methodology &amp; Scope Note / 计算口径与规则声明：</strong>
+          <span id="faym-spc-note-text">
+            Control limits are strictly computed from the baseline segment only
+            (Mean ± 3 × Sample StDev = 50.0 ± 0.6). Simplified Nelson rule
+            subset for teaching, not a full Nelson rule implementation.
+          </span>
+        </div>
+      </section>
+
+      <!-- Section 4: Interactive FDC Sensor Trace (§4.5) -->
+      <section class="faym-section" id="fdc-demo">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Fault Detection &amp; Classification</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_fdc_title">
+            Interactive FDC: In-Situ Sensor Deviation &amp; Alarm Interlock
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_fdc_subtitle">
+            Compare nominal chamber pressure traces against faulty deviations to
+            understand how consecutive-point persistence triggers tool health
+            alarms.
+          </p>
+        </div>
+
+        <div class="faym-toolbar">
+          <span style="font-weight: 700; font-size: 13px">Trace View:</span>
+          <button
+            type="button"
+            class="faym-btn active"
+            id="faym-fdc-btn-faulty"
+            onclick="setFdcView('faulty')"
+          >
+            Faulty Lot Trace · 异常批次
+          </button>
+          <button
+            type="button"
+            class="faym-btn"
+            id="faym-fdc-btn-good"
+            onclick="setFdcView('good')"
+          >
+            Good Lot Trace · 正常批次
+          </button>
+          <button
+            type="button"
+            class="faym-btn"
+            id="faym-fdc-btn-both"
+            onclick="setFdcView('both')"
+          >
+            Overlay (Both) · 双曲线叠加
+          </button>
+          <div style="flex: 1"></div>
+          <div id="faym-fdc-status-badge">
+            <!-- Populated dynamically -->
+          </div>
+        </div>
+
+        <!-- FDC SVG Chart -->
+        <div class="faym-chart-card">
+          <svg
+            id="faym-fdc-svg"
+            viewBox="0 0 960 300"
+            class="faym-chart-svg"
+          ></svg>
+        </div>
+
+        <!-- Permanent Explanatory Note (§4.5) -->
+        <div
+          style="
+            padding: 12px 16px;
+            background: var(--surface-2);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--ink-2);
+            border-left: 3px solid var(--accent);
+          "
+        >
+          <strong>Permanent Note / 永久说明：</strong>
+          <span data-i18n="fab_apc_fdc_perm_note">
+            示意 Trace，非真实工具信号；真实 FDC
+            模型远比阈值规则复杂。Illustrative trace, not a real tool signal;
+            production FDC models are far more complex than simple thresholding.
+          </span>
+        </div>
+      </section>
+
+      <!-- Section 5: Interactive APC Run-to-Run (§4.6) -->
+      <section class="faym-section" id="apc-demo">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Advanced Process Control</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_r2r_title">
+            Interactive APC Run-to-Run: Proportional Recipe Feedback
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_r2r_subtitle">
+            Adjust post-etch critical dimension (CD) measurements to observe how
+            proportional feedback updates the recipe setpoint for the next
+            incoming lot.
+          </p>
+        </div>
+
+        <div class="faym-slider-card">
+          <div class="faym-slider-row">
+            <label
+              for="faym-apc-slider"
+              style="font-weight: 700; font-size: 14px; min-width: 220px"
+            >
+              Measured Value (实测量测值):
+              <span
+                id="faym-apc-meas-val"
+                style="
+                  font-family: &quot;IBM Plex Mono&quot;, monospace;
+                  color: var(--accent);
+                  font-size: 18px;
+                "
+                >52.0</span
+              >
+              nm
+            </label>
+            <input
+              type="range"
+              id="faym-apc-slider"
+              class="faym-slider-input"
+              min="46.0"
+              max="54.0"
+              step="0.1"
+              value="52.0"
+              oninput="updateApcCalc(this.value)"
+            />
+            <button
+              type="button"
+              class="faym-btn"
+              onclick="resetApcWorkedExample()"
+            >
+              Reset to Worked Example (52.0)
+            </button>
+          </div>
+
+          <div class="faym-kpi-grid" style="margin-top: 20px">
+            <div class="faym-kpi-card">
+              <div class="faym-kpi-label">Target Dimension (y_target)</div>
+              <div class="faym-kpi-value">50.0 nm</div>
+              <div class="faym-kpi-desc">Nominal specification</div>
+            </div>
+            <div class="faym-kpi-card">
+              <div class="faym-kpi-label">Measured Error (y - y_target)</div>
+              <div
+                class="faym-kpi-value"
+                id="faym-apc-kpi-err"
+                style="color: var(--amber)"
+              >
+                +2.0 nm
+              </div>
+              <div class="faym-kpi-desc">Dimensional overshoot</div>
+            </div>
+            <div class="faym-kpi-card">
+              <div class="faym-kpi-label">Adjustment (Δu = -0.5 × Error)</div>
+              <div
+                class="faym-kpi-value"
+                id="faym-apc-kpi-adj"
+                style="color: var(--accent)"
+              >
+                -1.0
+              </div>
+              <div class="faym-kpi-desc">k = 0.5 teaching gain</div>
+            </div>
+            <div class="faym-kpi-card">
+              <div class="faym-kpi-label">Next Lot Recipe Setting</div>
+              <div
+                class="faym-kpi-value"
+                id="faym-apc-kpi-next"
+                style="color: var(--accent-ink)"
+              >
+                99.0
+              </div>
+              <div class="faym-kpi-desc">Base 100.0 + Adjustment</div>
+            </div>
+          </div>
+
+          <!-- Worked Example Card (Mandatory §4.6) -->
+          <div class="faym-worked-example">
+            <h4 style="margin: 0 0 6px; font-size: 13px; font-weight: 700">
+              Canonical Worked Example / 标准教学算例（固定示范）：
+            </h4>
+            <p style="margin: 0; line-height: 1.6; color: var(--ink)">
+              目标值 50.0，实测值 52.0，调整量 = -0.5 × (52.0 − 50.0) =
+              -1.0；若原 recipe 设定为 100（示意单位），下一 lot 设定为
+              99（示意单位）。<br />
+              <span style="color: var(--ink-2); font-size: 12px">
+                Target: 50.0, Measured: 52.0, Adjustment = -0.5 × (52.0 − 50.0)
+                = -1.0; If original recipe is 100 (illustrative units), next lot
+                setting is 99 (illustrative units).
+              </span>
+            </p>
+          </div>
+
+          <!-- Simplified Model Disclaimer -->
+          <p style="font-size: 12px; color: var(--ink-3); margin: 16px 0 0">
+            * 教学说明：这是简化线性模型，真实 APC
+            含动态模型、物理约束、稳定性界限与多变量耦合，滑杆结果不保证下一 lot
+            一定合格。<br />
+            Teaching note: Simplified linear model. Production APC incorporates
+            dynamic models, physical constraints, stability bounds, and
+            multivariate coupling; slider results do not guarantee
+            qualification.
+          </p>
+        </div>
+
+        <!-- Feedback vs Feedforward Comparison Table (§4.6) -->
+        <div class="faym-table-wrap">
+          <table class="faym-table">
+            <thead>
+              <tr>
+                <th style="width: 22%">APC Control Mode · 控制模式</th>
+                <th style="width: 39%">Operational Mechanism · 运作机制</th>
+                <th style="width: 39%">Fab Use Case · 晶圆厂典型场景</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Feedback (反馈控制)</strong></td>
+                <td>
+                  用本 lot 的量测值调整<strong>后续 lot</strong>
+                  进入同一台机台时的 recipe
+                  设定。纠正机台部件老化、腔体聚合物沉淀等缓慢时间漂移。<br />
+                  <span style="font-size: 12px; color: var(--ink-3)">
+                    Adjusts recipe setpoints for subsequent lots entering the
+                    same tool based on post-process metrology of current lot.
+                  </span>
+                </td>
+                <td>
+                  刻蚀腔体每运行 5 批次后，根据 CD-SEM
+                  测得的线宽微调刻蚀时间偏置。
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Feedforward (前馈控制)</strong></td>
+                <td>
+                  用<strong>上游步骤的实测量测</strong>预先微调<strong
+                    >本 lot 即将进入的下游工序</strong
+                  >
+                  recipe。在工艺发生前即抵消来料批次厚度或线宽差异。<br />
+                  <span style="font-size: 12px; color: var(--ink-3)">
+                    Preemptively modifies recipe of downstream step for the
+                    exact same lot based on incoming upstream metrology.
+                  </span>
+                </td>
+                <td>
+                  量测当前 lot 氧化膜实际厚度（如比标称厚
+                  3nm），在前馈下自动延长下一步化学机械研磨 (CMP) 的抛光时间。
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 6: Inline Metrology Types Table (§4.7) -->
+      <section class="faym-section" id="metrology-types">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Process Verification</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_metrology_title">
+            Inline Metrology &amp; Inspection Types: Scope &amp; Trade-offs
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_metrology_subtitle">
+            What each technique physically measures, when it is scheduled in the
+            process flow, and its physical/throughput constraints.
+          </p>
+        </div>
+
+        <div class="faym-table-wrap">
+          <table class="faym-table">
+            <thead>
+              <tr>
+                <th style="width: 20%">Technique · 量测类型</th>
+                <th style="width: 30%">What It Measures · 量什么</th>
+                <th style="width: 25%">When It Is Used · 何时用</th>
+                <th style="width: 25%">Limitations · 有何局限</th>
+              </tr>
+            </thead>
+            <tbody id="faym-metrology-tbody">
+              <!-- Dynamically populated from JS with full bilingual support -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 7: Defect Pareto + Wafer Map (§4.8) -->
+      <section class="faym-section" id="defect-pareto">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Defect Analytics</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_pareto_title">
+            Defect Pareto &amp; Wafer Map: Directional Signatures
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_pareto_subtitle">
+            Explore the 80/20 distribution of defect categories and click to
+            inspect corresponding wafer surface signature patterns.
+          </p>
+        </div>
+
+        <div class="faym-pareto-grid">
+          <!-- Left: Interactive Pareto Chart -->
+          <div class="faym-chart-card">
+            <h4 style="margin: 0 0 12px; font-size: 14px; font-weight: 700">
+              Defect Category Pareto (N=100) · 点击柱形切换晶圆图
+            </h4>
+            <svg
+              id="faym-pareto-svg"
+              viewBox="0 0 460 280"
+              class="faym-chart-svg"
+            ></svg>
+            <div style="margin-top: 10px; font-size: 11px; color: var(--ink-3)">
+              * 教学固定数字：Particle 35、Scratch 20、Pattern defect
+              18、Contamination 15、Other 12（合计 100，累计占比
+              35%、55%、73%、88%、100%）。
+            </div>
+          </div>
+
+          <!-- Right: Interactive Wafer Map Display -->
+          <div class="faym-chart-card" style="text-align: center">
+            <div
+              style="
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 8px;
+              "
+            >
+              <h4
+                id="faym-map-pattern-title"
+                style="margin: 0; font-size: 14px; font-weight: 700"
+              >
+                Center Cluster · 中心聚集
+              </h4>
+              <span
+                class="faym-badge"
+                style="background: var(--amber-bg); color: var(--amber)"
+                >示意分布，非诊断</span
+              >
+            </div>
+            <svg
+              id="faym-wafer-svg"
+              viewBox="0 0 280 280"
+              style="
+                width: 220px;
+                height: 220px;
+                margin: 0 auto;
+                display: block;
+              "
+            ></svg>
+            <!-- Non-negotiable Disclaimer Caption (§4.8) -->
+            <p
+              id="faym-map-caption"
+              style="
+                font-size: 12px;
+                color: var(--ink-2);
+                margin: 12px 0 0;
+                line-height: 1.5;
+              "
+            >
+              示意分布，非诊断。分布形状只提示排查方向，不等同于根因。<br />
+              <span style="font-size: 11px; color: var(--ink-3)">
+                Illustrative pattern, not a diagnosis. Spatial pattern only
+                hints at investigation direction and is not a root cause.
+              </span>
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 8: Yield Waterfall Arithmetic Example (§4.9) -->
+      <section class="faym-section" id="yield-waterfall">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Yield Accounting</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_yield_title">
+            Yield Waterfall Structure: Additive Loss Accounting
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_yield_subtitle">
+            An illustrative arithmetic walkthrough showing how wafer starts
+            progress through process scrap, defect losses, and hold rejections
+            to final output.
+          </p>
+        </div>
+
+        <div
+          class="faym-chart-card"
+          style="background: var(--surface-2); border: 1px solid var(--line)"
+        >
+          <div class="faym-wf-row">
+            <div class="faym-wf-label">Wafer Starts (投入)</div>
+            <div class="faym-wf-bar-wrap">
+              <div
+                style="width: 100%; background: var(--accent); height: 100%"
+              ></div>
+            </div>
+            <div class="faym-wf-val">1000 片 (100.0%)</div>
+          </div>
+
+          <div class="faym-wf-row">
+            <div class="faym-wf-label" style="color: var(--red)">
+              - Process Loss (工艺损失)
+            </div>
+            <div class="faym-wf-bar-wrap">
+              <div
+                style="width: 3%; background: var(--red); height: 100%"
+              ></div>
+            </div>
+            <div class="faym-wf-val" style="color: var(--red)">
+              -30 片 (-3.0%)
+            </div>
+          </div>
+
+          <div class="faym-wf-row">
+            <div class="faym-wf-label" style="color: var(--amber)">
+              - Defect Loss (缺陷损失)
+            </div>
+            <div class="faym-wf-bar-wrap">
+              <div
+                style="width: 4%; background: var(--amber); height: 100%"
+              ></div>
+            </div>
+            <div class="faym-wf-val" style="color: var(--amber)">
+              -40 片 (-4.0%)
+            </div>
+          </div>
+
+          <div class="faym-wf-row">
+            <div class="faym-wf-label" style="color: var(--ink-3)">
+              - Metrology Hold/Scrap (量测报废)
+            </div>
+            <div class="faym-wf-bar-wrap">
+              <div
+                style="width: 1%; background: var(--ink-3); height: 100%"
+              ></div>
+            </div>
+            <div class="faym-wf-val" style="color: var(--ink-3)">
+              -10 片 (-1.0%)
+            </div>
+          </div>
+
+          <div
+            style="border-top: 1px dashed var(--line); margin: 12px 0 10px"
+          ></div>
+
+          <div class="faym-wf-row" style="font-weight: 700">
+            <div class="faym-wf-label" style="color: var(--accent)">
+              Qualified Output (合格产出)
+            </div>
+            <div class="faym-wf-bar-wrap">
+              <div
+                style="width: 92%; background: var(--accent); height: 100%"
+              ></div>
+            </div>
+            <div
+              class="faym-wf-val"
+              style="color: var(--accent); font-size: 15px"
+            >
+              920 片 (92.0%)
+            </div>
+          </div>
+        </div>
+
+        <div
+          style="
+            padding: 12px 16px;
+            background: var(--surface-2);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--ink-2);
+            border-left: 3px solid var(--amber);
+          "
+        >
+          <strong>Arithmetic Scope Clarification / 算术口径严谨声明：</strong>
+          <span id="faym-yield-note-text">
+            这是算术示例，仅用于讲 waterfall 的加法结构；92%
+            不是任何真实工厂的良率，不得去掉「示例」二字引用。 This is an
+            arithmetic example only, illustrating the additive structure of the
+            waterfall; 92% is not the yield of any real fab and must not be
+            quoted without the "illustrative" qualifier.
+          </span>
+        </div>
+      </section>
+
+      <!-- Section 9: Neighboring Fab Systems (§4.10) -->
+      <section class="faym-section" id="neighbors">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Ecosystem Integration</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_neighbors_title">
+            Neighboring Fab Systems: Handshakes &amp; Boundaries
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_neighbors_subtitle">
+            How APC, FDC, and metrology integrate with MES, connectivity
+            conduits, equipment PLCs, and enterprise yield management.
+          </p>
+        </div>
+
+        <div class="faym-table-wrap">
+          <table class="faym-table">
+            <thead>
+              <tr>
+                <th style="width: 22%">Neighboring System · 邻居系统</th>
+                <th style="width: 38%">Core Operational Role · 承担角色</th>
+                <th style="width: 40%">
+                  Boundary &amp; Handshake · 边界与交接
+                </th>
+              </tr>
+            </thead>
+            <tbody id="faym-neighbors-tbody">
+              <!-- Dynamically populated from JS with full bilingual support -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 10: Representative Vendor Landscape (§4.11) -->
+      <section class="faym-section" id="vendors">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Industry Landscape</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_vendors_title">
+            Representative Vendor Landscape
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_vendors_subtitle">
+            Commercial process control software platforms and inline metrology
+            equipment manufacturers.
+          </p>
+        </div>
+
+        <!-- Mandatory Disclaimer Before Table (§4.11 / §7) -->
+        <div
+          style="
+            padding: 10px 14px;
+            background: var(--surface-2);
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--ink-2);
+            margin-bottom: 16px;
+            border-left: 3px solid var(--accent);
+          "
+          data-i18n="fab_apc_vendors_disclaimer"
+        >
+          代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative
+          vendors for teaching only, in alphabetical order; not a ranking, not
+          exhaustive, not an endorsement.
+        </div>
+
+        <div class="faym-table-wrap">
+          <table class="faym-table">
+            <thead>
+              <tr>
+                <th style="width: 28%">Category · 类别</th>
+                <th style="width: 32%">Representative Vendors · 代表厂商</th>
+                <th style="width: 40%">Primary Domain · 主营业务范畴</th>
+              </tr>
+            </thead>
+            <tbody id="faym-vendors-tbody">
+              <!-- Dynamically populated from JS in strict alphabetical order -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Mandatory Statement After Table (§4.11) -->
+        <p
+          style="font-size: 12px; color: var(--ink-3); margin: 12px 0 0"
+          data-i18n="fab_apc_vendors_afterword"
+        >
+          厂商名不等于某家工厂实际在用的系统，同一厂商可横跨多个类别。Vendor
+          names do not imply actual deployment in any specific fab; individual
+          vendors often span multiple functional categories.
+        </p>
+      </section>
+
+      <!-- Section 11: Glossary (§4.12) -->
+      <section class="faym-section" id="glossary">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Knowledge Reference</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_glossary_title">
+            Glossary of APC, Yield &amp; Metrology Terms
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_glossary_subtitle">
+            Essential terminology for process control, equipment health
+            monitoring, and defect analysis.
+          </p>
+        </div>
+
+        <div class="faym-table-wrap">
+          <table class="faym-table">
+            <thead>
+              <tr>
+                <th style="width: 14%">Term · 术语</th>
+                <th style="width: 26%">Full Name · 中英文全称</th>
+                <th style="width: 60%">Plain Definition · 核心定义</th>
+              </tr>
+            </thead>
+            <tbody id="faym-glossary-tbody">
+              <!-- Dynamically populated from JS -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Section 12: Complete Accessible Text Edition (§4.13) -->
+      <section class="faym-section" id="static-text-edition">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Screen Reader &amp; SEO Reference</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_text_ver_title">
+            Complete Accessible Text Edition
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_text_ver_subtitle">
+            Full static reference of the closed loop, SPC baseline values, FDC
+            rules, APC worked example, Pareto counts, and yield waterfall
+            without JavaScript.
+          </p>
+        </div>
+
+        <div class="faym-static-text" id="faym-static-text-content">
+          <!-- Populated by JS for full bilingual completeness -->
+        </div>
+      </section>
+
+      <!-- Section 13: Educational Quiz (§4.14 - P1) -->
+      <section class="faym-section" id="quiz">
+        <div class="faym-sec-header">
+          <div class="faym-sec-tag">Conceptual Check</div>
+          <h2 class="faym-sec-title" data-i18n="fab_apc_quiz_title">
+            Interactive Knowledge Check
+          </h2>
+          <p class="faym-sec-desc" data-i18n="fab_apc_quiz_subtitle">
+            Three conceptual questions to verify your understanding of SPC vs
+            FDC, APC feedback/feedforward, and wafer map interpretation.
+          </p>
+        </div>
+
+        <div id="faym-quiz-container">
+          <!-- Dynamically populated from JS -->
+        </div>
+      </section>
+
+      <!-- Sponsorship Mount (§4.15 / §8) -->
+      <aside id="faym-sponsorship-container"></aside>
+
+      <!-- Footer Hub Return Link (§5) -->
+      <footer class="faym-hub-footer">
+        <a
+          href="fab-operations.html"
+          class="faym-hub-link"
+          data-i18n="fab_apc_back_hub"
+        >
+          ← Back to Fab Operations Hub
+        </a>
+        <div style="font-size: 12px; color: var(--ink-3)">
+          Related:
+          <a href="twin.html" class="faym-link"
+            >300mm Fab Twin (Educational Simulation)</a
+          >
+          ·
+          <a href="fab-data-layer.html" class="faym-link">Fab Data Layer</a>
+          ·
+          <a href="fab-mes.html" class="faym-link">MES &amp; Dispatch</a>
+        </div>
+      </footer>
+    </main>
+
+    <!-- Core Scripts -->
+    <script src="js/translations.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/site-nav.js"></script>
+
+    <!-- Page Logic Script -->
+    <script>
+      (function () {
+        "use strict";
+
+        let pageData = null;
+        let currentLang = "en";
+        let curSpcView = "full"; // 'full' or 'baseline'
+        let curFdcView = "faulty"; // 'faulty', 'good', or 'both'
+        let curParetoIdx = 0; // selected Pareto item
+        let highlightRule1 = true;
+
+        // Helper to detect current language
+        function getLang() {
+          const stored = localStorage.getItem("semicon_lang");
+          if (stored) return stored.startsWith("zh") ? "zh" : "en";
+          const nav = navigator.language || "en";
+          return nav.startsWith("zh") ? "zh" : "en";
+        }
+
+        // Fetch page teaching data
+        async function loadData() {
+          try {
+            const res = await fetch("data/fab-apc-yield-metrology.json");
+            pageData = await res.json();
+          } catch (e) {
+            console.error("Failed to load fab-apc-yield-metrology.json", e);
+          }
+        }
+
+        // ==========================================
+        // 1. Six Concepts Comparison Table
+        // ==========================================
+        const CONCEPTS = [
+          {
+            name_en: "SPC (Statistical Process Control)",
+            name_zh: "SPC (统计过程控制)",
+            def_en:
+              "Statistical methodology monitoring whether process parameter outcomes across production lots remain in statistical control over time.",
+            def_zh:
+              "使用控制图与数理统计方法，持续监测工艺产出参数在批次间是否处于受控稳定状态。",
+            mech_en:
+              "Control charts (UCL, LCL, Center Line) and pattern rules (e.g. Nelson rule subsets).",
+            mech_zh:
+              "控制图（UCL、LCL、中心线）与统计判定规则（如 Nelson 规则子集）。",
+            scope_en:
+              "Monitors cross-lot stability; does not analyze in-situ sensor waveforms or update recipe setpoints directly.",
+            scope_zh:
+              "监测批次间统计稳定性；不分析工艺过程中的高频传感器波形，亦不直接修改 recipe 设定值。",
+          },
+          {
+            name_en: "FDC (Fault Detection & Classification)",
+            name_zh: "FDC (故障检测与分类)",
+            def_en:
+              "Real-time monitoring of high-frequency tool sensor telemetry (pressure, RF, temperature) during each wafer run to detect tool hardware excursions.",
+            def_zh:
+              "在晶圆加工过程中原位采集高频传感器 Trace 数据（压力、射频、温度等），检出设备硬件异常。",
+            mech_en:
+              "Sensor trace envelope deviation, multivariate principal component analysis (PCA), fault classifiers.",
+            mech_zh:
+              "传感器波形包络线偏离、多元主成分分析 (PCA) 与故障特征分类器。",
+            scope_en:
+              "Diagnoses tool hardware anomalies during processing; does not measure wafer geometry or calculate fab yield.",
+            scope_zh:
+              "诊断工艺执行期间的设备异常；不量测晶圆物理几何尺寸，亦不核算全厂良率。",
+          },
+          {
+            name_en: "APC (Advanced Process Control)",
+            name_zh: "APC (先进过程控制)",
+            def_en:
+              "Automated closed-loop compensation system dynamically adjusting recipe setpoints (e.g. etch time) between runs.",
+            def_zh:
+              "在工艺批次之间自动闭环微调机台 recipe 参数设定（如刻蚀时间），以抵消设备漂移与来料波动。",
+            mech_en:
+              "Run-to-run (R2R) feedback control (post-metrology updates next lot) and feedforward control (incoming metrology tunes current lot).",
+            mech_zh:
+              "Run-to-run (R2R) 反馈控制（量测更新后序批次）与前馈控制（上游量测预调当前批次）。",
+            scope_en:
+              "Calculates updated recipe setpoints; does not replace the tool's embedded sub-second hardware PID loops.",
+            scope_zh:
+              "计算并下发 recipe 设定值；不替代机台内部亚毫秒级的底层硬件 PID 控制器。",
+          },
+          {
+            name_en: "Metrology (量测与检测)",
+            name_zh: "量测与检测 (Metrology & Inspection)",
+            def_en:
+              "Physical measurements of wafer geometry, film properties, alignment accuracy, and surface defect counts.",
+            def_zh:
+              "对加工后的晶圆进行物理几何尺寸、薄膜特性、层间对准精度与表面缺陷数量的量化检验。",
+            mech_en:
+              "CD-SEM, optical scatterometry, spectroscopic ellipsometry, brightfield/darkfield defect scanners.",
+            mech_zh:
+              "CD-SEM 扫描电镜、光学散射仪、光谱椭偏仪、明场/暗场光学缺陷扫描仪。",
+            scope_en:
+              "Provides verification ground truth to SPC, APC, and MES; does not make control or tuning decisions on its own.",
+            scope_zh:
+              "为 SPC、APC 与 MES 提供客观验证真值；自身不执行参数调节或闭环控制决策。",
+          },
+          {
+            name_en: "Defect Analysis (缺陷分析)",
+            name_zh: "缺陷分析 (Defect Analysis)",
+            def_en:
+              "Systematic classification, Pareto ranking, and spatial wafer map clustering of detected physical surface anomalies.",
+            def_zh:
+              "对检出的表面物理缺陷进行模式分类、Pareto 80/20 频次排序与晶圆空间几何分布聚类。",
+            mech_en:
+              "Pareto cumulative ranking, 2D wafer map spatial signatures (center cluster, edge ring, scratch line, random).",
+            mech_zh:
+              "Pareto 累计排序、二维 Wafer Map 空间指纹特征（中心聚集、边缘环、划痕线、随机散布）。",
+            scope_en:
+              "Provides directional investigation hypotheses; spatial patterns alone are illustrative and not definitive root cause diagnoses.",
+            scope_zh:
+              "提供排查假设与方向指引；分布形状仅为空间示意，绝不等于最终确诊根因。",
+          },
+          {
+            name_en: "Yield (制造良率)",
+            name_zh: "制造良率 (Semiconductor Yield)",
+            def_en:
+              "The percentage of non-defective, fully functional chips (or undamaged wafers) delivered relative to total input material started.",
+            def_zh:
+              "产线上最终产出的合格芯片（或合格晶圆）占最初投产物料总量的百分比，是制造竞争力的最终结果度量。",
+            mech_en:
+              "Additive loss accounting (waterfall) and line yield × die sort yield aggregation models.",
+            mech_zh: "加法损耗拆解 (Waterfall) 与芯片分选良率综合核算模型。",
+            scope_en:
+              "A retrospective scorecard measuring fab effectiveness; is a result metric, not an active in-line control actuator.",
+            scope_zh:
+              "全厂制造能力的事后综合度量；是结果性指标，而非实时控制手段。",
+          },
+        ];
+
+        function renderConceptsTable(lang) {
+          const tbody = document.getElementById("faym-concepts-tbody");
+          if (!tbody) return;
+          const isZh = lang === "zh";
+          tbody.innerHTML = CONCEPTS.map(
+            (c) => `
+            <tr>
+              <td><strong>${isZh ? c.name_zh : c.name_en}</strong></td>
+              <td>${isZh ? c.def_zh : c.def_en}</td>
+              <td><span style="font-family:'IBM Plex Mono',monospace;font-size:12px;">${isZh ? c.mech_zh : c.mech_en}</span></td>
+              <td style="color:var(--ink);">${isZh ? c.scope_zh : c.scope_en}</td>
+            </tr>
+          `,
+          ).join("");
+        }
+
+        // ==========================================
+        // 2. Closed Loop Diagram & Step Inventory
+        // ==========================================
+        const LOOP_STEPS = [
+          {
+            num: 1,
+            title_en: "Process Tool Execution",
+            title_zh: "工艺设备执行",
+            desc_en:
+              "Tool chamber processes wafer with current recipe parameters.",
+            desc_zh: "工艺设备按当前 recipe 设定值对晶圆进行加工。",
+          },
+          {
+            num: 2,
+            title_en: "Telemetry & Traces via Connectivity Layer",
+            title_zh: "Trace 与传感器数据经连接层采集",
+            desc_en:
+              "High-frequency in-situ sensor telemetry (pressure, RF, temperature) streams to data layer.",
+            desc_zh:
+              "原位传感器数据（压力、RF 功率、温度）经 SECS/GEM 或 EDA 连接层传输至数据层。",
+          },
+          {
+            num: 3,
+            title_en: "FDC Evaluation & Fault Detection",
+            title_zh: "FDC 判断与故障监测",
+            desc_en:
+              "FDC evaluates trace envelopes; detects persistent deviation and prevents chamber damage.",
+            desc_zh:
+              "FDC 实时评估传感器包络线偏离；检出机台异常并防范整批晶圆报废。",
+          },
+          {
+            num: 4,
+            title_en: "SPC Control Chart Monitoring",
+            title_zh: "SPC 控制图统计监测",
+            desc_en:
+              "Batch parameters plotted on control charts against baseline UCL/LCL to verify stability.",
+            desc_zh:
+              "批次参数绘制于控制图中，依据基线 UCL/LCL 验证工艺统计受控状态。",
+          },
+          {
+            num: 5,
+            title_en: "APC Run-to-Run Tuning",
+            title_zh: "APC 闭环调整",
+            desc_en:
+              "APC algorithm calculates proportional adjustment (-k × error) for tool recipe.",
+            desc_zh:
+              "APC 算法根据量测误差计算比例调节量（-k × 误差），生成下一 recipe 设定。",
+          },
+          {
+            num: 6,
+            title_en: "Next Lot Recipe Updated",
+            title_zh: "下一 Lot 的 Recipe 更新",
+            desc_en:
+              "Tool receives compensated recipe setpoints for subsequent wafer lot processing.",
+            desc_zh:
+              "机台接收经过 APC 补偿后的新 recipe 设定值，准备执行下一批次。",
+          },
+          {
+            num: 7,
+            title_en: "Metrology Verification",
+            title_zh: "量测验证",
+            desc_en:
+              "CD-SEM, overlay, and film thickness verify physical critical dimensions.",
+            desc_zh:
+              "CD-SEM、套刻对准与膜厚量测对晶圆实际物理几何尺寸进行客观验证。",
+          },
+          {
+            num: 8,
+            title_en: "Defect Inspection & Attribution",
+            title_zh: "缺陷分析与归因提示",
+            desc_en:
+              "Inspection tools categorize defects and map 2D wafer spatial signature patterns.",
+            desc_zh:
+              "缺陷扫描机台对缺陷进行分类，并绘制 2D Wafer Map 空间分布指纹以提示排查方向。",
+          },
+          {
+            num: 9,
+            title_en: "Yield Aggregation",
+            title_zh: "良率汇总核算",
+            desc_en:
+              "Yield analytics compiles cumulative line and die yield waterfall.",
+            desc_zh:
+              "良率管理分析系统汇总工艺损耗、缺陷损失与最终合格良率 Waterfall。",
+          },
+          {
+            num: 10,
+            title_en: "MES Disposition & Action (Hold / Release)",
+            title_zh: "回到工艺 / 设备 / MES 处置 (Hold / 放行)",
+            desc_en:
+              "In-spec lots advance to next route step; excursions trigger automated MES Hold for review.",
+            desc_zh:
+              "合格批次自动放行进入下一道工步；异常触发 MES 自动 Hold 扣留并等待工程排查。",
+          },
+        ];
+
+        function renderClosedLoopSvg() {
+          const svg = document.getElementById("faym-loop-svg");
+          if (!svg) return;
+          const isZh = currentLang === "zh";
+
+          // 10 nodes laid out horizontally in 2 rows of 5 nodes
+          const row1 = LOOP_STEPS.slice(0, 5);
+          const row2 = LOOP_STEPS.slice(5, 10);
+
+          let html = `
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-fit">
+                <path d="M 0 1 L 8 5 L 0 9 z" fill="var(--accent)" />
+              </marker>
+            </defs>
+          `;
+
+          // Row 1: Left to Right
+          row1.forEach((st, i) => {
+            const x = 30 + i * 210;
+            const y = 20;
+            html += `
+              <g transform="translate(${x}, ${y})">
+                <rect width="180" height="70" rx="8" fill="var(--surface-2)" stroke="var(--line)" stroke-width="1.5"/>
+                <circle cx="20" cy="20" r="10" fill="var(--accent)" />
+                <text x="20" y="24" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle" font-family="'IBM Plex Mono', monospace">${st.num}</text>
+                <text x="36" y="24" fill="var(--ink)" font-size="12" font-weight="700">${isZh ? st.title_zh : st.title_en}</text>
+                <text x="12" y="48" fill="var(--ink-2)" font-size="10" width="160">
+                  ${(isZh ? st.desc_zh : st.desc_en).substring(0, 36)}...
+                </text>
+              </g>
+            `;
+            if (i < 4) {
+              html += `<line x1="${x + 180}" y1="55" x2="${x + 210}" y2="55" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>`;
+            }
+          });
+
+          // Connector Row 1 to Row 2
+          html += `
+            <path d="M 960 90 L 960 125 L 870 125 L 870 140" fill="none" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>
+          `;
+
+          // Row 2: Right to Left (Nodes 6 to 10)
+          row2.forEach((st, i) => {
+            const x = 30 + (4 - i) * 210;
+            const y = 140;
+            html += `
+              <g transform="translate(${x}, ${y})">
+                <rect width="180" height="70" rx="8" fill="var(--surface-2)" stroke="var(--line)" stroke-width="1.5"/>
+                <circle cx="20" cy="20" r="10" fill="${st.num === 10 ? "var(--amber)" : "var(--accent)"}" />
+                <text x="20" y="24" fill="#ffffff" font-size="11" font-weight="700" text-anchor="middle" font-family="'IBM Plex Mono', monospace">${st.num}</text>
+                <text x="36" y="24" fill="var(--ink)" font-size="12" font-weight="700">${isZh ? st.title_zh : st.title_en}</text>
+                <text x="12" y="48" fill="var(--ink-2)" font-size="10">
+                  ${(isZh ? st.desc_zh : st.desc_en).substring(0, 36)}...
+                </text>
+              </g>
+            `;
+            if (i < 4) {
+              html += `<line x1="${x}" y1="175" x2="${x - 30}" y2="175" stroke="var(--accent)" stroke-width="2" marker-end="url(#arrow)"/>`;
+            }
+          });
+
+          // Feedback loop from Node 10 back to Node 1
+          html += `
+            <path d="M 30 175 L 10 175 L 10 55 L 25 55" fill="none" stroke="var(--amber)" stroke-dasharray="4,4" stroke-width="2" marker-end="url(#arrow)"/>
+          `;
+
+          svg.innerHTML = html;
+
+          // Render Text Inventory List
+          const listEl = document.getElementById("faym-loop-steps-list");
+          if (listEl) {
+            listEl.innerHTML = LOOP_STEPS.map(
+              (st) => `
+              <li>
+                <strong>${isZh ? st.title_zh : st.title_en}</strong>:
+                ${isZh ? st.desc_zh : st.desc_en}
+              </li>
+            `,
+            ).join("");
+          }
+        }
+
+        // ==========================================
+        // 3. SPC Control Chart Interactive
+        // ==========================================
+        window.setSpcView = function (mode) {
+          curSpcView = mode;
+          document
+            .getElementById("faym-spc-btn-full")
+            .classList.toggle("active", mode === "full");
+          document
+            .getElementById("faym-spc-btn-base")
+            .classList.toggle("active", mode === "baseline");
+          renderSpcChart();
+        };
+
+        window.toggleSpcRuleHighlight = function () {
+          const chk = document.getElementById("faym-spc-rule1-chk");
+          highlightRule1 = chk ? chk.checked : true;
+          renderSpcChart();
+        };
+
+        function renderSpcChart() {
+          const svg = document.getElementById("faym-spc-svg");
+          if (!svg || !pageData || !pageData.spc) return;
+          const spc = pageData.spc;
+          const isZh = currentLang === "zh";
+
+          const baseline = spc.baseline; // 10 points
+          const drift = spc.drift; // 8 points
+          const outlier = spc.outlier; // 2 points
+          const series =
+            curSpcView === "baseline"
+              ? baseline
+              : baseline.concat(drift, outlier);
+
+          const W = 960;
+          const H = 320;
+          const padL = 60;
+          const padR = 120;
+          const padT = 30;
+          const padB = 40;
+          const chartW = W - padL - padR;
+          const chartH = H - padT - padB;
+
+          // Fixed Y Range: 49.0 to 51.5
+          const yMin = 49.2;
+          const yMax = 51.4;
+          const yScale = (v) =>
+            padT + chartH - ((v - yMin) / (yMax - yMin)) * chartH;
+          const xScale = (i) => padL + (i / (series.length - 1 || 1)) * chartW;
+
+          const uclY = yScale(spc.stats.ucl); // 50.6
+          const lclY = yScale(spc.stats.lcl); // 49.4
+          const clY = yScale(spc.stats.center_line); // 50.0
+          const p2sY = yScale(spc.stats.plus_2sigma); // 50.4
+          const m2sY = yScale(spc.stats.minus_2sigma); // 49.6
+
+          let html = `
+            <!-- Background Zone Bands -->
+            <!-- Zone A (+2s to +3s) -->
+            <rect x="${padL}" y="${uclY}" width="${chartW}" height="${p2sY - uclY}" fill="var(--amber)" fill-opacity="0.08" />
+            <!-- Zone A (-3s to -2s) -->
+            <rect x="${padL}" y="${m2sY}" width="${chartW}" height="${lclY - m2sY}" fill="var(--amber)" fill-opacity="0.08" />
+            <!-- Zone B/C (-2s to +2s) -->
+            <rect x="${padL}" y="${p2sY}" width="${chartW}" height="${m2sY - p2sY}" fill="var(--accent)" fill-opacity="0.04" />
+
+            <!-- Control Limit Lines -->
+            <!-- UCL -->
+            <line x1="${padL}" y1="${uclY}" x2="${padL + chartW}" y2="${uclY}" stroke="var(--red)" stroke-dasharray="4,3" stroke-width="1.5" />
+            <text x="${padL + chartW + 8}" y="${uclY + 4}" fill="var(--red)" font-size="11" font-weight="700" font-family="'IBM Plex Mono', monospace">UCL = 50.600 (+3σ)</text>
+
+            <!-- +2σ Line -->
+            <line x1="${padL}" y1="${p2sY}" x2="${padL + chartW}" y2="${p2sY}" stroke="var(--amber)" stroke-dasharray="2,3" stroke-width="1" />
+            <text x="${padL + chartW + 8}" y="${p2sY + 4}" fill="var(--amber)" font-size="10" font-family="'IBM Plex Mono', monospace">+2σ = 50.400</text>
+
+            <!-- Center Line (CL) -->
+            <line x1="${padL}" y1="${clY}" x2="${padL + chartW}" y2="${clY}" stroke="var(--accent)" stroke-width="1.5" />
+            <text x="${padL + chartW + 8}" y="${clY + 4}" fill="var(--accent)" font-size="11" font-weight="700" font-family="'IBM Plex Mono', monospace">CL = 50.000 (x̄)</text>
+
+            <!-- -2σ Line -->
+            <line x1="${padL}" y1="${m2sY}" x2="${padL + chartW}" y2="${m2sY}" stroke="var(--amber)" stroke-dasharray="2,3" stroke-width="1" />
+            <text x="${padL + chartW + 8}" y="${m2sY + 4}" fill="var(--amber)" font-size="10" font-family="'IBM Plex Mono', monospace">-2σ = 49.600</text>
+
+            <!-- LCL -->
+            <line x1="${padL}" y1="${lclY}" x2="${padL + chartW}" y2="${lclY}" stroke="var(--red)" stroke-dasharray="4,3" stroke-width="1.5" />
+            <text x="${padL + chartW + 8}" y="${lclY + 4}" fill="var(--red)" font-size="11" font-weight="700" font-family="'IBM Plex Mono', monospace">LCL = 49.400 (-3σ)</text>
+          `;
+
+          // Segment Division Markers if in full view
+          if (curSpcView === "full") {
+            const xBaseEnd = xScale(9.5);
+            const xDriftEnd = xScale(17.5);
+            html += `
+              <line x1="${xBaseEnd}" y1="${padT}" x2="${xBaseEnd}" y2="${padT + chartH}" stroke="var(--line)" stroke-dasharray="2,2" stroke-width="1"/>
+              <text x="${padL + 20}" y="${padT + 14}" fill="var(--ink-3)" font-size="11" font-weight="700">Baseline (Lots 1–10)</text>
+
+              <line x1="${xDriftEnd}" y1="${padT}" x2="${xDriftEnd}" y2="${padT + chartH}" stroke="var(--line)" stroke-dasharray="2,2" stroke-width="1"/>
+              <text x="${xBaseEnd + 15}" y="${padT + 14}" fill="var(--amber)" font-size="11" font-weight="700">Drift (Lots 11–18)</text>
+              <text x="${xDriftEnd + 6}" y="${padT + 14}" fill="var(--red)" font-size="11" font-weight="700">Outlier (19)</text>
+            `;
+          }
+
+          // Data Line Path
+          const pathPoints = series
+            .map((v, i) => `${xScale(i)},${yScale(v)}`)
+            .join(" L ");
+          html += `<path d="M ${pathPoints}" fill="none" stroke="var(--ink)" stroke-width="1.8" />`;
+
+          // Data Points
+          series.forEach((v, i) => {
+            const x = xScale(i);
+            const y = yScale(v);
+            const lotNum = i + 1;
+            const isOutlier = lotNum === 19 && v > spc.stats.ucl;
+            const isDrift = lotNum >= 11 && lotNum <= 18;
+
+            let fill = "var(--surface)";
+            let stroke = "var(--ink)";
+            let r = 4.5;
+
+            if (isOutlier && highlightRule1) {
+              fill = "var(--red)";
+              stroke = "var(--red)";
+              r = 7;
+            } else if (isDrift && curSpcView === "full") {
+              fill = "var(--amber)";
+              stroke = "var(--amber)";
+            }
+
+            html += `
+              <circle cx="${x}" cy="${y}" r="${r}" fill="${fill}" stroke="${stroke}" stroke-width="2">
+                <title>Lot ${lotNum}: ${v.toFixed(3)} nm</title>
+              </circle>
+              <text x="${x}" y="${padT + chartH + 18}" fill="var(--ink-2)" font-size="10" text-anchor="middle" font-family="'IBM Plex Mono', monospace">${lotNum}</text>
+            `;
+
+            // Annotate Outlier Point
+            if (isOutlier && highlightRule1) {
+              html += `
+                <text x="${x}" y="${y - 12}" fill="var(--red)" font-size="11" font-weight="800" text-anchor="middle" font-family="'IBM Plex Mono', monospace">
+                  Rule 1: ${v.toFixed(1)} > UCL
+                </text>
+              `;
+            }
+          });
+
+          // Axis Y Labels
+          [49.4, 50.0, 50.6, 51.2].forEach((val) => {
+            const y = yScale(val);
+            html += `<text x="${padL - 10}" y="${y + 4}" fill="var(--ink-3)" font-size="10" text-anchor="end" font-family="'IBM Plex Mono', monospace">${val.toFixed(1)}</text>`;
+          });
+
+          svg.innerHTML = html;
+        }
+
+        // ==========================================
+        // 4. FDC Sensor Trace Interactive
+        // ==========================================
+        window.setFdcView = function (mode) {
+          curFdcView = mode;
+          document
+            .getElementById("faym-fdc-btn-faulty")
+            .classList.toggle("active", mode === "faulty");
+          document
+            .getElementById("faym-fdc-btn-good")
+            .classList.toggle("active", mode === "good");
+          document
+            .getElementById("faym-fdc-btn-both")
+            .classList.toggle("active", mode === "both");
+          renderFdcChart();
+        };
+
+        function renderFdcChart() {
+          const svg = document.getElementById("faym-fdc-svg");
+          if (!svg || !pageData || !pageData.fdc) return;
+          const fdc = pageData.fdc;
+          const isZh = currentLang === "zh";
+
+          const W = 960;
+          const H = 300;
+          const padL = 60;
+          const padR = 140;
+          const padT = 30;
+          const padB = 40;
+          const chartW = W - padL - padR;
+          const chartH = H - padT - padB;
+
+          const yMin = 23.5;
+          const yMax = 30.5;
+          const yScale = (v) =>
+            padT + chartH - ((v - yMin) / (yMax - yMin)) * chartH;
+          const xScale = (i) => padL + (i / 29) * chartW;
+
+          const threshY = yScale(fdc.threshold); // 27.0
+          const baseY = yScale(fdc.nominal_baseline); // 25.0
+
+          // Update Status Badge
+          const badgeEl = document.getElementById("faym-fdc-status-badge");
+          if (badgeEl) {
+            if (curFdcView === "good") {
+              badgeEl.innerHTML = `
+                <span class="faym-status-pill faym-status-normal">
+                  ● ${isZh ? "状态正常 (0 报警)" : "STATUS: NORMAL (0 alarms)"}
+                </span>
+              `;
+            } else {
+              badgeEl.innerHTML = `
+                <span class="faym-status-pill faym-status-alarm">
+                  ▲ ${isZh ? "报警触发 (t=19s, 连续 5 点超阈值)" : "ALARM TRIGGERED (t=19s, 5 consec pts > 27.0 mTorr)"}
+                </span>
+              `;
+            }
+          }
+
+          let html = `
+            <!-- Baseline nominal line -->
+            <line x1="${padL}" y1="${baseY}" x2="${padL + chartW}" y2="${baseY}" stroke="var(--ink-3)" stroke-dasharray="3,3" stroke-width="1"/>
+            <text x="${padL + chartW + 8}" y="${baseY + 4}" fill="var(--ink-3)" font-size="11" font-family="'IBM Plex Mono', monospace">Nominal: 25.0 mTorr</text>
+
+            <!-- Fault Threshold Line -->
+            <line x1="${padL}" y1="${threshY}" x2="${padL + chartW}" y2="${threshY}" stroke="var(--red)" stroke-dasharray="5,3" stroke-width="1.5"/>
+            <text x="${padL + chartW + 8}" y="${threshY + 4}" fill="var(--red)" font-size="11" font-weight="700" font-family="'IBM Plex Mono', monospace">Threshold: 27.0 mTorr</text>
+          `;
+
+          // If faulty or both, highlight the deviation window (pts 15 to 24)
+          if (curFdcView !== "good") {
+            const xDevStart = xScale(14);
+            const xDevEnd = xScale(23);
+            html += `
+              <rect x="${xDevStart}" y="${padT}" width="${xDevEnd - xDevStart}" height="${chartH}" fill="var(--red)" fill-opacity="0.08" />
+              <text x="${xDevStart + 4}" y="${padT + 14}" fill="var(--red)" font-size="10" font-weight="700">Deviation Window (t=15–24s)</text>
+            `;
+          }
+
+          // Good Lot Trace (Green/Teal)
+          if (curFdcView === "good" || curFdcView === "both") {
+            const goodPts = fdc.good_trace
+              .map((v, i) => `${xScale(i)},${yScale(v)}`)
+              .join(" L ");
+            html += `
+              <path d="M ${goodPts}" fill="none" stroke="var(--accent)" stroke-width="2" />
+            `;
+            fdc.good_trace.forEach((v, i) => {
+              html += `<circle cx="${xScale(i)}" cy="${yScale(v)}" r="3" fill="var(--accent)" />`;
+            });
+          }
+
+          // Faulty Lot Trace (Dark/Red)
+          if (curFdcView === "faulty" || curFdcView === "both") {
+            const faultyPts = fdc.faulty_trace
+              .map((v, i) => `${xScale(i)},${yScale(v)}`)
+              .join(" L ");
+            html += `
+              <path d="M ${faultyPts}" fill="none" stroke="var(--ink)" stroke-width="2.2" />
+            `;
+            fdc.faulty_trace.forEach((v, i) => {
+              const isOver = v > fdc.threshold;
+              const isAlarmPoint = i === 18; // t = 19 (19th point, index 18)
+              const ptColor = isOver ? "var(--red)" : "var(--ink)";
+              const ptR = isAlarmPoint ? 7 : isOver ? 4.5 : 3;
+              html += `<circle cx="${xScale(i)}" cy="${yScale(v)}" r="${ptR}" fill="${isAlarmPoint ? "var(--red)" : ptColor}" />`;
+
+              if (isAlarmPoint) {
+                html += `
+                  <!-- Alarm callout arrow & text -->
+                  <line x1="${xScale(i)}" y1="${yScale(v)}" x2="${xScale(i)}" y2="${yScale(v) - 30}" stroke="var(--red)" stroke-width="1.5"/>
+                  <text x="${xScale(i)}" y="${yScale(v) - 36}" fill="var(--red)" font-size="11" font-weight="800" text-anchor="middle" font-family="'IBM Plex Mono', monospace">
+                    ▲ FDC ALARM (Point 5 > Thresh @ t=19s)
+                  </text>
+                `;
+              }
+            });
+          }
+
+          // X Axis ticks (t = 1 to 30)
+          for (let i = 0; i < 30; i += 5) {
+            html += `<text x="${xScale(i)}" y="${padT + chartH + 18}" fill="var(--ink-3)" font-size="10" text-anchor="middle" font-family="'IBM Plex Mono', monospace">${i + 1}s</text>`;
+          }
+
+          // Y Axis ticks
+          [24.0, 25.0, 27.0, 29.0].forEach((val) => {
+            html += `<text x="${padL - 10}" y="${yScale(val) + 4}" fill="var(--ink-3)" font-size="10" text-anchor="end" font-family="'IBM Plex Mono', monospace">${val.toFixed(1)}</text>`;
+          });
+
+          svg.innerHTML = html;
+        }
+
+        // ==========================================
+        // 5. APC Run-to-Run Interactive
+        // ==========================================
+        window.updateApcCalc = function (measured) {
+          const yMeas = parseFloat(measured);
+          const yTarget = 50.0;
+          const k = 0.5;
+          const err = yMeas - yTarget;
+          const adj = -k * err;
+          const baseRecipe = 100.0;
+          const nextSetting = baseRecipe + adj;
+
+          document.getElementById("faym-apc-meas-val").textContent =
+            yMeas.toFixed(1);
+          document.getElementById("faym-apc-kpi-err").textContent =
+            (err >= 0 ? "+" : "") + err.toFixed(1) + " nm";
+          document.getElementById("faym-apc-kpi-adj").textContent =
+            (adj >= 0 ? "+" : "") + adj.toFixed(2);
+          document.getElementById("faym-apc-kpi-next").textContent =
+            nextSetting.toFixed(2);
+        };
+
+        window.resetApcWorkedExample = function () {
+          const slider = document.getElementById("faym-apc-slider");
+          if (slider) {
+            slider.value = "52.0";
+            updateApcCalc(52.0);
+          }
+        };
+
+        // ==========================================
+        // 6. Metrology Types Table
+        // ==========================================
+        function renderMetrologyTable(lang) {
+          const tbody = document.getElementById("faym-metrology-tbody");
+          if (!tbody || !pageData || !pageData.metrology_types) return;
+          const isZh = lang === "zh";
+
+          tbody.innerHTML = pageData.metrology_types
+            .map(
+              (m) => `
+            <tr>
+              <td><strong>${isZh ? m.name_zh : m.name_en}</strong></td>
+              <td>${isZh ? m.measures_zh : m.measures_en}</td>
+              <td>${isZh ? m.when_zh : m.when_en}</td>
+              <td style="color:var(--ink-2);font-size:12px;">${isZh ? m.limitations_zh : m.limitations_en}</td>
+            </tr>
+          `,
+            )
+            .join("");
+        }
+
+        // ==========================================
+        // 7. Defect Pareto & Wafer Map
+        // ==========================================
+        window.selectParetoItem = function (idx) {
+          curParetoIdx = idx;
+          renderParetoChart();
+          renderWaferMap();
+        };
+
+        function renderParetoChart() {
+          const svg = document.getElementById("faym-pareto-svg");
+          if (!svg || !pageData || !pageData.pareto) return;
+          const data = pageData.pareto;
+          const isZh = currentLang === "zh";
+
+          const W = 460;
+          const H = 280;
+          const padL = 40;
+          const padR = 40;
+          const padT = 30;
+          const padB = 50;
+          const chartW = W - padL - padR;
+          const chartH = H - padT - padB;
+
+          const maxCount = 40;
+          const barWidth = 42;
+          const barGap = (chartW - data.length * barWidth) / (data.length - 1);
+
+          let html = `
+            <!-- Left Y Axis (Count) -->
+            <line x1="${padL}" y1="${padT}" x2="${padL}" y2="${padT + chartH}" stroke="var(--line)" />
+            <!-- Right Y Axis (Cumulative %) -->
+            <line x1="${padL + chartW}" y1="${padT}" x2="${padL + chartW}" y2="${padT + chartH}" stroke="var(--line)" />
+          `;
+
+          // Bars & Bar Labels
+          data.forEach((d, i) => {
+            const x = padL + i * (barWidth + barGap);
+            const barH = (d.count / maxCount) * chartH;
+            const y = padT + chartH - barH;
+            const isSelected = i === curParetoIdx;
+
+            const fill = isSelected ? "var(--accent)" : "var(--surface-2)";
+            const stroke = isSelected ? "var(--accent-ink)" : "var(--line)";
+
+            html += `
+              <rect class="faym-interactive-bar" x="${x}" y="${y}" width="${barWidth}" height="${barH}" rx="4"
+                    fill="${fill}" stroke="${stroke}" stroke-width="${isSelected ? 2 : 1}"
+                    onclick="selectParetoItem(${i})">
+                <title>${isZh ? d.type_zh : d.type_en}: ${d.count} (${d.pct}%)</title>
+              </rect>
+              <text x="${x + barWidth / 2}" y="${y - 6}" fill="${isSelected ? "var(--accent)" : "var(--ink)"}" font-size="11" font-weight="700" text-anchor="middle" font-family="'IBM Plex Mono', monospace">
+                ${d.count}
+              </text>
+              <text x="${x + barWidth / 2}" y="${padT + chartH + 16}" fill="var(--ink)" font-size="11" font-weight="${isSelected ? 700 : 500}" text-anchor="middle">
+                ${isZh ? d.type_zh : d.type_en}
+              </text>
+              <text x="${x + barWidth / 2}" y="${padT + chartH + 30}" fill="var(--ink-3)" font-size="10" text-anchor="middle" font-family="'IBM Plex Mono', monospace">
+                ${d.pct}%
+              </text>
+            `;
+          });
+
+          // Cumulative Percentage Curve
+          const cumPoints = data
+            .map((d, i) => {
+              const x = padL + i * (barWidth + barGap) + barWidth / 2;
+              const y = padT + chartH - (d.cum_pct / 100) * chartH;
+              return `${x},${y}`;
+            })
+            .join(" L ");
+
+          html += `
+            <path d="M ${cumPoints}" fill="none" stroke="var(--amber)" stroke-width="2" />
+          `;
+
+          data.forEach((d, i) => {
+            const x = padL + i * (barWidth + barGap) + barWidth / 2;
+            const y = padT + chartH - (d.cum_pct / 100) * chartH;
+            html += `
+              <circle cx="${x}" cy="${y}" r="4" fill="var(--amber)" stroke="var(--surface)" stroke-width="1.5" />
+              <text x="${x}" y="${y - 8}" fill="var(--amber)" font-size="10" font-weight="700" text-anchor="middle" font-family="'IBM Plex Mono', monospace">
+                ${d.cum_pct}%
+              </text>
+            `;
+          });
+
+          svg.innerHTML = html;
+        }
+
+        function renderWaferMap() {
+          const svg = document.getElementById("faym-wafer-svg");
+          if (!svg || !pageData || !pageData.pareto) return;
+          const curItem = pageData.pareto[curParetoIdx];
+          const patternKey = curItem.map_pattern;
+          const patMeta = pageData.wafer_maps[patternKey];
+          const isZh = currentLang === "zh";
+
+          // Update Pattern Title & Explanations
+          const titleEl = document.getElementById("faym-map-pattern-title");
+          if (titleEl && patMeta) {
+            titleEl.textContent = `${isZh ? patMeta.title_zh : patMeta.title_en} · ${isZh ? curItem.type_zh : curItem.type_en}`;
+          }
+
+          const captionEl = document.getElementById("faym-map-caption");
+          if (captionEl && patMeta) {
+            captionEl.innerHTML = `
+              <strong>${isZh ? patMeta.directions_zh : patMeta.directions_en}</strong><br />
+              <span style="font-size: 11px; color: var(--ink-3);">
+                ${isZh ? patMeta.caption_zh : patMeta.caption_en}
+              </span>
+            `;
+          }
+
+          const cx = 140;
+          const cy = 140;
+          const R = 110;
+
+          let html = `
+            <!-- Silicon Wafer Disc -->
+            <circle cx="${cx}" cy="${cy}" r="${R}" fill="var(--surface-2)" stroke="var(--line)" stroke-width="2"/>
+            <!-- Wafer Notch (Bottom) -->
+            <path d="M ${cx - 10} ${cy + R} A 10 10 0 0 1 ${cx + 10} ${cy + R}" fill="var(--surface)" stroke="var(--line)" stroke-width="2" />
+          `;
+
+          // Generate pattern dots
+          if (patternKey === "center_cluster") {
+            // Defects concentrated in center
+            for (let i = 0; i < 45; i++) {
+              const r = Math.random() * 40;
+              const th = Math.random() * Math.PI * 2;
+              const x = cx + r * Math.cos(th);
+              const y = cy + r * Math.sin(th);
+              html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="var(--accent)" opacity="0.85" />`;
+            }
+          } else if (patternKey === "edge_ring") {
+            // Circular edge ring
+            for (let i = 0; i < 60; i++) {
+              const r = 90 + Math.random() * 15;
+              const th = Math.random() * Math.PI * 2;
+              const x = cx + r * Math.cos(th);
+              const y = cy + r * Math.sin(th);
+              html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="var(--amber)" opacity="0.85" />`;
+            }
+          } else if (patternKey === "scratch_line") {
+            // Scratch line across disc
+            for (let i = 0; i < 40; i++) {
+              const t = (i / 40) * 160 - 80;
+              const x = cx + t + (Math.random() * 4 - 2);
+              const y =
+                cy + 0.6 * t + Math.sin(t / 20) * 8 + (Math.random() * 4 - 2);
+              html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.5" fill="var(--red)" opacity="0.85" />`;
+            }
+          } else {
+            // Random uniform distribution
+            for (let i = 0; i < 40; i++) {
+              const r = Math.sqrt(Math.random()) * (R - 10);
+              const th = Math.random() * Math.PI * 2;
+              const x = cx + r * Math.cos(th);
+              const y = cy + r * Math.sin(th);
+              html += `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.2" fill="var(--ink)" opacity="0.75" />`;
+            }
+          }
+
+          svg.innerHTML = html;
+        }
+
+        // ==========================================
+        // 8. Neighboring Systems Comparison
+        // ==========================================
+        function renderNeighborsTable(lang) {
+          const tbody = document.getElementById("faym-neighbors-tbody");
+          if (!tbody || !pageData || !pageData.neighbors) return;
+          const isZh = lang === "zh";
+
+          tbody.innerHTML = pageData.neighbors
+            .map((n) => {
+              const linkHtml = n.link
+                ? `<br /><a href="${n.link}" class="faym-link" style="font-size:11px;">→ Explore ${n.link.replace(".html", "")}</a>`
+                : "";
+              return `
+              <tr>
+                <td><strong>${isZh ? n.system_zh : n.system_en}</strong>${linkHtml}</td>
+                <td>${isZh ? n.role_zh : n.role_en}</td>
+                <td style="color:var(--ink);">${isZh ? n.boundary_zh : n.boundary_en}</td>
+              </tr>
+            `;
+            })
+            .join("");
+        }
+
+        // ==========================================
+        // 9. Vendor Landscape (Strict Alphabetical Order)
+        // ==========================================
+        function renderVendorsTable(lang) {
+          const tbody = document.getElementById("faym-vendors-tbody");
+          if (!tbody || !pageData || !pageData.vendors) return;
+          const isZh = lang === "zh";
+          const apcList = pageData.vendors.apc_fdc_yield || [];
+          const metroList = pageData.vendors.metrology_inspection || [];
+
+          let rows = [];
+
+          apcList.forEach((v) => {
+            rows.push(`
+              <tr>
+                <td><span class="faym-badge">APC / FDC / Yield</span></td>
+                <td><strong>${v.name}</strong></td>
+                <td>${isZh ? v.category_zh : v.category_en}</td>
+              </tr>
+            `);
+          });
+
+          metroList.forEach((v) => {
+            rows.push(`
+              <tr>
+                <td><span class="faym-badge" style="background:var(--surface);color:var(--ink-2);">Metrology &amp; Inspection</span></td>
+                <td><strong>${v.name}</strong></td>
+                <td>${isZh ? v.category_zh : v.category_en}</td>
+              </tr>
+            `);
+          });
+
+          tbody.innerHTML = rows.join("");
+        }
+
+        // ==========================================
+        // 10. Glossary
+        // ==========================================
+        function renderGlossary(lang) {
+          const tbody = document.getElementById("faym-glossary-tbody");
+          if (!tbody || !pageData || !pageData.glossary) return;
+          const isZh = lang === "zh";
+
+          tbody.innerHTML = pageData.glossary
+            .map(
+              (g) => `
+            <tr>
+              <td><span style="font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--accent);">${g.term}</span></td>
+              <td><strong>${isZh ? g.full_zh : g.full_en}</strong><br /><span style="font-size:11px;color:var(--ink-3);">${isZh ? g.full_en : g.full_zh}</span></td>
+              <td>${isZh ? g.def_zh : g.def_en}</td>
+            </tr>
+          `,
+            )
+            .join("");
+        }
+
+        // ==========================================
+        // 11. Accessible Static Text Edition (§4.13)
+        // ==========================================
+        function renderStaticTextEdition(lang) {
+          const el = document.getElementById("faym-static-text-content");
+          if (!el) return;
+          const isZh = lang === "zh";
+
+          el.innerHTML = `
+            <h4>1. Closed-Loop Process Flow · 闭环因果流程清单</h4>
+            <p>${
+              isZh
+                ? "工艺设备按设定值执行 → 原位传感器经 SECS/GEM 或 EDA 连接层传输 Trace → FDC 实时检测偏离并评估设备健康 → SPC 控制图根据基线限度判断统计受控状态 → APC 算法计算比例微调量（-k × 误差）→ 下一批次 Recipe 设定更新 → CD-SEM / 套刻 / 膜厚量测验证物理几何尺寸 → 缺陷扫描分类并生成 Wafer Map 空间指纹 → 良率管理系统汇总 Waterfall 损耗 → 回到工艺 / 设备 / MES 处置（正常放行或触发 Hold 挂起）。"
+                : "Process Tool executes recipe → In-situ sensor traces flow through SECS/GEM or EDA connectivity layer → FDC detects trace deviation and evaluates chamber health → SPC charts check statistical process stability against baseline limits → APC algorithm computes proportional correction (-k × error) → Next lot recipe setpoint updated → Inline metrology verifies physical dimensions (CD, overlay, film) → Defect inspection classifies surface anomalies and generates 2D wafer maps → Yield management aggregates waterfall loss breakdown → Closed loop returns to Process / Equipment / MES disposition (lot release or automated hold)."
+            }</p>
+
+            <h4>2. SPC Baseline &amp; Nelson Rule Values · SPC 基线数据与判定结果</h4>
+            <p>
+              ${
+                isZh
+                  ? "基线段（Lots 1–10 序列）：[50.2, 49.8, 50.3, 49.7, 50.1, 49.9, 50.2, 49.8, 50.0, 50.0]。<br />" +
+                    "基线统计量：样本量 N=10，基线均值 x̄ = 50.000，样本标准差 s = 0.200（自由度 9）。<br />" +
+                    "控制限（严格只基于基线段计算）：中心线 CL = 50.000，UCL = 50.0 + 3×0.2 = 50.600，LCL = 50.0 - 3×0.2 = 49.400。<br />" +
+                    "漂移段（Lots 11–18）：均值平缓上移，全部 8 点均在中心线上侧，触发规则 3（连续 8 点在同侧）；其中 Lots 16–19 连续 3 点中有 2 点超出 2σ (50.400)，触发规则 2。<br />" +
+                    "离群点（Lot 19）：实测值 51.200，超出控制上限 UCL (50.600)，触发规则 1（1 点超出 3σ）。Lot 20 回落至 50.100。"
+                  : "Baseline Segment (Lots 1–10): [50.2, 49.8, 50.3, 49.7, 50.1, 49.9, 50.2, 49.8, 50.0, 50.0].<br />" +
+                    "Baseline Statistics: Count N=10, Baseline Mean x̄ = 50.000, Sample StDev s = 0.200 (ddof=1).<br />" +
+                    "Control Limits (strictly computed from baseline only): Center Line CL = 50.000, UCL = 50.0 + 3×0.2 = 50.600, LCL = 50.0 - 3×0.2 = 49.400.<br />" +
+                    "Drift Segment (Lots 11–18): Upward drift with 8 consecutive points above center line, triggering Rule 3; Lots 16–19 contain 2 of 3 points beyond 2σ (50.400), triggering Rule 2.<br />" +
+                    "Outlier (Lot 19): Value 51.200 exceeds UCL (50.600), triggering Rule 1 (1 point beyond 3σ). Lot 20 returns to 50.100."
+              }
+            </p>
+
+            <h4>3. FDC Alarm Rule &amp; Trigger Moment · FDC 报警规则与触发时刻</h4>
+            <p>
+              ${
+                isZh
+                  ? "监测信号：刻蚀腔体压力 Etch Chamber Pressure (mTorr)。标称基线为 25.0 mTorr，报警阈值为 27.0 mTorr。<br />" +
+                    "报警判定规则：连续 5 个采样点超出 27.0 mTorr 阈值即触发机台健康报警。<br />" +
+                    "判定结果：正常批次（Good Lot）全程在 24.7 至 25.3 mTorr 波动，触发 0 次报警；异常批次（Faulty Lot）在 t=15s 至 24s 发生偏离（升至 27.6–29.1 mTorr），在连续第 5 点（t=19s）精确触发 FDC ALARM 报警并通知 MES 停机排查。"
+                  : "Monitored Signal: Etch Chamber Pressure (mTorr). Nominal baseline: 25.0 mTorr, threshold: 27.0 mTorr.<br />" +
+                    "Alarm Rule: Trigger alarm when signal exceeds 27.0 mTorr for 5 consecutive sample points.<br />" +
+                    "Result: Good lot trace hovers normally between 24.7 and 25.3 mTorr (0 alarms); Faulty lot trace suffers excursion from t=15s to 24s (27.6–29.1 mTorr), triggering FDC ALARM at exactly t=19s (the 5th consecutive point exceeding threshold)."
+              }
+            </p>
+
+            <h4>4. APC Formula &amp; Worked Example · APC 公式与算例</h4>
+            <p>
+              ${
+                isZh
+                  ? "教学公式：下一 recipe 调整量 = -k × (实测量测值 − 目标值)，其中增益系数 k = 0.5。<br />" +
+                    "标准算例：目标值 50.0 nm，实测值 52.0 nm，误差 = +2.0 nm，调整量 = -0.5 × (52.0 − 50.0) = -1.0。原 recipe 设定为 100，下一批次设定为 100 + (-1.0) = 99。"
+                  : "Teaching Formula: Next Recipe Adjustment = -k × (Measured Value - Target Value), with teaching gain k = 0.5.<br />" +
+                    "Worked Example: Target = 50.0 nm, Measured = 52.0 nm, Error = +2.0 nm, Adjustment = -0.5 × (52.0 − 50.0) = -1.0. Original recipe setting = 100, next lot setting = 100 + (-1.0) = 99."
+              }
+            </p>
+
+            <h4>5. Pareto Counts &amp; Wafer Map Patterns · 缺陷 Pareto 与晶圆分布</h4>
+            <p>
+              ${
+                isZh
+                  ? "缺陷统计（固定 N=100）：颗粒 (Particle) 35 (35%, 累计 35%)、划痕 (Scratch) 20 (20%, 累计 55%)、图形缺陷 (Pattern defect) 18 (18%, 累计 73%)、污染 (Contamination) 15 (15%, 累计 88%)、其他 (Other) 12 (12%, 累计 100%)。<br />" +
+                    "晶圆空间指纹模式：中心聚集（提示气体喷淋或涂胶滴胶）、边缘环（提示边缘去胶或等离子体鞘层）、划痕线（提示机械手抓取划擦或 CMP 杂质）、随机分布（提示空气悬浮微粒或化学槽液杂质）。标注：示意分布，非诊断；分布形状只提示排查方向，不等同于根因。"
+                  : "Defect Pareto Counts (Fixed N=100): Particle 35 (35%, cum 35%), Scratch 20 (20%, cum 55%), Pattern defect 18 (18%, cum 73%), Contamination 15 (15%, cum 88%), Other 12 (12%, cum 100%).<br />" +
+                    "Wafer Map Signatures: Center cluster (showerhead flow/nozzle drip clue), Edge ring (EBR/plasma edge clue), Scratch line (robot blade/CMP debris clue), Random (airborne particles/bath purity clue). Note: Illustrative distribution, not a diagnosis; spatial pattern only hints at investigation direction and is not a root cause."
+              }
+            </p>
+
+            <h4>6. Yield Waterfall Arithmetic · 良率 Waterfall 加法结构</h4>
+            <p>
+              ${
+                isZh
+                  ? "投产晶圆 1000 片 (100.0%) − 工艺损失 30 片 (-3.0%) − 缺陷损失 40 片 (-4.0%) − 量测 Hold 报废 10 片 (-1.0%) = 最终合格产出 920 片 (92.0%)。声明：这是算术示例，仅用于讲 waterfall 的加法结构；92% 不是任何真实工厂的良率，不得去掉「示例」二字引用。"
+                  : "Wafer Starts 1000 (100.0%) − Process Loss 30 (-3.0%) − Defect Loss 40 (-4.0%) − Metrology Hold/Scrap 10 (-1.0%) = Qualified Output 920 (92.0%). Scope: Arithmetic example only, illustrating additive waterfall structure; 92% is not the yield of any real fab and must not be quoted without the 'illustrative' qualifier."
+              }
+            </p>
+          `;
+        }
+
+        // ==========================================
+        // 12. Educational Quiz (§4.14 - P1)
+        // ==========================================
+        function renderQuiz(lang) {
+          const container = document.getElementById("faym-quiz-container");
+          if (!container || !pageData || !pageData.quiz) return;
+          const isZh = lang === "zh";
+
+          container.innerHTML = pageData.quiz
+            .map((q, qIdx) => {
+              const qText = isZh ? q.question_zh : q.question_en;
+              const opts = isZh ? q.options_zh : q.options_en;
+              const exp = isZh ? q.explanation_zh : q.explanation_en;
+
+              const optsHtml = opts
+                .map(
+                  (opt, optIdx) => `
+                <button type="button" class="faym-quiz-opt" onclick="checkQuizAnswer(${qIdx}, ${optIdx}, ${q.correct})">
+                  ${String.fromCharCode(65 + optIdx)}. ${opt}
+                </button>
+              `,
+                )
+                .join("");
+
+              return `
+                <div class="faym-quiz-item" id="faym-quiz-${qIdx}">
+                  <div class="faym-quiz-q">Q${qIdx + 1}: ${qText}</div>
+                  <div class="faym-quiz-options">
+                    ${optsHtml}
+                  </div>
+                  <div class="faym-quiz-exp" id="faym-quiz-exp-${qIdx}">
+                    <div id="faym-quiz-res-${qIdx}" style="font-weight:700;margin-bottom:4px;"></div>
+                    <div>${exp}</div>
+                  </div>
+                </div>
+              `;
+            })
+            .join("");
+        }
+
+        window.checkQuizAnswer = function (qIdx, selectedOpt, correctOpt) {
+          const expEl = document.getElementById(`faym-quiz-exp-${qIdx}`);
+          const resEl = document.getElementById(`faym-quiz-res-${qIdx}`);
+          if (!expEl || !resEl) return;
+
+          const isCorrect = selectedOpt === correctOpt;
+          const isZh = currentLang === "zh";
+
+          expEl.className = `faym-quiz-exp show ${isCorrect ? "correct" : "incorrect"}`;
+          resEl.textContent = isCorrect
+            ? isZh
+              ? "✓ 回答正确！"
+              : "✓ Correct!"
+            : isZh
+              ? "✕ 选项不准确，请参考解析："
+              : "✕ Incorrect. Review explanation below:";
+        };
+
+        // ==========================================
+        // 13. Sponsorship Mount (Default Disabled - §8)
+        // ==========================================
+        function renderSponsorship() {
+          const container = document.getElementById(
+            "faym-sponsorship-container",
+          );
+          if (!container) return;
+          // When enabled is false or absent: absolutely zero rendering, no empty box, no placeholder
+          if (
+            !pageData ||
+            !pageData.sponsorship ||
+            !pageData.sponsorship.enabled
+          ) {
+            container.innerHTML = "";
+            return;
+          }
+          // If enabled in future:
+          container.innerHTML = `
+            <div style="background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 20px;margin-top:24px;">
+              <span class="faym-badge" style="color:var(--amber);">Sponsored</span>
+              <p style="margin:4px 0 0;font-size:12px;color:var(--ink-2);">${pageData.sponsorship.sponsor_name || ""}</p>
+            </div>
+          `;
+        }
+
+        // ==========================================
+        // Master Render Function
+        // ==========================================
+        function renderAllUI() {
+          currentLang = getLang();
+          renderConceptsTable(currentLang);
+          renderClosedLoopSvg();
+          renderSpcChart();
+          renderFdcChart();
+          renderMetrologyTable(currentLang);
+          renderParetoChart();
+          renderWaferMap();
+          renderNeighborsTable(currentLang);
+          renderVendorsTable(currentLang);
+          renderGlossary(currentLang);
+          renderStaticTextEdition(currentLang);
+          renderQuiz(currentLang);
+          renderSponsorship();
+        }
+
+        // Global language hook from site-nav / i18n
+        window.onSemiconLanguageChange = function (newLang) {
+          currentLang = newLang.startsWith("zh") ? "zh" : "en";
+          renderAllUI();
+        };
+
+        window.addEventListener("semiconfab:langChanged", function (e) {
+          const l = (e.detail && e.detail.lang) || getLang();
+          currentLang = l.startsWith("zh") ? "zh" : "en";
+          renderAllUI();
+        });
+
+        // Initialize Page
+        async function initPage() {
+          await loadData();
+          renderAllUI();
+        }
+
+        document.addEventListener("DOMContentLoaded", initPage);
+      })();
+    </script>
+  </body>
+</html>

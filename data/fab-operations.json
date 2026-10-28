@@ -42,19 +42,19 @@
           "id": "apc-fdc-spc-yield",
           "title_en": "APC, FDC, SPC & Yield",
           "title_zh": "先进控制、故障检测与良率",
-          "status": "planned",
-          "href": null,
-          "scope_en": "Planned: run-to-run control, fault detection, statistical process control, and yield analytics concepts.",
-          "scope_zh": "计划中：将覆盖 run-to-run、故障检测、统计控制与良率分析的概念。"
+          "status": "available",
+          "href": "fab-apc-yield-metrology.html",
+          "scope_en": "Run-to-run control, fault detection, statistical process control, and yield analytics concepts.",
+          "scope_zh": "Run-to-run、故障检测、统计控制与良率分析核心概念与闭环互动。"
         },
         {
           "id": "metrology-defect-analysis",
           "title_en": "Metrology & Defect Analysis",
           "title_zh": "量测与缺陷分析",
-          "status": "planned",
-          "href": null,
-          "scope_en": "Planned: inline metrology, defect classification, and root-cause tracing concepts.",
-          "scope_zh": "计划中：将覆盖量测、缺陷分类与溯源的概念。"
+          "status": "available",
+          "href": "fab-apc-yield-metrology.html",
+          "scope_en": "Inline metrology types, defect classification, Pareto analysis, and wafer map patterns.",
+          "scope_zh": "在线量测类型、缺陷分类、Pareto 80-20 分析与晶圆图分布模式。"
         },
         {
           "id": "scheduling-benchmark",

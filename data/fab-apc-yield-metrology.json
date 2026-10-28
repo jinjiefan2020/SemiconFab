@@ -1,0 +1,484 @@
+{
+  "spc": {
+    "baseline": [50.2, 49.8, 50.3, 49.7, 50.1, 49.9, 50.2, 49.8, 50.0, 50.0],
+    "drift": [50.2, 50.3, 50.4, 50.4, 50.5, 50.5, 50.5, 50.4],
+    "outlier": [51.2, 50.1],
+    "stats": {
+      "baseline_count": 10,
+      "baseline_mean": 50.0,
+      "baseline_sample_std": 0.2,
+      "center_line": 50.0,
+      "ucl": 50.6,
+      "lcl": 49.4,
+      "plus_2sigma": 50.4,
+      "minus_2sigma": 49.6,
+      "plus_1sigma": 50.2,
+      "minus_1sigma": 49.8
+    },
+    "note_en": "Illustrative only; limits are computed from the baseline segment only (Baseline Mean ± 3 × Sample StDev = 50.0 ± 0.6). Simplified Nelson rule subset for teaching.",
+    "note_zh": "仅为示意；控制限只用基线段计算（基线均值 ± 3 × 样本标准差 = 50.0 ± 0.6）。教学用简化 Nelson 规则子集。",
+    "rules": [
+      {
+        "id": "rule1",
+        "name_en": "Rule 1: 1 point beyond 3σ",
+        "name_zh": "规则 1：1 点超出 3σ",
+        "desc_en": "A single point falls outside the upper or lower control limits (> 50.6 or < 49.4).",
+        "desc_zh": "单个点落在控制上限 UCL 或控制下限 LCL 之外（> 50.6 或 < 49.4）。",
+        "triggers": [19]
+      },
+      {
+        "id": "rule2",
+        "name_en": "Rule 2: 2 out of 3 consecutive points beyond 2σ (same side)",
+        "name_zh": "规则 2：连续 3 点中有 2 点在同侧超出 2σ",
+        "desc_en": "Two out of three consecutive points fall in Zone A or beyond (> 50.4 or < 49.6) on the same side of the center line.",
+        "desc_zh": "连续 3 个点中有 2 个点落在中心线同侧的 2σ 区域外（> 50.4 或 < 49.6）。",
+        "triggers": [16, 17, 18, 19]
+      },
+      {
+        "id": "rule3",
+        "name_en": "Rule 3: 8 consecutive points on same side of center line",
+        "name_zh": "规则 3：连续 8 点在中心线同侧",
+        "desc_en": "Eight consecutive points fall on the same side of the center line (all > 50.0).",
+        "desc_zh": "连续 8 个点全部落在中心线同侧（全部 > 50.0）。",
+        "triggers": [18, 19, 20]
+      }
+    ]
+  },
+  "fdc": {
+    "signal_name_en": "Etch Chamber Pressure (mTorr)",
+    "signal_name_zh": "刻蚀腔体压力 (mTorr)",
+    "signal_en": "Illustrative sensor signal (not a real tool signal).",
+    "signal_zh": "示意传感器信号（非真实工具信号）。",
+    "nominal_baseline": 25.0,
+    "threshold": 27.0,
+    "alarm_rule_en": "Alarm when deviation exceeds the threshold (27.0 mTorr) for 5 consecutive points.",
+    "alarm_rule_zh": "偏离超过阈值 (27.0 mTorr) 且连续 5 个点即触发 FDC 报警。",
+    "alarm_trigger_point": 19,
+    "deviation_window": [15, 24],
+    "good_trace": [
+      25.1, 24.9, 25.0, 25.2, 24.8, 25.1, 25.0, 24.9, 25.2, 25.1, 24.8, 25.0,
+      25.1, 24.9, 25.0, 25.2, 24.9, 25.1, 25.0, 24.8, 25.1, 25.0, 24.9, 25.2,
+      25.0, 24.9, 25.1, 25.0, 24.8, 25.0
+    ],
+    "faulty_trace": [
+      25.1, 24.9, 25.0, 25.2, 24.8, 25.1, 25.0, 24.9, 25.2, 25.1, 24.8, 25.0,
+      25.1, 24.9, 27.8, 28.4, 28.9, 29.1, 28.8, 28.6, 28.9, 28.5, 28.2, 27.6,
+      25.3, 24.9, 25.1, 25.0, 24.8, 25.0
+    ],
+    "permanent_note_en": "Illustrative trace, not a real tool signal; production FDC models are far more complex than simple thresholding.",
+    "permanent_note_zh": "示意 Trace，非真实工具信号；真实 FDC 模型远比阈值规则复杂。"
+  },
+  "apc": {
+    "formula_en": "Next Recipe Adjustment = -k × (Measured Value - Target Value)",
+    "formula_zh": "下一 recipe 调整量 = -k × (实测量测值 − 目标值)",
+    "k": 0.5,
+    "target_val": 50.0,
+    "original_recipe_setting": 100.0,
+    "worked_example": {
+      "target": 50.0,
+      "measured": 52.0,
+      "k": 0.5,
+      "adjustment": -1.0,
+      "original_setting": 100.0,
+      "next_setting": 99.0
+    },
+    "disclaimer_en": "Simplified linear model for teaching. Production APC incorporates dynamic disturbance models, physical constraints, gain stability bounds, and multivariate coupling; slider results do not guarantee next lot qualification.",
+    "disclaimer_zh": "教学用简化线性模型。真实工厂 APC 包含动态扰动模型、物理约束、增益稳定性界限与多变量耦合；滑杆结果不保证下一 lot 一定合格。",
+    "feedback_vs_feedforward": {
+      "feedback_en": "Feedback control: Uses this lot's post-process metrology (e.g. post-etch CD) to compute recipe parameter adjustments for the next lot entering the same process tool.",
+      "feedback_zh": "反馈控制 (Feedback)：使用当前 lot 工艺后的量测值（如刻蚀后 CD）计算调节量，更新后续 lot 进入同一台机台时的 recipe 设定。",
+      "feedforward_en": "Feedforward control: Uses upstream metrology results (e.g. incoming film thickness from deposition) to preemptively adjust the recipe of the upcoming downstream process step (e.g. etch time) for this exact lot before processing begins.",
+      "feedforward_zh": "前馈控制 (Feedforward)：使用上游步骤的量测值（如前道沉积的膜厚）在上游向本 lot 下游工艺（如下一步刻蚀时间）进行前馈预调，在工艺发生前即调整 recipe。"
+    }
+  },
+  "pareto": [
+    {
+      "type_en": "Particle",
+      "type_zh": "颗粒",
+      "count": 35,
+      "pct": 35,
+      "cum_pct": 35,
+      "map_pattern": "random",
+      "hint_en": "Airborne particles, cleanroom handling, or fluid filtration issue.",
+      "hint_zh": "空气悬浮微粒、洁净室搬运或流体过滤问题。"
+    },
+    {
+      "type_en": "Scratch",
+      "type_zh": "划痕",
+      "count": 20,
+      "pct": 20,
+      "cum_pct": 55,
+      "map_pattern": "scratch_line",
+      "hint_en": "Robot end-effector slippage, cassette friction, or CMP pad debris.",
+      "hint_zh": "机械手臂抓取滑动、晶圆盒插槽摩擦或 CMP 研磨垫异物划擦。"
+    },
+    {
+      "type_en": "Pattern defect",
+      "type_zh": "图形缺陷",
+      "count": 18,
+      "pct": 18,
+      "cum_pct": 73,
+      "map_pattern": "center_cluster",
+      "hint_en": "Showerhead gas flow asymmetry, spin-coater nozzle drip, or reticle contamination.",
+      "hint_zh": "气体喷淋头流量不对称、旋涂喷嘴残胶滴落或光罩缺陷。"
+    },
+    {
+      "type_en": "Contamination",
+      "type_zh": "污染",
+      "count": 15,
+      "pct": 15,
+      "cum_pct": 88,
+      "map_pattern": "edge_ring",
+      "hint_en": "Edge bead removal (EBR) residual, clamp ring contact, or bevel plasma exclusion.",
+      "hint_zh": "边缘去胶 (EBR) 残留、夹具卡爪接触或斜角边缘等离子体边界异常。"
+    },
+    {
+      "type_en": "Other",
+      "type_zh": "其他",
+      "count": 12,
+      "pct": 12,
+      "cum_pct": 100,
+      "map_pattern": "random",
+      "hint_en": "Unclassified micro-voids, crystal defects, or substrate surface pits.",
+      "hint_zh": "未分类微孔、晶格原生缺陷或衬底表面微坑。"
+    }
+  ],
+  "wafer_maps": {
+    "center_cluster": {
+      "id": "center_cluster",
+      "title_en": "Center Cluster",
+      "title_zh": "中心聚集",
+      "desc_en": "Defects concentrated heavily in the central region of the wafer disc.",
+      "desc_zh": "缺陷密集分布在晶圆中央圆形区域内。",
+      "directions_en": "Directional exploration: center showerhead gas flow non-uniformity, spin-coating center dispense drip, or center thermal hot-spot. Not a root cause diagnosis.",
+      "directions_zh": "可能排查方向：中心进气喷淋头流量不均、旋涂中心喷嘴滴胶、中心加热板温区热点。非根因确诊。",
+      "caption_en": "Illustrative distribution, not a diagnosis. Spatial pattern only hints at investigation direction and is not a root cause.",
+      "caption_zh": "示意分布，非诊断。分布形状只提示排查方向，不等同于根因。"
+    },
+    "edge_ring": {
+      "id": "edge_ring",
+      "title_en": "Edge Ring",
+      "title_zh": "边缘环",
+      "desc_en": "Defects distributed in a circular perimeter ring along the wafer bevel/edge.",
+      "desc_zh": "缺陷沿晶圆边缘/斜角区域呈环形同心分布。",
+      "directions_en": "Directional exploration: edge-bead removal (EBR) non-uniformity, electrostatic chuck edge clamp wear, or edge sheath plasma divergence. Not a root cause diagnosis.",
+      "directions_zh": "可能排查方向：边缘去胶 (EBR) 不均匀、静电吸盘边缘环磨损、边缘等离子体鞘层畸变。非根因确诊。",
+      "caption_en": "Illustrative distribution, not a diagnosis. Spatial pattern only hints at investigation direction and is not a root cause.",
+      "caption_zh": "示意分布，非诊断。分布形状只提示排查方向，不等同于根因。"
+    },
+    "scratch_line": {
+      "id": "scratch_line",
+      "title_en": "Scratch Line",
+      "title_zh": "划痕线",
+      "desc_en": "Defects distributed along straight lines or curved mechanical scratch tracks.",
+      "desc_zh": "缺陷呈现明显的长直线或弧状划痕轨迹。",
+      "directions_en": "Directional exploration: robotic blade / end-effector mechanical scraping, carrier cassette slot friction, or hard CMP slurry agglomerate scratching. Not a root cause diagnosis.",
+      "directions_zh": "可能排查方向：机器人手臂卡爪刮擦、晶圆盒片槽物理摩擦、CMP 研磨液硬质团聚颗粒划伤。非根因确诊。",
+      "caption_en": "Illustrative distribution, not a diagnosis. Spatial pattern only hints at investigation direction and is not a root cause.",
+      "caption_zh": "示意分布，非诊断。分布形状只提示排查方向，不等同于根因。"
+    },
+    "random": {
+      "id": "random",
+      "title_en": "Random Distribution",
+      "title_zh": "随机分布",
+      "desc_en": "Defects scattered uniformly across the entire wafer disc with zero spatial clustering.",
+      "desc_zh": "缺陷在晶圆表面均匀无序散布，无任何明显的空间聚集或几何特征。",
+      "directions_en": "Directional exploration: ambient airborne aerosol particles, bath chemical particulate contamination, or incoming bare wafer substrate quality. Not a root cause diagnosis.",
+      "directions_zh": "可能排查方向：洁净室环境空气气溶胶颗粒、化学槽液微粒杂质、进料裸片衬底原生微缺陷。非根因确诊。",
+      "caption_en": "Illustrative distribution, not a diagnosis. Spatial pattern only hints at investigation direction and is not a root cause.",
+      "caption_zh": "示意分布，非诊断。分布形状只提示排查方向，不等同于根因。"
+    }
+  },
+  "yield_example": {
+    "input": 1000,
+    "process_loss": 30,
+    "defect_loss": 40,
+    "hold_scrap": 10,
+    "output": 920,
+    "yield_pct": 92.0,
+    "note_en": "Arithmetic example only, illustrating the additive structure of the yield waterfall. 92% is not the yield of any real fab and must not be quoted without the 'illustrative' qualifier.",
+    "note_zh": "这是算术示例，仅用于讲 waterfall 的加法结构；92% 不是任何真实工厂的良率，不得去掉「示例」二字引用。"
+  },
+  "metrology_types": [
+    {
+      "id": "cd_sem",
+      "name_en": "CD-SEM (Critical Dimension SEM)",
+      "name_zh": "CD-SEM 关键尺寸扫描电镜",
+      "measures_en": "Nanometer-scale critical dimensions: gate linewidth, trench width, contact/via hole diameter.",
+      "measures_zh": "纳米级关键尺寸：栅极线宽、刻蚀深槽宽度、接触孔/通孔孔径。",
+      "when_en": "Post-lithography development inspection (ADI) and post-etch inspection (AEI).",
+      "when_zh": "光刻显影后检查 (ADI) 以及刻蚀去胶后检查 (AEI)。",
+      "limitations_en": "Slow point-by-point e-beam sampling throughput, high-vacuum requirement, and potential beam-induced resist shrinkage or charging.",
+      "limitations_zh": "电子束点状抽样吞吐速度较慢，需高真空腔体，且电子束轰击可能引发光刻胶收缩或静电累积。"
+    },
+    {
+      "id": "overlay",
+      "name_en": "Overlay Metrology",
+      "name_zh": "套刻对准量测",
+      "measures_en": "Layer-to-layer positional pattern alignment registration accuracy in X and Y planes.",
+      "measures_zh": "上下不同工艺层之间图案在 X/Y 平面上的几何对准精度（套准误差）。",
+      "when_en": "Immediately after lithography exposure and development, prior to committing lots to irreversible etch.",
+      "when_zh": "光刻曝光与显影完成后立即进行，以便在进入不可逆刻蚀前进行重工 (Rework)。",
+      "limitations_en": "Optical measurement relies on specialized targets in the wafer scribe line, which can drift slightly from true intra-die functional circuit distortion.",
+      "limitations_zh": "通常依赖切割道 (Scribe Line) 中的专用光学标记，可能与芯片内部 (Intra-die) 的微观畸变存在微小偏差。"
+    },
+    {
+      "id": "film_thickness",
+      "name_en": "Film Thickness Metrology",
+      "name_zh": "膜厚量测 (椭偏/反射仪)",
+      "measures_en": "Transparent/semi-transparent dielectric or metallic thin-film thickness and refractive index (n, k).",
+      "measures_zh": "透明/半透明介质或金属薄膜厚度与光学折射率/消光系数 (n, k)。",
+      "when_en": "Post-thermal oxidation, post-CVD/ALD deposition, and post-CMP chemical mechanical polishing.",
+      "when_zh": "热氧化后、CVD/ALD 薄膜沉积后，以及 CMP 化学机械研磨平坦化后。",
+      "limitations_en": "Requires optical model fitting; measurement uncertainty increases significantly on complex multi-layer opaque stacks or sub-nanometer ultra-thin films.",
+      "limitations_zh": "高度依赖光学物理色散模型拟合；在多层不透明金属堆叠或亚纳米级超薄膜层上不确定度显著增大。"
+    },
+    {
+      "id": "defect_inspection",
+      "name_en": "Defect Inspection",
+      "name_zh": "缺陷检测 (明场/暗场/电束)",
+      "measures_en": "Physical anomalies: airborne particles, pattern bridges, line breaks, voids, residue, and CMP scratches.",
+      "measures_zh": "表面微观物理异常：微粒、图案桥连、断线、空洞、化学残留与研磨划伤。",
+      "when_en": "At critical process transition checkpoints following litho, etch, clean, CMP, and ion implantation.",
+      "when_zh": "在光刻、刻蚀、清洗、CMP 及离子注入等关键工艺交接检查点抽测或全检。",
+      "limitations_en": "Inherent trade-off between scan speed and detection sensitivity; optical tools miss buried sub-10nm anomalies while e-beam inspection is too slow for 100% full-wafer coverage.",
+      "limitations_zh": "扫描速度与灵敏度存在固有权衡；光学机台无法检出深层亚 10nm 缺陷，而电子束检出速度极慢难以全片覆盖。"
+    },
+    {
+      "id": "electrical_test",
+      "name_en": "Electrical Test (WAT / PCM)",
+      "name_zh": "电性测试 (WAT / PCM 晶圆验收)",
+      "measures_en": "Device electrical characteristics: threshold voltage (Vt), contact resistance (Rc), sheet resistance (Rs), gate leakage, and saturation current.",
+      "measures_zh": "器件电学参数：阈值电压 (Vt)、接触电阻 (Rc)、方块电阻 (Rs)、栅氧化层漏电与晶体管饱和电流。",
+      "when_en": "At end-of-line (EOL) or after completion of intermediate metal interconnect / contact contact loops.",
+      "when_zh": "产线末端 (EOL) 出货前或中间互连金属层/通孔接触回路加工完成后。",
+      "limitations_en": "High latency feedback loop; testing occurs days or weeks after early front-end processes, making immediate recipe compensation impossible without inline proxies.",
+      "limitations_zh": "反馈反馈延迟较长；测试发生在前道工序完成数天甚至数周之后，无法对早期工艺漂移提供即时在线补偿。"
+    }
+  ],
+  "neighbors": [
+    {
+      "system_en": "MES (Manufacturing Execution System)",
+      "system_zh": "MES (制造执行系统)",
+      "role_en": "Maintains lot routes, dispatches WIP to tools, and executes hold / release actions based on FDC alarms or out-of-spec metrology. Does not perform real-time recipe tuning.",
+      "role_zh": "管理生产批次路线、向机台派工、根据 FDC 报警或量测超标执行 Hold/放行操作。不负责实时 recipe 参数微调。",
+      "boundary_en": "FDC / SPC send hold triggers to MES; MES retains authoritative WIP state. This page does not replace MES.",
+      "boundary_zh": "FDC / SPC 向 MES 发送 Hold 请求；MES 保留批次状态唯一真源。本页不替代 MES。",
+      "link": "fab-mes.html"
+    },
+    {
+      "system_en": "Connectivity & Data Layer",
+      "system_zh": "连接层与数据层",
+      "role_en": "Standardized industrial protocol conduits (SECS/GEM, EDA/Interface A, MQTT, Kafka) transporting high-frequency sensor traces and metrology reports to analytics.",
+      "role_zh": "标准化工业协议通道（SECS/GEM、EDA/Interface A、MQTT、Kafka），将机台高频传感器 Trace 与量测报告传输给分析系统。",
+      "boundary_en": "Provides the raw transport pipeline; FDC and SPC consume the data but do not implement protocol drivers. This page does not replace the data layer.",
+      "boundary_zh": "提供底层数据传输管线；FDC 与 SPC 消费数据但不实现底层驱动。本页不替代数据层。",
+      "link": "fab-data-layer.html"
+    },
+    {
+      "system_en": "Equipment Embedded Control",
+      "system_zh": "机台底层嵌入式控制",
+      "role_en": "Direct hardware execution: mass flow controllers (MFC), RF generators, vacuum pumps, and robotic wafer loaders executing the loaded recipe.",
+      "role_zh": "硬件直接执行层：质流控制器 (MFC)、射频电源 (RF)、真空泵和机械手按载入的 recipe 严格执行硬件闭环。",
+      "boundary_en": "FDC monitors external sensor deviation; APC updates recipe setpoints. Neither system directly overrides internal sub-millisecond tool PID loops.",
+      "boundary_zh": "FDC 监测传感器偏离，APC 微调 recipe 目标；两者均不替代机台内部亚毫秒级的底层硬件 PID 控制器。",
+      "link": null
+    },
+    {
+      "system_en": "YMS (Yield Management System)",
+      "system_zh": "YMS (良率管理系统)",
+      "role_en": "Enterprise analytics repository correlating inline metrology, defect inspection wafer maps, and final wafer sort / die test bin data across lots and quarters.",
+      "role_zh": "良率企业级综合分析平台，跨批次、跨季度关联在线量测、缺陷 Wafer Map、WAT 电测与最终晶圆芯片分选 (Die Sort) Bin 图。",
+      "boundary_en": "Aggregates overall fab yield trends and baseline modeling; this page explains the foundational engineering loop and does not replace YMS software.",
+      "boundary_zh": "负责全厂宏观良率趋势与基线模型归因；本页讲解良率底层闭环结构，不替代完整 YMS 系统。",
+      "link": null
+    }
+  ],
+  "vendors": {
+    "disclaimer_en": "Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+    "disclaimer_zh": "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。",
+    "apc_fdc_yield": [
+      {
+        "name": "Applied Materials APC",
+        "category_en": "Run-to-Run APC & Integrated Metrology",
+        "category_zh": "Run-to-Run APC 与集成量测控制"
+      },
+      {
+        "name": "BISTel",
+        "category_en": "FDC, SPC & Predictive Tool Health",
+        "category_zh": "FDC、SPC 与机台健康预测"
+      },
+      {
+        "name": "PDF Solutions Exensio",
+        "category_en": "Fab-wide Big Data, Yield & FDC Analytics",
+        "category_zh": "全厂大数据、良率与 FDC 协同分析"
+      }
+    ],
+    "metrology_inspection": [
+      {
+        "name": "Applied Materials",
+        "category_en": "Pattern defect inspection & CD-SEM systems",
+        "category_zh": "图形缺陷检测与 CD-SEM 关键尺寸量测"
+      },
+      {
+        "name": "ASML",
+        "category_en": "Optical & e-beam overlay metrology (YieldStar)",
+        "category_zh": "光学与电子束套刻对准量测 (YieldStar 系列)"
+      },
+      {
+        "name": "Hitachi High-Tech",
+        "category_en": "Critical Dimension SEM & review tools",
+        "category_zh": "关键尺寸扫描电镜 CD-SEM 与缺陷复检设备"
+      },
+      {
+        "name": "KLA",
+        "category_en": "Broadband optical wafer defect inspection & metrology",
+        "category_zh": "宽带明场/暗场晶圆缺陷检测与高精度光学量测"
+      },
+      {
+        "name": "Onto Innovation",
+        "category_en": "Spectroscopic ellipsometry & macro defect inspection",
+        "category_zh": "光谱椭偏膜厚量测与宏观宏观缺陷检测系统"
+      }
+    ],
+    "post_note_en": "Vendor names do not imply actual deployment in any specific fab; individual vendors often span multiple functional categories.",
+    "post_note_zh": "厂商名不等于某家工厂实际在用的系统，同一厂商可横跨多个类别。"
+  },
+  "glossary": [
+    {
+      "term": "APC",
+      "full_en": "Advanced Process Control",
+      "full_zh": "先进过程控制",
+      "def_en": "A closed-loop system adjusting recipe setpoints (e.g. etch time) between runs to compensate for tool drift and incoming variations.",
+      "def_zh": "在生产批次之间自动微调工艺 recipe 设定值（如刻蚀时间）以补偿机台漂移与来料波动的闭环控制系统。"
+    },
+    {
+      "term": "FDC",
+      "full_en": "Fault Detection & Classification",
+      "full_zh": "故障检测与分类",
+      "def_en": "Monitoring high-frequency sensor traces (pressure, RF, temperature) during processing to detect anomalies before a lot is damaged.",
+      "def_zh": "在工艺执行期间监测高频传感器 Trace 数据（压力、射频、温度等），在整批晶圆报废前及时检出机台异常。"
+    },
+    {
+      "term": "SPC",
+      "full_en": "Statistical Process Control",
+      "full_zh": "统计过程控制",
+      "def_en": "Statistical methodology using control charts (UCL, LCL, center line) and pattern rules to evaluate whether a process is in statistical control.",
+      "def_zh": "使用控制图（控制上限、控制下限、中心线）与统计规则评估工艺是否处于受控稳定状态的统计学方法。"
+    },
+    {
+      "term": "R2R",
+      "full_en": "Run-to-Run Control",
+      "full_zh": "批次间过程控制",
+      "def_en": "A specific APC paradigm modifying tool recipe parameters on a run-by-run basis using post-run metrology feedback or pre-run feedforward.",
+      "def_zh": "APC 的核心形式之一，利用前道批次的后道量测反馈或来料前馈，逐批调整机台 recipe 参数。"
+    },
+    {
+      "term": "CD",
+      "full_en": "Critical Dimension",
+      "full_zh": "关键尺寸",
+      "def_en": "The exact physical dimensions (e.g. gate width, fin pitch) critical to the transistor or interconnect electrical performance.",
+      "def_zh": "对晶体管或互连电路电学特性起决定性影响的最小特征物理尺寸（如栅极线宽、鳍片间距）。"
+    },
+    {
+      "term": "Overlay",
+      "full_en": "Lithography Overlay Error",
+      "full_zh": "光刻套刻对准误差",
+      "def_en": "The positional vector offset between a newly patterned lithography layer and the underlying previously etched pattern.",
+      "def_zh": "当前新曝光的光刻层图案与下方已加工完成的底层图案之间的几何位置偏移向量误差。"
+    },
+    {
+      "term": "Pareto",
+      "full_en": "Pareto Chart / Analysis",
+      "full_zh": "帕累托图 / 80-20 分析",
+      "def_en": "A dual-axis chart sorting defect causes in descending order with a cumulative percentage line to identify the vital few root causes.",
+      "def_zh": "将缺陷类别按发生频次降序排列，并叠加累计百分比曲线的双轴图表，用于锁定前几项主要矛盾。"
+    },
+    {
+      "term": "Wafer Map",
+      "full_en": "Wafer Spatial Defect Map",
+      "full_zh": "晶圆空间缺陷分布图",
+      "def_en": "A 2D spatial representation of defect coordinates across the circular wafer disc, revealing signature spatial distribution patterns.",
+      "def_zh": "展示缺陷在圆形晶圆表面几何坐标的二维空间分布图，用于呈现特征性的空间几何分布分布形状。"
+    },
+    {
+      "term": "Yield",
+      "full_en": "Semiconductor Manufacturing Yield",
+      "full_zh": "半导体制造良率",
+      "def_en": "The ratio of non-defective, fully functioning chips (or intact wafers) delivered at the end of the line relative to total units started.",
+      "def_zh": "最终产出的合格芯片（或合格晶圆）占最初投产物料总量的百分比，是制造综合竞争力的结果性度量。"
+    },
+    {
+      "term": "Hold",
+      "full_en": "Lot Hold (Production Interruption)",
+      "full_zh": "批次锁定 / 扣留",
+      "def_en": "An automated or manual suspension of a wafer lot in MES preventing further dispatch until defect investigation or rework authorization is complete.",
+      "def_zh": "MES 中对晶圆批次执行的自动或人工锁定状态，阻止其继续派工，直至工程调查判定或授权重工/放行。"
+    }
+  ],
+  "quiz": [
+    {
+      "id": "q1",
+      "question_en": "What is the primary difference in operational focus between SPC and FDC?",
+      "question_zh": "SPC 与 FDC 在晶圆厂运营分工上的核心区别是什么？",
+      "options_en": [
+        "SPC monitors statistical stability of process outcomes across lots; FDC analyzes high-frequency sensor traces during execution to detect equipment faults.",
+        "SPC adjusts physical recipe setpoints automatically; FDC generates wafer defect maps.",
+        "SPC measures electrical threshold voltage; FDC inspects cleanroom air quality.",
+        "SPC is used only for packaging; FDC is used only for lithography."
+      ],
+      "options_zh": [
+        "SPC 用统计方法监测批次间工艺结果是否稳定；FDC 分析工艺过程中的高频传感器 Trace 以检出设备本身故障。",
+        "SPC 自动调整 recipe 工艺参数；FDC 负责生成晶圆缺陷图。",
+        "SPC 测量芯片阈值电压；FDC 检测洁净室空气微粒。",
+        "SPC 仅用于封装厂；FDC 仅用于光刻车间。"
+      ],
+      "correct": 0,
+      "explanation_en": "Correct! SPC evaluates whether the process output remains in statistical control across runs using control charts, while FDC watches in-situ sensor signals (pressure, RF, temperature) to detect equipment anomalies during the run.",
+      "explanation_zh": "正确！SPC 利用控制图在批次间评估工艺输出是否处于统计受控状态；而 FDC 在工艺执行期间实时分析腔体原位传感器信号（压力、射频、温度等），以诊断设备本身是否发生异常。"
+    },
+    {
+      "id": "q2",
+      "question_en": "How does APC Feedback control differ from APC Feedforward control?",
+      "question_zh": "APC 反馈控制 (Feedback) 与前馈控制 (Feedforward) 的核心区别是什么？",
+      "options_en": [
+        "Feedback tunes the recipe for the *next* lot entering the tool; feedforward uses upstream metrology to tune downstream parameters for the *same* lot.",
+        "Feedback is open loop; feedforward is closed loop.",
+        "Feedback operates only on human inspection; feedforward requires AI neural networks.",
+        "Feedback controls fab temperature; feedforward controls chemical inventory."
+      ],
+      "options_zh": [
+        "反馈控制用本 lot 工艺后的量测值调整*下一 lot* 进入机台时的参数；前馈控制用上游量测值提前微调*本 lot* 即将进入的下游工序参数。",
+        "反馈是开环的；前馈是闭环的。",
+        "反馈依赖人工目检；前馈必须采用深度神经网络。",
+        "反馈控制厂房环境温湿度；前馈控制化学品仓储库存。"
+      ],
+      "correct": 0,
+      "explanation_en": "Correct! Feedback R2R adjusts future lots to counter drift on the same tool. Feedforward takes incoming measurements (e.g. deposited thickness) to modify the processing recipe (e.g. etch time) for that specific incoming lot.",
+      "explanation_zh": "正确！反馈 R2R 控制通过当前 lot 的出料量测纠正同一机台后续批次的漂移；而前馈控制利用上游来料实际量测（如已沉积的膜厚），在该 lot 刚进入下游机台时预先调节其工艺 recipe（如刻蚀时长）。"
+    },
+    {
+      "id": "q3",
+      "question_en": "If a wafer inspection map reveals an edge-ring defect distribution, what does this pattern indicate?",
+      "question_zh": "如果晶圆缺陷图呈现明显的边缘环 (Edge Ring) 分布，这代表什么？",
+      "options_en": [
+        "It provides a directional clue (e.g. edge bead removal, wafer clamp, plasma edge sheath), but is an illustrative pattern and NOT a definitive root-cause diagnosis.",
+        "It proves 100% conclusively that the optical lithography stepper laser was misaligned.",
+        "It indicates that all wafers in the fab must be scrapped immediately.",
+        "It means the cleanroom humidity dropped below zero percent."
+      ],
+      "options_zh": [
+        "它提供了排查方向提示（如边缘去胶 EBR、吸盘边缘卡爪磨损或等离子体鞘层），但仅为空间示意模式，绝非根因确诊结论。",
+        "它 100% 确诊光刻机曝光激光光源发生偏移。",
+        "它表明全厂的所有在制品批次必须立即全部报废。",
+        "它证明洁净室环境相对湿度已降至 0% 以下。"
+      ],
+      "correct": 0,
+      "explanation_en": "Correct! Spatial wafer maps show geometrical correlations that narrow down engineering hypotheses, but root causes must be verified with physical failure analysis and process logs.",
+      "explanation_zh": "正确！Wafer Map 的空间几何分布仅用于帮助工程师缩小假设范围并指引排查方向，绝不能作为单一的根因确诊依据，必须结合设备 Log 与物理失效分析验证。"
+    }
+  ],
+  "sponsorship": {
+    "enabled": false
+  }
+}
