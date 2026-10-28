@@ -326,17 +326,14 @@ const I18N_DICTIONARY = {
     fab_mes_back_hub: "← Back to Fab Operations Hub",
 
     // APC, FDC, SPC, Metrology & Yield Explainer Keys
-    fab_apc_page_title:
-      "APC / FDC / SPC 与良率、量测与缺陷分析 · APC, Yield & Metrology — SemiconFab.org",
+    fab_apc_page_title: "APC, Yield & Metrology — SemiconFab.org",
     fab_apc_hero_badge: "TOPIC EXPLAINER · OPERATIONS CORE",
     fab_apc_hero_title: "APC, Yield & Metrology: The Fab Control Loop",
     fab_apc_hero_subtitle:
       "How a fab watches, controls, measures, and explains yield: SPC, FDC, APC, metrology, and defect analysis — as a teaching model.",
-    fab_apc_banner_1:
-      "教学讲解，非真实 APC / 良率系统 · Teaching explainer, not a real APC / yield system",
-    fab_apc_banner_2:
-      "数据、Trace、缺陷计数均为示意 · Data, traces, and defect counts are illustrative",
-    fab_apc_banner_3: "未连接任何真实工厂 · No live fab connection",
+    fab_apc_banner_1: "Teaching explainer, not a real APC / yield system",
+    fab_apc_banner_2: "Data, traces, and defect counts are illustrative",
+    fab_apc_banner_3: "No live fab connection",
     fab_apc_concepts_title:
       "Six Core Concepts: Distinguishing Roles & Boundaries",
     fab_apc_concepts_subtitle:
@@ -374,9 +371,9 @@ const I18N_DICTIONARY = {
     fab_apc_vendors_subtitle:
       "Commercial process control software platforms and inline metrology equipment manufacturers.",
     fab_apc_vendors_disclaimer:
-      "代表厂商为教学示例，按字母顺序排列，非排名、非穷尽、不构成背书。Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
+      "Representative vendors for teaching only, in alphabetical order; not a ranking, not exhaustive, not an endorsement.",
     fab_apc_vendors_afterword:
-      "厂商名不等于某家工厂实际在用的系统，同一厂商可横跨多个类别。Vendor names do not imply actual deployment in any specific fab; individual vendors often span multiple functional categories.",
+      "Vendor names do not imply actual deployment in any specific fab; individual vendors often span multiple functional categories.",
     fab_apc_glossary_title: "Glossary of APC, Yield & Metrology Terms",
     fab_apc_glossary_subtitle:
       "Essential terminology for process control, equipment health monitoring, and defect analysis.",
