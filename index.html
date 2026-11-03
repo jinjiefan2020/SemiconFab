@@ -940,6 +940,86 @@
                   </div>
                 </div>
               </a>
+              <a
+                href="/fab-data-layer"
+                class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 text-blue-600 dark:text-blue-400 text-xs font-semibold transition"
+              >
+                <i
+                  data-lucide="layers"
+                  class="w-4 h-4 text-blue-500 shrink-0"
+                ></i>
+                <div>
+                  <div class="leading-tight" data-i18n="nav_item_data_layer">
+                    Fab Data Layer
+                  </div>
+                  <div
+                    class="text-[10px] font-normal text-slate-400"
+                    data-i18n="nav_item_data_layer_sub"
+                  >
+                    How fab data flows, layer by layer
+                  </div>
+                </div>
+              </a>
+              <a
+                href="/fab-mes"
+                class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 text-teal-600 dark:text-teal-400 text-xs font-semibold transition"
+              >
+                <i
+                  data-lucide="workflow"
+                  class="w-4 h-4 text-teal-500 shrink-0"
+                ></i>
+                <div>
+                  <div class="leading-tight" data-i18n="nav_item_fab_mes">
+                    MES &amp; Dispatch
+                  </div>
+                  <div
+                    class="text-[10px] font-normal text-slate-400"
+                    data-i18n="nav_item_fab_mes_sub"
+                  >
+                    How MES routes and dispatches lots
+                  </div>
+                </div>
+              </a>
+              <a
+                href="/fab-apc-yield-metrology"
+                class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 text-orange-600 dark:text-orange-400 text-xs font-semibold transition"
+              >
+                <i
+                  data-lucide="target"
+                  class="w-4 h-4 text-orange-500 shrink-0"
+                ></i>
+                <div>
+                  <div class="leading-tight" data-i18n="nav_item_apc_yield">
+                    APC, Yield &amp; Metrology
+                  </div>
+                  <div
+                    class="text-[10px] font-normal text-slate-400"
+                    data-i18n="nav_item_apc_yield_sub"
+                  >
+                    How fabs control, measure, and explain yield
+                  </div>
+                </div>
+              </a>
+              <a
+                href="/fab-operations"
+                class="flex items-center gap-2.5 px-3 py-2 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/80 text-indigo-600 dark:text-indigo-400 text-xs font-semibold transition"
+              >
+                <i
+                  data-lucide="factory"
+                  class="w-4 h-4 text-indigo-500 shrink-0"
+                ></i>
+                <div>
+                  <div class="leading-tight" data-i18n="nav_item_fab_ops">
+                    Fab Operations
+                  </div>
+                  <div
+                    class="text-[10px] font-normal text-slate-400"
+                    data-i18n="nav_item_fab_ops_sub"
+                  >
+                    Map of fab operations topics
+                  </div>
+                </div>
+              </a>
             </div>
           </div>
 
@@ -1276,6 +1356,38 @@
             >
               <i data-lucide="boxes" class="w-3.5 h-3.5 text-rose-500"></i>
               <span data-i18n="nav_item_hbm">HBM</span>
+            </a>
+            <a
+              href="/fab-data-layer"
+              onclick="toggleMobileMenu()"
+              class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-blue-600 dark:text-blue-400 text-xs font-semibold transition"
+            >
+              <i data-lucide="layers" class="w-3.5 h-3.5 text-blue-500"></i>
+              <span data-i18n="nav_item_data_layer">Fab Data Layer</span>
+            </a>
+            <a
+              href="/fab-mes"
+              onclick="toggleMobileMenu()"
+              class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-teal-600 dark:text-teal-400 text-xs font-semibold transition"
+            >
+              <i data-lucide="workflow" class="w-3.5 h-3.5 text-teal-500"></i>
+              <span data-i18n="nav_item_fab_mes">MES &amp; Dispatch</span>
+            </a>
+            <a
+              href="/fab-apc-yield-metrology"
+              onclick="toggleMobileMenu()"
+              class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-orange-600 dark:text-orange-400 text-xs font-semibold transition"
+            >
+              <i data-lucide="target" class="w-3.5 h-3.5 text-orange-500"></i>
+              <span data-i18n="nav_item_apc_yield">APC, Yield &amp; Metrology</span>
+            </a>
+            <a
+              href="/fab-operations"
+              onclick="toggleMobileMenu()"
+              class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800/70 text-indigo-600 dark:text-indigo-400 text-xs font-semibold transition"
+            >
+              <i data-lucide="factory" class="w-3.5 h-3.5 text-indigo-500"></i>
+              <span data-i18n="nav_item_fab_ops">Fab Operations</span>
             </a>
           </div>
 
