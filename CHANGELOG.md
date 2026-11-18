@@ -4,6 +4,22 @@ All notable changes to the SemiconFab source-available repository will be docume
 
 ## [Unreleased]
 
+### Physics, Standards, Capex & Catalog Synchronization (物理修正、标准、Capex 与目录同步)
+
+- **GAAFET (`gaa.html`)**: Step text corrected to 0.33 NA EUV single patterning (or High-NA / SADP for sub-2nm); added Si0.4Ge0.6 basal sacrificial layer selectively replaced to form Bottom Dielectric Isolation (BDI), suppressing sub-fin parasitic channel leakage.
+- **HBM (`hbm.html`)**: Carrier debonding corrected from 308nm excimer to 355nm solid-state UV laser (or 1064nm IR); differentiated HBM3E (1024-bit bus, microbump, TC-NCF / MR-MUF) from HBM4 (2048-bit bus, Cu-Cu direct hybrid bonding for 16-Hi+, JEDEC 720μm package height limit).
+- **3D NAND (`nand.html`)**: Channel-hole etch rewritten as Dual-Deck / Multi-Tier string stacking with inter-deck plug & alignment and cryogenic HAR etch (>60:1 per deck, >100:1 combined).
+- **DRAM (`dram.html`)**: Capacitor aspect ratio corrected from >40:1 to >60:1–80:1 (CD ~20–25nm), with Dual Si3N4 supporter mesh stabilizing the freestanding TiN cylinders.
+- **Cleanroom & Logistics (`index.html`, `twin.html`, `twin-mega.html`, `js/translations.js`)**: ISO Class 1 now refers strictly to the FOUP mini-environment (FOUP pods, EFEMs, process chambers); the ballroom (Bay & Chase) is stated as ISO Class 4/5. twin-mega discloses 1:15 OHT visual scaling (86 rendered ≈ 1,200–1,500 vehicles at 50k WSPM).
+- **SEMI Standards (`fab-data-layer.html`, `data/fab-data-layer.json`, `data/fab-operations.json`)**: Legacy SEMI E4 (SECS-I) replaced by SEMI E37 (HSMS) across the fab data layer; protocol strings now read SECS/GEM (E5/E30/E37).
+- **YMS Yield Engine (`twin.html`)**: Seeds model explicitly implemented as the Negative Binomial yield formula, linked to WM-811K defect-pattern presets; cluster alpha slider widened to 0.1–10.0 (default 1.20) with pattern-based auto-recommendation (e.g. Edge-Ring → 0.40); added 8-step cascading cumulative yield for Observed / Poisson / Murphy / Negative Binomial.
+- **Capex Estimator (`fab-capex.html`)**: Added scaling-mode toggle — Throughput-Weighted Fab Scaling (Realistic, default, HVM bottleneck-balanced) vs Linear Scaling (Baseline, fixed-ratio). At 1× both modes agree; they diverge at higher scale factors.
+- **Catalog Sync (`index.html`, `scripts/sync_catalog_stats.js`)**: Homepage maturity funnel synchronized with `catalog.json` (253 tools: L1 9 · 4%, draft 244 · 96%; Fab 167 / OSAT 86) and now also refreshes dynamically from `catalog.json` at runtime; added `scripts/sync_catalog_stats.js` to re-sync the pre-rendered values.
+- **Layout Editor (`layout-editor.html`)**: Palette now shows all 253 tools; tools without recorded physical dimensions resolve footprints from category fallback buckets (e.g. advanced lithography 4.8m × 12.0m) and are labelled "(Cat. Est)".
+- **Benchmark (`benchmark.html`)**: Added "Historical Heritage" section attributing MIMAC-2026 to the 1995 SEMATECH / Arizona State University MIMAC benchmark (Fowler & Robinson et al., SEMATECH Tech Transfer #95062861A-TR) with a 1995-vs-2026 comparison table, and a v2026.2 roadmap note (Q-Time and batching/reticle-sharing constraints).
+- **Dual-Track Licensing (`LICENSE`, `README.md`, `index.html`)**: Website, 3D assets and digital twin remain under PolyForm Noncommercial 1.0.0; the MIMAC-2026 benchmark specification, simulator and baselines are now licensed under Apache License 2.0 for unrestricted academic research, citation and publication.
+- **Routing (`_redirects`)**: Added Cloudflare Pages redirects: `/benchmark/spec` → `/benchmark`, `/spec` → `/data-standard`, `/12` → `/`, `/submit-equipment` and `/submit-equipment.html` → `/add-equipment` (all 301).
+
 ### APC, FDC, SPC, Metrology & Yield (APC / FDC / SPC 与良率、量测与缺陷分析) Teaching Explainer (`fab-apc-yield-metrology.html`)
 
 - **New Standalone Teaching Topic Page (`fab-apc-yield-metrology.html`)**:
