@@ -181,8 +181,8 @@
               {
                 "@type": "HowToStep",
                 "position": 7,
-                "name": "Backside UBM Metallization & Excimer Laser Debonding",
-                "text": "Patterning Ti/Cu/Ni/Au UBM pads on TSV tips, 308nm excimer laser debonding of the glass carrier, and stealth laser dicing into Known Good Dies (KGD)."
+                "name": "Backside UBM Metallization & 355nm UV Laser Debonding",
+                "text": "Patterning Ti/Cu/Ni/Au UBM pads on TSV tips, 355nm solid-state UV laser (or 1064nm IR laser) debonding through the borosilicate glass carrier, and stealth laser dicing into Known Good Dies (KGD)."
               },
               {
                 "@type": "HowToStep",
@@ -1011,13 +1011,13 @@
           matEn:
             "P-Type Single-Crystal Si + Cu/Low-k Interconnects + Passivation",
           matDimZh:
-            "晶圆直径: 300mm | 逻辑底模厚度: ~775μm | I/O 接口: 1024-bit 宽总线",
+            "晶圆直径: 300mm | 逻辑底模厚度: ~775μm | 接口: HBM3E 1024-bit / HBM4 升级 2048-bit 超宽总线",
           matDimEn:
-            "Wafer Size: 300mm | Die Thickness: ~775μm | 1024-bit Wide Bus",
+            "Wafer Size: 300mm | Die Thickness: ~775μm | Interface: HBM3E 1024-bit / HBM4 2048-bit Ultra-Wide Bus",
           purposeZh:
-            "充当整座 HBM 立体堆叠的指挥中枢与物理基底，将上层垂直贯穿的数千条 TSV 信号进行转接、重定时、差分驱动并提供 BIST 自检，实现与主机 GPU/CPU 的超高速接口对接。",
+            "充当整座 HBM 立体堆叠的指挥中枢与物理基底。HBM3E 采用 1024-bit 宽总线，而新一代 HBM4 升级为 2048-bit 超宽物理接口（位宽翻倍且支持先进制程晶圆代工制造底模）。将上层垂直贯穿的数千条 TSV 信号进行转接、重定时、差分驱动并提供 BIST 自检，实现与主机 GPU/CPU 的超高速接口对接。",
           purposeEn:
-            "Acts as the command hub and electrical foundation for the entire 3D stack, managing thousands of vertical TSV lines with BIST self-repair and driving the ultra-wide 1024-bit interface to the host GPU/ASIC.",
+            "Acts as the command hub and electrical foundation for the entire 3D stack. HBM3E employs a 1024-bit wide bus, while next-generation HBM4 upgrades to a 2048-bit ultra-wide interface (doubled bus width with advanced foundry logic node Base Die). Manages vertical TSV routing, BIST self-repair, and drives high-speed PHY signaling to the host GPU/ASIC.",
         },
         {
           id: 1,
@@ -1178,24 +1178,24 @@
           shortZh: "UBM与激光剥离",
           shortEn: "UBM & Laser Debond",
           catZh: "背面金属化与解键合 (Metallization & Debonding)",
-          catEn: "Backside UBM & Excimer Laser Debond",
-          titleZh: "背面凸点下金属化 (UBM) 焊盘制备与载板激光剥离",
-          titleEn: "Backside UBM Pad Metallization & Excimer Laser Debonding",
+          catEn: "Backside UBM & 355nm UV Laser Debond",
+          titleZh: "背面凸点下金属化 (UBM) 焊盘制备与 355nm 固体紫外激光解键合",
+          titleEn: "Backside UBM Pad Metallization & 355nm UV Laser Debonding",
           summaryZh:
-            "溅射沉积钛/铜/镍/金（Ti/Cu/Ni/Au）复合薄膜并微图形化，在每个露出的 TSV 铜头上形成平整牢固的凸点下金属化焊盘（UBM Landing Pad）。随后使用 308nm/355nm 紫外准分子激光从玻璃载板背面瞬间透射扫描，光化学热解剥离粘结胶层，安全脱开载板并清洗残留物，经隐形激光切割（Stealth Dicing）分切为已知良品裸片（KGD）。",
+            "溅射沉积钛/铜/镍/金（Ti/Cu/Ni/Au）复合薄膜并微图形化，在每个露出的 TSV 铜头上形成平整牢固的凸点下金属化焊盘（UBM Landing Pad）。随后使用 355nm 固体紫外激光（或 1064nm 红外激光）穿透高透光的硼硅酸盐玻璃载板（Borosilicate Glass Carrier），光化学热解剥离粘结胶层，安全脱开载板并清洗残留物，经隐形激光切割（Stealth Dicing）分切为已知良品裸片（KGD）。",
           summaryEn:
-            "Sputtering and patterning Ti/Cu/Ni/Au forms robust Under-Bump Metallization (UBM) landing pads on exposed TSV tips. UV excimer laser (308nm/355nm) scans through the glass carrier, photochemically decomposing the adhesive layer for stress-free carrier debonding, followed by stealth dicing into Known Good Dies (KGD).",
-          toolZh: "准分子激光解键合剥离机 + 晶圆等离子清洗槽 + 隐形激光切割机",
+            "Sputtering and patterning Ti/Cu/Ni/Au forms robust Under-Bump Metallization (UBM) landing pads on exposed TSV tips. A 355nm solid-state UV laser (or 1064nm IR laser) transmits through the borosilicate glass carrier to photochemically decompose the adhesive layer for stress-free carrier debonding, followed by stealth dicing into Known Good Dies (KGD).",
+          toolZh: "355nm 固体紫外激光解键合剥离机 + 晶圆等离子清洗槽 + 隐形激光切割机",
           toolEn:
-            "Excimer Laser Debonder + Plasma Clean Station + Stealth Laser Dicer",
+            "355nm Solid-State UV Laser Debonder + Plasma Clean Station + Stealth Laser Dicer",
           toolVendor: "SUSS MicroTec XDD300 / DISCO DFL7362 / EVG 850DB",
-          matZh: "背面 UBM 焊盘 (Ti/Cu/Ni/Au) + 紫外激光脉冲光解界面",
+          matZh: "背面 UBM 焊盘 (Ti/Cu/Ni/Au) + 355nm 紫外激光脉冲光解界面",
           matEn:
             "Backside UBM Landing Pads (Ti/Cu/Ni/Au) + Cleaned KGD Silicon Dice",
           matDimZh:
-            "UBM 焊盘直径: ~18-22μm | 激光剥离分秒级完成 | KGD 裸片厚度: ~35μm",
+            "UBM 焊盘直径: ~18-22μm | 355nm 激光剥离分秒级完成 | KGD 裸片厚度: ~35μm",
           matDimEn:
-            "UBM Pad Diameter: ~18-22μm | Laser Cycle: <60s | Die Thickness: ~35μm",
+            "UBM Pad Diameter: ~18-22μm | 355nm Laser Cycle: <60s | Die Thickness: ~35μm",
           purposeZh:
             "完成 DRAM 单晶粒的正反双面垂直金属通孔接口构建，使晶粒具备上下一体导通能力；并将超薄晶圆无损释放为高良率已知好裸片（KGD）。",
           purposeEn:
@@ -1213,9 +1213,9 @@
           titleEn:
             "High-Precision 12-Hi 3D Die Stacking (TC-NCF / MR-MUF / Hybrid Bonding)",
           summaryZh:
-            "使用亚微米高精度贴片机将 12 层 DRAM KGD 裸片依次垂直精准堆叠（12-Hi，包含底层 Base Die 共 13 层芯片）。前 11 层晶片内部贯穿垂直 TSV 铜柱与微凸点阵列；最顶层（第12层）芯片无 TSV 穿透，保留完整单晶硅背部作为直接散热界面。采用热压非导电胶膜（TC-NCF）或先进大规模回流模塑底部填充（MR-MUF，SK海力士代表技术）在加温加压下一体熔融焊点并填充层间微间隙；未来 HBM4 更引入无凸点直接铜-铜混合键合（Cu-Cu Hybrid Bonding）。",
+            "使用亚微米高精度贴片机将 DRAM KGD 裸片依次垂直精准堆叠（主流 12-Hi 至前沿 16-Hi）。代际架构区分：HBM3E 采用 1024-bit 宽总线，基于微凸点（Microbump）互连并采用热压非导电胶膜（TC-NCF）或大规模回流模塑底部填充（MR-MUF，SK海力士代表技术）在加温加压下一体熔融焊点并填充层间微间隙；而新一代 HBM4 升级为 2048-bit 超宽接口，并在 16-Hi 及以上堆叠中引入无凸点直接铜-铜混合键合（Cu-Cu Direct Hybrid Bonding / Bumpless），使层间微间距压缩至 1μm 以下，以确保 16 层总厚度控制在 JEDEC 720μm 封装限高内。",
           summaryEn:
-            "Sub-micron precision pick-and-place stackers align 12 DRAM KGD dies sequentially atop the Base Die (12-Hi, totaling 13 dies). The lower 11 DRAM tiers feature dense vertical TSVs and microbumps, while the topmost 12th tier has NO TSVs, serving as a pristine bare silicon heat spreader. Thermal Compression Non-Conductive Film (TC-NCF) or Mass Reflow Molded Underfill (MR-MUF) solidifies thousands of microbumps void-free.",
+            "Sub-micron precision stackers align DRAM KGD dies sequentially (mainstream 12-Hi to advanced 16-Hi). Generational specifications: HBM3E uses a 1024-bit bus with microbump interconnects bonded via TC-NCF or MR-MUF (Mass Reflow Molded Underfill). Next-generation HBM4 upgrades to a 2048-bit ultra-wide interface, introducing Cu-Cu Direct Hybrid Bonding (Bumpless) for 16-Hi+ stacks to compress inter-die pitch below 1μm and stay strictly within the JEDEC 720μm package height limit.",
           toolZh: "超高精度 3D 倒装贴片键合机 / 晶圆级热压键合系统",
           toolEn:
             "Sub-Micron 3D Flip-Chip Die Bonder / Thermal Compression System",
@@ -2756,10 +2756,10 @@
         },
         {
           id: "laserBeam",
-          nameZh: "308nm 紫外准分子激光面",
-          nameEn: "UV 308nm Laser Release",
+          nameZh: "355nm 固体紫外激光面",
+          nameEn: "355nm UV Laser Release",
           color: "#c084fc",
-          formula: "308nm UV",
+          formula: "355nm UV",
           descZh: "光化学热解粘合胶 · 零应力安全剥离",
           descEn: "Photochemical carrier debonding plane",
         },
@@ -3117,7 +3117,7 @@
           <p>
             Advanced CMOS logic fabrication constructs the Base Die wafer with
             high-speed DFI PHY, BIST self-repair controllers, and dense landing
-            pads.
+            pads (HBM3E 1024-bit bus vs. HBM4 upgraded 2048-bit ultra-wide bus).
           </p>
           <p>
             <strong>Equipment:</strong> Advanced Logic ArFi/EUV Scanner +
@@ -3206,14 +3206,14 @@
           </p>
         </li>
         <li>
-          <h3>Step 7: Backside UBM Metallization & Excimer Laser Debonding</h3>
+          <h3>Step 7: Backside UBM Metallization & 355nm UV Laser Debonding</h3>
           <p>
-            Patterning Ti/Cu/Ni/Au UBM pads on TSV tips, 308nm excimer laser
-            debonding of the glass carrier, and stealth laser dicing into Known
+            Patterning Ti/Cu/Ni/Au UBM pads on TSV tips, 355nm solid-state UV laser (or 1064nm IR laser)
+            debonding through the borosilicate glass carrier, and stealth laser dicing into Known
             Good Dies (KGD).
           </p>
           <p>
-            <strong>Equipment:</strong> Excimer Laser Debonder + Plasma Clean
+            <strong>Equipment:</strong> 355nm UV Laser Debonder + Plasma Clean
             Station + Stealth Laser Dicer (SUSS MicroTec XDD300 / DISCO DFL7362
             / EVG 850DB). <strong>Materials:</strong> Backside UBM Landing Pads
             (Ti/Cu/Ni/Au) + Cleaned KGD Silicon Dice.
@@ -3226,14 +3226,14 @@
           </h3>
           <p>
             Sub-micron pick-and-place stackers aligning DRAM KGD dies
-            sequentially atop the Base Die, bonding via TC-NCF or MR-MUF with
-            void-free joints.
+            sequentially atop the Base Die, bonding via TC-NCF or MR-MUF for HBM3E,
+            or Cu-Cu Direct Hybrid Bonding (Bumpless) for HBM4 16-Hi+ to meet the 720μm package height limit.
           </p>
           <p>
             <strong>Equipment:</strong> Sub-Micron 3D Flip-Chip Die Bonder /
-            Thermal Compression System (Toray / Hanmi Semiconductor DUAL TC
+            Thermal Compression System / Direct Hybrid Bonder (Toray / Hanmi Semiconductor DUAL TC
             Bonder / Besi Datacon 8800). <strong>Materials:</strong> 8-Hi to
-            16-Hi Stacked DRAM Dies + Sn-Ag Joints + NCF / MUF Underfill.
+            16-Hi Stacked DRAM Dies + Sn-Ag Joints / Cu-Cu Hybrid Pads + NCF / MUF Underfill.
           </p>
         </li>
         <li>

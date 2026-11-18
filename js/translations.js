@@ -559,7 +559,7 @@ const I18N_DICTIONARY = {
       'Below are the line-item anchors found in the report. Note the enormous spread in cleanroom unit prices: base fit-out and "tool-ready" state differ by more than 4×, and EUV lithography bays double again — a unit price without a state condition is meaningless.',
     fab_cost_th_item: "Line item",
     fab_cost_th_price_scale: "Price / scale",
-    fab_cost_fac_r1_name: "Cleanroom (ISO Class 1–3 ballroom)",
+    fab_cost_fac_r1_name: "Cleanroom (FOUP ISO 1 / Ballroom ISO 4–5)",
     fab_cost_fac_r1_price:
       "Fit-out + hardware $1,200–2,500/m²; tool-ready $5,000–10,000/m²; EUV bays $20,000+/m²; another ISO Class 3 basis cites >$700/ft² (≈$7,500/m²)",
     fab_cost_fac_r1_notes:
@@ -801,7 +801,7 @@ const I18N_DICTIONARY = {
     fab_cost_split_e_notes_sub: "engineering design, permitting, commissioning",
     fab_cost_node_r9_basis_note:
       'Small fabs have markedly higher unit facility costs — see "Capacity scaling"',
-    fab_cost_fac_r1_sub: "ISO Class 1–3 ballroom",
+    fab_cost_fac_r1_sub: "FOUP ISO 1 / Ballroom ISO 4–5",
     fab_cost_src_1_sub:
       "cost structure, equipment 70–80%, MEP ≈ 2/3 of construction cost, +30% per node, timelines",
     fab_cost_src_2_sub:
@@ -1174,7 +1174,7 @@ const I18N_DICTIONARY = {
       "SemiconFab.org is an open-access engineering digital twin platform for 300mm (12-inch) semiconductor wafer fabrication cleanrooms. It models architectural cleanroom elevations, subfab MEP utility networks, a 253-model OEM equipment engineering taxonomy (167 fab + 86 OSAT), real-time SECS/GEM & SEMI E10 industrial telemetry, and microscopic yield analytics directly in the browser.",
     faq_q2: "What cleanroom and architectural standards are modeled?",
     faq_a2:
-      "The platform follows SEMI standards and ISO 14644-1 Class 1 cleanroom specifications (< 10 particles/m³ for particles ≥ 0.1 µm). It models a 4.5m process cleanroom with raised waffle-slab access flooring (600mm × 600mm perforated tiles), an amber-lit photolithography core, fan filter units (FFU), and a 6.0m subfab utility basement (Class 10,000 / ISO 7) for vacuum pumps, RF generators, and scrubbers.",
+      "The platform follows SEMI standards and modern 300mm SMIF / FOUP mini-environment specifications: ISO 14644-1 Class 1 (< 10 particles/m³ for particles ≥ 0.1 µm) is strictly maintained inside FOUP wafer pods, EFEMs, and process chambers, while the 4.5m process cleanroom ballroom (Bay & Chase) operates at ISO Class 4 to Class 5 for sustainable HVAC energy efficiency. It models raised waffle-slab access flooring (600mm × 600mm perforated tiles), an amber-lit photolithography core, fan filter units (FFU), and a 6.0m subfab utility basement (Class 10,000 / ISO 7) for vacuum pumps, RF generators, and scrubbers.",
     faq_q3:
       "Which semiconductor equipment categories and OEM tools are included?",
     faq_a3:
@@ -1796,7 +1796,7 @@ const I18N_DICTIONARY = {
       '以下是报告中找到的分项锚点。注意洁净室单价的跨度极大：基础装修与"可装机"状态相差 4 倍以上，EUV 光刻区还要再翻倍——不带状态条件的单价没有意义。',
     fab_cost_th_item: "分项",
     fab_cost_th_price_scale: "价格 / 规模",
-    fab_cost_fac_r1_name: "洁净室（ISO Class 1–3 大开间）",
+    fab_cost_fac_r1_name: "洁净室（FOUP 微环境 ISO 1 / 大开间 ISO 4–5）",
     fab_cost_fac_r1_price:
       "装修 + 硬件 $1,200–2,500/m²；可装机状态 $5,000–10,000/m²；EUV 区 $20,000+/m²；另有 ISO Class 3 口径 >$700/ft²（≈$7,500/m²）的说法",
     fab_cost_fac_r1_notes:
@@ -2027,7 +2027,7 @@ const I18N_DICTIONARY = {
     fab_cost_split_e_notes_sub: "工程设计、许可、调试验收",
     fab_cost_node_r9_basis_note:
       '小型 Fab 的单位设施成本明显更高——见"产能缩放"',
-    fab_cost_fac_r1_sub: "ISO Class 1–3 大开间",
+    fab_cost_fac_r1_sub: "FOUP 微环境 ISO 1 / 大开间 ISO 4–5",
     fab_cost_src_1_sub:
       "成本结构、设备 70–80%、机电 ≈ 建设成本的 2/3、每代 +30%、工期",
     fab_cost_src_2_sub:
@@ -2381,7 +2381,7 @@ const I18N_DICTIONARY = {
       "SemiconFab.org 是一个面向 300mm（12英寸）半导体晶圆制造洁净室的全球开放工程级数字孪生平台。它在浏览器内直接建模洁净室物理建筑立体构造、Subfab 辅助动力管网系统、253 款半导体核心设备分类工程图鉴（167 前道 + 86 封测）、实时 SECS/GEM 与 SEMI E10 工业遥测系统，以及前道微观级联良率仿真分析。",
     faq_q2: "平台遵循哪些洁净室与半导体工业标准？",
     faq_a2:
-      "平台严格遵循 SEMI 国际标准以及 ISO 14644-1 Class 1（1级）洁净室规范（对于 ≥ 0.1 µm 的微粒，微粒浓度小于 10 颗/m³）。三维模型包含 4.5 米高前道工艺厂房（采用 600mm × 600mm 铝合金穿孔高架抗静电地板）、黄光微影曝光核心区、风机过滤机组（FFU）循环系统，以及 6.0 米高的下层动力 Subfab 地下室（Class 10,000 / ISO 7），用于安装干泵、射频电源与废气尾气洗涤塔。",
+      "平台遵循 SEMI 国际标准与现代 300mm 晶圆厂 SMIF / FOUP 局部微环境架构规范：在 FOUP 晶圆传送盒内部、设备前端模块 (EFEM) 及工艺反应腔内维持严格的 ISO Class 1 级别（对于 ≥ 0.1 µm 的微粒，微粒浓度小于 10 颗/m³）；而在 4.5 米高主洁净室大厅（Ballroom / Bay & Chase）维持 ISO Class 4 至 Class 5，以真实反映现代 Fab 的 HVAC 节能工程实践。三维模型包含铝合金穿孔高架抗静电地板、黄光微影曝光核心区、FFU 循环系统，以及 6.0 米高的下层动力 Subfab 地下室（Class 10,000 / ISO 7）。",
     faq_q3: "平台涵盖了哪些半导体设备分类与领军 OEM 机台？",
     faq_a3:
       "工程设备库覆盖 24 大半导体制造分类的 253 款核心 OEM 设备（167 前道 + 86 封测）：光刻微影（13.5nm EUV、193nm 浸润式 ArFi、KrF）、涂胶显影机（Track）、等离子体干法刻蚀（RIE、ICP、ALE）、薄膜沉积（PECVD、LPCVD、ALD、PVD、超充铜电镀 ECD）、湿法清洗机、化学机械研磨（CMP）、高温退火氧化与离子注入机，以及量测检测机台（CD-SEM、缺陷复检 SEM、椭偏仪）。",
@@ -2790,7 +2790,7 @@ const I18N_DICTIONARY = {
       "SemiconFab.org 是一個面向 300mm（12吋）半導體晶圓製造無塵室的全球開放工程級數位雙生平台。它在瀏覽器內直接建模無塵室物理建築立體構造、Subfab 輔助動力管網系統、253 款半導體核心設備分類工程圖鑑（167 前段 + 86 封測）、即時 SECS/GEM 與 SEMI E10 工業遙測系統，以及前道微觀級聯良率模擬分析。",
     faq_q2: "平台遵循哪些無塵室與半導體工業標準？",
     faq_a2:
-      "平台嚴格遵循 SEMI 國際標準以及 ISO 14644-1 Class 1（1級）無塵室規範（對於 ≥ 0.1 µm 的微粒，微粒濃度小於 10 顆/m³）。三維模型包含 4.5 米高前道工藝廠房（採用 600mm × 600mm 鋁合金穿孔高架防靜電地板）、黃光微影曝光核心區、風機過濾機組（FFU）循環系統，以及 6.0 米高的下層動力 Subfab 地下室（Class 10,000 / ISO 7），用於安裝乾泵、射頻電源與廢氣尾氣洗滌塔。",
+      "平台遵循 SEMI 國際標準與現代 300mm 晶圓廠 SMIF / FOUP 局部微環境架構規範：在 FOUP 晶圓傳送盒內部、設備前端模組 (EFEM) 及工藝反應腔內維持嚴格的 ISO Class 1 級別（對於 ≥ 0.1 µm 的微粒，微粒濃度小於 10 顆/m³）；而在 4.5 米高主無塵室大廳（Ballroom / Bay & Chase）維持 ISO Class 4 至 Class 5，以真實反映現代 Fab 的 HVAC 節能工程實踐。三維模型包含鋁合金穿孔高架防靜電地板、黃光微影曝光核心區、FFU 循環系統，以及 6.0 米高的下層動力 Subfab 地下室（Class 10,000 / ISO 7）。",
     faq_q3: "平台涵蓋了哪些半導體設備分類與領軍 OEM 機台？",
     faq_a3:
       "工程設備庫覆蓋 24 大半導體製造分類的 253 款核心 OEM 設備（167 前段 + 86 封測）：微影曝光（13.5nm EUV、193nm 浸潤式 ArFi、KrF）、塗膠顯影機（Track）、電漿乾蝕刻（RIE、ICP、ALE）、薄膜沉積（PECVD、LPCVD、ALD、PVD、超充電鍍銅 ECD）、濕法清洗機、化學機械研磨（CMP）、高溫退火氧化與離子植入機，以及量測檢測機台（CD-SEM、缺陷複檢 SEM、橢偏儀）。",

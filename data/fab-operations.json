@@ -161,8 +161,8 @@
           "title_zh": "300mm 晶圆厂孪生",
           "status": "available",
           "href": "twin.html",
-          "scope_en": "Educational 3D model of ISO Class 1 cleanroom and subfab layout with equipment footprints (teaching simulation).",
-          "scope_zh": "教学级 3D 仿真：ISO 1 级洁净室、次层空间与机台几何布局示意。"
+          "scope_en": "Educational 3D model of FOUP mini-environment (ISO Class 1) & ISO Class 4/5 cleanroom and subfab layout with equipment footprints (teaching simulation).",
+          "scope_zh": "教学级 3D 仿真：FOUP 微环境 (ISO 1 级) 与 ISO 4/5 级洁净室、次层空间与机台几何布局示意。"
         },
         {
           "id": "osat-twin",

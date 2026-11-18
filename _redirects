@@ -1,0 +1,20 @@
+# ==========================================
+# Cloudflare Pages URL Redirects
+# Project: SemiconFab.org
+# ==========================================
+
+# MIMAC-2026 legacy spec URL -> Canonical benchmark portal
+/benchmark/spec         /benchmark               301
+/benchmark/spec/        /benchmark               301
+
+# Legacy schema spec URL -> Data standard
+/spec                   /data-standard           301
+/spec/                  /data-standard           301
+
+# Clean URL / Erroneous legacy crawler 404 path
+/12                     /                        301
+/12/                    /                        301
+
+# Canonical redirects for equipment submission
+/submit-equipment       /add-equipment           301
+/submit-equipment.html  /add-equipment           301

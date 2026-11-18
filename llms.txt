@@ -7,9 +7,9 @@ SemiconFab.org provides a browser-based, high-fidelity 2D/3D digital twin of a 3
 ## Key Technical Specifications & Architectural Standards
 
 - **Wafer Geometry**: 300mm (12-inch) single-crystal silicon wafer standard, SEMI M1 notch orientation, 775 µm nominal thickness.
-- **Cleanroom Specification**: ISO 14644-1 Class 1 (US FED STD 209E Class 1), < 10 particles (≥ 0.1 µm) per m³.
+- **Cleanroom Architecture & Specification**: Modern 300mm SMIF / FOUP mini-environment architecture: ISO 14644-1 Class 1 (< 10 particles/m³ for particles ≥ 0.1 µm) inside FOUP pods, EFEMs, and process chambers; ISO Class 4 to Class 5 in the 4.5m process ballroom (Bay & Chase) for HVAC energy efficiency.
 - **Cleanroom Elevation**:
-  - Level 1 (L1) Process Cleanroom: 4.5m ceiling height, Class 1 unidirectional laminar air flow, raised perforated waffle slab (600mm × 600mm tiles).
+  - Level 1 (L1) Process Cleanroom: 4.5m ceiling height, ISO Class 4/5 unidirectional laminar downflow, raised perforated waffle slab (600mm × 600mm tiles).
   - Basment (B1) Subfab Utility Plenum: 6.0m clear height, Class 10,000 / ISO 7, housing vacuum dry pumps, RF plasma generators, scrubbers, and chemical dispense units.
   - Plenums: FFU (Fan Filter Unit) recirculation plenum (+20m relative) with ULPA filters (99.9995% efficiency @ 0.12 µm).
 - **Subfab MEP Utility Loops**:
@@ -62,7 +62,7 @@ SemiconFab.org provides interactive 10-step 3D CAD fabrication digital twins for
 
 5. **HBM3E / HBM4 3D Memory Stacking & Advanced Packaging Digital Twin** (`https://semiconfab.org/hbm.html` / `https://semiconfab.org/hbm`):
    - **Architecture**: 8-Hi / 12-Hi / 16-Hi High Bandwidth Memory cube with vertical TSVs, dense microbumps, and 2.5D CoWoS host GPU heterogeneous integration.
-   - **Key Steps**: CMOS Logic Base/Buffer Die fabrication with 1024-bit DFI PHY & BIST testing, DRAM core wafer high-density blind TSV DRIE & void-free ECD copper fill, front-side fine-pitch Cu RDL & microbump metallization (Cu pillar + Sn-Ag cap), temporary optical carrier wafer bonding, extreme backside mechanical diamond grinding & stress-relief CMP (~30-45μm), selective SF6 TSV tip reveal etch & low-temp passivation, backside UBM sputtering & 308nm excimer laser debonding into Known Good Dies (KGD), high-precision sub-micron 3D vertical die stacking via TC-NCF / MR-MUF, vacuum epoxy molding compound (EMC) encapsulation with top-die bare silicon heat dissipation polish, and 2.5D Silicon Interposer CoWoS integration alongside host GPU compute processor.
+   - **Key Steps**: CMOS Logic Base/Buffer Die fabrication with 1024-bit DFI PHY (HBM3E) / 2048-bit (HBM4) & BIST testing, DRAM core wafer high-density blind TSV DRIE & void-free ECD copper fill, front-side fine-pitch Cu RDL & microbump metallization (Cu pillar + Sn-Ag cap), temporary optical carrier wafer bonding, extreme backside mechanical diamond grinding & stress-relief CMP (~30-45μm), selective SF6 TSV tip reveal etch & low-temp passivation, backside UBM sputtering & 355nm solid-state UV laser (or 1064nm IR) debonding into Known Good Dies (KGD), high-precision sub-micron 3D vertical die stacking via TC-NCF / MR-MUF (HBM3E) or Cu-Cu Hybrid Bonding (HBM4), vacuum epoxy molding compound (EMC) encapsulation with top-die bare silicon heat dissipation polish, and 2.5D Silicon Interposer CoWoS integration alongside host GPU compute processor.
 
 ## Canonical Data Endpoints
 

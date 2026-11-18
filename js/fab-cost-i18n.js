@@ -191,7 +191,7 @@ const FAB_COST_I18N = {
       'Below are the line-item anchors found in the report. Note the enormous spread in cleanroom unit prices: base fit-out and "tool-ready" state differ by more than 4×, and EUV lithography bays double again — a unit price without a state condition is meaningless.',
     fab_cost_th_item: "Line item",
     fab_cost_th_price_scale: "Price / scale",
-    fab_cost_fac_r1_name: "Cleanroom (ISO Class 1–3 ballroom)",
+    fab_cost_fac_r1_name: "Cleanroom (FOUP ISO 1 / Ballroom ISO 4–5)",
     fab_cost_fac_r1_price:
       "Fit-out + hardware $1,200–2,500/m²; tool-ready $5,000–10,000/m²; EUV bays $20,000+/m²; another ISO Class 3 basis cites >$700/ft² (≈$7,500/m²)",
     fab_cost_fac_r1_notes:
@@ -448,7 +448,7 @@ const FAB_COST_I18N = {
     fab_cost_split_e_notes_sub: "engineering design, permitting, commissioning",
     fab_cost_node_r9_basis_note:
       'Small fabs have markedly higher unit facility costs — see "Capacity scaling"',
-    fab_cost_fac_r1_sub: "ISO Class 1–3 ballroom",
+    fab_cost_fac_r1_sub: "FOUP ISO 1 / Ballroom ISO 4–5",
     fab_cost_src_1_sub:
       "cost structure, equipment 70–80%, MEP ≈ 2/3 of construction cost, +30% per node, timelines",
     fab_cost_src_2_sub:
@@ -650,7 +650,7 @@ const FAB_COST_I18N = {
       '以下是报告中找到的分项锚点。注意洁净室单价的跨度极大：基础装修与"可装机"状态相差 4 倍以上，EUV 光刻区还要再翻倍——不带状态条件的单价没有意义。',
     fab_cost_th_item: "分项",
     fab_cost_th_price_scale: "价格 / 规模",
-    fab_cost_fac_r1_name: "洁净室（ISO Class 1–3 大开间）",
+    fab_cost_fac_r1_name: "洁净室（FOUP 微环境 ISO 1 / 大开间 ISO 4–5）",
     fab_cost_fac_r1_price:
       "装修 + 硬件 $1,200–2,500/m²；可装机状态 $5,000–10,000/m²；EUV 区 $20,000+/m²；另有 ISO Class 3 口径 >$700/ft²（≈$7,500/m²）的说法",
     fab_cost_fac_r1_notes:
@@ -896,7 +896,7 @@ const FAB_COST_I18N = {
     fab_cost_split_e_notes_sub: "工程设计、许可、调试验收",
     fab_cost_node_r9_basis_note:
       '小型 Fab 的单位设施成本明显更高——见"产能缩放"',
-    fab_cost_fac_r1_sub: "ISO Class 1–3 大开间",
+    fab_cost_fac_r1_sub: "FOUP 微环境 ISO 1 / 大开间 ISO 4–5",
     fab_cost_src_1_sub:
       "成本结构、设备 70–80%、机电 ≈ 建设成本的 2/3、每代 +30%、工期",
     fab_cost_src_2_sub:

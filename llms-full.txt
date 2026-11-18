@@ -11,9 +11,9 @@ Source & Deployment: Cloudflare Pages (Purely Static Edge Architecture)
 ## 2. Fab Architecture & Cleanroom Engineering
 
 ### 2.1 Cleanroom Hierarchy (ISO 14644-1 / FED-STD-209E)
-1. **L1 Cleanroom Bay & Chase (ISO Class 1 / Class 3)**
+1. **L1 Cleanroom Bay & Chase (FOUP Mini-Environment ISO Class 1 / Ballroom ISO Class 4–5)**
+   - SMIF / FOUP mini-environment architecture: FOUP pods, EFEMs, and process chambers maintain ISO Class 1 (< 10 particles/m³ for particles >= 0.1 µm); ballroom operates at ISO Class 4–5.
    - Unidirectional downward laminar airflow (0.45 m/s ± 20%).
-   - Airborne particulate limit: < 10 particles/m³ for particles >= 0.1 µm.
    - Raised access flooring (600mm x 600mm perforated aluminum waffle slab) providing 20%-40% perforation for laminar air return.
    - Photolithography Core: Amber/yellow filtered lighting (blocking wavelengths < 500 nm to protect diazonaphthoquinone (DNQ) and chemical amplified resists (CAR) from premature actinic exposure).
    - Temperature stability: 21.0°C ± 0.1°C; Relative Humidity: 42% ± 1.0% RH.

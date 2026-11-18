@@ -78,12 +78,12 @@
         "EDA / Interface A 元数据与高速 Trace 缓冲"
       ],
       "protocols_en": [
-        "SEMI E4 / E5 / E30 (SECS/GEM)",
+        "SEMI E5 / E30 / E37 (SECS/GEM / HSMS)",
         "SEMI E39, E87, E90, E94 (GEM300)",
         "SEMI E120, E125, E132, E134 (EDA / Interface A)"
       ],
       "protocols_zh": [
-        "SEMI E4 / E5 / E30 (SECS/GEM)",
+        "SEMI E5 / E30 / E37 (SECS/GEM / HSMS)",
         "SEMI E39, E87, E90, E94 (GEM300)",
         "SEMI E120, E125, E132, E134 (EDA / Interface A)"
       ],

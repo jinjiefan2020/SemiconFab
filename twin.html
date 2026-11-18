@@ -14,7 +14,7 @@
     />
     <meta
       name="description"
-      content="Interactive 3D cleanroom and subfab digital twin for 300mm wafer fabrication. Features ISO Class 1 cleanroom models, subfab MEP piping (UPW, gas, vacuum, exhaust), AMHS OHT ceiling track, SEMI E10 equipment telemetry, cascading yield simulation, and WM-811K wafer map analytics."
+      content="Interactive 3D cleanroom and subfab digital twin for 300mm wafer fabrication. Features FOUP mini-environment (ISO Class 1) & ISO Class 4/5 cleanroom models, subfab MEP piping (UPW, gas, vacuum, exhaust), AMHS OHT ceiling track, SEMI E10 equipment telemetry, cascading yield simulation, and WM-811K wafer map analytics."
     />
     <meta
       name="keywords"
@@ -115,7 +115,7 @@
           "priceCurrency": "USD"
         },
         "featureList": [
-          "ISO Class 1 / Class 3 cleanroom spatial twin",
+          "FOUP Mini-Environment (ISO Class 1) & ISO Class 4/5 cleanroom spatial twin",
           "Basement Subfab MEP utility piping network (UPW, Gas, Vacuum, Exhaust)",
           "Exploded multi-tier cleanroom deconstruction",
           "Dynamic 3D section clipping (X, Y, Z axes)",
@@ -484,7 +484,7 @@
             class="text-[10px] text-slate-400 leading-tight truncate"
             id="tour-hud-desc"
           >
-            ISO Class 1 / Class 3 cleanroom with dual-loop AMHS OHT monorail
+            FOUP Mini-Environment (ISO Class 1) & ISO Class 4/5 cleanroom with dual-loop AMHS OHT monorail
             logistics.
           </p>
         </div>
@@ -19379,9 +19379,9 @@
           titleZh: "300mm 晶圆洁净室宏观全景",
           titleEn: "300mm Cleanroom Grand Aerial Overview",
           descZh:
-            "ISO Class 1/3 微环境洁净室全景与双环路天车 (AMHS OHT) 自动化物流导轨。",
+            "FOUP 微环境 (ISO Class 1) 与 ISO Class 4/5 洁净室全景，配备双环路天车 (AMHS OHT) 自动化物流导轨。",
           descEn:
-            "ISO Class 1 / Class 3 cleanroom with dual-loop AMHS OHT monorail logistics.",
+            "FOUP Mini-Environment (ISO Class 1) & ISO Class 4/5 cleanroom with dual-loop AMHS OHT monorail logistics.",
         },
         {
           index: 2,
@@ -23329,7 +23329,28 @@
           activeBtn.className =
             "pat-btn px-2.5 py-1.5 rounded-lg border text-left transition font-medium flex flex-col bg-slate-900 text-white border-slate-900 shadow-sm";
         }
+
+        // Automatic recommendation of alpha based on spatial defect clustering physics
+        let recommendedAlpha = 1.2;
+        if (pat === "random") {
+          recommendedAlpha = 5.0; // Near Poisson uniform distribution
+        } else if (pat === "center" || pat === "donut" || pat === "edge_local") {
+          recommendedAlpha = 1.2; // Moderate spatial clustering
+        } else if (pat === "ring" || pat === "scratch") {
+          recommendedAlpha = 0.4; // High spatial clustering (significant yield protection)
+        } else if (pat === "clean") {
+          recommendedAlpha = 4.0;
+        }
+
+        const alphaInput = document.getElementById("input-cluster-alpha");
+        if (alphaInput) {
+          alphaInput.value = recommendedAlpha;
+          const alphaLabel = document.getElementById("slider-val-alpha");
+          if (alphaLabel) alphaLabel.textContent = recommendedAlpha.toFixed(2);
+        }
+
         renderWaferMapSvg();
+        calculateTheoreticalYieldModels();
       }
 
       function randomizeWaferPattern() {
@@ -23547,10 +23568,18 @@
         const areaCm2 = areaMm2 / 100.0;
         const ad0 = areaCm2 * d0;
 
-        const poisson = Math.exp(-ad0) * 100;
-        const murphy =
-          (ad0 > 0 ? Math.pow((1 - Math.exp(-ad0)) / ad0, 2) : 1.0) * 100;
-        const seeds = Math.pow(1 + ad0 / alpha, -alpha) * 100;
+        const pStep = Math.exp(-ad0);
+        const mStep = ad0 > 0 ? Math.pow((1 - Math.exp(-ad0)) / ad0, 2) : 1.0;
+        const nbStep = Math.pow(1 + ad0 / alpha, -alpha);
+
+        const poisson = pStep * 100;
+        const murphy = mStep * 100;
+        const seeds = nbStep * 100;
+
+        // 8-step cascading cumulative yield
+        const pCum = Math.pow(pStep, 8) * 100;
+        const mCum = Math.pow(mStep, 8) * 100;
+        const nbCum = Math.pow(nbStep, 8) * 100;
 
         const elP = document.getElementById("model-poisson-yield");
         const elM = document.getElementById("model-murphy-yield");
@@ -23559,6 +23588,21 @@
         if (elP) elP.textContent = `${poisson.toFixed(1)}%`;
         if (elM) elM.textContent = `${murphy.toFixed(1)}%`;
         if (elS) elS.textContent = `${seeds.toFixed(1)}%`;
+
+        const elPCum = document.getElementById("model-poisson-cum-yield");
+        const elMCum = document.getElementById("model-murphy-cum-yield");
+        const elSCum = document.getElementById("model-seeds-cum-yield");
+        if (elPCum) elPCum.textContent = `${pCum.toFixed(1)}%`;
+        if (elMCum) elMCum.textContent = `${mCum.toFixed(1)}%`;
+        if (elSCum) elSCum.textContent = `${nbCum.toFixed(1)}%`;
+
+        const elActual = document.getElementById("model-actual-yield");
+        const elActualCum = document.getElementById("model-actual-cum-yield");
+        if (elActual && elActualCum) {
+          const actVal = parseFloat(elActual.textContent) || 93.4;
+          const actCum = Math.pow(actVal / 100, 8) * 100;
+          elActualCum.textContent = `${actCum.toFixed(1)}%`;
+        }
       }
 
       function copyStdfJson() {
@@ -24265,77 +24309,97 @@
                   >
                     <span>Cluster Param (α)</span>
                     <b id="slider-val-alpha" class="text-slate-900 font-bold"
-                      >2.00</b
+                      >1.20</b
                     >
                   </div>
                   <input
                     type="range"
                     id="input-cluster-alpha"
-                    min="1.0"
-                    max="4.0"
-                    value="2.0"
-                    step="0.2"
+                    min="0.1"
+                    max="10.0"
+                    value="1.2"
+                    step="0.1"
                     oninput="onYieldParamsChanged()"
                     class="w-full accent-emerald-600 cursor-pointer h-1.5 bg-slate-200 rounded"
                   />
                 </div>
               </div>
 
-              <!-- Comparison Cards: Actual Wafer vs Theoretical Formulas -->
+              <!-- Comparison Cards: Actual Wafer vs Theoretical Formulas & 8-Step Cumulative -->
               <div class="grid grid-cols-4 gap-2 text-center font-mono">
                 <div
-                  class="bg-emerald-50 border border-emerald-200 p-2 rounded-lg"
+                  class="bg-emerald-50 border border-emerald-200 p-2 rounded-lg flex flex-col justify-between"
                 >
-                  <span class="text-[9px] text-emerald-700 block"
-                    >OBSERVED DIE YIELD</span
-                  >
-                  <span
-                    id="model-actual-yield"
-                    class="text-base font-bold text-emerald-800"
-                    >93.4%</span
-                  >
-                  <span class="text-[8px] text-emerald-600 block mt-0.5"
-                    >504 / 540 Dies</span
-                  >
+                  <div>
+                    <span class="text-[9px] text-emerald-700 block"
+                      >OBSERVED DIE YIELD</span
+                    >
+                    <span
+                      id="model-actual-yield"
+                      class="text-base font-bold text-emerald-800"
+                      >93.4%</span
+                    >
+                    <span class="text-[8px] text-emerald-600 block mt-0.5"
+                      >504 / 540 Dies</span
+                    >
+                  </div>
+                  <div class="mt-1 pt-1 border-t border-emerald-200/80 text-[8px] text-emerald-700">
+                    8-Step Cum: <b id="model-actual-cum-yield" class="font-bold">57.5%</b>
+                  </div>
                 </div>
-                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg">
-                  <span class="text-[9px] text-slate-500 block"
-                    >POISSON: e^(-A·D₀)</span
-                  >
-                  <span
-                    id="model-poisson-yield"
-                    class="text-base font-bold text-slate-800"
-                    >90.5%</span
-                  >
-                  <span class="text-[8px] text-slate-400 block mt-0.5"
-                    >Uniform Random</span
-                  >
+                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg flex flex-col justify-between">
+                  <div>
+                    <span class="text-[9px] text-slate-500 block"
+                      >POISSON: e^(-A·D₀)</span
+                    >
+                    <span
+                      id="model-poisson-yield"
+                      class="text-base font-bold text-slate-800"
+                      >90.5%</span
+                    >
+                    <span class="text-[8px] text-slate-400 block mt-0.5"
+                      >Uniform Random</span
+                    >
+                  </div>
+                  <div class="mt-1 pt-1 border-t border-slate-200 text-[8px] text-slate-500">
+                    8-Step Cum: <b id="model-poisson-cum-yield" class="font-bold text-slate-700">44.9%</b>
+                  </div>
                 </div>
-                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg">
-                  <span class="text-[9px] text-slate-500 block"
-                    >MURPHY MODEL</span
-                  >
-                  <span
-                    id="model-murphy-yield"
-                    class="text-base font-bold text-slate-800"
-                    >90.6%</span
-                  >
-                  <span class="text-[8px] text-slate-400 block mt-0.5"
-                    >Triangular Distribution</span
-                  >
+                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg flex flex-col justify-between">
+                  <div>
+                    <span class="text-[9px] text-slate-500 block"
+                      >MURPHY MODEL</span
+                    >
+                    <span
+                      id="model-murphy-yield"
+                      class="text-base font-bold text-slate-800"
+                      >90.6%</span
+                    >
+                    <span class="text-[8px] text-slate-400 block mt-0.5"
+                      >Triangular PDF</span
+                    >
+                  </div>
+                  <div class="mt-1 pt-1 border-t border-slate-200 text-[8px] text-slate-500">
+                    8-Step Cum: <b id="model-murphy-cum-yield" class="font-bold text-slate-700">45.4%</b>
+                  </div>
                 </div>
-                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg">
-                  <span class="text-[9px] text-slate-500 block"
-                    >SEEDS / NEG-BINOMIAL</span
-                  >
-                  <span
-                    id="model-seeds-yield"
-                    class="text-base font-bold text-slate-800"
-                    >90.7%</span
-                  >
-                  <span class="text-[8px] text-slate-400 block mt-0.5"
-                    >Defect Clustering α</span
-                  >
+                <div class="bg-slate-50 border border-slate-200 p-2 rounded-lg flex flex-col justify-between">
+                  <div>
+                    <span class="text-[9px] text-slate-500 block"
+                      >NEG-BINOMIAL (SEEDS)</span
+                    >
+                    <span
+                      id="model-seeds-yield"
+                      class="text-base font-bold text-slate-800"
+                      >91.2%</span
+                    >
+                    <span class="text-[8px] text-slate-400 block mt-0.5"
+                      >Cluster α</span
+                    >
+                  </div>
+                  <div class="mt-1 pt-1 border-t border-slate-200 text-[8px] text-slate-500">
+                    8-Step Cum: <b id="model-seeds-cum-yield" class="font-bold text-slate-700">48.2%</b>
+                  </div>
                 </div>
               </div>
             </div>
@@ -24501,7 +24565,7 @@
                     class="p-1 rounded bg-slate-50 border border-slate-200 flex justify-between"
                   >
                     <b class="text-slate-800">secsgem (Python)</b>
-                    <span class="text-slate-500">SEMI E4/E5/E30</span>
+                    <span class="text-slate-500">SEMI E5/E30/E37 (HSMS)</span>
                   </div>
                   <div
                     class="p-1 rounded bg-slate-50 border border-slate-200 flex justify-between"

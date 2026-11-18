@@ -991,9 +991,9 @@
           titleZh: "Si/SiGe 多层超晶格原子级外延生长",
           titleEn: "Si/SiGe Superlattice Multi-layer Epitaxy",
           summaryZh:
-            "在单晶硅基底上，利用低压化学气相外延（RPCVD）交替精确生长单原子层级突变的 Si0.7Ge0.3 牺牲层与纯硅 Si 纳米片层（通常交替 3 层 SiGe + 3 层 Si 纳米片）。",
+            "在单晶硅基底上，先外延生长一层高锗组分底部牺牲层（Si0.4Ge0.6 Basal Sacrificial Layer，用于后续构建 BDI 底部介质隔离），随后利用减压化学气相外延（RPCVD）交替精确生长单原子层级突变的 Si0.7Ge0.3 牺牲层与纯硅 Si 纳米片层（通常交替 3 层 SiGe + 3 层 Si 纳米片）。",
           summaryEn:
-            "On single-crystal Si wafer, reduced-pressure CVD (RPCVD) alternates atomic-layer epitaxial growth of sacrificial Si0.7Ge0.3 and pure Si nanosheet channel layers (3 pairs of alternating Si/SiGe ribbons).",
+            "On single-crystal Si wafer, a high-Ge basal sacrificial layer (Si0.4Ge0.6, later selectively replaced to form Bottom Dielectric Isolation / BDI) is grown first. Reduced-pressure CVD (RPCVD) then alternates atomic-layer epitaxial growth of sacrificial Si0.7Ge0.3 and pure Si nanosheet channel layers (3 pairs of alternating Si/SiGe ribbons).",
           toolZh: "减压化学气相外延反应炉 (RPCVD)",
           toolEn: "Reduced-Pressure CVD Epitaxy Reactor",
           toolVendor: "Applied Materials Centura Epi / ASM Intrepid",
@@ -1002,9 +1002,9 @@
           matDimZh: "硅片厚度 ~5nm | SiGe 厚度 ~9nm | 周期: 3层",
           matDimEn: "Si Sheet: ~5nm | SiGe Sacrificial: ~9nm | 3-Stack",
           purposeZh:
-            "构建未来悬空三维导电纳米通道的材料前驱骨架，严格控制 Si/SiGe 晶格界面的原子突变锐利度，避免锗原子互扩散导致后续选择性腐蚀失效。",
+            "构建未来悬空三维导电纳米通道的材料前驱骨架。底层 Si0.4Ge0.6 牺牲层为 BDI 提供高选择比刻蚀空间；同时严格控制上部 Si/SiGe 晶格界面的原子突变锐利度，避免锗原子互扩散导致后续通道释放失效。",
           purposeEn:
-            "Builds precursor skeleton for future suspended 3D nanosheet channels with atomically abrupt interfaces to guarantee extreme chemical etch selectivity.",
+            "Builds precursor skeleton for future suspended 3D nanosheet channels. The bottom Si0.4Ge0.6 basal sacrificial layer provides extreme selectivity for BDI formation, while atomically abrupt Si/SiGe interfaces prevent Ge interdiffusion.",
         },
         {
           id: 1,
@@ -1014,12 +1014,12 @@
           shortEn: "Fin Stack Etch",
           catZh: "高深宽比光刻与叠层刻蚀",
           catEn: "High-Aspect-Ratio Etch",
-          titleZh: "EUV高精度光刻与纳米片鳍状叠层刻蚀",
-          titleEn: "EUV Patterning & Nanosheet Stack Fin Etch",
+          titleZh: "EUV单次曝光/SADP与纳米片鳍状叠层刻蚀",
+          titleEn: "0.33 NA EUV Single Patterning (or High-NA / SADP) & Stack Fin Etch",
           summaryZh:
-            "涂覆 SiN 硬掩模，利用高数值孔径 EUV 光刻机精准曝光，随后采用各向异性反应离子刻蚀（RIE）垂直穿透整个 3 层 Si/SiGe 叠层并向下挖入基底，成型垂直直立的纳米片复合鳍条柱。",
+            "涂覆 SiN 硬掩模，利用 0.33 NA EUV 单次曝光（或针对 sub-2nm 采用 High-NA EUV / 自对准双重微影 SADP）精准定义纳米片有源区鳍条，随后采用各向异性反应离子刻蚀（RIE）垂直穿透所有 Si/SiGe 叠层与底层高锗牺牲层并挖入基底，成型垂直直立的纳米片复合鳍条柱。",
           summaryEn:
-            "A Si3N4 hard mask is applied. High-NA EUV lithography defines fin tracks. Deep anisotropic RIE cuts vertically through all 3 Si/SiGe pairs into the substrate, carving vertical multi-bridge pillars.",
+            "A Si3N4 hard mask is applied. 0.33 NA EUV single patterning (or High-NA EUV / SADP for sub-2nm) defines active nanosheet fin tracks. Deep anisotropic RIE cuts vertically through all Si/SiGe layers and the basal sacrificial layer into the substrate, carving vertical multi-bridge pillars.",
           toolZh: "高数值孔径 EUV 光刻机 + 各向异性等离子干法刻蚀机",
           toolEn: "High-NA EUV Scanner + Anisotropic Deep RIE Etcher",
           toolVendor: "ASML Twinscan EXE:5000 / Lam Research Kiyo",
@@ -1043,9 +1043,9 @@
           titleZh: "STI浅沟槽氧化层填充与底部绝缘回退",
           titleEn: "STI Oxide Fill, CMP & Bottom Isolation Recess",
           summaryZh:
-            "采用流动态 CVD 填满沟槽，经 CMP 研磨平坦化，随后高精度各向同性刻蚀回退氧化层至最底层纳米片下方，露出上部活跃的 3 层 Si/SiGe 纳米片叠层，并在底部构建防穿通势垒（BDI）。",
+            "采用流动态 CVD 填满沟槽，经 CMP 研磨平坦化后刻蚀回退氧化层至最底层纳米片下方。随后利用湿法/气相高选择比去除底层 Si0.4Ge0.6 高锗牺牲层并回填介质，在每个鳍条底部构建完整的底部介质隔离（BDI, Bottom Dielectric Isolation），彻底阻断寄生底沟道（Sub-fin parasitic channel）漏电。",
           summaryEn:
-            "Flowable CVD fills trenches with SiO2, polished by CMP, then precisely recessed below the bottom nanosheet layer, isolating the sub-fin while exposing the active 3-tier superlattice.",
+            "Flowable CVD fills trenches with SiO2, polished by CMP, then recessed below the bottom nanosheet layer. The basal Si0.4Ge0.6 layer is selectively etched away and backfilled with dielectric to form complete Bottom Dielectric Isolation (BDI), shutting down sub-fin parasitic channel leakage.",
           toolZh: "流动态CVD介质沉积机 + CMP抛光机 + 精密回蚀槽",
           toolEn:
             "FCVD Oxide Coater + CMP Polisher + Precision Recess Wet Bench",
@@ -2818,27 +2818,27 @@
           </p>
         </li>
         <li>
-          <h3>Step 2: Si/SiGe Alternating Superlattice Epitaxy</h3>
+          <h3>Step 2: Basal Sacrificial Layer & Si/SiGe Superlattice Epitaxy</h3>
           <p>
-            Atomic-precision chemical vapor epitaxy growing alternating layers
+            Atomic-precision chemical vapor epitaxy growing a basal high-Ge sacrificial layer (Si0.4Ge0.6) for BDI formation, followed by alternating layers
             of single-crystal silicon channels (~5nm) and sacrificial Si0.7Ge0.3
             layers (~5nm) with atomic-level interface abruptness.
           </p>
           <p>
             <strong>Equipment:</strong> Ultra-High Vacuum CVD (UHVCVD) Epitaxy
             Reactor (Applied Materials Centura Epi / ASM Intrepid).
-            <strong>Materials:</strong> Pure Silicon (Si) + Silicon-Germanium
+            <strong>Materials:</strong> Si0.4Ge0.6 Basal Layer + Pure Silicon (Si) + Silicon-Germanium
             (Si0.7Ge0.3, 30% Ge).
           </p>
         </li>
         <li>
           <h3>
-            Step 3: EUV Fin Pitch Splitting & Superlattice Anisotropic Dry Etch
+            Step 3: 0.33 NA EUV Single Patterning (or High-NA / SADP) & Superlattice Dry Etch
           </h3>
           <p>
-            Extreme Ultraviolet (0.33 NA EUV) lithography defining dense
-            nanosheet fin pitches, followed by anisotropic plasma dry etching
-            through all Si/SiGe layers with vertical sidewall angles (>89°).
+            0.33 NA EUV Single Patterning (or High-NA EUV / SADP for sub-2nm) defining dense
+            active nanosheet fin pillars, followed by anisotropic plasma dry etching
+            through all Si/SiGe layers and the basal sacrificial layer with vertical sidewall angles (>89°).
           </p>
           <p>
             <strong>Equipment:</strong> EUV Lithography Scanner (ASML Twinscan
@@ -2849,10 +2849,12 @@
         </li>
         <li>
           <h3>
-            Step 4: Shallow Trench Isolation (STI) Oxide Fill, CMP & Recess
+            Step 4: Shallow Trench Isolation (STI) & Bottom Dielectric Isolation (BDI)
           </h3>
           <p>
             Flowable CVD oxide trench filling, CMP planarization, and selective
+            oxide recess. The basal Si0.4Ge0.6 layer is selectively etched and replaced with dielectric to establish Bottom Dielectric Isolation (BDI), suppressing sub-fin parasitic channel leakage.
+          </p>
             oxide recess exposing the multi-layer nanosheet fin active stack.
           </p>
           <p>

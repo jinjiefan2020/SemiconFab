@@ -4,7 +4,9 @@
 
 SemiconFab is a source-available 300mm logic semiconductor wafer fabrication digital twin and equipment catalog platform combining first-principles cleanroom visualization, discrete-event scheduling benchmarks, and crowdsourced equipment taxonomy.
 
-> **License Notice**: This project is released under the **PolyForm Noncommercial License 1.0.0** (source-available). Commercial use requires a separate license — contact info@semiconfab.org.
+> **License Notice**: This project adopts a **Dual-Track Licensing** structure:
+> - **Platform & Digital Twin Visuals**: [PolyForm Noncommercial License 1.0.0](LICENSE) (source-available). Commercial use requires a separate license — contact info@semiconfab.org.
+> - **MIMAC-2026 Benchmark Testbed**: [Apache License 2.0](LICENSE) (open research use for academic modeling, citation, and paper publication).
 
 ---
 
@@ -100,6 +102,6 @@ Code formatting is enforced via Prettier (`npm run format`) and linted with ESLi
 
 ## License
 
-This project is source-available software licensed under the [PolyForm Noncommercial License 1.0.0](LICENSE).
-
-Commercial use requires a separate license — contact info@semiconfab.org.
+This project is released under **Dual-Track Licensing** (see [LICENSE](LICENSE) for details):
+- **Website, 3D Assets, and Cleanroom Digital Twin**: [PolyForm Noncommercial License 1.0.0](LICENSE) (source-available). Commercial use requires a separate license — contact info@semiconfab.org.
+- **MIMAC-2026 Benchmark Suite**: [Apache License 2.0](LICENSE) (open research use for academic modeling, evaluation, and scientific citation).

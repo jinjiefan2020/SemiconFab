@@ -14,7 +14,7 @@
     />
     <meta
       name="description"
-      content="SemiconFab.org is an open-access 300mm (12-inch) semiconductor wafer fabrication digital twin platform. Explore ISO Class 1 cleanroom 3D architecture, subfab MEP infrastructure, 253 OEM equipment engineering taxonomy, SECS/GEM SEMI E10 telemetry, cascading yield simulation, and STDF / WM-811K spatial wafer map defect analytics."
+      content="SemiconFab.org is an open-access 300mm (12-inch) semiconductor wafer fabrication digital twin platform. Explore FOUP mini-environment (ISO Class 1) & ISO Class 4/5 cleanroom 3D architecture, subfab MEP infrastructure, 253 OEM equipment engineering taxonomy, SECS/GEM SEMI E10 telemetry, cascading yield simulation, and STDF / WM-811K spatial wafer map defect analytics."
     />
     <meta
       name="keywords"
@@ -152,7 +152,7 @@
             "description": "Interactive 2D blueprint and 3D cleanroom digital twin simulation for 300mm advanced semiconductor wafer fabrication.",
             "browserRequirements": "Requires WebGL support",
             "featureList": [
-              "300mm Wafer Cleanroom ISO Class 1 Spatial Simulation",
+              "300mm Cleanroom FOUP Mini-Environment (ISO Class 1) Spatial Simulation",
               "Subfab MEP Piping X-Ray (UPW, Process Gas, Vacuum, Exhaust)",
               "253 OEM Tool Engineering Taxonomy & 55+ 3D OEM Equipment Models",
               "SECS/GEM & SEMI E10 Real-Time Telemetry Streaming",
@@ -229,7 +229,7 @@
                 "name": "What cleanroom standards are modeled in the digital twin?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "The platform models an ISO 14644-1 Class 1 (US FED STD 209E Class 1) cleanroom environment with 4.5m ceiling height, laminar airflow through fan filter units (FFU), 600mm x 600mm raised waffle slab perforated flooring, an amber-lit photolithography core, and a 6.0m subfab utility basement (Class 10,000 / ISO 7)."
+                  "text": "The platform models modern 300mm SMIF / FOUP mini-environment architecture: ISO 14644-1 Class 1 (< 10 particles/m³ for particles ≥ 0.1 µm) is strictly maintained inside FOUP wafer pods, EFEMs, and process chambers, while the 4.5m cleanroom ballroom (Bay & Chase) maintains ISO Class 4 to Class 5 with laminar airflow through fan filter units (FFU), 600mm x 600mm raised waffle slab perforated flooring, an amber-lit photolithography core, and a 6.0m subfab utility basement (Class 10,000 / ISO 7)."
                 }
               },
               {
@@ -1746,16 +1746,16 @@
                       >L1 Verified (Footprint &amp; Manual)</span
                     >
                     <span
+                      id="funnel-l1-stat"
                       class="font-mono font-semibold text-emerald-600 dark:text-emerald-400"
-                      >6% · 7 tools</span
+                      >4% · 9 tools</span
                     >
                   </div>
                   <div
                     class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden"
                   >
                     <div
-                      class="bg-emerald-500 h-1.5 rounded-full"
-                      style="width: 6%"
+                      id="funnel-l1-bar" class="bg-emerald-500 h-1.5 rounded-full" style="width: 4%"
                     ></div>
                   </div>
                 </div>
@@ -1769,16 +1769,16 @@
                       >Draft (Awaiting Dimensions &amp; Hookups)</span
                     >
                     <span
+                      id="funnel-draft-stat"
                       class="font-mono font-semibold text-amber-600 dark:text-amber-400"
-                      >94% · 114 tools</span
+                      >96% · 244 tools</span
                     >
                   </div>
                   <div
                     class="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-1.5 overflow-hidden"
                   >
                     <div
-                      class="bg-amber-500 h-1.5 rounded-full"
-                      style="width: 94%"
+                      id="funnel-draft-bar" class="bg-amber-500 h-1.5 rounded-full" style="width: 96%"
                     ></div>
                   </div>
                 </div>
@@ -3167,13 +3167,7 @@
               class="mt-4 pt-3 border-t border-slate-200/80 dark:border-slate-800 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed space-y-2"
             >
               <p data-i18n="faq_a2">
-                The platform follows SEMI standards and ISO 14644-1 Class 1
-                cleanroom specifications (&lt; 10 particles/m³ for particles ≥
-                0.1 µm). It models a 4.5m process cleanroom with raised
-                waffle-slab access flooring (600mm × 600mm perforated tiles), an
-                amber-lit photolithography core, fan filter units (FFU), and a
-                6.0m subfab utility basement (Class 10,000 / ISO 7) for vacuum
-                pumps, RF generators, and scrubbers.
+                The platform follows SEMI standards and modern 300mm SMIF / FOUP mini-environment specifications: ISO 14644-1 Class 1 (&lt; 10 particles/m³ for particles ≥ 0.1 µm) is maintained inside FOUP pods, EFEMs, and process chambers, while the 4.5m process cleanroom ballroom (Bay &amp; Chase) operates at ISO Class 4 to Class 5 for sustainable HVAC energy efficiency. It models raised waffle-slab access flooring (600mm × 600mm perforated tiles), an amber-lit photolithography core, fan filter units (FFU), and a 6.0m subfab utility basement (Class 10,000 / ISO 7) for vacuum pumps, RF generators, and scrubbers.
               </p>
             </div>
           </details>
@@ -3991,10 +3985,41 @@
         }
       });
 
+      // Dynamic catalog maturity sync
+      async function syncCatalogStatsDynamic() {
+        try {
+          const res = await fetch("catalog.json");
+          if (!res.ok) return;
+          const tools = await res.json();
+          if (!Array.isArray(tools) || tools.length === 0) return;
+          const total = tools.length;
+          let l1Count = 0;
+          tools.forEach((t) => {
+            if ((t.conformance_level || "").toLowerCase() === "l1") l1Count++;
+          });
+          const draftCount = total - l1Count;
+          const l1Pct = Math.round((l1Count / total) * 100);
+          const draftPct = 100 - l1Pct;
+
+          const l1StatEl = document.getElementById("funnel-l1-stat");
+          const l1BarEl = document.getElementById("funnel-l1-bar");
+          const draftStatEl = document.getElementById("funnel-draft-stat");
+          const draftBarEl = document.getElementById("funnel-draft-bar");
+
+          if (l1StatEl) l1StatEl.textContent = `${l1Pct}% · ${l1Count} tools`;
+          if (l1BarEl) l1BarEl.style.width = `${l1Pct}%`;
+          if (draftStatEl) draftStatEl.textContent = `${draftPct}% · ${draftCount} tools`;
+          if (draftBarEl) draftBarEl.style.width = `${draftPct}%`;
+        } catch (e) {
+          // Pre-rendered HTML values will serve as reliable fallback
+        }
+      }
+
       // Bootstrap
       window.addEventListener("DOMContentLoaded", () => {
         lucide.createIcons();
         initI18n();
+        syncCatalogStatsDynamic();
       });
     </script>
   </body>

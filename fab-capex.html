@@ -264,6 +264,37 @@
         color: var(--text-muted);
       }
 
+      .scaling-mode-toggle {
+        display: inline-flex;
+        background: var(--surface-2, var(--sc-bg-hover));
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 3px;
+        gap: 3px;
+        width: fit-content;
+        margin-top: 2px;
+      }
+
+      .scaling-mode-btn {
+        padding: 5px 12px;
+        font-size: 0.75rem;
+        font-family: inherit;
+        font-weight: 600;
+        border-radius: 6px;
+        border: none;
+        cursor: pointer;
+        background: transparent;
+        color: var(--text-muted);
+        transition: all 0.15s ease;
+      }
+
+      .scaling-mode-btn.active {
+        background: var(--accent, #0e6e6b);
+        color: #ffffff;
+        font-weight: 700;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+      }
+
       @media (max-width: 768px) {
         .control-panel {
           grid-template-columns: 1fr;
@@ -753,6 +784,24 @@
               >1.0x (121 Tools Baseline)</span
             >
           </label>
+          <div class="scaling-mode-toggle" id="scaling-mode-toggle-group">
+            <button
+              id="btn-scale-realistic"
+              type="button"
+              onclick="setScalingMode('realistic')"
+              class="scaling-mode-btn active"
+            >
+              ⚡ Throughput-Weighted Fab Scaling (Realistic)
+            </button>
+            <button
+              id="btn-scale-linear"
+              type="button"
+              onclick="setScalingMode('linear')"
+              class="scaling-mode-btn"
+            >
+              📏 Linear Scaling (Baseline)
+            </button>
+          </div>
           <select id="sel-scale" onchange="recalculate()">
             <option value="1" id="opt-scale-1">
               1.0x · Advanced Pilot Line Baseline (121 Tools, ~1k WSPM)
@@ -3657,8 +3706,42 @@
         other: 5.0,
       };
 
+      let scalingMode = "realistic"; // "realistic" | "linear"
+
+      function setScalingMode(mode) {
+        scalingMode = mode;
+        updateScalingModeUI();
+        recalculate();
+      }
+
+      function updateScalingModeUI() {
+        const btnRealistic = document.getElementById("btn-scale-realistic");
+        const btnLinear = document.getElementById("btn-scale-linear");
+        if (!btnRealistic || !btnLinear) return;
+        const isZh = currentLang === "zh";
+
+        btnRealistic.textContent = isZh
+          ? "⚡ 现实量产瓶颈加权 (Throughput-Weighted)"
+          : "⚡ Throughput-Weighted Fab Scaling (Realistic)";
+        btnLinear.textContent = isZh
+          ? "📏 理论线性等比 (Linear Baseline)"
+          : "📏 Linear Scaling (Baseline)";
+
+        if (scalingMode === "realistic") {
+          btnRealistic.classList.add("active");
+          btnLinear.classList.remove("active");
+        } else {
+          btnLinear.classList.add("active");
+          btnRealistic.classList.remove("active");
+        }
+      }
+
       function getToolCount(item, scale) {
         if (scale === 1) return item.count;
+        if (scalingMode === "linear") {
+          return Math.max(1, Math.round(item.count * scale));
+        }
+        // Throughput-Weighted Scaling (Realistic)
         const scaleFactor = scale / 5.0;
         if (item.category === "lithography") {
           const cfg = HVM_LITHO_COUNTS[scale];
@@ -3670,6 +3753,7 @@
       }
 
       function recalculate() {
+        updateScalingModeUI();
         const t = I18N[currentLang];
         const btnToggle = document.getElementById("btn-toggle-lang");
         if (btnToggle) {
@@ -3791,14 +3875,25 @@
           `${regionText} (${regionVal.toFixed(2)}x)`;
 
         // Update BOM subtitle
-        document.getElementById("ui-bom-sub").textContent =
-          currentLang === "zh"
-            ? scaleVal === 1
-              ? "来源于 twin/layout-default.json 的 121 台试验机台，归并为 103 个设备选型条目"
-              : `现实量产均衡配比已生效：共 ${totalTools.toLocaleString()} 台设备（基于 103 个设备选型按通量瓶颈均衡扩展）`
-            : scaleVal === 1
-              ? "121 tools aggregated across 103 models from twin/layout-default.json"
-              : `HVM balanced configuration active: ${totalTools.toLocaleString()} total tools scaled by process throughput bottlenecks`;
+        if (scalingMode === "linear") {
+          document.getElementById("ui-bom-sub").textContent =
+            currentLang === "zh"
+              ? scaleVal === 1
+                ? "来源于 twin/layout-default.json 的 121 台试验机台，归并为 103 个设备选型条目"
+                : `理论线性等比扩展生效 (${scaleVal}x)：共 ${totalTools.toLocaleString()} 台设备（各机台按固定比例等比复制）`
+              : scaleVal === 1
+                ? "121 tools aggregated across 103 models from twin/layout-default.json"
+                : `Linear proportional scaling (${scaleVal}x): ${totalTools.toLocaleString()} tools across 103 models without throughput balancing`;
+        } else {
+          document.getElementById("ui-bom-sub").textContent =
+            currentLang === "zh"
+              ? scaleVal === 1
+                ? "来源于 twin/layout-default.json 的 121 台试验机台，归并为 103 个设备选型条目"
+                : `现实量产均衡配比已生效：共 ${totalTools.toLocaleString()} 台设备（基于 103 个设备选型按通量瓶颈均衡扩展）`
+              : scaleVal === 1
+                ? "121 tools aggregated across 103 models from twin/layout-default.json"
+                : `HVM balanced configuration active: ${totalTools.toLocaleString()} total tools scaled by process throughput bottlenecks`;
+        }
 
         // Apply region multiplier
         const wfeLow = baseLow * regionVal;

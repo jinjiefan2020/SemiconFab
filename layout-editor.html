@@ -274,7 +274,7 @@
         <div
           class="p-2.5 border-t border-slate-800 text-[11px] text-slate-400 bg-slate-900/80 flex items-center justify-between"
         >
-          <span id="palette-showing-text">Showing 153 tools</span>
+          <span id="palette-showing-text">Showing 253 tools</span>
           <span class="text-slate-500">100% Static & Local</span>
         </div>
       </aside>
@@ -1329,13 +1329,114 @@
       }
 
       // ==========================================
-      // VALIDATION ENGINE
+      // CATEGORY FALLBACK FOOTPRINTS & VALIDATION ENGINE
       // ==========================================
+      const CATEGORY_FALLBACK_FOOTPRINTS = {
+        // Lithography (EUV / Immersion + Track): 4.8m × 12.0m
+        litho_advanced: { width: 4.8, depth: 12.0 },
+        // Lithography (i-line / KrF / Mask Aligner): 2.8m × 4.2m
+        litho_standard: { width: 2.8, depth: 4.2 },
+        // Wet Bench / Cleaning: 2.5m × 6.5m
+        wet_clean: { width: 2.5, depth: 6.5 },
+        // Ion Implantation: 3.8m × 5.5m
+        ion_implantation: { width: 3.8, depth: 5.5 },
+        // Etch / CVD / ALD / PVD (Cluster Tools): 2.8m × 4.0m
+        cluster_etch_dep: { width: 2.8, depth: 4.0 },
+        // Thermal / Vertical Furnace: 2.0m × 3.8m
+        thermal_processing: { width: 2.0, depth: 3.8 },
+        // Metrology & Inspection: 2.0m × 2.6m
+        metrology_inspection: { width: 2.0, depth: 2.6 },
+        // OSAT (Dicing / Wire Bond / Die Attach / Pick & Place): 1.4m × 1.8m
+        osat_assembly: { width: 1.4, depth: 1.8 },
+        // OSAT (Molding / Reflow / ATE Tester): 2.2m × 3.2m
+        osat_backend: { width: 2.2, depth: 3.2 },
+        // Default Fallback: 2.4m × 3.5m
+        default: { width: 2.4, depth: 3.5 },
+      };
+
+      function resolveToolDimensions(item) {
+        if (!item) {
+          return { width: 2.4, depth: 3.5, isFallback: true };
+        }
+        const phys = item.record?.physical || {};
+        if (phys.width_mm?.value && phys.depth_mm?.value) {
+          return {
+            width: phys.width_mm.value / 1000,
+            depth: phys.depth_mm.value / 1000,
+            isFallback: false,
+          };
+        }
+
+        const cat = (item.category || "").toLowerCase();
+        const sub = (item.subcategory || "").toLowerCase();
+        const model = (item.model || "").toLowerCase();
+
+        let fb = CATEGORY_FALLBACK_FOOTPRINTS.default;
+
+        if (cat === "lithography" || cat === "resist_track") {
+          if (
+            model.includes("euv") ||
+            model.includes("exe:") ||
+            model.includes("nxe:") ||
+            model.includes("nxt:") ||
+            model.includes("immersion") ||
+            cat === "resist_track" ||
+            sub.includes("track") ||
+            sub.includes("euv")
+          ) {
+            fb = CATEGORY_FALLBACK_FOOTPRINTS.litho_advanced;
+          } else {
+            fb = CATEGORY_FALLBACK_FOOTPRINTS.litho_standard;
+          }
+        } else if (cat === "wet_clean" || cat.includes("clean") || sub.includes("wet")) {
+          fb = CATEGORY_FALLBACK_FOOTPRINTS.wet_clean;
+        } else if (cat === "ion_implantation" || cat.includes("implant")) {
+          fb = CATEGORY_FALLBACK_FOOTPRINTS.ion_implantation;
+        } else if (
+          cat === "dry_etch" ||
+          cat === "thin_film_deposition" ||
+          cat.includes("etch") ||
+          cat.includes("cvd") ||
+          cat.includes("ald") ||
+          cat.includes("pvd") ||
+          cat === "cmp"
+        ) {
+          fb = CATEGORY_FALLBACK_FOOTPRINTS.cluster_etch_dep;
+        } else if (cat === "thermal_processing" || cat.includes("furnace")) {
+          fb = CATEGORY_FALLBACK_FOOTPRINTS.thermal_processing;
+        } else if (cat === "metrology" || cat === "inspection") {
+          fb = CATEGORY_FALLBACK_FOOTPRINTS.metrology_inspection;
+        } else if (
+          cat.startsWith("osat_") ||
+          cat === "packaging" ||
+          cat === "test"
+        ) {
+          if (
+            cat.includes("molding") ||
+            cat.includes("reflow") ||
+            cat.includes("test") ||
+            cat.includes("ate") ||
+            sub.includes("molding") ||
+            sub.includes("reflow")
+          ) {
+            fb = CATEGORY_FALLBACK_FOOTPRINTS.osat_backend;
+          } else {
+            fb = CATEGORY_FALLBACK_FOOTPRINTS.osat_assembly;
+          }
+        }
+
+        return {
+          width: fb.width,
+          depth: fb.depth,
+          isFallback: true,
+        };
+      }
+
       function getToolFootprint(tool) {
         const catalogItem = catalogMap.get(tool.tool_id);
-        const phys = catalogItem?.record?.physical || {};
-        const baseW = (phys.width_mm?.value || 2400) / 1000;
-        const baseD = (phys.depth_mm?.value || 3500) / 1000;
+        const dims = resolveToolDimensions(catalogItem);
+        const baseW = dims.width;
+        const baseD = dims.depth;
 
         // If rotation is 90° or 270°, swap width and depth
         const rot = tool.rotation || 0;
@@ -1346,6 +1447,7 @@
         return {
           width,
           depth,
+          isFallback: dims.isFallback,
           minX: tool.x - width / 2,
           maxX: tool.x + width / 2,
           minZ: tool.z - depth / 2,
@@ -1370,9 +1472,9 @@
           return { valid: false, reason: "reject_drop_nobay" };
         }
 
-        const phys = catalogItem.record?.physical || {};
-        const baseW = (phys.width_mm?.value || 2400) / 1000;
-        const baseD = (phys.depth_mm?.value || 3500) / 1000;
+        const dims = resolveToolDimensions(catalogItem);
+        const baseW = dims.width;
+        const baseD = dims.depth;
 
         const rot =
           candidateRot !== undefined ? candidateRot : tool.rotation || 0;
@@ -1594,10 +1696,10 @@
         filtered.forEach((item) => {
           const id = item.record_id || item.id;
           const isPlaced = placedIds.has(id);
-          const phys = item.record?.physical || {};
-          const w = (phys.width_mm?.value || 2400) / 1000;
-          const d = (phys.depth_mm?.value || 3500) / 1000;
-          const isL1 = item.conformance_level === "L1" && phys.width_mm?.value;
+          const dims = resolveToolDimensions(item);
+          const w = dims.width;
+          const d = dims.depth;
+          const isL1 = item.conformance_level === "L1" && !dims.isFallback;
           const catColor = CATEGORY_ACCENT_HEX[item.category] || "#64748b";
 
           const card = document.createElement("div");
@@ -1619,7 +1721,7 @@
             <div class="font-bold text-xs truncate leading-tight">${escapeHtml(item.model || "Unknown")}</div>
             <div class="text-[11px] text-slate-400 flex items-center justify-between mt-0.5">
               <span>${escapeHtml(item.vendor || "OEM")}</span>
-              <span class="font-mono text-[10px] text-slate-500">${w}m × ${d}m</span>
+              <span class="font-mono text-[10px] text-slate-500">${w}m × ${d}m${dims.isFallback ? ' <span class="text-[9px] text-amber-400/80">(Cat. Est)</span>' : ""}</span>
             </div>
             <div class="mt-2 pt-1.5 border-t border-slate-700/60 flex items-center justify-between">
               <span class="text-[10px] font-mono ${isPlaced ? "text-emerald-400" : "text-slate-500"}">
@@ -2095,8 +2197,9 @@
 
         const bayName = currentLang === "zh" ? bay?.nameZh : bay?.nameEn;
         const fp = getToolFootprint(selectedTool);
+        const fallbackNote = fp.isFallback ? " (Category Est. Footprint)" : "";
         document.getElementById("selected-tool-meta").textContent =
-          `${bayName || selectedTool.bay} · ${fp.width}m × ${fp.depth}m (X: ${selectedTool.x}m, Z: ${selectedTool.z}m)`;
+          `${bayName || selectedTool.bay} · ${fp.width}m × ${fp.depth}m${fallbackNote} (X: ${selectedTool.x}m, Z: ${selectedTool.z}m)`;
 
         document.getElementById("selected-rot-label").textContent =
           `${selectedTool.rotation || 0}°`;

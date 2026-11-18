@@ -506,8 +506,8 @@
       <div class="flex items-center gap-4 shrink-0 pl-4">
         <div class="flex items-center gap-1.5">
           <span class="text-[var(--ink-3)]" id="kpi-lbl-amhs">AMHS Fleet:</span>
-          <span id="kpi-val-amhs" class="font-semibold text-emerald-600"
-            >86 OHT Loops Active</span
+          <span id="kpi-val-amhs" class="font-semibold text-emerald-600 cursor-help" title="86 Active OHTs Rendered (1:15 Visual Scaling · Actual 50k WSPM Fleet: ~1,200–1,500 Vehicles)"
+            >86 Active OHTs Rendered (1:15 Visual Scaling · Actual Fleet: ~1,200–1,500)</span
           >
         </div>
         <div class="h-3 w-px bg-[var(--line)]"></div>
@@ -2973,10 +2973,14 @@
           ? "AMHS 闭环运力:"
           : "AMHS Loops:";
         const kpiValAmhs = document.getElementById("kpi-val-amhs");
-        if (kpiValAmhs)
+        if (kpiValAmhs) {
           kpiValAmhs.textContent = isZh
-            ? "86 辆天车全闭环巡航"
-            : "86 OHT Pods in Closed Loops";
+            ? "86 辆渲染 (1:15 视觉缩放 · 50k WSPM 实体: ~1,200–1,500 辆)"
+            : "86 Active OHTs Rendered (1:15 Visual Scaling · Actual 50k WSPM Fleet: ~1,200–1,500 Vehicles)";
+          kpiValAmhs.title = isZh
+            ? "前端保障 60 FPS 采用 1:15 视觉缩放渲染 86 辆，实际 50k WSPM 晶圆厂需配备约 1,200–1,500 辆 OHT 天车"
+            : "86 Active OHTs Rendered (1:15 Visual Scaling · Actual 50k WSPM Fleet: ~1,200–1,500 Vehicles)";
+        }
         document.getElementById("kpi-lbl-capex").textContent = isZh
           ? "总投资估算:"
           : "Est. Capex:";

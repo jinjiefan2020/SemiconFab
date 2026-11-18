@@ -1036,6 +1036,72 @@
         </div>
       </section>
 
+      <!-- Section: Historical Heritage & Evolution Comparison -->
+      <section class="card" id="history">
+        <h2>
+          <span class="en-only">Historical Heritage: 1995 SEMATECH MIMAC to MIMAC-2026</span>
+          <span class="zh-only">学术溯源：从 1995 SEMATECH MIMAC 到 MIMAC-2026 现代演进</span>
+        </h2>
+        <p class="en-pair">
+          <strong>Academic Attribution &amp; Tribute:</strong> MIMAC-2026 is an open modernization and tribute to the seminal <em>Measurement and Improvement of Manufacturing Capacities (MIMAC)</em> benchmark created in 1995 by SEMATECH and Arizona State University (Fowler &amp; Robinson et al., SEMATECH Tech Transfer #95062861A-TR). Three decades ago, the original MIMAC dataset laid the foundations for discrete-event semiconductor wafer fab scheduling research. MIMAC-2026 reconstructs this classical benchmark to reflect the operational realities of modern 300mm automated megafabs.
+        </p>
+        <p class="zh">
+          <strong>学术溯源与历史致敬：</strong>MIMAC-2026 是对 1995 年由 SEMATECH（美国半导体制造技术联合体）与亚利桑那州立大学（Fowler &amp; Robinson 团队）联合创立的经典 <em>Measurement and Improvement of Manufacturing Capacities (MIMAC)</em> 数据集的现代化重构与致敬。三十年前，原版 MIMAC 数据集奠定了半导体制造运筹优化与离散事件排程的研究基石；MIMAC-2026 全面重构了其数学模型，使其完美契合现代 300mm 自动化超级晶圆厂的真实工业环境。
+        </p>
+
+        <!-- Comparison Table -->
+        <div class="table-wrap" style="margin: 16px 0;">
+          <table>
+            <thead>
+              <tr>
+                <th style="width: 22%">Dimension / 评估维度</th>
+                <th style="width: 39%">1995 Original MIMAC (Fowler et al.)</th>
+                <th style="width: 39%">2026 MIMAC-2026 Benchmark</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Wafer Standard &amp; Carriers</strong><br><span style="font-size: 11px; color: var(--text-muted)">晶圆标准与载具</span></td>
+                <td>150mm / 200mm wafers in open-cassettes; manual wafer lot handling.</td>
+                <td><strong>300mm (12-inch) standard</strong>; hermetic FOUPs (25 wafers/lot) with automated load ports.</td>
+              </tr>
+              <tr>
+                <td><strong>Internal Logistics &amp; AMHS</strong><br><span style="font-size: 11px; color: var(--text-muted)">厂内物流与搬运</span></td>
+                <td>Open-loop manual carts; negligible inter-bay transit time assumptions.</td>
+                <td><strong>Closed-loop AMHS OHT ceiling monorails</strong>; velocity/acceleration profiles, track contention, SEMI E87.</td>
+              </tr>
+              <tr>
+                <td><strong>Equipment RAM States</strong><br><span style="font-size: 11px; color: var(--text-muted)">设备状态与可靠性</span></td>
+                <td>Simple two-state Markov (Up / Down) with static availability %.</td>
+                <td>Full <strong>SEMI E10 6-state RAM</strong> (Productive, Standby, Scheduled Down, Unscheduled Down, etc.).</td>
+              </tr>
+              <tr>
+                <td><strong>Factory Protocol Suite</strong><br><span style="font-size: 11px; color: var(--text-muted)">工业自动化通信</span></td>
+                <td>Serial SECS-I (E4); manual paper traveler or simple terminal dispatch.</td>
+                <td><strong>GEM300 (E39/E40/E87/E90/E94) + SEMI E37 (HSMS over TCP/IP)</strong> event architecture.</td>
+              </tr>
+              <tr>
+                <td><strong>Process Flow Re-entrancy</strong><br><span style="font-size: 11px; color: var(--text-muted)">重入工序流复杂度</span></td>
+                <td>50–70 sequential operations; single-product predominant flow.</td>
+                <td><strong>100–120 re-entrant operations</strong>; 3 heterogeneous concurrent logic products (HVM, Mobile, Auto).</td>
+              </tr>
+              <tr>
+                <td><strong>Software &amp; RL Interfacing</strong><br><span style="font-size: 11px; color: var(--text-muted)">算法接口与运行环境</span></td>
+                <td>Legacy Fortran/Pascal simulation engines; static offline text tables.</td>
+                <td><strong>Python 3.10+ / SimPy, Gymnasium-compatible RL API</strong>, and zero-install in-browser Pyodide WASM.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Roadmap Callout -->
+        <div style="background: rgba(14, 110, 107, 0.08); border-left: 4px solid var(--accent, #0e6e6b); padding: 12px 16px; border-radius: 6px; font-size: 13px;">
+          <strong style="color: var(--accent, #0e6e6b);">Roadmap Note (规范演进路线图):</strong>
+          <span class="en-only">Specification <code>v2026.2</code> will formally introduce strict <strong>Q-Time (Queue-Time Window Constraints)</strong> between critical oxidation/cleaning steps and <strong>Batching / Reticle Sharing Constraints</strong> on photolithography scanner clusters.</span>
+          <span class="zh-only">基准测试规范 <code>v2026.2</code> 将正式引入光刻/刻蚀/氧化清洗关键工序间的 <strong>Q-Time（严格排队时间窗口上限）约束</strong>，以及光刻机集群的 <strong>批处理排程与掩模版（Reticle）共享调度约束</strong>。</span>
+        </div>
+      </section>
+
       <!-- Section 2: The Modeled Fab -->
       <section class="card" id="modeled-fab">
         <h2>
@@ -1691,6 +1757,14 @@ python run_benchmark.py --policy fifo --days 365</code></pre>
               >
               <span class="zh-only">在 GitHub 查看仿真器与规范源码 &rarr;</span>
             </a>
+          </li>
+          <li>
+            <strong
+              ><span class="en-only">Open Benchmark License</span
+              ><span class="zh-only">开源评测许可协议</span></strong
+            >:
+            <span class="en-only">MIMAC-2026 simulation suite &amp; spec are licensed under <strong>Apache-2.0</strong> for unrestricted academic research, citation, and paper publication.</span>
+            <span class="zh-only">MIMAC-2026 仿真套件与规范独立适用 <strong>Apache-2.0</strong> 开源协议，支持学术界自由引用、基准对照与论文发表。</span>
           </li>
         </ul>
         <p class="zh">

@@ -154,8 +154,8 @@
               {
                 "@type": "HowToStep",
                 "position": 3,
-                "name": "Extreme High Aspect Ratio (>60:1) Channel Hole Cryogenic Plasma Etch",
-                "text": "Cryogenic reactive ion etching (HAR Cryo-RIE) using thick amorphous carbon hardmask (ACL) to punch vertical channel holes through the entire ONON stack down to the source plate."
+                "name": "Dual-Deck (>60:1 per deck, >100:1 combined) Channel Hole Cryogenic Plasma Etch",
+                "text": "Dual-Deck / Multi-Tier String Stacking (with inter-deck plug & alignment) utilizing cryogenic reactive ion etching (Sub-zero HF/Fluorocarbon Cryo-RIE) to punch vertical channel holes (>60:1 per deck, combined >100:1) through ONON stacks down to the source plate."
               },
               {
                 "@type": "HowToStep",
@@ -1024,22 +1024,22 @@
           badgeEn: "STEP 03/10",
           catZh: "高深宽比等离子刻蚀",
           catEn: "HAR Plasma Etch",
-          titleZh: "超高深宽比（HARC >60:1）垂直通道存储孔等离子体穿透干法刻蚀",
+          titleZh: "双层堆叠 (Dual-Deck / Multi-Tier) 极低温等离子体超高深宽比通道孔刻蚀",
           titleEn:
-            "Extreme High Aspect Ratio (>60:1) Channel Hole Cryogenic Plasma Etch",
-          shortZh: "高深宽比通道孔",
-          shortEn: "HAR Channel Hole",
+            "Dual-Deck (>60:1 per deck, >100:1 combined) Channel Hole Cryogenic Plasma Etch",
+          shortZh: "双层高深宽比孔",
+          shortEn: "Dual-Deck HAR Etch",
           summaryZh:
-            "应用硬掩模（厚非晶碳 ACL）与极低温高能高深宽比反应离子刻蚀（HAR Cryo-RIE），以高速氟碳等离子体一枪贯穿所有数十层 ONON 叠层直至底层源极板，形成孔径高度均匀、无扭曲偏转的纳米垂直通道孔阵列。",
+            "针对 128+ 层以上三维闪存，工业界主流采用双层/多层串联堆叠架构（Dual-Deck / Multi-Tier String Stacking with Inter-Deck Plug & Alignment）。结合厚非晶碳硬掩模（ACL）与零下数十度的极低温高能干法刻蚀（Cryogenic Etch，采用 Sub-zero HF/Fluorocarbon 等离子体），分段实现单 Deck >60:1、合计数 >100:1 的超深垂直通道孔阵列刻蚀，并在层间实现高精度金属栓塞互连与套刻对准，彻底消除单次刻蚀深孔扭曲（Twisting）与底部不通问题。",
           summaryEn:
-            "Utilizing thick amorphous carbon hardmask (ACL) and cryogenic high-aspect-ratio reactive ion etching (HAR Cryo-RIE) with fluorocarbon plasma to punch vertical memory channel holes through all ONON layers down to the source plate with exceptional verticality and zero profile twisting.",
-          toolZh: "超低温极高深宽比电介质干法刻蚀机",
-          toolEn: "Cryogenic Extreme HAR Dielectric RIE Etcher",
+            "For 128+ tier 3D NAND, industry adopts Dual-Deck / Multi-Tier String Stacking (with inter-deck plug & alignment). Thick amorphous carbon hardmask (ACL) and Cryogenic Etch (sub-zero HF/fluorocarbon plasma) etch high-aspect-ratio holes (>60:1 per deck, combined >100:1) through the multi-deck ONON stack with sub-nm inter-deck alignment, eliminating profile distortion, bowing, and hole twisting.",
+          toolZh: "极低温超高深宽比电介质干法刻蚀机 (Cryo-RIE)",
+          toolEn: "Cryogenic Extreme HAR Dielectric RIE Etcher (Sub-zero Plasma)",
           toolVendor: "Tokyo Electron TEL Tactras / Lam Research Vantex",
-          matZh: "深纵贯圆柱通道孔 (Channel Holes)",
-          matEn: "Vertical Deep Memory Channel Hole Cavities",
-          matDimZh: "深宽比: >60:1 | 顶部 CD: ~75nm | 底部 CD: ~55nm",
-          matDimEn: "Aspect Ratio: >60:1 | Top CD: ~75nm | Bottom CD: ~55nm",
+          matZh: "双层多段垂直通道孔 (Dual-Deck Channel Holes)",
+          matEn: "Dual-Deck Vertical Memory Channel Hole Cavities",
+          matDimZh: "深宽比: 单 Deck >60:1 (合并 >100:1) | 顶部 CD: ~75nm | 底部 CD: ~50nm",
+          matDimEn: "Aspect Ratio: >60:1 per deck (combined >100:1) | Top CD: ~75nm | Bottom CD: ~50nm",
           purposeZh:
             "这是 3D NAND 制造中最具挑战性的关键工序。孔的垂直度与底端开通率直接决定了上百层垂直串中每个存储单元的电学一致性与器件良率。",
           purposeEn:
@@ -2898,20 +2898,21 @@
         </li>
         <li>
           <h3>
-            Step 3: Extreme High Aspect Ratio (>60:1) Channel Hole Cryogenic
-            Plasma Etch
+            Step 3: Dual-Deck (>60:1 per deck, >100:1 combined) Channel Hole
+            Cryogenic Plasma Etch
           </h3>
           <p>
-            Using thick amorphous carbon hardmask (ACL) and cryogenic
-            fluorocarbon plasma RIE to punch vertical cylindrical channel holes
-            straight through all ONON layers down to the source plate with
-            exceptional verticality.
+            Utilizing Dual-Deck / Multi-Tier String Stacking (with inter-deck plug &
+            alignment), thick amorphous carbon hardmask (ACL), and Cryogenic Etch
+            (sub-zero HF/fluorocarbon plasma) to punch vertical channel holes
+            (>60:1 aspect ratio per deck, combined >100:1) with exceptional
+            verticality and zero hole twisting.
           </p>
           <p>
             <strong>Equipment:</strong> Cryogenic Extreme HAR Dielectric RIE
             Etcher (Tokyo Electron TEL Tactras / Lam Vantex).
-            <strong>Materials:</strong> Vertical Memory Channel Voids (Aspect
-            Ratio: >60:1, Top CD: ~75nm, Bottom CD: ~55nm).
+            <strong>Materials:</strong> Dual-Deck Vertical Channel Voids (Aspect
+            Ratio: >60:1 per deck, combined >100:1, Top CD: ~75nm, Bottom CD: ~50nm).
           </p>
         </li>
         <li>
